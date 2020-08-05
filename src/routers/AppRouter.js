@@ -1,7 +1,7 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { LoginScreen } from "../components/auth/LoginScreen";
-import { SicperScreen } from "../components/sicper/SicperScreen";
+import { DashboardRoutes } from "./DashboardRoutes";
 
 export const AppRouter = () => {
 	return (
@@ -9,8 +9,7 @@ export const AppRouter = () => {
 			<div>
 				<Switch>
 					<Route exact path="/login" component={LoginScreen} />
-					<Route exact path="/" component={SicperScreen} />
-					<Redirect to="/" />
+					<Route path="/" component={DashboardRoutes} />
 				</Switch>
 			</div>
 		</Router>

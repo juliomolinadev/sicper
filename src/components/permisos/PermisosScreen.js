@@ -1,9 +1,9 @@
 import React from "react";
 
-export const SicperScreen = () => {
+export const PermisosScreen = () => {
 	return (
 		<div>
-			<h1>Inicio</h1>
+			<h1>Permisos</h1>
 		</div>
 	);
 };

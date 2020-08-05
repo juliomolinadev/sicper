@@ -1,9 +1,9 @@
 import React from "react";
 
-export const SicperScreen = () => {
+export const ReportesScreen = () => {
 	return (
 		<div>
-			<h1>Inicio</h1>
+			<h1>Reportes</h1>
 		</div>
 	);
 };
