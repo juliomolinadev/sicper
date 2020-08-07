@@ -8,11 +8,13 @@ import { ConfiguracionScreen } from "../components/configuracion/ConfiguracionSc
 import { ReportesScreen } from "../components/reportes/ReportesScreen";
 import { TransferenciasScreen } from "../components/transferencias/TransferenciasScreen";
 import { PermisosScreen } from "../components/permisos/PermisosScreen";
+import Header from "../components/ui/header/Header";
 
 export const DashboardRoutes = () => {
 	return (
 		<>
 			<Navbar />
+			<Header />
 			<Switch>
 				<Route exact path="/sicper" component={SicperScreen} />
 				<Route exact path="/padron" component={PadronScreen} />

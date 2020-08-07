@@ -17,47 +17,64 @@ import { Link, NavLink } from "react-router-dom";
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar navbar-expand-sm navbar-dark bg-dark">
+		<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
 			<Link className="navbar-brand" to="/">
-				Asociaciones
+				<img
+					className=""
+					src={"./logos/cna.png"}
+					alt="Logo de modulo 19"
+					style={{ maxHeight: 50 }}
+				/>
 			</Link>
+			<button
+				className="navbar-toggler"
+				type="button"
+				data-toggle="collapse"
+				data-target="#navbarNav"
+				aria-controls="navbarNav"
+				aria-expanded="false"
+				aria-label="Toggle navigation"
+			>
+				<span className="navbar-toggler-icon"></span>
+			</button>
 
-			<div className="navbar-collapse">
-				<div className="navbar-nav">
-					<NavLink activeClassName="active" className="nav-item nav-link" exact to="/sicper">
-						Inicio
-					</NavLink>
+			<div className="collapse navbar-collapse " id="navbarNav">
+				<ul className="navbar-nav mr-auto">
+					<li className="nav-item">
+						<NavLink activeClassName="active" className="nav-link" exact to="/sicper">
+							Inicio
+						</NavLink>
+					</li>
+					<li className="nav-item">
+						<NavLink activeClassName="active" className="nav-link" exact to="/padron">
+							Padron
+						</NavLink>
+					</li>
+					<li className="nav-item">
+						<NavLink activeClassName="active" className="nav-link" exact to="/permisos">
+							Permisos
+						</NavLink>
+					</li>
+					<li className="nav-item">
+						<NavLink activeClassName="active" className="nav-link" exact to="/transferencias">
+							Transferencias
+						</NavLink>
+					</li>
+					<li className="nav-item">
+						<NavLink activeClassName="active" className="nav-link" exact to="/reportes">
+							Reportes
+						</NavLink>
+					</li>
+					<li className="nav-item">
+						<NavLink activeClassName="active" className="nav-link" exact to="/configuracion">
+							Configuracion
+						</NavLink>
+					</li>
+				</ul>
+				{/* </div>
 
-					<NavLink activeClassName="active" className="nav-item nav-link" exact to="/padron">
-						Padron
-					</NavLink>
-
-					<NavLink activeClassName="active" className="nav-item nav-link" exact to="/permisos">
-						Permisos
-					</NavLink>
-
-					<NavLink
-						activeClassName="active"
-						className="nav-item nav-link"
-						exact
-						to="/transferencias"
-					>
-						Transferencias
-					</NavLink>
-
-					<NavLink activeClassName="active" className="nav-item nav-link" exact to="/reportes">
-						Reportes
-					</NavLink>
-
-					<NavLink activeClassName="active" className="nav-item nav-link" exact to="/configuracion">
-						Configuracion
-					</NavLink>
-				</div>
-			</div>
-
-			<div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
-				<ul className="navbar-nav ml-auto">
-					{/* <NavLink activeClassName="active" className="nav-item nav-link" exact to="/login"> */}
+			<div className="navbar-collapse collapse w-100 order-3 dual-collapse2"> */}
+				<ul className="my-2 my-lg-0 ">
 					<NavLink activeClassName="active" className="btn btn-outline-secondary" exact to="/login">
 						<i className="fas fa-sign-out-alt"></i>
 						Salir
