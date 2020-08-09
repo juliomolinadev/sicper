@@ -1,7 +1,7 @@
 import React from "react";
-import { getEntidadesByUser } from "../../../selectors/getEntidadByUser";
+import { getEntidadesByUser } from "../../selectors/getEntidadByUser";
 
-const entidad = getEntidadesByUser("2");
+const entidad = getEntidadesByUser("1");
 
 export const Header = () => {
 	return (

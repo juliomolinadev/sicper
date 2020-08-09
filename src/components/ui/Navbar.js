@@ -14,6 +14,7 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 //TODO: Aser que la navbar sea resposive
+//TODO: Aser que la navbar se quede fija
 
 export const Navbar = () => {
 	return (

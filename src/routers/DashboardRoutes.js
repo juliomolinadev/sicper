@@ -8,7 +8,7 @@ import { ConfiguracionScreen } from "../components/configuracion/ConfiguracionSc
 import { ReportesScreen } from "../components/reportes/ReportesScreen";
 import { TransferenciasScreen } from "../components/transferencias/TransferenciasScreen";
 import { PermisosScreen } from "../components/permisos/PermisosScreen";
-import Header from "../components/ui/header/Header";
+import Header from "../components/ui/Header";
 
 export const DashboardRoutes = () => {
 	return (
