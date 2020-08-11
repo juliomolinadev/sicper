@@ -1,5 +1,5 @@
 import React from "react";
-import { Table } from "../tables/PadronTable";
+import { PadronTable } from "../tables/PadronTable";
 
 export const PadronScreen = () => {
 	return (
@@ -9,7 +9,7 @@ export const PadronScreen = () => {
 			</div>
 			<div className="row m-3">
 				<div className="col-sm-8 border rounded">
-					<Table />
+					<PadronTable />
 				</div>
 			</div>
 		</>
