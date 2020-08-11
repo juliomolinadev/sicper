@@ -1,41 +1,32 @@
 import React from "react";
 import Datatable from "react-data-table-component";
 import styled from "styled-components";
-import { padron } from "../../data/padron";
+import { permisos } from "../../data/permisos";
 
 // TODO: Hacer los campos expandibles
 
-const title = "Padron de usuarios";
-const data = padron;
+const title = "Permisos";
+const data = permisos;
 const columns = [
-	{ name: "CUENTA", selector: "CUENTA", sortable: true, width: "80px" },
-	{ name: "SUBCTA", selector: "SUBCTA", sortable: true, width: "60px", center: true },
-	{ name: "UNIDAD", selector: "UNIDAD", sortable: true, width: "60px", center: true },
-	{ name: "ZONA", selector: "ZONA", sortable: true, width: "60px", center: true },
-	{ name: "SECCION", selector: "SECCION", sortable: true, width: "60px", center: true },
-	{ name: "CP", selector: "CP", sortable: true, width: "60px", center: true },
-	{ name: "LT", selector: "LT", sortable: true, width: "60px", center: true },
-	{ name: "SLT", selector: "SLT", sortable: true, width: "60px", center: true },
-	{ name: "RA", selector: "RA", sortable: true, width: "60px", center: true },
-	{ name: "SRA", selector: "SRA", sortable: true, width: "60px", center: true },
-	{ name: "SSRA", selector: "SSRA", sortable: true, width: "60px", center: true },
-	{ name: "PCONTROL", selector: "PCONTROL", sortable: true, width: "80px", center: true },
-	{ name: "TENENCIA", selector: "TENENCIA", sortable: true, width: "60px", center: true },
-	{ name: "ESTADO", selector: "ESTADO", sortable: true, width: "60px", center: true },
-	{ name: "MUNICIPIO", selector: "MUNICIPIO", sortable: true, width: "60px", center: true },
-	{ name: "EJIDO", selector: "EJIDO", sortable: true, width: "60px", center: true },
-	{ name: "GRUPO", selector: "GRUPO", sortable: true, width: "60px", center: true },
-	{ name: "PREDIO", selector: "PREDIO", sortable: true, width: "60px", center: true },
-	{ name: "SISTRIEGO", selector: "SISTRIEGO", sortable: true, width: "60px", center: true },
-	{ name: "EQUIPO", selector: "EQUIPO", sortable: true, width: "60px", center: true },
-	{ name: "APPATERNO", selector: "APPATERNO", sortable: true },
-	{ name: "APMATERNO", selector: "APMATERNO", sortable: true },
-	{ name: "NOMBRE", selector: "NOMBRE", sortable: true },
-	{ name: "SUPFISICA", selector: "SUPFISICA", sortable: true, width: "80px", center: true },
-	{ name: "SUPRIEGO", selector: "SUPRIEGO", sortable: true, width: "60px", center: true },
-	{ name: "FECHA", selector: "FECHA", sortable: true },
-	{ name: "REFERENCIA", selector: "REFERENCIA", sortable: true, width: "80px", center: true },
-	{ name: "MODULO", selector: "MODULO", sortable: true, width: "60px", center: true }
+	{ name: "id", selector: "id", sortable: true },
+	{ name: "numero", selector: "numero", sortable: true },
+	{ name: "tipo", selector: "tipo", sortable: true },
+	{ name: "ciclo", selector: "ciclo", sortable: true },
+	{ name: "subCiclo", selector: "subCiclo", sortable: true },
+	{ name: "cultivo", selector: "cultivo", sortable: true },
+	{ name: "variedad", selector: "variedad", sortable: true },
+	{ name: "vigencia", selector: "vigencia", sortable: true },
+	{ name: "fechaLimite", selector: "fechaLimite", sortable: true },
+	{ name: "superficie", selector: "superficie", sortable: true },
+	{ name: "sistema", selector: "sistema", sortable: true },
+	{ name: "estado", selector: "estado", sortable: true },
+	{ name: "folioSanidad", selector: "folioSanidad", sortable: true },
+	{ name: "Usuario", selector: "Usuario", sortable: true },
+	{ name: "Productor", selector: "Productor", sortable: true },
+	{ name: "fuenteCredito", selector: "fuenteCredito", sortable: true },
+	{ name: "lote", selector: "lote", sortable: true },
+	{ name: "ubicacion", selector: "ubicacion", sortable: true },
+	{ name: "Cuota", selector: "Cuota", sortable: true }
 ];
 
 const TextField = styled.input`
@@ -101,7 +92,7 @@ function downloadCSV(array) {
 	let csv = convertArrayOfObjectsToCSV(array);
 	if (csv == null) return;
 
-	const filename = "Padron.csv";
+	const filename = "Permisos.csv";
 
 	if (!csv.match(/^data:text\/csv/i)) {
 		csv = `data:text/csv;charset=utf-8,${csv}`;
@@ -125,12 +116,11 @@ const Export = ({ onExport }) => (
 	</>
 );
 
-export const PadronTable = () => {
+export const PermisosTable = () => {
 	const [filterText, setFilterText] = React.useState("");
 	const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
 	const filteredItems = data.filter(
-		(item) =>
-			item["APPATERNO"] && item["APPATERNO"].toLowerCase().includes(filterText.toLowerCase())
+		(item) => item["numero"] && item["numero"].toLowerCase().includes(filterText.toLowerCase())
 	);
 
 	// TODO: Hacer que los datos se descarguen en el orden en que se muestran al filtrarlos
