@@ -14,11 +14,10 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 //TODO: Aser que la navbar sea resposive
-//TODO: Aser que la navbar se quede fija
 
 export const Navbar = () => {
 	return (
-		<nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+		<nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 			<Link className="navbar-brand" to="/">
 				<img
 					className=""
@@ -76,7 +75,12 @@ export const Navbar = () => {
 
 			<div className="navbar-collapse collapse w-100 order-3 dual-collapse2"> */}
 				<ul className="my-2 my-lg-0 ">
-					<NavLink activeClassName="active" className="btn btn-outline-secondary" exact to="/login">
+					<NavLink
+						activeClassName="active"
+						className="btn btn-outline-secondary btn-sm"
+						exact
+						to="/login"
+					>
 						<i className="fas fa-sign-out-alt"></i>
 						Salir
 					</NavLink>
