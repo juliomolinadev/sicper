@@ -8,6 +8,7 @@ import { ConfiguracionScreen } from "../components/configuracion/ConfiguracionSc
 import { ReportesScreen } from "../components/reportes/ReportesScreen";
 import { TransferenciasScreen } from "../components/transferencias/TransferenciasScreen";
 import { PermisosScreen } from "../components/permisos/PermisosScreen";
+import { NuevoPermisoScreen } from "../components/permisos/NuevoPermisoScreen";
 import Header from "../components/ui/Header";
 
 export const DashboardRoutes = () => {
@@ -22,6 +23,7 @@ export const DashboardRoutes = () => {
 				<Route exact path="/transferencias" component={TransferenciasScreen} />
 				<Route exact path="/reportes" component={ReportesScreen} />
 				<Route exact path="/configuracion" component={ConfiguracionScreen} />
+				<Route exact path="/nuevo-permiso" component={NuevoPermisoScreen} />
 
 				<Redirect to="/sicper" />
 			</Switch>

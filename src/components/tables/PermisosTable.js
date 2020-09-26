@@ -128,6 +128,10 @@ export const PermisosTable = () => {
 		filteredItems
 	]);
 
+	const getRow = (row) => {
+		console.log(row);
+	};
+
 	const subHeaderComponentMemo = React.useMemo(() => {
 		const handleClear = () => {
 			if (filterText) {
@@ -151,6 +155,7 @@ export const PermisosTable = () => {
 		selectAllRowsItem: true,
 		selectAllRowsItemText: "Todos"
 	};
+
 	return (
 		<div className="table-responsive">
 			<Datatable
@@ -170,6 +175,7 @@ export const PermisosTable = () => {
 				pointerOnHover={true}
 				dense={true}
 				actions={actionsMemo}
+				onRowClicked={getRow}
 			/>
 		</div>
 	);
