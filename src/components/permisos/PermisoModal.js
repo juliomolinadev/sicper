@@ -16,15 +16,25 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 export const PermisoModal = () => {
-	const [isOpen, setIsOpen] = useState(true);
+	// const [isOpen, setIsOpen] = useState(true);
+
+	// const closeModal = () => {
+	// 	setIsOpen(false);
+	// };
+
+	const [state, setState] = useState({
+		permisoModal: true
+	});
+
+	const { permisoModal } = state;
 
 	const closeModal = () => {
-		setIsOpen(false);
+		setState({ ...state, permisoModal: false });
 	};
 
 	return (
 		<Modal
-			isOpen={isOpen}
+			isOpen={permisoModal}
 			// onAfterOpen={afterOpenModal}
 			onRequestClose={closeModal}
 			style={customStyles}
