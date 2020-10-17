@@ -1,48 +1,48 @@
 import React from "react";
-import "./login.css";
+import { Link } from "react-router-dom";
+import "./_auth.scss";
 
 export const LoginScreen = () => {
 	return (
-		<div className="container login-container">
-			<div className="row">
-				<div className="col-md-6 login-form-1">
-					<h3>Ingreso</h3>
-					<form>
-						<div className="form-group">
-							<input type="text" className="form-control" placeholder="Correo" />
+		<>
+			<h3 className="auth__title">Login</h3>
+
+			<form>
+				<input
+					type="text"
+					placeholder="Email"
+					name="email"
+					className="auth__input"
+					autoComplete="off"
+				/>
+
+				<input type="password" placeholder="Password" name="password" className="auth__input" />
+
+				<button type="submit" className="btn btn-primary btn-block">
+					Login
+				</button>
+
+				<div className="auth__social-networks">
+					<p>Login with social networks</p>
+
+					<div className="google-btn">
+						<div className="google-icon-wrapper">
+							<img
+								className="google-icon"
+								src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+								alt="google button"
+							/>
 						</div>
-						<div className="form-group">
-							<input type="password" className="form-control" placeholder="Contraseña" />
-						</div>
-						<div className="form-group">
-							<input type="submit" className="btnSubmit" value="Login" />
-						</div>
-					</form>
+						<p className="btn-text">
+							<b>Registro con google</b>
+						</p>
+					</div>
 				</div>
 
-				<div className="col-md-6 login-form-2">
-					<h3>Registro</h3>
-					<form>
-						<div className="form-group">
-							<input type="text" className="form-control" placeholder="Nombre" />
-						</div>
-						<div className="form-group">
-							<input type="email" className="form-control" placeholder="Correo" />
-						</div>
-						<div className="form-group">
-							<input type="password" className="form-control" placeholder="Contraseña" />
-						</div>
-
-						<div className="form-group">
-							<input type="password" className="form-control" placeholder="Repita la contraseña" />
-						</div>
-
-						<div className="form-group">
-							<input type="submit" className="btnSubmit" value="Crear cuenta" />
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
+				<Link to="/auth/register" className="link">
+					Crear nuevo usuario
+				</Link>
+			</form>
+		</>
 	);
 };

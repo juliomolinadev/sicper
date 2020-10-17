@@ -1,0 +1,145 @@
+* {
+	font-family: Helvetica, Arial, sans-serif;
+	margin: 0px;
+}
+
+html,
+body {
+	height: 100vh;
+	width: 100vw;
+}
+
+main {
+	width: 100%;
+}
+
+.mt-1 {
+	margin-top: 5px;
+}
+
+.mt-5 {
+	margin-top: 20px;
+}
+
+.mb-1 {
+	margin-bottom: 5px;
+}
+
+.mb-5 {
+	margin-bottom: 20px;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+$primary: #5c62c5;
+$dark-grey: #363636;
+$light-grey: #d8d8d8;
+
+$white: #fff;
+$google-blue: #4285f4;
+$button-active-blue: #1669f2;
+//
+
+.auth__main {
+	align-items: center;
+	background-color: $primary;
+	display: flex;
+	justify-content: center;
+	margin: 0px;
+	height: 100vh;
+	width: 100vw;
+}
+
+.auth__box-container {
+	background-color: white;
+	box-shadow: 0px 3px $dark-grey;
+	border-radius: 2px;
+	padding: 20px;
+	width: 300px;
+}
+
+.auth__title {
+	color: darken($color: $primary, $amount: 20);
+	margin-bottom: 20px;
+}
+
+.auth__input {
+	color: $dark-grey;
+	border: 0px;
+	border-bottom: 1px solid $light-grey;
+	font-size: 16px;
+	margin-bottom: 10px;
+	height: 20px;
+	width: 100%;
+
+	transition: border-bottom 0.3s ease;
+
+	&:focus {
+		border-bottom: 1px solid $primary;
+		outline: none;
+	}
+}
+
+.auth__social-networks {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	width: 100%;
+}
+
+.auth__alert-error {
+	background-color: red;
+	border-radius: 5px;
+	color: white;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 10px;
+	padding: 5px;
+}
+
+.google-btn {
+	cursor: pointer;
+	margin-top: 5px;
+	width: 100%;
+	height: 42px;
+	background-color: $google-blue;
+	border-radius: 2px;
+	box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
+
+	transition: box-shadow 0.3s ease;
+
+	.google-icon-wrapper {
+		position: absolute;
+		margin-top: 1px;
+		margin-left: 1px;
+		width: 40px;
+		height: 40px;
+		border-radius: 2px;
+		background-color: $white;
+	}
+	.google-icon {
+		position: absolute;
+		margin-top: 11px;
+		margin-left: 11px;
+		width: 18px;
+		height: 18px;
+	}
+	.btn-text {
+		float: right;
+		margin: 11px 40px 0 0;
+		color: $white;
+		font-size: 14px;
+		letter-spacing: 0.2px;
+	}
+	&:hover {
+		box-shadow: 0 0 6px $google-blue;
+	}
+	&:active {
+		background: $button-active-blue;
+	}
+}
