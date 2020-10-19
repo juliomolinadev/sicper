@@ -93,9 +93,11 @@ $button-active-blue: #1669f2;
 }
 
 .auth__alert-error {
-	background-color: red;
+	border-color: crimson;
+	border-style: solid;
+	border-width: 1px;
 	border-radius: 5px;
-	color: white;
+	color: crimson;
 	display: flex;
 	justify-content: center;
 	margin-bottom: 10px;

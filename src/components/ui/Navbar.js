@@ -1,21 +1,17 @@
-// export const Navbar = () => {
-// 	return (
-// 		<div className="navbar navbar-dark bg-dark mb-4">
-// 			<span className="navbar-brand">Juls</span>
-// 			<button className="btn btn-outline-secondary">
-// 				<i className="fas fa-sign-out-alt"></i>
-// 				<span> Salir</span>
-// 			</button>
-// 		</div>
-// 	);
-// };
-
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { startLogout } from "../../actions/auth";
 
 //TODO: Aser que la navbar sea resposive
 
 export const Navbar = () => {
+	const dispatch = useDispatch();
+
+	const handleLogout = () => {
+		dispatch(startLogout());
+	};
+
 	return (
 		<nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
 			<Link className="navbar-brand" to="/">
@@ -78,6 +74,7 @@ export const Navbar = () => {
 					<NavLink
 						activeClassName="active"
 						className="btn btn-outline-secondary btn-sm"
+						onClick={handleLogout}
 						exact
 						to="/login"
 					>
