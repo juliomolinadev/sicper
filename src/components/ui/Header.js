@@ -1,9 +1,12 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { getEntidadesByUser } from "../../selectors/getEntidadByUser";
 
-const entidad = getEntidadesByUser("1");
+// const entidad = getEntidadesByUser("1");
 
 export const Header = () => {
+	const { name, entidad, img } = useSelector((state) => state.auth);
+
 	return (
 		<div className="pt-4">
 			<div className="row m-3 pt-5">
@@ -11,7 +14,7 @@ export const Header = () => {
 					<div className="border rounded h-100 d-flex justify-content-center">
 						<img
 							className="align-self-center"
-							src={`./logos/${entidad.img}`}
+							src={`./logos/${img}`}
 							alt="Logo de modulo 19"
 							style={{ maxHeight: 100 }}
 						/>
@@ -19,7 +22,7 @@ export const Header = () => {
 				</div>
 				<div className="col-sm-10">
 					<div className=" card border">
-						<div className="card-header">{entidad.nombre}</div>
+						<div className="card-header">{`${entidad} - Operador: ${name}`}</div>
 						<div className="card-body text-dark">
 							<h5 className="card-title">Plataforma digital</h5>
 							<p className="card-text">Distrito de riego 014 Rio Colorado</p>
