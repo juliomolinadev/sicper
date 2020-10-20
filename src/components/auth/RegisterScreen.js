@@ -11,12 +11,7 @@ export const RegisterScreen = () => {
 	const dispatch = useDispatch();
 	const { msgError } = useSelector((state) => state.ui);
 
-	const [formValues, handleInputChange] = useForm({
-		name: "Fena",
-		email: "fena@gmail.com",
-		password: "123456",
-		password2: "123456"
-	});
+	const [formValues, handleInputChange] = useForm();
 
 	const { name, email, password, password2 } = formValues;
 
@@ -53,11 +48,11 @@ export const RegisterScreen = () => {
 				{msgError && <div className="auth__alert-error">{msgError}</div>}
 				<input
 					type="text"
-					placeholder="Name"
+					placeholder="Nombre"
 					name="name"
 					className="auth__input"
 					autoComplete="off"
-					value={name}
+					// value={name}
 					onChange={handleInputChange}
 				/>
 
@@ -67,7 +62,7 @@ export const RegisterScreen = () => {
 					name="email"
 					className="auth__input"
 					autoComplete="off"
-					value={email}
+					// value="email"
 					onChange={handleInputChange}
 				/>
 
@@ -76,16 +71,16 @@ export const RegisterScreen = () => {
 					placeholder="Password"
 					name="password"
 					className="auth__input"
-					value={password}
+					// value={password}
 					onChange={handleInputChange}
 				/>
 
 				<input
 					type="password"
-					placeholder="Confirm password"
+					placeholder="Confirmar password"
 					name="password2"
 					className="auth__input"
-					value={password2}
+					// value={password2}
 					onChange={handleInputChange}
 				/>
 

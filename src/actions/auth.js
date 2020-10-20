@@ -1,4 +1,4 @@
-import { firebase, googleAuthProvider } from "../firebase/firebase-config";
+import { db, firebase, googleAuthProvider } from "../firebase/firebase-config";
 import { types } from "../types/types";
 import { finishLoading, startLoading } from "./ui";
 import Swal from "sweetalert2";
@@ -10,8 +10,12 @@ export const startLoginEmailPassword = (email, password) => {
 		firebase
 			.auth()
 			.signInWithEmailAndPassword(email, password)
-			.then(({ user }) => {
-				dispatch(login(user.uid, user.displayName));
+			.then(async ({ user }) => {
+				const entity = await loadEntity(user.uid);
+
+				const { entidad, img } = entity;
+
+				await dispatch(login(user.uid, user.displayName, entidad, img));
 				dispatch(finishLoading());
 			})
 			.catch((e) => {
@@ -49,11 +53,13 @@ export const startGoogleLogin = () => {
 	};
 };
 
-export const login = (uid, displayName) => ({
+export const login = (uid, displayName, entidad, img) => ({
 	type: types.login,
 	payload: {
 		uid,
-		displayName
+		displayName,
+		entidad,
+		img
 	}
 });
 
@@ -67,3 +73,17 @@ export const startLogout = () => {
 export const logout = () => ({
 	type: types.logout
 });
+
+export const loadEntity = async (uid) => {
+	const entitySnap = await db.collection(`usuarios`).get();
+
+	let entity = {};
+
+	entitySnap.forEach((snapHijo) => {
+		if (snapHijo.id === uid) {
+			entity = { ...snapHijo.data() };
+		}
+	});
+
+	return entity;
+};
