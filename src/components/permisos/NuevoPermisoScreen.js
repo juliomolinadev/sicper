@@ -1,7 +1,15 @@
 import React from "react";
-import { PermisoModal } from "./PermisoModal";
+import { useDispatch } from "react-redux";
+import { openCultivosModal } from "../../actions/altaPermisos";
+import { CultivoModal } from "../modals/CultivoModal";
 
 export const NuevoPermisoScreen = () => {
+	const dispatch = useDispatch();
+
+	const handleOpenCultivosModal = () => {
+		dispatch(openCultivosModal());
+	};
+
 	return (
 		<>
 			<div className="row m-3 d-flex justify-content-center">
@@ -39,13 +47,22 @@ export const NuevoPermisoScreen = () => {
 					<div className="col-sm-6">
 						<div className="form-group">
 							<label>Cultivo:</label>
-							<input
-								type="text"
-								className="form-control"
-								placeholder="cultivo"
-								name="cultivo"
-								autoComplete="off"
-							/>
+							<div className="d-flex flex-row">
+								<input
+									type="text"
+									className="form-control"
+									placeholder="cultivo"
+									name="cultivo"
+									autoComplete="off"
+								/>
+								<button
+									className=" btn btn-primary btn-sm d-sm-block"
+									type="button"
+									onClick={handleOpenCultivosModal}
+								>
+									<i className="fas fa-search"></i>
+								</button>
+							</div>
 						</div>
 					</div>
 					<div className="col-sm-6">
@@ -182,7 +199,7 @@ export const NuevoPermisoScreen = () => {
 					<span> Guardar</span>
 				</button>
 			</form>
-			<PermisoModal />
+			<CultivoModal />
 		</>
 	);
 };

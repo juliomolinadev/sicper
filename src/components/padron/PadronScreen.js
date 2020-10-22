@@ -4,7 +4,7 @@ import { padronColumns } from "../tables/configTables";
 import { padron } from "../../data/padron";
 
 export const PadronScreen = () => {
-	const table = true;
+	const table = false;
 	const tableTitle = "Padron de usuarios";
 
 	return (
