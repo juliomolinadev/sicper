@@ -123,6 +123,10 @@ export const PermisosTable = () => {
 		(item) => item["numero"] && item["numero"].toLowerCase().includes(filterText.toLowerCase())
 	);
 
+	const handleSelectedRow = (row) => {
+		console.log(row);
+	};
+
 	// TODO: Hacer que los datos se descarguen en el orden en que se muestran al filtrarlos
 	const actionsMemo = React.useMemo(() => <Export onExport={() => downloadCSV(filteredItems)} />, [
 		filteredItems
@@ -176,6 +180,7 @@ export const PermisosTable = () => {
 				dense={true}
 				actions={actionsMemo}
 				onRowClicked={getRow}
+				onRowClicked={handleSelectedRow}
 			/>
 		</div>
 	);

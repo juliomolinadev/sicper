@@ -1,8 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { getEntidadesByUser } from "../../selectors/getEntidadByUser";
-
-// const entidad = getEntidadesByUser("1");
 
 export const Header = () => {
 	const { name, entidad, img } = useSelector((state) => state.auth);

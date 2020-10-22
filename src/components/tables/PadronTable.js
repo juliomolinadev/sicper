@@ -1,41 +1,43 @@
 import React from "react";
 import Datatable from "react-data-table-component";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { padron } from "../../data/padron";
+import { startLoadingDerechos } from "../../actions/derechos";
+import { useForm } from "../../hooks/useForm";
 
 // TODO: Hacer los campos expandibles
 
 const title = "Padron de usuarios";
-const data = padron;
+// const data = derechos;
 const columns = [
-	{ name: "CUENTA", selector: "CUENTA", sortable: true, width: "80px" },
-	{ name: "SUBCTA", selector: "SUBCTA", sortable: true, width: "60px", center: true },
-	{ name: "UNIDAD", selector: "UNIDAD", sortable: true, width: "60px", center: true },
-	{ name: "ZONA", selector: "ZONA", sortable: true, width: "60px", center: true },
-	{ name: "SECCION", selector: "SECCION", sortable: true, width: "60px", center: true },
-	{ name: "CP", selector: "CP", sortable: true, width: "60px", center: true },
-	{ name: "LT", selector: "LT", sortable: true, width: "60px", center: true },
-	{ name: "SLT", selector: "SLT", sortable: true, width: "60px", center: true },
-	{ name: "RA", selector: "RA", sortable: true, width: "60px", center: true },
-	{ name: "SRA", selector: "SRA", sortable: true, width: "60px", center: true },
-	{ name: "SSRA", selector: "SSRA", sortable: true, width: "60px", center: true },
-	{ name: "PCONTROL", selector: "PCONTROL", sortable: true, width: "80px", center: true },
-	{ name: "TENENCIA", selector: "TENENCIA", sortable: true, width: "60px", center: true },
-	{ name: "ESTADO", selector: "ESTADO", sortable: true, width: "60px", center: true },
-	{ name: "MUNICIPIO", selector: "MUNICIPIO", sortable: true, width: "60px", center: true },
-	{ name: "EJIDO", selector: "EJIDO", sortable: true, width: "60px", center: true },
-	{ name: "GRUPO", selector: "GRUPO", sortable: true, width: "60px", center: true },
-	{ name: "PREDIO", selector: "PREDIO", sortable: true, width: "60px", center: true },
-	{ name: "SISTRIEGO", selector: "SISTRIEGO", sortable: true, width: "60px", center: true },
-	{ name: "EQUIPO", selector: "EQUIPO", sortable: true, width: "60px", center: true },
-	{ name: "APPATERNO", selector: "APPATERNO", sortable: true },
-	{ name: "APMATERNO", selector: "APMATERNO", sortable: true },
-	{ name: "NOMBRE", selector: "NOMBRE", sortable: true },
-	{ name: "SUPFISICA", selector: "SUPFISICA", sortable: true, width: "80px", center: true },
-	{ name: "SUPRIEGO", selector: "SUPRIEGO", sortable: true, width: "60px", center: true },
-	{ name: "FECHA", selector: "FECHA", sortable: true },
-	{ name: "REFERENCIA", selector: "REFERENCIA", sortable: true, width: "80px", center: true },
-	{ name: "MODULO", selector: "MODULO", sortable: true, width: "60px", center: true }
+	{ name: "cuenta", selector: "cuenta", sortable: true, width: "80px" },
+	{ name: "subcta", selector: "subcta", sortable: true, width: "60px", center: true },
+	{ name: "unidad", selector: "unidad", sortable: true, width: "60px", center: true },
+	{ name: "zona", selector: "zona", sortable: true, width: "60px", center: true },
+	{ name: "seccion", selector: "seccion", sortable: true, width: "60px", center: true },
+	{ name: "cp", selector: "cp", sortable: true, width: "60px", center: true },
+	{ name: "lt", selector: "lt", sortable: true, width: "60px", center: true },
+	{ name: "slt", selector: "slt", sortable: true, width: "60px", center: true },
+	{ name: "ra", selector: "ra", sortable: true, width: "60px", center: true },
+	{ name: "sra", selector: "sra", sortable: true, width: "60px", center: true },
+	{ name: "ssra", selector: "ssra", sortable: true, width: "60px", center: true },
+	{ name: "pcontrol", selector: "pcontrol", sortable: true, width: "80px", center: true },
+	{ name: "tenencia", selector: "tenencia", sortable: true, width: "60px", center: true },
+	{ name: "estado", selector: "estado", sortable: true, width: "60px", center: true },
+	{ name: "municipio", selector: "municipio", sortable: true, width: "60px", center: true },
+	{ name: "ejido", selector: "ejido", sortable: true, width: "60px", center: true },
+	{ name: "grupo", selector: "grupo", sortable: true, width: "60px", center: true },
+	{ name: "predio", selector: "predio", sortable: true, width: "60px", center: true },
+	{ name: "sistriego", selector: "sistriego", sortable: true, width: "60px", center: true },
+	{ name: "equipo", selector: "equipo", sortable: true, width: "60px", center: true },
+	{ name: "appaterno", selector: "appaterno", sortable: true },
+	{ name: "apmaterno", selector: "apmaterno", sortable: true },
+	{ name: "nombre", selector: "nombre", sortable: true },
+	{ name: "supfisica", selector: "supfisica", sortable: true, width: "80px", center: true },
+	{ name: "supriego", selector: "supriego", sortable: true, width: "60px", center: true },
+	{ name: "fecha", selector: "fecha", sortable: true },
+	{ name: "referencia", selector: "referencia", sortable: true, width: "80px", center: true },
+	{ name: "modulo", selector: "modulo", sortable: true, width: "60px", center: true }
 ];
 
 const TextField = styled.input`
@@ -74,7 +76,36 @@ function convertArrayOfObjectsToCSV(array) {
 
 	const columnDelimiter = ",";
 	const lineDelimiter = "\n";
-	const keys = Object.keys(data[0]);
+	const keys = [
+		"cuenta",
+		"subcta",
+		"unidad",
+		"zona",
+		"seccion",
+		"cp",
+		"lt",
+		"slt",
+		"ra",
+		"sra",
+		"ssra",
+		"pcontrol",
+		"tenencia",
+		"estado",
+		"municipio",
+		"ejido",
+		"grupo",
+		"predio",
+		"sistriego",
+		"equipo",
+		"appaterno",
+		"apmaterno",
+		"nombre",
+		"supfisica",
+		"supriego",
+		"fecha",
+		"referencia",
+		"modulo"
+	];
 
 	result = "";
 	result += keys.join(columnDelimiter);
@@ -126,11 +157,39 @@ const Export = ({ onExport }) => (
 );
 
 export const PadronTable = () => {
+	const dispatch = useDispatch();
+
+	const [formValues, handleInputChange] = useForm({
+		apPaterno: ""
+	});
+
+	const { apPaterno } = formValues;
+
+	let data = [];
+
+	const derechos = useSelector((state) => state.padron);
+	const handleDerechosLoad = async (e) => {
+		e.preventDefault();
+		console.log(apPaterno);
+		dispatch(startLoadingDerechos(apPaterno));
+		data = await Object.values(derechos);
+	};
+
+	console.log(derechos);
+
+	// const data = Object.values(derechos);
+
+	// derechos.forEach((derecho) => {
+	// 	data.push(derecho);
+	// });
+
+	console.log("Deta:", data);
+
 	const [filterText, setFilterText] = React.useState("");
 	const [resetPaginationToggle, setResetPaginationToggle] = React.useState(false);
 	const filteredItems = data.filter(
 		(item) =>
-			item["APPATERNO"] && item["APPATERNO"].toLowerCase().includes(filterText.toLowerCase())
+			item["apPaterno"] && item["apPaterno"].toLowerCase().includes(filterText.toLowerCase())
 	);
 
 	// TODO: Hacer que los datos se descarguen en el orden en que se muestran al filtrarlos
@@ -161,8 +220,21 @@ export const PadronTable = () => {
 		selectAllRowsItem: true,
 		selectAllRowsItemText: "Todos"
 	};
+
 	return (
 		<div className="table-responsive">
+			<>
+				<TextField
+					name="apPaterno"
+					type="text"
+					placeholder="Buscar por apellido"
+					value={apPaterno}
+					onChange={handleInputChange}
+				/>
+				<button className=" btn btn-primary btn-sm" type="submit" onClick={handleDerechosLoad}>
+					<i className="fas fa-search"></i>
+				</button>
+			</>
 			<Datatable
 				columns={columns}
 				data={filteredItems}
@@ -184,3 +256,32 @@ export const PadronTable = () => {
 		</div>
 	);
 };
+
+// Ctrl + Shift + W R   : Emmet wrap.
+// Alt + ↑ / ↓          : Mueve el contenido de una linea o seleccion.
+// Shift + Tab          : Quita la indentacion de un bloque seleccionado.
+// Alt + Shift + ↑ / ↓  : Clona la linea actual o bloque seleccionado abajo o arriba.
+// Ctrl + Shift + L     : Selecciona todas las ocurrencias de la seleccion.
+// Ctrl + Shift + K     : Borra la linea actual.
+// Ctrl + Shift + ↑ / ↓ : Crea multicursores continuos.
+// Ctrl + Alt + U       : Combierte seleccion en mayusculas.
+// Ctrl + D             : Selecciona la siguiente ocurencia con multicursor.
+
+// Ctrl + P             : [Input] Lista de busqueda para los archivos del proyecto
+// Ctrl + Shift + P     : [Input + >] Lista de busqueda para comandos.
+// Ctrl + Shift + O     : [Input + @] Lista de busqueda para las definiciones de elementos (: ordena).
+// Ctrl + G             : [Input + :] Buscar una linea en especifico.
+
+// Ctrl + Alt + clk der : Abre tab con la definicion del elemento en cursor, lo crea si no existe.
+// Ctrl + Shift + F12   : Abre una ventana que muestra la definicion del elemento en cursor.
+// F2                   : Refactorizar, rename.
+
+// Ctrl + K Z           : Modo zen.
+// Ctrl + `             : Abre la terminal.
+// Ctrl + K Ctrl + S    : Configuracion de shortcuts.
+// Ctrl + Shift + V     : Abre archivo en markdown para previsualizar.
+// Shift + Alt + S      : Guarda todos los archivos.
+// Ctrl + space         : Recupera el autocompletado.
+
+// Ctrl + /             : Comenta la linea donde se encuentre el cursor o el bloque seleccionado.
+// Ctrl + Shift + A     : Comenta solo el fragmento seleccionado.
