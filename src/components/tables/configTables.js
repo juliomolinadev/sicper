@@ -47,6 +47,12 @@ export const padronColumns = [
 	{ name: "modulo", selector: "modulo", sortable: true, width: "60px", center: true }
 ];
 
+export const cultivosColumns = [
+	{ name: "clave", selector: "clave", sortable: true, width: "60px", center: true },
+	{ name: "nombre", selector: "nombre", sortable: true, center: true },
+	{ name: "subciclo", selector: "subciclo", sortable: true, center: true }
+];
+
 export const padronKeys = [
 	"cuenta",
 	"subcta",

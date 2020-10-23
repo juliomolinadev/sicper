@@ -17,5 +17,9 @@ export const types = {
 	derechosLogoutCleaning: "[Derechos] Logout Cleaning",
 
 	altaPermisoOpenCultivosModal: "[Alta Permisos] Open cultivos modal",
-	altaPermisoCloseCultivosModal: "[Alta Permisos] Close cultivos modal"
+	altaPermisoCloseCultivosModal: "[Alta Permisos] Close cultivos modal",
+
+	loadCultivos: "[Alta Permisos] Load cultivos",
+	clearCultivos: "[Alta Permisos] Clear cultivos",
+	setCultivo: "[Alta Permisos] Set Cultivo"
 };

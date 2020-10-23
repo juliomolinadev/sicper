@@ -1,7 +1,16 @@
 import React from "react";
 import Datatable from "react-data-table-component";
+import { useDispatch } from "react-redux";
 
-export const CustomTable = ({ title, data, columns }) => {
+export const CustomTable = ({ title, columns, data, customKey, setFunction, closeFunction }) => {
+	const key = customKey;
+	const dispatch = useDispatch();
+
+	const getRowSelected = (row) => {
+		dispatch(setFunction(row[customKey]));
+		dispatch(closeFunction());
+	};
+
 	const paginationOptions = {
 		rowsPerPageText: "Filas por pagina",
 		rangesSeparatorText: "de",
@@ -10,7 +19,7 @@ export const CustomTable = ({ title, data, columns }) => {
 	};
 
 	return (
-		<div className="table-responsive">
+		<div className="table-responsive border rounded">
 			<Datatable
 				columns={columns}
 				data={data}
@@ -27,6 +36,7 @@ export const CustomTable = ({ title, data, columns }) => {
 				striped={true}
 				pointerOnHover={true}
 				dense={true}
+				onRowClicked={getRowSelected}
 				// actions={actionsMemo}
 			/>
 		</div>

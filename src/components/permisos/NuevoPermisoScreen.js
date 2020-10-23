@@ -1,14 +1,28 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { openCultivosModal } from "../../actions/altaPermisos";
+import { useDispatch, useSelector } from "react-redux";
+import { openCultivosModal, startloadCultivos } from "../../actions/altaPermisos";
+import { useForm } from "../../hooks/useForm";
 import { CultivoModal } from "../modals/CultivoModal";
 
 export const NuevoPermisoScreen = () => {
 	const dispatch = useDispatch();
 
 	const handleOpenCultivosModal = () => {
+		handleLoadCultivos();
 		dispatch(openCultivosModal());
 	};
+
+	const handleLoadCultivos = () => {
+		dispatch(startloadCultivos(cultivo.toUpperCase()));
+	};
+
+	const [formValues, handleInputChange] = useForm({
+		cultivo: null
+	});
+
+	const { cultivo } = formValues;
+
+	const { cultivoSelected } = useSelector((state) => state.altaPermisos);
 
 	return (
 		<>
@@ -46,7 +60,11 @@ export const NuevoPermisoScreen = () => {
 				<div className="row">
 					<div className="col-sm-6">
 						<div className="form-group">
-							<label>Cultivo:</label>
+							<div className="d-flex justify-content-between">
+								<label>Cultivo: </label>
+								<label>{cultivoSelected} </label>
+								{cultivoSelected ? <div className="fas fa-check text-success"></div> : <></>}
+							</div>
 							<div className="d-flex flex-row">
 								<input
 									type="text"
@@ -54,6 +72,8 @@ export const NuevoPermisoScreen = () => {
 									placeholder="cultivo"
 									name="cultivo"
 									autoComplete="off"
+									value={cultivo}
+									onChange={handleInputChange}
 								/>
 								<button
 									className=" btn btn-primary btn-sm d-sm-block"
