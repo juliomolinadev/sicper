@@ -1,9 +1,9 @@
 import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { closeCultivosModal, setCultivoSelected } from "../../actions/cultivos";
+import { closeUsuariosModal, setUsuarioSelected } from "../../actions/altaPermisos";
 import { CustomTable } from "../tables/CustomTable";
-import { cultivosColumns } from "../tables/configTables";
+import { derechosColumns } from "../tables/configTables";
 
 const customStyles = {
 	content: {
@@ -19,21 +19,20 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-export const CultivoModal = () => {
+export const UsuarioModal = () => {
 	const dispatch = useDispatch();
 
-	const { openCultivosModal, cultivos } = useSelector((state) => state.altaPermisos);
+	const { openUsuariosModal, usuarios } = useSelector((state) => state.altaPermisos);
 	let data = [];
-	data = Object.values(cultivos);
+	data = Object.values(usuarios);
 
 	const closeModal = () => {
-		dispatch(closeCultivosModal());
+		dispatch(closeUsuariosModal());
 	};
 
 	return (
 		<Modal
-			isOpen={openCultivosModal}
-			// onAfterOpen={afterOpenModal}
+			isOpen={openUsuariosModal}
 			onRequestClose={closeModal}
 			style={customStyles}
 			closeTimeoutMS={200}
@@ -41,12 +40,12 @@ export const CultivoModal = () => {
 			overlayClassName="modal-fondo"
 		>
 			<CustomTable
-				title={data.length === 0 ? "No se encontraron cultivos" : "Cultivos"}
-				columns={cultivosColumns}
+				title={data.length === 0 ? "No se encontraron usuarios" : "Usuarios"}
+				columns={derechosColumns}
 				data={data}
-				customKey="nombre"
-				setFunction={setCultivoSelected}
-				closeFunction={closeCultivosModal}
+				customKey="apPaterno"
+				setFunction={setUsuarioSelected}
+				closeFunction={closeUsuariosModal}
 			></CustomTable>
 		</Modal>
 	);

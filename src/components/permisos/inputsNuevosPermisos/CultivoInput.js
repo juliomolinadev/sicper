@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../../hooks/useForm";
 import {
 	openCultivosModal,
-	startloadCultivos,
+	startLoadCultivos,
 	unsetCultivoSelected
-} from "../../../actions/altaPermisos";
+} from "../../../actions/cultivos";
 
 export const CultivoInput = () => {
 	const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export const CultivoInput = () => {
 	};
 
 	const handleLoadCultivos = () => {
-		dispatch(startloadCultivos(cultivo.toUpperCase()));
+		dispatch(startLoadCultivos(cultivo.toUpperCase()));
 	};
 
 	const { cultivoSelected } = useSelector((state) => state.altaPermisos);

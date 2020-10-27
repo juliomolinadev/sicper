@@ -1,6 +1,6 @@
 import React from "react";
 import { CultivoModal } from "../modals/CultivoModal";
-import { CultivoInput } from "./inputsNuevosPermisos/cultivoInput";
+import { CultivoInput } from "./inputsNuevosPermisos/CultivoInput";
 
 export const NuevoPermisoScreen = () => {
 	return (

@@ -16,7 +16,7 @@ export const TextField = styled.input`
 	}
 `;
 
-export const padronColumns = [
+export const derechosColumns = [
 	{ name: "cuenta", selector: "cuenta", sortable: true, width: "80px" },
 	{ name: "subcta", selector: "subcta", sortable: true, width: "60px", center: true },
 	{ name: "unidad", selector: "unidad", sortable: true, width: "60px", center: true },
@@ -37,8 +37,8 @@ export const padronColumns = [
 	{ name: "predio", selector: "predio", sortable: true, width: "60px", center: true },
 	{ name: "sistriego", selector: "sistriego", sortable: true, width: "60px", center: true },
 	{ name: "equipo", selector: "equipo", sortable: true, width: "60px", center: true },
-	{ name: "appaterno", selector: "appaterno", sortable: true },
-	{ name: "apmaterno", selector: "apmaterno", sortable: true },
+	{ name: "apPaterno", selector: "apPaterno", sortable: true },
+	{ name: "apMaterno", selector: "apMaterno", sortable: true },
 	{ name: "nombre", selector: "nombre", sortable: true },
 	{ name: "supfisica", selector: "supfisica", sortable: true, width: "80px", center: true },
 	{ name: "supriego", selector: "supriego", sortable: true, width: "60px", center: true },
