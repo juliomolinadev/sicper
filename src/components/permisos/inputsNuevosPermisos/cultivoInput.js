@@ -38,7 +38,7 @@ export const CultivoInput = () => {
 				<div className="d-flex align-items-baseline">
 					<label>Cultivo: </label>
 					<label className="pl-3">{cultivoSelected} </label>
-					{cultivoSelected ? <div className="fas fa-check text-success pl-3"></div> : <></>}
+					{cultivoSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
 					{cultivoSelected ? (
 						<></>
 					) : (
@@ -56,7 +56,7 @@ export const CultivoInput = () => {
 					)}
 					{cultivoSelected ? (
 						<button
-							className=" btn btn-primary d-sm-block ml-auto"
+							className=" btn btn-outline-primary d-sm-block ml-auto"
 							type="button"
 							onClick={clearCultivoInput}
 						>
@@ -64,7 +64,7 @@ export const CultivoInput = () => {
 						</button>
 					) : (
 						<button
-							className=" btn btn-primary d-sm-block ml-auto"
+							className=" btn btn-outline-primary d-sm-block ml-auto"
 							type="button"
 							onClick={handleOpenCultivosModal}
 						>

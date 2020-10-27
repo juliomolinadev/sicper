@@ -25,18 +25,14 @@ export const CustomTable = ({ title, columns, data, customKey, setFunction, clos
 				title={title}
 				pagination
 				paginationComponentOptions={paginationOptions}
-				// paginationResetDefaultPage={resetPaginationToggle}
-				// subHeaderComponent={subHeaderComponentMemo}
 				fixedHeader
-				subHeader
 				persistTableHead
-				fixedHeaderScrollHeight="600px"
+				fixedHeaderScrollHeight="380px"
 				highlightOnHover={true}
 				striped={true}
 				pointerOnHover={true}
 				dense={true}
 				onRowClicked={getRowSelected}
-				// actions={actionsMemo}
 			/>
 		</div>
 	);
