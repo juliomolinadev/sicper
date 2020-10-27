@@ -25,3 +25,7 @@ export const setCultivoSelected = (cultivo) => ({
 	type: types.setCultivo,
 	payload: cultivo
 });
+
+export const unsetCultivoSelected = () => ({
+	type: types.unsetCultivo
+});

@@ -40,11 +40,11 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				cultivoSelected: action.payload
 			};
 
-		// case types.altaPermisoUnsetCultivo:
-		// 	return {
-		// 		...state,
-		// 		cultivoSelected: null
-		// 	};
+		case types.unsetCultivo:
+			return {
+				...state,
+				cultivoSelected: null
+			};
 
 		default:
 			return state;

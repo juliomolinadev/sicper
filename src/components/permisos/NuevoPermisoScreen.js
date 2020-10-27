@@ -1,6 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { openCultivosModal, startloadCultivos } from "../../actions/altaPermisos";
+import {
+	openCultivosModal,
+	startloadCultivos,
+	unsetCultivoSelected
+} from "../../actions/altaPermisos";
 import { useForm } from "../../hooks/useForm";
 import { CultivoModal } from "../modals/CultivoModal";
 
@@ -10,6 +14,11 @@ export const NuevoPermisoScreen = () => {
 	const handleOpenCultivosModal = () => {
 		handleLoadCultivos();
 		dispatch(openCultivosModal());
+	};
+
+	const clearCultivoInput = () => {
+		dispatch(unsetCultivoSelected());
+		formValues.cultivo = "";
 	};
 
 	const handleLoadCultivos = () => {
@@ -60,31 +69,46 @@ export const NuevoPermisoScreen = () => {
 				<div className="row">
 					<div className="col-sm-6">
 						<div className="form-group">
-							<div className="d-flex justify-content-between">
+							<div className="d-flex align-items-baseline">
 								<label>Cultivo: </label>
-								<label>{cultivoSelected} </label>
-								{cultivoSelected ? <div className="fas fa-check text-success"></div> : <></>}
-							</div>
-							<div className="d-flex flex-row">
-								<input
-									type="text"
-									className="form-control"
-									placeholder="cultivo"
-									name="cultivo"
-									autoComplete="off"
-									value={cultivo}
-									onChange={handleInputChange}
-								/>
-								<button
-									className=" btn btn-primary btn-sm d-sm-block"
-									type="button"
-									onClick={handleOpenCultivosModal}
-								>
-									<i className="fas fa-search"></i>
-								</button>
+								<label className="pl-1">{cultivoSelected} </label>
+								{cultivoSelected ? <div className="fas fa-check text-success pl-3"></div> : <></>}
+								{cultivoSelected ? (
+									<></>
+								) : (
+									<div className="flex-grow-1 pl-1">
+										<input
+											type="text"
+											className="form-control"
+											placeholder="cultivo"
+											name="cultivo"
+											autoComplete="off"
+											value={cultivo}
+											onChange={handleInputChange}
+										/>
+									</div>
+								)}
+								{cultivoSelected ? (
+									<button
+										className=" btn btn-primary d-sm-block ml-auto"
+										type="button"
+										onClick={clearCultivoInput}
+									>
+										<i className="fas fa-redo"></i>
+									</button>
+								) : (
+									<button
+										className=" btn btn-primary d-sm-block ml-auto"
+										type="button"
+										onClick={handleOpenCultivosModal}
+									>
+										<i className="fas fa-search"></i>
+									</button>
+								)}
 							</div>
 						</div>
 					</div>
+
 					<div className="col-sm-6">
 						<div className="form-group">
 							<label>Variedad:</label>
@@ -214,7 +238,7 @@ export const NuevoPermisoScreen = () => {
 					</small>
 				</div>
 
-				<button type="submit" className="btn btn-outline-primary btn-block">
+				<button type="button" className="btn btn-outline-primary btn-block">
 					<i className="far fa-save"></i>
 					<span> Guardar</span>
 				</button>
