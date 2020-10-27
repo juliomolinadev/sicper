@@ -11,8 +11,6 @@ export const loadCultivos = async (cultivo) => {
 
 	const cultivos = [];
 
-	console.log("Cultivos Snapo: ", cultivosSnap);
-
 	cultivosSnap.forEach((snapHijo) => {
 		cultivos.push({
 			id: snapHijo.id,

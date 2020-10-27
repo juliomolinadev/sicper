@@ -3,7 +3,6 @@ import Datatable from "react-data-table-component";
 import { useDispatch } from "react-redux";
 
 export const CustomTable = ({ title, columns, data, customKey, setFunction, closeFunction }) => {
-	const key = customKey;
 	const dispatch = useDispatch();
 
 	const getRowSelected = (row) => {

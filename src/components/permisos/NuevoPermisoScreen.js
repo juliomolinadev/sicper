@@ -17,7 +17,7 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const [formValues, handleInputChange] = useForm({
-		cultivo: null
+		cultivo: ""
 	});
 
 	const { cultivo } = formValues;

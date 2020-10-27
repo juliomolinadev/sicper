@@ -3,7 +3,7 @@ import Datatable from "react-data-table-component";
 import styled from "styled-components";
 import { permisos } from "../../data/permisos";
 
-// TODO: Hacer los campos expandibles
+// TODO: Separar este archivo en componentes
 
 const title = "Permisos";
 const data = permisos;
@@ -123,18 +123,10 @@ export const PermisosTable = () => {
 		(item) => item["numero"] && item["numero"].toLowerCase().includes(filterText.toLowerCase())
 	);
 
-	const handleSelectedRow = (row) => {
-		console.log(row);
-	};
-
 	// TODO: Hacer que los datos se descarguen en el orden en que se muestran al filtrarlos
 	const actionsMemo = React.useMemo(() => <Export onExport={() => downloadCSV(filteredItems)} />, [
 		filteredItems
 	]);
-
-	const getRow = (row) => {
-		console.log(row);
-	};
 
 	const subHeaderComponentMemo = React.useMemo(() => {
 		const handleClear = () => {
@@ -179,8 +171,6 @@ export const PermisosTable = () => {
 				pointerOnHover={true}
 				dense={true}
 				actions={actionsMemo}
-				onRowClicked={getRow}
-				onRowClicked={handleSelectedRow}
 			/>
 		</div>
 	);

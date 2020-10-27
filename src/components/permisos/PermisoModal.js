@@ -1,48 +1,50 @@
-import React, { useState } from "react";
-import Modal from "react-modal";
-import { PadronModal } from "../modals/PadronModal";
+// TODO: Borra esto
 
-const customStyles = {
-	content: {
-		top: "50%",
-		left: "50%",
-		right: "auto",
-		bottom: "auto",
-		marginRight: "-50%",
-		transform: "translate(-50%, -50%)"
-	}
-};
+// import React, { useState } from "react";
+// import Modal from "react-modal";
+// import { PadronModal } from "../modals/PadronModal";
 
-Modal.setAppElement("#root");
+// const customStyles = {
+// 	content: {
+// 		top: "50%",
+// 		left: "50%",
+// 		right: "auto",
+// 		bottom: "auto",
+// 		marginRight: "-50%",
+// 		transform: "translate(-50%, -50%)"
+// 	}
+// };
 
-export const PermisoModal = () => {
-	// const [isOpen, setIsOpen] = useState(true);
+// Modal.setAppElement("#root");
 
-	// const closeModal = () => {
-	// 	setIsOpen(false);
-	// };
+// export const PermisoModal = () => {
+// 	// const [isOpen, setIsOpen] = useState(true);
 
-	const [state, setState] = useState({
-		permisoModal: true
-	});
+// 	// const closeModal = () => {
+// 	// 	setIsOpen(false);
+// 	// };
 
-	const { permisoModal } = state;
+// 	const [state, setState] = useState({
+// 		permisoModal: true
+// 	});
 
-	const closeModal = () => {
-		setState({ ...state, permisoModal: false });
-	};
+// 	const { permisoModal } = state;
 
-	return (
-		<Modal
-			isOpen={permisoModal}
-			// onAfterOpen={afterOpenModal}
-			onRequestClose={closeModal}
-			style={customStyles}
-			closeTimeoutMS={200}
-			className="modal"
-			overlayClassName="modal-fondo"
-		>
-			<PadronModal />
-		</Modal>
-	);
-};
+// 	const closeModal = () => {
+// 		setState({ ...state, permisoModal: false });
+// 	};
+
+// 	return (
+// 		<Modal
+// 			isOpen={permisoModal}
+// 			// onAfterOpen={afterOpenModal}
+// 			onRequestClose={closeModal}
+// 			style={customStyles}
+// 			closeTimeoutMS={200}
+// 			className="modal"
+// 			overlayClassName="modal-fondo"
+// 		>
+// 			<PadronModal />
+// 		</Modal>
+// 	);
+// };
