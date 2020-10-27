@@ -12,26 +12,32 @@ export const NuevoPermisoScreen = () => {
 				<div className="row">
 					<div className="col-sm-6">
 						<div className="form-group">
-							<label>Usuario:</label>
-							<input
-								type="text"
-								className="form-control"
-								placeholder="Usuario"
-								name="usuario"
-								autoComplete="off"
-							/>
+							<div className="d-flex align-items-baseline row p-3">
+								<label className="col-sm-3">Usuario:</label>
+								<div className="flex-grow-1 ">
+									<input
+										type="text"
+										className="form-control"
+										placeholder="Usuario"
+										name="usuario"
+										autoComplete="off"
+									/>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div className="col-sm-6">
-						<div className="form-group">
-							<label>Productor:</label>
-							<input
-								type="text"
-								className="form-control"
-								placeholder="Productor"
-								name="productor"
-								autoComplete="off"
-							/>
+						<div className="form-group d-flex align-items-baseline row p-3">
+							<label className="col-sm-3">Productor:</label>
+							<div className="flex-grow-1 ">
+								<input
+									type="text"
+									className="form-control"
+									placeholder="Productor"
+									name="productor"
+									autoComplete="off"
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -40,76 +46,86 @@ export const NuevoPermisoScreen = () => {
 					<CultivoInput />
 
 					<div className="col-sm-6">
-						<div className="form-group">
-							<label>Variedad:</label>
-							<input
-								type="text"
-								className="form-control"
-								placeholder="variedad"
-								name="variedad"
-								autoComplete="off"
-							/>
+						<div className="form-group d-flex align-items-baseline row p-3">
+							<label className="col-sm-3">Variedad:</label>
+							<div className="flex-grow-1 ">
+								<input
+									type="text"
+									className="form-control"
+									placeholder="variedad"
+									name="variedad"
+									autoComplete="off"
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
 				<div className="row">
 					<div className="col-sm-6">
-						<div className="form-group">
-							<label>Superficie:</label>
-							<input
-								type="text"
-								className="form-control"
-								placeholder="superficie"
-								name="superficie"
-								autoComplete="off"
-							/>
+						<div className="form-group d-flex align-items-baseline row p-3">
+							<label className="col-sm-3">Superficie:</label>
+							<div className="flex-grow-1 ">
+								<input
+									type="text"
+									className="form-control"
+									placeholder="superficie"
+									name="superficie"
+									autoComplete="off"
+								/>
+							</div>
 						</div>
 					</div>
 					<div className="col-sm-6">
-						<div className="form-group">
-							<label>Fuente de credito:</label>
-							<input
-								type="text"
-								className="form-control"
-								placeholder="fuente-credito"
-								name="fuente-credito"
-								autoComplete="off"
-							/>
-						</div>
-					</div>
-				</div>
-
-				<div className="row">
-					<div className="col-sm-6">
-						<div className="form-group">
-							<label>Latitud:</label>
-							<input
-								type="text"
-								className="form-control"
-								placeholder="latitud"
-								name="latitud"
-								autoComplete="off"
-							/>
-						</div>
-					</div>
-					<div className="col-sm-6">
-						<div className="form-group">
-							<label>Longitud:</label>
-							<input
-								type="text"
-								className="form-control"
-								placeholder="longitud"
-								name="longitud"
-								autoComplete="off"
-							/>
+						<div className="form-group d-flex align-items-baseline row p-3">
+							<label className="col-sm-3">Fuente de credito:</label>
+							<div className="flex-grow-1 ">
+								<input
+									type="text"
+									className="form-control"
+									placeholder="fuente-credito"
+									name="fuente-credito"
+									autoComplete="off"
+								/>
+							</div>
 						</div>
 					</div>
 				</div>
 
 				<div className="row">
 					<div className="col-sm-6">
-						<div className="form-group">
-							<label>Tipo:</label>
+						<div className="form-group d-flex align-items-baseline row p-3">
+							<label className="col-sm-3">Latitud:</label>
+							<div className="flex-grow-1 ">
+								<input
+									type="text"
+									className="form-control"
+									placeholder="latitud"
+									name="latitud"
+									autoComplete="off"
+								/>
+							</div>
+						</div>
+					</div>
+					<div className="col-sm-6">
+						<div className="form-group d-flex align-items-baseline row p-3">
+							<label className="col-sm-3">Longitud:</label>
+							<div className="flex-grow-1 ">
+								<input
+									type="text"
+									className="form-control"
+									placeholder="longitud"
+									name="longitud"
+									autoComplete="off"
+								/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col-sm-6">
+						<div className="form-group d-flex align-items-baseline row p-3">
+							<label className="col-sm-3">Tipo:</label>
 							<br />
 							<div className="row">
 								<div className="px-4">
@@ -121,34 +137,6 @@ export const NuevoPermisoScreen = () => {
 									<input type="radio" id="superficie-extra" name="tipo" value="superficie-extra" />
 									<span> </span>
 									<label htmlFor="superficie-extra"> Superficie extra</label>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div className="col-sm-6">
-						<div className="form-group">
-							<label>Sistema:</label>
-							<br />
-							<div className="row">
-								<div className="px-4">
-									<input type="checkbox" id="gravedad" name="sistema" value="gravedad" />
-									<span> </span>
-									<label htmlFor="gravedad">Gravedad</label>
-								</div>
-								<div className="px-4">
-									<input
-										type="checkbox"
-										id="poso-particular"
-										name="sistema"
-										value="poso-particular"
-									/>
-									<span> </span>
-									<label htmlFor="poso-particular"> Poso particular</label>
-								</div>
-								<div className="px-4">
-									<input type="checkbox" id="poso-federal" name="sistema" value="poso-federal" />
-									<span> </span>
-									<label htmlFor="poso-federal"> Poso federal</label>
 								</div>
 							</div>
 						</div>
