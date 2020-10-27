@@ -21,6 +21,14 @@ export const types = {
 
 	loadCultivos: "[Alta Permisos] Load cultivos",
 	clearCultivos: "[Alta Permisos] Clear cultivos",
-	setCultivo: "[Alta Permisos] Set Cultivo",
-	unsetCultivo: "[Alta Permisos] unset Cultivo"
+	setCultivo: "[Alta Permisos] Set cultivo",
+	unsetCultivo: "[Alta Permisos] unset cultivo",
+
+	altaPermisoOpenUsuariosModal: "[Alta Permisos] Open usuarios modal",
+	altaPermisoCloseUsuariosModal: "[Alta Permisos] Close usuarios modal",
+
+	loadUsuarios: "[Alta Permisos] Load usuarios",
+	clearUsuarios: "[Alta Permisos] Clear usuarios",
+	seUsuarios: "[Alta Permisos] Set usuario",
+	unseUsuarios: "[Alta Permisos] unset usuario"
 };

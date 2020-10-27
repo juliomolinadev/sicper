@@ -3,12 +3,14 @@ import { types } from "../types/types";
 const initialState = {
 	openCultivosModal: false,
 	cultivos: [],
-	cultivoSelected: null
+	cultivoSelected: null,
+	usuarios: [],
+	usuarioSelected: null
 };
 
 export const altaPermisosReducer = (state = initialState, action) => {
 	switch (action.type) {
-		//Alta permisos screen****************************
+		//Cultivos **************************************
 		case types.altaPermisoOpenCultivosModal:
 			return {
 				...state,
@@ -21,7 +23,6 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				openCultivosModal: false
 			};
 
-		//Cultivos **************************************
 		case types.loadCultivos:
 			return {
 				...state,
@@ -44,6 +45,44 @@ export const altaPermisosReducer = (state = initialState, action) => {
 			return {
 				...state,
 				cultivoSelected: null
+			};
+
+		//Usuarios **************************************
+
+		case types.altaPermisoOpenUsuariosModal:
+			return {
+				...state,
+				openUsuariosModal: true
+			};
+
+		case types.altaPermisoCloseUsuariosModal:
+			return {
+				...state,
+				openUsuariosModal: false
+			};
+
+		case types.loadUsuarios:
+			return {
+				...state,
+				usuarios: action.payload
+			};
+
+		case types.clearUsuarios:
+			return {
+				...state,
+				usuarios: []
+			};
+
+		case types.setUsuario:
+			return {
+				...state,
+				usuarioSelected: action.payload
+			};
+
+		case types.unsetUsuario:
+			return {
+				...state,
+				usuarioSelected: null
 			};
 
 		default:

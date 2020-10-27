@@ -1,7 +1,6 @@
 import { db } from "../firebase/firebase-config";
 
 export const loadCultivos = async (cultivo) => {
-	// const cultivosSnap = await db.collection(`cultivos`).where("nombre", "==", cultivo).get();
 	const cultivosSnap = await db
 		.collection(`cultivos`)
 		.orderBy("nombre")

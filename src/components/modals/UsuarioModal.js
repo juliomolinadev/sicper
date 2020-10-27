@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { closeUsuariosModal, setUsuarioSelected } from "../../actions/altaPermisos";
+import { closeUsuariosModal, setUsuarioSelected } from "../../actions/usuarios";
 import { CustomTable } from "../tables/CustomTable";
 import { derechosColumns } from "../tables/configTables";
 

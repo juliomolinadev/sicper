@@ -1,6 +1,8 @@
 import React from "react";
 import { CultivoModal } from "../modals/CultivoModal";
+import { UsuarioModal } from "../modals/UsuarioModal";
 import { CultivoInput } from "./inputsNuevosPermisos/CultivoInput";
+import { UsuarioInput } from "./inputsNuevosPermisos/UsuarioInput";
 
 export const NuevoPermisoScreen = () => {
 	return (
@@ -10,22 +12,8 @@ export const NuevoPermisoScreen = () => {
 			</div>
 			<form className="container pb-4">
 				<div className="row">
-					<div className="col-sm-6">
-						<div className="form-group">
-							<div className="d-flex align-items-baseline row p-3">
-								<label className="col-sm-3">Usuario:</label>
-								<div className="flex-grow-1 ">
-									<input
-										type="text"
-										className="form-control"
-										placeholder="Usuario"
-										name="usuario"
-										autoComplete="off"
-									/>
-								</div>
-							</div>
-						</div>
-					</div>
+					<UsuarioInput />
+
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
 							<label className="col-sm-3">Productor:</label>
@@ -162,6 +150,7 @@ export const NuevoPermisoScreen = () => {
 				</button>
 			</form>
 			<CultivoModal />
+			<UsuarioModal />
 		</>
 	);
 };

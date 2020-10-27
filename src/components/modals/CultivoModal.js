@@ -33,7 +33,6 @@ export const CultivoModal = () => {
 	return (
 		<Modal
 			isOpen={openCultivosModal}
-			// onAfterOpen={afterOpenModal}
 			onRequestClose={closeModal}
 			style={customStyles}
 			closeTimeoutMS={200}

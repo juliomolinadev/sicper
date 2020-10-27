@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../../hooks/useForm";
 import {
 	openUsuariosModal,
-	startloadUsuarios,
+	startLoadUsuarios,
 	unsetUsuarioSelected
-} from "../../../actions/cultivos";
+} from "../../../actions/usuarios";
 
 export const UsuarioInput = () => {
 	const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export const UsuarioInput = () => {
 	};
 
 	const handleLoadUsuarios = () => {
-		dispatch(startloadUsuarios(usuario.toUpperCase()));
+		dispatch(startLoadUsuarios(usuario.toUpperCase()));
 	};
 
 	const { usuarioSelected } = useSelector((state) => state.altaPermisos);
