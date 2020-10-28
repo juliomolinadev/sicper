@@ -2,6 +2,7 @@
 
 export const types = {
 	login: "[Login] Login",
+	entity: "[Login] Entity",
 	logout: "[Login] Logout",
 
 	uiSetError: "[UI] Set Error",

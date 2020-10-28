@@ -1,6 +1,6 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadUsuarios = async (usuario) => {
+export const loadUsuarios = async (usuario, claveEntidad) => {
 	const usuariosSnap = await db
 		.collection(`derechos`)
 		.orderBy("apPaterno")

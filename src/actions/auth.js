@@ -13,9 +13,12 @@ export const startLoginEmailPassword = (email, password) => {
 			.then(async ({ user }) => {
 				const entity = await loadEntity(user.uid);
 
-				const { entidad, img } = entity;
+				console.log("En actions: ", entity);
 
-				await dispatch(login(user.uid, user.displayName, entidad, img));
+				const { entidad, claveEntidad, img } = entity;
+
+				dispatch(login(user.uid, user.displayName));
+				dispatch(setEntity(entidad, img, claveEntidad));
 				dispatch(finishLoading());
 			})
 			.catch((e) => {
@@ -53,13 +56,20 @@ export const startGoogleLogin = () => {
 	};
 };
 
-export const login = (uid, displayName, entidad, img) => ({
+export const login = (uid, displayName) => ({
 	type: types.login,
 	payload: {
 		uid,
-		displayName,
+		displayName
+	}
+});
+
+export const setEntity = (entidad, img, claveEntidad) => ({
+	type: types.entity,
+	payload: {
 		entidad,
-		img
+		img,
+		claveEntidad
 	}
 });
 
