@@ -9,9 +9,9 @@ export const closeUsuariosModal = () => ({
 	type: types.altaPermisoCloseUsuariosModal
 });
 
-export const startLoadUsuarios = (usuario) => {
+export const startLoadUsuarios = (usuario, claveEntidad) => {
 	return async (dispatch) => {
-		const usuarios = await loadUsuarios(usuario);
+		const usuarios = await loadUsuarios(usuario, claveEntidad);
 		dispatch(setUsuarios(usuarios));
 	};
 };

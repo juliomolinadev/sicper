@@ -38,9 +38,9 @@ export const addNewDerecho = (id, derecho) => ({
 	}
 });
 
-export const startLoadingDerechos = (apPaterno) => {
+export const startLoadingDerechos = (apPaterno, claveEntidad) => {
 	return async (dispatch) => {
-		const derechos = await loadDerechos(apPaterno);
+		const derechos = await loadDerechos(apPaterno, claveEntidad);
 		dispatch(setDerechos(derechos));
 	};
 };

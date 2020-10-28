@@ -4,6 +4,7 @@ const initialState = {
 	openCultivosModal: false,
 	cultivos: [],
 	cultivoSelected: null,
+	openUsuariosModal: false,
 	usuarios: [],
 	usuarioSelected: null
 };

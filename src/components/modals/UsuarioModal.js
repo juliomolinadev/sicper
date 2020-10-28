@@ -43,7 +43,7 @@ export const UsuarioModal = () => {
 				title={data.length === 0 ? "No se encontraron usuarios" : "Usuarios"}
 				columns={derechosColumns}
 				data={data}
-				customKey="apPaterno"
+				customKey="cuenta"
 				setFunction={setUsuarioSelected}
 				closeFunction={closeUsuariosModal}
 			></CustomTable>

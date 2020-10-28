@@ -30,6 +30,6 @@ export const types = {
 
 	loadUsuarios: "[Alta Permisos] Load usuarios",
 	clearUsuarios: "[Alta Permisos] Clear usuarios",
-	seUsuarios: "[Alta Permisos] Set usuario",
-	unseUsuarios: "[Alta Permisos] unset usuario"
+	setUsuario: "[Alta Permisos] Set usuario",
+	unsetUsuario: "[Alta Permisos] Unset usuario"
 };

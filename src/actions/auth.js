@@ -13,8 +13,6 @@ export const startLoginEmailPassword = (email, password) => {
 			.then(async ({ user }) => {
 				const entity = await loadEntity(user.uid);
 
-				console.log("En actions: ", entity);
-
 				const { entidad, claveEntidad, img } = entity;
 
 				dispatch(login(user.uid, user.displayName));

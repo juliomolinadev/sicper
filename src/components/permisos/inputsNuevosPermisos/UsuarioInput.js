@@ -16,8 +16,10 @@ export const UsuarioInput = () => {
 	};
 
 	const handleLoadUsuarios = () => {
-		dispatch(startLoadUsuarios(usuario.toUpperCase()));
+		dispatch(startLoadUsuarios(usuario.toUpperCase(), claveEntidad));
 	};
+
+	const { claveEntidad } = useSelector((state) => state.auth);
 
 	const { usuarioSelected } = useSelector((state) => state.altaPermisos);
 
