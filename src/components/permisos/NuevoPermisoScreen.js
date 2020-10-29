@@ -3,6 +3,7 @@ import { CultivoModal } from "../modals/CultivoModal";
 import { UsuarioModal } from "../modals/UsuarioModal";
 import { CultivoInput } from "./inputsNuevosPermisos/CultivoInput";
 import { UsuarioInput } from "./inputsNuevosPermisos/UsuarioInput";
+import { UsuarioSelected } from "./inputsNuevosPermisos/UsuarioSelected";
 
 export const NuevoPermisoScreen = () => {
 	return (
@@ -10,7 +11,9 @@ export const NuevoPermisoScreen = () => {
 			<div className="row m-3 d-flex justify-content-center">
 				<h1>Alta de permiso unico de siembra</h1>
 			</div>
+
 			<form className="container pb-4">
+				<UsuarioSelected />
 				<div className="row">
 					<UsuarioInput />
 

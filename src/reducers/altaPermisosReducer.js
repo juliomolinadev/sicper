@@ -6,7 +6,8 @@ const initialState = {
 	cultivoSelected: null,
 	openUsuariosModal: false,
 	usuarios: [],
-	usuarioSelected: null
+	cuentaSelected: null,
+	subCuentaSelected: null
 };
 
 export const altaPermisosReducer = (state = initialState, action) => {
@@ -77,13 +78,14 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.setUsuario:
 			return {
 				...state,
-				usuarioSelected: action.payload
+				cuentaSelected: action.payload.cuenta,
+				subCuentaSelected: action.payload.subCuenta
 			};
 
 		case types.unsetUsuario:
 			return {
 				...state,
-				usuarioSelected: null
+				cuentaSelected: null
 			};
 
 		default:

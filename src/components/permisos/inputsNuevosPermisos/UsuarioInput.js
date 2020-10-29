@@ -21,7 +21,13 @@ export const UsuarioInput = () => {
 
 	const { claveEntidad } = useSelector((state) => state.auth);
 
-	const { usuarioSelected } = useSelector((state) => state.altaPermisos);
+	const { cuentaSelected, subCuentaSelected } = useSelector((state) => state.altaPermisos);
+
+	let cuenta = "";
+
+	if (cuentaSelected) {
+		cuenta = `${cuentaSelected}-${subCuentaSelected}`;
+	}
 
 	const clearUsuarioInput = () => {
 		dispatch(unsetUsuarioSelected());
@@ -38,9 +44,9 @@ export const UsuarioInput = () => {
 		<div className="col-sm-6">
 			<div className="form-group d-flex align-items-baseline row p-3">
 				<label className="col-sm-3">Usuario: </label>
-				<label className="">{usuarioSelected} </label>
-				{usuarioSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
-				{usuarioSelected ? (
+				<label>{cuenta} </label>
+				{cuentaSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
+				{cuentaSelected ? (
 					<></>
 				) : (
 					<div className="flex-grow-1">
@@ -55,7 +61,7 @@ export const UsuarioInput = () => {
 						/>
 					</div>
 				)}
-				{usuarioSelected ? (
+				{cuentaSelected ? (
 					<button
 						className=" btn btn-outline-primary d-sm-block ml-auto"
 						type="button"

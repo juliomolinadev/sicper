@@ -2,11 +2,19 @@ import React from "react";
 import Datatable from "react-data-table-component";
 import { useDispatch } from "react-redux";
 
-export const CustomTable = ({ title, columns, data, customKey, setFunction, closeFunction }) => {
+export const CustomTable = ({
+	title,
+	columns,
+	data,
+	customKeyA,
+	customKeyB,
+	setFunction,
+	closeFunction
+}) => {
 	const dispatch = useDispatch();
 
 	const getRowSelected = (row) => {
-		dispatch(setFunction(row[customKey]));
+		dispatch(setFunction(row[customKeyA], row[customKeyB]));
 		dispatch(closeFunction());
 	};
 
