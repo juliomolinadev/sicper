@@ -53,7 +53,7 @@ export const UsuarioInput = () => {
 						<input
 							type="text"
 							className="form-control"
-							placeholder="usuario"
+							placeholder="Usuario"
 							name="usuario"
 							autoComplete="off"
 							value={usuario}

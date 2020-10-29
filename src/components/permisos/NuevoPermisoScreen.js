@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { CultivoModal } from "../modals/CultivoModal";
 import { UsuarioModal } from "../modals/UsuarioModal";
 import { CultivoInput } from "./inputsNuevosPermisos/CultivoInput";
@@ -6,6 +7,7 @@ import { UsuarioInput } from "./inputsNuevosPermisos/UsuarioInput";
 import { UsuarioSelected } from "./inputsNuevosPermisos/UsuarioSelected";
 
 export const NuevoPermisoScreen = () => {
+	const { cuentaSelected } = useSelector((state) => state.altaPermisos);
 	return (
 		<>
 			<div className="row m-3 d-flex justify-content-center">
@@ -13,7 +15,8 @@ export const NuevoPermisoScreen = () => {
 			</div>
 
 			<form className="container pb-4">
-				<UsuarioSelected />
+				{cuentaSelected ? <UsuarioSelected /> : <></>}
+
 				<div className="row">
 					<UsuarioInput />
 
