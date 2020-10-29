@@ -27,24 +27,13 @@ export const derechosColumns = [
 	{ name: "Ejido", selector: "ejido", sortable: true, width: "60px", center: true },
 	{ name: "Seccion", selector: "seccion", sortable: true, width: "60px", center: true },
 	{ name: "Modulo", selector: "modulo", sortable: true, width: "60px", center: true }
-	// { name: "unidad", selector: "unidad", sortable: true, width: "60px", center: true },
-	// { name: "zona", selector: "zona", sortable: true, width: "60px", center: true },
-	// { name: "cp", selector: "cp", sortable: true, width: "60px", center: true },
-	// { name: "lt", selector: "lt", sortable: true, width: "60px", center: true },
-	// { name: "slt", selector: "slt", sortable: true, width: "60px", center: true },
-	// { name: "ra", selector: "ra", sortable: true, width: "60px", center: true },
-	// { name: "sra", selector: "sra", sortable: true, width: "60px", center: true },
-	// { name: "ssra", selector: "ssra", sortable: true, width: "60px", center: true },
-	// { name: "pControl", selector: "pControl", sortable: true, width: "80px", center: true },
-	// { name: "tenencia", selector: "tenencia", sortable: true, width: "60px", center: true },
-	// { name: "estado", selector: "estado", sortable: true, width: "60px", center: true },
-	// { name: "municipio", selector: "municipio", sortable: true, width: "60px", center: true },
-	// { name: "grupo", selector: "grupo", sortable: true, width: "60px", center: true },
-	// { name: "sistRiego", selector: "sistRiego", sortable: true, width: "60px", center: true },
-	// { name: "equipo", selector: "equipo", sortable: true, width: "60px", center: true },
-	// { name: "supFisica", selector: "supFisica", sortable: true, width: "80px", center: true },
-	// { name: "fecha", selector: "fecha", sortable: true },
-	// { name: "referencia", selector: "referencia", sortable: true, width: "80px", center: true }
+];
+
+export const productoresColumns = [
+	{ name: "Paterno", selector: "apPaterno", width: "140px", sortable: true },
+	{ name: "Materno", selector: "apMaterno", width: "140px", sortable: true },
+	{ name: "Nombre", selector: "nombre", width: "200px", sortable: true },
+	{ name: "RFC", selector: "rfc", sortable: true, width: "140px", center: true }
 ];
 
 export const cultivosColumns = [

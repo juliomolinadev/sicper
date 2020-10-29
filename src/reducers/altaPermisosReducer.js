@@ -7,7 +7,10 @@ const initialState = {
 	openUsuariosModal: false,
 	usuarios: [],
 	cuentaSelected: null,
-	subCuentaSelected: null
+	subCuentaSelected: null,
+	openProductoresModal: false,
+	productores: [],
+	productorSelected: null
 };
 
 export const altaPermisosReducer = (state = initialState, action) => {
@@ -86,6 +89,44 @@ export const altaPermisosReducer = (state = initialState, action) => {
 			return {
 				...state,
 				cuentaSelected: null
+			};
+
+		//Productores **************************************
+
+		case types.altaPermisoOpenProductoresModal:
+			return {
+				...state,
+				openProductoresModal: true
+			};
+
+		case types.altaPermisoCloseProductoresModal:
+			return {
+				...state,
+				openProductoresModal: false
+			};
+
+		case types.loadProductores:
+			return {
+				...state,
+				productores: action.payload
+			};
+
+		case types.clearProductores:
+			return {
+				...state,
+				productores: []
+			};
+
+		case types.setProductor:
+			return {
+				...state,
+				productorSelected: action.payload
+			};
+
+		case types.unsetProductor:
+			return {
+				...state,
+				productorSelected: null
 			};
 
 		default:

@@ -33,18 +33,18 @@ export const UsuarioSelected = () => {
 	return (
 		<div className="border rounded mb-4 p-2">
 			<div className="row">
-				<div className="col-sm-4">Cuenta: {cuentaSelected}</div>
-				<div className="col-sm-4">Colonia/Ejido: {localidad}</div>
-				<div className="col-sm-4">Sup. Derecho: {derecho}</div>
+				<div className="col-sm-6">Cuenta: {cuentaSelected}</div>
+				<div className="col-sm-3">Colonia/Ejido: {localidad}</div>
+				<div className="col-sm-3">Sup. Derecho: {derecho}</div>
 			</div>
 			<div className="row">
-				<div className="col-sm-4">SubCuenta: {subCuentaSelected}</div>
-				<div className="col-sm-4">Lote: {lote}</div>
-				<div className="col-sm-4">Sup. Disponible: {derechoDisponible}</div>
+				<div className="col-sm-6">SubCuenta: {subCuentaSelected}</div>
+				<div className="col-sm-3">Lote: {lote}</div>
+				<div className="col-sm-3">Sup. Disponible: {derechoDisponible}</div>
 			</div>
 			<div className="row">
-				<div className="col-sm-4">Usuario: {usuario}</div>
-				<div className="col-sm-4">Seccion: {seccion}</div>
+				<div className="col-sm-6">Usuario: {usuario}</div>
+				<div className="col-sm-3">Seccion: {seccion}</div>
 			</div>
 		</div>
 	);
