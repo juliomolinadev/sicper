@@ -11,7 +11,7 @@ const initialState = {
 	openProductoresModal: false,
 	productores: [],
 	productorSelected: null,
-	openNuevoProductorModal: false
+	openNuevoProductorModal: true
 };
 
 export const altaPermisosReducer = (state = initialState, action) => {
