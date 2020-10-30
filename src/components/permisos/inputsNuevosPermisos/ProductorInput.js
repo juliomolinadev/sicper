@@ -59,7 +59,7 @@ export const ProductorInput = () => {
 						type="button"
 						onClick={clearProductorInput}
 					>
-						<i className="fas fa-redo"></i>
+						<i className="fas fa-trash"></i>
 					</button>
 				) : (
 					<button

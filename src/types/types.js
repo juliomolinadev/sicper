@@ -31,10 +31,13 @@ export const types = {
 	setUsuario: "[Alta Permisos] Set usuario",
 	unsetUsuario: "[Alta Permisos] Unset usuario",
 
-	altaPermisoOpenProductoresModal: "[Alta Permisos] Open prosuctores modal",
-	altaPermisoCloseProductoresModal: "[Alta Permisos] Close prosuctores modal",
+	altaPermisoOpenProductoresModal: "[Alta Permisos] Open productores modal",
+	altaPermisoCloseProductoresModal: "[Alta Permisos] Close productores modal",
 	loadProductores: "[Alta Permisos] Load prosuctores",
 	clearProductores: "[Alta Permisos] Clear prosuctores",
 	setProductor: "[Alta Permisos] Set productor",
-	unsetProductor: "[Alta Permisos] Unset productor"
+	unsetProductor: "[Alta Permisos] Unset productor",
+
+	altaPermisoOpenNuevoProductorModal: "[Alta Permisos] Open nuevo prouctor modal",
+	altaPermisoCloseNuevoProductorModal: "[Alta Permisos] Close nuevo prouctor modal"
 };

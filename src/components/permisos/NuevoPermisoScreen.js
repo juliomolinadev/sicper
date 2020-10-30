@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { CultivoModal } from "../modals/CultivoModal";
 import { UsuarioModal } from "../modals/UsuarioModal";
 import { ProductorModal } from "../modals/ProductorModal";
+import { NuevoProductorModal } from "../modals/NuevoProductorModal";
 import { CultivoInput } from "./inputsNuevosPermisos/CultivoInput";
 import { UsuarioInput } from "./inputsNuevosPermisos/UsuarioInput";
 import { ProductorInput } from "./inputsNuevosPermisos/ProductorInput";
@@ -146,6 +147,7 @@ export const NuevoPermisoScreen = () => {
 			<CultivoModal />
 			<UsuarioModal />
 			<ProductorModal />
+			<NuevoProductorModal />
 		</>
 	);
 };

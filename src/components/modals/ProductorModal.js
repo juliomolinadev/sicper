@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { closeProductoresModal, setProductorSelected } from "../../actions/productores";
+import { openNuevoProductorModal } from "../../actions/nuevoProductor";
 import { CustomTable } from "../tables/CustomTable";
 import { productoresColumns } from "../tables/configTables";
 
@@ -30,6 +31,11 @@ export const ProductorModal = () => {
 		dispatch(closeProductoresModal());
 	};
 
+	const changeProductorModal = () => {
+		dispatch(closeProductoresModal());
+		dispatch(openNuevoProductorModal());
+	};
+
 	return (
 		<Modal
 			isOpen={openProductoresModal}
@@ -47,6 +53,13 @@ export const ProductorModal = () => {
 				setFunction={setProductorSelected}
 				closeFunction={closeProductoresModal}
 			></CustomTable>
+
+			<div className="row d-flex justify-content-center pt-3">
+				<button className="btn btn-outline-primary" type="button" onClick={changeProductorModal}>
+					<span>Registrar nuevo productor </span>
+					<i className="fas fa-plus"></i>
+				</button>
+			</div>
 		</Modal>
 	);
 };
