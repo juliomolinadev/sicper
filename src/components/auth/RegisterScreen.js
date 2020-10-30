@@ -52,7 +52,6 @@ export const RegisterScreen = () => {
 					name="name"
 					className="auth__input"
 					autoComplete="off"
-					// value={name}
 					onChange={handleInputChange}
 				/>
 
@@ -62,7 +61,6 @@ export const RegisterScreen = () => {
 					name="email"
 					className="auth__input"
 					autoComplete="off"
-					// value="email"
 					onChange={handleInputChange}
 				/>
 
@@ -71,7 +69,6 @@ export const RegisterScreen = () => {
 					placeholder="Password"
 					name="password"
 					className="auth__input"
-					// value={password}
 					onChange={handleInputChange}
 				/>
 
@@ -80,7 +77,6 @@ export const RegisterScreen = () => {
 					placeholder="Confirmar password"
 					name="password2"
 					className="auth__input"
-					// value={password2}
 					onChange={handleInputChange}
 				/>
 
