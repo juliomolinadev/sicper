@@ -33,23 +33,35 @@ export const NuevoProductorModal = () => {
 	const [formValues, handleInputChange] = useForm();
 
 	const {
-		apPaterno,
-		direccion,
-		apMaterno,
-		estado,
-		nombre,
-		municipio,
-		rfc,
-		cp,
-		genero,
-		telefono
+		apPaterno = "",
+		direccion = "",
+		apMaterno = "",
+		estado = "",
+		nombre = "",
+		municipio = "",
+		rfc = "",
+		cp = "",
+		genero = "",
+		telefono = ""
 	} = formValues;
 
 	const handleRegister = (e) => {
 		e.preventDefault();
 
 		if (isFormValid()) {
-			dispatch(startSaveProductor(formValues));
+			dispatch(
+				startSaveProductor({
+					...formValues,
+					apPaterno: apPaterno.toUpperCase(),
+					apMaterno: apMaterno.toUpperCase(),
+					nombre: nombre.toUpperCase(),
+					direccion: direccion.toUpperCase(),
+					estado: estado.toUpperCase(),
+					municipio: municipio.toUpperCase(),
+					rfc: rfc.toUpperCase(),
+					telefono: telefono.replace(/ /g, "")
+				})
+			);
 		}
 	};
 
@@ -72,20 +84,19 @@ export const NuevoProductorModal = () => {
 		} else if (municipio.trim().length === 0) {
 			dispatch(setError("Se requiere municipio"));
 			return false;
-		} else if (rfc.trim().length === 0) {
-			dispatch(setError("Se requiere rfc"));
+		} else if (rfc.trim().length < 12) {
+			dispatch(setError("RFC no valido"));
 			return false;
-		} else if (cp.trim().length === 0) {
-			dispatch(setError("Se requiere codigo postal"));
+		} else if (cp.trim().length < 5) {
+			dispatch(setError("Codigo postal no valido"));
 			return false;
 		} else if (!genero) {
 			dispatch(setError("Se requiere genero"));
 			return false;
-		} else if (telefono.trim().length === 0) {
-			dispatch(setError("Se requiere telefono"));
+		} else if (telefono.replace(/ /g, "").length < 10) {
+			dispatch(setError("Telefono no valido"));
 			return false;
 		}
-
 		dispatch(removeError());
 
 		return true;
