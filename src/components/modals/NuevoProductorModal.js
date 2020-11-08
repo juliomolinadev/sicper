@@ -257,6 +257,7 @@ export const NuevoProductorModal = () => {
 						<span> Guardar</span>
 					</button>
 				</div>
+				<h4>Hola</h4>
 			</form>
 		</Modal>
 	);
