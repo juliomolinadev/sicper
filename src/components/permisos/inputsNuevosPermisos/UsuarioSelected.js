@@ -2,9 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export const UsuarioSelected = () => {
-	const { usuarios, cuentaSelected, subCuentaSelected } = useSelector(
-		(state) => state.altaPermisos
-	);
+	const { usuarios, idUsuarioSelected } = useSelector((state) => state.altaPermisos);
 
 	let localidad = "";
 	let derecho = "";
@@ -14,7 +12,7 @@ export const UsuarioSelected = () => {
 	let seccion = "";
 
 	usuarios.forEach((element) => {
-		if (element.cuenta === cuentaSelected && element.subcta === subCuentaSelected) {
+		if (element.id === idUsuarioSelected) {
 			localidad = element.ejido;
 			derecho = element.supRiego;
 			lote = element.predio;
@@ -31,12 +29,12 @@ export const UsuarioSelected = () => {
 	return (
 		<div className="border rounded mb-4 p-2">
 			<div className="row">
-				<div className="col-sm-6">Cuenta: {cuentaSelected}</div>
+				<div className="col-sm-6">Cuenta: {idUsuarioSelected}</div>
 				<div className="col-sm-3">Colonia/Ejido: {localidad}</div>
 				<div className="col-sm-3">Sup. Derecho: {derecho}</div>
 			</div>
 			<div className="row">
-				<div className="col-sm-6">SubCuenta: {subCuentaSelected}</div>
+				<div className="col-sm-6">SubCuenta:</div>
 				<div className="col-sm-3">Lote: {lote}</div>
 				<div className="col-sm-3">Sup. Disponible: {derechoDisponible}</div>
 			</div>

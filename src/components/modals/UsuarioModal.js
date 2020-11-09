@@ -3,7 +3,7 @@ import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { closeUsuariosModal, setUsuarioSelected } from "../../actions/usuarios";
 import { CustomTable } from "../tables/CustomTable";
-import { derechosColumns } from "../tables/configTables";
+import { usuariosColumns } from "../tables/configTables";
 
 const customStyles = {
 	content: {
@@ -41,10 +41,8 @@ export const UsuarioModal = () => {
 		>
 			<CustomTable
 				title={data.length === 0 ? "No se encontraron usuarios" : "Usuarios"}
-				columns={derechosColumns}
+				columns={usuariosColumns}
 				data={data}
-				customKeyA="cuenta"
-				customKeyB="subcta"
 				setFunction={setUsuarioSelected}
 				closeFunction={closeUsuariosModal}
 			></CustomTable>

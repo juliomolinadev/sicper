@@ -10,7 +10,7 @@ import { ProductorInput } from "./inputsNuevosPermisos/ProductorInput";
 import { UsuarioSelected } from "./inputsNuevosPermisos/UsuarioSelected";
 
 export const NuevoPermisoScreen = () => {
-	const { cuentaSelected } = useSelector((state) => state.altaPermisos);
+	const { idUsuarioSelected } = useSelector((state) => state.altaPermisos);
 	return (
 		<>
 			<div className="row m-3 d-flex justify-content-center">
@@ -18,7 +18,7 @@ export const NuevoPermisoScreen = () => {
 			</div>
 
 			<form className="container pb-4">
-				{cuentaSelected ? <UsuarioSelected /> : <></>}
+				{idUsuarioSelected ? <UsuarioSelected /> : <></>}
 
 				<div className="row">
 					<UsuarioInput />

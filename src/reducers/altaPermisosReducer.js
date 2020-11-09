@@ -8,8 +8,7 @@ const initialState = {
 	usuarios: [],
 	cultivos: [],
 	productores: [],
-	cuentaSelected: null,
-	subCuentaSelected: null,
+	idUsuarioSelected: null,
 	cuenta: "desde derechos",
 	usuario: "desde derechos",
 	supDerecho: "desde derechos",
@@ -22,10 +21,10 @@ const initialState = {
 	canal: "desde derechos",
 	toma: "desde derechos",
 	sistema: "desde derechos",
-	productorSelected: null,
+	idProductorSelected: null,
 	nombreProductor: "desde productores",
 	rfcProductor: "desde productores",
-	cultivoSelected: null,
+	idCultivoSelected: null,
 	subciclo: "desde cultivos",
 	supPrevia: "desde permisos",
 	tipo: "desde autorizados",
@@ -116,8 +115,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.setUsuario:
 			return {
 				...state,
-				cuentaSelected: action.payload.cuenta,
-				subCuentaSelected: action.payload.subCuenta
+				idUsuarioSelected: action.payload
 			};
 
 		case types.unsetUsuario:

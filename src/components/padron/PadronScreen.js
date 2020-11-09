@@ -1,6 +1,6 @@
 import React from "react";
 import { CustomTable } from "../tables/CustomTable";
-import { derechosColumns } from "../tables/configTables";
+import { usuariosColumns } from "../tables/configTables";
 import { padron } from "../../data/padron";
 
 export const PadronScreen = () => {
@@ -17,7 +17,7 @@ export const PadronScreen = () => {
 				<div className="col-sm-8 border rounded">
 					<div>
 						{table ? (
-							<CustomTable title={tableTitle} data={padron} columns={derechosColumns} />
+							<CustomTable title={tableTitle} data={padron} columns={usuariosColumns} />
 						) : (
 							<></>
 						)}

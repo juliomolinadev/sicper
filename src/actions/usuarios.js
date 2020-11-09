@@ -21,12 +21,9 @@ export const setUsuarios = (usuarios) => ({
 	payload: usuarios
 });
 
-export const setUsuarioSelected = (cuenta, subCuenta) => ({
+export const setUsuarioSelected = (id) => ({
 	type: types.setUsuario,
-	payload: {
-		cuenta,
-		subCuenta
-	}
+	payload: id
 });
 
 export const unsetUsuarioSelected = () => ({

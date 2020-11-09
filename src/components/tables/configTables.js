@@ -16,7 +16,8 @@ export const TextField = styled.input`
 	}
 `;
 
-export const derechosColumns = [
+export const usuariosColumns = [
+	{ name: "id", selector: "id", omit: true },
 	{ name: "Cuenta", selector: "cuenta", sortable: true, width: "80px" },
 	{ name: "Subcta", selector: "subcta", sortable: true, width: "40px", center: true },
 	{ name: "Paterno", selector: "apPaterno", width: "140px", sortable: true },
@@ -30,6 +31,7 @@ export const derechosColumns = [
 ];
 
 export const productoresColumns = [
+	{ name: "id", selector: "id", omit: true },
 	{ name: "Paterno", selector: "apPaterno", width: "140px", sortable: true },
 	{ name: "Materno", selector: "apMaterno", width: "140px", sortable: true },
 	{ name: "Nombre", selector: "nombre", width: "200px", sortable: true },
@@ -37,38 +39,39 @@ export const productoresColumns = [
 ];
 
 export const cultivosColumns = [
+	{ name: "id", selector: "id", omit: true },
 	{ name: "clave", selector: "clave", sortable: true, width: "60px", center: true },
 	{ name: "nombre", selector: "nombre", sortable: true, center: true },
 	{ name: "subciclo", selector: "subciclo", sortable: true, center: true }
 ];
 
-export const padronKeys = [
-	"cuenta",
-	"subcta",
-	"unidad",
-	"zona",
-	"seccion",
-	"cp",
-	"lt",
-	"slt",
-	"ra",
-	"sra",
-	"ssra",
-	"pcontrol",
-	"tenencia",
-	"estado",
-	"municipio",
-	"ejido",
-	"grupo",
-	"predio",
-	"sistriego",
-	"equipo",
-	"appaterno",
-	"apmaterno",
-	"nombre",
-	"supfisica",
-	"supriego",
-	"fecha",
-	"referencia",
-	"modulo"
-];
+// export const padronKeys = [
+// 	"cuenta",
+// 	"subcta",
+// 	"unidad",
+// 	"zona",
+// 	"seccion",
+// 	"cp",
+// 	"lt",
+// 	"slt",
+// 	"ra",
+// 	"sra",
+// 	"ssra",
+// 	"pcontrol",
+// 	"tenencia",
+// 	"estado",
+// 	"municipio",
+// 	"ejido",
+// 	"grupo",
+// 	"predio",
+// 	"sistriego",
+// 	"equipo",
+// 	"appaterno",
+// 	"apmaterno",
+// 	"nombre",
+// 	"supfisica",
+// 	"supriego",
+// 	"fecha",
+// 	"referencia",
+// 	"modulo"
+// ];
