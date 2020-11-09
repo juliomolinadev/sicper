@@ -10,6 +10,7 @@ export const closeNuevoProductorModal = () => ({
 	type: types.altaPermisoCloseNuevoProductorModal
 });
 
+// TODO: Comprobar que el rfc no exista
 export const startSaveProductor = (productor) => {
 	return (dispatch) => {
 		db.collection("productores")
