@@ -19,7 +19,7 @@ export const ProductorInput = () => {
 		dispatch(startLoadProductores(productor.toUpperCase()));
 	};
 
-	const { productorSelected } = useSelector((state) => state.altaPermisos);
+	const { idProductorSelected } = useSelector((state) => state.altaPermisos);
 
 	const clearProductorInput = () => {
 		dispatch(unsetProductorSelected());
@@ -36,9 +36,9 @@ export const ProductorInput = () => {
 		<div className="col-sm-6">
 			<div className="form-group d-flex align-items-baseline row p-3">
 				<label className="col-sm-3">Productor: </label>
-				<label>{productorSelected} </label>
-				{productorSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
-				{productorSelected ? (
+				<label>{idProductorSelected} </label>
+				{idProductorSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
+				{idProductorSelected ? (
 					<></>
 				) : (
 					<div className="flex-grow-1">
@@ -53,7 +53,7 @@ export const ProductorInput = () => {
 						/>
 					</div>
 				)}
-				{productorSelected ? (
+				{idProductorSelected ? (
 					<button
 						className=" btn btn-outline-primary d-sm-block ml-auto"
 						type="button"

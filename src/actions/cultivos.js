@@ -21,9 +21,9 @@ export const setCultivos = (cultivos) => ({
 	payload: cultivos
 });
 
-export const setCultivoSelected = (cultivo) => ({
+export const setCultivoSelected = (idCultivo) => ({
 	type: types.setCultivo,
-	payload: cultivo
+	payload: idCultivo
 });
 
 export const unsetCultivoSelected = () => ({

@@ -77,13 +77,13 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.setCultivo:
 			return {
 				...state,
-				cultivoSelected: action.payload
+				idCultivoSelected: action.payload
 			};
 
 		case types.unsetCultivo:
 			return {
 				...state,
-				cultivoSelected: null
+				idCultivoSelected: null
 			};
 
 		//Usuarios **************************************
@@ -121,7 +121,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.unsetUsuario:
 			return {
 				...state,
-				cuentaSelected: null
+				idUsuarioSelected: null
 			};
 
 		//Productores **************************************
@@ -153,13 +153,13 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.setProductor:
 			return {
 				...state,
-				productorSelected: action.payload
+				idProductorSelected: action.payload
 			};
 
 		case types.unsetProductor:
 			return {
 				...state,
-				productorSelected: null
+				idProductorSelected: null
 			};
 
 		//Nuevo Productor **************************************

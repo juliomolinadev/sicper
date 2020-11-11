@@ -21,9 +21,9 @@ export const setProductores = (productores) => ({
 	payload: productores
 });
 
-export const setProductorSelected = (rfc) => ({
+export const setProductorSelected = (idProductor) => ({
 	type: types.setProductor,
-	payload: rfc
+	payload: idProductor
 });
 
 export const unsetProductorSelected = () => ({
