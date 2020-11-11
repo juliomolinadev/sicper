@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { closeUsuariosModal, setUsuarioSelected } from "../../actions/usuarios";
+import { closeUsuariosModal, startSetUsuarioSelected } from "../../actions/usuarios";
 import { CustomTable } from "../tables/CustomTable";
 import { usuariosColumns } from "../tables/configTables";
 
@@ -43,7 +43,7 @@ export const UsuarioModal = () => {
 				title={data.length === 0 ? "No se encontraron usuarios" : "Usuarios"}
 				columns={usuariosColumns}
 				data={data}
-				setFunction={setUsuarioSelected}
+				setFunction={startSetUsuarioSelected}
 				closeFunction={closeUsuariosModal}
 			></CustomTable>
 		</Modal>

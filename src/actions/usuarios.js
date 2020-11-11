@@ -1,5 +1,6 @@
 import { types } from "../types/types";
 import { loadUsuarios } from "../helpers/loadUsuarios";
+import { loadLocalidad } from "../helpers/loadLocalidad";
 
 export const openUsuariosModal = () => ({
 	type: types.altaPermisoOpenUsuariosModal
@@ -21,10 +22,41 @@ export const setUsuarios = (usuarios) => ({
 	payload: usuarios
 });
 
-export const setUsuarioSelected = (id) => ({
-	type: types.setUsuario,
-	payload: id
-});
+export const startSetUsuarioSelected = (usuario) => {
+	return async (dispatch) => {
+		const localidad = await loadLocalidad(usuario.ejido);
+		usuario.ejido = localidad;
+		dispatch(setUsuarioSelected(usuario));
+	};
+};
+
+export const setUsuarioSelected = (usuario) => {
+	if (usuario.estado === 26) {
+		usuario.estado = "Sonora";
+	}
+	if (usuario.estado === 2) {
+		usuario.estado = "Baja California";
+	}
+	if (usuario.municipio === 2) {
+		usuario.municipio = "Mexicali";
+	}
+	if (usuario.municipio === 55) {
+		usuario.municipio = "San Luis Rio Colorado";
+	}
+	if (usuario.sistRiego === 1) {
+		usuario.sistRiego = "Gravedad";
+	}
+	if (usuario.sistRiego === 2 && usuario.equipo === 1) {
+		usuario.sistRiego = "Poso Particular";
+	}
+	if (usuario.sistRiego === 2 && usuario.equipo === 2) {
+		usuario.sistRiego = "Poso Federal";
+	}
+	return {
+		type: types.setUsuario,
+		payload: usuario
+	};
+};
 
 export const unsetUsuarioSelected = () => ({
 	type: types.unsetUsuario

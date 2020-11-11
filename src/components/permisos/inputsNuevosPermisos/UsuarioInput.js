@@ -21,12 +21,12 @@ export const UsuarioInput = () => {
 
 	const { claveEntidad } = useSelector((state) => state.auth);
 
-	const { idUsuarioSelected } = useSelector((state) => state.altaPermisos);
+	const { idUsuarioSelected, usuario: nombreUsuario } = useSelector((state) => state.altaPermisos);
 
 	let cuenta = "";
 
 	if (idUsuarioSelected) {
-		cuenta = `${idUsuarioSelected}`;
+		cuenta = nombreUsuario;
 	}
 
 	const clearUsuarioInput = () => {

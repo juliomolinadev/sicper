@@ -3,7 +3,6 @@ import thunk from "redux-thunk";
 
 import { authReducer } from "../reducers/authReducer";
 import { uiReducer } from "../reducers/uiReducer";
-import { derechosReducer } from "../reducers/derechosReducer";
 import { altaPermisosReducer } from "../reducers/altaPermisosReducer";
 
 const composeEnhancers =
@@ -12,7 +11,6 @@ const composeEnhancers =
 const reducers = combineReducers({
 	auth: authReducer,
 	ui: uiReducer,
-	padron: derechosReducer,
 	altaPermisos: altaPermisosReducer
 });
 
