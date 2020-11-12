@@ -25,7 +25,10 @@ const initialState = {
 	nombreProductor: null,
 	rfcProductor: null,
 	idCultivoSelected: null,
-	subciclo: "desde cultivos",
+	nombreCultivo: null,
+	claveCultivo: null,
+	subciclo: null,
+	cuotaCultivo: null,
 	supPrevia: "desde permisos",
 	tipo: "desde autorizados",
 	presidente: "desde entidades",
@@ -77,13 +80,21 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.setCultivo:
 			return {
 				...state,
-				idCultivoSelected: action.payload.id
+				idCultivoSelected: action.payload.id,
+				nombreCultivo: action.payload.nombre,
+				claveCultivo: action.payload.clave,
+				subciclo: action.payload.subciclo,
+				cuotaCultivo: action.payload.costoHectarea
 			};
 
 		case types.unsetCultivo:
 			return {
 				...state,
-				idCultivoSelected: null
+				idCultivoSelected: null,
+				nombreCultivo: null,
+				claveCultivo: null,
+				subciclo: null,
+				cuotaCultivo: null
 			};
 
 		//Usuarios **************************************
@@ -133,7 +144,19 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.unsetUsuario:
 			return {
 				...state,
-				idUsuarioSelected: null
+				idUsuarioSelected: null,
+				cuenta: null,
+				usuario: null,
+				supDerecho: null,
+				lote: null,
+				localidad: null,
+				municipio: null,
+				estado: null,
+				modulo: null,
+				seccion: null,
+				canal: null,
+				toma: null,
+				sistema: null
 			};
 
 		//Productores **************************************
@@ -173,7 +196,9 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.unsetProductor:
 			return {
 				...state,
-				idProductorSelected: null
+				idProductorSelected: null,
+				nombreProductor: null,
+				rfcProductor: null
 			};
 
 		//Nuevo Productor **************************************

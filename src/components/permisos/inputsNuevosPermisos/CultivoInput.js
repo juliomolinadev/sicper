@@ -19,7 +19,13 @@ export const CultivoInput = () => {
 		dispatch(startLoadCultivos(cultivo.toUpperCase()));
 	};
 
-	const { idCultivoSelected } = useSelector((state) => state.altaPermisos);
+	const { idCultivoSelected, nombreCultivo } = useSelector((state) => state.altaPermisos);
+
+	let cultivoLabel = "";
+
+	if (idCultivoSelected) {
+		cultivoLabel = nombreCultivo;
+	}
 
 	const clearCultivoInput = () => {
 		dispatch(unsetCultivoSelected());
@@ -36,7 +42,7 @@ export const CultivoInput = () => {
 		<div className="col-sm-6">
 			<div className="form-group d-flex align-items-baseline row p-3">
 				<label className="col-sm-3">Cultivo: </label>
-				<label className="">{idCultivoSelected} </label>
+				<label className="">{cultivoLabel} </label>
 				{idCultivoSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
 				{idCultivoSelected ? (
 					<></>
