@@ -49,7 +49,6 @@ export const ProductorModal = () => {
 				title={data.length === 0 ? "No se encontraron productores" : "Productores"}
 				columns={productoresColumns}
 				data={data}
-				customKeyA="rfc"
 				setFunction={setProductorSelected}
 				closeFunction={closeProductoresModal}
 			></CustomTable>

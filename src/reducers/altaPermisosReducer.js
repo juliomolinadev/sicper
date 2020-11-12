@@ -22,8 +22,8 @@ const initialState = {
 	toma: null,
 	sistema: null,
 	idProductorSelected: null,
-	nombreProductor: "desde productores",
-	rfcProductor: "desde productores",
+	nombreProductor: null,
+	rfcProductor: null,
 	idCultivoSelected: null,
 	subciclo: "desde cultivos",
 	supPrevia: "desde permisos",
@@ -77,7 +77,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.setCultivo:
 			return {
 				...state,
-				idCultivoSelected: action.payload
+				idCultivoSelected: action.payload.id
 			};
 
 		case types.unsetCultivo:
@@ -165,7 +165,9 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.setProductor:
 			return {
 				...state,
-				idProductorSelected: action.payload
+				idProductorSelected: action.payload.id,
+				nombreProductor: `${action.payload.apPaterno} ${action.payload.apMaterno} ${action.payload.nombre}`,
+				rfcProductor: action.payload.rfc
 			};
 
 		case types.unsetProductor:

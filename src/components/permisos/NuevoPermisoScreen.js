@@ -8,9 +8,10 @@ import { CultivoInput } from "./inputsNuevosPermisos/CultivoInput";
 import { UsuarioInput } from "./inputsNuevosPermisos/UsuarioInput";
 import { ProductorInput } from "./inputsNuevosPermisos/ProductorInput";
 import { UsuarioSelected } from "./inputsNuevosPermisos/UsuarioSelected";
+import { ProductorSelected } from "./inputsNuevosPermisos/ProductorSelected";
 
 export const NuevoPermisoScreen = () => {
-	const { idUsuarioSelected } = useSelector((state) => state.altaPermisos);
+	const { idUsuarioSelected, idProductorSelected } = useSelector((state) => state.altaPermisos);
 	return (
 		<>
 			<div className="row m-3 d-flex justify-content-center">
@@ -19,6 +20,7 @@ export const NuevoPermisoScreen = () => {
 
 			<form className="container pb-4">
 				{idUsuarioSelected ? <UsuarioSelected /> : <></>}
+				{idProductorSelected ? <ProductorSelected /> : <></>}
 
 				<div className="row">
 					<UsuarioInput />

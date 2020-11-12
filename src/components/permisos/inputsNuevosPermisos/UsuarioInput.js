@@ -23,10 +23,10 @@ export const UsuarioInput = () => {
 
 	const { idUsuarioSelected, usuario: nombreUsuario } = useSelector((state) => state.altaPermisos);
 
-	let cuenta = "";
+	let usuarioLabel = "";
 
 	if (idUsuarioSelected) {
-		cuenta = nombreUsuario;
+		usuarioLabel = nombreUsuario;
 	}
 
 	const clearUsuarioInput = () => {
@@ -44,7 +44,7 @@ export const UsuarioInput = () => {
 		<div className="col-sm-6">
 			<div className="form-group d-flex align-items-baseline row p-3">
 				<label className="col-sm-3">Usuario: </label>
-				<label>{cuenta} </label>
+				<label>{usuarioLabel} </label>
 				{idUsuarioSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
 				{idUsuarioSelected ? (
 					<></>
