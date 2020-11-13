@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export const UsuarioSelected = () => {
-	const { usuarios, idUsuarioSelected } = useSelector((state) => state.altaPermisos);
+	const { usuarios, idUsuarioSelected, supPrevia } = useSelector((state) => state.altaPermisos);
 
 	let localidad = "";
 	let cuenta = "";
@@ -12,24 +12,21 @@ export const UsuarioSelected = () => {
 	let usuario = "";
 	let seccion = "";
 
-	usuarios.forEach((element) => {
-		if (element.id === idUsuarioSelected) {
-			cuenta = `${element.cuenta}.${element.subcta}`;
-			localidad = element.ejido;
-			derecho = element.supRiego;
-			lote = element.predio;
-			if (element.supDisponible) {
-				derechoDisponible = element.supDisponible;
-			} else {
-				derechoDisponible = derecho;
-			}
-			usuario = `${element.apPaterno} ${element.apMaterno} ${element.nombre}`;
-			seccion = element.seccion;
+	usuarios.forEach((usuario) => {
+		if (usuario.id === idUsuarioSelected) {
+			cuenta = `${usuario.cuenta}.${usuario.subcta}`;
+			localidad = usuario.ejido;
+			derecho = usuario.supRiego;
+			lote = usuario.predio;
+			derechoDisponible = derecho - supPrevia;
+			usuario = `${usuario.apPaterno} ${usuario.apMaterno} ${usuario.nombre}`;
+			seccion = usuario.seccion;
 		}
 	});
 
 	return (
 		<div className="border rounded mb-4 p-2">
+			{/* TODO: Poner alerta cuando la cuenta no tenga superficie disponible */}
 			<div className="row">
 				<div className="col-sm-6">Cuenta: {cuenta}</div>
 				<div className="col-sm-3">Colonia/Ejido: {localidad}</div>

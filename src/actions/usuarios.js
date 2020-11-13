@@ -1,6 +1,7 @@
 import { types } from "../types/types";
 import { loadUsuarios } from "../helpers/loadUsuarios";
 import { loadLocalidad } from "../helpers/loadLocalidad";
+import { loadSuperficiePrevia } from "../helpers/loadSuperficiePrevia";
 
 export const openUsuariosModal = () => ({
 	type: types.altaPermisoOpenUsuariosModal
@@ -25,7 +26,9 @@ export const setUsuarios = (usuarios) => ({
 export const startSetUsuarioSelected = (usuario) => {
 	return async (dispatch) => {
 		const localidad = await loadLocalidad(usuario.ejido);
+		const supPrevia = await loadSuperficiePrevia(`${usuario.cuenta}.${usuario.subcta}`);
 		usuario.ejido = localidad;
+		usuario.supPrevia = supPrevia;
 		dispatch(setUsuarioSelected(usuario));
 	};
 };

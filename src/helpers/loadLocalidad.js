@@ -3,15 +3,14 @@ import { db } from "../firebase/firebase-config";
 export const loadLocalidad = async (clave) => {
 	const localidadSnap = await db.collection(`colonias`).where("clave", "==", clave).get();
 
-	const localidad = [];
+	const localidades = [];
 
 	localidadSnap.forEach((snapHijo) => {
-		localidad.push({
+		localidades.push({
 			id: snapHijo.id,
 			...snapHijo.data()
 		});
 	});
 
-	console.log(localidad[0].nombre);
-	return localidad[0].nombre;
+	return localidades[0].nombre;
 };

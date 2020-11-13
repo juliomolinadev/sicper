@@ -29,11 +29,11 @@ const initialState = {
 	claveCultivo: null,
 	subciclo: null,
 	cuotaCultivo: null,
-	supPrevia: "desde permisos",
-	tipo: "desde autorizados",
-	presidente: "desde entidades",
+	supPrevia: 0,
+	tipo: "Por definir",
+	titularEntidad: "desde entidades",
 	dotacion: "desde entidades",
-	ciclo: "se calcula al guardar",
+	ciclo: "se calcula al abrir formulario",
 	numeroPermiso: "se calcula al guardar",
 	fechaEmicion: "se calcula al guardar",
 	fechaLimite: "se calcula al guardar",
@@ -41,6 +41,7 @@ const initialState = {
 	folioSanidad: "se calcula al guardar",
 	supDisponible: "se calcula al guardar",
 	cuotas: "se calcula al guardar",
+	usuarioSistema: "se obtiene al guardar",
 	supAutorizada: "desde formulario",
 	variedad: "desde formulario",
 	fuenteCredito: "desde formulario",
@@ -138,7 +139,8 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				seccion: action.payload.seccion,
 				canal: `${action.payload.cp}-${action.payload.lt}-${action.payload.slt}-${action.payload.ra}-${action.payload.sra}-${action.payload.ssra}`,
 				toma: action.payload.pControl,
-				sistema: action.payload.sistRiego
+				sistema: action.payload.sistRiego,
+				supPrevia: action.payload.supPrevia
 			};
 
 		case types.unsetUsuario:
