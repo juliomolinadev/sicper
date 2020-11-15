@@ -4,10 +4,12 @@
 
     supPrevia:
       <!-- Crear tabla de permisos y un ejemplo para pruevas -->
-      Calcular la superficie disponible de la cuenta seleccionada
+      <!-- Calcular la superficie disponible de la cuenta seleccionada -->
 
     tipo:
       Definir si el permiso es normal o extra
+        Crear tabla de superficie autorizada
+        Verificar si el cultivo tiene superficie disponible
 
     presidente:
     dotacion:

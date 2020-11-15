@@ -42,13 +42,13 @@ const initialState = {
 	supDisponible: "se calcula al guardar",
 	cuotas: "se calcula al guardar",
 	usuarioSistema: "se obtiene al guardar",
-	supAutorizada: "desde formulario",
-	variedad: "desde formulario",
-	fuenteCredito: "desde formulario",
-	latitud: "desde formulario",
-	longitud: "desde formulario",
-	cultivoAnterior: "desde formulario",
-	observaciones: "desde formulario"
+	variedad: "",
+	supAutorizada: 0,
+	fuenteCredito: "",
+	latitud: "",
+	longitud: "",
+	cultivoAnterior: "",
+	observaciones: ""
 };
 
 export const altaPermisosReducer = (state = initialState, action) => {
@@ -215,6 +215,20 @@ export const altaPermisosReducer = (state = initialState, action) => {
 			return {
 				...state,
 				openNuevoProductorModal: false
+			};
+
+		//Set Form *****************************************************
+
+		case types.altaPermisosSetFormValues:
+			return {
+				...state,
+				supAutorizada: action.payload.supAutorizada,
+				variedad: action.payload.variedad,
+				fuenteCredito: action.payload.fuenteCredito,
+				latitud: action.payload.latitud,
+				longitud: action.payload.longitud,
+				cultivoAnterior: action.payload.cultivoAnterior,
+				observaciones: action.payload.observaciones
 			};
 
 		default:

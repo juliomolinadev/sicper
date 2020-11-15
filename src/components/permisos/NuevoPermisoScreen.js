@@ -1,5 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { CultivoModal } from "../modals/CultivoModal";
 import { UsuarioModal } from "../modals/UsuarioModal";
 import { ProductorModal } from "../modals/ProductorModal";
@@ -9,9 +9,31 @@ import { UsuarioInput } from "./inputsNuevosPermisos/UsuarioInput";
 import { ProductorInput } from "./inputsNuevosPermisos/ProductorInput";
 import { UsuarioSelected } from "./inputsNuevosPermisos/UsuarioSelected";
 import { ProductorSelected } from "./inputsNuevosPermisos/ProductorSelected";
+import { useForm } from "../../hooks/useForm";
+import { setFormValues } from "../../actions/altaPermisos";
 
 export const NuevoPermisoScreen = () => {
 	const { idUsuarioSelected, idProductorSelected } = useSelector((state) => state.altaPermisos);
+
+	const [formValues, handleInputChange] = useForm({
+		variedad: "",
+		supAutorizada: 0,
+		fuenteCredito: "",
+		latitud: "",
+		longitud: "",
+		observaciones: ""
+	});
+
+	const { variedad, supAutorizada, fuenteCredito, latitud, longitud, observaciones } = formValues;
+
+	const dispatch = useDispatch();
+
+	const onSendForm = (e) => {
+		console.log(formValues);
+		e.preventDefault();
+		dispatch(setFormValues(formValues));
+	};
+
 	return (
 		<>
 			<div className="row m-3 d-flex justify-content-center">
@@ -39,7 +61,9 @@ export const NuevoPermisoScreen = () => {
 									className="form-control"
 									placeholder="variedad"
 									name="variedad"
+									value={variedad}
 									autoComplete="off"
+									onChange={handleInputChange}
 								/>
 							</div>
 						</div>
@@ -54,8 +78,10 @@ export const NuevoPermisoScreen = () => {
 									type="text"
 									className="form-control"
 									placeholder="superficie"
-									name="superficie"
+									name="supAutorizada"
+									value={supAutorizada}
 									autoComplete="off"
+									onChange={handleInputChange}
 								/>
 							</div>
 						</div>
@@ -67,9 +93,11 @@ export const NuevoPermisoScreen = () => {
 								<input
 									type="text"
 									className="form-control"
-									placeholder="fuente-credito"
-									name="fuente-credito"
+									placeholder="fuente de credito"
+									name="fuenteCredito"
+									value={fuenteCredito}
 									autoComplete="off"
+									onChange={handleInputChange}
 								/>
 							</div>
 						</div>
@@ -86,7 +114,9 @@ export const NuevoPermisoScreen = () => {
 									className="form-control"
 									placeholder="latitud"
 									name="latitud"
+									value={latitud}
 									autoComplete="off"
+									onChange={handleInputChange}
 								/>
 							</div>
 						</div>
@@ -100,29 +130,10 @@ export const NuevoPermisoScreen = () => {
 									className="form-control"
 									placeholder="longitud"
 									name="longitud"
+									value={longitud}
 									autoComplete="off"
+									onChange={handleInputChange}
 								/>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div className="row">
-					<div className="col-sm-6">
-						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">Tipo:</label>
-							<br />
-							<div className="row">
-								<div className="px-4">
-									<input type="radio" id="normal" name="tipo" value="normal" />
-									<span> </span>
-									<label htmlFor="normal"> Normal</label>
-								</div>
-								<div className="px-4">
-									<input type="radio" id="superficie-extra" name="tipo" value="superficie-extra" />
-									<span> </span>
-									<label htmlFor="superficie-extra"> Superficie extra</label>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -134,14 +145,16 @@ export const NuevoPermisoScreen = () => {
 						className="form-control"
 						placeholder="Observaciones"
 						rows="5"
-						name="notas"
+						name="observaciones"
+						value={observaciones}
+						onChange={handleInputChange}
 					></textarea>
 					<small id="emailHelp" className="form-text text-muted">
 						Información adicional
 					</small>
 				</div>
 
-				<button type="button" className="btn btn-outline-primary btn-block">
+				<button type="button" className="btn btn-outline-primary btn-block" onClick={onSendForm}>
 					<i className="far fa-save"></i>
 					<span> Guardar</span>
 				</button>

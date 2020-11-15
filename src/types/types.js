@@ -10,13 +10,6 @@ export const types = {
 	uiStartLoading: "[UI] Start Loading",
 	uiFinishLoading: "[UI] Finish Loading",
 
-	// derechosAddNew: "[Derechos] New derecho",
-	// derechosActive: "[Derechos] Set active derecho",
-	// derechosLoad: "[Derechos] Load derechos",
-	// derechosUpdated: "[Derechos] Updated derecho",
-	// derechosDelete: "[Derechos] Delete derecho",
-	// derechosLogoutCleaning: "[Derechos] Logout Cleaning",
-
 	altaPermisoOpenCultivosModal: "[Alta Permisos] Open cultivos modal",
 	altaPermisoCloseCultivosModal: "[Alta Permisos] Close cultivos modal",
 	loadCultivos: "[Alta Permisos] Load cultivos",
@@ -39,5 +32,8 @@ export const types = {
 	unsetProductor: "[Alta Permisos] Unset productor",
 
 	altaPermisoOpenNuevoProductorModal: "[Alta Permisos] Open nuevo prouctor modal",
-	altaPermisoCloseNuevoProductorModal: "[Alta Permisos] Close nuevo prouctor modal"
+	altaPermisoCloseNuevoProductorModal: "[Alta Permisos] Close nuevo prouctor modal",
+
+	altaPermisosSetFormValues: "[Alta Permisos] Set form value",
+	altaPermisosUnsetFormValues: "[Alta Permisos] Unset form value"
 };
