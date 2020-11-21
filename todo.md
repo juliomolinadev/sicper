@@ -6,48 +6,28 @@
       <!-- Crear tabla de permisos y un ejemplo para pruevas -->
       <!-- Calcular la superficie disponible de la cuenta seleccionada -->
 
-    tipo:
-      Definir si el permiso es normal o extra
-        Crear tabla de superficie autorizada
-        Verificar si el cultivo tiene superficie disponible
+    tipo: Definir si el permiso es normal o extra, Crear tabla de superficie autorizada, Verificar si el cultivo tiene superficie disponible
 
-    presidente:
-    dotacion:
-      Obtener los datos de la entidad (dotacion y presidente)
+    presidente y dotacion: Obtener los datos de la entidad (dotacion y presidente)
 
-    ciclo:
-      Calcular el ciclo al que corresponde el permiso
+    ciclo: Calcular el ciclo al que corresponde el permiso
 
-    numeroPermiso:
-      Establecer el numero de permiso con autoincrement
+    numeroPermiso: Establecer el numero de permiso con autoincrement
 
-    fechaEmicion:
-      Calcular al guardar
+    fechaEmicion: Calcular al guardar
 
-    fechaLimite:
-      Fecha de emicion mas 30 dias
+    fechaLimite: Fecha de emicion mas 30 dias
 
-    vigencia:
-      Segun subciclo
+    vigencia: Segun subciclo
 
-    folioSanidad:
-      Establecer al guardar con autoincrement
+    folioSanidad: Establecer al guardar con autoincrement
 
-    supDisponible:
-      Derecho menos supPrevia
+    supDisponible: Derecho menos supPrevia
 
-    cuotas:
-      superficie del permiso por cuota del cultivo
+    cuotas: superficie del permiso por cuota del cultivo
 
-    supAutorizada:
-      Verificar si la cuenta tiene superficie disponible
+    supAutorizada: Verificar si la cuenta tiene superficie disponible
 
-    variedad:
-    fuenteCredito:
-    latitud:
-    longitud:
-    cultivoAnterior:
-    observaciones:
-      Manejar formulario
+    Manejar formulario: variedad, fuenteCredito, latitud, longitud, cultivoAnterior, observaciones
 
 ## Crear plantilla html de impresion

@@ -13,7 +13,9 @@ export const authReducer = (state = {}, action) => {
 				...state,
 				entidad: action.payload.entidad,
 				img: action.payload.img,
-				claveEntidad: action.payload.claveEntidad
+				claveEntidad: action.payload.claveEntidad,
+				dotacion: action.payload.dotacion,
+				titular: action.payload.titular
 			};
 
 		case types.logout:

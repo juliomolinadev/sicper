@@ -35,5 +35,7 @@ export const types = {
 	altaPermisoCloseNuevoProductorModal: "[Alta Permisos] Close nuevo prouctor modal",
 
 	altaPermisosSetFormValues: "[Alta Permisos] Set form value",
-	altaPermisosUnsetFormValues: "[Alta Permisos] Unset form value"
+	altaPermisosUnsetFormValues: "[Alta Permisos] Unset form value",
+	altaPermisosSetTipoPermiso: "[Alta Permisos] Set tipo permiso",
+	altaPermisosUnsetTipoPermiso: "[Alta Permisos] Unset tipo permiso"
 };

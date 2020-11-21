@@ -4,7 +4,7 @@ import { AuthRouter } from "./AuthRouter";
 import { DashboardRoutes } from "./DashboardRoutes";
 import { firebase } from "../firebase/firebase-config";
 import { useDispatch } from "react-redux";
-import { loadEntity, login, setEntity } from "../actions/auth";
+import { loadEntity, loadEntityData, login, setEntity } from "../actions/auth";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 
@@ -18,13 +18,15 @@ export const AppRouter = () => {
 		firebase.auth().onAuthStateChanged(async (user) => {
 			if (user?.uid) {
 				const entity = await loadEntity(user.uid);
+				const entityData = await loadEntityData(entity.claveEntidad);
+				const { nombre, img, clave, dotacion, titular } = entityData;
 
-				const { entidad, img, claveEntidad } = entity;
 				dispatch(login(user.uid, user.displayName));
-				dispatch(setEntity(entidad, img, claveEntidad));
+				dispatch(setEntity(nombre, img, clave, dotacion, titular));
 				setIsLoggedIn(true);
 			} else {
 				setIsLoggedIn(false);
+				// dispatch(logout());
 			}
 			setChecking(false);
 		});

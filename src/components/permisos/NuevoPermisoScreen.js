@@ -10,7 +10,7 @@ import { ProductorInput } from "./inputsNuevosPermisos/ProductorInput";
 import { UsuarioSelected } from "./inputsNuevosPermisos/UsuarioSelected";
 import { ProductorSelected } from "./inputsNuevosPermisos/ProductorSelected";
 import { useForm } from "../../hooks/useForm";
-import { setFormValues } from "../../actions/altaPermisos";
+import { setFormValues, setTipoPermiso } from "../../actions/altaPermisos";
 
 export const NuevoPermisoScreen = () => {
 	const { idUsuarioSelected, idProductorSelected } = useSelector((state) => state.altaPermisos);
@@ -29,9 +29,23 @@ export const NuevoPermisoScreen = () => {
 	const dispatch = useDispatch();
 
 	const onSendForm = (e) => {
-		console.log(formValues);
-		e.preventDefault();
-		dispatch(setFormValues(formValues));
+		if (isFormValid()) {
+			console.log(formValues);
+			e.preventDefault();
+			dispatch(setFormValues(formValues));
+			dispatch(setTipoPermiso(defineTipoPermiso()));
+		}
+	};
+
+	const isFormValid = () => {
+		// TODO: Validar formulario de nuevos permisos
+		return true;
+	};
+
+	const defineTipoPermiso = () => {
+		// TODO: Determinar si el permiso es normal o extra segun tabla de superficie autorizada por cultivo
+		const tipo = "Normal";
+		return tipo;
 	};
 
 	return (

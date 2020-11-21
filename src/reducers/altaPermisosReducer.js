@@ -30,10 +30,10 @@ const initialState = {
 	subciclo: null,
 	cuotaCultivo: null,
 	supPrevia: 0,
-	tipo: "Por definir",
+	tipo: null,
 	titularEntidad: "desde entidades",
 	dotacion: "desde entidades",
-	ciclo: "se calcula al abrir formulario",
+	ciclo: "se calcula al guardar",
 	numeroPermiso: "se calcula al guardar",
 	fechaEmicion: "se calcula al guardar",
 	fechaLimite: "se calcula al guardar",
@@ -229,6 +229,18 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				longitud: action.payload.longitud,
 				cultivoAnterior: action.payload.cultivoAnterior,
 				observaciones: action.payload.observaciones
+			};
+
+		case types.altaPermisosSetTipoPermiso:
+			return {
+				...state,
+				tipo: action.payload
+			};
+
+		case types.altaPermisosUnsetTipoPermiso:
+			return {
+				...state,
+				tipo: null
 			};
 
 		default:

@@ -12,11 +12,12 @@ export const startLoginEmailPassword = (email, password) => {
 			.signInWithEmailAndPassword(email, password)
 			.then(async ({ user }) => {
 				const entity = await loadEntity(user.uid);
+				const entityData = await loadEntityData(entity.claveEntidad);
 
-				const { entidad, claveEntidad, img } = entity;
+				const { nombre, img, clave, dotacion, titular } = entityData;
 
 				dispatch(login(user.uid, user.displayName));
-				dispatch(setEntity(entidad, img, claveEntidad));
+				dispatch(setEntity(nombre, img, clave, dotacion, titular));
 				dispatch(finishLoading());
 			})
 			.catch((e) => {
@@ -62,12 +63,14 @@ export const login = (uid, displayName) => ({
 	}
 });
 
-export const setEntity = (entidad, img, claveEntidad) => ({
+export const setEntity = (entidad, img, claveEntidad, dotacion, titular) => ({
 	type: types.entity,
 	payload: {
 		entidad,
 		img,
-		claveEntidad
+		claveEntidad,
+		dotacion,
+		titular
 	}
 });
 
@@ -94,4 +97,18 @@ export const loadEntity = async (uid) => {
 	});
 
 	return entity;
+};
+
+export const loadEntityData = async (claveEntidad) => {
+	const entitySnap = await db.collection(`entidades`).get();
+
+	let entityData = {};
+
+	entitySnap.forEach((snapHijo) => {
+		if (snapHijo.data().clave === claveEntidad) {
+			entityData = { ...snapHijo.data() };
+		}
+	});
+
+	return entityData;
 };
