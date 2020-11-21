@@ -9,7 +9,7 @@ export const UsuarioSelected = () => {
 	let derecho = "";
 	let lote = "";
 	let derechoDisponible = "";
-	let usuario = "";
+	let nombreUsuario = "";
 	let seccion = "";
 
 	usuarios.forEach((usuario) => {
@@ -19,7 +19,7 @@ export const UsuarioSelected = () => {
 			derecho = usuario.supRiego;
 			lote = usuario.predio;
 			derechoDisponible = derecho - supPrevia;
-			usuario = `${usuario.apPaterno} ${usuario.apMaterno} ${usuario.nombre}`;
+			nombreUsuario = `${usuario.apPaterno} ${usuario.apMaterno} ${usuario.nombre}`;
 			seccion = usuario.seccion;
 		}
 	});
@@ -33,7 +33,7 @@ export const UsuarioSelected = () => {
 				<div className="col-sm-3">Sup. Derecho: {derecho}</div>
 			</div>
 			<div className="row">
-				<div className="col-sm-6">Usuario: {usuario}</div>
+				<div className="col-sm-6">Usuario: {nombreUsuario}</div>
 				<div className="col-sm-3">Lote: {lote}</div>
 				<div className="col-sm-3">Sup. Disponible: {derechoDisponible}</div>
 			</div>
