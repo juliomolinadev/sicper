@@ -36,6 +36,6 @@ export const types = {
 
 	altaPermisosSetFormValues: "[Alta Permisos] Set form value",
 	altaPermisosUnsetFormValues: "[Alta Permisos] Unset form value",
-	altaPermisosSetTipoPermiso: "[Alta Permisos] Set tipo permiso",
-	altaPermisosUnsetTipoPermiso: "[Alta Permisos] Unset tipo permiso"
+	altaPermisosSetSubmitData: "[Alta Permisos] Set onSubmit data",
+	altaPermisosUnsetSubmitData: "[Alta Permisos] unSet onSubmit data"
 };

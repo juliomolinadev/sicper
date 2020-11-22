@@ -31,17 +31,11 @@ const initialState = {
 	cuotaCultivo: null,
 	supPrevia: 0,
 	tipo: null,
-	titularEntidad: "desde entidades",
-	dotacion: "desde entidades",
-	ciclo: "se calcula al guardar",
-	numeroPermiso: "se calcula al guardar",
-	fechaEmicion: "se calcula al guardar",
-	fechaLimite: "se calcula al guardar",
-	vigencia: "se calcula al guardar",
-	folioSanidad: "se calcula al guardar",
-	supDisponible: "se calcula al guardar",
-	cuotas: "se calcula al guardar",
-	usuarioSistema: "se obtiene al guardar",
+	ciclo: null,
+	numeroPermiso: null,
+	fechaEmicion: null,
+	fechaLimite: null,
+	vigencia: null,
 	variedad: "",
 	supAutorizada: 0,
 	fuenteCredito: "",
@@ -231,16 +225,28 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				observaciones: action.payload.observaciones
 			};
 
-		case types.altaPermisosSetTipoPermiso:
+		// Al guardar
+
+		case types.altaPermisosSetSubmitData:
 			return {
 				...state,
-				tipo: action.payload
+				tipo: action.payload.tipo,
+				ciclo: action.payload.ciclo,
+				numeroPermiso: action.payload.numeroPermiso,
+				fechaEmicion: action.payload.fechaEmicion,
+				fechaLimite: action.payload.fechaLimite,
+				vigencia: action.payload.vigencia
 			};
 
-		case types.altaPermisosUnsetTipoPermiso:
+		case types.altaPermisosUnsetSubmitData:
 			return {
 				...state,
-				tipo: null
+				tipo: null,
+				ciclo: null,
+				numeroPermiso: null,
+				fechaEmicion: null,
+				fechaLimite: null,
+				vigencia: null
 			};
 
 		default:

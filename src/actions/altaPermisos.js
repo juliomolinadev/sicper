@@ -5,11 +5,11 @@ export const setFormValues = (values) => ({
 	payload: values
 });
 
-export const setTipoPermiso = (tipoPermiso) => ({
-	type: types.altaPermisosSetTipoPermiso,
-	payload: tipoPermiso
+export const setOnSubmitData = (data) => ({
+	type: types.altaPermisosSetSubmitData,
+	payload: data
 });
 
-export const unsetTipoPermiso = () => ({
-	type: types.altaPermisosUnsetTipoPermiso
+export const unsetOnSubmitData = () => ({
+	type: types.altaPermisosUnsetSubmitData
 });

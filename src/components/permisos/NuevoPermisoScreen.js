@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+import { useForm } from "../../hooks/useForm";
 import { CultivoModal } from "../modals/CultivoModal";
 import { UsuarioModal } from "../modals/UsuarioModal";
 import { ProductorModal } from "../modals/ProductorModal";
@@ -9,11 +11,12 @@ import { UsuarioInput } from "./inputsNuevosPermisos/UsuarioInput";
 import { ProductorInput } from "./inputsNuevosPermisos/ProductorInput";
 import { UsuarioSelected } from "./inputsNuevosPermisos/UsuarioSelected";
 import { ProductorSelected } from "./inputsNuevosPermisos/ProductorSelected";
-import { useForm } from "../../hooks/useForm";
-import { setFormValues, setTipoPermiso } from "../../actions/altaPermisos";
+import { setFormValues, setOnSubmitData } from "../../actions/altaPermisos";
 
 export const NuevoPermisoScreen = () => {
-	const { idUsuarioSelected, idProductorSelected } = useSelector((state) => state.altaPermisos);
+	const { idUsuarioSelected, idProductorSelected, subciclo } = useSelector(
+		(state) => state.altaPermisos
+	);
 
 	const [formValues, handleInputChange] = useForm({
 		variedad: "",
@@ -30,10 +33,9 @@ export const NuevoPermisoScreen = () => {
 
 	const onSendForm = (e) => {
 		if (isFormValid()) {
-			console.log(formValues);
 			e.preventDefault();
 			dispatch(setFormValues(formValues));
-			dispatch(setTipoPermiso(defineTipoPermiso()));
+			dispatch(setOnSubmitData(getOnSubmitData()));
 		}
 	};
 
@@ -42,10 +44,66 @@ export const NuevoPermisoScreen = () => {
 		return true;
 	};
 
+	const getOnSubmitData = () => {
+		const data = {
+			tipo: defineTipoPermiso(),
+			ciclo: defineCiclo(),
+			numeroPermiso: defineNumeroPermiso(),
+			fechaEmicion: moment().format("DD/MM/YYYY"),
+			fechaLimite: moment().add(10, "days").format("DD/MM/YYYY"),
+			vigencia: defineVigencia(subciclo)
+			// supDisponible: defineSupDisponible(),
+			// cuotas: defineCuotas(),
+		};
+
+		return data;
+	};
+
 	const defineTipoPermiso = () => {
 		// TODO: Determinar si el permiso es normal o extra segun tabla de superficie autorizada por cultivo
 		const tipo = "Normal";
 		return tipo;
+	};
+
+	const defineCiclo = () => {
+		// TODO: Determinar el ciclo segun la fecha
+		const ciclo = "2020-2021";
+		return ciclo;
+	};
+
+	const defineNumeroPermiso = () => {
+		// TODO: Determinar el numero de permiso segun contador
+		const permiso = "M19-000";
+		return permiso;
+	};
+
+	const defineVigencia = (subciclo) => {
+		// TODO: Determinar la vigencia segun subciclo y fecha de emicion
+		let vigencia = null;
+		if (subciclo) {
+			switch (subciclo) {
+				case "PRIMAVERA-VERANO":
+					vigencia = moment("09/30/2021").format("DD/MM/YYYY");
+					break;
+
+				case "OTOÑO-INVIERNO":
+					vigencia = moment("05/31/2021").format("DD/MM/YYYY");
+					break;
+
+				case "PERENNES":
+					vigencia = moment("09/30/2021").format("DD/MM/YYYY");
+					break;
+
+				case "PERENES":
+					vigencia = moment("09/30/2021").format("DD/MM/YYYY");
+					break;
+
+				default:
+					vigencia = "";
+					break;
+			}
+		}
+		return vigencia;
 	};
 
 	return (
