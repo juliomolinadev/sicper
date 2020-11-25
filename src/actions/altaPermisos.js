@@ -13,3 +13,11 @@ export const setOnSubmitData = (data) => ({
 export const unsetOnSubmitData = () => ({
 	type: types.altaPermisosUnsetSubmitData
 });
+
+export const openPrintPermisoModal = () => ({
+	type: types.altaPermisoOpenPrintPermisoModal
+});
+
+export const closePrintPermisoModal = () => ({
+	type: types.altaPermisoClosePrintPermisoModal
+});

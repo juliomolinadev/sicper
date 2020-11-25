@@ -10,6 +10,9 @@ export const types = {
 	uiStartLoading: "[UI] Start Loading",
 	uiFinishLoading: "[UI] Finish Loading",
 
+	altaPermisoOpenPrintPermisoModal: "[Alta Permisos] Open permiso modal",
+	altaPermisoClosePrintPermisoModal: "[Alta Permisos] Close permiso modal",
+
 	altaPermisoOpenCultivosModal: "[Alta Permisos] Open cultivos modal",
 	altaPermisoCloseCultivosModal: "[Alta Permisos] Close cultivos modal",
 	loadCultivos: "[Alta Permisos] Load cultivos",

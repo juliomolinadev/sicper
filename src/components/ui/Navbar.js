@@ -18,7 +18,7 @@ export const Navbar = () => {
 				<img
 					className=""
 					src={"./logos/cna.png"}
-					alt="Logo de modulo 19"
+					alt="Logo comisión nacional del agua"
 					style={{ maxHeight: 50 }}
 				/>
 			</Link>

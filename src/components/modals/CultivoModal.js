@@ -43,7 +43,6 @@ export const CultivoModal = () => {
 				title={data.length === 0 ? "No se encontraron cultivos" : "Cultivos"}
 				columns={cultivosColumns}
 				data={data}
-				customKeyA="nombre"
 				setFunction={setCultivoSelected}
 				closeFunction={closeCultivosModal}
 			></CustomTable>

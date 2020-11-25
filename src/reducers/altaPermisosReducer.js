@@ -5,6 +5,7 @@ const initialState = {
 	openProductoresModal: false,
 	openNuevoProductorModal: false,
 	openCultivosModal: false,
+	openPrintPermisoModal: true,
 	usuarios: [],
 	cultivos: [],
 	productores: [],
@@ -47,6 +48,20 @@ const initialState = {
 
 export const altaPermisosReducer = (state = initialState, action) => {
 	switch (action.type) {
+		//Print Permiso **************************************
+
+		case types.altaPermisoOpenPrintPermisoModal:
+			return {
+				...state,
+				openPrintPermisoModal: true
+			};
+
+		case types.altaPermisoClosePrintPermisoModal:
+			return {
+				...state,
+				openPrintPermisoModal: false
+			};
+
 		//Cultivos **************************************
 		case types.altaPermisoOpenCultivosModal:
 			return {

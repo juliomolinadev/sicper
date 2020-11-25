@@ -1,22 +1,27 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+
 import { useForm } from "../../hooks/useForm";
 import { CultivoModal } from "../modals/CultivoModal";
 import { UsuarioModal } from "../modals/UsuarioModal";
 import { ProductorModal } from "../modals/ProductorModal";
 import { NuevoProductorModal } from "../modals/NuevoProductorModal";
+import { PrintPermisoModal } from "../modals/PrintPermisoModal";
 import { CultivoInput } from "./inputsNuevosPermisos/CultivoInput";
 import { UsuarioInput } from "./inputsNuevosPermisos/UsuarioInput";
 import { ProductorInput } from "./inputsNuevosPermisos/ProductorInput";
 import { UsuarioSelected } from "./inputsNuevosPermisos/UsuarioSelected";
 import { ProductorSelected } from "./inputsNuevosPermisos/ProductorSelected";
-import { setFormValues, setOnSubmitData } from "../../actions/altaPermisos";
+import { setFormValues, setOnSubmitData, openPrintPermisoModal } from "../../actions/altaPermisos";
 
 export const NuevoPermisoScreen = () => {
 	const { idUsuarioSelected, idProductorSelected, subciclo } = useSelector(
 		(state) => state.altaPermisos
 	);
+
+	const altaPermisos = useSelector((state) => state.altaPermisos);
+	const auth = useSelector((state) => state.auth);
 
 	const [formValues, handleInputChange] = useForm({
 		variedad: "",
@@ -29,7 +34,19 @@ export const NuevoPermisoScreen = () => {
 
 	const { variedad, supAutorizada, fuenteCredito, latitud, longitud, observaciones } = formValues;
 
+	const permisoData = {
+		...formValues,
+		...altaPermisos,
+		...auth
+	};
+
+	console.log("Datos: ", permisoData);
+
 	const dispatch = useDispatch();
+
+	const handleOpenPrintPermisoModal = () => {
+		dispatch(openPrintPermisoModal());
+	};
 
 	const onSendForm = (e) => {
 		if (isFormValid()) {
@@ -50,10 +67,9 @@ export const NuevoPermisoScreen = () => {
 			ciclo: defineCiclo(),
 			numeroPermiso: defineNumeroPermiso(),
 			fechaEmicion: moment().format("DD/MM/YYYY"),
+			// TODO: Verificar la fecha limite de siembra
 			fechaLimite: moment().add(10, "days").format("DD/MM/YYYY"),
 			vigencia: defineVigencia(subciclo)
-			// supDisponible: defineSupDisponible(),
-			// cuotas: defineCuotas(),
 		};
 
 		return data;
@@ -226,15 +242,21 @@ export const NuevoPermisoScreen = () => {
 					</small>
 				</div>
 
-				<button type="button" className="btn btn-outline-primary btn-block" onClick={onSendForm}>
-					<i className="far fa-save"></i>
-					<span> Guardar</span>
-				</button>
+				<div
+					className="row d-flex justify-content-center pt-5"
+					onClick={handleOpenPrintPermisoModal}
+				>
+					<button type="button" className="btn btn-outline-primary" onClick={onSendForm}>
+						<i className="far fa-save"></i>
+						<span> Guardar</span>
+					</button>
+				</div>
 			</form>
 			<CultivoModal />
 			<UsuarioModal />
 			<ProductorModal />
 			<NuevoProductorModal />
+			<PrintPermisoModal data={permisoData} />
 		</>
 	);
 };

@@ -9,6 +9,7 @@
 	justify-content: center;
 	transition: opacity 0.2s ease-in-out;
 	z-index: 999;
+	position: absolute;
 }
 
 .modal-fondo {
@@ -40,6 +41,53 @@
 	margin-top: 50px;
 }
 
+.printModal {
+	background: white;
+	border-radius: 5px;
+	color: rgb(51, 51, 51);
+	display: inline;
+	max-height: 1500px;
+	max-width: 1125px;
+	outline: auto;
+	padding: 10px;
+	margin-top: 1100px;
+	font-size: 13px;
+}
+
+.printPermisoSubLogo {
+	font-size: 10px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.printModal p {
+	font-size: 12px;
+	text-align: justify;
+}
+
+.printModal h1 {
+	font-size: 28px;
+}
+.printModal h2 {
+	font-size: 22px;
+}
+.printModal h3 {
+	font-size: 18px;
+}
+
+.printModal ul {
+	list-style: none;
+	text-decoration: none;
+}
+
+.text-dotacion {
+	font-size: 14px;
+}
+
+.firma {
+	margin-top: 80px;
+}
+
 /* Date picker */
 
 .react-datetime-picker input:focus {
@@ -48,6 +96,13 @@
 
 .react-datetime-picker__wrapper {
 	border: 0px solid gray !important;
+}
+
+@media print {
+	.printModal {
+		outline: none;
+		margin-top: 0px;
+	}
 }
 
 /* FABS */
