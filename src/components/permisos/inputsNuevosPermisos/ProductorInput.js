@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../../hooks/useForm";
+import Swal from "sweetalert2";
+
 import {
 	openProductoresModal,
 	startLoadProductores,
@@ -12,7 +14,11 @@ export const ProductorInput = () => {
 
 	const handleOpenProductoresModal = () => {
 		handleLoadProductores();
-		dispatch(openProductoresModal());
+		if (productor.length > 0) {
+			dispatch(openProductoresModal());
+		} else {
+			Swal.fire("Nada para buscar", "Ingrese apellido paterno del productor", "warning");
+		}
 	};
 
 	const handleLoadProductores = () => {

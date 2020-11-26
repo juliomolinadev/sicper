@@ -97,7 +97,6 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const defineNumeroPermiso = async () => {
-		// TODO: Determinar el numero de permiso segun contador
 		const permiso = `MOD${auth.claveEntidad}-${fill(
 			(await loadContador(auth.claveEntidad)) + 1,
 			3

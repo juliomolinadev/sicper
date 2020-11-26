@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
+
 import { useForm } from "../../../hooks/useForm";
 import {
 	openCultivosModal,
@@ -12,7 +14,11 @@ export const CultivoInput = () => {
 
 	const handleOpenCultivosModal = () => {
 		handleLoadCultivos();
-		dispatch(openCultivosModal());
+		if (cultivo.length > 0) {
+			dispatch(openCultivosModal());
+		} else {
+			Swal.fire("Nada para buscar", "Ingrese nombre del cultivo", "warning");
+		}
 	};
 
 	const handleLoadCultivos = () => {

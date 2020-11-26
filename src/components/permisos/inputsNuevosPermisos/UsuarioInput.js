@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../../hooks/useForm";
+import Swal from "sweetalert2";
 import {
 	openUsuariosModal,
 	startLoadUsuarios,
@@ -12,7 +13,11 @@ export const UsuarioInput = () => {
 
 	const handleOpenUsuariosModal = () => {
 		handleLoadUsuarios();
-		dispatch(openUsuariosModal());
+		if (usuario.length > 0) {
+			dispatch(openUsuariosModal());
+		} else {
+			Swal.fire("Nada para buscar", "Ingrese apellido paterno del usuario", "warning");
+		}
 	};
 
 	const handleLoadUsuarios = () => {
