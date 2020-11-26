@@ -5,7 +5,7 @@ const initialState = {
 	openProductoresModal: false,
 	openNuevoProductorModal: false,
 	openCultivosModal: false,
-	openPrintPermisoModal: true,
+	openPrintPermisoModal: false,
 	usuarios: [],
 	cultivos: [],
 	productores: [],

@@ -14,6 +14,7 @@ import { ProductorInput } from "./inputsNuevosPermisos/ProductorInput";
 import { UsuarioSelected } from "./inputsNuevosPermisos/UsuarioSelected";
 import { ProductorSelected } from "./inputsNuevosPermisos/ProductorSelected";
 import { setFormValues, setOnSubmitData, openPrintPermisoModal } from "../../actions/altaPermisos";
+import { loadContador } from "../../helpers/loadContador";
 
 export const NuevoPermisoScreen = () => {
 	const { idUsuarioSelected, idProductorSelected, subciclo } = useSelector(
@@ -27,12 +28,22 @@ export const NuevoPermisoScreen = () => {
 		variedad: "",
 		supAutorizada: 0,
 		fuenteCredito: "",
-		latitud: "",
-		longitud: "",
-		observaciones: ""
+		// latitud: "",
+		// longitud: "",
+		observaciones: "",
+		transferencia: ""
 	});
 
-	const { variedad, supAutorizada, fuenteCredito, latitud, longitud, observaciones } = formValues;
+	const {
+		variedad,
+		supAutorizada,
+		fuenteCredito,
+		// latitud,
+		// longitud,
+		observaciones,
+		cultivoAnterior,
+		transferencia
+	} = formValues;
 
 	const permisoData = {
 		...formValues,
@@ -40,19 +51,17 @@ export const NuevoPermisoScreen = () => {
 		...auth
 	};
 
-	console.log("Datos: ", permisoData);
-
 	const dispatch = useDispatch();
 
 	const handleOpenPrintPermisoModal = () => {
 		dispatch(openPrintPermisoModal());
 	};
 
-	const onSendForm = (e) => {
+	const onSendForm = async (e) => {
 		if (isFormValid()) {
 			e.preventDefault();
 			dispatch(setFormValues(formValues));
-			dispatch(setOnSubmitData(getOnSubmitData()));
+			dispatch(setOnSubmitData(await getOnSubmitData()));
 		}
 	};
 
@@ -61,11 +70,11 @@ export const NuevoPermisoScreen = () => {
 		return true;
 	};
 
-	const getOnSubmitData = () => {
+	const getOnSubmitData = async () => {
 		const data = {
 			tipo: defineTipoPermiso(),
 			ciclo: defineCiclo(),
-			numeroPermiso: defineNumeroPermiso(),
+			numeroPermiso: await defineNumeroPermiso(),
 			fechaEmicion: moment().format("DD/MM/YYYY"),
 			// TODO: Verificar la fecha limite de siembra
 			fechaLimite: moment().add(10, "days").format("DD/MM/YYYY"),
@@ -87,11 +96,16 @@ export const NuevoPermisoScreen = () => {
 		return ciclo;
 	};
 
-	const defineNumeroPermiso = () => {
+	const defineNumeroPermiso = async () => {
 		// TODO: Determinar el numero de permiso segun contador
-		const permiso = "M19-000";
+		const permiso = `MOD${auth.claveEntidad}-${fill(
+			(await loadContador(auth.claveEntidad)) + 1,
+			3
+		)}`;
 		return permiso;
 	};
+
+	const fill = (number, len) => "0".repeat(len - number.toString().length) + number.toString();
 
 	const defineVigencia = (subciclo) => {
 		// TODO: Determinar la vigencia segun subciclo y fecha de emicion
@@ -192,7 +206,7 @@ export const NuevoPermisoScreen = () => {
 					</div>
 				</div>
 
-				<div className="row">
+				{/* <div className="row">
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
 							<label className="col-sm-3">Latitud:</label>
@@ -219,6 +233,42 @@ export const NuevoPermisoScreen = () => {
 									placeholder="longitud"
 									name="longitud"
 									value={longitud}
+									autoComplete="off"
+									onChange={handleInputChange}
+								/>
+							</div>
+						</div>
+					</div>
+				</div> */}
+
+				<div className="row">
+					<div className="col-sm-6">
+						<div className="form-group d-flex align-items-baseline row p-3">
+							<label className="col-sm-3">Cultivo anterior:</label>
+							<div className="flex-grow-1 ">
+								<input
+									type="text"
+									className="form-control"
+									placeholder="Cultivo anterior"
+									name="cultivoAnterior"
+									value={cultivoAnterior}
+									autoComplete="off"
+									onChange={handleInputChange}
+								/>
+							</div>
+						</div>
+					</div>
+
+					<div className="col-sm-6">
+						<div className="form-group d-flex align-items-baseline row p-3">
+							<label className="col-sm-3">Transferencia interna:</label>
+							<div className="flex-grow-1 ">
+								<input
+									type="text"
+									className="form-control"
+									placeholder="Cuenta destino"
+									name="transferencia"
+									value={transferencia}
 									autoComplete="off"
 									onChange={handleInputChange}
 								/>
