@@ -15,6 +15,7 @@ import { UsuarioSelected } from "./inputsNuevosPermisos/UsuarioSelected";
 import { ProductorSelected } from "./inputsNuevosPermisos/ProductorSelected";
 import { setFormValues, setOnSubmitData, openPrintPermisoModal } from "../../actions/altaPermisos";
 import { loadContador } from "../../helpers/loadContador";
+import { removeError, setError } from "../../actions/ui";
 
 export const NuevoPermisoScreen = () => {
 	const { idUsuarioSelected, idProductorSelected, subciclo } = useSelector(
@@ -23,6 +24,7 @@ export const NuevoPermisoScreen = () => {
 
 	const altaPermisos = useSelector((state) => state.altaPermisos);
 	const auth = useSelector((state) => state.auth);
+	const { msgError } = useSelector((state) => state.ui);
 
 	const [formValues, handleInputChange] = useForm({
 		variedad: "",
@@ -62,11 +64,38 @@ export const NuevoPermisoScreen = () => {
 			e.preventDefault();
 			dispatch(setFormValues(formValues));
 			dispatch(setOnSubmitData(await getOnSubmitData()));
+			handleOpenPrintPermisoModal();
 		}
 	};
 
 	const isFormValid = () => {
 		// TODO: Validar formulario de nuevos permisos
+		if (!altaPermisos.usuario) {
+			dispatch(setError("El campo usuario es obligatorio."));
+			return false;
+		} else if (!altaPermisos.nombreProductor) {
+			dispatch(setError("El campo productor es obligatorio."));
+			return false;
+		} else if (!altaPermisos.nombreCultivo) {
+			dispatch(setError("El campo cultivo es obligatorio."));
+			return false;
+		} else if (supAutorizada <= 0) {
+			dispatch(setError("Ingrese la superficie que será autorizada en este permiso."));
+			return false;
+		} else if (altaPermisos.supDerecho - altaPermisos.supPrevia < supAutorizada) {
+			dispatch(
+				setError("La superficie excede la superficie disponible de la cuenta seleccionada.")
+			);
+			return false;
+		} else if (!fuenteCredito) {
+			dispatch(setError("Especifique la fuente de crédito."));
+			return false;
+		} else if (!cultivoAnterior) {
+			dispatch(setError("Especifique el cultivo anterior."));
+			return false;
+		}
+
+		dispatch(removeError());
 		return true;
 	};
 
@@ -142,6 +171,7 @@ export const NuevoPermisoScreen = () => {
 			</div>
 
 			<form className="container pb-4">
+				{msgError && <div className="auth__alert-error">{msgError}</div>}
 				{idUsuarioSelected ? <UsuarioSelected /> : <></>}
 				{idProductorSelected ? <ProductorSelected /> : <></>}
 
@@ -293,7 +323,7 @@ export const NuevoPermisoScreen = () => {
 
 				<div
 					className="row d-flex justify-content-center pt-5"
-					onClick={handleOpenPrintPermisoModal}
+					// onClick={handleOpenPrintPermisoModal}
 				>
 					<button type="button" className="btn btn-outline-primary" onClick={onSendForm}>
 						<i className="far fa-save"></i>
