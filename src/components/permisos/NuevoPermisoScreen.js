@@ -21,8 +21,8 @@ export const NuevoPermisoScreen = () => {
 	const { idUsuarioSelected, idProductorSelected, subciclo } = useSelector(
 		(state) => state.altaPermisos
 	);
-
 	const altaPermisos = useSelector((state) => state.altaPermisos);
+
 	const auth = useSelector((state) => state.auth);
 	const { msgError } = useSelector((state) => state.ui);
 
@@ -30,9 +30,10 @@ export const NuevoPermisoScreen = () => {
 		variedad: "",
 		supAutorizada: 0,
 		fuenteCredito: "",
-		// latitud: "",
-		// longitud: "",
+		latitud: "",
+		longitud: "",
 		observaciones: "",
+		cultivoAnterior: "",
 		transferencia: ""
 	});
 

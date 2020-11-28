@@ -1,11 +1,12 @@
 import { types } from "../types/types";
 
 const initialState = {
+	isPermisoSaved: false,
 	openUsuariosModal: false,
 	openProductoresModal: false,
 	openNuevoProductorModal: false,
 	openCultivosModal: false,
-	openPrintPermisoModal: false,
+	isOpenPrintPermisoModal: false,
 	usuarios: [],
 	cultivos: [],
 	productores: [],
@@ -217,13 +218,13 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.altaPermisoOpenNuevoProductorModal:
 			return {
 				...state,
-				openNuevoProductorModal: true
+				isOpenNuevoProductorModal: true
 			};
 
 		case types.altaPermisoCloseNuevoProductorModal:
 			return {
 				...state,
-				openNuevoProductorModal: false
+				isOpenNuevoProductorModal: false
 			};
 
 		//Set Form *****************************************************
@@ -262,6 +263,18 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				fechaEmicion: null,
 				fechaLimite: null,
 				vigencia: null
+			};
+
+		case types.altaPermisosSetSavedPermiso:
+			return {
+				...state,
+				isPermisoSaved: true
+			};
+
+		case types.altaPermisosUnsetSavedPermiso:
+			return {
+				...state,
+				isPermisoSaved: false
 			};
 
 		default:

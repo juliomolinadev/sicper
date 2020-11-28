@@ -21,3 +21,11 @@ export const openPrintPermisoModal = () => ({
 export const closePrintPermisoModal = () => ({
 	type: types.altaPermisoClosePrintPermisoModal
 });
+
+export const setSavedPermiso = () => ({
+	type: types.altaPermisosSetSavedPermiso
+});
+
+export const unsetSavedPermiso = () => ({
+	type: types.altaPermisosUnsetSavedPermiso
+});

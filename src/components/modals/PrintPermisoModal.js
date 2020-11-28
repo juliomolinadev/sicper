@@ -1,7 +1,8 @@
 import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { closePrintPermisoModal } from "../../actions/altaPermisos";
+import { closePrintPermisoModal, setSavedPermiso } from "../../actions/altaPermisos";
+import { sabePermiso } from "../../helpers/sabePermiso";
 
 const customStyles = {
 	content: {
@@ -11,11 +12,16 @@ const customStyles = {
 };
 
 export const PrintPermisoModal = ({ data }) => {
-	const { openPrintPermisoModal } = useSelector((state) => state.altaPermisos);
+	const { openPrintPermisoModal, isPermisoSaved } = useSelector((state) => state.altaPermisos);
 	const dispatch = useDispatch();
 
 	const closeModal = () => {
 		dispatch(closePrintPermisoModal());
+	};
+
+	const handleSavePermiso = () => {
+		sabePermiso(data);
+		dispatch(setSavedPermiso());
 	};
 
 	return (
@@ -333,20 +339,21 @@ export const PrintPermisoModal = ({ data }) => {
 					<div className="d-flex justify-content-center">BAJA CALIFORNIA</div>
 				</div>
 				<div className="col-6 d-flex justify-content-center align-items-center pt-5">
-					<button type="submit" className="btn btn-outline-primary d-print-none">
-						<i className="far fa-edit"></i>
-						<span> Editar</span>
-					</button>
-
-					<button type="submit" className="btn btn-outline-primary ml-5 d-print-none">
-						<i className="far fa-save"></i>
-						<span> Guardar</span>
-					</button>
-
-					<button type="submit" className="btn btn-outline-primary ml-5 d-print-none">
-						<i className="fas fa-print"></i>
-						<span> Imprimir</span>
-					</button>
+					{isPermisoSaved ? (
+						<button type="submit" className="btn btn-outline-primary ml-5 d-print-none">
+							<i className="fas fa-print"></i>
+							<span> Imprimir</span>
+						</button>
+					) : (
+						<button
+							type="submit"
+							className="btn btn-outline-primary ml-5 d-print-none"
+							onClick={handleSavePermiso}
+						>
+							<i className="far fa-save"></i>
+							<span> Guardar</span>
+						</button>
+					)}
 				</div>
 			</div>
 		</Modal>
