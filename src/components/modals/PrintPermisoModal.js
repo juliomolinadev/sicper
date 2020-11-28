@@ -1,13 +1,15 @@
 import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import Swal from "sweetalert2";
 import {
 	closePrintPermisoModal,
 	startDisableSaveButton,
 	unsetOnSubmitData,
 	startEnablePrintButton,
-	unsetSavedPermiso
+	setEnEspera,
+	unsetEnEspera,
+	startEnableSaveButton,
+	startDisablePrintButton
 } from "../../actions/altaPermisos";
 import { unsetCultivoSelected } from "../../actions/cultivos";
 import { unsetProductorSelected } from "../../actions/productores";
@@ -22,7 +24,7 @@ const customStyles = {
 };
 
 export const PrintPermisoModal = ({ data }) => {
-	const { openPrintPermisoModal, enableSaveButton, enablePrintButton } = useSelector(
+	const { openPrintPermisoModal, enableSaveButton, enablePrintButton, enEspera } = useSelector(
 		(state) => state.altaPermisos
 	);
 	const dispatch = useDispatch();
@@ -30,18 +32,19 @@ export const PrintPermisoModal = ({ data }) => {
 	const closeModal = () => {
 		dispatch(closePrintPermisoModal());
 		dispatch(unsetOnSubmitData());
-		dispatch(unsetSavedPermiso());
 		dispatch(unsetCultivoSelected());
 		dispatch(unsetProductorSelected());
 		dispatch(unsetUsuarioSelected());
+		dispatch(startEnableSaveButton());
+		dispatch(startDisablePrintButton());
 	};
 
 	const handleSavePermiso = async () => {
 		dispatch(startDisableSaveButton());
+		dispatch(setEnEspera());
 		if (await sabePermiso(data)) {
+			dispatch(unsetEnEspera());
 			dispatch(startEnablePrintButton());
-		} else {
-			Swal.fire("Error", "Verifique su conexión.", "error");
 		}
 	};
 
@@ -372,6 +375,15 @@ export const PrintPermisoModal = ({ data }) => {
 					) : (
 						<></>
 					)}
+
+					{enEspera ? (
+						<div class="spinner-border text-primary" role="status">
+							<span class="sr-only">Loading...</span>
+						</div>
+					) : (
+						<></>
+					)}
+
 					{enablePrintButton ? (
 						<button type="submit" className="btn btn-outline-primary ml-5 d-print-none">
 							<i className="fas fa-print"></i>
