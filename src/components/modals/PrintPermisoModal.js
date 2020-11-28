@@ -1,10 +1,12 @@
 import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
 import {
 	closePrintPermisoModal,
-	setSavedPermiso,
+	startDisableSaveButton,
 	unsetOnSubmitData,
+	startEnablePrintButton,
 	unsetSavedPermiso
 } from "../../actions/altaPermisos";
 import { unsetCultivoSelected } from "../../actions/cultivos";
@@ -20,7 +22,9 @@ const customStyles = {
 };
 
 export const PrintPermisoModal = ({ data }) => {
-	const { openPrintPermisoModal, isPermisoSaved } = useSelector((state) => state.altaPermisos);
+	const { openPrintPermisoModal, enableSaveButton, enablePrintButton } = useSelector(
+		(state) => state.altaPermisos
+	);
 	const dispatch = useDispatch();
 
 	const closeModal = () => {
@@ -32,9 +36,13 @@ export const PrintPermisoModal = ({ data }) => {
 		dispatch(unsetUsuarioSelected());
 	};
 
-	const handleSavePermiso = () => {
-		sabePermiso(data);
-		dispatch(setSavedPermiso());
+	const handleSavePermiso = async () => {
+		dispatch(startDisableSaveButton());
+		if (await sabePermiso(data)) {
+			dispatch(startEnablePrintButton());
+		} else {
+			Swal.fire("Error", "Verifique su conexión.", "error");
+		}
 	};
 
 	return (
@@ -352,12 +360,7 @@ export const PrintPermisoModal = ({ data }) => {
 					<div className="d-flex justify-content-center">BAJA CALIFORNIA</div>
 				</div>
 				<div className="col-6 d-flex justify-content-center align-items-center pt-5">
-					{isPermisoSaved ? (
-						<button type="submit" className="btn btn-outline-primary ml-5 d-print-none">
-							<i className="fas fa-print"></i>
-							<span> Imprimir</span>
-						</button>
-					) : (
+					{enableSaveButton ? (
 						<button
 							type="submit"
 							className="btn btn-outline-primary ml-5 d-print-none"
@@ -366,6 +369,16 @@ export const PrintPermisoModal = ({ data }) => {
 							<i className="far fa-save"></i>
 							<span> Guardar</span>
 						</button>
+					) : (
+						<></>
+					)}
+					{enablePrintButton ? (
+						<button type="submit" className="btn btn-outline-primary ml-5 d-print-none">
+							<i className="fas fa-print"></i>
+							<span> Imprimir</span>
+						</button>
+					) : (
+						<></>
 					)}
 				</div>
 			</div>

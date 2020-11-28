@@ -2,6 +2,8 @@ import { types } from "../types/types";
 
 const initialState = {
 	isPermisoSaved: false,
+	enableSaveButton: true,
+	enablePrintButton: false,
 	openUsuariosModal: false,
 	openProductoresModal: false,
 	openNuevoProductorModal: false,
@@ -275,6 +277,30 @@ export const altaPermisosReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isPermisoSaved: false
+			};
+
+		case types.altaPermisosEnableSaveButton:
+			return {
+				...state,
+				enableSaveButton: true
+			};
+
+		case types.altaPermisosDisableSaveButton:
+			return {
+				...state,
+				enableSaveButton: false
+			};
+
+		case types.altaPermisosEnablePrintButton:
+			return {
+				...state,
+				enablePrintButton: true
+			};
+
+		case types.altaPermisosDisablePrintButton:
+			return {
+				...state,
+				enablePrintButton: false
 			};
 
 		default:

@@ -29,3 +29,19 @@ export const setSavedPermiso = () => ({
 export const unsetSavedPermiso = () => ({
 	type: types.altaPermisosUnsetSavedPermiso
 });
+
+export const startEnableSaveButton = () => ({
+	type: types.altaPermisosEnableSaveButton
+});
+
+export const startDisableSaveButton = () => ({
+	type: types.altaPermisosDisableSaveButton
+});
+
+export const startEnablePrintButton = () => ({
+	type: types.altaPermisosEnablePrintButton
+});
+
+export const startDisablePrintButton = () => ({
+	type: types.altaPermisosDisablePrintButton
+});

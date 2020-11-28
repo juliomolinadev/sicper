@@ -43,5 +43,11 @@ export const types = {
 	altaPermisosUnsetSubmitData: "[Alta Permisos] unSet onSubmit data",
 
 	altaPermisosSetSavedPermiso: "[Alta Permisos] Set savedPermiso data",
-	altaPermisosUnsetSavedPermiso: "[Alta Permisos] unSet savedPermiso data"
+	altaPermisosUnsetSavedPermiso: "[Alta Permisos] unSet savedPermiso data",
+
+	altaPermisosEnableSaveButton: "[Alta Permisos] Enable save button",
+	altaPermisosDisableSaveButton: "[Alta Permisos] Disable save button",
+
+	altaPermisosEnablePrintButton: "[Alta Permisos] Enable print button",
+	altaPermisosDisablePrintButton: "[Alta Permisos] Disable print button"
 };

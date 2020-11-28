@@ -2,7 +2,7 @@ import { db } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
 import { updateContador } from "./updateContador";
 
-export const sabePermiso = (allData) => {
+export const sabePermiso = async (allData) => {
 	const data = {
 		idUsuarioSelected: allData.idUsuarioSelected,
 		cuenta: allData.cuenta,
@@ -46,11 +46,17 @@ export const sabePermiso = (allData) => {
 		transferencia: allData.transferencia
 	};
 
-	db.collection(`permisos`)
+	const isSave = await db
+		.collection(`permisos`)
 		.add(data)
 		.then(() => {
 			updateContador(allData.modulo);
 			Swal.fire("Permiso Guardado", "Se registró con éxito el nuevo permiso de riego.", "success");
+			return true;
 		})
-		.catch((e) => console.log("Error", e));
+		.catch((e) => {
+			console.log("Error", e);
+		});
+
+	return isSave;
 };
