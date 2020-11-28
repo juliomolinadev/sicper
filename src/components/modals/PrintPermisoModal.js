@@ -1,7 +1,15 @@
 import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { closePrintPermisoModal, setSavedPermiso } from "../../actions/altaPermisos";
+import {
+	closePrintPermisoModal,
+	setSavedPermiso,
+	unsetOnSubmitData,
+	unsetSavedPermiso
+} from "../../actions/altaPermisos";
+import { unsetCultivoSelected } from "../../actions/cultivos";
+import { unsetProductorSelected } from "../../actions/productores";
+import { unsetUsuarioSelected } from "../../actions/usuarios";
 import { sabePermiso } from "../../helpers/sabePermiso";
 
 const customStyles = {
@@ -17,6 +25,11 @@ export const PrintPermisoModal = ({ data }) => {
 
 	const closeModal = () => {
 		dispatch(closePrintPermisoModal());
+		dispatch(unsetOnSubmitData());
+		dispatch(unsetSavedPermiso());
+		dispatch(unsetCultivoSelected());
+		dispatch(unsetProductorSelected());
+		dispatch(unsetUsuarioSelected());
 	};
 
 	const handleSavePermiso = () => {

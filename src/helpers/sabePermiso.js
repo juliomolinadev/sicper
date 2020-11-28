@@ -1,5 +1,6 @@
 import { db } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
+import { updateContador } from "./updateContador";
 
 export const sabePermiso = (allData) => {
 	const data = {
@@ -48,6 +49,7 @@ export const sabePermiso = (allData) => {
 	db.collection(`permisos`)
 		.add(data)
 		.then(() => {
+			updateContador(allData.modulo);
 			Swal.fire("Permiso Guardado", "Se registró con éxito el nuevo permiso de riego.", "success");
 		})
 		.catch((e) => console.log("Error", e));
