@@ -48,6 +48,11 @@ export const PrintPermisoModal = ({ data }) => {
 		}
 	};
 
+	const imprimir = () => {
+		window.print();
+		console.log("Si funciona el boton");
+	};
+
 	return (
 		<Modal
 			isOpen={openPrintPermisoModal}
@@ -377,15 +382,19 @@ export const PrintPermisoModal = ({ data }) => {
 					)}
 
 					{enEspera ? (
-						<div class="spinner-border text-primary" role="status">
-							<span class="sr-only">Loading...</span>
+						<div className="spinner-border text-primary" role="status">
+							<span className="sr-only">Loading...</span>
 						</div>
 					) : (
 						<></>
 					)}
 
 					{enablePrintButton ? (
-						<button type="submit" className="btn btn-outline-primary ml-5 d-print-none">
+						<button
+							type="button"
+							className="btn btn-outline-primary ml-5 d-print-none"
+							onClick={imprimir}
+						>
 							<i className="fas fa-print"></i>
 							<span> Imprimir</span>
 						</button>
