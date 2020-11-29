@@ -6,7 +6,7 @@ const initialState = {
 	enablePrintButton: false,
 	openUsuariosModal: false,
 	openProductoresModal: false,
-	openNuevoProductorModal: false,
+	isOpenNuevoProductorModal: false,
 	openCultivosModal: false,
 	isOpenPrintPermisoModal: false,
 	usuarios: [],

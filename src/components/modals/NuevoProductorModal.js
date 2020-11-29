@@ -23,7 +23,7 @@ Modal.setAppElement("#root");
 export const NuevoProductorModal = () => {
 	const dispatch = useDispatch();
 
-	const { openNuevoProductorModal } = useSelector((state) => state.altaPermisos);
+	const { isOpenNuevoProductorModal } = useSelector((state) => state.altaPermisos);
 	const { msgError } = useSelector((state) => state.ui);
 
 	const closeModal = () => {
@@ -107,7 +107,7 @@ export const NuevoProductorModal = () => {
 
 	return (
 		<Modal
-			isOpen={openNuevoProductorModal}
+			isOpen={isOpenNuevoProductorModal}
 			onRequestClose={closeModal}
 			style={customStyles}
 			closeTimeoutMS={200}
