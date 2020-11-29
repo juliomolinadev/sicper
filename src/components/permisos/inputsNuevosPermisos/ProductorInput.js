@@ -44,6 +44,12 @@ export const ProductorInput = () => {
 
 	const { productor } = formValues;
 
+	const handleKeyDown = (event) => {
+		if (event.key === "Enter") {
+			handleOpenProductoresModal();
+		}
+	};
+
 	return (
 		<div className="col-sm-6">
 			<div className="form-group d-flex align-items-baseline row p-3">
@@ -62,6 +68,7 @@ export const ProductorInput = () => {
 							autoComplete="off"
 							value={productor}
 							onChange={handleInputChange}
+							onKeyDown={handleKeyDown}
 						/>
 					</div>
 				)}

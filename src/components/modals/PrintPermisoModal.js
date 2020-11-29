@@ -50,7 +50,6 @@ export const PrintPermisoModal = ({ data }) => {
 
 	const imprimir = () => {
 		window.print();
-		console.log("Si funciona el boton");
 	};
 
 	return (
@@ -401,6 +400,15 @@ export const PrintPermisoModal = ({ data }) => {
 					) : (
 						<></>
 					)}
+
+					<button
+						type="button"
+						className="btn btn-outline-primary ml-5 d-print-none ml-3"
+						onClick={closeModal}
+					>
+						<i className="fas fa-sign-out-alt"></i>
+						<span> Cerrar</span>
+					</button>
 				</div>
 			</div>
 		</Modal>

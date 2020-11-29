@@ -45,6 +45,12 @@ export const UsuarioInput = () => {
 
 	const { usuario } = formValues;
 
+	const handleKeyDown = (event) => {
+		if (event.key === "Enter") {
+			handleOpenUsuariosModal();
+		}
+	};
+
 	return (
 		<div className="col-sm-6">
 			<div className="form-group d-flex align-items-baseline row p-3">
@@ -63,6 +69,7 @@ export const UsuarioInput = () => {
 							autoComplete="off"
 							value={usuario}
 							onChange={handleInputChange}
+							onKeyDown={handleKeyDown}
 						/>
 					</div>
 				)}
