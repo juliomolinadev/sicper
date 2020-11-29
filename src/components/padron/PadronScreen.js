@@ -1,11 +1,11 @@
 import React from "react";
-import { CustomTable } from "../tables/CustomTable";
-import { usuariosColumns } from "../tables/configTables";
-import { padron } from "../../data/padron";
+// import { CustomTable } from "../tables/CustomTable";
+// import { usuariosColumns } from "../tables/configTables";
+// import { padron } from "../../data/padron";
 
 export const PadronScreen = () => {
-	const table = false;
-	const tableTitle = "Padron de usuarios";
+	// const table = false;
+	// const tableTitle = "Padron de usuarios";
 
 	return (
 		<>
@@ -13,7 +13,7 @@ export const PadronScreen = () => {
 				<h1>Padron de usuarios</h1>
 			</div>
 
-			<div className="row m-3">
+			{/* <div className="row m-3">
 				<div className="col-sm-8 border rounded">
 					<div>
 						{table ? (
@@ -23,7 +23,7 @@ export const PadronScreen = () => {
 						)}
 					</div>
 				</div>
-			</div>
+			</div> */}
 		</>
 	);
 };
