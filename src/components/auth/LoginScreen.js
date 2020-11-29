@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { Link } from "react-router-dom";
-import { startGoogleLogin, startLoginEmailPassword } from "../../actions/auth";
+// import { Link } from "react-router-dom";
+import { /* startGoogleLogin, */ startLoginEmailPassword } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
 import "./_auth.scss";
 
@@ -11,8 +11,8 @@ export const LoginScreen = () => {
 	const { loading } = useSelector((state) => state.ui);
 
 	const [formValues, handleInputChange] = useForm({
-		email: "juliom19@gmail.com",
-		password: "123456"
+		email: "",
+		password: ""
 	});
 
 	const { email, password } = formValues;
@@ -22,9 +22,9 @@ export const LoginScreen = () => {
 		dispatch(startLoginEmailPassword(email, password));
 	};
 
-	const handleGoogleLogin = () => {
-		dispatch(startGoogleLogin());
-	};
+	// const handleGoogleLogin = () => {
+	// 	dispatch(startGoogleLogin());
+	// };
 
 	return (
 		<>
@@ -54,7 +54,7 @@ export const LoginScreen = () => {
 					Login
 				</button>
 
-				<div className="auth__social-networks">
+				{/* <div className="auth__social-networks">
 					<p>Login con redes</p>
 
 					<div className="google-btn" onClick={handleGoogleLogin}>
@@ -73,7 +73,7 @@ export const LoginScreen = () => {
 
 				<Link to="/auth/register" className="link">
 					Crear nuevo usuario
-				</Link>
+				</Link> */}
 			</form>
 		</>
 	);
