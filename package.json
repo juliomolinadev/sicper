@@ -28,7 +28,7 @@
 		"validator": "^13.1.17"
 	},
 	"scripts": {
-		"predeploy": "npm run build",
+		"predeploy": "npm run build && echo 'gestionpermisosdr014.com' > ./build/CNAME",
 		"deploy": "gh-pages -d build",
 		"start": "react-scripts start",
 		"build": "react-scripts build",
