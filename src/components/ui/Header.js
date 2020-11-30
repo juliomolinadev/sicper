@@ -11,7 +11,7 @@ export const Header = () => {
 					<div className="border rounded h-100 d-flex justify-content-center">
 						<img
 							className="align-self-center"
-							src={`./logos/${img}`}
+							src={`./sicper/logos/${img}`}
 							alt="Logo de modulo 19"
 							style={{ maxHeight: 100 }}
 						/>

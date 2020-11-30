@@ -17,7 +17,7 @@ export const Navbar = () => {
 			<Link className="navbar-brand" to="/">
 				<img
 					className=""
-					src={"./logos/cna.png"}
+					src={"./sicper/logos/cna.png"}
 					alt="Logo comisión nacional del agua"
 					style={{ maxHeight: 50 }}
 				/>

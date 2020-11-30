@@ -67,14 +67,14 @@ export const PrintPermisoModal = ({ data }) => {
 				<div className="col-2 d-flex flex-column justify-content-center">
 					<div className="d-flex justify-content-center">
 						<img
-							src={"./logos/sader.png"}
+							src={"./sicper/logos/sader.png"}
 							alt="Logo comisión nacional del agua"
 							style={{ maxHeight: 35 }}
 						/>
 					</div>
 					<div className="d-flex justify-content-center mt-3">
 						<img
-							src={"./logos/crl.png"}
+							src={"./sicper/logos/crl.png"}
 							alt="Logo comisión nacional del agua"
 							style={{ maxHeight: 70 }}
 						/>
@@ -104,7 +104,7 @@ export const PrintPermisoModal = ({ data }) => {
 				<div className="col-2 d-flex flex-column justify-content-center">
 					<div className="d-flex justify-content-center">
 						<img
-							src={"./logos/cna.png"}
+							src={"./sicper/logos/cna.png"}
 							alt="Logo comisión nacional del agua"
 							style={{ maxHeight: 50 }}
 						/>
@@ -357,7 +357,7 @@ export const PrintPermisoModal = ({ data }) => {
 				<div className="col-3 d-flex flex-column">
 					<div className="d-flex justify-content-center">
 						<img
-							src={"./logos/sanidad.webp"}
+							src={"./sicper/logos/sanidad.webp"}
 							alt="Logo comisión nacional del agua"
 							style={{ maxHeight: 70 }}
 						/>
