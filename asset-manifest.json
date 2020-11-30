@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/sicper/static/css/main.13984551.chunk.css",
+    "main.js": "/sicper/static/js/main.97044a62.chunk.js",
+    "main.js.map": "/sicper/static/js/main.97044a62.chunk.js.map",
+    "runtime-main.js": "/sicper/static/js/runtime-main.31a0d830.js",
+    "runtime-main.js.map": "/sicper/static/js/runtime-main.31a0d830.js.map",
+    "static/css/2.af3c1da9.chunk.css": "/sicper/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.a641b4a0.chunk.js": "/sicper/static/js/2.a641b4a0.chunk.js",
+    "static/js/2.a641b4a0.chunk.js.map": "/sicper/static/js/2.a641b4a0.chunk.js.map",
+    "index.html": "/sicper/index.html",
+    "precache-manifest.a1884578f3035d06ed88bd5ec51a70ee.js": "/sicper/precache-manifest.a1884578f3035d06ed88bd5ec51a70ee.js",
+    "service-worker.js": "/sicper/service-worker.js",
+    "static/css/2.af3c1da9.chunk.css.map": "/sicper/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.13984551.chunk.css.map": "/sicper/static/css/main.13984551.chunk.css.map",
+    "static/js/2.a641b4a0.chunk.js.LICENSE.txt": "/sicper/static/js/2.a641b4a0.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.31a0d830.js",
+    "static/css/2.af3c1da9.chunk.css",
+    "static/js/2.a641b4a0.chunk.js",
+    "static/css/main.13984551.chunk.css",
+    "static/js/main.97044a62.chunk.js"
+  ]
+}
