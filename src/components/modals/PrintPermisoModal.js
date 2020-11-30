@@ -66,18 +66,10 @@ export const PrintPermisoModal = ({ data }) => {
 			<div className="row m-3 d-flex justify-content-center">
 				<div className="col-2 d-flex flex-column justify-content-center">
 					<div className="d-flex justify-content-center">
-						<img
-							src={"./sicper/logos/sader.png"}
-							alt="Logo comisión nacional del agua"
-							style={{ maxHeight: 35 }}
-						/>
+						<img src={"./sicper/logos/sader.png"} alt="Logo SADER" style={{ maxHeight: 35 }} />
 					</div>
 					<div className="d-flex justify-content-center mt-3">
-						<img
-							src={"./sicper/logos/crl.png"}
-							alt="Logo comisión nacional del agua"
-							style={{ maxHeight: 70 }}
-						/>
+						<img src={"./sicper/logos/crl.png"} alt="Logo CRL" style={{ maxHeight: 70 }} />
 					</div>
 					<div className="d-flex justify-content-center">
 						<span className="printPermisoSubLogo">DISTRITO DE RIEGO RÍO COLORADO</span>
@@ -358,7 +350,7 @@ export const PrintPermisoModal = ({ data }) => {
 					<div className="d-flex justify-content-center">
 						<img
 							src={"./sicper/logos/sanidad.webp"}
-							alt="Logo comisión nacional del agua"
+							alt="Logo sanidad vegetal"
 							style={{ maxHeight: 70 }}
 						/>
 					</div>
