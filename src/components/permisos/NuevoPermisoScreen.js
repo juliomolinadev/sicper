@@ -171,6 +171,9 @@ export const NuevoPermisoScreen = () => {
 				<h1>Alta de permiso unico de siembra</h1>
 			</div>
 
+			{/* TODO: indicar cuando un campo es incorrecto directamente en los inputs */}
+			{/* TODO: Cambiar el flujo de los tab para que no se seleccionen las lupas */}
+			{/* TODO: Checkbox para transferencia interna */}
 			<form className="container pb-4">
 				{msgError && <div className="auth__alert-error">{msgError}</div>}
 				{idUsuarioSelected ? <UsuarioSelected /> : <></>}
