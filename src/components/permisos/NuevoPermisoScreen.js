@@ -105,9 +105,9 @@ export const NuevoPermisoScreen = () => {
 			tipo: defineTipoPermiso(),
 			ciclo: defineCiclo(),
 			numeroPermiso: await defineNumeroPermiso(),
-			fechaEmicion: moment().format("DD/MM/YYYY"),
+			fechaEmicion: moment(),
 			// TODO: Verificar la fecha limite de siembra
-			fechaLimite: moment().add(10, "days").format("DD/MM/YYYY"),
+			fechaLimite: moment().add(10, "days"),
 			vigencia: defineVigencia(subciclo)
 		};
 
@@ -142,19 +142,19 @@ export const NuevoPermisoScreen = () => {
 		if (subciclo) {
 			switch (subciclo) {
 				case "PRIMAVERA-VERANO":
-					vigencia = moment("09/30/2021").format("DD/MM/YYYY");
+					vigencia = moment("09/30/2021");
 					break;
 
 				case "OTOÑO-INVIERNO":
-					vigencia = moment("05/31/2021").format("DD/MM/YYYY");
+					vigencia = moment("05/31/2021");
 					break;
 
 				case "PERENNES":
-					vigencia = moment("09/30/2021").format("DD/MM/YYYY");
+					vigencia = moment("09/30/2021");
 					break;
 
 				case "PERENES":
-					vigencia = moment("09/30/2021").format("DD/MM/YYYY");
+					vigencia = moment("09/30/2021");
 					break;
 
 				default:

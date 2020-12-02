@@ -1,5 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
+import moment from "moment";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
 	closePrintPermisoModal,
@@ -77,7 +79,7 @@ export const PrintPermisoModal = ({ data }) => {
 					<div className="d-flex justify-content-center">
 						<span className="printPermisoSubLogo">S DE R.L. DE I.P. DE C.V.</span>
 					</div>
-					<div className="border rounded d-flex justify-content-center mt-4">Folio: 224400</div>
+					<div className="border rounded d-flex justify-content-left mt-4 w-200">Folio: </div>
 				</div>
 
 				<div className="col-8 d-flex flex-column justify-content-center">
@@ -104,7 +106,9 @@ export const PrintPermisoModal = ({ data }) => {
 					<div className="border rounded d-flex justify-content-center mt-4">
 						Folio: {data.numeroPermiso}
 					</div>
-					<div className="d-flex justify-content-center mt-4">{data.fechaEmicion}</div>
+					<div className="d-flex justify-content-center mt-4">
+						{moment(data.fechaEmicion).format("DD/MM/YYYY")}
+					</div>
 				</div>
 			</div>
 
@@ -162,7 +166,7 @@ export const PrintPermisoModal = ({ data }) => {
 						<br />
 						Superficie autorizada: <b>{data.supAutorizada} ha</b>
 						<br />
-						Fecha límite de siembra: <b>{data.fechaLimite}</b>
+						Fecha límite de siembra: <b>{moment(data.fechaLimite).format("DD/MM/YYYY")}</b>
 						<br />
 					</div>
 				</div>

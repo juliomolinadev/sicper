@@ -45,33 +45,16 @@ export const cultivosColumns = [
 	{ name: "subciclo", selector: "subciclo", sortable: true, center: true }
 ];
 
-// export const padronKeys = [
-// 	"cuenta",
-// 	"subcta",
-// 	"unidad",
-// 	"zona",
-// 	"seccion",
-// 	"cp",
-// 	"lt",
-// 	"slt",
-// 	"ra",
-// 	"sra",
-// 	"ssra",
-// 	"pcontrol",
-// 	"tenencia",
-// 	"estado",
-// 	"municipio",
-// 	"ejido",
-// 	"grupo",
-// 	"predio",
-// 	"sistriego",
-// 	"equipo",
-// 	"appaterno",
-// 	"apmaterno",
-// 	"nombre",
-// 	"supfisica",
-// 	"supriego",
-// 	"fecha",
-// 	"referencia",
-// 	"modulo"
-// ];
+export const permisosColumns = [
+	{ name: "id", selector: "id", omit: true },
+	{ name: "PERMISO", selector: "numeroPermiso", sortable: true, width: "80px" },
+	{ name: "CUENTA", selector: "cuenta", sortable: true, width: "80px" },
+	{ name: "USUARIO", selector: "usuario", sortable: true, width: "40px", center: true },
+	{ name: "PRODUCTOR", selector: "nombreProductor", width: "140px", sortable: true },
+	{ name: "CULTIVO", selector: "nombreCultivo", width: "140px", sortable: true },
+	{ name: "DERECHO(ha)", selector: "supAutorizada", width: "200px", sortable: true },
+	{ name: "LOTE", selector: "lote", sortable: true, width: "80px", center: true },
+	{ name: "LOCALIDAD", selector: "localidad", sortable: true, width: "60px", center: true },
+	{ name: "VIGENCIA", selector: "vigencia", sortable: true, width: "60px", center: true },
+	{ name: "ESTADO", selector: "estadoPermiso", sortable: true, width: "60px", center: true }
+];

@@ -1,5 +1,6 @@
 import { db } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
+import moment from "moment";
 import { updateContador } from "./updateContador";
 
 export const sabePermiso = async (allData) => {
@@ -29,9 +30,9 @@ export const sabePermiso = async (allData) => {
 		tipo: allData.tipo,
 		ciclo: allData.ciclo,
 		numeroPermiso: allData.numeroPermiso,
-		fechaEmicion: allData.fechaEmicion,
-		fechaLimite: allData.fechaLimite,
-		vigencia: allData.vigencia,
+		fechaEmicion: moment(allData.fechaEmicion).toDate(),
+		fechaLimite: moment(allData.fechaLimite).toDate(),
+		vigencia: moment(allData.vigencia).toDate(),
 		variedad: allData.variedad,
 		supAutorizada: allData.supAutorizada,
 		fuenteCredito: allData.fuenteCredito,
@@ -43,7 +44,8 @@ export const sabePermiso = async (allData) => {
 		name: allData.name,
 		dotacion: allData.dotacion,
 		titular: allData.titular,
-		transferencia: allData.transferencia
+		transferencia: allData.transferencia,
+		estadoPermiso: "activo"
 	};
 
 	const isSave = await db
