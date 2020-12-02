@@ -4,13 +4,17 @@ import { Link } from "react-router-dom";
 // import { useDispatch, useSelector } from "react-redux";
 import { CustomTable } from "../tables/CustomTable";
 import { permisosColumns } from "../tables/configTables";
-import { loadUltimosPermisos } from "../../helpers/loadUltimosPermisos";
+import { startLoadPermisos } from "../../actions/permisosScreen";
+import { useDispatch, useSelector } from "react-redux";
 
 export const PermisosScreen = () => {
-	const permisos = loadUltimosPermisos();
-	console.log("Permisos: ", permisos);
+	const dispatch = useDispatch();
 
-	let data = [];
+	const { permisos } = useSelector((state) => state.permisosScreen);
+
+	if (!permisos) {
+		dispatch(startLoadPermisos());
+	}
 
 	return (
 		<>
@@ -20,7 +24,7 @@ export const PermisosScreen = () => {
 					<CustomTable
 						title="Permisos"
 						columns={permisosColumns}
-						data={data}
+						data={permisos}
 						// setFunction={startSetUsuarioSelected}
 						// closeFunction={closeUsuariosModal}
 					></CustomTable>
@@ -28,7 +32,7 @@ export const PermisosScreen = () => {
 
 				<div className="col-sm-4 pt-lg-0 pt-4">
 					<Link to="/nuevo-permiso">
-						<button className="btn btn-primary float-right" type="button">
+						<button className="btn btn-outline-primary float-right" type="button">
 							<span>Nuevo Permiso </span>
 							<i className="fas fa-plus"></i>
 						</button>

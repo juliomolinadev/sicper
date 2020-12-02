@@ -47,14 +47,14 @@ export const cultivosColumns = [
 
 export const permisosColumns = [
 	{ name: "id", selector: "id", omit: true },
-	{ name: "PERMISO", selector: "numeroPermiso", sortable: true, width: "80px" },
+	{ name: "PERMISO", selector: "numeroPermiso", sortable: true, width: "110px" },
 	{ name: "CUENTA", selector: "cuenta", sortable: true, width: "80px" },
-	{ name: "USUARIO", selector: "usuario", sortable: true, width: "40px", center: true },
-	{ name: "PRODUCTOR", selector: "nombreProductor", width: "140px", sortable: true },
-	{ name: "CULTIVO", selector: "nombreCultivo", width: "140px", sortable: true },
-	{ name: "DERECHO(ha)", selector: "supAutorizada", width: "200px", sortable: true },
-	{ name: "LOTE", selector: "lote", sortable: true, width: "80px", center: true },
-	{ name: "LOCALIDAD", selector: "localidad", sortable: true, width: "60px", center: true },
-	{ name: "VIGENCIA", selector: "vigencia", sortable: true, width: "60px", center: true },
-	{ name: "ESTADO", selector: "estadoPermiso", sortable: true, width: "60px", center: true }
+	{ name: "USUARIO", selector: "usuario", sortable: true, width: "160px" },
+	{ name: "PRODUCTOR", selector: "nombreProductor", width: "160px", sortable: true },
+	{ name: "CULTIVO", selector: "nombreCultivo", width: "100px", sortable: true },
+	{ name: "SUP(ha)", selector: "supAutorizada", width: "60px", sortable: true, center: true },
+	{ name: "LOTE", selector: "lote", sortable: true, width: "60px", center: true },
+	{ name: "LOCALIDAD", selector: "localidad", sortable: true, width: "120px" },
+	{ name: "VIGENCIA", selector: "vigencia", sortable: true, width: "100px" },
+	{ name: "ESTADO", selector: "estadoPermiso", sortable: true, width: "100px" }
 ];

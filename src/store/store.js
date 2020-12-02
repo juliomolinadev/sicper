@@ -4,6 +4,7 @@ import thunk from "redux-thunk";
 import { authReducer } from "../reducers/authReducer";
 import { uiReducer } from "../reducers/uiReducer";
 import { altaPermisosReducer } from "../reducers/altaPermisosReducer";
+import { permisosScreenReducer } from "../reducers/permisosScreenReducer";
 
 const composeEnhancers =
 	(typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -11,6 +12,7 @@ const composeEnhancers =
 const reducers = combineReducers({
 	auth: authReducer,
 	ui: uiReducer,
+	permisosScreen: permisosScreenReducer,
 	altaPermisos: altaPermisosReducer
 });
 

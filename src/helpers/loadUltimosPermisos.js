@@ -5,8 +5,6 @@ export const loadUltimosPermisos = async () => {
 	const hoy = moment().toDate();
 	const hoyMenos3 = moment().subtract(3, "days").toDate();
 
-	console.log("Fechas: ", hoy, hoyMenos3);
-
 	const permisosSnap = await db
 		.collection(`permisos`)
 		.where("fechaEmicion", "<=", hoy)
@@ -15,6 +13,7 @@ export const loadUltimosPermisos = async () => {
 		.get();
 
 	const permisos = [];
+	const permisosFormateados = [];
 
 	permisosSnap.forEach((snapHijo) => {
 		permisos.push({
@@ -23,7 +22,14 @@ export const loadUltimosPermisos = async () => {
 		});
 	});
 
-	console.log("Permisos: ", permisos);
+	permisos.forEach((permiso) => {
+		permisosFormateados.push({
+			...permiso,
+			fechaEmicion: moment(permiso.fechaEmicion.toDate()).format("DD/MM/YYYY"),
+			fechaLimite: moment(permiso.fechaLimite.toDate()).format("DD/MM/YYYY"),
+			vigencia: moment(permiso.vigencia.toDate()).format("DD/MM/YYYY")
+		});
+	});
 
-	return permisos;
+	return permisosFormateados;
 };

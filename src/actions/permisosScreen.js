@@ -1,5 +1,5 @@
 import { types } from "../types/types";
-import { loadUltimosPermisos } from "../../helpers/loadUltimosPermisos";
+import { loadUltimosPermisos } from "../helpers/loadUltimosPermisos";
 
 export const startLoadPermisos = () => {
 	return async (dispatch) => {
@@ -9,6 +9,10 @@ export const startLoadPermisos = () => {
 };
 
 export const setPermisos = (permisos) => ({
-	type: types.permisosScreenLoadPermisos,
+	type: types.permisosScreenSetPermisos,
 	payload: permisos
+});
+
+export const unsetPermisos = () => ({
+	type: types.permisosScreenUnsetPermisos
 });
