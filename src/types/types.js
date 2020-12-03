@@ -52,5 +52,7 @@ export const types = {
 	altaPermisosDisablePrintButton: "[Alta Permisos] Disable print button",
 
 	permisosScreenSetPermisos: "[Permisos Screen] Set permisos",
-	permisosScreenUnsetPermisos: "[Permisos Screen] Unset permisos"
+	permisosScreenUnsetPermisos: "[Permisos Screen] Unset permisos",
+	permisosScreenSetPermisoSelected: "[Permisos Screen] Set permiso selected",
+	permisosScreenUnsetPermisoSelected: "[Permisos Screen] Unset permiso selected"
 };

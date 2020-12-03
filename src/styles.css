@@ -122,3 +122,20 @@
 	position: fixed;
 	left: 25px;
 }
+
+.bgc {
+	background-color: crimson;
+}
+
+.bgt {
+	background-color: teal;
+}
+
+.header {
+	padding-top: 90px;
+}
+
+.detallePermiso {
+	font-size: 12px;
+	background-color: #f2f2f2;
+}

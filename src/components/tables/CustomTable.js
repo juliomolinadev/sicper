@@ -7,7 +7,9 @@ export const CustomTable = ({ title, columns, data, setFunction, closeFunction }
 
 	const getRowSelected = (row) => {
 		dispatch(setFunction(row));
-		dispatch(closeFunction());
+		if (!closeFunction === undefined) {
+			dispatch(closeFunction());
+		}
 	};
 
 	const paginationOptions = {

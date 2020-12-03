@@ -13,7 +13,7 @@ import Header from "../components/ui/Header";
 
 export const DashboardRoutes = () => {
 	return (
-		<>
+		<div className="container-fluid pr-4">
 			<Navbar />
 			<Header />
 			<Switch>
@@ -27,6 +27,6 @@ export const DashboardRoutes = () => {
 
 				<Redirect to="/sicper" />
 			</Switch>
-		</>
+		</div>
 	);
 };

@@ -5,8 +5,8 @@ export const Header = () => {
 	const { name, entidad, img } = useSelector((state) => state.auth);
 
 	return (
-		<div className="pt-4">
-			<div className="row m-3 pt-5">
+		<>
+			<div className="row d-flex justify-content-between header">
 				<div className="col-sm-2 text-center ">
 					<div className="border rounded h-100 d-flex justify-content-center">
 						<img
@@ -18,7 +18,7 @@ export const Header = () => {
 					</div>
 				</div>
 				<div className="col-sm-10">
-					<div className=" card border">
+					<div className="card border">
 						<div className="card-header">{`${entidad} - Operador: ${name}`}</div>
 						<div className="card-body text-dark">
 							<h5 className="card-title">Plataforma digital</h5>
@@ -27,7 +27,7 @@ export const Header = () => {
 					</div>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

@@ -16,3 +16,12 @@ export const setPermisos = (permisos) => ({
 export const unsetPermisos = () => ({
 	type: types.permisosScreenUnsetPermisos
 });
+
+export const setPermisoSelected = (permiso) => ({
+	type: types.permisosScreenSetPermisoSelected,
+	payload: permiso.id
+});
+
+export const unsetPermisoSelected = () => ({
+	type: types.permisosScreenUnsetPermisoSelected
+});
