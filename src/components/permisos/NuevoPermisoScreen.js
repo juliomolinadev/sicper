@@ -339,7 +339,7 @@ export const NuevoPermisoScreen = () => {
 			<UsuarioModal />
 			<ProductorModal />
 			<NuevoProductorModal />
-			<PrintPermisoModal data={permisoData} />
+			<PrintPermisoModal data={permisoData} isNew={true} />
 		</>
 	);
 };

@@ -175,7 +175,7 @@ export const PermisosScreen = () => {
 					<></>
 				)}
 			</div>
-			<PrintPermisoModal data={dataPermiso} />
+			<PrintPermisoModal data={dataPermiso} isNew={false} />
 		</>
 	);
 };

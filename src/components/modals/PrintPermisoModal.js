@@ -25,7 +25,7 @@ const customStyles = {
 	}
 };
 
-export const PrintPermisoModal = ({ data }) => {
+export const PrintPermisoModal = ({ data, isNew }) => {
 	const { openPrintPermisoModal, enableSaveButton, enablePrintButton, enEspera } = useSelector(
 		(state) => state.altaPermisos
 	);
@@ -364,14 +364,25 @@ export const PrintPermisoModal = ({ data }) => {
 				</div>
 				<div className="col-6 d-flex justify-content-center align-items-center pt-5">
 					{enableSaveButton ? (
-						<button
-							type="submit"
-							className="btn btn-outline-primary ml-5 d-print-none"
-							onClick={handleSavePermiso}
-						>
-							<i className="far fa-save"></i>
-							<span> Guardar</span>
-						</button>
+						isNew ? (
+							<button
+								type="submit"
+								className="btn btn-outline-primary ml-5 d-print-none"
+								onClick={handleSavePermiso}
+							>
+								<i className="far fa-save"></i>
+								<span> Guardar</span>
+							</button>
+						) : (
+							<button
+								type="button"
+								className="btn btn-outline-primary ml-5 d-print-none"
+								onClick={imprimir}
+							>
+								<i className="fas fa-print"></i>
+								<span> Imprimir</span>
+							</button>
+						)
 					) : (
 						<></>
 					)}
