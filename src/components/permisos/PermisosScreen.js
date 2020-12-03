@@ -2,12 +2,14 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+import Swal from "sweetalert2";
 
 import { CustomTable } from "../tables/CustomTable";
 import { permisosColumns } from "../tables/configTables";
 import { startLoadPermisos, setPermisoSelected } from "../../actions/permisosScreen";
 import { openPrintPermisoModal } from "../../actions/altaPermisos";
 import { PrintPermisoModal } from "../modals/PrintPermisoModal";
+import { setPermisoInCancelProces } from "../../helpers/setPermisoInCancelProces";
 
 export const PermisosScreen = () => {
 	const dispatch = useDispatch();
@@ -52,6 +54,29 @@ export const PermisosScreen = () => {
 		dispatch(openPrintPermisoModal());
 	};
 
+	const cancelarPermiso = () => {
+		Swal.fire({
+			title: "Atención!!",
+			text: `Está a punto de cancelar el permiso ${dataPermiso.numeroPermiso}, ¿Realmente desea cancelar este permiso?`,
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Si",
+			cancelButtonText: "No"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				setPermisoInCancelProces(permisoSelected);
+				dispatch(startLoadPermisos());
+				Swal.fire(
+					"Solicitud recibida",
+					`Se inició el proceso de cancelación para el permiso ${dataPermiso.numeroPermiso}`,
+					"success"
+				);
+			}
+		});
+	};
+
 	return (
 		<>
 			<div className="row pt-5">
@@ -92,13 +117,11 @@ export const PermisosScreen = () => {
 
 			<div className="row pt-3 pb-4 pr-3">
 				<div className="col-sm-8">
-					{/* <PermisosTable /> */}
 					<CustomTable
 						title="Permisos"
 						columns={permisosColumns}
 						data={permisosFormateados}
 						setFunction={setPermisoSelected}
-						// closeFunction={closeFunction}
 					></CustomTable>
 				</div>
 
@@ -189,14 +212,18 @@ export const PermisosScreen = () => {
 								</button>
 							</div>
 							<div className="col-6 d-flex justify-content-center">
-								<button
-									type="button"
-									className="btn btn-outline-danger"
-									// onClick={closeModal}
-								>
-									<i className="fas fa-times"></i>
-									<span> Cancelar</span>
-								</button>
+								{dataPermiso.estadoPermiso === "activo" ? (
+									<button
+										type="button"
+										className="btn btn-outline-danger"
+										onClick={cancelarPermiso}
+									>
+										<i className="fas fa-times"></i>
+										<span> Cancelar</span>
+									</button>
+								) : (
+									<></>
+								)}
 							</div>
 						</div>
 					</div>
