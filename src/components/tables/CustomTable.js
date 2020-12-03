@@ -7,7 +7,7 @@ export const CustomTable = ({ title, columns, data, setFunction, closeFunction }
 
 	const getRowSelected = (row) => {
 		dispatch(setFunction(row));
-		if (!closeFunction === undefined) {
+		if (closeFunction !== undefined) {
 			dispatch(closeFunction());
 		}
 	};

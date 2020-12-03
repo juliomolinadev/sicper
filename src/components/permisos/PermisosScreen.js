@@ -1,12 +1,12 @@
 import React from "react";
-// import { PermisosTable } from "../tables/PermisosTable";
 import { Link } from "react-router-dom";
-// import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+
 import { CustomTable } from "../tables/CustomTable";
 import { permisosColumns } from "../tables/configTables";
 import { startLoadPermisos, setPermisoSelected } from "../../actions/permisosScreen";
 import { openPrintPermisoModal } from "../../actions/altaPermisos";
-import { useDispatch, useSelector } from "react-redux";
 import { PrintPermisoModal } from "../modals/PrintPermisoModal";
 
 export const PermisosScreen = () => {
@@ -18,12 +18,35 @@ export const PermisosScreen = () => {
 		dispatch(startLoadPermisos());
 	}
 
-	let dataPermiso = {};
+	let permisosFormateados = [];
+
+	permisos.forEach((permiso) => {
+		permisosFormateados.push({
+			...permiso,
+			fechaEmicion: moment(permiso.fechaEmicion.toDate()).format("DD/MM/YYYY"),
+			fechaLimite: moment(permiso.fechaLimite.toDate()).format("DD/MM/YYYY"),
+			vigencia: moment(permiso.vigencia.toDate()).format("DD/MM/YYYY")
+		});
+	});
+
+	let dataPermiso;
+
 	permisos.forEach((permiso) => {
 		if (permiso.id === permisoSelected) {
 			dataPermiso = permiso;
 		}
 	});
+
+	let dataPermisoImprecion = {};
+
+	if (dataPermiso !== undefined) {
+		dataPermisoImprecion = {
+			...dataPermiso,
+			fechaEmicion: dataPermiso.fechaEmicion.toDate(),
+			fechaLimite: dataPermiso.fechaLimite.toDate(),
+			vigencia: dataPermiso.vigencia.toDate()
+		};
+	}
 
 	const handleOpenPrintPermisoModal = () => {
 		dispatch(openPrintPermisoModal());
@@ -73,7 +96,7 @@ export const PermisosScreen = () => {
 					<CustomTable
 						title="Permisos"
 						columns={permisosColumns}
-						data={permisos}
+						data={permisosFormateados}
 						setFunction={setPermisoSelected}
 						// closeFunction={closeFunction}
 					></CustomTable>
@@ -134,15 +157,21 @@ export const PermisosScreen = () => {
 						</div>
 						<div className="row p-1 pl-2">
 							<div className="col-4">EXPEDICION:</div>
-							<div className="col-8">{dataPermiso.fechaEmicion}</div>
+							<div className="col-8">
+								{moment(dataPermiso.fechaEmicion.toDate()).format("DD/MM/YYYY")}
+							</div>
 						</div>
 						<div className="row p-1 pl-2">
 							<div className="col-4">FECHA LIMITE:</div>
-							<div className="col-8">{dataPermiso.fechaLimite}</div>
+							<div className="col-8">
+								{moment(dataPermiso.fechaLimite.toDate()).format("DD/MM/YYYY")}
+							</div>
 						</div>
 						<div className="row p-1 pl-2">
 							<div className="col-4">VIGENCIA:</div>
-							<div className="col-8">{dataPermiso.vigencia}</div>
+							<div className="col-8">
+								{moment(dataPermiso.vigencia.toDate()).format("DD/MM/YYYY")}
+							</div>
 						</div>
 						<div className="row p-1 pl-2">
 							<div className="col-4">ESTADO:</div>
@@ -175,7 +204,7 @@ export const PermisosScreen = () => {
 					<></>
 				)}
 			</div>
-			<PrintPermisoModal data={dataPermiso} isNew={false} />
+			<PrintPermisoModal data={dataPermisoImprecion} isNew={false} />
 		</>
 	);
 };

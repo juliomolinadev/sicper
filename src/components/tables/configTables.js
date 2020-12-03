@@ -55,6 +55,7 @@ export const permisosColumns = [
 	{ name: "SUP(ha)", selector: "supAutorizada", width: "60px", sortable: true, center: true },
 	{ name: "LOTE", selector: "lote", sortable: true, width: "60px", center: true },
 	{ name: "LOCALIDAD", selector: "localidad", sortable: true, width: "120px" },
+	{ name: "EMICION", selector: "fechaEmicion", sortable: true, width: "100px" },
 	{ name: "VIGENCIA", selector: "vigencia", sortable: true, width: "100px" },
 	{ name: "ESTADO", selector: "estadoPermiso", sortable: true, width: "100px" }
 ];

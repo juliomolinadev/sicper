@@ -13,7 +13,6 @@ export const loadUltimosPermisos = async () => {
 		.get();
 
 	const permisos = [];
-	const permisosFormateados = [];
 
 	permisosSnap.forEach((snapHijo) => {
 		permisos.push({
@@ -22,14 +21,5 @@ export const loadUltimosPermisos = async () => {
 		});
 	});
 
-	permisos.forEach((permiso) => {
-		permisosFormateados.push({
-			...permiso,
-			fechaEmicion: moment(permiso.fechaEmicion.toDate()).format("DD/MM/YYYY"),
-			fechaLimite: moment(permiso.fechaLimite.toDate()).format("DD/MM/YYYY"),
-			vigencia: moment(permiso.vigencia.toDate()).format("DD/MM/YYYY")
-		});
-	});
-
-	return permisosFormateados;
+	return permisos;
 };
