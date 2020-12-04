@@ -44,7 +44,7 @@ export const CultivoInput = () => {
 
 	const { cultivo } = formValues;
 
-	const handleKeyDown = (event) => {
+	const handleKeyUp = (event) => {
 		if (event.key === "Enter") {
 			handleOpenCultivosModal();
 		}
@@ -68,7 +68,7 @@ export const CultivoInput = () => {
 							autoComplete="off"
 							value={cultivo}
 							onChange={handleInputChange}
-							onKeyDown={handleKeyDown}
+							onKeyUp={handleKeyUp}
 						/>
 					</div>
 				)}

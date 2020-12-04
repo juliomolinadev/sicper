@@ -44,7 +44,7 @@ export const ProductorInput = () => {
 
 	const { productor } = formValues;
 
-	const handleKeyDown = (event) => {
+	const handleKeyUp = (event) => {
 		if (event.key === "Enter") {
 			handleOpenProductoresModal();
 		}
@@ -68,7 +68,7 @@ export const ProductorInput = () => {
 							autoComplete="off"
 							value={productor}
 							onChange={handleInputChange}
-							onKeyDown={handleKeyDown}
+							onKeyUp={handleKeyUp}
 						/>
 					</div>
 				)}

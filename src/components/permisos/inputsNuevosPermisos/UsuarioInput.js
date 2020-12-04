@@ -45,7 +45,7 @@ export const UsuarioInput = () => {
 
 	const { usuario } = formValues;
 
-	const handleKeyDown = (event) => {
+	const handleKeyUp = (event) => {
 		if (event.key === "Enter") {
 			handleOpenUsuariosModal();
 		}
@@ -69,7 +69,7 @@ export const UsuarioInput = () => {
 							autoComplete="off"
 							value={usuario}
 							onChange={handleInputChange}
-							onKeyDown={handleKeyDown}
+							onKeyUp={handleKeyUp}
 						/>
 					</div>
 				)}
