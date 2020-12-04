@@ -6,19 +6,46 @@ import Swal from "sweetalert2";
 
 import { CustomTable } from "../tables/CustomTable";
 import { permisosColumns } from "../tables/configTables";
-import { startLoadPermisos, setPermisoSelected } from "../../actions/permisosScreen";
+import {
+	startLoadPermisos,
+	setPermisoSelected,
+	startLoadPermisosSearch
+} from "../../actions/permisosScreen";
 import { openPrintPermisoModal } from "../../actions/altaPermisos";
 import { PrintPermisoModal } from "../modals/PrintPermisoModal";
 import { setPermisoInCancelProces } from "../../helpers/setPermisoInCancelProces";
+import { useForm } from "../../hooks/useForm";
 
 export const PermisosScreen = () => {
 	const dispatch = useDispatch();
+
+	const [formValues, handleInputChange] = useForm({ palabra: "" });
+
+	const { palabra } = formValues;
 
 	const { permisos, permisoSelected } = useSelector((state) => state.permisosScreen);
 
 	if (permisos.length === 0) {
 		dispatch(startLoadPermisos());
 	}
+
+	const buscarPermisos = () => {
+		if (palabra.length > 0) {
+			dispatch(startLoadPermisosSearch(palabra));
+		} else {
+			Swal.fire(
+				"Nada para buscar",
+				"Ingrese número de permiso, número de cuenta o el apellido paterno del usuario.",
+				"warning"
+			);
+		}
+	};
+
+	const handleKeyUp = (event) => {
+		if (event.key === "Enter") {
+			buscarPermisos();
+		}
+	};
 
 	let permisosFormateados = [];
 
@@ -95,18 +122,18 @@ export const PermisosScreen = () => {
 							<input
 								type="text"
 								className="form-control"
-								placeholder="Apellido paterno o numero de cuenta"
-								name="usuario"
+								placeholder="Número de permiso, número de cuenta o apellido paterno"
+								name="palabra"
 								autoComplete="off"
-								// value={usuario}
-								// onChange={handleInputChange}
-								// onKeyDown={handleKeyDown}
+								value={palabra}
+								onChange={handleInputChange}
+								onKeyUp={handleKeyUp}
 							/>
 
 							<button
 								className=" btn btn-outline-primary d-sm-block ml-auto"
 								type="button"
-								// onClick={handleOpenUsuariosModal}
+								onClick={buscarPermisos}
 							>
 								<i className="fas fa-search"></i>
 							</button>
@@ -125,7 +152,7 @@ export const PermisosScreen = () => {
 					></CustomTable>
 				</div>
 
-				{permisoSelected ? (
+				{permisoSelected && dataPermiso !== undefined ? (
 					<div className="col-sm-4 border border-info rounded detallePermiso">
 						<div className="row bg-light border-info border-bottom rounded-top p-1 justify-content-center font-weight-bold text-secondary pt-3">
 							<h5>{dataPermiso.numeroPermiso}</h5>

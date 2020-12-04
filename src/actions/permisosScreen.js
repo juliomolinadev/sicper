@@ -1,9 +1,17 @@
 import { types } from "../types/types";
 import { loadUltimosPermisos } from "../helpers/loadUltimosPermisos";
+import { loadPermisos } from "../helpers/loadPermisos";
 
 export const startLoadPermisos = () => {
 	return async (dispatch) => {
 		const permisos = await loadUltimosPermisos();
+		dispatch(setPermisos(permisos));
+	};
+};
+
+export const startLoadPermisosSearch = (palabra) => {
+	return async (dispatch) => {
+		const permisos = await loadPermisos(palabra);
 		dispatch(setPermisos(permisos));
 	};
 };
