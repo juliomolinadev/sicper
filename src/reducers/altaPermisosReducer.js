@@ -234,7 +234,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.altaPermisosSetFormValues:
 			return {
 				...state,
-				supAutorizada: action.payload.supAutorizada,
+				supAutorizada: Number(action.payload.supAutorizada),
 				variedad: action.payload.variedad,
 				fuenteCredito: action.payload.fuenteCredito,
 				latitud: action.payload.latitud,

@@ -1,7 +1,8 @@
 import { db } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
 import moment from "moment";
-import { updateContador } from "./updateContador";
+import firebase from "firebase/app";
+import "firebase/firestore";
 
 export const sabePermiso = async (allData) => {
 	const data = {
@@ -50,9 +51,47 @@ export const sabePermiso = async (allData) => {
 
 	const isSave = await db
 		.collection(`permisos`)
+		.doc(`permisosM${data.modulo}`)
+		.collection(`permisos`)
 		.add(data)
 		.then(() => {
-			updateContador(allData.modulo);
+			db.collection(`permisos`)
+				.doc(`permisosM${data.modulo}`)
+				.update({
+					numeroPermisosModulo: firebase.firestore.FieldValue.increment(1),
+					superficieModulo: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+				});
+
+			db.collection(`permisos`)
+				.doc(`permisosM${data.modulo}`)
+				.collection(`permisosPorCultivo`)
+				.doc(`${data.claveCultivo}-${data.nombreCultivo}`)
+				.get()
+				.then((doc) => {
+					if (doc.exists) {
+						db.collection(`permisos`)
+							.doc(`permisosM${data.modulo}`)
+							.collection(`permisosPorCultivo`)
+							.doc(`${data.claveCultivo}-${data.nombreCultivo}`)
+							.update({
+								numeroPermisos: firebase.firestore.FieldValue.increment(1),
+								superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+							});
+					} else {
+						db.collection(`permisos`)
+							.doc(`permisosM${data.modulo}`)
+							.collection(`permisosPorCultivo`)
+							.doc(`${data.claveCultivo}-${data.nombreCultivo}`)
+							.set({
+								numeroPermisos: firebase.firestore.FieldValue.increment(1),
+								superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+							});
+					}
+				})
+				.catch((e) => {
+					console.log("Error", e);
+				});
+
 			Swal.fire("Permiso Guardado", "Se registró con éxito el nuevo permiso de riego.", "success");
 			return true;
 		})

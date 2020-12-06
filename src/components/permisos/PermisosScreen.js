@@ -15,6 +15,7 @@ import { openPrintPermisoModal } from "../../actions/altaPermisos";
 import { PrintPermisoModal } from "../modals/PrintPermisoModal";
 import { setPermisoInCancelProces } from "../../helpers/setPermisoInCancelProces";
 import { useForm } from "../../hooks/useForm";
+import { DoughnutChart } from "../charts/DoughnutChart";
 
 export const PermisosScreen = () => {
 	const dispatch = useDispatch();
@@ -24,14 +25,15 @@ export const PermisosScreen = () => {
 	const { palabra } = formValues;
 
 	const { permisos, permisoSelected } = useSelector((state) => state.permisosScreen);
+	const { claveEntidad } = useSelector((state) => state.auth);
 
 	if (permisos.length === 0) {
-		dispatch(startLoadPermisos());
+		dispatch(startLoadPermisos(claveEntidad));
 	}
 
 	const buscarPermisos = () => {
 		if (palabra.length > 0) {
-			dispatch(startLoadPermisosSearch(palabra));
+			dispatch(startLoadPermisosSearch(palabra, claveEntidad));
 		} else {
 			Swal.fire(
 				"Nada para buscar",
@@ -255,7 +257,9 @@ export const PermisosScreen = () => {
 						</div>
 					</div>
 				) : (
-					<></>
+					<div className="col-sm-4 border border-info rounded detallePermiso">
+						<DoughnutChart />
+					</div>
 				)}
 			</div>
 			<PrintPermisoModal data={dataPermisoImprecion} isNew={false} />

@@ -26,7 +26,10 @@ export const setUsuarios = (usuarios) => ({
 export const startSetUsuarioSelected = (usuario) => {
 	return async (dispatch) => {
 		const localidad = await loadLocalidad(usuario.ejido);
-		const supPrevia = await loadSuperficiePrevia(`${usuario.cuenta}.${usuario.subcta}`);
+		const supPrevia = await loadSuperficiePrevia(
+			`${usuario.cuenta}.${usuario.subcta}`,
+			usuario.modulo
+		);
 		usuario.ejido = localidad;
 		usuario.supPrevia = supPrevia;
 		dispatch(setUsuarioSelected(usuario));

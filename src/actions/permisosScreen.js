@@ -2,16 +2,16 @@ import { types } from "../types/types";
 import { loadUltimosPermisos } from "../helpers/loadUltimosPermisos";
 import { loadPermisos } from "../helpers/loadPermisos";
 
-export const startLoadPermisos = () => {
+export const startLoadPermisos = (modulo) => {
 	return async (dispatch) => {
-		const permisos = await loadUltimosPermisos();
+		const permisos = await loadUltimosPermisos(modulo);
 		dispatch(setPermisos(permisos));
 	};
 };
 
-export const startLoadPermisosSearch = (palabra) => {
+export const startLoadPermisosSearch = (palabra, modulo) => {
 	return async (dispatch) => {
-		const permisos = await loadPermisos(palabra);
+		const permisos = await loadPermisos(palabra, modulo);
 		dispatch(setPermisos(permisos));
 	};
 };

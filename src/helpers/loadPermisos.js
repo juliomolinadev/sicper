@@ -1,8 +1,10 @@
 import { db } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
 
-export const loadPermisos = async (palabra) => {
+export const loadPermisos = async (palabra, modulo) => {
 	const permisosNombre = await db
+		.collection(`permisos`)
+		.doc(`permisosM${modulo}`)
 		.collection(`permisos`)
 		.orderBy("usuario")
 		.startAt(palabra.toUpperCase())
@@ -11,12 +13,16 @@ export const loadPermisos = async (palabra) => {
 
 	const permisosCuenta = await db
 		.collection(`permisos`)
+		.doc(`permisosM${modulo}`)
+		.collection(`permisos`)
 		.orderBy("cuenta")
 		.startAt(palabra)
 		.endAt(palabra + "\uf8ff")
 		.get();
 
 	const permisosPermiso = await db
+		.collection(`permisos`)
+		.doc(`permisosM${modulo}`)
 		.collection(`permisos`)
 		.orderBy("numeroPermiso")
 		.startAt(palabra.toUpperCase())

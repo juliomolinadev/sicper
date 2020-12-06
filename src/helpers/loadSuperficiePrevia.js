@@ -1,7 +1,12 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadSuperficiePrevia = async (cuenta) => {
-	const permisosSnap = await db.collection(`permisos`).where("cuenta", "==", cuenta).get();
+export const loadSuperficiePrevia = async (cuenta, modulo) => {
+	const permisosSnap = await db
+		.collection(`permisos`)
+		.doc(`permisosM${modulo}`)
+		.collection(`permisos`)
+		.where("cuenta", "==", cuenta)
+		.get();
 
 	const permisos = [];
 

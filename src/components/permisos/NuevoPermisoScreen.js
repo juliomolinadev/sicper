@@ -210,7 +210,7 @@ export const NuevoPermisoScreen = () => {
 							<label className="col-sm-3">Superficie:</label>
 							<div className="flex-grow-1 ">
 								<input
-									type="text"
+									type="number"
 									className="form-control"
 									placeholder="superficie"
 									name="supAutorizada"
