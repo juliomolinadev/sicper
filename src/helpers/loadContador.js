@@ -1,18 +1,16 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadContador = async (entidad) => {
-	const contadorSnap = await db
-		.collection(`contadoresPermisos`)
-		.where("claveEntidad", "==", entidad)
-		.get();
-
-	const contadores = [];
-
-	contadorSnap.forEach((snapHijo) => {
-		contadores.push({
-			id: snapHijo.id,
-			...snapHijo.data()
+export const loadContador = async (modulo) => {
+	let contador = 0;
+	await db
+		.collection(`permisos`)
+		.doc(`permisosM${modulo}`)
+		.get()
+		.then((doc) => {
+			if (doc.exists) {
+				contador = doc.data().numeroPermisosModulo;
+			}
 		});
-	});
-	return contadores[0].cuenta;
+
+	return contador;
 };
