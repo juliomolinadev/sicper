@@ -10,6 +10,9 @@ export const loadContador = async (modulo) => {
 			if (doc.exists) {
 				contador = doc.data().numeroPermisosModulo;
 			}
+		})
+		.catch((e) => {
+			console.log(" Error: ", e);
 		});
 
 	return contador;

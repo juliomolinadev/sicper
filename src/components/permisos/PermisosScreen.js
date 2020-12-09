@@ -9,7 +9,8 @@ import { permisosColumns } from "../tables/configTables";
 import {
 	startLoadPermisos,
 	setPermisoSelected,
-	startLoadPermisosSearch
+	startLoadPermisosSearch,
+	startLoadSuperficies
 } from "../../actions/permisosScreen";
 import { openPrintPermisoModal } from "../../actions/altaPermisos";
 import { PrintPermisoModal } from "../modals/PrintPermisoModal";
@@ -24,11 +25,15 @@ export const PermisosScreen = () => {
 
 	const { palabra } = formValues;
 
-	const { permisos, permisoSelected } = useSelector((state) => state.permisosScreen);
+	const { permisos, permisoSelected, superficies } = useSelector((state) => state.permisosScreen);
 	const { claveEntidad } = useSelector((state) => state.auth);
 
 	if (permisos.length === 0) {
 		dispatch(startLoadPermisos(claveEntidad));
+	}
+
+	if (superficies === null) {
+		dispatch(startLoadSuperficies(claveEntidad));
 	}
 
 	const buscarPermisos = () => {
@@ -95,7 +100,7 @@ export const PermisosScreen = () => {
 			cancelButtonText: "No"
 		}).then((result) => {
 			if (result.isConfirmed) {
-				setPermisoInCancelProces(permisoSelected);
+				setPermisoInCancelProces(permisoSelected, claveEntidad);
 				dispatch(startLoadPermisos());
 				Swal.fire(
 					"Solicitud recibida",

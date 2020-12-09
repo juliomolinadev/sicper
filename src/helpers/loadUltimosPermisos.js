@@ -3,7 +3,7 @@ import moment from "moment";
 
 export const loadUltimosPermisos = async (modulo) => {
 	const hoy = moment().toDate();
-	const hoyMenos3 = moment().subtract(3, "days").toDate();
+	const hoyMenos3 = moment().subtract(15, "days").toDate();
 
 	const permisosSnap = await db
 		.collection(`permisos`)

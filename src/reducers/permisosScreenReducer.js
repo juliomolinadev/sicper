@@ -2,7 +2,8 @@ import { types } from "../types/types";
 
 const initialState = {
 	permisos: [],
-	permisoSelected: null
+	permisoSelected: null,
+	superficies: null
 };
 
 export const permisosScreenReducer = (state = initialState, action) => {
@@ -29,6 +30,18 @@ export const permisosScreenReducer = (state = initialState, action) => {
 			return {
 				...state,
 				permisoSelected: null
+			};
+
+		case types.permisosScreenSetSuperficies:
+			return {
+				...state,
+				superficies: action.payload
+			};
+
+		case types.permisosScreenUnsetSuperficies:
+			return {
+				...state,
+				superficies: null
 			};
 
 		default:
