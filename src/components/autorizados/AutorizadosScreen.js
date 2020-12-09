@@ -31,9 +31,9 @@ export const AutorizadosScreen = () => {
 		<>
 			<div className="row pt-3">
 				<div className="col-sm-8 border rounded">
-					{modulos.map((modulo, index) => {
+					{modulos.map((modulo) => {
 						return (
-							<button key={index} className="btn btn-outline-primary m-1" type="button">
+							<button key={modulo} className="btn btn-outline-primary m-1" type="button">
 								<span>M-{modulo}</span>
 							</button>
 						);
