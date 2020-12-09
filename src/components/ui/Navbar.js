@@ -62,6 +62,11 @@ export const Navbar = () => {
 						</NavLink>
 					</li>
 					<li className="nav-item">
+						<NavLink activeClassName="active" className="nav-link" exact to="/autorizados">
+							Autorizados
+						</NavLink>
+					</li>
+					<li className="nav-item">
 						<NavLink activeClassName="active" className="nav-link" exact to="/configuracion">
 							Configuracion
 						</NavLink>
