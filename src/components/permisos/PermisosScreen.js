@@ -16,7 +16,7 @@ import { openPrintPermisoModal } from "../../actions/altaPermisos";
 import { PrintPermisoModal } from "../modals/PrintPermisoModal";
 import { setPermisoInCancelProces } from "../../helpers/setPermisoInCancelProces";
 import { useForm } from "../../hooks/useForm";
-import { DoughnutChart } from "../charts/DoughnutChart";
+import { SuperficiesChart } from "../charts/SuperficiesChart";
 
 export const PermisosScreen = () => {
 	const dispatch = useDispatch();
@@ -263,7 +263,7 @@ export const PermisosScreen = () => {
 					</div>
 				) : (
 					<div className="col-sm-4 border border-info rounded detallePermiso">
-						<DoughnutChart />
+						<SuperficiesChart />
 					</div>
 				)}
 			</div>

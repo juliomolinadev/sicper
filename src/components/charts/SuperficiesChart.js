@@ -3,7 +3,7 @@ import { Doughnut } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 import { setSuperficiesDataformat } from "./setSuperficiesDataformat";
 
-export const DoughnutChart = () => {
+export const SuperficiesChart = () => {
 	const { superficies } = useSelector((state) => state.permisosScreen);
 
 	let data = {};
