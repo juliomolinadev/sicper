@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { setModulo } from "../../actions/autorizadosScreen";
 
 export const AutorizadosScreen = () => {
 	const modulos = [
@@ -27,13 +29,27 @@ export const AutorizadosScreen = () => {
 		22
 	];
 
+	const dispatch = useDispatch();
+
+	// const { modulo } = useSelector((state) => state.autorizadosScreen);
+
+	const setModuloToEdit = (modulo) => {
+		console.log("modulo en set: ", modulo);
+		dispatch(setModulo(modulo));
+	};
+
 	return (
 		<>
 			<div className="row pt-3">
 				<div className="col-sm-8 border rounded">
 					{modulos.map((modulo) => {
 						return (
-							<button key={modulo} className="btn btn-outline-primary m-1" type="button">
+							<button
+								key={modulo}
+								className="btn btn-outline-primary m-1"
+								type="button"
+								onClick={() => setModuloToEdit(modulo)}
+							>
 								<span>M-{modulo}</span>
 							</button>
 						);
