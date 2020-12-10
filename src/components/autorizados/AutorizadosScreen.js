@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setModulo } from "../../actions/autorizadosScreen";
 
 export const AutorizadosScreen = () => {
@@ -31,28 +31,41 @@ export const AutorizadosScreen = () => {
 
 	const dispatch = useDispatch();
 
-	// const { modulo } = useSelector((state) => state.autorizadosScreen);
+	const { modulo } = useSelector((state) => state.autorizadosScreen);
 
-	const setModuloToEdit = (modulo) => {
-		console.log("modulo en set: ", modulo);
-		dispatch(setModulo(modulo));
+	const setModuloToEdit = (moduloToEdit) => {
+		console.log("modulo en set: ", moduloToEdit);
+		dispatch(setModulo(moduloToEdit));
 	};
 
 	return (
 		<>
 			<div className="row pt-3">
-				<div className="col-sm-8 border rounded">
-					{modulos.map((modulo) => {
-						return (
-							<button
-								key={modulo}
-								className="btn btn-outline-primary m-1"
-								type="button"
-								onClick={() => setModuloToEdit(modulo)}
-							>
-								<span>M-{modulo}</span>
-							</button>
-						);
+				<div className="col-sm-8 ">
+					{modulos.map((moduloIndex) => {
+						if (modulo === moduloIndex) {
+							return (
+								<button
+									key={moduloIndex}
+									className="btn btn-primary m-1"
+									type="button"
+									onClick={() => setModuloToEdit(moduloIndex)}
+								>
+									<span>M-{moduloIndex}</span>
+								</button>
+							);
+						} else {
+							return (
+								<button
+									key={moduloIndex}
+									className="btn btn-outline-primary m-1"
+									type="button"
+									onClick={() => setModuloToEdit(moduloIndex)}
+								>
+									<span>M-{moduloIndex}</span>
+								</button>
+							);
+						}
 					})}
 				</div>
 			</div>
