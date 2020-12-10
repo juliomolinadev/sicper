@@ -1,7 +1,8 @@
 import { types } from "../types/types";
 
 const initialState = {
-	modulo: null
+	modulo: null,
+	autorizados: {}
 };
 
 export const autorizadosReducer = (state = initialState, action) => {
@@ -16,6 +17,18 @@ export const autorizadosReducer = (state = initialState, action) => {
 			return {
 				...state,
 				modulo: null
+			};
+
+		case types.autorizadosScreenSetAutorizados:
+			return {
+				...state,
+				autorizados: action.payload
+			};
+
+		case types.autorizadosScreenUnsetAutorizados:
+			return {
+				...state,
+				autorizados: {}
 			};
 
 		default:

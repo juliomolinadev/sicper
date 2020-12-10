@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setModulo } from "../../actions/autorizadosScreen";
+import { setModulo, startLoadAutorizados } from "../../actions/autorizadosScreen";
 
 export const AutorizadosScreen = () => {
 	const modulos = [
@@ -34,8 +34,8 @@ export const AutorizadosScreen = () => {
 	const { modulo } = useSelector((state) => state.autorizadosScreen);
 
 	const setModuloToEdit = (moduloToEdit) => {
-		console.log("modulo en set: ", moduloToEdit);
 		dispatch(setModulo(moduloToEdit));
+		dispatch(startLoadAutorizados(modulo));
 	};
 
 	return (

@@ -59,5 +59,7 @@ export const types = {
 	permisosScreenUnsetSuperficies: "[Permisos Screen] Unset superficies",
 
 	autorizadosScreenSetModulo: "[Autorizados Screen] Set modulo",
-	autorizadosScreenUnsetModulo: "[Autorizados Screen] Unset modulo"
+	autorizadosScreenUnsetModulo: "[Autorizados Screen] Unset modulo",
+	autorizadosScreenSetAutorizados: "[Autorizados Screen] Set autorizados",
+	autorizadosScreenUnsetAutorizados: "[Autorizados Screen] Unset autorizados"
 };
