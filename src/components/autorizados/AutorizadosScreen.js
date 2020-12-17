@@ -1,12 +1,10 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-	openAutorizadosModal,
 	setAutorizadoSelected,
 	setModulo,
 	startLoadAutorizados
 } from "../../actions/autorizadosScreen";
-import { useForm } from "../../hooks/useForm";
 import { AutorizadosModal } from "../modals/AutorizadosModal";
 import { autorizadosColumns } from "../tables/configTables";
 import { CustomTable } from "../tables/CustomTable";
@@ -40,7 +38,9 @@ export const AutorizadosScreen = () => {
 
 	const dispatch = useDispatch();
 
-	const { modulo, autorizados } = useSelector((state) => state.autorizadosScreen);
+	const { modulo, autorizados, autorizadoSelected } = useSelector(
+		(state) => state.autorizadosScreen
+	);
 
 	const setModuloToEdit = (moduloToEdit) => {
 		dispatch(setModulo(moduloToEdit));
@@ -93,7 +93,7 @@ export const AutorizadosScreen = () => {
 					)}
 				</div>
 			</div>
-			<AutorizadosModal />
+			{autorizadoSelected ? <AutorizadosModal /> : <></>}
 		</>
 	);
 };

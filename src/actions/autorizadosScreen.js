@@ -17,6 +17,18 @@ export const startLoadAutorizados = (modulo) => {
 	};
 };
 
+export const updateAutorizados = (autorizados, autorizadoSelected) => {
+	autorizados.forEach((autorizado) => {
+		if (autorizado.cultivo === autorizadoSelected.cultivo) {
+			autorizado = autorizadoSelected;
+		}
+	});
+	return async (dispatch) => {
+		await dispatch(setAutorizadoSelected(autorizadoSelected));
+		dispatch(setAutorizados(autorizados));
+	};
+};
+
 export const setAutorizados = (autorizados) => ({
 	type: types.autorizadosScreenSetAutorizados,
 	payload: autorizados
@@ -34,9 +46,9 @@ export const closeAutorizadosModal = () => ({
 	type: types.closeAutorizadosModal
 });
 
-export const setAutorizadoSelected = (autorizadoIndex) => ({
+export const setAutorizadoSelected = (autorizado) => ({
 	type: types.setAutorizadoSelected,
-	payload: autorizadoIndex
+	payload: autorizado
 });
 
 export const unsetAutorizadoSelected = () => ({

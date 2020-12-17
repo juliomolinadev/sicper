@@ -42,6 +42,7 @@ export const autorizadosReducer = (state = initialState, action) => {
 		case types.closeAutorizadosModal:
 			return {
 				...state,
+				autorizadoSelected: null,
 				openAutorizadosModal: false
 			};
 

@@ -1,7 +1,8 @@
 import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { closeAutorizadosModal } from "../../actions/autorizadosScreen";
+import { closeAutorizadosModal, setAutorizados } from "../../actions/autorizadosScreen";
+import { useForm } from "../../hooks/useForm";
 
 const customStyles = {
 	content: {
@@ -20,10 +21,46 @@ Modal.setAppElement("#root");
 export const AutorizadosModal = () => {
 	const dispatch = useDispatch();
 
-	const { openAutorizadosModal } = useSelector((state) => state.autorizadosScreen);
+	const { openAutorizadosModal, autorizadoSelected, autorizados } = useSelector(
+		(state) => state.autorizadosScreen
+	);
+
+	const [formValues, handleInputChange] = useForm({
+		cultivo: autorizadoSelected.cultivo,
+		normal: autorizadoSelected.normal,
+		extra: autorizadoSelected.extra,
+		disponible: autorizadoSelected.disponible
+	});
+
+	const { cultivo, normal, extra, disponible } = formValues;
 
 	const closeModal = () => {
 		dispatch(closeAutorizadosModal());
+	};
+
+	const nuevosAutorizados = [];
+
+	const startUpdateAutorizados = () => {
+		autorizados.forEach((autorizado) => {
+			if (autorizado.cultivo === autorizadoSelected.cultivo) {
+				nuevosAutorizados.push({
+					cultivo: cultivo,
+					normal: normal,
+					extra: extra,
+					disponible: disponible
+				});
+			} else {
+				nuevosAutorizados.push(autorizado);
+			}
+		});
+		dispatch(setAutorizados(nuevosAutorizados));
+		dispatch(closeAutorizadosModal());
+	};
+
+	const handleKeyUp = (event) => {
+		if (event.key === "Enter") {
+			startUpdateAutorizados();
+		}
 	};
 
 	return (
@@ -36,53 +73,69 @@ export const AutorizadosModal = () => {
 			overlayClassName="modal-fondo"
 		>
 			<form className="row">
-				<div className="col-sm-3">
-					<div className="col-form-label">Cultivo</div>
+				<div className="d-flex justify-content-center col-sm-3">
+					<div className="col-form-label">{cultivo}</div>
 				</div>
 
 				<div className="form-group d-flex align-items-baseline col-sm-3">
-					<label htmlFor="">Normal:</label>
-					<div className="flex-grow-1 ">
+					<label htmlFor="">Normal: </label>
+					<div className="flex-grow-1 pl-1">
 						<input
 							type="text"
 							className="form-control"
-							placeholder="variedad"
-							name="variedad"
-							// value={variedad}
+							placeholder="Normal"
+							name="normal"
+							value={normal}
 							autoComplete="off"
-							// onChange={handleInputChange}
+							onChange={handleInputChange}
+							onKeyUp={handleKeyUp}
+						/>
+					</div>
+				</div>
+
+				<div className="form-group d-flex align-items-baseline col-sm-2">
+					<label htmlFor="">Extra: </label>
+					<div className="flex-grow-1 pl-1">
+						<input
+							type="text"
+							className="form-control"
+							placeholder="Extra"
+							name="extra"
+							value={extra}
+							autoComplete="off"
+							onChange={handleInputChange}
+							onKeyUp={handleKeyUp}
 						/>
 					</div>
 				</div>
 
 				<div className="form-group d-flex align-items-baseline col-sm-3">
-					<label htmlFor="">Extra:</label>
-					<div className="flex-grow-1 ">
+					<label htmlFor="">Disponible: </label>
+					<div className="flex-grow-1 pl-1">
 						<input
 							type="text"
 							className="form-control"
-							placeholder="variedad"
-							name="variedad"
-							// value={variedad}
+							placeholder="Disponible"
+							name="disponible"
+							value={disponible}
 							autoComplete="off"
-							// onChange={handleInputChange}
+							onChange={handleInputChange}
+							onKeyUp={handleKeyUp}
 						/>
 					</div>
 				</div>
 
-				<div className="form-group d-flex align-items-baseline col-sm-3">
-					<label htmlFor="">Disponible:</label>
-					<div className="flex-grow-1 ">
-						<input
-							type="text"
-							className="form-control"
-							placeholder="variedad"
-							name="variedad"
-							// value={variedad}
-							autoComplete="off"
-							// onChange={handleInputChange}
-						/>
-					</div>
+				<div
+					className="d-block justify-content-center col-sm-1"
+					// onClick={handleOpenPrintPermisoModal}
+				>
+					<button
+						type="button"
+						className="btn btn-outline-primary"
+						onClick={startUpdateAutorizados}
+					>
+						<i className="fas fa-check"></i>
+					</button>
 				</div>
 			</form>
 		</Modal>
