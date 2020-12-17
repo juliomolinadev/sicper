@@ -9,7 +9,13 @@
 	justify-content: center;
 	transition: opacity 0.2s ease-in-out;
 	z-index: 999;
-	position: absolute;
+	position: fixed;
+
+	/* position: absolute; */
+}
+
+.autorizadosModal {
+	position: fixed;
 }
 
 .modal-fondo {
@@ -18,7 +24,8 @@
 	left: 0;
 	right: 0;
 	top: 0;
-	position: fixed;
+
+	/* position: fixed; */
 }
 
 .ReactModalPortal .ReactModal__Overlay--after-open {
@@ -46,12 +53,13 @@
 	border-radius: 5px;
 	color: rgb(51, 51, 51);
 	display: inline;
-	max-height: 1500px;
+	max-height: 480px;
 	max-width: 1125px;
 	outline: auto;
 	padding: 10px;
-	margin-top: 1100px;
+	margin-top: 80px;
 	font-size: 13px;
+	position: absolute;
 }
 
 .printPermisoSubLogo {
@@ -101,6 +109,7 @@
 @media print {
 	.printModal {
 		outline: none;
+		max-height: 1500px;
 		margin-top: 0px;
 	}
 }

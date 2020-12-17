@@ -21,7 +21,8 @@ import { sabePermiso } from "../../helpers/sabePermiso";
 const customStyles = {
 	content: {
 		width: "1125px",
-		height: "1500px"
+		height: "1500px",
+		overflow: "auto"
 	}
 };
 

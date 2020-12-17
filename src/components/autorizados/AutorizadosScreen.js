@@ -1,6 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setModulo, startLoadAutorizados } from "../../actions/autorizadosScreen";
+import {
+	openAutorizadosModal,
+	setAutorizadoSelected,
+	setModulo,
+	startLoadAutorizados
+} from "../../actions/autorizadosScreen";
+import { useForm } from "../../hooks/useForm";
+import { AutorizadosModal } from "../modals/AutorizadosModal";
+import { autorizadosColumns } from "../tables/configTables";
+import { CustomTable } from "../tables/CustomTable";
 
 export const AutorizadosScreen = () => {
 	const modulos = [
@@ -31,7 +40,7 @@ export const AutorizadosScreen = () => {
 
 	const dispatch = useDispatch();
 
-	const { modulo } = useSelector((state) => state.autorizadosScreen);
+	const { modulo, autorizados } = useSelector((state) => state.autorizadosScreen);
 
 	const setModuloToEdit = (moduloToEdit) => {
 		dispatch(setModulo(moduloToEdit));
@@ -40,7 +49,7 @@ export const AutorizadosScreen = () => {
 
 	return (
 		<>
-			<div className="row pt-3">
+			<div className="row pt-3 .autorizadosModal">
 				<div className="col-sm-8 ">
 					{modulos.map((moduloIndex) => {
 						if (modulo === moduloIndex) {
@@ -69,6 +78,22 @@ export const AutorizadosScreen = () => {
 					})}
 				</div>
 			</div>
+
+			<div className="row pt-5">
+				<div className="col-sm-8">
+					{modulo ? (
+						<CustomTable
+							title="Autorizados"
+							columns={autorizadosColumns}
+							data={autorizados}
+							setFunction={setAutorizadoSelected}
+						></CustomTable>
+					) : (
+						<></>
+					)}
+				</div>
+			</div>
+			<AutorizadosModal />
 		</>
 	);
 };

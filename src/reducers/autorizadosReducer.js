@@ -2,7 +2,9 @@ import { types } from "../types/types";
 
 const initialState = {
 	modulo: null,
-	autorizados: {}
+	openAutorizadosModal: false,
+	autorizados: [],
+	autorizadoSelected: null
 };
 
 export const autorizadosReducer = (state = initialState, action) => {
@@ -28,7 +30,33 @@ export const autorizadosReducer = (state = initialState, action) => {
 		case types.autorizadosScreenUnsetAutorizados:
 			return {
 				...state,
-				autorizados: {}
+				autorizados: []
+			};
+
+		case types.openAutorizadosModal:
+			return {
+				...state,
+				openAutorizadosModal: true
+			};
+
+		case types.closeAutorizadosModal:
+			return {
+				...state,
+				openAutorizadosModal: false
+			};
+
+		case types.setAutorizadoSelected:
+			return {
+				...state,
+				openAutorizadosModal: true,
+				autorizadoSelected: action.payload
+			};
+
+		case types.unsetAutorizadoSelected:
+			return {
+				...state,
+				openAutorizadosModal: false,
+				autorizadoSelected: null
 			};
 
 		default:

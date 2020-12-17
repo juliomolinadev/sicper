@@ -25,3 +25,20 @@ export const setAutorizados = (autorizados) => ({
 export const unsetAutorizados = () => ({
 	type: types.autorizadosScreenUnsetAutorizados
 });
+
+export const openAutorizadosModal = () => ({
+	type: types.openAutorizadosModal
+});
+
+export const closeAutorizadosModal = () => ({
+	type: types.closeAutorizadosModal
+});
+
+export const setAutorizadoSelected = (autorizadoIndex) => ({
+	type: types.setAutorizadoSelected,
+	payload: autorizadoIndex
+});
+
+export const unsetAutorizadoSelected = () => ({
+	type: types.unsetAutorizadoSelected
+});

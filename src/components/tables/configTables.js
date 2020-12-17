@@ -59,3 +59,11 @@ export const permisosColumns = [
 	{ name: "VIGENCIA", selector: "vigencia", sortable: true, width: "100px" },
 	{ name: "ESTADO", selector: "estadoPermiso", sortable: true, width: "100px" }
 ];
+
+export const autorizadosColumns = [
+	{ name: "id", selector: "id", omit: true },
+	{ name: "CULTIVO", selector: "cultivo", sortable: true, width: "160px", center: true },
+	{ name: "NORMAL", selector: "normal", sortable: true, center: true },
+	{ name: "EXTRA", selector: "extra", sortable: true, center: true },
+	{ name: "DISPONIBLE", selector: "disponible", sortable: true, center: true }
+];
