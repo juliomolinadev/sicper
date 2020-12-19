@@ -12,7 +12,8 @@ const customStyles = {
 		bottom: "auto",
 		marginRight: "-50%",
 		transform: "translate(-50%, -50%)",
-		height: "60px"
+		height: "60px",
+		width: "1000px"
 	}
 };
 
@@ -45,9 +46,9 @@ export const AutorizadosModal = () => {
 			if (autorizado.cultivo === autorizadoSelected.cultivo) {
 				nuevosAutorizados.push({
 					cultivo: cultivo,
-					normal: normal,
-					extra: extra,
-					disponible: disponible
+					normal: Number(normal),
+					extra: Number(extra),
+					disponible: Number(disponible)
 				});
 			} else {
 				nuevosAutorizados.push(autorizado);
@@ -69,7 +70,7 @@ export const AutorizadosModal = () => {
 			onRequestClose={closeModal}
 			style={customStyles}
 			closeTimeoutMS={200}
-			className="modal autorizadosModal"
+			className="autorizadosModal"
 			overlayClassName="modal-fondo"
 		>
 			<form className="row">
@@ -81,7 +82,7 @@ export const AutorizadosModal = () => {
 					<label htmlFor="">Normal: </label>
 					<div className="flex-grow-1 pl-1">
 						<input
-							type="text"
+							type="number"
 							className="form-control"
 							placeholder="Normal"
 							name="normal"
@@ -97,7 +98,7 @@ export const AutorizadosModal = () => {
 					<label htmlFor="">Extra: </label>
 					<div className="flex-grow-1 pl-1">
 						<input
-							type="text"
+							type="number"
 							className="form-control"
 							placeholder="Extra"
 							name="extra"
@@ -110,12 +111,12 @@ export const AutorizadosModal = () => {
 				</div>
 
 				<div className="form-group d-flex align-items-baseline col-sm-3">
-					<label htmlFor="">Disponible: </label>
+					<label htmlFor="">Asignada: </label>
 					<div className="flex-grow-1 pl-1">
 						<input
-							type="text"
+							type="number"
 							className="form-control"
-							placeholder="Disponible"
+							placeholder="Asignada"
 							name="disponible"
 							value={disponible}
 							autoComplete="off"

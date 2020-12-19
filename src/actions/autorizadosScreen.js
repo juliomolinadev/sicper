@@ -13,7 +13,15 @@ export const unsetModulo = () => ({
 export const startLoadAutorizados = (modulo) => {
 	return async (dispatch) => {
 		const autorizados = await loadAutorizados(modulo);
+
+		let superficieReferencia = 0;
+		autorizados.forEach((autorizado) => {
+			superficieReferencia += autorizado.normal;
+			superficieReferencia += autorizado.extra;
+			superficieReferencia += autorizado.disponible;
+		});
 		dispatch(setAutorizados(autorizados));
+		dispatch(setSuperficieReferencia(superficieReferencia));
 	};
 };
 
@@ -23,6 +31,7 @@ export const updateAutorizados = (autorizados, autorizadoSelected) => {
 			autorizado = autorizadoSelected;
 		}
 	});
+
 	return async (dispatch) => {
 		await dispatch(setAutorizadoSelected(autorizadoSelected));
 		dispatch(setAutorizados(autorizados));
@@ -53,4 +62,13 @@ export const setAutorizadoSelected = (autorizado) => ({
 
 export const unsetAutorizadoSelected = () => ({
 	type: types.unsetAutorizadoSelected
+});
+
+export const setSuperficieReferencia = (superficieReferencia) => ({
+	type: types.setSuperficieReferencia,
+	payload: superficieReferencia
+});
+
+export const unsetSuperficieReferencia = () => ({
+	type: types.unsetSuperficieReferencia
 });

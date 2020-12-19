@@ -65,5 +65,7 @@ export const types = {
 	openAutorizadosModal: "[Autorizados Screen] Open autorizados modal",
 	closeAutorizadosModal: "[Autorizados Screen] Close autorizados modal",
 	setAutorizadoSelected: "[Autorizados Screen] Set autorizado selected",
-	unsetAutorizadoSelected: "[Autorizados Screen] Unset autorizado selected"
+	unsetAutorizadoSelected: "[Autorizados Screen] Unset autorizado selected",
+	setSuperficieReferencia: "[Autorizados Screen] Set superficie referencia",
+	unsetSuperficieReferencia: "[Autorizados Screen] Unset superficie referencia"
 };

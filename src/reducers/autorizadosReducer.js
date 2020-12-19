@@ -4,7 +4,8 @@ const initialState = {
 	modulo: null,
 	openAutorizadosModal: false,
 	autorizados: [],
-	autorizadoSelected: null
+	autorizadoSelected: null,
+	superficieReferencia: null
 };
 
 export const autorizadosReducer = (state = initialState, action) => {
@@ -58,6 +59,18 @@ export const autorizadosReducer = (state = initialState, action) => {
 				...state,
 				openAutorizadosModal: false,
 				autorizadoSelected: null
+			};
+
+		case types.setSuperficieReferencia:
+			return {
+				...state,
+				superficieReferencia: action.payload
+			};
+
+		case types.unsetSuperficieReferencia:
+			return {
+				...state,
+				superficieReferencia: null
 			};
 
 		default:

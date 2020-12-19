@@ -1,9 +1,10 @@
 import { db } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
 
-export const sabeAutorizados = async (modulo, autorizados) => {
-	autorizados.forEach((autorizado) => {
-		db.collection("autorizados")
+export const sabeAutorizados = (modulo, autorizados) => {
+	autorizados.forEach(async (autorizado) => {
+		await db
+			.collection("autorizados")
 			.doc(`autorizadosM${modulo}`)
 			.collection(`autorizados`)
 			.doc(`${autorizado.cultivo}`)
@@ -21,5 +22,6 @@ export const sabeAutorizados = async (modulo, autorizados) => {
 			});
 	});
 
-	Swal.fire("Autorizados Guardados", "Se registró con éxito el nuevo permiso de riego.", "success");
+	Swal.fire("Autorizados Guardados", "Se registraron con éxito los cambios.", "success");
+	return true;
 };

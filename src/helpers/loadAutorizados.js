@@ -6,20 +6,20 @@ export const loadAutorizados = async (modulo) => {
 		.collection(`autorizados`)
 		.doc(`autorizadosM${modulo}`)
 		.collection(`autorizados`)
+		.orderBy(`cultivo`)
 		.get();
-
-	const nombresCultivos = await loadNombreCultivos();
 
 	let autorizados = [];
 
-	if (autorizadosSnap.size !== 0) {
-		autorizadosSnap.forEach((snapHijo) => {
-			autorizados.push({
-				id: snapHijo.id,
-				...snapHijo.data()
-			});
+	autorizadosSnap.forEach((snapHijo) => {
+		autorizados.push({
+			...snapHijo.data()
 		});
-	} else {
+	});
+
+	const nombresCultivos = await loadNombreCultivos();
+
+	if (autorizados.length === 0) {
 		nombresCultivos.forEach((cultivo) => {
 			autorizados.push({
 				cultivo: cultivo,

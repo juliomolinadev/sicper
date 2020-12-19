@@ -5,6 +5,7 @@ import {
 	setModulo,
 	startLoadAutorizados
 } from "../../actions/autorizadosScreen";
+import { sabeAutorizados } from "../../helpers/sabeAutorizados";
 import { AutorizadosModal } from "../modals/AutorizadosModal";
 import { autorizadosColumns } from "../tables/configTables";
 import { CustomTable } from "../tables/CustomTable";
@@ -38,12 +39,32 @@ export const AutorizadosScreen = () => {
 
 	const dispatch = useDispatch();
 
-	const { modulo, autorizados, autorizadoSelected } = useSelector(
+	const { modulo, autorizados, autorizadoSelected, superficieReferencia } = useSelector(
 		(state) => state.autorizadosScreen
 	);
 
+	let totalNormal = 0;
+	let totalExtra = 0;
+	let totalDisponible = 0;
+	let superficieTotal = 0;
+
+	if (modulo !== null) {
+		autorizados.forEach((autorizado) => {
+			totalNormal += autorizado.normal;
+			totalExtra += autorizado.extra;
+			totalDisponible += autorizado.disponible;
+		});
+
+		superficieTotal = totalNormal + totalExtra + totalDisponible;
+	}
+
 	const setModuloToEdit = (moduloToEdit) => {
 		dispatch(setModulo(moduloToEdit));
+		dispatch(startLoadAutorizados(moduloToEdit));
+	};
+
+	const handleSaveAutorizados = async () => {
+		sabeAutorizados(modulo, autorizados);
 		dispatch(startLoadAutorizados(modulo));
 	};
 
@@ -79,7 +100,7 @@ export const AutorizadosScreen = () => {
 				</div>
 			</div>
 
-			<div className="row pt-5">
+			<div className="row pt-5 pr-3">
 				<div className="col-sm-8">
 					{modulo ? (
 						<CustomTable
@@ -92,6 +113,51 @@ export const AutorizadosScreen = () => {
 						<></>
 					)}
 				</div>
+
+				{modulo ? (
+					<div className="col-sm-4 d-flex flex-column border rounded border-info">
+						<div className="row bg-light border-info border-bottom rounded-top p-1 justify-content-center font-weight-bold text-secondary pt-3">
+							<h5>Módulo {modulo}</h5>
+						</div>
+
+						<div className="row p-1 pl-2 pt-4">
+							<div className="col-6 d-flex justify-content-end">NORMAL:</div>
+							<div className="col-6">{totalNormal}</div>
+						</div>
+
+						<div className="row p-1 pl-2 pt-2">
+							<div className="col-6 d-flex justify-content-end">EXTRA:</div>
+							<div className="col-6">{totalExtra}</div>
+						</div>
+
+						<div className="row p-1 pl-2 pt-2">
+							<div className="col-6 d-flex justify-content-end">DISPONIBLE:</div>
+							<div className="col-6">{totalDisponible}</div>
+						</div>
+
+						{superficieReferencia === superficieTotal ? (
+							<></>
+						) : (
+							<div className="row p-1 pl-2  d-flex flex-column">
+								<div className="d-flex justify-content-center pt-5 text-warning">
+									! Hay modificaciones sin guardar !
+								</div>
+								<div className="d-flex justify-content-center pt-4">
+									<button
+										type="submit"
+										className="btn btn-outline-primary"
+										onClick={handleSaveAutorizados}
+									>
+										<i className="far fa-save"></i>
+										<span> Guardar Cambios</span>
+									</button>
+								</div>
+							</div>
+						)}
+					</div>
+				) : (
+					<></>
+				)}
 			</div>
 			{autorizadoSelected ? <AutorizadosModal /> : <></>}
 		</>
