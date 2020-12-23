@@ -1,12 +1,12 @@
 import { db } from "../firebase/firebase-config";
-import { loadNombreCultivos } from "./loadNombresCultivos";
+import { loadNombresCultivos } from "./loadNombresCultivos";
 
 export const loadAutorizados = async (modulo) => {
 	const autorizadosSnap = await db
 		.collection(`autorizados`)
 		.doc(`autorizadosM${modulo}`)
 		.collection(`autorizados`)
-		.orderBy(`cultivo`)
+		.orderBy(`clave`)
 		.get();
 
 	let autorizados = [];
@@ -17,15 +17,22 @@ export const loadAutorizados = async (modulo) => {
 		});
 	});
 
-	const nombresCultivos = await loadNombreCultivos();
+	const nombresCultivos = await loadNombresCultivos();
 
 	if (autorizados.length === 0) {
 		nombresCultivos.forEach((cultivo) => {
 			autorizados.push({
-				cultivo: cultivo,
-				normal: 0,
-				extra: 0,
-				disponible: 0
+				clave: cultivo.clave,
+				cultivo: cultivo.cultivo,
+				normalGravedad: 0,
+				extraGravedad: 0,
+				asignadaGravedad: 0,
+				normalPozoFederal: 0,
+				extraPozoFederal: 0,
+				asignadaPozoFederal: 0,
+				normalPozoParticular: 0,
+				extraPozoParticular: 0,
+				asignadaPozoParticular: 0
 			});
 		});
 	}

@@ -7,12 +7,19 @@ export const sabeAutorizados = (modulo, autorizados) => {
 			.collection("autorizados")
 			.doc(`autorizadosM${modulo}`)
 			.collection(`autorizados`)
-			.doc(`${autorizado.cultivo}`)
+			.doc(`${autorizado.clave}-${autorizado.cultivo}`)
 			.set({
+				clave: autorizado.clave,
 				cultivo: autorizado.cultivo,
-				normal: autorizado.normal,
-				extra: autorizado.extra,
-				disponible: autorizado.disponible
+				normalGravedad: autorizado.normalGravedad,
+				extraGravedad: autorizado.extraGravedad,
+				asignadaGravedad: autorizado.asignadaGravedad,
+				normalPozoFederal: autorizado.normalPozoFederal,
+				extraPozoFederal: autorizado.extraPozoFederal,
+				asignadaPozoFederal: autorizado.asignadaPozoFederal,
+				normalPozoParticular: autorizado.normalPozoParticular,
+				extraPozoParticular: autorizado.extraPozoParticular,
+				asignadaPozoParticular: autorizado.asignadaPozoParticular
 			})
 			.then(function () {
 				console.log("Document successfully written!");

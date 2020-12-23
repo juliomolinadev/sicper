@@ -5,7 +5,8 @@ const initialState = {
 	openAutorizadosModal: false,
 	autorizados: [],
 	autorizadoSelected: null,
-	superficieReferencia: null
+	superficieReferencia: null,
+	formError: null
 };
 
 export const autorizadosReducer = (state = initialState, action) => {
@@ -71,6 +72,18 @@ export const autorizadosReducer = (state = initialState, action) => {
 			return {
 				...state,
 				superficieReferencia: null
+			};
+
+		case types.setFormError:
+			return {
+				...state,
+				formError: action.payload
+			};
+
+		case types.removeFormError:
+			return {
+				...state,
+				formError: null
 			};
 
 		default:

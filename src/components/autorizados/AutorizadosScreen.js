@@ -25,7 +25,6 @@ export const AutorizadosScreen = () => {
 		10,
 		11,
 		12,
-		13,
 		14,
 		15,
 		16,
@@ -34,7 +33,8 @@ export const AutorizadosScreen = () => {
 		19,
 		20,
 		21,
-		22
+		22,
+		"FL"
 	];
 
 	const dispatch = useDispatch();
@@ -45,17 +45,22 @@ export const AutorizadosScreen = () => {
 
 	let totalNormal = 0;
 	let totalExtra = 0;
-	let totalDisponible = 0;
+	let totalAsignada = 0;
 	let superficieTotal = 0;
 
 	if (modulo !== null) {
 		autorizados.forEach((autorizado) => {
-			totalNormal += autorizado.normal;
-			totalExtra += autorizado.extra;
-			totalDisponible += autorizado.disponible;
+			totalNormal +=
+				autorizado.normalGravedad + autorizado.normalPozoFederal + autorizado.normalPozoParticular;
+			totalExtra +=
+				autorizado.extraGravedad + autorizado.extraPozoFederal + autorizado.extraPozoParticular;
+			totalAsignada +=
+				autorizado.asignadaGravedad +
+				autorizado.asignadaPozoFederal +
+				autorizado.asignadaPozoParticular;
 		});
 
-		superficieTotal = totalNormal + totalExtra + totalDisponible;
+		superficieTotal = totalNormal + totalExtra + totalAsignada;
 	}
 
 	const setModuloToEdit = (moduloToEdit) => {
@@ -132,7 +137,7 @@ export const AutorizadosScreen = () => {
 
 						<div className="row p-1 pl-2 pt-2">
 							<div className="col-6 d-flex justify-content-end">DISPONIBLE:</div>
-							<div className="col-6">{totalDisponible}</div>
+							<div className="col-6">{totalAsignada}</div>
 						</div>
 
 						{superficieReferencia === superficieTotal ? (

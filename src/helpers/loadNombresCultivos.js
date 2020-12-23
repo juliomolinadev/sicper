@@ -1,12 +1,15 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadNombreCultivos = async () => {
+export const loadNombresCultivos = async () => {
 	const cultivosSnap = await db.collection(`cultivos`).orderBy("clave").get();
 
 	const cultivos = [];
 
 	cultivosSnap.forEach((snapHijo) => {
-		cultivos.push(`${snapHijo.data().clave}-${snapHijo.data().nombre}`);
+		cultivos.push({
+			clave: snapHijo.data().clave,
+			cultivo: snapHijo.data().nombre
+		});
 	});
 
 	return cultivos;

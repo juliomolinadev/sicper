@@ -62,8 +62,25 @@ export const permisosColumns = [
 
 export const autorizadosColumns = [
 	{ name: "id", selector: "id", omit: true },
-	{ name: "CULTIVO", selector: "cultivo", sortable: true, width: "160px", center: true },
-	{ name: "NORMAL", selector: "normal", sortable: true, center: true },
-	{ name: "EXTRA", selector: "extra", sortable: true, center: true },
-	{ name: "ASIGNADA", selector: "disponible", sortable: true, center: true }
+	{ name: "CLAVE", selector: "clave", sortable: true, width: "80px", center: true },
+	{ name: "CULTIVO", selector: "cultivo", sortable: true, width: "160px" },
+	{ name: "NORMAL GRAVEDAD", selector: "normalGravedad", sortable: true, center: true },
+	{ name: "EXTRA GRAVEDAD", selector: "extraGravedad", sortable: true, center: true },
+	{ name: "ASIGNADA GRAVEDAD", selector: "asignadaGravedad", sortable: true, center: true },
+	{ name: "NORMAL POZO FEDERAL", selector: "normalPozoFederal", sortable: true, center: true },
+	{ name: "EXTRA POZO FEDERAL", selector: "extraPozoFederal", sortable: true, center: true },
+	{ name: "ASIGNADA POZO FEDERAL", selector: "asignadaPozoFederal", sortable: true, center: true },
+	{
+		name: "NORMAL POZO PARTICULAR",
+		selector: "normalPozoParticular",
+		sortable: true,
+		center: true
+	},
+	{ name: "EXTRA POZO PARTICULAR", selector: "extraPozoParticular", sortable: true, center: true },
+	{
+		name: "ASIGNADA POZO PARTICULAR",
+		selector: "asignadaPozoParticular",
+		sortable: true,
+		center: true
+	}
 ];

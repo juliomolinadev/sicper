@@ -16,9 +16,15 @@ export const startLoadAutorizados = (modulo) => {
 
 		let superficieReferencia = 0;
 		autorizados.forEach((autorizado) => {
-			superficieReferencia += autorizado.normal;
-			superficieReferencia += autorizado.extra;
-			superficieReferencia += autorizado.disponible;
+			superficieReferencia += autorizado.normalGravedad;
+			superficieReferencia += autorizado.extraGravedad;
+			superficieReferencia += autorizado.asignadaGravedad;
+			superficieReferencia += autorizado.normalPozoFederal;
+			superficieReferencia += autorizado.extraPozoFederal;
+			superficieReferencia += autorizado.asignadaPozoFederal;
+			superficieReferencia += autorizado.normalPozoParticular;
+			superficieReferencia += autorizado.extraPozoParticular;
+			superficieReferencia += autorizado.asignadaPozoParticular;
 		});
 		dispatch(setAutorizados(autorizados));
 		dispatch(setSuperficieReferencia(superficieReferencia));
@@ -71,4 +77,13 @@ export const setSuperficieReferencia = (superficieReferencia) => ({
 
 export const unsetSuperficieReferencia = () => ({
 	type: types.unsetSuperficieReferencia
+});
+
+export const setFormError = (formError) => ({
+	type: types.setFormError,
+	payload: formError
+});
+
+export const removeFormError = () => ({
+	type: types.removeFormError
 });

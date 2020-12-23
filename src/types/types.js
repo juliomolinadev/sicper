@@ -67,5 +67,7 @@ export const types = {
 	setAutorizadoSelected: "[Autorizados Screen] Set autorizado selected",
 	unsetAutorizadoSelected: "[Autorizados Screen] Unset autorizado selected",
 	setSuperficieReferencia: "[Autorizados Screen] Set superficie referencia",
-	unsetSuperficieReferencia: "[Autorizados Screen] Unset superficie referencia"
+	unsetSuperficieReferencia: "[Autorizados Screen] Unset superficie referencia",
+	setFormError: "[Autorizados Screen] Set Form Error",
+	removeFormError: "[Autorizados Screen] Unset Form Error"
 };
