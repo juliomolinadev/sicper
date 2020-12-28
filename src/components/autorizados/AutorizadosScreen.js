@@ -136,7 +136,7 @@ export const AutorizadosScreen = () => {
 						</div>
 
 						<div className="row p-1 pl-2 pt-2">
-							<div className="col-6 d-flex justify-content-end">DISPONIBLE:</div>
+							<div className="col-6 d-flex justify-content-end">ASIGNADA:</div>
 							<div className="col-6">{totalAsignada}</div>
 						</div>
 

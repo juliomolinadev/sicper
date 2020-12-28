@@ -3,6 +3,14 @@ import Swal from "sweetalert2";
 
 export const sabeAutorizados = (modulo, autorizados) => {
 	autorizados.forEach(async (autorizado) => {
+		const totalCultivo =
+			autorizado.normalGravedad +
+			autorizado.extraGravedad +
+			autorizado.normalPozoFederal +
+			autorizado.extraPozoFederal +
+			autorizado.normalPozoParticular +
+			autorizado.extraPozoParticular;
+
 		await db
 			.collection("autorizados")
 			.doc(`autorizadosM${modulo}`)
@@ -11,6 +19,7 @@ export const sabeAutorizados = (modulo, autorizados) => {
 			.set({
 				clave: autorizado.clave,
 				cultivo: autorizado.cultivo,
+				superficieTotal: totalCultivo,
 				normalGravedad: autorizado.normalGravedad,
 				extraGravedad: autorizado.extraGravedad,
 				asignadaGravedad: autorizado.asignadaGravedad,
