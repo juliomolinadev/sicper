@@ -49,6 +49,12 @@ export const sabePermiso = async (allData) => {
 		estadoPermiso: "activo"
 	};
 
+	const permisosPorCultivoRef = db
+		.collection(`permisos`)
+		.doc(`permisosM${data.modulo}`)
+		.collection(`permisosPorCultivo`)
+		.doc(`${data.claveCultivo}-${data.nombreCultivo}`);
+
 	const isSave = await db
 		.collection(`permisos`)
 		.doc(`permisosM${data.modulo}`)
@@ -62,30 +68,75 @@ export const sabePermiso = async (allData) => {
 					superficieModulo: firebase.firestore.FieldValue.increment(allData.supAutorizada)
 				});
 
-			db.collection(`permisos`)
-				.doc(`permisosM${data.modulo}`)
-				.collection(`permisosPorCultivo`)
-				.doc(`${data.claveCultivo}-${data.nombreCultivo}`)
+			permisosPorCultivoRef
 				.get()
 				.then((doc) => {
 					if (doc.exists) {
-						db.collection(`permisos`)
-							.doc(`permisosM${data.modulo}`)
-							.collection(`permisosPorCultivo`)
-							.doc(`${data.claveCultivo}-${data.nombreCultivo}`)
-							.update({
-								numeroPermisos: firebase.firestore.FieldValue.increment(1),
-								superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada)
-							});
+						switch (allData.sistema) {
+							case "Gravedad":
+								permisosPorCultivoRef.update({
+									numeroPermisos: firebase.firestore.FieldValue.increment(1),
+									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+									gravedad: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+								});
+								break;
+
+							case "Pozo Federal":
+								permisosPorCultivoRef.update({
+									numeroPermisos: firebase.firestore.FieldValue.increment(1),
+									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+									pozoFederal: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+								});
+								break;
+
+							case "Pozo Particular":
+								permisosPorCultivoRef.update({
+									numeroPermisos: firebase.firestore.FieldValue.increment(1),
+									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+									pozoParticular: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+								});
+								break;
+
+							default:
+								console.log("Sistema de riego indefinido");
+								break;
+						}
 					} else {
-						db.collection(`permisos`)
-							.doc(`permisosM${data.modulo}`)
-							.collection(`permisosPorCultivo`)
-							.doc(`${data.claveCultivo}-${data.nombreCultivo}`)
-							.set({
-								numeroPermisos: firebase.firestore.FieldValue.increment(1),
-								superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada)
-							});
+						switch (allData.sistema) {
+							case "Gravedad":
+								permisosPorCultivoRef.set({
+									clave: allData.claveCultivo,
+									cultivo: allData.nombreCultivo,
+									numeroPermisos: firebase.firestore.FieldValue.increment(1),
+									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+									gravedad: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+								});
+								break;
+
+							case "Pozo Federal":
+								permisosPorCultivoRef.set({
+									clave: allData.claveCultivo,
+									cultivo: allData.nombreCultivo,
+									numeroPermisos: firebase.firestore.FieldValue.increment(1),
+									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+									pozoFederal: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+								});
+								break;
+
+							case "Pozo Particular":
+								permisosPorCultivoRef.set({
+									clave: allData.claveCultivo,
+									cultivo: allData.nombreCultivo,
+									numeroPermisos: firebase.firestore.FieldValue.increment(1),
+									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+									pozoParticular: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+								});
+								break;
+
+							default:
+								console.log("Sistema de riego indefinido");
+								break;
+						}
 					}
 				})
 				.catch((e) => {

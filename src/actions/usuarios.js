@@ -53,10 +53,10 @@ export const setUsuarioSelected = (usuario) => {
 		usuario.sistRiego = "Gravedad";
 	}
 	if (usuario.sistRiego === 2 && usuario.equipo === 1) {
-		usuario.sistRiego = "Poso Particular";
+		usuario.sistRiego = "Pozo Particular";
 	}
 	if (usuario.sistRiego === 2 && usuario.equipo === 2) {
-		usuario.sistRiego = "Poso Federal";
+		usuario.sistRiego = "Pozo Federal";
 	}
 	return {
 		type: types.setUsuario,
