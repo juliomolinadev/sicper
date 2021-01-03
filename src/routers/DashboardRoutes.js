@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar } from "../components/ui/Navbar";
+import { NavbarComponent } from "../components/ui/NavbarComponent";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 import { SicperScreen } from "../components/sicper/SicperScreen";
@@ -15,7 +15,7 @@ import Header from "../components/ui/Header";
 export const DashboardRoutes = () => {
 	return (
 		<div className="container-fluid pr-4">
-			<Navbar />
+			<NavbarComponent />
 			<Header />
 			<Switch>
 				<Route exact path="/sicper" component={SicperScreen} />
