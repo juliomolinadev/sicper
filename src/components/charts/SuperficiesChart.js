@@ -1,5 +1,5 @@
 import React from "react";
-import { Doughnut } from "react-chartjs-2";
+import { HorizontalBar } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 import { setSuperficiesDataformat } from "./setSuperficiesDataformat";
 
@@ -11,7 +11,7 @@ export const SuperficiesChart = () => {
 	let totalPermisos = 0;
 
 	if (superficies !== null) {
-		data = setSuperficiesDataformat(superficies);
+		data = setSuperficiesDataformat(superficies, "Superficie por cultivo");
 
 		superficies.superficiesCultivos.forEach((superficie) => {
 			totalSuperficie += superficie;
@@ -21,6 +21,18 @@ export const SuperficiesChart = () => {
 			totalPermisos += permisos;
 		});
 	}
+
+	const options = {
+		scales: {
+			yAxes: [
+				{
+					ticks: {
+						beginAtZero: true
+					}
+				}
+			]
+		}
+	};
 
 	return (
 		<div className="pt-4">
@@ -36,7 +48,7 @@ export const SuperficiesChart = () => {
 				</div>
 			</div>
 			<div className="pb-4">
-				<Doughnut data={data} width={140} />
+				<HorizontalBar data={data} options={options} width={220} />
 			</div>
 		</div>
 	);

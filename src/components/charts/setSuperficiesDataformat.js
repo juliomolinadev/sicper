@@ -1,9 +1,9 @@
-export const setSuperficiesDataformat = (dataSend) => {
+export const setSuperficiesDataformat = (dataSend, titulo) => {
 	const data = {
 		labels: dataSend.labels,
 		datasets: [
 			{
-				label: "# of Votes",
+				label: titulo,
 				data: dataSend.superficiesCultivos,
 				backgroundColor: [
 					"rgba(255, 99, 132, 0.2)",

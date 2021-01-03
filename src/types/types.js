@@ -69,5 +69,8 @@ export const types = {
 	setSuperficieReferencia: "[Autorizados Screen] Set superficie referencia",
 	unsetSuperficieReferencia: "[Autorizados Screen] Unset superficie referencia",
 	setFormError: "[Autorizados Screen] Set Form Error",
-	removeFormError: "[Autorizados Screen] Unset Form Error"
+	removeFormError: "[Autorizados Screen] Unset Form Error",
+
+	sicperScreenSetAutorizados: "[Sicper Screen] Set autorizados",
+	sicperScreenUnsetAutorizados: "[Sicper Screen] Unset autorizados"
 };

@@ -6,6 +6,7 @@ import { uiReducer } from "../reducers/uiReducer";
 import { altaPermisosReducer } from "../reducers/altaPermisosReducer";
 import { permisosScreenReducer } from "../reducers/permisosScreenReducer";
 import { autorizadosReducer } from "../reducers/autorizadosReducer";
+import { sicperReducer } from "../reducers/sicperReducer";
 
 const composeEnhancers =
 	(typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -13,9 +14,10 @@ const composeEnhancers =
 const reducers = combineReducers({
 	auth: authReducer,
 	ui: uiReducer,
+	sicperScreen: sicperReducer,
 	permisosScreen: permisosScreenReducer,
-	autorizadosScreen: autorizadosReducer,
-	altaPermisos: altaPermisosReducer
+	altaPermisos: altaPermisosReducer,
+	autorizadosScreen: autorizadosReducer
 });
 
 export const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)));
