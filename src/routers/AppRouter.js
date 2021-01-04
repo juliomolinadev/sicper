@@ -33,7 +33,13 @@ export const AppRouter = () => {
 	}, [dispatch, setChecking, setIsLoggedIn]);
 
 	if (checking) {
-		return <h1>Espere...</h1>;
+		return (
+			<div className="container pt-5 d-flex justify-content-center">
+				<div className="spinner-border text-primary" role="status">
+					<span className="sr-only">Cargando...</span>
+				</div>
+			</div>
+		);
 	}
 
 	return (
