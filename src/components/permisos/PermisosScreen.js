@@ -113,10 +113,10 @@ export const PermisosScreen = () => {
 
 	return (
 		<>
-			<div className="row pt-5">
-				<div className="col-sm-8 pr-4">
+			<div className="row mt-5">
+				<div className="col-sm-8">
 					<div className="row d-flex">
-						<div className="col-sm-4">
+						<div className="d-flex justify-content-center col-sm-4 p-2">
 							<Link to="/nuevo-permiso">
 								<button className="btn btn-outline-primary" type="button">
 									<span>Nuevo Permiso </span>
@@ -125,7 +125,7 @@ export const PermisosScreen = () => {
 							</Link>
 						</div>
 
-						<div className="col-sm-8 d-inline-flex">
+						<div className="col-sm-8 d-inline-flex p-2 pr-4">
 							<input
 								type="text"
 								className="form-control"
@@ -149,8 +149,8 @@ export const PermisosScreen = () => {
 				</div>
 			</div>
 
-			<div className="row pt-3 pb-4 pr-3">
-				<div className="col-sm-8">
+			<div className="row pt-3 pb-4">
+				<div className="col-sm-8 pr-0 mt-3">
 					<CustomTable
 						title="Permisos"
 						columns={permisosColumns}
@@ -160,110 +160,114 @@ export const PermisosScreen = () => {
 				</div>
 
 				{permisoSelected && dataPermiso !== undefined ? (
-					<div className="col-sm-4 border border-info rounded detallePermiso">
-						<div className="row bg-light border-info border-bottom rounded-top p-1 justify-content-center font-weight-bold text-secondary pt-3">
-							<h5>{dataPermiso.numeroPermiso}</h5>
-						</div>
-						<div className="row p-1 pl-2 pt-2">
-							<div className="col-4">CUENTA:</div>
-							<div className="col-8">{dataPermiso.cuenta}</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">USUARIO:</div>
-							<div className="col-8">{dataPermiso.usuario}</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">PRODUCTOR:</div>
-							<div className="col-8">{dataPermiso.nombreProductor}</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">CULTIVO:</div>
-							<div className="col-8">{dataPermiso.nombreCultivo}</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">SUBCICLO:</div>
-							<div className="col-8">{dataPermiso.subciclo}</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">SUPERFICIE:</div>
-							<div className="col-8">{dataPermiso.supAutorizada} ha</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">DOTACION:</div>
-							<div className="col-8">{dataPermiso.dotacion * dataPermiso.supAutorizada} lts</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">SISTEMA:</div>
-							<div className="col-8">{dataPermiso.sistema}</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">LOCALIDAD:</div>
-							<div className="col-8">{dataPermiso.localidad}</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">LOTE:</div>
-							<div className="col-8">{dataPermiso.lote}</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">SECCION:</div>
-							<div className="col-8">{dataPermiso.seccion}</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">MODULO:</div>
-							<div className="col-8">{dataPermiso.modulo}</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">EXPEDICION:</div>
-							<div className="col-8">
-								{moment(dataPermiso.fechaEmicion.toDate()).format("DD/MM/YYYY")}
+					<div className="col-sm-4 mt-3">
+						<div className="border border-info rounded detallePermiso">
+							<div className="d-flex bg-light border-info border-bottom rounded-top p-1 justify-content-center font-weight-bold text-secondary pt-3">
+								<h5>{dataPermiso.numeroPermiso}</h5>
 							</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">FECHA LIMITE:</div>
-							<div className="col-8">
-								{moment(dataPermiso.fechaLimite.toDate()).format("DD/MM/YYYY")}
+							<div className="row p-1 pl-2 pt-2">
+								<div className="col-4">CUENTA:</div>
+								<div className="col-8">{dataPermiso.cuenta}</div>
 							</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">VIGENCIA:</div>
-							<div className="col-8">
-								{moment(dataPermiso.vigencia.toDate()).format("DD/MM/YYYY")}
+							<div className="row p-1 pl-2">
+								<div className="col-4">USUARIO:</div>
+								<div className="col-8">{dataPermiso.usuario}</div>
 							</div>
-						</div>
-						<div className="row p-1 pl-2">
-							<div className="col-4">ESTADO:</div>
-							<div className="col-8">{dataPermiso.estadoPermiso}</div>
-						</div>
-						<div className="row p-1 pl-2 pt-4 pb-4">
-							<div className="col-6 d-flex justify-content-center">
-								<button
-									type="button"
-									className="btn btn-outline-info"
-									onClick={handleOpenPrintPermisoModal}
-								>
-									<i className="fas fa-print"></i>
-									<span> Imprimir</span>
-								</button>
+							<div className="row p-1 pl-2">
+								<div className="col-4">PRODUCTOR:</div>
+								<div className="col-8">{dataPermiso.nombreProductor}</div>
 							</div>
-							<div className="col-6 d-flex justify-content-center">
-								{dataPermiso.estadoPermiso === "activo" ? (
+							<div className="row p-1 pl-2">
+								<div className="col-4">CULTIVO:</div>
+								<div className="col-8">{dataPermiso.nombreCultivo}</div>
+							</div>
+							<div className="row p-1 pl-2">
+								<div className="col-4">SUBCICLO:</div>
+								<div className="col-8">{dataPermiso.subciclo}</div>
+							</div>
+							<div className="row p-1 pl-2">
+								<div className="col-4">SUPERFICIE:</div>
+								<div className="col-8">{dataPermiso.supAutorizada} ha</div>
+							</div>
+							<div className="row p-1 pl-2">
+								<div className="col-4">DOTACION:</div>
+								<div className="col-8">{dataPermiso.dotacion * dataPermiso.supAutorizada} lts</div>
+							</div>
+							<div className="row p-1 pl-2">
+								<div className="col-4">SISTEMA:</div>
+								<div className="col-8">{dataPermiso.sistema}</div>
+							</div>
+							<div className="row p-1 pl-2">
+								<div className="col-4">LOCALIDAD:</div>
+								<div className="col-8">{dataPermiso.localidad}</div>
+							</div>
+							<div className="row p-1 pl-2">
+								<div className="col-4">LOTE:</div>
+								<div className="col-8">{dataPermiso.lote}</div>
+							</div>
+							<div className="row p-1 pl-2">
+								<div className="col-4">SECCION:</div>
+								<div className="col-8">{dataPermiso.seccion}</div>
+							</div>
+							<div className="row p-1 pl-2">
+								<div className="col-4">MODULO:</div>
+								<div className="col-8">{dataPermiso.modulo}</div>
+							</div>
+							<div className="row p-1 pl-2">
+								<div className="col-4">EXPEDICION:</div>
+								<div className="col-8">
+									{moment(dataPermiso.fechaEmicion.toDate()).format("DD/MM/YYYY")}
+								</div>
+							</div>
+							<div className="row p-1 pl-2">
+								<div className="col-4">FECHA LIMITE:</div>
+								<div className="col-8">
+									{moment(dataPermiso.fechaLimite.toDate()).format("DD/MM/YYYY")}
+								</div>
+							</div>
+							<div className="row p-1 pl-2">
+								<div className="col-4">VIGENCIA:</div>
+								<div className="col-8">
+									{moment(dataPermiso.vigencia.toDate()).format("DD/MM/YYYY")}
+								</div>
+							</div>
+							<div className="row p-1 pl-2">
+								<div className="col-4">ESTADO:</div>
+								<div className="col-8">{dataPermiso.estadoPermiso}</div>
+							</div>
+							<div className="row p-1 pl-2 pt-4 pb-4">
+								<div className="col-6 d-flex justify-content-center">
 									<button
 										type="button"
-										className="btn btn-outline-danger"
-										onClick={cancelarPermiso}
+										className="btn btn-outline-info"
+										onClick={handleOpenPrintPermisoModal}
 									>
-										<i className="fas fa-times"></i>
-										<span> Cancelar</span>
+										<i className="fas fa-print"></i>
+										<span> Imprimir</span>
 									</button>
-								) : (
-									<></>
-								)}
+								</div>
+								<div className="col-6 d-flex justify-content-center">
+									{dataPermiso.estadoPermiso === "activo" ? (
+										<button
+											type="button"
+											className="btn btn-outline-danger"
+											onClick={cancelarPermiso}
+										>
+											<i className="fas fa-times"></i>
+											<span> Cancelar</span>
+										</button>
+									) : (
+										<></>
+									)}
+								</div>
 							</div>
 						</div>
 					</div>
 				) : (
-					<div className="col-sm-4 border border-info rounded detallePermiso">
-						<SuperficiesChart />
+					<div className="col-sm-4 mt-3">
+						<div className="border border-info rounded detallePermiso">
+							<SuperficiesChart />
+						</div>
 					</div>
 				)}
 			</div>
