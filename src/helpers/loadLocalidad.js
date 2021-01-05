@@ -12,5 +12,6 @@ export const loadLocalidad = async (clave) => {
 		});
 	});
 
-	return localidades[0].nombre;
+	if (localidades.length === 0) return "";
+	else return localidades[0].nombre;
 };

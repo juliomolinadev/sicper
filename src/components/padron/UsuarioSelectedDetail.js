@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-export const UsuarioSelected = () => {
+export const UsuarioSelectedDetail = () => {
 	const { usuarios, idUsuarioSelected, supPrevia } = useSelector((state) => state.altaPermisos);
 
 	let localidad = "";
@@ -26,21 +26,14 @@ export const UsuarioSelected = () => {
 
 	return (
 		<div className="border rounded mb-4 p-2">
-			{/* TODO: Poner alerta cuando la cuenta no tenga superficie disponible */}
-			<div className="row">
-				<div className="col-sm-6">Cuenta: {cuenta}</div>
-				<div className="col-sm-3">Colonia/Ejido: {localidad}</div>
-				<div className="col-sm-3">Sup. Derecho: {derecho}</div>
-			</div>
-			<div className="row">
-				<div className="col-sm-6">Usuario: {nombreUsuario}</div>
-				<div className="col-sm-3">Lote: {lote}</div>
-				<div className="col-sm-3">Sup. Disponible: {derechoDisponible}</div>
-			</div>
-			<div className="row">
-				<div className="col-sm-6"></div>
-				<div className="col-sm-3">Seccion: {seccion}</div>
-			</div>
+			<div>Cuenta: {cuenta}</div>
+			<div>Colonia/Ejido: {localidad}</div>
+			<div>Sup. Derecho: {derecho}</div>
+			<div>Usuario: {nombreUsuario}</div>
+			<div>Lote: {lote}</div>
+			<div>Sup. Disponible: {derechoDisponible}</div>
+			<div></div>
+			<div>Seccion: {seccion}</div>
 		</div>
 	);
 };
