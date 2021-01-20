@@ -64,23 +64,42 @@ export const autorizadosColumns = [
 	{ name: "id", selector: "id", omit: true },
 	{ name: "CLAVE", selector: "clave", sortable: true, width: "80px", center: true },
 	{ name: "CULTIVO", selector: "cultivo", sortable: true, width: "160px" },
-	{ name: "NORMAL GRAVEDAD", selector: "normalGravedad", sortable: true, center: true },
-	{ name: "EXTRA GRAVEDAD", selector: "extraGravedad", sortable: true, center: true },
-	{ name: "ASIGNADA GRAVEDAD", selector: "asignadaGravedad", sortable: true, center: true },
-	{ name: "NORMAL POZO FEDERAL", selector: "normalPozoFederal", sortable: true, center: true },
-	{ name: "EXTRA POZO FEDERAL", selector: "extraPozoFederal", sortable: true, center: true },
-	{ name: "ASIGNADA POZO FEDERAL", selector: "asignadaPozoFederal", sortable: true, center: true },
 	{
-		name: "NORMAL POZO PARTICULAR",
-		selector: "normalPozoParticular",
+		name: "GRAVEDAD NORMAL AUTORIZADA",
+		selector: "gravedadNormalAutorizada",
 		sortable: true,
 		center: true
 	},
-	{ name: "EXTRA POZO PARTICULAR", selector: "extraPozoParticular", sortable: true, center: true },
 	{
-		name: "ASIGNADA POZO PARTICULAR",
-		selector: "asignadaPozoParticular",
+		name: "GRAVEDAD NORMAL ASIGNADA",
+		selector: "gravedadNormalAsignada",
 		sortable: true,
 		center: true
-	}
+	},
+	{
+		name: "GRAVEDAD EXTRA AUTORIZADA",
+		selector: "gravedadExtraAutorizada",
+		sortable: true,
+		center: true
+	},
+	{
+		name: "GRAVEDAD EXTRA ASIGNADA",
+		selector: "gravedadExtraAsignada",
+		sortable: true,
+		center: true
+	},
+	{
+		name: "POZO NORMAL AUTORIZADA",
+		selector: "pozoNormalAutorizada",
+		sortable: true,
+		center: true
+	},
+	{ name: "POZO NORMAL ASIGNADA", selector: "pozoNormalAsignada", sortable: true, center: true },
+	{
+		name: "POZO EXTRA AUTORIZADA",
+		selector: "pozoExtraAutorizada",
+		sortable: true,
+		center: true
+	},
+	{ name: "POZO EXTRA ASIGNADA", selector: "pozoExtraAsignada", sortable: true, center: true }
 ];

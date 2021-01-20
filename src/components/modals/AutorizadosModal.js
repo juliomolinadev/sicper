@@ -34,29 +34,27 @@ export const AutorizadosModal = () => {
 	const [formValues, handleInputChange] = useForm({
 		clave: autorizadoSelected.clave,
 		cultivo: autorizadoSelected.cultivo,
-		normalGravedad: autorizadoSelected.normalGravedad,
-		extraGravedad: autorizadoSelected.extraGravedad,
-		asignadaGravedad: autorizadoSelected.asignadaGravedad,
-		normalPozoFederal: autorizadoSelected.normalPozoFederal,
-		extraPozoFederal: autorizadoSelected.extraPozoFederal,
-		asignadaPozoFederal: autorizadoSelected.asignadaPozoFederal,
-		normalPozoParticular: autorizadoSelected.normalPozoParticular,
-		extraPozoParticular: autorizadoSelected.extraPozoParticular,
-		asignadaPozoParticular: autorizadoSelected.asignadaPozoParticular
+		gravedadNormalAutorizada: autorizadoSelected.gravedadNormalAutorizada,
+		gravedadNormalAsignada: autorizadoSelected.gravedadNormalAsignada,
+		gravedadExtraAutorizada: autorizadoSelected.gravedadExtraAutorizada,
+		gravedadExtraAsignada: autorizadoSelected.gravedadExtraAsignada,
+		pozoNormalAutorizada: autorizadoSelected.pozoNormalAutorizada,
+		pozoNormalAsignada: autorizadoSelected.pozoNormalAsignada,
+		pozoExtraAutorizada: autorizadoSelected.pozoExtraAutorizada,
+		pozoExtraAsignada: autorizadoSelected.pozoExtraAsignada
 	});
 
 	const {
 		clave,
 		cultivo,
-		normalGravedad,
-		extraGravedad,
-		asignadaGravedad,
-		normalPozoFederal,
-		extraPozoFederal,
-		asignadaPozoFederal,
-		normalPozoParticular,
-		extraPozoParticular,
-		asignadaPozoParticular
+		gravedadNormalAutorizada,
+		gravedadNormalAsignada,
+		gravedadExtraAutorizada,
+		gravedadExtraAsignada,
+		pozoNormalAutorizada,
+		pozoNormalAsignada,
+		pozoExtraAutorizada,
+		pozoExtraAsignada
 	} = formValues;
 
 	const closeModal = () => {
@@ -73,15 +71,14 @@ export const AutorizadosModal = () => {
 					nuevosAutorizados.push({
 						clave: clave,
 						cultivo: cultivo,
-						normalGravedad: Number(normalGravedad),
-						extraGravedad: Number(extraGravedad),
-						asignadaGravedad: Number(asignadaGravedad),
-						normalPozoFederal: Number(normalPozoFederal),
-						extraPozoFederal: Number(extraPozoFederal),
-						asignadaPozoFederal: Number(asignadaPozoFederal),
-						normalPozoParticular: Number(normalPozoParticular),
-						extraPozoParticular: Number(extraPozoParticular),
-						asignadaPozoParticular: Number(asignadaPozoParticular)
+						gravedadNormalAutorizada: Number(gravedadNormalAutorizada),
+						gravedadNormalAsignada: Number(gravedadNormalAsignada),
+						gravedadExtraAutorizada: Number(gravedadExtraAutorizada),
+						gravedadExtraAsignada: Number(gravedadExtraAsignada),
+						pozoNormalAutorizada: Number(pozoNormalAutorizada),
+						pozoNormalAsignada: Number(pozoNormalAsignada),
+						pozoExtraAutorizada: Number(pozoExtraAutorizada),
+						pozoExtraAsignada: Number(pozoExtraAsignada)
 					});
 				} else {
 					nuevosAutorizados.push(autorizado);
@@ -104,76 +101,52 @@ export const AutorizadosModal = () => {
 			"La superficie asignada no puede ser mayor a la suma de la superficie normal y extra !";
 		const valorVacioError = "Es necesario asignar un valor a todas las superficies !";
 
-		if (Number(normalGravedad) < 0) {
+		if (Number(gravedadNormalAutorizada) < 0) {
 			dispatch(setFormError(valorNegativoError));
 			return false;
-		} else if (Number(extraGravedad) < 0) {
+		} else if (Number(gravedadNormalAsignada) < 0) {
 			dispatch(setFormError(valorNegativoError));
 			return false;
-		} else if (Number(asignadaGravedad) < 0) {
+		} else if (Number(gravedadExtraAutorizada) < 0) {
 			dispatch(setFormError(valorNegativoError));
 			return false;
-		} else if (Number(normalPozoFederal) < 0) {
+		} else if (Number(gravedadExtraAsignada) < 0) {
 			dispatch(setFormError(valorNegativoError));
 			return false;
-		} else if (Number(extraPozoFederal) < 0) {
+		} else if (Number(pozoNormalAutorizada) < 0) {
 			dispatch(setFormError(valorNegativoError));
 			return false;
-		} else if (Number(asignadaPozoFederal) < 0) {
+		} else if (Number(pozoNormalAsignada) < 0) {
 			dispatch(setFormError(valorNegativoError));
 			return false;
-		} else if (Number(normalPozoParticular) < 0) {
+		} else if (Number(pozoExtraAutorizada) < 0) {
 			dispatch(setFormError(valorNegativoError));
 			return false;
-		} else if (Number(extraPozoParticular) < 0) {
+		} else if (Number(pozoExtraAsignada) < 0) {
 			dispatch(setFormError(valorNegativoError));
 			return false;
-		} else if (Number(asignadaPozoParticular) < 0) {
-			dispatch(setFormError(valorNegativoError));
-			return false;
-		} else if (Number(normalGravedad) + Number(extraGravedad) < Number(asignadaGravedad)) {
-			console.log("Es en gravedad: ", normalGravedad + extraGravedad);
-			console.log("normalGravedad en lugar: ", normalGravedad);
-			console.log("extraGravedad en lugar: ", extraGravedad);
-			console.log("asignadaGravedad en lugar: ", asignadaGravedad);
-			dispatch(setFormError(supAsignadaError));
-			return false;
-		} else if (Number(normalPozoFederal) + Number(extraPozoFederal) < Number(asignadaPozoFederal)) {
-			console.log("Es en pozo federal");
-			dispatch(setFormError(supAsignadaError));
-			return false;
-		} else if (
-			Number(normalPozoParticular) + Number(extraPozoParticular) <
-			Number(asignadaPozoParticular)
-		) {
-			console.log("Es en pozo particular");
-			dispatch(setFormError(supAsignadaError));
-			return false;
-		} else if (normalGravedad === "") {
+		} else if (gravedadNormalAutorizada === "") {
 			dispatch(setFormError(valorVacioError));
 			return false;
-		} else if (extraGravedad === "") {
+		} else if (gravedadNormalAsignada === "") {
 			dispatch(setFormError(valorVacioError));
 			return false;
-		} else if (asignadaGravedad === "") {
+		} else if (gravedadExtraAutorizada === "") {
 			dispatch(setFormError(valorVacioError));
 			return false;
-		} else if (normalPozoFederal === "") {
+		} else if (gravedadExtraAsignada === "") {
 			dispatch(setFormError(valorVacioError));
 			return false;
-		} else if (extraPozoFederal === "") {
+		} else if (pozoNormalAutorizada === "") {
 			dispatch(setFormError(valorVacioError));
 			return false;
-		} else if (asignadaPozoFederal === "") {
+		} else if (pozoNormalAsignada === "") {
 			dispatch(setFormError(valorVacioError));
 			return false;
-		} else if (normalPozoParticular === "") {
+		} else if (pozoExtraAutorizada === "") {
 			dispatch(setFormError(valorVacioError));
 			return false;
-		} else if (extraPozoParticular === "") {
-			dispatch(setFormError(valorVacioError));
-			return false;
-		} else if (asignadaPozoParticular === "") {
+		} else if (pozoExtraAsignada === "") {
 			dispatch(setFormError(valorVacioError));
 			return false;
 		}
@@ -207,13 +180,19 @@ export const AutorizadosModal = () => {
 					<></>
 				)}
 
-				<table className="table table-hover table-striped table-info mt-4 border-info text-secondary">
+				<table className="table table-borderless table-hover table-striped table-info mt-4 border-info text-secondary">
 					<thead>
 						<tr>
+							<th scope="row"></th>
+							<th colSpan="2">Superficie Normal</th>
+							<th colSpan="2">Superficie Extra</th>
+						</tr>
+						<tr>
 							<th scope="col">Sistema</th>
-							<th scope="col">Sup Normal</th>
-							<th scope="col">Sup Extra</th>
-							<th scope="col">Sup Asignada</th>
+							<th scope="col">Autorizada</th>
+							<th scope="col">Asignada</th>
+							<th scope="col">Autorizada</th>
+							<th scope="col">Asignada</th>
 						</tr>
 					</thead>
 
@@ -224,9 +203,9 @@ export const AutorizadosModal = () => {
 								<input
 									type="number"
 									className="form-control"
-									placeholder="Normal Gravedad"
-									name="normalGravedad"
-									value={normalGravedad}
+									placeholder="Gravedad Normal Autorizada"
+									name="gravedadNormalAutorizada"
+									value={gravedadNormalAutorizada}
 									autoComplete="off"
 									onChange={handleInputChange}
 									onKeyUp={handleKeyUp}
@@ -236,9 +215,9 @@ export const AutorizadosModal = () => {
 								<input
 									type="number"
 									className="form-control"
-									placeholder="Extra Gravedad"
-									name="extraGravedad"
-									value={extraGravedad}
+									placeholder="gravedad Normal Asignada"
+									name="gravedadNormalAsignada"
+									value={gravedadNormalAsignada}
 									autoComplete="off"
 									onChange={handleInputChange}
 									onKeyUp={handleKeyUp}
@@ -248,9 +227,21 @@ export const AutorizadosModal = () => {
 								<input
 									type="number"
 									className="form-control"
-									placeholder="Asignada Gravedad"
-									name="asignadaGravedad"
-									value={asignadaGravedad}
+									placeholder="Gravedad Extra Autorizada"
+									name="gravedadExtraAutorizada"
+									value={gravedadExtraAutorizada}
+									autoComplete="off"
+									onChange={handleInputChange}
+									onKeyUp={handleKeyUp}
+								/>
+							</td>
+							<td>
+								<input
+									type="number"
+									className="form-control"
+									placeholder="Gravedad Extra Asignada"
+									name="gravedadExtraAsignada"
+									value={gravedadExtraAsignada}
 									autoComplete="off"
 									onChange={handleInputChange}
 									onKeyUp={handleKeyUp}
@@ -264,9 +255,9 @@ export const AutorizadosModal = () => {
 								<input
 									type="number"
 									className="form-control"
-									placeholder="Normal Pozo Federal"
-									name="normalPozoFederal"
-									value={normalPozoFederal}
+									placeholder="Pozo Normal Autorizada"
+									name="pozoNormalAutorizada"
+									value={pozoNormalAutorizada}
 									autoComplete="off"
 									onChange={handleInputChange}
 									onKeyUp={handleKeyUp}
@@ -276,9 +267,9 @@ export const AutorizadosModal = () => {
 								<input
 									type="number"
 									className="form-control"
-									placeholder="Extra Pozo Federal"
-									name="extraPozoFederal"
-									value={extraPozoFederal}
+									placeholder="Pozo Normal Asignada"
+									name="pozoNormalAsignada"
+									value={pozoNormalAsignada}
 									autoComplete="off"
 									onChange={handleInputChange}
 									onKeyUp={handleKeyUp}
@@ -288,25 +279,9 @@ export const AutorizadosModal = () => {
 								<input
 									type="number"
 									className="form-control"
-									placeholder="Asignada Pozo Federal"
-									name="asignadaPozoFederal"
-									value={asignadaPozoFederal}
-									autoComplete="off"
-									onChange={handleInputChange}
-									onKeyUp={handleKeyUp}
-								/>
-							</td>
-						</tr>
-
-						<tr>
-							<th scope="row">Pozo Particular</th>
-							<td>
-								<input
-									type="number"
-									className="form-control"
-									placeholder="Normal Pozo Particular"
-									name="normalPozoParticular"
-									value={normalPozoParticular}
+									placeholder="Pozo Extra Autorizada"
+									name="pozoExtraAutorizada"
+									value={pozoExtraAutorizada}
 									autoComplete="off"
 									onChange={handleInputChange}
 									onKeyUp={handleKeyUp}
@@ -316,21 +291,9 @@ export const AutorizadosModal = () => {
 								<input
 									type="number"
 									className="form-control"
-									placeholder="Extra Pozo Particular"
-									name="extraPozoParticular"
-									value={extraPozoParticular}
-									autoComplete="off"
-									onChange={handleInputChange}
-									onKeyUp={handleKeyUp}
-								/>
-							</td>
-							<td>
-								<input
-									type="number"
-									className="form-control"
-									placeholder="Asignada Pozo Particular"
-									name="asignadaPozoParticular"
-									value={asignadaPozoParticular}
+									placeholder="Pozo Extra Asignada"
+									name="pozoExtraAsignada"
+									value={pozoExtraAsignada}
 									autoComplete="off"
 									onChange={handleInputChange}
 									onKeyUp={handleKeyUp}

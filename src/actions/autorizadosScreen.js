@@ -16,15 +16,14 @@ export const startLoadAutorizados = (modulo) => {
 
 		let superficieReferencia = 0;
 		autorizados.forEach((autorizado) => {
-			superficieReferencia += autorizado.normalGravedad;
-			superficieReferencia += autorizado.extraGravedad;
-			superficieReferencia += autorizado.asignadaGravedad;
-			superficieReferencia += autorizado.normalPozoFederal;
-			superficieReferencia += autorizado.extraPozoFederal;
-			superficieReferencia += autorizado.asignadaPozoFederal;
-			superficieReferencia += autorizado.normalPozoParticular;
-			superficieReferencia += autorizado.extraPozoParticular;
-			superficieReferencia += autorizado.asignadaPozoParticular;
+			superficieReferencia += autorizado.gravedadNormalAutorizada;
+			superficieReferencia += autorizado.gravedadNormalAsignada;
+			superficieReferencia += autorizado.gravedadExtraAutorizada;
+			superficieReferencia += autorizado.gravedadExtraAsignada;
+			superficieReferencia += autorizado.pozoNormalAutorizada;
+			superficieReferencia += autorizado.pozoNormalAsignada;
+			superficieReferencia += autorizado.pozoExtraAutorizada;
+			superficieReferencia += autorizado.pozoExtraAsignada;
 		});
 		dispatch(setAutorizados(autorizados));
 		dispatch(setSuperficieReferencia(superficieReferencia));

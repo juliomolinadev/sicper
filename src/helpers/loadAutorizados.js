@@ -24,15 +24,14 @@ export const loadAutorizados = async (modulo) => {
 			autorizados.push({
 				clave: cultivo.clave,
 				cultivo: cultivo.cultivo,
-				normalGravedad: 0,
-				extraGravedad: 0,
-				asignadaGravedad: 0,
-				normalPozoFederal: 0,
-				extraPozoFederal: 0,
-				asignadaPozoFederal: 0,
-				normalPozoParticular: 0,
-				extraPozoParticular: 0,
-				asignadaPozoParticular: 0
+				gravedadNormalAutorizada: 0,
+				gravedadNormalAsignada: 0,
+				gravedadExtraAutorizada: 0,
+				gravedadExtraAsignada: 0,
+				pozoNormalAutorizada: 0,
+				pozoNormalAsignada: 0,
+				pozoExtraAutorizada: 0,
+				pozoExtraAsignada: 0
 			});
 		});
 	}
