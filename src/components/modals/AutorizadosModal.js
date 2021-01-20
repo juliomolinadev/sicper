@@ -104,8 +104,6 @@ export const AutorizadosModal = () => {
 			"La superficie asignada no puede ser mayor a la suma de la superficie normal y extra !";
 		const valorVacioError = "Es necesario asignar un valor a todas las superficies !";
 
-		console.log("formValues en validar: ", formValues);
-
 		if (Number(normalGravedad) < 0) {
 			dispatch(setFormError(valorNegativoError));
 			return false;
@@ -212,7 +210,7 @@ export const AutorizadosModal = () => {
 				<table className="table table-hover table-striped table-info mt-4 border-info text-secondary">
 					<thead>
 						<tr>
-							<th scope="col">Riego</th>
+							<th scope="col">Sistema</th>
 							<th scope="col">Sup Normal</th>
 							<th scope="col">Sup Extra</th>
 							<th scope="col">Sup Asignada</th>
