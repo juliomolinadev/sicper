@@ -43,24 +43,37 @@ export const AutorizadosScreen = () => {
 		(state) => state.autorizadosScreen
 	);
 
-	let totalNormal = 0;
-	let totalExtra = 0;
-	let totalAsignada = 0;
+	let totalGravedadNormalAutorizada = 0;
+	let totalGravedadNormalAsignada = 0;
+	let totalGravedadExtraAutorizada = 0;
+	let totalGravedadExtraAsignada = 0;
+	let totalPozoNormalAutorizada = 0;
+	let totalPozoNormalAsignada = 0;
+	let totalPozoExtraAutorizada = 0;
+	let totalPozoExtraAsignada = 0;
 	let superficieTotal = 0;
 
 	if (modulo !== null) {
 		autorizados.forEach((autorizado) => {
-			totalNormal +=
-				autorizado.normalGravedad + autorizado.normalPozoFederal + autorizado.normalPozoParticular;
-			totalExtra +=
-				autorizado.extraGravedad + autorizado.extraPozoFederal + autorizado.extraPozoParticular;
-			totalAsignada +=
-				autorizado.asignadaGravedad +
-				autorizado.asignadaPozoFederal +
-				autorizado.asignadaPozoParticular;
+			totalGravedadNormalAutorizada += autorizado.gravedadNormalAutorizada;
+			totalGravedadNormalAsignada += autorizado.gravedadNormalAsignada;
+			totalGravedadExtraAutorizada += autorizado.gravedadExtraAutorizada;
+			totalGravedadExtraAsignada += autorizado.gravedadExtraAsignada;
+			totalPozoNormalAutorizada += autorizado.pozoNormalAutorizada;
+			totalPozoNormalAsignada += autorizado.pozoNormalAsignada;
+			totalPozoExtraAutorizada += autorizado.pozoExtraAutorizada;
+			totalPozoExtraAsignada += autorizado.pozoExtraAsignada;
 		});
 
-		superficieTotal = totalNormal + totalExtra + totalAsignada;
+		superficieTotal =
+			totalGravedadNormalAutorizada +
+			totalGravedadNormalAsignada +
+			totalGravedadExtraAutorizada +
+			totalGravedadExtraAsignada +
+			totalPozoNormalAutorizada +
+			totalPozoNormalAsignada +
+			totalPozoExtraAutorizada +
+			totalPozoExtraAsignada;
 	}
 
 	const setModuloToEdit = (moduloToEdit) => {
@@ -126,19 +139,60 @@ export const AutorizadosScreen = () => {
 								<h5>Módulo {modulo}</h5>
 							</div>
 
-							<div className="row p-1 pl-2 pt-4">
-								<div className="col-6 d-flex justify-content-end">NORMAL:</div>
-								<div className="col-6">{totalNormal}</div>
+							<div className="table-responsive">
+								<table className="table">
+									<thead>
+										<tr>
+											<th colSpan="3">Total Superficie Normal</th>
+										</tr>
+										<tr>
+											<th scope="col">Sistema</th>
+											<th scope="col">Autorizada</th>
+											<th scope="col">Asignada</th>
+										</tr>
+									</thead>
+
+									<tbody>
+										<tr>
+											<th scope="row">Gravedad</th>
+											<td>{totalGravedadNormalAutorizada}</td>
+											<td>{totalGravedadNormalAsignada}</td>
+										</tr>
+										<tr>
+											<th scope="row">Pozo Federal</th>
+											<td>{totalPozoNormalAutorizada}</td>
+											<td>{totalPozoNormalAsignada}</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 
-							<div className="row p-1 pl-2 pt-2">
-								<div className="col-6 d-flex justify-content-end">EXTRA:</div>
-								<div className="col-6">{totalExtra}</div>
-							</div>
+							<div className="table-responsive">
+								<table className="table">
+									<thead>
+										<tr>
+											<th colSpan="3">Total Superficie Extra</th>
+										</tr>
+										<tr>
+											<th scope="col">Sistema</th>
+											<th scope="col">Autorizada</th>
+											<th scope="col">Asignada</th>
+										</tr>
+									</thead>
 
-							<div className="row p-1 pl-2 pt-2">
-								<div className="col-6 d-flex justify-content-end">ASIGNADA:</div>
-								<div className="col-6">{totalAsignada}</div>
+									<tbody>
+										<tr>
+											<th scope="row">Gravedad</th>
+											<td>{totalGravedadExtraAutorizada}</td>
+											<td>{totalGravedadExtraAsignada}</td>
+										</tr>
+										<tr>
+											<th scope="row">Pozo Federal</th>
+											<td>{totalPozoExtraAutorizada}</td>
+											<td>{totalPozoExtraAsignada}</td>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 
 							{superficieReferencia === superficieTotal ? (

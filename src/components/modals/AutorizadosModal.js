@@ -180,128 +180,130 @@ export const AutorizadosModal = () => {
 					<></>
 				)}
 
-				<table className="table table-borderless table-hover table-striped table-info mt-4 border-info text-secondary">
-					<thead>
-						<tr>
-							<th scope="row"></th>
-							<th colSpan="2">Superficie Normal</th>
-							<th colSpan="2">Superficie Extra</th>
-						</tr>
-						<tr>
-							<th scope="col">Sistema</th>
-							<th scope="col">Autorizada</th>
-							<th scope="col">Asignada</th>
-							<th scope="col">Autorizada</th>
-							<th scope="col">Asignada</th>
-						</tr>
-					</thead>
+				<div className="table-responsive">
+					<table className="table table-borderless table-hover table-striped table-info mt-4 border-info text-secondary">
+						<thead>
+							<tr>
+								<th scope="row"></th>
+								<th colSpan="2">Superficie Normal</th>
+								<th colSpan="2">Superficie Extra</th>
+							</tr>
+							<tr>
+								<th scope="col">Sistema</th>
+								<th scope="col">Autorizada</th>
+								<th scope="col">Asignada</th>
+								<th scope="col">Autorizada</th>
+								<th scope="col">Asignada</th>
+							</tr>
+						</thead>
 
-					<tbody>
-						<tr>
-							<th scope="row">Gravedad</th>
-							<td>
-								<input
-									type="number"
-									className="form-control"
-									placeholder="Gravedad Normal Autorizada"
-									name="gravedadNormalAutorizada"
-									value={gravedadNormalAutorizada}
-									autoComplete="off"
-									onChange={handleInputChange}
-									onKeyUp={handleKeyUp}
-								/>
-							</td>
-							<td>
-								<input
-									type="number"
-									className="form-control"
-									placeholder="gravedad Normal Asignada"
-									name="gravedadNormalAsignada"
-									value={gravedadNormalAsignada}
-									autoComplete="off"
-									onChange={handleInputChange}
-									onKeyUp={handleKeyUp}
-								/>
-							</td>
-							<td>
-								<input
-									type="number"
-									className="form-control"
-									placeholder="Gravedad Extra Autorizada"
-									name="gravedadExtraAutorizada"
-									value={gravedadExtraAutorizada}
-									autoComplete="off"
-									onChange={handleInputChange}
-									onKeyUp={handleKeyUp}
-								/>
-							</td>
-							<td>
-								<input
-									type="number"
-									className="form-control"
-									placeholder="Gravedad Extra Asignada"
-									name="gravedadExtraAsignada"
-									value={gravedadExtraAsignada}
-									autoComplete="off"
-									onChange={handleInputChange}
-									onKeyUp={handleKeyUp}
-								/>
-							</td>
-						</tr>
+						<tbody>
+							<tr>
+								<th scope="row">Gravedad</th>
+								<td>
+									<input
+										type="number"
+										className="form-control"
+										placeholder="Gravedad Normal Autorizada"
+										name="gravedadNormalAutorizada"
+										value={gravedadNormalAutorizada}
+										autoComplete="off"
+										onChange={handleInputChange}
+										onKeyUp={handleKeyUp}
+									/>
+								</td>
+								<td>
+									<input
+										type="number"
+										className="form-control"
+										placeholder="gravedad Normal Asignada"
+										name="gravedadNormalAsignada"
+										value={gravedadNormalAsignada}
+										autoComplete="off"
+										onChange={handleInputChange}
+										onKeyUp={handleKeyUp}
+									/>
+								</td>
+								<td>
+									<input
+										type="number"
+										className="form-control"
+										placeholder="Gravedad Extra Autorizada"
+										name="gravedadExtraAutorizada"
+										value={gravedadExtraAutorizada}
+										autoComplete="off"
+										onChange={handleInputChange}
+										onKeyUp={handleKeyUp}
+									/>
+								</td>
+								<td>
+									<input
+										type="number"
+										className="form-control"
+										placeholder="Gravedad Extra Asignada"
+										name="gravedadExtraAsignada"
+										value={gravedadExtraAsignada}
+										autoComplete="off"
+										onChange={handleInputChange}
+										onKeyUp={handleKeyUp}
+									/>
+								</td>
+							</tr>
 
-						<tr>
-							<th scope="row">Pozo Federal</th>
-							<td>
-								<input
-									type="number"
-									className="form-control"
-									placeholder="Pozo Normal Autorizada"
-									name="pozoNormalAutorizada"
-									value={pozoNormalAutorizada}
-									autoComplete="off"
-									onChange={handleInputChange}
-									onKeyUp={handleKeyUp}
-								/>
-							</td>
-							<td>
-								<input
-									type="number"
-									className="form-control"
-									placeholder="Pozo Normal Asignada"
-									name="pozoNormalAsignada"
-									value={pozoNormalAsignada}
-									autoComplete="off"
-									onChange={handleInputChange}
-									onKeyUp={handleKeyUp}
-								/>
-							</td>
-							<td>
-								<input
-									type="number"
-									className="form-control"
-									placeholder="Pozo Extra Autorizada"
-									name="pozoExtraAutorizada"
-									value={pozoExtraAutorizada}
-									autoComplete="off"
-									onChange={handleInputChange}
-									onKeyUp={handleKeyUp}
-								/>
-							</td>
-							<td>
-								<input
-									type="number"
-									className="form-control"
-									placeholder="Pozo Extra Asignada"
-									name="pozoExtraAsignada"
-									value={pozoExtraAsignada}
-									autoComplete="off"
-									onChange={handleInputChange}
-									onKeyUp={handleKeyUp}
-								/>
-							</td>
-						</tr>
-					</tbody>
-				</table>
+							<tr>
+								<th scope="row">Pozo Federal</th>
+								<td>
+									<input
+										type="number"
+										className="form-control"
+										placeholder="Pozo Normal Autorizada"
+										name="pozoNormalAutorizada"
+										value={pozoNormalAutorizada}
+										autoComplete="off"
+										onChange={handleInputChange}
+										onKeyUp={handleKeyUp}
+									/>
+								</td>
+								<td>
+									<input
+										type="number"
+										className="form-control"
+										placeholder="Pozo Normal Asignada"
+										name="pozoNormalAsignada"
+										value={pozoNormalAsignada}
+										autoComplete="off"
+										onChange={handleInputChange}
+										onKeyUp={handleKeyUp}
+									/>
+								</td>
+								<td>
+									<input
+										type="number"
+										className="form-control"
+										placeholder="Pozo Extra Autorizada"
+										name="pozoExtraAutorizada"
+										value={pozoExtraAutorizada}
+										autoComplete="off"
+										onChange={handleInputChange}
+										onKeyUp={handleKeyUp}
+									/>
+								</td>
+								<td>
+									<input
+										type="number"
+										className="form-control"
+										placeholder="Pozo Extra Asignada"
+										name="pozoExtraAsignada"
+										value={pozoExtraAsignada}
+										autoComplete="off"
+										onChange={handleInputChange}
+										onKeyUp={handleKeyUp}
+									/>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 				<div className="row d-flex">
 					<div className="d-flex justify-content-center col-sm-12">
 						<button
