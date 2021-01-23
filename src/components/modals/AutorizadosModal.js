@@ -98,7 +98,7 @@ export const AutorizadosModal = () => {
 	const isFormValid = () => {
 		const valorNegativoError = "No se permiten valores negativos !";
 		const supAsignadaError =
-			"La superficie asignada no puede ser mayor a la suma de la superficie normal y extra !";
+			"La superficie asignada no puede ser mayor a la superficie autorizada !";
 		const valorVacioError = "Es necesario asignar un valor a todas las superficies !";
 
 		if (Number(gravedadNormalAutorizada) < 0) {
@@ -148,6 +148,18 @@ export const AutorizadosModal = () => {
 			return false;
 		} else if (pozoExtraAsignada === "") {
 			dispatch(setFormError(valorVacioError));
+			return false;
+		} else if (gravedadNormalAsignada > gravedadNormalAutorizada) {
+			dispatch(setFormError(supAsignadaError));
+			return false;
+		} else if (gravedadExtraAsignada > gravedadExtraAutorizada) {
+			dispatch(setFormError(supAsignadaError));
+			return false;
+		} else if (pozoNormalAsignada > pozoNormalAutorizada) {
+			dispatch(setFormError(supAsignadaError));
+			return false;
+		} else if (pozoExtraAsignada > pozoExtraAutorizada) {
+			dispatch(setFormError(supAsignadaError));
 			return false;
 		}
 

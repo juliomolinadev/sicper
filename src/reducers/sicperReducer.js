@@ -1,21 +1,21 @@
 import { types } from "../types/types";
 
 const initialState = {
-	autorizados: []
+	expedicion: null
 };
 
 export const sicperReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case types.sicperScreenSetAutorizados:
+		case types.sicperScreenSetExpedicion:
 			return {
 				...state,
-				autorizados: action.payload
+				expedicion: action.payload
 			};
 
-		case types.sicperScreenUnsetAutorizados:
+		case types.sicperScreenUnsetExpedicion:
 			return {
 				...state,
-				autorizados: []
+				expedicion: null
 			};
 
 		default:

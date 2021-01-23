@@ -9,6 +9,7 @@ import { sabeAutorizados } from "../../helpers/sabeAutorizados";
 import { AutorizadosModal } from "../modals/AutorizadosModal";
 import { autorizadosColumns } from "../tables/configTables";
 import { CustomTable } from "../tables/CustomTable";
+import { ResumenAutorizados } from "./ResumenAutorizados";
 
 export const AutorizadosScreen = () => {
 	const modulos = [
@@ -81,7 +82,7 @@ export const AutorizadosScreen = () => {
 		dispatch(startLoadAutorizados(moduloToEdit));
 	};
 
-	const handleSaveAutorizados = async () => {
+	const handleSaveAutorizados = () => {
 		sabeAutorizados(modulo, autorizados);
 		dispatch(startLoadAutorizados(modulo));
 	};
@@ -135,65 +136,11 @@ export const AutorizadosScreen = () => {
 				{modulo ? (
 					<div className="col-sm-4 pl-3 mt-3">
 						<div className="d-flex flex-column border rounded border-info">
-							<div className="d-flex bg-light border-info border-bottom rounded-top p-1 justify-content-center font-weight-bold text-secondary pt-3">
-								<h5>Módulo {modulo}</h5>
-							</div>
-
-							<div className="table-responsive">
-								<table className="table">
-									<thead>
-										<tr>
-											<th colSpan="3">Total Superficie Normal</th>
-										</tr>
-										<tr>
-											<th scope="col">Sistema</th>
-											<th scope="col">Autorizada</th>
-											<th scope="col">Asignada</th>
-										</tr>
-									</thead>
-
-									<tbody>
-										<tr>
-											<th scope="row">Gravedad</th>
-											<td>{totalGravedadNormalAutorizada}</td>
-											<td>{totalGravedadNormalAsignada}</td>
-										</tr>
-										<tr>
-											<th scope="row">Pozo Federal</th>
-											<td>{totalPozoNormalAutorizada}</td>
-											<td>{totalPozoNormalAsignada}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-
-							<div className="table-responsive">
-								<table className="table">
-									<thead>
-										<tr>
-											<th colSpan="3">Total Superficie Extra</th>
-										</tr>
-										<tr>
-											<th scope="col">Sistema</th>
-											<th scope="col">Autorizada</th>
-											<th scope="col">Asignada</th>
-										</tr>
-									</thead>
-
-									<tbody>
-										<tr>
-											<th scope="row">Gravedad</th>
-											<td>{totalGravedadExtraAutorizada}</td>
-											<td>{totalGravedadExtraAsignada}</td>
-										</tr>
-										<tr>
-											<th scope="row">Pozo Federal</th>
-											<td>{totalPozoExtraAutorizada}</td>
-											<td>{totalPozoExtraAsignada}</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+							{autorizados.length > 0 ? (
+								<ResumenAutorizados autorizados={autorizados} modulo={modulo}></ResumenAutorizados>
+							) : (
+								<></>
+							)}
 
 							{superficieReferencia === superficieTotal ? (
 								<></>
@@ -202,7 +149,7 @@ export const AutorizadosScreen = () => {
 									<div className="d-flex justify-content-center pt-5 text-warning">
 										! Hay modificaciones sin guardar !
 									</div>
-									<div className="d-flex justify-content-center pt-4">
+									<div className="d-flex justify-content-center pt-4 pb-4">
 										<button
 											type="submit"
 											className="btn btn-outline-primary"

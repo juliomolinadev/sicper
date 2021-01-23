@@ -1,32 +1,36 @@
 import { loadAutorizados } from "../helpers/loadAutorizados";
 import { types } from "../types/types";
+import { loadExpedicion } from "../helpers/loadExpedicion";
 
-export const startLoadAutorizados = (modulo) => {
+export const startLoadExpedicion = (modulo) => {
 	return async (dispatch) => {
+		const expedicion = await loadExpedicion(modulo);
 		const autorizados = await loadAutorizados(modulo);
 
-		let superficieReferencia = 0;
-		autorizados.forEach((autorizado) => {
-			superficieReferencia += autorizado.normalGravedad;
-			superficieReferencia += autorizado.extraGravedad;
-			superficieReferencia += autorizado.asignadaGravedad;
-			superficieReferencia += autorizado.normalPozoFederal;
-			superficieReferencia += autorizado.extraPozoFederal;
-			superficieReferencia += autorizado.asignadaPozoFederal;
-			superficieReferencia += autorizado.normalPozoParticular;
-			superficieReferencia += autorizado.extraPozoParticular;
-			superficieReferencia += autorizado.asignadaPozoParticular;
+		let superficies = [];
+		expedicion.forEach((cultivoExpedido) => {
+			autorizados.forEach((cultivoAutorizado) => {
+				if (cultivoExpedido.id === `${cultivoAutorizado.clave}-${cultivoAutorizado.cultivo}`) {
+					superficies.push({ ...cultivoAutorizado, ...cultivoExpedido });
+				}
+			});
 		});
-		dispatch(setAutorizados(autorizados));
-		dispatch(setSuperficieReferencia(superficieReferencia));
+
+		superficies.forEach((cultivo) => {
+			if (cultivo.gravedad === undefined) cultivo.gravedad = 0;
+			if (cultivo.pozoFederal === undefined) cultivo.pozoFederal = 0;
+			console.log("pozoFederal en for: ", cultivo.pozoFederal);
+		});
+
+		dispatch(setExpedicion(superficies));
 	};
 };
 
-export const setAutorizados = (autorizados) => ({
-	type: types.autorizadosScreenSetAutorizados,
-	payload: autorizados
+export const setExpedicion = (superficies) => ({
+	type: types.sicperScreenSetExpedicion,
+	payload: superficies
 });
 
-export const unsetAutorizados = () => ({
-	type: types.autorizadosScreenUnsetAutorizados
+export const unsetExpedicion = () => ({
+	type: types.sicperScreenUnsetExpedicion
 });

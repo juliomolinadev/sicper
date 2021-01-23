@@ -2,33 +2,29 @@ import { db } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
 
 export const sabeAutorizados = (modulo, autorizados) => {
-	autorizados.forEach(async (autorizado) => {
-		const totalCultivo =
-			autorizado.normalGravedad +
-			autorizado.extraGravedad +
-			autorizado.normalPozoFederal +
-			autorizado.extraPozoFederal +
-			autorizado.normalPozoParticular +
-			autorizado.extraPozoParticular;
+	autorizados.forEach((autorizado) => {
+		const totalNormal = autorizado.gravedadNormalAutorizada + autorizado.pozoNormalAutorizada;
+		const totalExtra = autorizado.gravedadExtraAutorizada + autorizado.pozoExtraAutorizada;
+		const totalCultivo = totalNormal + totalExtra;
 
-		await db
-			.collection("autorizados")
+		db.collection("autorizados")
 			.doc(`autorizadosM${modulo}`)
 			.collection(`autorizados`)
 			.doc(`${autorizado.clave}-${autorizado.cultivo}`)
 			.set({
 				clave: autorizado.clave,
 				cultivo: autorizado.cultivo,
+				superficieNormal: totalNormal,
+				superficieExtra: totalExtra,
 				superficieTotal: totalCultivo,
-				normalGravedad: autorizado.normalGravedad,
-				extraGravedad: autorizado.extraGravedad,
-				asignadaGravedad: autorizado.asignadaGravedad,
-				normalPozoFederal: autorizado.normalPozoFederal,
-				extraPozoFederal: autorizado.extraPozoFederal,
-				asignadaPozoFederal: autorizado.asignadaPozoFederal,
-				normalPozoParticular: autorizado.normalPozoParticular,
-				extraPozoParticular: autorizado.extraPozoParticular,
-				asignadaPozoParticular: autorizado.asignadaPozoParticular
+				gravedadNormalAutorizada: autorizado.gravedadNormalAutorizada,
+				gravedadNormalAsignada: autorizado.gravedadNormalAsignada,
+				gravedadExtraAutorizada: autorizado.gravedadExtraAutorizada,
+				gravedadExtraAsignada: autorizado.gravedadExtraAsignada,
+				pozoNormalAutorizada: autorizado.pozoNormalAutorizada,
+				pozoNormalAsignada: autorizado.pozoNormalAsignada,
+				pozoExtraAutorizada: autorizado.pozoExtraAutorizada,
+				pozoExtraAsignada: autorizado.pozoExtraAsignada
 			})
 			.then(function () {
 				console.log("Document successfully written!");
@@ -37,7 +33,7 @@ export const sabeAutorizados = (modulo, autorizados) => {
 				console.error("Error writing document: ", error);
 			});
 	});
-
+	// TODO: Hacer que se dispare la alerta hasta que se terminen de guardar los autorizados
 	Swal.fire("Autorizados Guardados", "Se registraron con éxito los cambios.", "success");
 	return true;
 };

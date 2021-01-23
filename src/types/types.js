@@ -72,5 +72,7 @@ export const types = {
 	removeFormError: "[Autorizados Screen] Unset Form Error",
 
 	sicperScreenSetAutorizados: "[Sicper Screen] Set autorizados",
-	sicperScreenUnsetAutorizados: "[Sicper Screen] Unset autorizados"
+	sicperScreenUnsetAutorizados: "[Sicper Screen] Unset autorizados",
+	sicperScreenSetExpedicion: "[Sicper Screen] Set expedicion",
+	sicperScreenUnsetExpedicion: "[Sicper Screen] Unset expedicion"
 };
