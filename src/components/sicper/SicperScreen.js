@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { startLoadSuperficies } from "../../actions/permisosScreen";
 import { ResumenAutorizados } from "../autorizados/ResumenAutorizados";
 import { startLoadAutorizados } from "../../actions/autorizadosScreen";
-import { startLoadExpedicion } from "../../actions/sicperScreen";
+import {
+	setSuperficieExtra,
+	setSuperficieNormal,
+	startLoadExpedicion
+} from "../../actions/sicperScreen";
 
 export const SicperScreen = () => {
 	const dispatch = useDispatch();
@@ -13,7 +17,7 @@ export const SicperScreen = () => {
 	const { superficies } = useSelector((state) => state.permisosScreen);
 	const { claveEntidad } = useSelector((state) => state.auth);
 	const { autorizados } = useSelector((state) => state.autorizadosScreen);
-	const { expedicion } = useSelector((state) => state.sicperScreen);
+	const { expedicion, superficie } = useSelector((state) => state.sicperScreen);
 
 	if (autorizados.length === 0) {
 		dispatch(startLoadAutorizados(claveEntidad));
@@ -27,18 +31,50 @@ export const SicperScreen = () => {
 		dispatch(startLoadSuperficies(claveEntidad));
 	}
 
+	const setNormal = () => {
+		dispatch(setSuperficieNormal());
+	};
+
+	const setExtra = () => {
+		dispatch(setSuperficieExtra());
+	};
+
 	return (
 		<>
 			<div className="row pt-5">
-				<div className="col-sm-8 pr-4">
-					<div className="row d-flex">
-						<div className="col-sm-4">
-							<Link to="/nuevo-permiso">
-								<button className="btn btn-outline-primary" type="button">
-									<span>Nuevo Permiso </span>
-									<i className="fas fa-plus"></i>
+				<div className="col-sm-3 pr-4 pt-3">
+					<div className="d-flex justify-content-center">
+						<Link to="/nuevo-permiso">
+							<button className="btn btn-outline-primary" type="button">
+								<span>Nuevo Permiso </span>
+								<i className="fas fa-plus"></i>
+							</button>
+						</Link>
+					</div>
+				</div>
+
+				<div className="col-sm-5 pt-3">
+					<div className="d-flex justify-content-center">
+						<div className="btn-group" role="group">
+							{superficie === "normal" ? (
+								<button type="button" className="btn btn-primary" onClick={setNormal}>
+									Superficie Normal
 								</button>
-							</Link>
+							) : (
+								<button type="button" className="btn btn-outline-primary" onClick={setNormal}>
+									Superficie Normal
+								</button>
+							)}
+
+							{superficie === "extra" ? (
+								<button type="button" className="btn btn-primary" onClick={setExtra}>
+									Superficie Extra
+								</button>
+							) : (
+								<button type="button" className="btn btn-outline-primary" onClick={setExtra}>
+									Superficie Extra
+								</button>
+							)}
 						</div>
 					</div>
 				</div>
@@ -70,7 +106,7 @@ export const SicperScreen = () => {
 										</th>
 									</tr>
 								</thead>
-								{expedicion ? (
+								{expedicion && superficie === "normal" ? (
 									<tbody>
 										{expedicion.map((cultivo) => {
 											return (
@@ -102,6 +138,48 @@ export const SicperScreen = () => {
 														</div>
 														<div className="text-center">
 															{cultivo.pozoNormalAsignada - cultivo.pozoFederal}
+														</div>
+													</td>
+												</tr>
+											);
+										})}
+									</tbody>
+								) : (
+									<></>
+								)}
+
+								{expedicion && superficie === "extra" ? (
+									<tbody>
+										{expedicion.map((cultivo) => {
+											return (
+												<tr key={`${cultivo.id}-${cultivo.clave}`}>
+													<th scope="row" className="text-center">
+														{cultivo.clave}
+													</th>
+													<td>{cultivo.cultivo}</td>
+													<td>
+														<div>Gravedad</div>
+														<div>Pozo Federal</div>
+														<div>Pozo Particular</div>
+													</td>
+													<td>
+														<div className="text-center">{cultivo.gravedadExtraAutorizada}</div>
+														<div className="text-center">{cultivo.pozoExtraAutorizada}</div>
+													</td>
+													<td>
+														<div className="text-center">{cultivo.gravedadExtraAsignada}</div>
+														<div className="text-center">{cultivo.pozoExtraAsignada}</div>
+													</td>
+													<td>
+														<div className="text-center">{cultivo.gravedad}</div>
+														<div className="text-center">{cultivo.pozoFederal}</div>
+													</td>
+													<td>
+														<div className="text-center">
+															{cultivo.gravedadExtraAsignada - cultivo.gravedad}
+														</div>
+														<div className="text-center">
+															{cultivo.pozoExtraAsignada - cultivo.pozoFederal}
 														</div>
 													</td>
 												</tr>

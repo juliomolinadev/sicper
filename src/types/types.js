@@ -74,5 +74,7 @@ export const types = {
 	sicperScreenSetAutorizados: "[Sicper Screen] Set autorizados",
 	sicperScreenUnsetAutorizados: "[Sicper Screen] Unset autorizados",
 	sicperScreenSetExpedicion: "[Sicper Screen] Set expedicion",
-	sicperScreenUnsetExpedicion: "[Sicper Screen] Unset expedicion"
+	sicperScreenUnsetExpedicion: "[Sicper Screen] Unset expedicion",
+	sicperScreenSetSuperficieNormal: "[Sicper Screen] Set superficie normal",
+	sicperScreenSetSuperficieExtra: "[Sicper Screen] Set superficie extra"
 };

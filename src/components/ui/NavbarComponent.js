@@ -27,14 +27,6 @@ export const NavbarComponent = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mr-auto">
-						{/* <Nav.Link href="/sicper">Inicio</Nav.Link>
-						<Nav.Link href="/padron">Padron</Nav.Link>
-						<Nav.Link href="/permisos">Permisos</Nav.Link>
-						<Nav.Link href="/transferencias">Transferencias</Nav.Link>
-						<Nav.Link href="/reportes">Reportes</Nav.Link>
-						<Nav.Link href="/autorizados">Autorizados</Nav.Link>
-						<Nav.Link href="/configuracion">Configuracion</Nav.Link> */}
-
 						<Link to="/sicper" className="nav-link">
 							Inicio
 						</Link>

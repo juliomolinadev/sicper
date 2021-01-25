@@ -19,7 +19,6 @@ export const startLoadExpedicion = (modulo) => {
 		superficies.forEach((cultivo) => {
 			if (cultivo.gravedad === undefined) cultivo.gravedad = 0;
 			if (cultivo.pozoFederal === undefined) cultivo.pozoFederal = 0;
-			console.log("pozoFederal en for: ", cultivo.pozoFederal);
 		});
 
 		dispatch(setExpedicion(superficies));
@@ -33,4 +32,12 @@ export const setExpedicion = (superficies) => ({
 
 export const unsetExpedicion = () => ({
 	type: types.sicperScreenUnsetExpedicion
+});
+
+export const setSuperficieNormal = () => ({
+	type: types.sicperScreenSetSuperficieNormal
+});
+
+export const setSuperficieExtra = () => ({
+	type: types.sicperScreenSetSuperficieExtra
 });

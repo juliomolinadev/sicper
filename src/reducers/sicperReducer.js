@@ -1,7 +1,8 @@
 import { types } from "../types/types";
 
 const initialState = {
-	expedicion: null
+	expedicion: null,
+	superficie: "normal"
 };
 
 export const sicperReducer = (state = initialState, action) => {
@@ -16,6 +17,18 @@ export const sicperReducer = (state = initialState, action) => {
 			return {
 				...state,
 				expedicion: null
+			};
+
+		case types.sicperScreenSetSuperficieNormal:
+			return {
+				...state,
+				superficie: "normal"
+			};
+
+		case types.sicperScreenSetSuperficieExtra:
+			return {
+				...state,
+				superficie: "extra"
 			};
 
 		default:
