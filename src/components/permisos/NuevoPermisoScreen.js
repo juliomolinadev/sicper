@@ -125,7 +125,10 @@ export const NuevoPermisoScreen = () => {
 	const defineTipoPermiso = () => {
 		let tipo = "";
 		autorizados.forEach((cultivo) => {
-			if (cultivo.cultivo === altaPermisos.nombreCultivo) {
+			if (
+				cultivo.cultivo === altaPermisos.nombreCultivo &&
+				cultivo.clave === altaPermisos.claveCultivo
+			) {
 				if (altaPermisos.sistema === "Gravedad") {
 					if (cultivo.gravedadNormalAsignada >= supAutorizada) tipo = "normal";
 					else if (cultivo.gravedadExtraAsignada >= supAutorizada) tipo = "extra";
@@ -137,7 +140,7 @@ export const NuevoPermisoScreen = () => {
 				}
 			}
 		});
-		console.log("tipo en define: ", tipo);
+
 		return tipo;
 	};
 

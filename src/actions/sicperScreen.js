@@ -8,18 +8,44 @@ export const startLoadExpedicion = (modulo) => {
 		const autorizados = await loadAutorizados(modulo);
 
 		let superficies = [];
-		expedicion.forEach((cultivoExpedido) => {
-			autorizados.forEach((cultivoAutorizado) => {
-				if (cultivoExpedido.id === `${cultivoAutorizado.clave}-${cultivoAutorizado.cultivo}`) {
-					superficies.push({ ...cultivoAutorizado, ...cultivoExpedido });
-				}
+
+		if (expedicion) {
+			expedicion.forEach((cultivoExpedido) => {
+				autorizados.forEach((cultivoAutorizado) => {
+					if (cultivoExpedido.id === `${cultivoAutorizado.clave}-${cultivoAutorizado.cultivo}`) {
+						superficies.push({ ...cultivoAutorizado, ...cultivoExpedido });
+					}
+				});
 			});
-		});
+		}
 
 		superficies.forEach((cultivo) => {
-			if (cultivo.gravedad === undefined) cultivo.gravedad = 0;
-			if (cultivo.pozoFederal === undefined) cultivo.pozoFederal = 0;
+			if (cultivo.gravedadNormal === undefined) cultivo.gravedadNormal = 0;
+			if (cultivo.gravedadExtra === undefined) cultivo.gravedadExtra = 0;
+			if (cultivo.pozoNormal === undefined) cultivo.pozoNormal = 0;
+			if (cultivo.pozoExtra === undefined) cultivo.pozoExtra = 0;
 		});
+
+		if (superficies.length === 0) {
+			superficies = [
+				{
+					clave: "-",
+					cultivo: "Sin expedicion",
+					gravedadNormalAutorizada: 0,
+					gravedadNormalAsignada: 0,
+					gravedadExtraAutorizada: 0,
+					gravedadExtraAsignada: 0,
+					pozoNormalAutorizada: 0,
+					pozoNormalAsignada: 0,
+					pozoExtraAutorizada: 0,
+					pozoExtraAsignada: 0,
+					gravedadNormal: 0,
+					pozoNormal: 0,
+					gravedadExtra: 0,
+					pozoExtra: 0
+				}
+			];
+		}
 
 		dispatch(setExpedicion(superficies));
 	};

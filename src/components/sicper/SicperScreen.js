@@ -117,8 +117,7 @@ export const SicperScreen = () => {
 													<td>{cultivo.cultivo}</td>
 													<td>
 														<div>Gravedad</div>
-														<div>Pozo Federal</div>
-														<div>Pozo Particular</div>
+														<div>Pozo</div>
 													</td>
 													<td>
 														<div className="text-center">{cultivo.gravedadNormalAutorizada}</div>
@@ -129,15 +128,15 @@ export const SicperScreen = () => {
 														<div className="text-center">{cultivo.pozoNormalAsignada}</div>
 													</td>
 													<td>
-														<div className="text-center">{cultivo.gravedad}</div>
-														<div className="text-center">{cultivo.pozoFederal}</div>
+														<div className="text-center">{cultivo.gravedadNormal}</div>
+														<div className="text-center">{cultivo.pozoNormal}</div>
 													</td>
 													<td>
 														<div className="text-center">
-															{cultivo.gravedadNormalAsignada - cultivo.gravedad}
+															{cultivo.gravedadNormalAsignada - cultivo.gravedadNormal}
 														</div>
 														<div className="text-center">
-															{cultivo.pozoNormalAsignada - cultivo.pozoFederal}
+															{cultivo.pozoNormalAsignada - cultivo.pozoNormal}
 														</div>
 													</td>
 												</tr>
@@ -159,8 +158,7 @@ export const SicperScreen = () => {
 													<td>{cultivo.cultivo}</td>
 													<td>
 														<div>Gravedad</div>
-														<div>Pozo Federal</div>
-														<div>Pozo Particular</div>
+														<div>Pozo</div>
 													</td>
 													<td>
 														<div className="text-center">{cultivo.gravedadExtraAutorizada}</div>
@@ -171,15 +169,15 @@ export const SicperScreen = () => {
 														<div className="text-center">{cultivo.pozoExtraAsignada}</div>
 													</td>
 													<td>
-														<div className="text-center">{cultivo.gravedad}</div>
-														<div className="text-center">{cultivo.pozoFederal}</div>
+														<div className="text-center">{cultivo.gravedadExtra}</div>
+														<div className="text-center">{cultivo.pozoExtra}</div>
 													</td>
 													<td>
 														<div className="text-center">
-															{cultivo.gravedadExtraAsignada - cultivo.gravedad}
+															{cultivo.gravedadExtraAsignada - cultivo.gravedadExtra}
 														</div>
 														<div className="text-center">
-															{cultivo.pozoExtraAsignada - cultivo.pozoFederal}
+															{cultivo.pozoExtraAsignada - cultivo.pozoExtra}
 														</div>
 													</td>
 												</tr>
