@@ -16,15 +16,16 @@ import { ProductorSelected } from "./inputsNuevosPermisos/ProductorSelected";
 import { setFormValues, setOnSubmitData, openPrintPermisoModal } from "../../actions/altaPermisos";
 import { loadContador } from "../../helpers/loadContador";
 import { removeError, setError } from "../../actions/ui";
+import { startLoadAutorizados } from "../../actions/autorizadosScreen";
 
 export const NuevoPermisoScreen = () => {
 	const { idUsuarioSelected, idProductorSelected, subciclo } = useSelector(
 		(state) => state.altaPermisos
 	);
 	const altaPermisos = useSelector((state) => state.altaPermisos);
-
 	const auth = useSelector((state) => state.auth);
 	const { msgError } = useSelector((state) => state.ui);
+	const { autorizados } = useSelector((state) => state.autorizadosScreen);
 
 	const [formValues, handleInputChange] = useForm({
 		variedad: "",
@@ -55,6 +56,10 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const dispatch = useDispatch();
+
+	if (autorizados.length === 0) {
+		dispatch(startLoadAutorizados(auth.claveEntidad));
+	}
 
 	const handleOpenPrintPermisoModal = () => {
 		dispatch(openPrintPermisoModal());
@@ -94,6 +99,9 @@ export const NuevoPermisoScreen = () => {
 		} else if (!cultivoAnterior) {
 			dispatch(setError("Especifique el cultivo anterior."));
 			return false;
+		} else if (defineTipoPermiso() === "Superficie no disponible") {
+			dispatch(setError("Superficie no disponible."));
+			return false;
 		}
 
 		dispatch(removeError());
@@ -115,8 +123,21 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const defineTipoPermiso = () => {
-		// TODO: Determinar si el permiso es normal o extra segun tabla de superficie autorizada por cultivo
-		const tipo = "Normal";
+		let tipo = "";
+		autorizados.forEach((cultivo) => {
+			if (cultivo.cultivo === altaPermisos.nombreCultivo) {
+				if (altaPermisos.sistema === "Gravedad") {
+					if (cultivo.gravedadNormalAsignada >= supAutorizada) tipo = "normal";
+					else if (cultivo.gravedadExtraAsignada >= supAutorizada) tipo = "extra";
+					else tipo = "Superficie no disponible";
+				} else if (altaPermisos.sistema === "Pozo Federal") {
+					if (cultivo.pozoNormalAsignada >= supAutorizada) tipo = "normal";
+					else if (cultivo.pozoExtraAsignada >= supAutorizada) tipo = "extra";
+					else tipo = "Superficie no disponible";
+				}
+			}
+		});
+		console.log("tipo en define: ", tipo);
 		return tipo;
 	};
 
@@ -238,41 +259,6 @@ export const NuevoPermisoScreen = () => {
 						</div>
 					</div>
 				</div>
-
-				{/* <div className="row">
-					<div className="col-sm-6">
-						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">Latitud:</label>
-							<div className="flex-grow-1 ">
-								<input
-									type="text"
-									className="form-control"
-									placeholder="latitud"
-									name="latitud"
-									value={latitud}
-									autoComplete="off"
-									onChange={handleInputChange}
-								/>
-							</div>
-						</div>
-					</div>
-					<div className="col-sm-6">
-						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">Longitud:</label>
-							<div className="flex-grow-1 ">
-								<input
-									type="text"
-									className="form-control"
-									placeholder="longitud"
-									name="longitud"
-									value={longitud}
-									autoComplete="off"
-									onChange={handleInputChange}
-								/>
-							</div>
-						</div>
-					</div>
-				</div> */}
 
 				<div className="row">
 					<div className="col-sm-6">
