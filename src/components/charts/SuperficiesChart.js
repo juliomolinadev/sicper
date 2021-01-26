@@ -35,7 +35,7 @@ export const SuperficiesChart = () => {
 	};
 
 	return (
-		<div className="pt-4">
+		<div className="pt-4 text-secondary">
 			<div className="d-flex justify-content-center">
 				<h5>Superficies por cultivo</h5>
 			</div>

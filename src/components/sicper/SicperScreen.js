@@ -84,8 +84,8 @@ export const SicperScreen = () => {
 				<div className="col-sm-8">
 					<div className="border border-info rounded p-0">
 						<div className="table-responsive">
-							<table className="table table-sm table-striped">
-								<thead>
+							<table className="table table-sm table-striped text-secondary">
+								<thead className="table-info">
 									<tr>
 										<th scope="col" className="text-center">
 											Clave
@@ -193,7 +193,7 @@ export const SicperScreen = () => {
 				</div>
 
 				<div className="col-sm-4">
-					<div className="border border-info rounded detallePermiso">
+					<div className="border border-info rounded detallePermiso text-secondary">
 						<SuperficiesChart />
 						{autorizados.length > 0 ? (
 							<ResumenAutorizados

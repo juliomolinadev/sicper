@@ -30,7 +30,7 @@ export const ResumenAutorizados = ({ autorizados, modulo }) => {
 			</div>
 
 			<div className="table-responsive">
-				<table className="table table-info mb-0">
+				<table className="table table-info mb-0 text-secondary">
 					<thead>
 						<tr>
 							<th colSpan="3">Total Superficie Normal</th>
@@ -58,7 +58,7 @@ export const ResumenAutorizados = ({ autorizados, modulo }) => {
 			</div>
 
 			<div className="table-responsive">
-				<table className="table table-table-secondary">
+				<table className="table table-table-secondary text-secondary">
 					<thead>
 						<tr>
 							<th colSpan="3">Total Superficie Extra</th>
