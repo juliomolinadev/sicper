@@ -4,8 +4,6 @@ import { startLogout } from "../../actions/auth";
 import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-//TODO: Aser que la navbar sea resposive
-
 export const NavbarComponent = () => {
 	const dispatch = useDispatch();
 

@@ -35,7 +35,8 @@ export const AutorizadosScreen = () => {
 		20,
 		21,
 		22,
-		"FL"
+		"FL",
+		"Pozo Federal"
 	];
 
 	const dispatch = useDispatch();

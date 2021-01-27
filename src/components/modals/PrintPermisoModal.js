@@ -64,6 +64,14 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			className="printModal"
 			overlayClassName="modal-fondo"
 		>
+			{/* Marca de agua ***************************************************************** */}
+
+			{data.estadoPermiso === "activo" ? (
+				<></>
+			) : (
+				<div className="watermark rotar">{data.estadoPermiso}</div>
+			)}
+
 			{/* Header ************************************************************************ */}
 
 			<div className="row m-3 d-flex justify-content-center">
