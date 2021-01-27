@@ -7,9 +7,11 @@ import {
 } from "../../actions/autorizadosScreen";
 import { sabeAutorizados } from "../../helpers/sabeAutorizados";
 import { AutorizadosModal } from "../modals/AutorizadosModal";
-import { autorizadosColumns } from "../tables/configTables";
+import { AutorizadosPozoModal } from "../modals/AutorizadosPozoModal";
+import { autorizadosColumns, autorizadosPozoColumns } from "../tables/configTables";
 import { CustomTable } from "../tables/CustomTable";
 import { ResumenAutorizados } from "./ResumenAutorizados";
+import { ResumenAutorizadosPozo } from "./ResumenAutorizadosPozo";
 
 export const AutorizadosScreen = () => {
 	const modulos = [
@@ -36,7 +38,7 @@ export const AutorizadosScreen = () => {
 		21,
 		22,
 		"FL",
-		"Pozo Federal"
+		"Pozo Particular"
 	];
 
 	const dispatch = useDispatch();
@@ -122,15 +124,20 @@ export const AutorizadosScreen = () => {
 
 			<div className="row ">
 				<div className="col-sm-8 pr-0 mt-3">
-					{modulo ? (
+					{modulo === "Pozo Particular" ? (
+						<CustomTable
+							title="Autorizados"
+							columns={autorizadosPozoColumns}
+							data={autorizados}
+							setFunction={setAutorizadoSelected}
+						></CustomTable>
+					) : (
 						<CustomTable
 							title="Autorizados"
 							columns={autorizadosColumns}
 							data={autorizados}
 							setFunction={setAutorizadoSelected}
 						></CustomTable>
-					) : (
-						<></>
 					)}
 				</div>
 
@@ -138,7 +145,17 @@ export const AutorizadosScreen = () => {
 					<div className="col-sm-4 pl-3 mt-3">
 						<div className="d-flex flex-column border rounded border-info">
 							{autorizados.length > 0 ? (
-								<ResumenAutorizados autorizados={autorizados} modulo={modulo}></ResumenAutorizados>
+								modulo === "Pozo Particular" ? (
+									<ResumenAutorizadosPozo
+										autorizados={autorizados}
+										modulo={modulo}
+									></ResumenAutorizadosPozo>
+								) : (
+									<ResumenAutorizados
+										autorizados={autorizados}
+										modulo={modulo}
+									></ResumenAutorizados>
+								)
 							) : (
 								<></>
 							)}
@@ -168,7 +185,15 @@ export const AutorizadosScreen = () => {
 					<></>
 				)}
 			</div>
-			{autorizadoSelected ? <AutorizadosModal /> : <></>}
+			{autorizadoSelected ? (
+				modulo === "Pozo Particular" ? (
+					<AutorizadosPozoModal />
+				) : (
+					<AutorizadosModal />
+				)
+			) : (
+				<></>
+			)}
 		</>
 	);
 };

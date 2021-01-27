@@ -103,3 +103,23 @@ export const autorizadosColumns = [
 	},
 	{ name: "POZO EXTRA ASIGNADA", selector: "pozoExtraAsignada", sortable: true, center: true }
 ];
+
+export const autorizadosPozoColumns = [
+	{ name: "id", selector: "id", omit: true },
+	{ name: "CLAVE", selector: "clave", sortable: true, width: "80px", center: true },
+	{ name: "CULTIVO", selector: "cultivo", sortable: true, width: "160px" },
+	{
+		name: "POZO NORMAL AUTORIZADA",
+		selector: "pozoNormalAutorizada",
+		sortable: true,
+		center: true
+	},
+	{ name: "POZO NORMAL ASIGNADA", selector: "pozoNormalAsignada", sortable: true, center: true },
+	{
+		name: "POZO EXTRA AUTORIZADA",
+		selector: "pozoExtraAutorizada",
+		sortable: true,
+		center: true
+	},
+	{ name: "POZO EXTRA ASIGNADA", selector: "pozoExtraAsignada", sortable: true, center: true }
+];
