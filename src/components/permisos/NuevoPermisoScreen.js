@@ -19,7 +19,7 @@ import { removeError, setError } from "../../actions/ui";
 import { startLoadAutorizados } from "../../actions/autorizadosScreen";
 
 export const NuevoPermisoScreen = () => {
-	const { idUsuarioSelected, idProductorSelected, subciclo } = useSelector(
+	const { idUsuarioSelected, idProductorSelected, subciclo, nombreCultivo } = useSelector(
 		(state) => state.altaPermisos
 	);
 	const altaPermisos = useSelector((state) => state.altaPermisos);
@@ -116,9 +116,11 @@ export const NuevoPermisoScreen = () => {
 			fechaEmicion: moment(),
 			// TODO: Verificar la fecha limite de siembra
 			fechaLimite: moment().add(10, "days"),
-			vigencia: defineVigencia(subciclo)
+			vigencia: defineVigencia(subciclo),
+			estadoPermiso: await defineEstadoPermiso(nombreCultivo)
 		};
 
+		console.log("data.estadoPermiso en get: ", data.estadoPermiso);
 		return data;
 	};
 
@@ -187,6 +189,15 @@ export const NuevoPermisoScreen = () => {
 			}
 		}
 		return vigencia;
+	};
+
+	const defineEstadoPermiso = async (cultivo) => {
+		let estado = "";
+
+		if (cultivo === "ALGODONERO") estado = "pendiente";
+		else estado = "activo";
+
+		return estado;
 	};
 
 	return (

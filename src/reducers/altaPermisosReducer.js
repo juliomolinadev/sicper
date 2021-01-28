@@ -40,6 +40,7 @@ const initialState = {
 	fechaEmicion: null,
 	fechaLimite: null,
 	vigencia: null,
+	estadoPermiso: null,
 	variedad: "",
 	supAutorizada: 0,
 	fuenteCredito: "",
@@ -253,7 +254,8 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				numeroPermiso: action.payload.numeroPermiso,
 				fechaEmicion: action.payload.fechaEmicion,
 				fechaLimite: action.payload.fechaLimite,
-				vigencia: action.payload.vigencia
+				vigencia: action.payload.vigencia,
+				estadoPermiso: action.payload.estadoPermiso
 			};
 
 		case types.altaPermisosUnsetSubmitData:

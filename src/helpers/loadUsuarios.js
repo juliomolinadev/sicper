@@ -1,5 +1,7 @@
 import { db } from "../firebase/firebase-config";
 
+// TODO: Implementar busqueda de usuarios de pozo particular
+
 export const loadUsuarios = async (usuario, claveEntidad) => {
 	const usuariosSnap = await db
 		.collection(`derechos`)

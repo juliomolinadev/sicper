@@ -46,7 +46,7 @@ export const sabePermiso = async (allData) => {
 		dotacion: allData.dotacion,
 		titular: allData.titular,
 		transferencia: allData.transferencia,
-		estadoPermiso: "activo"
+		estadoPermiso: allData.estadoPermiso
 	};
 
 	const permisosPorCultivoRef = db
