@@ -11,6 +11,7 @@ import { PermisosScreen } from "../components/permisos/PermisosScreen";
 import { NuevoPermisoScreen } from "../components/permisos/NuevoPermisoScreen";
 import { AutorizadosScreen } from "../components/autorizados/AutorizadosScreen";
 import Header from "../components/ui/Header";
+import { AlgodoneroScreen } from "../components/Algodonero/AlgodoneroScreen";
 
 export const DashboardRoutes = () => {
 	return (
@@ -21,6 +22,7 @@ export const DashboardRoutes = () => {
 				<Route exact path="/sicper" component={SicperScreen} />
 				<Route exact path="/padron" component={PadronScreen} />
 				<Route exact path="/permisos" component={PermisosScreen} />
+				<Route exact path="/algodonero" component={AlgodoneroScreen} />
 				<Route exact path="/transferencias" component={TransferenciasScreen} />
 				<Route exact path="/reportes" component={ReportesScreen} />
 				<Route exact path="/autorizados" component={AutorizadosScreen} />

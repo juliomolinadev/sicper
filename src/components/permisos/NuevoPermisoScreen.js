@@ -210,6 +210,7 @@ export const NuevoPermisoScreen = () => {
 			{/* TODO: Cambiar el flujo de los tab para que no se seleccionen las lupas */}
 			{/* TODO: Checkbox para transferencia interna */}
 			<form className="container pb-4">
+				{/* TODO: Poner el mensaje de error en un lugar mas visible */}
 				{msgError && <div className="auth__alert-error">{msgError}</div>}
 				{idUsuarioSelected ? <UsuarioSelected /> : <></>}
 				{idProductorSelected ? <ProductorSelected /> : <></>}

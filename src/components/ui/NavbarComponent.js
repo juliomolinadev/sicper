@@ -34,6 +34,9 @@ export const NavbarComponent = () => {
 						<Link to="/permisos" className="nav-link">
 							Permisos
 						</Link>
+						<Link to="/algodonero" className="nav-link">
+							Algodonero
+						</Link>
 						<Link to="/transferencias" className="nav-link">
 							Transferencias
 						</Link>

@@ -76,5 +76,8 @@ export const types = {
 	sicperScreenSetExpedicion: "[Sicper Screen] Set expedicion",
 	sicperScreenUnsetExpedicion: "[Sicper Screen] Unset expedicion",
 	sicperScreenSetSuperficieNormal: "[Sicper Screen] Set superficie normal",
-	sicperScreenSetSuperficieExtra: "[Sicper Screen] Set superficie extra"
+	sicperScreenSetSuperficieExtra: "[Sicper Screen] Set superficie extra",
+
+	algodoneroScreenSetPermisos: "[Algodonero Screen] Set permisos",
+	algodoneroScreenUnsetPermisos: "[Algodonero Screen] Unset permisos"
 };
