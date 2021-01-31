@@ -120,7 +120,6 @@ export const NuevoPermisoScreen = () => {
 			estadoPermiso: await defineEstadoPermiso(nombreCultivo)
 		};
 
-		console.log("data.estadoPermiso en get: ", data.estadoPermiso);
 		return data;
 	};
 
