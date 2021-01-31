@@ -325,6 +325,7 @@ export const NuevoPermisoScreen = () => {
 					</small>
 				</div>
 
+				{msgError && <div className="auth__alert-error">{msgError}</div>}
 				<div
 					className="row d-flex justify-content-center pt-5"
 					// onClick={handleOpenPrintPermisoModal}
