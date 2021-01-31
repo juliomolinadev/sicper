@@ -20,7 +20,6 @@ export const AlgodoneroScreen = () => {
 	const { palabra } = formValues;
 
 	const { permisos, permisoSelected } = useSelector((state) => state.algodoneroScreen);
-	const { claveEntidad } = useSelector((state) => state.auth);
 
 	if (permisos.length === 0) {
 		dispatch(startLoadPermisos());
@@ -28,7 +27,7 @@ export const AlgodoneroScreen = () => {
 
 	const buscarPermisos = () => {
 		if (palabra.length > 0) {
-			dispatch(startLoadPermisosSearch(palabra, claveEntidad));
+			dispatch(startLoadPermisosSearch(palabra));
 		} else {
 			Swal.fire(
 				"Nada para buscar",

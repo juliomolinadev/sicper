@@ -1,7 +1,7 @@
 import { types } from "../types/types";
 import { loadPermisosAlgodonero } from "../helpers/loadPermisosAlgodonero";
-import { loadPermisos } from "../helpers/loadPermisos";
 import { loadSuperficiesCultivos } from "../helpers/loadSuperficiesCultivos";
+import { loadSearchPermisosAlgodonero } from "../helpers/loadSearchPermisosAlgodonero";
 
 export const startLoadPermisos = () => {
 	return async (dispatch) => {
@@ -10,9 +10,9 @@ export const startLoadPermisos = () => {
 	};
 };
 
-export const startLoadPermisosSearch = (palabra, modulo) => {
+export const startLoadPermisosSearch = (palabra) => {
 	return async (dispatch) => {
-		const permisos = await loadPermisos(palabra, modulo);
+		const permisos = await loadSearchPermisosAlgodonero(palabra);
 		dispatch(setPermisos(permisos));
 	};
 };
