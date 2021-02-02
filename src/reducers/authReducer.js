@@ -18,6 +18,12 @@ export const authReducer = (state = {}, action) => {
 				titular: action.payload.titular
 			};
 
+		case types.setPrivilegios:
+			return {
+				...state,
+				privilegios: action.payload
+			};
+
 		case types.logout:
 			return {};
 

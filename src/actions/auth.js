@@ -13,11 +13,15 @@ export const startLoginEmailPassword = (email, password) => {
 			.then(async ({ user }) => {
 				const entity = await loadEntity(user.uid);
 				const entityData = await loadEntityData(entity.claveEntidad);
+				console.log("entityData.rol en auth: ", entityData.rol);
+				console.log("entity.rol en auth: ", entity.rol);
+				const privilegios = await loadPrivilegios(entity.rol);
 
 				const { nombre, img, clave, dotacion, titular } = entityData;
 
 				dispatch(login(user.uid, user.displayName));
 				dispatch(setEntity(nombre, img, clave, dotacion, titular));
+				dispatch(setPrivilegios(privilegios));
 				dispatch(finishLoading());
 			})
 			.catch((e) => {
@@ -112,3 +116,24 @@ export const loadEntityData = async (claveEntidad) => {
 
 	return entityData;
 };
+
+export const loadPrivilegios = async (rol) => {
+	const roles = await db.collection(`roles`).get();
+
+	let privilegios = {};
+
+	roles.forEach((snapHijo) => {
+		console.log("snapHijo.id en load: ", snapHijo.id);
+		console.log("rol en load: ", rol);
+		if (snapHijo.id === rol) {
+			privilegios = { ...snapHijo.data() };
+		}
+	});
+
+	return privilegios;
+};
+
+export const setPrivilegios = (privilegios) => ({
+	type: types.setPrivilegios,
+	payload: privilegios
+});

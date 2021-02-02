@@ -4,7 +4,14 @@ import { AuthRouter } from "./AuthRouter";
 import { DashboardRoutes } from "./DashboardRoutes";
 import { firebase } from "../firebase/firebase-config";
 import { useDispatch } from "react-redux";
-import { loadEntity, loadEntityData, login, setEntity } from "../actions/auth";
+import {
+	loadEntity,
+	loadEntityData,
+	loadPrivilegios,
+	login,
+	setEntity,
+	setPrivilegios
+} from "../actions/auth";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
 
@@ -19,10 +26,12 @@ export const AppRouter = () => {
 			if (user?.uid) {
 				const entity = await loadEntity(user.uid);
 				const entityData = await loadEntityData(entity.claveEntidad);
+				const privilegios = await loadPrivilegios(entity.rol);
 				const { nombre, img, clave, dotacion, titular } = entityData;
 
 				dispatch(login(user.uid, user.displayName));
 				dispatch(setEntity(nombre, img, clave, dotacion, titular));
+				dispatch(setPrivilegios(privilegios));
 				setIsLoggedIn(true);
 			} else {
 				setIsLoggedIn(false);
