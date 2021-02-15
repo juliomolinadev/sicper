@@ -1,11 +1,13 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadExpedicion = async (modulo) => {
+export const loadExpedicion = async (modulo, ciclo) => {
 	let superficies = [];
 
 	await db
 		.collection(`permisos`)
 		.doc(`permisosM${modulo}`)
+		.collection(`ciclos`)
+		.doc(ciclo)
 		.collection(`permisosPorCultivo`)
 		.orderBy("superficie", "desc")
 		.get()

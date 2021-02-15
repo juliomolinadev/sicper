@@ -3,9 +3,9 @@ import { loadUltimosPermisos } from "../helpers/loadUltimosPermisos";
 import { loadPermisos } from "../helpers/loadPermisos";
 import { loadSuperficiesCultivos } from "../helpers/loadSuperficiesCultivos";
 
-export const startLoadPermisos = (modulo) => {
+export const startLoadPermisos = (modulo, ciclo) => {
 	return async (dispatch) => {
-		const permisos = await loadUltimosPermisos(modulo);
+		const permisos = await loadUltimosPermisos(modulo, ciclo);
 		dispatch(setPermisos(permisos));
 	};
 };
@@ -17,9 +17,9 @@ export const startLoadPermisosSearch = (palabra, modulo) => {
 	};
 };
 
-export const startLoadSuperficies = (modulo) => {
+export const startLoadSuperficies = (modulo, ciclo) => {
 	return async (dispatch) => {
-		const superficies = await loadSuperficiesCultivos(modulo);
+		const superficies = await loadSuperficiesCultivos(modulo, ciclo);
 		dispatch(setSuperficies(superficies));
 	};
 };

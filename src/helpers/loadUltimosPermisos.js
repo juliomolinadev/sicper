@@ -1,9 +1,11 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadUltimosPermisos = async (modulo) => {
+export const loadUltimosPermisos = async (modulo, ciclo) => {
 	const permisosSnap = await db
 		.collection(`permisos`)
 		.doc(`permisosM${modulo}`)
+		.collection(`ciclos`)
+		.doc(ciclo)
 		.collection(`permisos`)
 		.orderBy("fechaEmicion", "desc")
 		.limit(20)

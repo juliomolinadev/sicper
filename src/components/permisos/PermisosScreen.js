@@ -28,12 +28,15 @@ export const PermisosScreen = () => {
 	const { permisos, permisoSelected, superficies } = useSelector((state) => state.permisosScreen);
 	const { claveEntidad } = useSelector((state) => state.auth);
 
+	// TODO: crear funcion para definir ciclo
+	const ciclo = "2020-2021";
+
 	if (permisos.length === 0) {
-		dispatch(startLoadPermisos(claveEntidad));
+		dispatch(startLoadPermisos(claveEntidad, ciclo));
 	}
 
 	if (superficies === null) {
-		dispatch(startLoadSuperficies(claveEntidad));
+		dispatch(startLoadSuperficies(claveEntidad, ciclo));
 	}
 
 	const buscarPermisos = () => {

@@ -52,17 +52,23 @@ export const sabePermiso = async (allData) => {
 	const permisosPorCultivoRef = db
 		.collection(`permisos`)
 		.doc(`permisosM${data.modulo}`)
+		.collection(`ciclos`)
+		.doc(data.ciclo)
 		.collection(`permisosPorCultivo`)
 		.doc(`${data.claveCultivo}-${data.nombreCultivo}`);
 
 	const isSave = await db
 		.collection(`permisos`)
 		.doc(`permisosM${data.modulo}`)
+		.collection(`ciclos`)
+		.doc(data.ciclo)
 		.collection(`permisos`)
 		.add(data)
 		.then(() => {
 			db.collection(`permisos`)
 				.doc(`permisosM${data.modulo}`)
+				.collection(`ciclos`)
+				.doc(data.ciclo)
 				.update({
 					numeroPermisosModulo: firebase.firestore.FieldValue.increment(1),
 					superficieModulo: firebase.firestore.FieldValue.increment(allData.supAutorizada)

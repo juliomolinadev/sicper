@@ -23,12 +23,15 @@ export const SicperScreen = () => {
 		dispatch(startLoadAutorizados(claveEntidad));
 	}
 
+	// TODO: crear funcion para definir ciclo
+	const ciclo = "2020-2021";
+
 	if (expedicion === null) {
-		dispatch(startLoadExpedicion(claveEntidad));
+		dispatch(startLoadExpedicion(claveEntidad, ciclo));
 	}
 
 	if (superficies === null) {
-		dispatch(startLoadSuperficies(claveEntidad));
+		dispatch(startLoadSuperficies(claveEntidad, ciclo));
 	}
 
 	const setNormal = () => {

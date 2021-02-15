@@ -153,7 +153,7 @@ export const NuevoPermisoScreen = () => {
 
 	const defineNumeroPermiso = async () => {
 		const permiso = `MOD${auth.claveEntidad}-${fill(
-			(await loadContador(auth.claveEntidad)) + 1,
+			(await loadContador(auth.claveEntidad, defineCiclo())) + 1,
 			3
 		)}`;
 		return permiso;

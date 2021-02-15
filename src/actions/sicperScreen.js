@@ -2,9 +2,9 @@ import { loadAutorizados } from "../helpers/loadAutorizados";
 import { types } from "../types/types";
 import { loadExpedicion } from "../helpers/loadExpedicion";
 
-export const startLoadExpedicion = (modulo) => {
+export const startLoadExpedicion = (modulo, ciclo) => {
 	return async (dispatch) => {
-		const expedicion = await loadExpedicion(modulo);
+		const expedicion = await loadExpedicion(modulo, ciclo);
 		const autorizados = await loadAutorizados(modulo);
 
 		let superficies = [];

@@ -26,11 +26,15 @@ export const setUsuarios = (usuarios) => ({
 export const startSetUsuarioSelected = (usuario) => {
 	unsetUsuarioSelected();
 
+	// TODO: crear funcion para definir ciclo
+	const ciclo = "2020-2021";
+
 	return async (dispatch) => {
 		const localidad = await loadLocalidad(usuario.ejido);
 		const supPrevia = await loadSuperficiePrevia(
 			`${usuario.cuenta}.${usuario.subcta}`,
-			usuario.modulo
+			usuario.modulo,
+			ciclo
 		);
 		usuario.localidad = localidad;
 		usuario.supPrevia = supPrevia;
