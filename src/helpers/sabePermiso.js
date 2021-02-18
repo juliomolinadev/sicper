@@ -49,26 +49,49 @@ export const sabePermiso = async (allData) => {
 		estadoPermiso: allData.estadoPermiso
 	};
 
+	if (data.nombreCultivo === "ALGODONERO") {
+		data.desfoliado = false;
+		data.cosechado = false;
+		data.desvarado = false;
+		data.disqueado = false;
+		data.desarraigado = false;
+		data.superficieMapeada = 0;
+		data.pagado = false;
+		data.constanciaFitosanitaria = false;
+	}
+
+	// const permisosPorCultivoRef = db;
+	// .collection(`permisos`)
+	// .doc(`permisosM${data.modulo}`)
+	// .collection(`ciclos`)
+	// .doc(data.ciclo)
+	// .collection(`permisosPorCultivo`)
+	// .doc(`${data.claveCultivo}-${data.nombreCultivo}`);
+
 	const permisosPorCultivoRef = db
 		.collection(`permisos`)
-		.doc(`permisosM${data.modulo}`)
-		.collection(`ciclos`)
 		.doc(data.ciclo)
+		.collection("modulos")
+		.doc(`Modulo-${data.modulo}`)
 		.collection(`permisosPorCultivo`)
 		.doc(`${data.claveCultivo}-${data.nombreCultivo}`);
 
 	const isSave = await db
+		// .collection(`permisos`)
+		// .doc(`permisosM${data.modulo}`)
+		// .collection(`ciclos`)
+		// .doc(data.ciclo)
 		.collection(`permisos`)
-		.doc(`permisosM${data.modulo}`)
-		.collection(`ciclos`)
 		.doc(data.ciclo)
+		.collection("modulos")
+		.doc(`Modulo-${data.modulo}`)
 		.collection(`permisos`)
 		.add(data)
 		.then(() => {
 			db.collection(`permisos`)
-				.doc(`permisosM${data.modulo}`)
-				.collection(`ciclos`)
 				.doc(data.ciclo)
+				.collection("modulos")
+				.doc(`Modulo-${data.modulo}`)
 				.update({
 					numeroPermisosModulo: firebase.firestore.FieldValue.increment(1),
 					superficieModulo: firebase.firestore.FieldValue.increment(allData.supAutorizada)

@@ -5,9 +5,9 @@ export const loadExpedicion = async (modulo, ciclo) => {
 
 	await db
 		.collection(`permisos`)
-		.doc(`permisosM${modulo}`)
-		.collection(`ciclos`)
 		.doc(ciclo)
+		.collection("modulos")
+		.doc(`Modulo-${modulo}`)
 		.collection(`permisosPorCultivo`)
 		.orderBy("superficie", "desc")
 		.get()

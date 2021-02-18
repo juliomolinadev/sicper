@@ -4,9 +4,9 @@ import Swal from "sweetalert2";
 export const loadPermisos = async (palabra, modulo, ciclo) => {
 	const permisosNombre = await db
 		.collection(`permisos`)
-		.doc(`permisosM${modulo}`)
-		.collection(`ciclos`)
 		.doc(ciclo)
+		.collection("modulos")
+		.doc(`Modulo-${modulo}`)
 		.collection(`permisos`)
 		.orderBy("usuario")
 		.startAt(palabra.toUpperCase())
@@ -15,9 +15,9 @@ export const loadPermisos = async (palabra, modulo, ciclo) => {
 
 	const permisosCuenta = await db
 		.collection(`permisos`)
-		.doc(`permisosM${modulo}`)
-		.collection(`ciclos`)
 		.doc(ciclo)
+		.collection("modulos")
+		.doc(`Modulo-${modulo}`)
 		.collection(`permisos`)
 		.orderBy("cuenta")
 		.startAt(palabra)
@@ -26,9 +26,9 @@ export const loadPermisos = async (palabra, modulo, ciclo) => {
 
 	const permisosPermiso = await db
 		.collection(`permisos`)
-		.doc(`permisosM${modulo}`)
-		.collection(`ciclos`)
 		.doc(ciclo)
+		.collection("modulos")
+		.doc(`Modulo-${modulo}`)
 		.collection(`permisos`)
 		.orderBy("numeroPermiso")
 		.startAt(palabra.toUpperCase())

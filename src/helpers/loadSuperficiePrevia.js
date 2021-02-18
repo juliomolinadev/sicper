@@ -3,9 +3,9 @@ import { db } from "../firebase/firebase-config";
 export const loadSuperficiePrevia = async (cuenta, modulo, ciclo) => {
 	const permisosSnap = await db
 		.collection(`permisos`)
-		.doc(`permisosM${modulo}`)
-		.collection(`ciclos`)
 		.doc(ciclo)
+		.collection("modulos")
+		.doc(`Modulo-${modulo}`)
 		.collection(`permisos`)
 		.where("cuenta", "==", cuenta)
 		.get();
