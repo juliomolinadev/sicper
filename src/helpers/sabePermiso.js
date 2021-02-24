@@ -11,6 +11,7 @@ export const sabePermiso = async (allData) => {
 		usuario: allData.usuario,
 		supDerecho: allData.supDerecho,
 		lote: allData.lote,
+		// TODO: Poner nombre de localidad antes de guardar
 		localidad: allData.localidad,
 		municipio: allData.municipio,
 		estado: allData.estado,
@@ -60,14 +61,6 @@ export const sabePermiso = async (allData) => {
 		data.constanciaFitosanitaria = false;
 	}
 
-	// const permisosPorCultivoRef = db;
-	// .collection(`permisos`)
-	// .doc(`permisosM${data.modulo}`)
-	// .collection(`ciclos`)
-	// .doc(data.ciclo)
-	// .collection(`permisosPorCultivo`)
-	// .doc(`${data.claveCultivo}-${data.nombreCultivo}`);
-
 	const permisosPorCultivoRef = db
 		.collection(`permisos`)
 		.doc(data.ciclo)
@@ -77,10 +70,7 @@ export const sabePermiso = async (allData) => {
 		.doc(`${data.claveCultivo}-${data.nombreCultivo}`);
 
 	const isSave = await db
-		// .collection(`permisos`)
-		// .doc(`permisosM${data.modulo}`)
-		// .collection(`ciclos`)
-		// .doc(data.ciclo)
+
 		.collection(`permisos`)
 		.doc(data.ciclo)
 		.collection("modulos")

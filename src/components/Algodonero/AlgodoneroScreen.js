@@ -10,7 +10,7 @@ import {
 	startLoadPermisosSearch
 } from "../../actions/algodoneroScreen";
 import { useForm } from "../../hooks/useForm";
-import { activePermisoAlgodonero } from "../../helpers/activePermisoAlgodonero";
+import { CheckSanidad } from "../Modulos/CheckSanidad";
 
 export const AlgodoneroScreen = () => {
 	const dispatch = useDispatch();
@@ -62,29 +62,6 @@ export const AlgodoneroScreen = () => {
 		}
 	});
 
-	const activarPermiso = () => {
-		Swal.fire({
-			title: "Atención!!",
-			text: `Está a punto de activar el permiso ${dataPermiso.numeroPermiso}, ¿Realmente desea activar este permiso?`,
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
-			cancelButtonColor: "#d33",
-			confirmButtonText: "Si",
-			cancelButtonText: "No"
-		}).then((result) => {
-			if (result.isConfirmed) {
-				activePermisoAlgodonero(permisoSelected, dataPermiso.modulo);
-				dispatch(startLoadPermisos());
-				Swal.fire(
-					"OK",
-					`El permiso ${dataPermiso.numeroPermiso} fue activado con exito`,
-					"success"
-				);
-			}
-		});
-	};
-
 	return (
 		<>
 			<div className="row mt-5">
@@ -120,103 +97,7 @@ export const AlgodoneroScreen = () => {
 					></CustomTable>
 				</div>
 
-				{permisoSelected && dataPermiso !== undefined ? (
-					<div className="col-sm-4 mt-3">
-						<div className="border border-info rounded detallePermiso">
-							<div className="d-flex bg-light border-info border-bottom rounded-top p-1 justify-content-center font-weight-bold text-secondary pt-3">
-								<h5>{dataPermiso.numeroPermiso}</h5>
-							</div>
-							<div className="row p-1 pl-2 pt-2">
-								<div className="col-4">CUENTA:</div>
-								<div className="col-8">{dataPermiso.cuenta}</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">USUARIO:</div>
-								<div className="col-8">{dataPermiso.usuario}</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">PRODUCTOR:</div>
-								<div className="col-8">{dataPermiso.nombreProductor}</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">CULTIVO:</div>
-								<div className="col-8">{dataPermiso.nombreCultivo}</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">SUBCICLO:</div>
-								<div className="col-8">{dataPermiso.subciclo}</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">SUPERFICIE:</div>
-								<div className="col-8">{dataPermiso.supAutorizada} ha</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">DOTACION:</div>
-								<div className="col-8">{dataPermiso.dotacion * dataPermiso.supAutorizada} lts</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">SISTEMA:</div>
-								<div className="col-8">{dataPermiso.sistema}</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">LOCALIDAD:</div>
-								<div className="col-8">{dataPermiso.localidad}</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">LOTE:</div>
-								<div className="col-8">{dataPermiso.lote}</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">SECCION:</div>
-								<div className="col-8">{dataPermiso.seccion}</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">MODULO:</div>
-								<div className="col-8">{dataPermiso.modulo}</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">EXPEDICION:</div>
-								<div className="col-8">
-									{moment(dataPermiso.fechaEmicion.toDate()).format("DD/MM/YYYY")}
-								</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">FECHA LIMITE:</div>
-								<div className="col-8">
-									{moment(dataPermiso.fechaLimite.toDate()).format("DD/MM/YYYY")}
-								</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">VIGENCIA:</div>
-								<div className="col-8">
-									{moment(dataPermiso.vigencia.toDate()).format("DD/MM/YYYY")}
-								</div>
-							</div>
-							<div className="row p-1 pl-2">
-								<div className="col-4">ESTADO:</div>
-								<div className="col-8">{dataPermiso.estadoPermiso}</div>
-							</div>
-							<div className="row p-1 pl-2 pt-4 pb-4">
-								<div className="col-6 d-flex justify-content-center">
-									{dataPermiso.estadoPermiso === "pendiente" ? (
-										<button
-											type="button"
-											className="btn btn-outline-success"
-											onClick={activarPermiso}
-										>
-											<i className="fas fa-check"></i>
-											<span> Activar</span>
-										</button>
-									) : (
-										<></>
-									)}
-								</div>
-							</div>
-						</div>
-					</div>
-				) : (
-					<></>
-				)}
+				{permisoSelected && dataPermiso !== undefined ? <CheckSanidad /> : <></>}
 			</div>
 		</>
 	);
