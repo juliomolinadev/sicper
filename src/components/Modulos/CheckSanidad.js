@@ -19,34 +19,32 @@ export const CheckSanidad = () => {
 
 	const ciclo = "2020-2021";
 
-	const activarPermiso = () => {
-		Swal.fire({
-			title: "Atención!!",
-			text: `Está a punto de activar el permiso ${dataPermiso.numeroPermiso}, ¿Realmente desea activar este permiso?`,
-			icon: "warning",
-			showCancelButton: true,
-			confirmButtonColor: "#3085d6",
-			cancelButtonColor: "#d33",
-			confirmButtonText: "Si",
-			cancelButtonText: "No"
-		}).then((result) => {
-			if (result.isConfirmed) {
-				updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, ciclo);
-				dispatch(startLoadPermisos());
-				Swal.fire(
-					"OK",
-					`El permiso ${dataPermiso.numeroPermiso} fue activado con exito`,
-					"success"
-				);
-			}
-		});
-	};
-
 	const setUnset = (objeto, e) => {
 		e.preventDefault();
-		console.log(objeto);
 		updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, ciclo, objeto);
 		dispatch(startLoadPermisos());
+	};
+
+	const addSuperficieMapeada = (superficieActual) => {
+		Swal.fire({
+			title: "Actualizar superficie mapeada",
+			input: "number",
+			inputPlaceholder: superficieActual,
+			inputAttributes: {
+				autocapitalize: "off"
+			},
+			showCancelButton: true,
+			confirmButtonText: "Guardar",
+			cancelButtonText: "Cancelar"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, ciclo, {
+					superficieMapeada: result.value
+				});
+				dispatch(startLoadPermisos());
+				Swal.fire("OK", `Se actualiso la superficie mapeada`, "success");
+			}
+		});
 	};
 
 	// TODO: Asignar folio de constancia fitosanitaria al expedir permiso de algodon
@@ -92,7 +90,7 @@ export const CheckSanidad = () => {
 					<div className="col-8">{dataPermiso.modulo}</div>
 				</div>
 
-				<div className="row p-1 pl-2">
+				<div className="row p-1 pl-2 d-flex align-items-center">
 					<div className="col-4">DESFOLIADO:</div>
 					<div className="col-8">
 						{dataPermiso.desfoliado ? (
@@ -115,7 +113,7 @@ export const CheckSanidad = () => {
 					</div>
 				</div>
 
-				<div className="row p-1 pl-2">
+				<div className="row p-1 pl-2 d-flex align-items-center">
 					<div className="col-4">COSECHADO:</div>
 					<div className="col-8">
 						{dataPermiso.cosechado ? (
@@ -146,7 +144,7 @@ export const CheckSanidad = () => {
 					</div>
 				</div>
 
-				<div className="row p-1 pl-2">
+				<div className="row p-1 pl-2 d-flex align-items-center">
 					<div className="col-4">DESVARADO:</div>
 					<div className="col-8">
 						{dataPermiso.desvarado ? (
@@ -177,7 +175,7 @@ export const CheckSanidad = () => {
 					</div>
 				</div>
 
-				<div className="row p-1 pl-2">
+				<div className="row p-1 pl-2 d-flex align-items-center">
 					<div className="col-4">DISQUEADO:</div>
 					<div className="col-8">
 						{dataPermiso.disqueado ? (
@@ -208,7 +206,7 @@ export const CheckSanidad = () => {
 					</div>
 				</div>
 
-				<div className="row p-1 pl-2">
+				<div className="row p-1 pl-2 d-flex align-items-center">
 					<div className="col-4">DESARRAIGADO:</div>
 					<div className="col-8">
 						{dataPermiso.desarraigado ? (
@@ -239,12 +237,34 @@ export const CheckSanidad = () => {
 					</div>
 				</div>
 
+				{dataPermiso.desarraigado ? (
+					<div className="row border rounded m-2 p-2 d-flex align-items-center">
+						<div className="col-6 ">SUPERFICIE MAPEADA:</div>
+						<div className="col-3">{dataPermiso.superficieMapeada} Ha</div>
+						<div className="col-3">
+							<button
+								className=" btn btn-outline-primary btn-sm "
+								type="button"
+								onClick={() => addSuperficieMapeada(dataPermiso.superficieMapeada)}
+							>
+								<i className="fas fa-plus"></i>
+							</button>
+						</div>
+					</div>
+				) : (
+					<></>
+				)}
+
 				<div className="row p-1 pl-2 pt-4 pb-4">
 					<div className="col-6 d-flex justify-content-center">
 						{dataPermiso.estadoPermiso === "pendiente" ? (
-							<button type="button" className="btn btn-outline-success" onClick={activarPermiso}>
-								<i className="fas fa-check"></i>
-								<span> Activar</span>
+							<button
+								type="button"
+								className="btn btn-outline-success"
+								// onClick={addSuperficieMapeada}
+							>
+								<i className="fas fa-print"></i>
+								<span> Imprimir</span>
 							</button>
 						) : (
 							<></>
