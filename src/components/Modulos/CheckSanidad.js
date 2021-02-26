@@ -11,9 +11,12 @@ export const CheckSanidad = () => {
 
 	let dataPermiso;
 
+	const cuotaSanidad = 20;
+
 	permisos.forEach((permiso) => {
 		if (permiso.id === permisoSelected) {
 			dataPermiso = permiso;
+			console.log(dataPermiso.pagado);
 		}
 	});
 
@@ -46,6 +49,12 @@ export const CheckSanidad = () => {
 			}
 		});
 	};
+
+	const formatter = new Intl.NumberFormat("es-MX", {
+		style: "currency",
+		currency: "MXN"
+		// minimumFractionDigits: 0
+	});
 
 	// TODO: Asignar folio de constancia fitosanitaria al expedir permiso de algodon
 
@@ -255,9 +264,47 @@ export const CheckSanidad = () => {
 					<></>
 				)}
 
+				<div className="row p-1 pl-2">
+					<div className="col-4">MONTO A PAGAR:</div>
+					<div className="col-8">
+						{formatter.format(dataPermiso.supAutorizada * cuotaSanidad)} MN
+					</div>
+				</div>
+
+				<div className="row p-1 pl-2 d-flex align-items-center">
+					<div className="col-4">PAGADO:</div>
+					<div className="col-8">
+						{dataPermiso.pagado ? (
+							<button
+								className=" btn btn-success btn-sm "
+								type="button"
+								onClick={(e) => setUnset({ pagado: false }, e)}
+							>
+								<i className="fas fa-check"></i>
+							</button>
+						) : dataPermiso.desarraigado ? (
+							<button
+								className=" btn btn-outline-success btn-sm "
+								type="button"
+								onClick={(e) => setUnset({ pagado: true }, e)}
+							>
+								<i className="fas fa-check"></i>
+							</button>
+						) : (
+							<button
+								className=" btn btn-outline-secondary btn-sm "
+								type="button"
+								// onClick={setError}
+							>
+								<i className="fas fa-check"></i>
+							</button>
+						)}
+					</div>
+				</div>
+
 				<div className="row p-1 pl-2 pt-4 pb-4">
 					<div className="col-6 d-flex justify-content-center">
-						{dataPermiso.estadoPermiso === "pendiente" ? (
+						{dataPermiso.pagado ? (
 							<button
 								type="button"
 								className="btn btn-outline-success"
