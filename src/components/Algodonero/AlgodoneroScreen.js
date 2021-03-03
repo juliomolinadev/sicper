@@ -11,6 +11,7 @@ import {
 } from "../../actions/algodoneroScreen";
 import { useForm } from "../../hooks/useForm";
 import { CheckSanidad } from "../Modulos/CheckSanidad";
+import { PrintSanidadModal } from "../modals/PrintSanidadModal";
 
 export const AlgodoneroScreen = () => {
 	const dispatch = useDispatch();
@@ -99,6 +100,7 @@ export const AlgodoneroScreen = () => {
 
 				{permisoSelected && dataPermiso !== undefined ? <CheckSanidad /> : <></>}
 			</div>
+			<PrintSanidadModal />
 		</>
 	);
 };

@@ -50,3 +50,11 @@ export const setPermisoSelected = (permiso) => ({
 export const unsetPermisoSelected = () => ({
 	type: types.permisosScreenUnsetPermisoSelected
 });
+
+export const openSanidadModal = () => ({
+	type: types.openSanidadModal
+});
+
+export const closeSanidadModal = () => ({
+	type: types.closeSanidadModal
+});

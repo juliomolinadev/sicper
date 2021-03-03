@@ -80,5 +80,7 @@ export const types = {
 	sicperScreenSetSuperficieExtra: "[Sicper Screen] Set superficie extra",
 
 	algodoneroScreenSetPermisos: "[Algodonero Screen] Set permisos",
-	algodoneroScreenUnsetPermisos: "[Algodonero Screen] Unset permisos"
+	algodoneroScreenUnsetPermisos: "[Algodonero Screen] Unset permisos",
+	openSanidadModal: "[Algodonero Screen] Open Modal Sanidad",
+	closeSanidadModal: "[Algodonero Screen] Close Modal Sanidad"
 };

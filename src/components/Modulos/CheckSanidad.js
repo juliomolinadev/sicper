@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { startLoadPermisos } from "../../actions/algodoneroScreen";
+import { startLoadPermisos, openSanidadModal } from "../../actions/algodoneroScreen";
 import { updatePermisoAlgodonero } from "../../helpers/updatePermisoAlgodonero";
 
 export const CheckSanidad = () => {
@@ -16,7 +16,6 @@ export const CheckSanidad = () => {
 	permisos.forEach((permiso) => {
 		if (permiso.id === permisoSelected) {
 			dataPermiso = permiso;
-			console.log(dataPermiso.pagado);
 		}
 	});
 
@@ -55,6 +54,10 @@ export const CheckSanidad = () => {
 		currency: "MXN"
 		// minimumFractionDigits: 0
 	});
+
+	const handleOpenSanidadModal = () => {
+		dispatch(openSanidadModal());
+	};
 
 	// TODO: Asignar folio de constancia fitosanitaria al expedir permiso de algodon
 
@@ -308,7 +311,7 @@ export const CheckSanidad = () => {
 							<button
 								type="button"
 								className="btn btn-outline-success"
-								// onClick={addSuperficieMapeada}
+								onClick={handleOpenSanidadModal}
 							>
 								<i className="fas fa-print"></i>
 								<span> Imprimir</span>
