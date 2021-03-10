@@ -3,7 +3,7 @@ import { types } from "../types/types";
 const initialState = {
 	permisos: [],
 	permisoSelected: null,
-	printSanidadModal: true
+	printSanidadModal: false
 };
 
 export const algodoneroScreenReducer = (state = initialState, action) => {

@@ -100,7 +100,11 @@ export const AlgodoneroScreen = () => {
 
 				{permisoSelected && dataPermiso !== undefined ? <CheckSanidad /> : <></>}
 			</div>
-			<PrintSanidadModal />
+			{dataPermiso !== undefined ? (
+				<PrintSanidadModal data={dataPermiso}></PrintSanidadModal>
+			) : (
+				<></>
+			)}
 		</>
 	);
 };

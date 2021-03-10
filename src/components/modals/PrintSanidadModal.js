@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { closeSanidadModal } from "../../actions/algodoneroScreen";
 
-export const PrintSanidadModal = () => {
+export const PrintSanidadModal = ({ data }) => {
 	const { printSanidadModal } = useSelector((state) => state.algodoneroScreen);
 
 	const dispatch = useDispatch();
@@ -68,7 +68,7 @@ export const PrintSanidadModal = () => {
 
 			<div className="row dflex justify-content-center">
 				<h5>
-					<b>ALGODONERO CICLO P-V data.ciclo</b>
+					<b>ALGODONERO CICLO P-V {data.ciclo}</b>
 				</h5>
 			</div>
 
@@ -77,12 +77,12 @@ export const PrintSanidadModal = () => {
 			<div className="row d-flex justify-content-center pt-5 text-justify">
 				<div className="col-8">
 					<p>
-						POR LA PRESENTE HACEMOS CONSTAR QUE EL C. data.productor, PRODUCTOR DEL LOTE NO.
-						data.lote DEL EJIDO/COLONIA data.localidad, CON SUPERFICIE SEMBRADA DE:
-						data.supAutorizada HA; REALIZÓ LAS LABORES FITOSANITARIAS EN UNA SUPERFICIE DESVARADA
-						DE: data.supAutorizada HA; SUPERFICIE DISQUEADA DE: data.supAutorizada HA; SUPERFICIE
-						BARBECHADA DE: data.supAutorizada HA; SUPERFICIE CON DESARRAIGO TOTAL DE:
-						data.supAutorizada HA.
+						POR LA PRESENTE HACEMOS CONSTAR QUE EL C. {data.nombreProductor}, PRODUCTOR DEL LOTE NO.
+						{data.lote} DEL EJIDO/COLONIA {data.localidad}, CON SUPERFICIE SEMBRADA DE:
+						{data.supAutorizada} HA; REALIZÓ LAS LABORES FITOSANITARIAS EN UNA SUPERFICIE DESVARADA
+						DE: {data.supAutorizada} HA; SUPERFICIE DISQUEADA DE: {data.supAutorizada} HA;
+						SUPERFICIE BARBECHADA DE: {data.supAutorizada} HA; SUPERFICIE CON DESARRAIGO TOTAL DE:
+						{data.supAutorizada} HA.
 					</p>
 
 					<p>
@@ -95,7 +95,7 @@ export const PrintSanidadModal = () => {
 
 					<p>SIRVA EL PRESENTE DOCUMENTO PARA LA LIBERACIÓN DE CARTA DE GARANTÍA EMITIDA.</p>
 
-					<p>PROPIETARIO: data.usuario</p>
+					<p>PROPIETARIO: {data.usuario}</p>
 
 					<div className=" d-flex justify-content-end pt-5">
 						<p>MEXICALI, B.C., dia DE mes De anio</p>
