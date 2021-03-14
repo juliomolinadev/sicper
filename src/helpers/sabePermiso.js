@@ -51,6 +51,7 @@ export const sabePermiso = async (allData) => {
 	};
 
 	if (data.nombreCultivo === "ALGODONERO") {
+		data.tecnico = false;
 		data.desfoliado = false;
 		data.cosechado = false;
 		data.desvarado = false;

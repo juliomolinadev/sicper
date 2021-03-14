@@ -5,7 +5,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { SicperScreen } from "../components/sicper/SicperScreen";
 import { PadronScreen } from "../components/padron/PadronScreen";
 import { ConfiguracionScreen } from "../components/configuracion/ConfiguracionScreen";
-import { ReportesScreen } from "../components/reportes/ReportesScreen";
+import { ReportesScreen } from "../scenes/ReportesScreen";
 import { TransferenciasScreen } from "../components/transferencias/TransferenciasScreen";
 import { PermisosScreen } from "../components/permisos/PermisosScreen";
 import { NuevoPermisoScreen } from "../components/permisos/NuevoPermisoScreen";

@@ -1,4 +1,4 @@
-export const setSuperficiesDataformat = (dataSend, titulo) => {
+export const setDataGraficoHorizontal = (dataSend, titulo) => {
 	console.log({ dataSend });
 	const data = {
 		labels: dataSend.labels,

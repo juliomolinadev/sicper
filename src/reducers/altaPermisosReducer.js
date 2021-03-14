@@ -145,7 +145,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				usuario: `${action.payload.apPaterno} ${action.payload.apMaterno} ${action.payload.nombre}`,
 				supDerecho: action.payload.supRiego,
 				lote: action.payload.predio,
-				localidad: action.payload.ejido,
+				localidad: action.payload.localidad,
 				municipio: action.payload.municipio,
 				estado: action.payload.estado,
 				modulo: action.payload.modulo,
