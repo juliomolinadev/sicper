@@ -41,7 +41,7 @@ export const PermisosScreen = () => {
 
 	const buscarPermisos = () => {
 		if (palabra.length > 0) {
-			dispatch(startLoadPermisosSearch(palabra, claveEntidad));
+			dispatch(startLoadPermisosSearch(palabra, claveEntidad, ciclo));
 		} else {
 			Swal.fire(
 				"Nada para buscar",
@@ -103,8 +103,8 @@ export const PermisosScreen = () => {
 			cancelButtonText: "No"
 		}).then((result) => {
 			if (result.isConfirmed) {
-				setPermisoInCancelProces(permisoSelected, claveEntidad);
-				dispatch(startLoadPermisos());
+				setPermisoInCancelProces(permisoSelected, claveEntidad, ciclo);
+				dispatch(startLoadPermisos(claveEntidad, ciclo));
 				Swal.fire(
 					"Solicitud recibida",
 					`Se inició el proceso de cancelación para el permiso ${dataPermiso.numeroPermiso}`,

@@ -10,9 +10,9 @@ export const startLoadPermisos = (modulo, ciclo) => {
 	};
 };
 
-export const startLoadPermisosSearch = (palabra, modulo) => {
+export const startLoadPermisosSearch = (palabra, modulo, ciclo) => {
 	return async (dispatch) => {
-		const permisos = await loadPermisos(palabra, modulo);
+		const permisos = await loadPermisos(palabra, modulo, ciclo);
 		dispatch(setPermisos(permisos));
 	};
 };

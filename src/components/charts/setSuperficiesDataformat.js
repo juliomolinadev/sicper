@@ -1,5 +1,4 @@
 export const setSuperficiesDataformat = (dataSend, titulo) => {
-	console.log({ dataSend });
 	const data = {
 		labels: dataSend.labels,
 		datasets: [

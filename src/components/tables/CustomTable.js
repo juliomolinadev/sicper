@@ -20,7 +20,7 @@ export const CustomTable = ({ title, columns, data, setFunction, closeFunction }
 	};
 
 	return (
-		<div className="table-responsive border rounded">
+		<div className="table-responsive">
 			<Datatable
 				columns={columns}
 				data={data}

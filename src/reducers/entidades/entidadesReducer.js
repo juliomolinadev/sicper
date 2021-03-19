@@ -12,30 +12,11 @@ export const entidadesReducer = (state = {}, action) => {
 				}
 			};
 
-		// case types.login:
-		// 	return {
-		// 		uid: action.payload.uid,
-		// 		name: action.payload.displayName
-		// 	};
-
-		// case types.entity:
-		// 	return {
-		// 		...state,
-		// 		entidad: action.payload.entidad,
-		// 		img: action.payload.img,
-		// 		claveEntidad: action.payload.claveEntidad,
-		// 		dotacion: action.payload.dotacion,
-		// 		titular: action.payload.titular
-		// 	};
-
-		// case types.setPrivilegios:
-		// 	return {
-		// 		...state,
-		// 		privilegios: action.payload
-		// 	};
-
-		// case types.logout:
-		// 	return {};
+		case types.setPermisos:
+			return {
+				...state,
+				permisos: action.payload
+			};
 
 		default:
 			return state;
