@@ -8,7 +8,9 @@ export const startLoadPermisos = (
 	campos,
 	activosCancelados,
 	tipoSuperficie,
-	sistema
+	sistema,
+	fechaInicial,
+	fechaFinal
 ) => {
 	return async (dispatch) => {
 		const permisos = await loadPermisos(
@@ -18,7 +20,9 @@ export const startLoadPermisos = (
 			campos,
 			activosCancelados,
 			tipoSuperficie,
-			sistema
+			sistema,
+			fechaInicial,
+			fechaFinal
 		);
 		dispatch(setPermisos(permisos));
 	};

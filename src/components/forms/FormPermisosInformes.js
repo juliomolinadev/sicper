@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
+import DateTimePicker from "react-datetime-picker";
 
 import { useForm } from "../../hooks/useForm";
 import { startLoadPermisos } from "../../actions/entidades/permisos";
@@ -11,6 +12,10 @@ export const FormPermisosInformes = () => {
 	const { claveEntidad } = useSelector((state) => state.auth);
 	const [formValues, handleInputChange] = useForm({ palabra: "" });
 	const { palabra, campo, activosCancelados, tipoSuperficie, sistema } = formValues;
+
+	// TODO: obtener fecha inicial y final del ciclo vigente
+	const [fechaInicial, onChangeFechaInicial] = useState(new Date(2020, 9, 1));
+	const [fechaFinal, onChangeFechaFinal] = useState(new Date(2021, 8, 30));
 
 	// TODO: crear funcion para definir ciclo
 	const ciclo = "2020-2021";
@@ -25,7 +30,9 @@ export const FormPermisosInformes = () => {
 					[campo],
 					activosCancelados,
 					tipoSuperficie,
-					sistema
+					sistema,
+					fechaInicial,
+					fechaFinal
 				)
 			);
 		} else {
@@ -235,38 +242,34 @@ export const FormPermisosInformes = () => {
 					</div>
 				</div>
 
-				{/* <div className="row justify-content-between border rounded mt-2">
+				<div className="row justify-content-between border rounded mt-2">
 					<div className="col-sm-12 p-2">
 						<p>RANGO DE EXPEDICIÓN</p>
 					</div>
 					<div className="col-sm-5  pb-2">
-						<label className="form-check-label" htmlFor="fechaInicial">
-							Fecha inicial
-						</label>
-						<input
-							// className="form-check-input"
-							type="date"
-							name="fechaInicial"
-							id="fechaInicial"
-							value="fechaInicial"
-							onChange={handleInputChange}
-						/>
+						<label className="form-check-label">Fecha inicial</label>
+
+						<div>
+							<DateTimePicker
+								onChange={onChangeFechaInicial}
+								value={fechaInicial}
+								format={"dd/MM/yyyy"}
+							/>
+						</div>
 					</div>
 
 					<div className="col-sm-5 pb-2">
-						<label className="form-check-label" htmlFor="fechaInicial">
-							Fecha final
-						</label>
-						<input
-							// className="form-check-input"
-							type="date"
-							name="fechaInicial"
-							id="fechaInicial"
-							value="fechaInicial"
-							onChange={handleInputChange}
-						/>
+						<label className="form-check-label">Fecha final</label>
+
+						<div>
+							<DateTimePicker
+								onChange={onChangeFechaFinal}
+								value={fechaFinal}
+								format={"dd/MM/yyyy"}
+							/>
+						</div>
 					</div>
-				</div> */}
+				</div>
 			</div>
 
 			<div className="col-sm-3 d-flex flex-column">

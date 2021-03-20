@@ -8,7 +8,9 @@ export const loadPermisos = async (
 	campos = ["usuario", "cuenta", "numeroPermiso"],
 	estado = "todos",
 	tipo = "todos",
-	sistema = "todos"
+	sistema = "todos",
+	fechaInicial = new Date(2020, 9, 1),
+	fechaFinal = new Date(2021, 8, 30)
 ) => {
 	const permisos = [];
 	const permisosCampo = [];
@@ -29,7 +31,7 @@ export const loadPermisos = async (
 	campos.forEach((campo) => {
 		permisosCampo.push(
 			filtros
-				.orderBy(`${campo}`)
+				.orderBy(campo)
 				.startAt(palabra.toUpperCase())
 				.endAt(palabra.toUpperCase() + "\uf8ff")
 				.get()
@@ -40,10 +42,14 @@ export const loadPermisos = async (
 
 	for (let i = 0; i < permisosResueltos.length; i++) {
 		permisosResueltos[i].forEach((snapHijo) => {
-			permisos.push({
-				id: snapHijo.id,
-				...snapHijo.data()
-			});
+			const fecha = snapHijo.data().fechaEmicion.toDate();
+
+			if (fecha >= fechaInicial && fecha <= fechaFinal) {
+				permisos.push({
+					id: snapHijo.id,
+					...snapHijo.data()
+				});
+			}
 		});
 	}
 
