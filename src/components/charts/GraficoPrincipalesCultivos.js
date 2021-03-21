@@ -1,46 +1,58 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { startLoadPrincipalesCultivos } from "../../actions/entidades/principalesCultivos";
+import { useSelector } from "react-redux";
+import { ordenarDataParaGrafico } from "../../helpers/ordenarDataParaGrafico";
 import { CustomGraficoHorizontal } from "./CustomGraficoHorizontal";
 
 export const GraficoPrincipalesCultivos = () => {
-	const { principalesCultivos } = useSelector((state) => state.entidades);
-	const { claveEntidad } = useSelector((state) => state.auth);
+	const { permisos, campoOrdenador } = useSelector((state) => state.entidades);
 
-	const dispatch = useDispatch();
+	const completaTitulo = (campo) => {
+		switch (campo) {
+			case "nombreCultivo":
+				return "cultivo";
 
-	// TODO: crear funcion para definir ciclo
-	const ciclo = "2020-2021";
+			case "usuario":
+				return "usuario";
 
-	if (!principalesCultivos) {
-		dispatch(startLoadPrincipalesCultivos(claveEntidad, ciclo));
-	}
+			case "nombreProductor":
+				return "productor";
 
+			case "localidad":
+				return "localidad";
+
+			default:
+				break;
+		}
+	};
+
+	let data = [];
 	let totalSuperficie = 0;
 	let totalPermisos = 0;
 
-	if (principalesCultivos) {
-		principalesCultivos.superficiesCultivos.forEach((superficie) => {
+	if (permisos) {
+		data = ordenarDataParaGrafico(permisos, campoOrdenador);
+
+		data.superficiesCultivos.forEach((superficie) => {
 			totalSuperficie += superficie;
 		});
 
-		principalesCultivos.numeroPermisos.forEach((permisos) => {
+		data.numeroPermisos.forEach((permisos) => {
 			totalPermisos += permisos;
 		});
 	}
 
-	const subtitulo1 = `Superficie expedida: ${totalSuperficie} ha`;
-	const subtitulo2 = `Permisos expedidos: ${totalPermisos}`;
+	const subtitulo1 = `Superficie incluida: ${totalSuperficie} ha`;
+	const subtitulo2 = `Permisos incluidos: ${totalPermisos}`;
 
 	return (
 		<div>
-			{principalesCultivos ? (
+			{data ? (
 				<CustomGraficoHorizontal
-					titulo={"Superficies por cultivo "}
+					titulo={`Superficies por ${completaTitulo(campoOrdenador)}`}
 					subtitulo1={subtitulo1}
 					subtitulo2={subtitulo2}
-					etiquetas={principalesCultivos.labels}
-					dataSet={principalesCultivos.superficiesCultivos}
+					etiquetas={data.labels}
+					dataSet={data.superficiesCultivos}
 					ancho={220}
 				></CustomGraficoHorizontal>
 			) : (

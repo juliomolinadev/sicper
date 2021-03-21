@@ -18,6 +18,12 @@ export const entidadesReducer = (state = {}, action) => {
 				permisos: action.payload
 			};
 
+		case types.setCampoOrdenador:
+			return {
+				...state,
+				campoOrdenador: action.payload
+			};
+
 		default:
 			return state;
 	}

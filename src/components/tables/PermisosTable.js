@@ -16,7 +16,7 @@ export const PermisosTable = () => {
 	const ciclo = "2020-2021";
 
 	if (!permisos) {
-		dispatch(startLoadPermisos("", claveEntidad, ciclo, ["usuario"]));
+		dispatch(startLoadPermisos("", claveEntidad, ciclo, ["nombreCultivo"]));
 	}
 
 	let permisosFormateados = [];
@@ -40,8 +40,6 @@ export const PermisosTable = () => {
 				title={titulo}
 				columns={permisosColumns}
 				data={permisosFormateados}
-				setFunction={""}
-				closeFunction={""}
 			></CustomTable>
 		</div>
 	);

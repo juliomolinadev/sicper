@@ -69,9 +69,9 @@ export const FormPermisosInformes = () => {
 							className="form-control ml-2"
 						>
 							<option value="">-</option>
+							<option value="nombreCultivo">Cultivo</option>
 							<option value="usuario">Usuario</option>
 							<option value="nombreProductor">Productor</option>
-							<option value="nombreCultivo">Cultivo</option>
 							<option value="localidad">Localidad</option>
 						</select>
 

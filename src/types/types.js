@@ -87,5 +87,7 @@ export const types = {
 	setDataPrincipalesCultivos: "[Entidades] Set Data Principales Cultivos",
 	unsetDataPrincipalesCultivos: "[Entidades] Unset Data Principales Cultivos",
 	setPermisos: "[Entidades] Set permisos",
-	unsetPermisos: "[Entidades] Unset permisos"
+	unsetPermisos: "[Entidades] Unset permisos",
+	setCampoOrdenador: "[Entidades] Set Campo Ordenador",
+	unsetCampoOrdenador: "[Entidades] Unset Campo Ordenador"
 };

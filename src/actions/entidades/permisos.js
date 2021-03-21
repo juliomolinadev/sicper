@@ -25,6 +25,7 @@ export const startLoadPermisos = (
 			fechaFinal
 		);
 		dispatch(setPermisos(permisos));
+		dispatch(setCampoOrdenador(campos[0]));
 	};
 };
 
@@ -35,4 +36,13 @@ export const setPermisos = (permisos) => ({
 
 export const unsetPermisos = () => ({
 	type: types.unsetPermisos
+});
+
+export const setCampoOrdenador = (campo) => ({
+	type: types.setCampoOrdenador,
+	payload: campo
+});
+
+export const unsetCampoOrdenador = () => ({
+	type: types.unsetCampoOrdenador
 });

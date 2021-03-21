@@ -5,7 +5,7 @@ export const loadPermisos = async (
 	palabra,
 	modulo,
 	ciclo,
-	campos = ["usuario", "cuenta", "numeroPermiso"],
+	campos = ["nombreCultivo", "usuario", "cuenta", "numeroPermiso"],
 	estado = "todos",
 	tipo = "todos",
 	sistema = "todos",
