@@ -1,11 +1,11 @@
 import React from "react";
-import { ModuloInformes } from "../components/modulos/ModuloInformes";
+import { ModuloInformesPermisos } from "../components/modulos/ModuloInformesPermisos";
 
 export const ReportesScreen = () => {
 	return (
 		<div>
 			<div className="pt-5"></div>
-			<ModuloInformes titulo={"Permisos"}></ModuloInformes>
+			<ModuloInformesPermisos />
 			<div className="pb-5"></div>
 		</div>
 	);

@@ -77,11 +77,12 @@
 	color: rgb(51, 51, 51);
 	display: inline;
 	max-height: 480px;
+	height: auto;
 	max-width: 1125px;
 	outline: auto;
 	padding: 10px;
 	margin-top: 80px;
-	/* font-size: 13px; */
+	font-size: 13px;
 	position: absolute;
 }
 
@@ -129,15 +130,30 @@
 	border: 0px solid gray !important;
 }
 
+@page {
+	margin-bottom: 4%;
+	margin-top: 4%;
+}
+
 @media print {
+	.no-printme {
+		display: none !important;
+	}
+
+	.printme {
+		display: block !important;
+	}
+
+	.header {
+		padding-top: 0px !important;
+	}
+
 	.printModal {
 		outline: none;
 		max-height: 1500px;
 		margin-top: 0px;
 	}
-}
 
-@media print {
 	.printModalSanidad {
 		outline: none;
 		max-height: 1500px;

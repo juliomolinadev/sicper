@@ -89,5 +89,7 @@ export const types = {
 	setPermisos: "[Entidades] Set permisos",
 	unsetPermisos: "[Entidades] Unset permisos",
 	setCampoOrdenador: "[Entidades] Set Campo Ordenador",
-	unsetCampoOrdenador: "[Entidades] Unset Campo Ordenador"
+	unsetCampoOrdenador: "[Entidades] Unset Campo Ordenador",
+	openImprimirReporteModal: "[Scenes] Open Imprimir Reporte Modal",
+	closeImprimirReporteModal: "[Scenes] Close Imprimir Reporte Modal"
 };

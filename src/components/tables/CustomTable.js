@@ -6,7 +6,6 @@ export const CustomTable = ({ title, columns, data, setFunction, closeFunction }
 	const dispatch = useDispatch();
 
 	const getRowSelected = (row) => {
-		console.log("setFunction en lugar: ", setFunction);
 		if (setFunction !== undefined) {
 			dispatch(setFunction(row));
 		}
@@ -24,7 +23,7 @@ export const CustomTable = ({ title, columns, data, setFunction, closeFunction }
 	};
 
 	return (
-		<div className="table-responsive">
+		<div className="table-responsive tablePrint">
 			<Datatable
 				columns={columns}
 				data={data}

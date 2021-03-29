@@ -10,7 +10,7 @@ import {
 	startLoadPermisosSearch
 } from "../../actions/algodoneroScreen";
 import { useForm } from "../../hooks/useForm";
-import { CheckSanidad } from "../Modulos/CheckSanidad";
+import { CheckSanidad } from "../modulos/CheckSanidad";
 import { PrintSanidadModal } from "../modals/PrintSanidadModal";
 
 export const AlgodoneroScreen = () => {

@@ -1,31 +1,28 @@
-// import { types } from "../../types/types";
+import { types } from "../../types/types";
 
-export const scenesReducer = (state = {}, action) => {
+const initialState = {
+	reportesScreen: {
+		openImprimirReporteModal: false
+	}
+};
+
+export const scenesReducer = (state = initialState, action) => {
 	switch (action.type) {
-		// case types.login:
-		// 	return {
-		// 		uid: action.payload.uid,
-		// 		name: action.payload.displayName
-		// 	};
+		case types.openImprimirReporteModal:
+			return {
+				...state,
+				reportesScreen: {
+					openImprimirReporteModal: true
+				}
+			};
 
-		// case types.entity:
-		// 	return {
-		// 		...state,
-		// 		entidad: action.payload.entidad,
-		// 		img: action.payload.img,
-		// 		claveEntidad: action.payload.claveEntidad,
-		// 		dotacion: action.payload.dotacion,
-		// 		titular: action.payload.titular
-		// 	};
-
-		// case types.setPrivilegios:
-		// 	return {
-		// 		...state,
-		// 		privilegios: action.payload
-		// 	};
-
-		// case types.logout:
-		// 	return {};
+		case types.closeImprimirReporteModal:
+			return {
+				...state,
+				reportesScreen: {
+					openImprimirReporteModal: false
+				}
+			};
 
 		default:
 			return state;

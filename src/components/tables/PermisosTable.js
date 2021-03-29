@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
-import { CustomTable } from "./CustomTable";
+import { CustomPrintTable } from "./CustomPrintTable";
 import { permisosColumns } from "./configTables";
 import { startLoadPermisos } from "../../actions/entidades/permisos";
 
@@ -36,11 +36,11 @@ export const PermisosTable = () => {
 
 	return (
 		<div>
-			<CustomTable
+			<CustomPrintTable
 				title={titulo}
 				columns={permisosColumns}
 				data={permisosFormateados}
-			></CustomTable>
+			></CustomPrintTable>
 		</div>
 	);
 };

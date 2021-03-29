@@ -46,9 +46,13 @@ export const FormPermisosInformes = () => {
 		}
 	};
 
+	const imprimirInforme = () => {
+		window.print();
+	};
+
 	return (
 		<div className="row">
-			<div className="col-sm-9">
+			<div className="col-sm-12">
 				<div className="row">
 					<div className="col-sm-12 d-inline-flex p-0">
 						<input
@@ -76,7 +80,7 @@ export const FormPermisosInformes = () => {
 						</select>
 
 						<button
-							className=" btn btn-outline-primary d-sm-block ml-2"
+							className=" btn btn-outline-primary d-sm-block ml-2 no-printme"
 							type="button"
 							onClick={buscarPermisos}
 						>
@@ -270,38 +274,14 @@ export const FormPermisosInformes = () => {
 						</div>
 					</div>
 				</div>
-			</div>
 
-			<div className="col-sm-3 d-flex flex-column">
-				<div className="d-flex">
+				<div className=" row d-flex pt-3">
 					<button
-						className="btn btn-outline-primary flex-fill"
+						className="btn btn-outline-primary flex-fill no-printme"
 						type="button"
-						// onClick={changeProductorModal}
+						onClick={imprimirInforme}
 					>
 						<span>Imprimir informe </span>
-						<i className="fas fa-print"></i>
-					</button>
-				</div>
-
-				<div className="pt-3 d-flex">
-					<button
-						className="btn btn-outline-primary flex-fill"
-						type="button"
-						// onClick={changeProductorModal}
-					>
-						<span>Imprimir grafico </span>
-						<i className="fas fa-print"></i>
-					</button>
-				</div>
-
-				<div className="pt-3 d-flex">
-					<button
-						className="btn btn-outline-primary flex-fill"
-						type="button"
-						// onClick={changeProductorModal}
-					>
-						<span>Imprimir informe con grafico </span>
 						<i className="fas fa-print"></i>
 					</button>
 				</div>
