@@ -25,12 +25,12 @@ export const ResumenAutorizados = ({ autorizados, modulo }) => {
 
 	return (
 		<>
-			<div className="d-flex bg-light border-info border-bottom rounded-top p-1 justify-content-center font-weight-bold text-secondary pt-3">
+			<div className="d-flex bg-light border-primary border-bottom rounded-top p-1 justify-content-center font-weight-bold text-secondary pt-3">
 				<h5>Módulo {modulo}</h5>
 			</div>
 
 			<div className="table-responsive">
-				<table className="table table-info mb-0 text-secondary">
+				<table className="table table-primary mb-0 text-secondary">
 					<thead>
 						<tr>
 							<th colSpan="3">Total Superficie Normal</th>

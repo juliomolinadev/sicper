@@ -4,8 +4,9 @@ import { ModuloInformesPermisos } from "../components/modulos/ModuloInformesPerm
 export const ReportesScreen = () => {
 	return (
 		<div>
-			<div className="pt-5"></div>
-			<ModuloInformesPermisos />
+			<div className="pt-5">
+				<ModuloInformesPermisos />
+			</div>
 			<div className="pb-5"></div>
 		</div>
 	);
