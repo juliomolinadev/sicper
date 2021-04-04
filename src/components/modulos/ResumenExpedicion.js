@@ -8,7 +8,7 @@ import {
 
 export const ResumenExpedicion = () => {
 	const { expedicion, superficie } = useSelector((state) => state.sicperScreen);
-	const { claveEntidad } = useSelector((state) => state.auth);
+	const { modulo } = useSelector((state) => state.auth);
 
 	const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ export const ResumenExpedicion = () => {
 	const ciclo = "2020-2021";
 
 	if (expedicion === null) {
-		dispatch(startLoadExpedicion(claveEntidad, ciclo));
+		dispatch(startLoadExpedicion(modulo, ciclo));
 	}
 
 	const setNormal = () => {

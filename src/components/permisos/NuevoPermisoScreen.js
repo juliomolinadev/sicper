@@ -58,7 +58,7 @@ export const NuevoPermisoScreen = () => {
 	const dispatch = useDispatch();
 
 	if (autorizados.length === 0) {
-		dispatch(startLoadAutorizados(auth.claveEntidad));
+		dispatch(startLoadAutorizados(auth.modulo));
 	}
 
 	const handleOpenPrintPermisoModal = () => {
@@ -152,8 +152,8 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const defineNumeroPermiso = async () => {
-		const permiso = `MOD${auth.claveEntidad}-${fill(
-			(await loadContador(auth.claveEntidad, defineCiclo())) + 1,
+		const permiso = `MOD${auth.modulo}-${fill(
+			(await loadContador(auth.modulo, defineCiclo())) + 1,
 			3
 		)}`;
 		return permiso;

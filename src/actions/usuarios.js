@@ -2,6 +2,7 @@ import { types } from "../types/types";
 import { loadUsuarios } from "../helpers/loadUsuarios";
 import { loadLocalidad } from "../helpers/loadLocalidad";
 import { loadSuperficiePrevia } from "../helpers/loadSuperficiePrevia";
+import { loadUserTransfer } from "../helpers/loadUserTransfer";
 
 export const openUsuariosModal = () => ({
 	type: types.altaPermisoOpenUsuariosModal
@@ -11,15 +12,15 @@ export const closeUsuariosModal = () => ({
 	type: types.altaPermisoCloseUsuariosModal
 });
 
-export const startLoadUsuarios = (usuario, claveEntidad) => {
+export const startLoadUsuarios = (usuario, modulo) => {
 	return async (dispatch) => {
-		const usuarios = await loadUsuarios(usuario, claveEntidad);
+		const usuarios = await loadUsuarios(usuario, modulo);
 		dispatch(setUsuarios(usuarios));
 	};
 };
 
 export const setUsuarios = (usuarios) => ({
-	type: types.loadUsuarios,
+	type: types.setUsuarios,
 	payload: usuarios
 });
 
@@ -36,8 +37,15 @@ export const startSetUsuarioSelected = (usuario) => {
 			usuario.modulo,
 			ciclo
 		);
+		const transfers = await loadUserTransfer(
+			`${usuario.cuenta}.${usuario.subcta}`,
+			usuario.modulo,
+			ciclo
+		);
+
+		console.log("transfers en actions: ", transfers);
 		usuario.localidad = localidad;
-		usuario.supPrevia = supPrevia;
+		usuario.supPrevia = supPrevia + transfers;
 		dispatch(setUsuarioSelected(usuario));
 	};
 };

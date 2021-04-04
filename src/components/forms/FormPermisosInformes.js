@@ -9,7 +9,7 @@ import { startLoadPermisos } from "../../actions/entidades/permisos";
 export const FormPermisosInformes = () => {
 	const dispatch = useDispatch();
 
-	const { claveEntidad } = useSelector((state) => state.auth);
+	const { modulo } = useSelector((state) => state.auth);
 	const [formValues, handleInputChange] = useForm({ palabra: "" });
 	const { palabra, campo, activosCancelados, tipoSuperficie, sistema } = formValues;
 
@@ -25,7 +25,7 @@ export const FormPermisosInformes = () => {
 			dispatch(
 				startLoadPermisos(
 					palabra,
-					claveEntidad,
+					modulo,
 					ciclo,
 					[campo],
 					activosCancelados,

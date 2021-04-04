@@ -9,6 +9,9 @@ import {
 } from "../../../actions/usuarios";
 
 export const UsuarioInput = () => {
+	const { modulo } = useSelector((state) => state.auth);
+	const { idUsuarioSelected, usuario: nombreUsuario } = useSelector((state) => state.altaPermisos);
+
 	const dispatch = useDispatch();
 
 	const handleOpenUsuariosModal = () => {
@@ -21,12 +24,8 @@ export const UsuarioInput = () => {
 	};
 
 	const handleLoadUsuarios = () => {
-		dispatch(startLoadUsuarios(usuario.toUpperCase(), claveEntidad));
+		dispatch(startLoadUsuarios(usuario.toUpperCase(), modulo));
 	};
-
-	const { claveEntidad } = useSelector((state) => state.auth);
-
-	const { idUsuarioSelected, usuario: nombreUsuario } = useSelector((state) => state.altaPermisos);
 
 	let usuarioLabel = "";
 

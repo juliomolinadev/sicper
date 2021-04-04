@@ -18,7 +18,7 @@ export const startLoginEmailPassword = (email, password) => {
 				const { nombre, img, clave, dotacion, titular } = entityData;
 
 				dispatch(login(user.uid, user.displayName));
-				dispatch(setEntity(nombre, img, clave, dotacion, titular));
+				dispatch(setEntity(nombre, img, clave, dotacion, titular, entity.rol, entity.modulo));
 				dispatch(setPrivilegios(privilegios));
 				dispatch(finishLoading());
 			})
@@ -65,14 +65,16 @@ export const login = (uid, displayName) => ({
 	}
 });
 
-export const setEntity = (entidad, img, claveEntidad, dotacion, titular) => ({
+export const setEntity = (entidad, img, claveEntidad, dotacion, titular, rol, modulo) => ({
 	type: types.entity,
 	payload: {
 		entidad,
 		img,
 		claveEntidad,
 		dotacion,
-		titular
+		titular,
+		rol,
+		modulo
 	}
 });
 

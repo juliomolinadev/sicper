@@ -2,10 +2,10 @@ import { db } from "../firebase/firebase-config";
 
 // TODO: Implementar busqueda de usuarios de pozo particular
 
-export const loadUsuarios = async (usuario, claveEntidad) => {
+export const loadUsuarios = async (usuario, modulo) => {
 	const usuariosSnap = await db
 		.collection(`derechos`)
-		.where("modulo", "==", claveEntidad)
+		.where("modulo", "==", modulo)
 		.orderBy("apPaterno")
 		.startAt(usuario)
 		.endAt(usuario + "\uf8ff")

@@ -26,22 +26,22 @@ export const PermisosScreen = () => {
 	const { palabra } = formValues;
 
 	const { permisos, permisoSelected, superficies } = useSelector((state) => state.permisosScreen);
-	const { claveEntidad } = useSelector((state) => state.auth);
+	const { modulo } = useSelector((state) => state.auth);
 
 	// TODO: crear funcion para definir ciclo
 	const ciclo = "2020-2021";
 
 	if (permisos.length === 0) {
-		dispatch(startLoadPermisos(claveEntidad, ciclo));
+		dispatch(startLoadPermisos(modulo, ciclo));
 	}
 
 	if (superficies === null) {
-		dispatch(startLoadSuperficies(claveEntidad, ciclo));
+		dispatch(startLoadSuperficies(modulo, ciclo));
 	}
 
 	const buscarPermisos = () => {
 		if (palabra.length > 0) {
-			dispatch(startLoadPermisosSearch(palabra, claveEntidad, ciclo));
+			dispatch(startLoadPermisosSearch(palabra, modulo, ciclo));
 		} else {
 			Swal.fire(
 				"Nada para buscar",
@@ -103,8 +103,8 @@ export const PermisosScreen = () => {
 			cancelButtonText: "No"
 		}).then((result) => {
 			if (result.isConfirmed) {
-				setPermisoInCancelProces(permisoSelected, claveEntidad, ciclo);
-				dispatch(startLoadPermisos(claveEntidad, ciclo));
+				setPermisoInCancelProces(permisoSelected, modulo, ciclo);
+				dispatch(startLoadPermisos(modulo, ciclo));
 				Swal.fire(
 					"Solicitud recibida",
 					`Se inició el proceso de cancelación para el permiso ${dataPermiso.numeroPermiso}`,

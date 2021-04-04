@@ -1,12 +1,12 @@
 import { db } from "../firebase/firebase-config";
 import { loadContador } from "./loadContador";
 
-export const updateContador = async (entidad) => {
-	const contador = (await loadContador(entidad)) + 1;
+export const updateContador = async (modulo) => {
+	const contador = (await loadContador(modulo)) + 1;
 
 	const contadorSnap = await db
 		.collection(`contadoresPermisos`)
-		.where("claveEntidad", "==", entidad)
+		.where("claveEntidad", "==", modulo)
 		.get();
 
 	const contadores = [];

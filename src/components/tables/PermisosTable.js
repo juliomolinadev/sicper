@@ -8,7 +8,7 @@ import { startLoadPermisos } from "../../actions/entidades/permisos";
 
 export const PermisosTable = () => {
 	const { permisos } = useSelector((state) => state.entidades);
-	const { claveEntidad } = useSelector((state) => state.auth);
+	const { modulo } = useSelector((state) => state.auth);
 
 	const dispatch = useDispatch();
 
@@ -16,7 +16,7 @@ export const PermisosTable = () => {
 	const ciclo = "2020-2021";
 
 	if (!permisos) {
-		dispatch(startLoadPermisos("", claveEntidad, ciclo, ["nombreCultivo"]));
+		dispatch(startLoadPermisos("", modulo, ciclo, ["nombreCultivo"]));
 	}
 
 	let permisosFormateados = [];

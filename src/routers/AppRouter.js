@@ -30,7 +30,7 @@ export const AppRouter = () => {
 				const { nombre, img, clave, dotacion, titular } = entityData;
 
 				dispatch(login(user.uid, user.displayName));
-				dispatch(setEntity(nombre, img, clave, dotacion, titular));
+				dispatch(setEntity(nombre, img, clave, dotacion, titular, entity.rol, entity.modulo));
 				dispatch(setPrivilegios(privilegios));
 				setIsLoggedIn(true);
 			} else {

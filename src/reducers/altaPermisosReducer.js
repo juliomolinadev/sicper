@@ -125,7 +125,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				openUsuariosModal: false
 			};
 
-		case types.loadUsuarios:
+		case types.setUsuarios:
 			return {
 				...state,
 				usuarios: action.payload

@@ -24,6 +24,18 @@ export const entidadesReducer = (state = {}, action) => {
 				campoOrdenador: action.payload
 			};
 
+		case types.setUsuarios:
+			return {
+				...state,
+				usuarios: action.payload
+			};
+
+		case types.setUsuario:
+			return {
+				...state,
+				usuario: action.payload
+			};
+
 		default:
 			return state;
 	}

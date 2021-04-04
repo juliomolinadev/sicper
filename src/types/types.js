@@ -25,6 +25,8 @@ export const types = {
 	altaPermisoCloseUsuariosModal: "[Alta Permisos] Close usuarios modal",
 	loadUsuarios: "[Alta Permisos] Load usuarios",
 	clearUsuarios: "[Alta Permisos] Clear usuarios",
+	setUsuarios: "[Alta Permisos] Set usuarios",
+	unsetUsuarios: "[Alta Permisos] Unset usuarios",
 	setUsuario: "[Alta Permisos] Set usuario",
 	unsetUsuario: "[Alta Permisos] Unset usuario",
 
