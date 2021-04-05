@@ -93,5 +93,9 @@ export const types = {
 	setCampoOrdenador: "[Entidades] Set Campo Ordenador",
 	unsetCampoOrdenador: "[Entidades] Unset Campo Ordenador",
 	openImprimirReporteModal: "[Scenes] Open Imprimir Reporte Modal",
-	closeImprimirReporteModal: "[Scenes] Close Imprimir Reporte Modal"
+	closeImprimirReporteModal: "[Scenes] Close Imprimir Reporte Modal",
+
+	setSystemUsers: "[Entidades] Set System Users",
+	setSystemUserSelected: "[Entidades] Set System User Selected",
+	unsetSystemUserSelected: "[Entidades] Unset System User Selected"
 };

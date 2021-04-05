@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { /* startGoogleLogin, */ startLoginEmailPassword } from "../../actions/auth";
 import { useForm } from "../../hooks/useForm";
 import "./_auth.scss";
@@ -50,7 +50,7 @@ export const LoginScreen = () => {
 					onChange={handleInputChange}
 				/>
 
-				<button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+				<button type="submit" className="btn btn-outline-primary btn-block mt-3" disabled={loading}>
 					Login
 				</button>
 
@@ -69,11 +69,12 @@ export const LoginScreen = () => {
 							<b>Login con google</b>
 						</p>
 					</div>
+				</div> */}
+				<div className="pt-4">
+					<Link to="/auth/register" className="link">
+						Crear nuevo usuario
+					</Link>
 				</div>
-
-				<Link to="/auth/register" className="link">
-					Crear nuevo usuario
-				</Link> */}
 			</form>
 		</>
 	);

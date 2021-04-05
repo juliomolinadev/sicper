@@ -36,6 +36,24 @@ export const entidadesReducer = (state = {}, action) => {
 				usuario: action.payload
 			};
 
+		case types.setSystemUsers:
+			return {
+				...state,
+				systemUsers: action.payload
+			};
+
+		case types.setSystemUserSelected:
+			return {
+				...state,
+				systemUserSelected: action.payload
+			};
+
+		case types.unsetSystemUserSelected:
+			return {
+				...state,
+				systemUserSelected: null
+			};
+
 		default:
 			return state;
 	}

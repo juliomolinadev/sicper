@@ -5,7 +5,7 @@ import { db } from "../firebase/firebase-config";
 export const loadUsuarios = async (usuario, modulo) => {
 	const usuariosSnap = await db
 		.collection(`derechos`)
-		.where("modulo", "==", modulo)
+		.where("modulo", "==", parseInt(modulo))
 		.orderBy("apPaterno")
 		.startAt(usuario)
 		.endAt(usuario + "\uf8ff")

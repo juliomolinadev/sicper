@@ -23,22 +23,20 @@ export const CustomTable = ({ title, columns, data, setFunction, closeFunction }
 	};
 
 	return (
-		<div className="table-responsive tablePrint">
-			<Datatable
-				columns={columns}
-				data={data}
-				title={title}
-				pagination
-				paginationComponentOptions={paginationOptions}
-				fixedHeader
-				persistTableHead
-				fixedHeaderScrollHeight="380px"
-				highlightOnHover={true}
-				striped={true}
-				pointerOnHover={true}
-				dense={true}
-				onRowClicked={getRowSelected}
-			/>
-		</div>
+		<Datatable
+			columns={columns}
+			data={data}
+			title={title}
+			pagination
+			paginationComponentOptions={paginationOptions}
+			fixedHeader
+			persistTableHead
+			fixedHeaderScrollHeight="380px"
+			highlightOnHover={true}
+			striped={true}
+			pointerOnHover={true}
+			dense={true}
+			onRowClicked={getRowSelected}
+		/>
 	);
 };

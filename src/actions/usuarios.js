@@ -43,7 +43,6 @@ export const startSetUsuarioSelected = (usuario) => {
 			ciclo
 		);
 
-		console.log("transfers en actions: ", transfers);
 		usuario.localidad = localidad;
 		usuario.supPrevia = supPrevia + transfers;
 		dispatch(setUsuarioSelected(usuario));

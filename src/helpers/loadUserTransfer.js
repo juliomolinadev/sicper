@@ -1,7 +1,6 @@
 import { db } from "../firebase/firebase-config";
 
 export const loadUserTransfer = async (cuenta, modulo, ciclo) => {
-	console.log({ cuenta, modulo, ciclo });
 	const transferSnap = await db
 		.collection(`transferencias`)
 		.doc(ciclo)
@@ -24,8 +23,6 @@ export const loadUserTransfer = async (cuenta, modulo, ciclo) => {
 	transfer.forEach((transfer) => {
 		supPrevia += transfer.superficieTransferida;
 	});
-
-	console.log("supPrevia en load: ", supPrevia);
 
 	return supPrevia;
 };

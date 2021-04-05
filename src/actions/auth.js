@@ -30,7 +30,7 @@ export const startLoginEmailPassword = (email, password) => {
 	};
 };
 
-export const startRegisterWithEmailPasswordName = (email, password, name) => {
+export const startRegisterWithEmailPasswordName = (email, password, name, modulo) => {
 	return (dispatch) => {
 		firebase
 			.auth()
@@ -38,6 +38,13 @@ export const startRegisterWithEmailPasswordName = (email, password, name) => {
 			.then(async ({ user }) => {
 				await user.updateProfile({ displayName: name });
 				dispatch(login(user.uid, user.displayName));
+				await db.collection(`usuarios`).doc(user.uid).set({
+					claveEntidad: modulo,
+					modulo: modulo,
+					rol: "sinAsignar",
+					email: email,
+					displayName: name
+				});
 			})
 			.catch((e) => {
 				console.log(e);
