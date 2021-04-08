@@ -16,7 +16,7 @@ import {
 import { unsetCultivoSelected } from "../../actions/cultivos";
 import { unsetProductorSelected } from "../../actions/productores";
 import { unsetUsuarioSelected } from "../../actions/usuarios";
-import { sabePermiso } from "../../helpers/sabePermiso";
+import { savePermiso } from "../../helpers/savePermiso";
 
 const customStyles = {
 	content: {
@@ -45,7 +45,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 	const handleSavePermiso = async () => {
 		dispatch(startDisableSaveButton());
 		dispatch(setEnEspera());
-		if (await sabePermiso(data)) {
+		if (await savePermiso(data)) {
 			dispatch(unsetEnEspera());
 			dispatch(startEnablePrintButton());
 		}

@@ -4,7 +4,7 @@ import moment from "moment";
 import firebase from "firebase/app";
 import "firebase/firestore";
 
-export const sabePermiso = async (allData) => {
+export const savePermiso = async (allData) => {
 	const data = {
 		idUsuarioSelected: allData.idUsuarioSelected,
 		cuenta: allData.cuenta,
@@ -51,7 +51,7 @@ export const sabePermiso = async (allData) => {
 	};
 
 	if (data.nombreCultivo === "ALGODONERO") {
-		data.tecnico = false;
+		data.tecnico = "sinAsignar";
 		data.desfoliado = false;
 		data.cosechado = false;
 		data.desvarado = false;
@@ -71,7 +71,6 @@ export const sabePermiso = async (allData) => {
 		.doc(`${data.claveCultivo}-${data.nombreCultivo}`);
 
 	const isSave = await db
-
 		.collection(`permisos`)
 		.doc(data.ciclo)
 		.collection("modulos")

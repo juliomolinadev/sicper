@@ -56,14 +56,6 @@ export const NavbarComponent = () => {
 							<></>
 						)}
 
-						{dev || tecnicoCESVBC ? (
-							<Link to="/algodonero" className="nav-link">
-								Algodonero
-							</Link>
-						) : (
-							<></>
-						)}
-
 						{dev || operadorModulo || adminCNA ? (
 							<Link to="/transferencias" className="nav-link">
 								Transferencias
@@ -72,9 +64,17 @@ export const NavbarComponent = () => {
 							<></>
 						)}
 
-						{dev || operadorModulo || adminCNA || tecnicoCESVBC ? (
-							<Link to="/reportes" className="nav-link">
-								Reportes
+						{dev || tecnicoCESVBC ? (
+							<Link to="/asignacion" className="nav-link">
+								Asignacion
+							</Link>
+						) : (
+							<></>
+						)}
+
+						{dev || tecnicoCESVBC ? (
+							<Link to="/labores" className="nav-link">
+								Labores
 							</Link>
 						) : (
 							<></>
@@ -83,6 +83,14 @@ export const NavbarComponent = () => {
 						{dev || adminCNA ? (
 							<Link to="/autorizados" className="nav-link">
 								Autorizados
+							</Link>
+						) : (
+							<></>
+						)}
+
+						{dev || operadorModulo || adminCNA || tecnicoCESVBC ? (
+							<Link to="/reportes" className="nav-link">
+								Reportes
 							</Link>
 						) : (
 							<></>

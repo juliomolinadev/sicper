@@ -54,6 +54,11 @@ export const entidadesReducer = (state = {}, action) => {
 				systemUserSelected: null
 			};
 
+		case types.setLocalties:
+			return {
+				...state,
+				localties: action.payload
+			};
 		default:
 			return state;
 	}

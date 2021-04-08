@@ -4,14 +4,15 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 import { SicperScreen } from "../components/sicper/SicperScreen";
 import { PadronScreen } from "../components/padron/PadronScreen";
-import { ConfiguracionScreen } from "../scenes/ConfiguracionScreen";
-import { ReportesScreen } from "../scenes/ReportesScreen";
-import { TransferenciasScreen } from "../scenes/TransferenciasScreen";
 import { PermisosScreen } from "../components/permisos/PermisosScreen";
 import { NuevoPermisoScreen } from "../components/permisos/NuevoPermisoScreen";
+import { TransferenciasScreen } from "../scenes/TransferenciasScreen";
+import { AsignacionScreen } from "../scenes/AsignacionScreen";
+import { LaboresScreen } from "../scenes/LaboresScreen";
 import { AutorizadosScreen } from "../components/autorizados/AutorizadosScreen";
+import { ReportesScreen } from "../scenes/ReportesScreen";
+import { ConfiguracionScreen } from "../scenes/ConfiguracionScreen";
 import Header from "../components/ui/Header";
-import { AlgodoneroScreen } from "../components/Algodonero/AlgodoneroScreen";
 
 export const DashboardRoutes = () => {
 	return (
@@ -22,12 +23,13 @@ export const DashboardRoutes = () => {
 				<Route exact path="/sicper" component={SicperScreen} />
 				<Route exact path="/padron" component={PadronScreen} />
 				<Route exact path="/permisos" component={PermisosScreen} />
-				<Route exact path="/algodonero" component={AlgodoneroScreen} />
-				<Route exact path="/transferencias" component={TransferenciasScreen} />
-				<Route exact path="/reportes" component={ReportesScreen} />
-				<Route exact path="/autorizados" component={AutorizadosScreen} />
-				<Route exact path="/configuracion" component={ConfiguracionScreen} />
 				<Route exact path="/nuevo-permiso" component={NuevoPermisoScreen} />
+				<Route exact path="/transferencias" component={TransferenciasScreen} />
+				<Route exact path="/asignacion" component={AsignacionScreen} />
+				<Route exact path="/labores" component={LaboresScreen} />
+				<Route exact path="/autorizados" component={AutorizadosScreen} />
+				<Route exact path="/reportes" component={ReportesScreen} />
+				<Route exact path="/configuracion" component={ConfiguracionScreen} />
 
 				<Redirect to="/sicper" />
 			</Switch>

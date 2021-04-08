@@ -2,18 +2,18 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import Swal from "sweetalert2";
-import { CustomTable } from "../tables/CustomTable";
-import { permisosColumns } from "../tables/configTables";
+import { CustomTable } from "../components/tables/CustomTable";
+import { permisosColumns } from "../components/tables/configTables";
 import {
 	startLoadPermisos,
 	setPermisoSelected,
 	startLoadPermisosSearch
-} from "../../actions/algodoneroScreen";
-import { useForm } from "../../hooks/useForm";
-import { CheckSanidad } from "../modulos/CheckSanidad";
-import { PrintSanidadModal } from "../modals/PrintSanidadModal";
+} from "../actions/algodoneroScreen";
+import { useForm } from "../hooks/useForm";
+import { CheckSanidad } from "../components/modulos/CheckSanidad";
+import { PrintSanidadModal } from "../components/modals/PrintSanidadModal";
 
-export const AlgodoneroScreen = () => {
+export const LaboresScreen = () => {
 	const dispatch = useDispatch();
 
 	const [formValues, handleInputChange] = useForm({ palabra: "" });
