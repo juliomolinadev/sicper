@@ -53,6 +53,15 @@ export const systemUsersColumns = [
 	{ name: "ROL", selector: "rol", sortable: true }
 ];
 
+export const localtiesColumns = [
+	{ name: "id", selector: "id", omit: true },
+	{ name: "CLAVE", selector: "clave", sortable: true, center: true },
+	{ name: "NOMBRE", selector: "nombre", sortable: true },
+	{ name: "TIPO", selector: "tipo", sortable: true },
+	{ name: "MUNICIPIO", selector: "municipio", sortable: true },
+	{ name: "ESTADO", selector: "estado", sortable: true }
+];
+
 export const permisosColumns = [
 	{ name: "id", selector: "id", omit: true },
 	{ name: "PERMISO", selector: "numeroPermiso", sortable: true, width: "110px" },

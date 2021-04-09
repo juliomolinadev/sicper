@@ -99,5 +99,6 @@ export const types = {
 	setSystemUserSelected: "[Entidades] Set System User Selected",
 	unsetSystemUserSelected: "[Entidades] Unset System User Selected",
 
-	setLocalties: "[Entidades] Set Localties"
+	setLocalties: "[Entidades] Set Localties",
+	setSelectedLocalties: "[Entidades] Set Selected Localties"
 };
