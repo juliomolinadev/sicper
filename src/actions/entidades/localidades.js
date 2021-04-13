@@ -15,7 +15,15 @@ export const setLocalties = (localties) => ({
 	payload: localties
 });
 
+export const unsetLocalties = () => ({
+	type: types.unsetLocalties
+});
+
 export const setSelectedLocalties = (localties) => ({
 	type: types.setSelectedLocalties,
 	payload: localties
+});
+
+export const unsetSelectedLocalties = () => ({
+	type: types.unsetSelectedLocalties
 });

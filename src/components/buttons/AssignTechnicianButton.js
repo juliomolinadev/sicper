@@ -1,10 +1,13 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { assignTechnician } from "../../helpers/assignTechnician";
+import { unsetLocalties, unsetSelectedLocalties } from "../../actions/entidades/localidades";
 
 export const AssignTechnicianButton = () => {
 	const { selectedLocalties } = useSelector((state) => state.entidades);
 	const { uid, modulo } = useSelector((state) => state.auth);
+
+	const dispatch = useDispatch();
 
 	const localtiesNames = [];
 
@@ -15,6 +18,8 @@ export const AssignTechnicianButton = () => {
 			localtiesNames.push(location.nombre);
 		});
 		assignTechnician(ciclo, modulo, localtiesNames, uid);
+		dispatch(unsetSelectedLocalties());
+		dispatch(unsetLocalties());
 	};
 	return (
 		<div className="d-flex justify-content-center">

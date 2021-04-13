@@ -18,13 +18,15 @@ export const SelectableLocaltiesTable = () => {
 
 	const contextMessage = { singular: "localidad", plural: "localidades", message: "para asignar" };
 
-	return (
-		<CustomSelectableTable
-			title={"Localidades disponibles"}
-			columns={localtiesColumns}
-			data={localties}
-			setSelectedRowsFunction={setSelectedLocalties}
-			contextMessage={contextMessage}
-		/>
-	);
+	if (localties) {
+		return (
+			<CustomSelectableTable
+				title={"Localidades disponibles"}
+				columns={localtiesColumns}
+				data={localties}
+				setSelectedRowsFunction={setSelectedLocalties}
+				contextMessage={contextMessage}
+			/>
+		);
+	} else return <></>;
 };
