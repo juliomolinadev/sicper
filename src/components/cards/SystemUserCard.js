@@ -5,6 +5,7 @@ import { useForm } from "../../hooks/useForm";
 import { removeError, setError } from "../../actions/ui";
 import { updateSystemUser } from "../../helpers/updateSystemUser";
 import { startLoadSystemUsers, unsetSystemUserSelected } from "../../actions/entidades/sistemUsers";
+import { NewUserRole } from "../buttons/NewUserRole";
 
 export const SystemUserCard = () => {
 	const { systemUserSelected: user } = useSelector((state) => state.entidades);
@@ -69,12 +70,15 @@ export const SystemUserCard = () => {
 									<option value="operadorModulo">Modulo (Operador)</option>
 									<option value="operadorCNA">CNA (Operador)</option>
 								</select>
+
 								<button type="submit" className="btn btn-outline-primary btn-block mt-3 mb-5">
 									Asignar Rol
 								</button>
 
 								{msgError && <div className="auth__alert-error">{msgError}</div>}
 							</form>
+
+							<NewUserRole />
 						</div>
 					</div>
 				</div>

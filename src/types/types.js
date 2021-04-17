@@ -102,5 +102,8 @@ export const types = {
 	setLocalties: "[Entidades] Set Localties",
 	unsetLocalties: "[Entidades] Unset Localties",
 	setSelectedLocalties: "[Entidades] Set Selected Localties",
-	unsetSelectedLocalties: "[Entidades] Unset Selected Localties"
+	unsetSelectedLocalties: "[Entidades] Unset Selected Localties",
+
+	openUserRoleModal: "[UI] Open User Role Modal",
+	closeUserRoleModal: "[UI] Close User Role Modal"
 };

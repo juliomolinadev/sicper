@@ -16,3 +16,11 @@ export const startLoading = () => ({
 export const finishLoading = () => ({
 	type: types.uiFinishLoading
 });
+
+export const openUserRoleModal = () => ({
+	type: types.openUserRoleModal
+});
+
+export const closeUserRoleModal = () => ({
+	type: types.closeUserRoleModal
+});

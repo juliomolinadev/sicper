@@ -1,5 +1,5 @@
 import React from "react";
-import { CNAUsersRegister } from "../components/modulos/CNAUsersRegister";
+import { UsersRoleManagement } from "../components/modulos/UsersRoleManagement";
 
 export const ConfiguracionScreen = () => {
 	return (
@@ -12,7 +12,7 @@ export const ConfiguracionScreen = () => {
 
 			<div className="row pt-4">
 				<div className="col-sm-12">
-					<CNAUsersRegister />
+					<UsersRoleManagement />
 				</div>
 			</div>
 		</>
