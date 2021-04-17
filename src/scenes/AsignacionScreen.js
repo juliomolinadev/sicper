@@ -8,7 +8,7 @@ export const AsignacionScreen = () => {
 	return (
 		<>
 			<div className="row d-flex justify-content-center p-4">
-				<h1>Asignacion de técnico</h1>
+				<h1>Asignación de técnico</h1>
 			</div>
 			{selectedLocalties && selectedLocalties.length > 0 ? <AssignTechnicianButton /> : <></>}
 			<div className="row pt-3">

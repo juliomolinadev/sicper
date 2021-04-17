@@ -63,7 +63,7 @@ export const entidadesReducer = (state = {}, action) => {
 		case types.unsetLocalties:
 			return {
 				...state,
-				localties: false
+				localties: null
 			};
 
 		case types.setSelectedLocalties:
