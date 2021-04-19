@@ -40,7 +40,7 @@ export const uiReducer = (state = initialState, action) => {
 		case types.closeUserRoleModal:
 			return {
 				...state,
-				isOpenUserRoleModal: true
+				isOpenUserRoleModal: false
 			};
 
 		default:

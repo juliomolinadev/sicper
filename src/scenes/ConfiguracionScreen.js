@@ -1,4 +1,5 @@
 import React from "react";
+import { UserRoleModal } from "../components/modals/UserRoleModal";
 import { UsersRoleManagement } from "../components/modulos/UsersRoleManagement";
 
 export const ConfiguracionScreen = () => {
@@ -15,6 +16,8 @@ export const ConfiguracionScreen = () => {
 					<UsersRoleManagement />
 				</div>
 			</div>
+
+			<UserRoleModal />
 		</>
 	);
 };

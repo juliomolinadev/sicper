@@ -98,6 +98,9 @@ export const types = {
 	setSystemUsers: "[Entidades] Set System Users",
 	setSystemUserSelected: "[Entidades] Set System User Selected",
 	unsetSystemUserSelected: "[Entidades] Unset System User Selected",
+	setUserRoles: "[Entidades] Set Users Roles",
+	setUserRoleSelected: "[Entidades] Set User Role Selected",
+	setPrivilegesToEdit: "[Entidades] Set Privileges To Edit",
 
 	setLocalties: "[Entidades] Set Localties",
 	unsetLocalties: "[Entidades] Unset Localties",

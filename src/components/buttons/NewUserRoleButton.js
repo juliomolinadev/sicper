@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { openUserRoleModal } from "../../actions/ui";
 
-export const NewUserRole = () => {
+export const NewUserRoleButton = () => {
 	const dispatch = useDispatch();
 
 	const handOpenUserRoleModal = () => {
