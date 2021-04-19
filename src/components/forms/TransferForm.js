@@ -86,6 +86,7 @@ export const TransferForm = () => {
 						<h3>Transferencia</h3>
 					</div>
 					<div className="col-12 d-flex flex-column p-3">
+						{/* TODO: resaltar mensaje de error */}
 						{msgError && <div className="auth__alert-error">{msgError}</div>}
 						<div className=" row d-flex p-3">
 							<label htmlFor="">Superficie a transferir (ha):</label>
@@ -100,7 +101,7 @@ export const TransferForm = () => {
 								onKeyUp={handleKeyUp}
 							/>
 						</div>
-
+						{/* TODO: menu para seleccionar */}
 						<div className=" row d-flex p-3">
 							<label htmlFor="">Modulo destino:</label>
 							<input

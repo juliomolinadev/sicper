@@ -4,7 +4,11 @@ import { useForm } from "../../hooks/useForm";
 
 import { removeError, setError } from "../../actions/ui";
 import { updateSystemUser } from "../../helpers/updateSystemUser";
-import { startLoadSystemUsers, unsetSystemUserSelected } from "../../actions/entidades/sistemUsers";
+import {
+	startLoadSystemUsers,
+	startSetUserRoles,
+	unsetSystemUserSelected
+} from "../../actions/entidades/sistemUsers";
 import { NewUserRoleButton } from "../buttons/NewUserRoleButton";
 
 export const SystemUserCard = () => {
@@ -12,10 +16,16 @@ export const SystemUserCard = () => {
 	const { msgError } = useSelector((state) => state.ui);
 	const { claveEntidad } = useSelector((state) => state.auth);
 
+	const { userRoles } = useSelector((state) => state.entidades);
+
 	const [formValues, handleInputChange] = useForm();
 	const { rol } = formValues;
 
 	const dispatch = useDispatch();
+
+	if (!userRoles) {
+		dispatch(startSetUserRoles());
+	}
 
 	const handleSetUserRole = (e) => {
 		e.preventDefault();
@@ -67,8 +77,13 @@ export const SystemUserCard = () => {
 										Rol
 									</option>
 									<option value="sinAsignar">Sin Asignar</option>
-									<option value="operadorModulo">Modulo (Operador)</option>
-									<option value="operadorCNA">CNA (Operador)</option>
+									{userRoles.map((role) => {
+										return (
+											<option key={role} value={role}>
+												{role}
+											</option>
+										);
+									})}
 								</select>
 
 								<button type="submit" className="btn btn-outline-primary btn-block mt-3 mb-5">
