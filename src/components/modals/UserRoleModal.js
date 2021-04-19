@@ -24,7 +24,7 @@ export const UserRoleModal = () => {
 	const dispatch = useDispatch();
 
 	const { isOpenUserRoleModal } = useSelector((state) => state.ui);
-	const { privilegesToEdit } = useSelector((state) => state.entidades);
+	const { privilegesToEdit, userRoleSelected } = useSelector((state) => state.entidades);
 
 	const closeModal = () => {
 		dispatch(closeUserRoleModal());
@@ -39,13 +39,15 @@ export const UserRoleModal = () => {
 			className="modal"
 			overlayClassName="modal-fondo"
 		>
-			<AddNewUserRoleForm />
-			<div className="row d-flex justify-content-center">
-				<div className="col-sm-4">
-					<SelectRoleToEditForm />
-				</div>
+			<div className="p-4">
+				<AddNewUserRoleForm />
 			</div>
-			{privilegesToEdit ? <UserPrivilegesForm /> : <></>}
+			<div className="p-4">
+				<SelectRoleToEditForm />
+			</div>
+			<div className="p-4">
+				{privilegesToEdit && userRoleSelected ? <UserPrivilegesForm /> : <></>}
+			</div>
 		</Modal>
 	);
 };

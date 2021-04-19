@@ -42,16 +42,34 @@ export const entidadesReducer = (state = {}, action) => {
 				userRoles: action.payload
 			};
 
+		case types.unsetUserRoles:
+			return {
+				...state,
+				userRoles: false
+			};
+
 		case types.setUserRoleSelected:
 			return {
 				...state,
 				userRoleSelected: action.payload
 			};
 
+		case types.unsetUserRoleSelected:
+			return {
+				...state,
+				userRoleSelected: false
+			};
+
 		case types.setPrivilegesToEdit:
 			return {
 				...state,
 				privilegesToEdit: action.payload
+			};
+
+		case types.unsetPrivilegesToEdit:
+			return {
+				...state,
+				privilegesToEdit: false
 			};
 
 		case types.setSystemUsers:

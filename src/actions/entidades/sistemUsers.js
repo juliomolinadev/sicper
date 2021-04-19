@@ -34,6 +34,7 @@ export const startSetSystemUserSelected = (user) => {
 
 export const startSetUserRoles = () => {
 	return async (dispatch) => {
+		// dispatch(unsetUserRoles());
 		const roles = await loadUserRoles();
 		dispatch(setUserRoles(roles));
 	};
@@ -44,9 +45,17 @@ export const setUserRoles = (roles) => ({
 	payload: roles
 });
 
+export const unsetUserRoles = () => ({
+	type: types.unsetUserRoles
+});
+
 export const setUserRoleSelected = (role) => ({
 	type: types.setUserRoleSelected,
 	payload: role
+});
+
+export const unsetUserRoleSelected = () => ({
+	type: types.unsetUserRoleSelected
 });
 
 export const setPrivilegesToEdit = (privileges) => ({
@@ -54,11 +63,16 @@ export const setPrivilegesToEdit = (privileges) => ({
 	payload: privileges
 });
 
+export const unsetPrivilegesToEdit = () => ({
+	type: types.unsetPrivilegesToEdit
+});
+
 export const startSetPrivilegesToEdit = (role) => {
 	return async (dispatch) => {
 		const privileges = await loadUserPrivileges(role);
 
 		dispatch(setUserRoleSelected(role));
+		dispatch(unsetPrivilegesToEdit());
 		dispatch(setPrivilegesToEdit(privileges));
 	};
 };

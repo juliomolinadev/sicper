@@ -26,11 +26,16 @@ export const UserPrivilegesForm = () => {
 
 	return (
 		<form onSubmit={startSaveRolePrivileges} className="border rounded p-4">
-			<div className="d-flex flex-wrap">
-				<div className="w-75">PRIVILEGIOS</div>
-				<button type="submit" className="w-25 btn btn-outline-primary">
-					Guardar
-				</button>
+			<div className="row d-flex">
+				<div className="col-sm-8">
+					PRIVILEGIOS PARA EL ROL:{"  "}
+					<span className="text-success font-weight-bold">{userRoleSelected}</span>
+				</div>
+				<div className="col-sm-4">
+					<button type="submit" className=" btn btn-outline-primary">
+						Guardar
+					</button>
+				</div>
 			</div>
 			<div className="form-check d-flex flex-wrap">
 				{Object.getOwnPropertyNames(privileges).map((privilege) => {

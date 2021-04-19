@@ -1,7 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { startSetUserRoles, startSetPrivilegesToEdit } from "../../actions/entidades/sistemUsers";
+import {
+	startSetUserRoles,
+	startSetPrivilegesToEdit,
+	unsetUserRoles,
+	unsetUserRoleSelected
+} from "../../actions/entidades/sistemUsers";
 import { useForm } from "../../hooks/useForm";
+import Swal from "sweetalert2";
+import { deleteUserRole } from "../../helpers/deleteUserRole";
 
 export const SelectRoleToEditForm = () => {
 	const { userRoles } = useSelector((state) => state.entidades);
@@ -23,31 +30,71 @@ export const SelectRoleToEditForm = () => {
 			}
 		};
 
-		return (
-			<form onSubmit={handleSelectRoleToEdit} className="form-group pt-3">
-				<select
-					type="text"
-					name="selectedRole"
-					value={selectedRole}
-					onChange={handleInputChange}
-					className="form-control"
-				>
-					<option hidden defaultValue={false}>
-						Rol
-					</option>
-					{userRoles.map((role) => {
-						return (
-							<option key={role} value={role}>
-								{role}
-							</option>
-						);
-					})}
-				</select>
+		const startDeleteUserRole = () => {
+			Swal.fire({
+				title: "Atención!!",
+				text: `Esta apunto de borrar el rol de usuario ${selectedRole}, ¿Realmente desea borrarlo?`,
+				icon: "warning",
+				showCancelButton: true,
+				confirmButtonColor: "#3085d6",
+				cancelButtonColor: "#d33",
+				confirmButtonText: "Si",
+				cancelButtonText: "No"
+			}).then((result) => {
+				if (result.isConfirmed) {
+					deleteUserRole(selectedRole);
+					dispatch(unsetUserRoles());
+					dispatch(unsetUserRoleSelected());
+					dispatch(startSetUserRoles());
+					Swal.fire(`Rol: ${selectedRole}`, "Se borro el rol con éxito !", "success");
+				}
+			});
+		};
 
-				<button type="submit" className="btn btn-outline-primary btn-block mt-3 mb-5">
-					Editar Rol
-				</button>
-			</form>
+		return (
+			<div className="row">
+				<div className="col-sm-3">Gestionar rol:</div>
+
+				<div className="col-sm-5">
+					<select
+						type="text"
+						name="selectedRole"
+						value={selectedRole}
+						onChange={handleInputChange}
+						className="form-control"
+					>
+						<option hidden defaultValue={false}>
+							Rol
+						</option>
+						{userRoles.map((role) => {
+							return (
+								<option key={role} value={role}>
+									{role}
+								</option>
+							);
+						})}
+					</select>
+				</div>
+
+				<div className="col-sm-4 d-flex">
+					{selectedRole ? (
+						<button onClick={handleSelectRoleToEdit} className="btn btn-outline-primary">
+							<span>Editar Rol </span>
+							<i className="fas fa-edit"></i>
+						</button>
+					) : (
+						<></>
+					)}
+
+					{selectedRole ? (
+						<button onClick={startDeleteUserRole} className=" btn btn-outline-danger ml-4">
+							<span>Borrar</span>
+						</button>
+					) : (
+						<></>
+					)}
+				</div>
+			</div>
 		);
 	} else return <></>;
 };

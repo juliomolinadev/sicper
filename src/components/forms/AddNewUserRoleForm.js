@@ -1,4 +1,6 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { startSetUserRoles } from "../../actions/entidades/sistemUsers";
 import { saveNewUserRole } from "../../helpers/saveNewUserRole";
 import { useForm } from "../../hooks/useForm";
 
@@ -9,9 +11,12 @@ export const AddNewUserRoleForm = () => {
 
 	const { newRole } = formValues;
 
+	const dispatch = useDispatch();
+
 	const handleSaveNewUserRole = () => {
 		if (newRole.length > 0) {
 			saveNewUserRole(newRole);
+			dispatch(startSetUserRoles());
 		}
 	};
 
@@ -22,15 +27,15 @@ export const AddNewUserRoleForm = () => {
 	};
 
 	return (
-		<div className="row p-4">
-			<div className="col-sm-1">
-				<label>Rol:</label>
+		<div className="row">
+			<div className="col-sm-3">
+				<label>Crear nuevo rol:</label>
 			</div>
 
-			<div className="col-sm-8">
+			<div className="col-sm-5">
 				<input
 					type="text"
-					className="form-control ml-1"
+					className="form-control"
 					placeholder="Nuevo Rol"
 					name="newRole"
 					autoComplete="off"
@@ -40,12 +45,8 @@ export const AddNewUserRoleForm = () => {
 				/>
 			</div>
 
-			<div className="col-sm-3">
-				<button
-					className=" btn btn-outline-primary flex-fill"
-					type="button"
-					onClick={handleSaveNewUserRole}
-				>
+			<div className="col-sm-4">
+				<button className="btn btn-outline-primary" type="button" onClick={handleSaveNewUserRole}>
 					<span>Agregar </span>
 					<i className="fas fa-plus"></i>
 				</button>
