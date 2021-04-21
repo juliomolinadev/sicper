@@ -14,7 +14,7 @@ import { NewUserRoleButton } from "../buttons/NewUserRoleButton";
 export const SystemUserCard = () => {
 	const { systemUserSelected: user } = useSelector((state) => state.entidades);
 	const { msgError } = useSelector((state) => state.ui);
-	const { claveEntidad } = useSelector((state) => state.auth);
+	const { claveEntidad, privilegios } = useSelector((state) => state.auth);
 
 	const { userRoles } = useSelector((state) => state.entidades);
 
@@ -92,8 +92,7 @@ export const SystemUserCard = () => {
 
 								{msgError && <div className="auth__alert-error">{msgError}</div>}
 							</form>
-
-							<NewUserRoleButton />
+							{privilegios.editarRoles ? <NewUserRoleButton /> : <></>}
 						</div>
 					</div>
 				</div>

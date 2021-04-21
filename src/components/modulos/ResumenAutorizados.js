@@ -6,7 +6,7 @@ import {
 	startLoadExpedicion
 } from "../../actions/sicperScreen";
 
-export const ResumenExpedicion = () => {
+export const ResumenAutorizados = () => {
 	const { expedicion, superficie } = useSelector((state) => state.sicperScreen);
 	const { modulo } = useSelector((state) => state.auth);
 

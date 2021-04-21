@@ -5,12 +5,7 @@ import { Navbar, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const NavbarComponent = () => {
-	const { rol } = useSelector((state) => state.auth);
-
-	const dev = rol === "dev" ? true : false;
-	const operadorModulo = rol === "operadorModulo" ? true : false;
-	const adminCNA = rol === "adminCNA" ? true : false;
-	const tecnicoCESVBC = rol === "tecnicoCESVBC" ? true : false;
+	const { privilegios } = useSelector((state) => state.auth);
 
 	const dispatch = useDispatch();
 
@@ -32,7 +27,7 @@ export const NavbarComponent = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mr-auto">
-						{dev || operadorModulo || adminCNA ? (
+						{privilegios.pantallaInicio ? (
 							<Link to="/sicper" className="nav-link">
 								Inicio
 							</Link>
@@ -40,7 +35,7 @@ export const NavbarComponent = () => {
 							<></>
 						)}
 
-						{dev || operadorModulo || adminCNA ? (
+						{privilegios.pantallaPadron ? (
 							<Link to="/padron" className="nav-link">
 								Padron
 							</Link>
@@ -48,7 +43,7 @@ export const NavbarComponent = () => {
 							<></>
 						)}
 
-						{dev || operadorModulo || adminCNA ? (
+						{privilegios.pantallaPermisos ? (
 							<Link to="/permisos" className="nav-link">
 								Permisos
 							</Link>
@@ -56,7 +51,7 @@ export const NavbarComponent = () => {
 							<></>
 						)}
 
-						{dev || operadorModulo || adminCNA ? (
+						{privilegios.pantallaTransferencias ? (
 							<Link to="/transferencias" className="nav-link">
 								Transferencias
 							</Link>
@@ -64,7 +59,7 @@ export const NavbarComponent = () => {
 							<></>
 						)}
 
-						{dev || tecnicoCESVBC ? (
+						{privilegios.pantallaAsignacion ? (
 							<Link to="/asignacion" className="nav-link">
 								Asignacion
 							</Link>
@@ -72,7 +67,7 @@ export const NavbarComponent = () => {
 							<></>
 						)}
 
-						{dev || tecnicoCESVBC ? (
+						{privilegios.pantallaLabores ? (
 							<Link to="/labores" className="nav-link">
 								Labores
 							</Link>
@@ -80,7 +75,7 @@ export const NavbarComponent = () => {
 							<></>
 						)}
 
-						{dev || adminCNA ? (
+						{privilegios.pantallaAutorizados ? (
 							<Link to="/autorizados" className="nav-link">
 								Autorizados
 							</Link>
@@ -88,7 +83,7 @@ export const NavbarComponent = () => {
 							<></>
 						)}
 
-						{dev || operadorModulo || adminCNA || tecnicoCESVBC ? (
+						{privilegios.pantallaReportes ? (
 							<Link to="/reportes" className="nav-link">
 								Reportes
 							</Link>
@@ -96,7 +91,7 @@ export const NavbarComponent = () => {
 							<></>
 						)}
 
-						{dev || operadorModulo || adminCNA ? (
+						{privilegios.pantallaConfiguracion ? (
 							<Link to="/configuracion" className="nav-link">
 								Configuracion
 							</Link>

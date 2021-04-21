@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import Swal from "sweetalert2";
@@ -17,6 +16,7 @@ import { PrintPermisoModal } from "../modals/PrintPermisoModal";
 import { setPermisoInCancelProces } from "../../helpers/setPermisoInCancelProces";
 import { useForm } from "../../hooks/useForm";
 import { SuperficiesChart } from "../charts/SuperficiesChart";
+import { NuevoPermisoButton } from "../buttons/NuevoPermisoButton";
 
 export const PermisosScreen = () => {
 	const dispatch = useDispatch();
@@ -26,7 +26,7 @@ export const PermisosScreen = () => {
 	const { palabra } = formValues;
 
 	const { permisos, permisoSelected, superficies } = useSelector((state) => state.permisosScreen);
-	const { modulo } = useSelector((state) => state.auth);
+	const { modulo, privilegios } = useSelector((state) => state.auth);
 
 	// TODO: crear funcion para definir ciclo
 	const ciclo = "2020-2021";
@@ -120,12 +120,13 @@ export const PermisosScreen = () => {
 				<div className="col-sm-8">
 					<div className="row d-flex">
 						<div className="d-flex justify-content-center col-sm-4 p-2">
-							<Link to="/nuevo-permiso">
+							{privilegios.expedirPermisos ? <NuevoPermisoButton /> : <></>}
+							{/* <Link to="/nuevo-permiso">
 								<button className="btn btn-outline-primary" type="button">
 									<span>Nuevo Permiso </span>
 									<i className="fas fa-plus"></i>
 								</button>
-							</Link>
+							</Link> */}
 						</div>
 
 						<div className="col-sm-8 d-inline-flex p-2 pr-4">
@@ -251,14 +252,18 @@ export const PermisosScreen = () => {
 								</div>
 								<div className="col-6 d-flex justify-content-center">
 									{dataPermiso.estadoPermiso === "activo" ? (
-										<button
-											type="button"
-											className="btn btn-outline-danger"
-											onClick={cancelarPermiso}
-										>
-											<i className="fas fa-times"></i>
-											<span> Cancelar</span>
-										</button>
+										privilegios.cancelarPermisos ? (
+											<button
+												type="button"
+												className="btn btn-outline-danger"
+												onClick={cancelarPermiso}
+											>
+												<i className="fas fa-times"></i>
+												<span> Cancelar</span>
+											</button>
+										) : (
+											<></>
+										)
 									) : (
 										<></>
 									)}

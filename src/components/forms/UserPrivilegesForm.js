@@ -7,8 +7,31 @@ export const UserPrivilegesForm = () => {
 	const { userRoleSelected, privilegesToEdit } = useSelector((state) => state.entidades);
 
 	const privileges = {
-		editarTodo: false,
-		borrarPermisos: false
+		pantallaInicio: false,
+		pantallaPadron: false,
+		pantallaPermisos: false,
+		pantallaTransferencias: false,
+		pantallaAsignacion: false,
+		pantallaLabores: false,
+		pantallaAutorizados: false,
+		pantallaReportes: false,
+		pantallaConfiguracion: false,
+		consultarExpedicion: false,
+		consultarAutorizados: false,
+		expedirPermisos: false,
+		consultarPermisos: false,
+		cancelarPermisos: false,
+		solicitarTransferencias: false,
+		asignarTécnico: false,
+		consultarLabores: false,
+		registrarLabores: false,
+		pagarLabores: false,
+		imprimirLabores: false,
+		reportesPermisos: false,
+		reportesExpedición: false,
+		reportesAutorizados: false,
+		asignarRoles: false,
+		editarRoles: false
 	};
 
 	Object.getOwnPropertyNames(privilegesToEdit).map((privilegeName) => {
