@@ -3,9 +3,10 @@ import { ResumenAutorizados } from "../modulos/ResumenAutorizados";
 import { FichaExpedicion } from "../modulos/FichaExpedicion";
 import { NuevoPermisoButton } from "../buttons/NuevoPermisoButton";
 import { useSelector } from "react-redux";
+import { UnassignedPrivilegesMessage } from "../cards/UnassignedPrivilegesMessage";
 
 export const SicperScreen = () => {
-	const { privilegios } = useSelector((state) => state.auth);
+	const { privilegios, rol } = useSelector((state) => state.auth);
 
 	return (
 		<>
@@ -16,6 +17,12 @@ export const SicperScreen = () => {
 				<div className="col-sm-4">
 					{privilegios.expedirPermisos ? <NuevoPermisoButton /> : <></>}
 					{privilegios.consultarExpedicion ? <FichaExpedicion /> : <></>}
+				</div>
+			</div>
+
+			<div className="row d-flex justify-content-center pt-5">
+				<div className="col-sm-6">
+					{rol === "sinAsignar" ? <UnassignedPrivilegesMessage /> : <></>}
 				</div>
 			</div>
 		</>
