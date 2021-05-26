@@ -11,19 +11,15 @@ export const SicperScreen = () => {
 	return (
 		<>
 			<div className="row pt-5">
-				<div className="col-sm-8">
-					{privilegios.consultarAutorizados ? <ResumenAutorizados /> : <></>}
-				</div>
+				<div className="col-sm-8">{privilegios.consultarAutorizados && <ResumenAutorizados />}</div>
 				<div className="col-sm-4">
-					{privilegios.expedirPermisos ? <NuevoPermisoButton /> : <></>}
-					{privilegios.consultarExpedicion ? <FichaExpedicion /> : <></>}
+					{privilegios.expedirPermisos && <NuevoPermisoButton />}
+					{privilegios.consultarExpedicion && <FichaExpedicion />}
 				</div>
 			</div>
 
 			<div className="row d-flex justify-content-center pt-5">
-				<div className="col-sm-6">
-					{rol === "sinAsignar" ? <UnassignedPrivilegesMessage /> : <></>}
-				</div>
+				<div className="col-sm-6">{rol === "sinAsignar" && <UnassignedPrivilegesMessage />}</div>
 			</div>
 		</>
 	);

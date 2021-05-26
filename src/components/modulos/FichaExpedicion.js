@@ -25,10 +25,8 @@ export const FichaExpedicion = () => {
 	return (
 		<div className="border border-primary rounded detallePermiso text-secondary mt-3">
 			<SuperficiesChart />
-			{autorizados.length > 0 ? (
+			{autorizados.length > 0 && (
 				<ResumenAutorizados autorizados={autorizados} modulo={modulo}></ResumenAutorizados>
-			) : (
-				<></>
 			)}
 		</div>
 	);

@@ -27,76 +27,58 @@ export const NavbarComponent = () => {
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mr-auto">
-						{privilegios.pantallaInicio ? (
+						{privilegios.pantallaInicio && (
 							<Link to="/sicper" className="nav-link">
 								Inicio
 							</Link>
-						) : (
-							<></>
 						)}
 
-						{privilegios.pantallaPadron ? (
+						{privilegios.pantallaPadron && (
 							<Link to="/padron" className="nav-link">
 								Padron
 							</Link>
-						) : (
-							<></>
 						)}
 
-						{privilegios.pantallaPermisos ? (
+						{privilegios.pantallaPermisos && (
 							<Link to="/permisos" className="nav-link">
 								Permisos
 							</Link>
-						) : (
-							<></>
 						)}
 
-						{privilegios.pantallaTransferencias ? (
+						{privilegios.pantallaTransferencias && (
 							<Link to="/transferencias" className="nav-link">
 								Transferencias
 							</Link>
-						) : (
-							<></>
 						)}
 
-						{privilegios.pantallaAsignacion ? (
+						{privilegios.pantallaAsignacion && (
 							<Link to="/asignacion" className="nav-link">
 								Asignacion
 							</Link>
-						) : (
-							<></>
 						)}
 
-						{privilegios.pantallaLabores ? (
+						{privilegios.pantallaLabores && (
 							<Link to="/labores" className="nav-link">
 								Labores
 							</Link>
-						) : (
-							<></>
 						)}
 
-						{privilegios.pantallaAutorizados ? (
+						{privilegios.pantallaAutorizados && (
 							<Link to="/autorizados" className="nav-link">
 								Autorizados
 							</Link>
-						) : (
-							<></>
 						)}
 
-						{privilegios.pantallaReportes ? (
+						{privilegios.pantallaReportes && (
 							<Link to="/reportes" className="nav-link">
 								Reportes
 							</Link>
-						) : (
-							<></>
 						)}
 
-						{privilegios.pantallaConfiguracion ? (
+						{privilegios.pantallaConfiguracion && (
 							<Link to="/configuracion" className="nav-link">
 								Configuracion
 							</Link>
-						) : (
-							<></>
 						)}
 					</Nav>
 

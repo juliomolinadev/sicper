@@ -41,7 +41,7 @@ export const SuperficiesChart = () => {
 			</div>
 			<div className="d-flex flex-column pt-4 pb-4 pl-3">
 				<div>
-					<h6>Superficie expedida: {totalSuperficie} ha</h6>
+					<h6>Superficie expedida: {totalSuperficie.toFixed(2)} ha</h6>
 				</div>
 				<div>
 					<h6>Permisos expedidos: {totalPermisos}</h6>
