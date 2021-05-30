@@ -3,6 +3,8 @@ import { db } from "../firebase/firebase-config";
 export const loadExpedicion = async (modulo, ciclo) => {
 	let superficies = [];
 
+	console.log(modulo, ciclo);
+
 	await db
 		.collection(`permisos`)
 		.doc(ciclo)
