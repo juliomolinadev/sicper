@@ -1,17 +1,20 @@
 import { db } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
 
-export const sabeAutorizados = (modulo, autorizados) => {
+export const sabeAutorizados = (ciclo, modulo, autorizados) => {
 	autorizados.forEach((autorizado) => {
 		const totalNormal = autorizado.gravedadNormalAutorizada + autorizado.pozoNormalAutorizada;
 		const totalExtra = autorizado.gravedadExtraAutorizada + autorizado.pozoExtraAutorizada;
 		const totalCultivo = totalNormal + totalExtra;
 
 		db.collection("autorizados")
-			.doc(`autorizadosM${modulo}`)
+			.doc(ciclo)
+			.collection("modulos")
+			.doc(`Modulo-${modulo}`)
 			.collection(`autorizados`)
 			.doc(`${autorizado.clave}-${autorizado.cultivo}`)
 			.set({
+				modulo,
 				clave: autorizado.clave,
 				cultivo: autorizado.cultivo,
 				superficieNormal: totalNormal,

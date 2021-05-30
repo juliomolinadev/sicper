@@ -1,10 +1,12 @@
 import { db } from "../firebase/firebase-config";
 import { loadNombresCultivos } from "./loadNombresCultivos";
 
-export const loadAutorizados = async (modulo) => {
+export const loadAutorizados = async (ciclo, modulo) => {
 	const autorizadosSnap = await db
 		.collection(`autorizados`)
-		.doc(`autorizadosM${modulo}`)
+		.doc(ciclo)
+		.collection("modulos")
+		.doc(`Modulo-${modulo}`)
 		.collection(`autorizados`)
 		.orderBy(`clave`)
 		.get();

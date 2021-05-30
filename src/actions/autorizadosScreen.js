@@ -10,9 +10,9 @@ export const unsetModulo = () => ({
 	type: types.autorizadosScreenUnsetModulo
 });
 
-export const startLoadAutorizados = (modulo) => {
+export const startLoadAutorizados = (ciclo, modulo) => {
 	return async (dispatch) => {
-		const autorizados = await loadAutorizados(modulo);
+		const autorizados = await loadAutorizados(ciclo, modulo);
 
 		let superficieReferencia = 0;
 		autorizados.forEach((autorizado) => {

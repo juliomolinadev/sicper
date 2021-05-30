@@ -57,8 +57,11 @@ export const NuevoPermisoScreen = () => {
 
 	const dispatch = useDispatch();
 
+	// TODO: Determinar el ciclo segun la fecha
+	const ciclo = "2020-2021";
+
 	if (autorizados.length === 0) {
-		dispatch(startLoadAutorizados(auth.modulo));
+		dispatch(startLoadAutorizados(ciclo, auth.modulo));
 	}
 
 	const handleOpenPrintPermisoModal = () => {
@@ -122,6 +125,8 @@ export const NuevoPermisoScreen = () => {
 
 		return data;
 	};
+
+	// TODO: Probar defineTipoPermiso (es necesario conciderar el acumulado de lo expedido para cada cultivo)
 
 	const defineTipoPermiso = () => {
 		let tipo = "";

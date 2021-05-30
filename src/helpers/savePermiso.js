@@ -159,6 +159,7 @@ export const savePermiso = async (allData) => {
 							case "Gravedad":
 								if (allData.tipo === "normal") {
 									permisosPorCultivoRef.set({
+										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
 										numeroPermisos: firebase.firestore.FieldValue.increment(1),
@@ -169,6 +170,7 @@ export const savePermiso = async (allData) => {
 
 								if (allData.tipo === "extra") {
 									permisosPorCultivoRef.set({
+										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
 										numeroPermisos: firebase.firestore.FieldValue.increment(1),
@@ -181,6 +183,7 @@ export const savePermiso = async (allData) => {
 							case "Pozo Federal":
 								if (allData.tipo === "normal") {
 									permisosPorCultivoRef.set({
+										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
 										numeroPermisos: firebase.firestore.FieldValue.increment(1),
@@ -191,6 +194,7 @@ export const savePermiso = async (allData) => {
 
 								if (allData.tipo === "extra") {
 									permisosPorCultivoRef.set({
+										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
 										numeroPermisos: firebase.firestore.FieldValue.increment(1),
@@ -203,6 +207,7 @@ export const savePermiso = async (allData) => {
 							case "Pozo Particular":
 								if (allData.tipo === "normal") {
 									permisosPorCultivoRef.set({
+										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
 										numeroPermisos: firebase.firestore.FieldValue.increment(1),
@@ -215,6 +220,7 @@ export const savePermiso = async (allData) => {
 
 								if (allData.tipo === "extra") {
 									permisosPorCultivoRef.set({
+										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
 										numeroPermisos: firebase.firestore.FieldValue.increment(1),

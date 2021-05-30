@@ -5,7 +5,7 @@ import { loadExpedicion } from "../helpers/loadExpedicion";
 export const startLoadExpedicion = (modulo, ciclo) => {
 	return async (dispatch) => {
 		const expedicion = await loadExpedicion(modulo, ciclo);
-		const autorizados = await loadAutorizados(modulo);
+		const autorizados = await loadAutorizados(ciclo, modulo);
 
 		let superficies = [];
 

@@ -80,14 +80,17 @@ export const AutorizadosScreen = () => {
 			totalPozoExtraAsignada;
 	}
 
+	// TODO: crear funcion para definir ciclo
+	const ciclo = "2020-2021";
+
 	const setModuloToEdit = (moduloToEdit) => {
 		dispatch(setModulo(moduloToEdit));
-		dispatch(startLoadAutorizados(moduloToEdit));
+		dispatch(startLoadAutorizados(ciclo, moduloToEdit));
 	};
 
 	const handleSaveAutorizados = () => {
-		sabeAutorizados(modulo, autorizados);
-		dispatch(startLoadAutorizados(modulo));
+		sabeAutorizados(ciclo, modulo, autorizados);
+		dispatch(startLoadAutorizados(ciclo, modulo));
 	};
 
 	return (

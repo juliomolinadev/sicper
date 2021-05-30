@@ -1,5 +1,6 @@
 import React from "react";
-import { loadExpedicion } from "../../../helpers/loadExpedicion";
+import { loadAutorizadosGlobal } from "../../../helpers/DB/loadAutorizadosGlobal";
+import { loadAvanceSuperficieExpedida } from "../../../helpers/DB/loadAvanceSuperficieExpedida";
 import { useForm } from "../../../hooks/useForm";
 import { RadioButtonGroup } from "../molecules/RadioButtonGroup";
 import { ModulosCheckbox } from "./ModulosCheckbox";
@@ -29,7 +30,11 @@ export const ReporteExpedicion = () => {
 	};
 
 	const printExpedida = () => {
-		loadExpedicion(19, "2020-2021").then(console.log);
+		loadAvanceSuperficieExpedida().then(console.log);
+	};
+
+	const printAutorizados = () => {
+		loadAutorizadosGlobal().then(console.log);
 	};
 
 	return (
@@ -37,6 +42,12 @@ export const ReporteExpedicion = () => {
 			<div className="row mt-5 ">
 				<button onClick={printExpedida} className="btn btn-primary">
 					Expedida
+				</button>
+			</div>
+
+			<div className="row mt-5 ">
+				<button onClick={printAutorizados} className="btn btn-primary">
+					Autorizados
 				</button>
 			</div>
 
