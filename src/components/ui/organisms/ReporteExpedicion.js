@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { loadAutorizadosGlobal } from "../../../helpers/DB/loadAutorizadosGlobal";
 import { loadAvanceSuperficieExpedida } from "../../../helpers/DB/loadAvanceSuperficieExpedida";
+import { mergeReportData } from "../../../helpers/functions/mergeReportData";
 import { useForm } from "../../../hooks/useForm";
 import { RadioButtonGroup } from "../molecules/RadioButtonGroup";
 import { ModulosCheckbox } from "./ModulosCheckbox";
+
+let expedicion = [];
+let autorizados = [];
 
 export const ReporteExpedicion = () => {
 	const [reportOptionsValues, handleReportOptionsInputChange] = useForm();
@@ -29,27 +33,34 @@ export const ReporteExpedicion = () => {
 		button: "btn btn-outline-primary"
 	};
 
-	const printExpedida = () => {
-		loadAvanceSuperficieExpedida().then(console.log);
+	const loadAutorizados = async () => {
+		autorizados = await loadAutorizadosGlobal();
+		console.log("Secargo autorizados!!");
 	};
 
-	const printAutorizados = () => {
-		loadAutorizadosGlobal().then(console.log);
+	const loadExpedicion = async () => {
+		expedicion = await loadAvanceSuperficieExpedida();
+		console.log("Secargo autorizados!!");
+	};
+
+	useEffect(() => {
+		loadExpedicion();
+		loadAutorizados();
+	}, []);
+
+	const imprimir = () => {
+		console.table(mergeReportData(autorizados, expedicion));
+		// console.table(expedicion);
+		// console.log(expedicion, autorizados);
+		// console.table(expedicion);
+		// console.log(autorizados);
 	};
 
 	return (
 		<div>
-			<div className="row mt-5 ">
-				<button onClick={printExpedida} className="btn btn-primary">
-					Expedida
-				</button>
-			</div>
-
-			<div className="row mt-5 ">
-				<button onClick={printAutorizados} className="btn btn-primary">
-					Autorizados
-				</button>
-			</div>
+			<button onClick={imprimir} className="btn btn-primary">
+				imprimir
+			</button>
 
 			<div className="row m-0 ">
 				<div className="col-sm-12 p-3 d-flex justify-content-center">

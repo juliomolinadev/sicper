@@ -26,6 +26,7 @@ export const loadAutorizados = async (ciclo, modulo) => {
 			autorizados.push({
 				clave: cultivo.clave,
 				cultivo: cultivo.cultivo,
+				subciclo: cultivo.subciclo,
 				gravedadNormalAutorizada: 0,
 				gravedadNormalAsignada: 0,
 				gravedadExtraAutorizada: 0,

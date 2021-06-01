@@ -159,6 +159,7 @@ export const savePermiso = async (allData) => {
 							case "Gravedad":
 								if (allData.tipo === "normal") {
 									permisosPorCultivoRef.set({
+										subciclo: data.subciclo,
 										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
@@ -170,6 +171,7 @@ export const savePermiso = async (allData) => {
 
 								if (allData.tipo === "extra") {
 									permisosPorCultivoRef.set({
+										subciclo: data.subciclo,
 										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
@@ -183,6 +185,7 @@ export const savePermiso = async (allData) => {
 							case "Pozo Federal":
 								if (allData.tipo === "normal") {
 									permisosPorCultivoRef.set({
+										subciclo: data.subciclo,
 										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
@@ -194,6 +197,7 @@ export const savePermiso = async (allData) => {
 
 								if (allData.tipo === "extra") {
 									permisosPorCultivoRef.set({
+										subciclo: data.subciclo,
 										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
@@ -207,6 +211,7 @@ export const savePermiso = async (allData) => {
 							case "Pozo Particular":
 								if (allData.tipo === "normal") {
 									permisosPorCultivoRef.set({
+										subciclo: data.subciclo,
 										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
@@ -220,6 +225,7 @@ export const savePermiso = async (allData) => {
 
 								if (allData.tipo === "extra") {
 									permisosPorCultivoRef.set({
+										subciclo: data.subciclo,
 										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,

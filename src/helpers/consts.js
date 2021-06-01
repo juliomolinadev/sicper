@@ -4,6 +4,30 @@ export const modulosPorUnidad = {
 	terceraUnidad: ["M13", "M14", "M15", "M16", "M17", "M18"]
 };
 
+export const cultivosPrincipales = {
+	otonoInvierno: ["3-TRIGO", "8-AVENA", "2-CEBADA", "4-RYE-GRASS", "12-CEBOLLIN O-I", "VARIOS-OI"],
+	perenes: [
+		"50-ALFALFA",
+		"52-ESPARRAGO",
+		"53-VID",
+		"FRUTALES",
+		"117-ZACATE BERMUDA",
+		"60-PALMA DATILERA"
+	],
+	primaveraVerano: [
+		"80-ALGODONERO",
+		"81-SORGO GRANO TEMP.(SUDAN)",
+		"82-SORGO GRANO TARDIO",
+		"83-SORGO FORRAJERO TEMP.(SUDAN)",
+		"84-SORGO FORRAJERO TARDIO",
+		"87-MAIZ BLANCO TEMPRANO",
+		"88-MAIZ BLANCO TARDIO",
+		"12.1-CEBOLLIN P-V",
+		"12.2-CEBOLLIN TARDIO",
+		"VARIOS-PV"
+	]
+};
+
 export const modulos = [
 	1,
 	2,

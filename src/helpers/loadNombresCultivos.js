@@ -8,7 +8,8 @@ export const loadNombresCultivos = async () => {
 	cultivosSnap.forEach((snapHijo) => {
 		cultivos.push({
 			clave: snapHijo.data().clave,
-			cultivo: snapHijo.data().nombre
+			cultivo: snapHijo.data().nombre,
+			subciclo: snapHijo.data().subciclo
 		});
 	});
 

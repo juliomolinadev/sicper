@@ -17,6 +17,7 @@ export const sabeAutorizados = (ciclo, modulo, autorizados) => {
 				modulo,
 				clave: autorizado.clave,
 				cultivo: autorizado.cultivo,
+				subciclo: autorizado.subciclo,
 				superficieNormal: totalNormal,
 				superficieExtra: totalExtra,
 				superficieTotal: totalCultivo,
