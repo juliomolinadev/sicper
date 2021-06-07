@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { loadAutorizadosGlobal } from "../../../helpers/DB/loadAutorizadosGlobal";
 import { loadAvanceSuperficieExpedida } from "../../../helpers/DB/loadAvanceSuperficieExpedida";
+import { filterReportData } from "../../../helpers/functions/filterReportData";
 import { mergeReportData } from "../../../helpers/functions/mergeReportData";
 import { useForm } from "../../../hooks/useForm";
 import { RadioButtonGroup } from "../molecules/RadioButtonGroup";
@@ -49,7 +50,8 @@ export const ReporteExpedicion = () => {
 	}, []);
 
 	const imprimir = () => {
-		console.table(mergeReportData(autorizados, expedicion));
+		console.log(filterReportData(mergeReportData(autorizados, expedicion), "global"));
+		// console.table(mergeReportData(autorizados, expedicion));
 		// console.table(expedicion);
 		// console.log(expedicion, autorizados);
 		// console.table(expedicion);

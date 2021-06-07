@@ -46,6 +46,7 @@ const createNewAutorizadosItem = ({
 	pozoExtraAutorizada = 0,
 	pozoNormalAutorizada = 0
 }) => {
+	if (subciclo === "PERENES") subciclo = "PERENNES";
 	mergedData[`${id}-${modulo}`] = {
 		...plantillaRegistro,
 		cultivo: id,
