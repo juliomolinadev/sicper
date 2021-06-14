@@ -4,6 +4,7 @@ import { loadAvanceSuperficieExpedida } from "../../../helpers/DB/loadAvanceSupe
 import { filterReportData } from "../../../helpers/functions/filterReportData";
 import { mergeReportData } from "../../../helpers/functions/mergeReportData";
 import { useForm } from "../../../hooks/useForm";
+import { ExpedicionTable } from "../molecules/ExpedicionTable";
 import { RadioButtonGroup } from "../molecules/RadioButtonGroup";
 import { ModulosCheckbox } from "./ModulosCheckbox";
 
@@ -20,8 +21,12 @@ export const ReporteExpedicion = () => {
 			label: "Global"
 		},
 		{
-			id: "bcSon",
-			label: "BC - Sonora"
+			id: "Baja California",
+			label: "Baja California"
+		},
+		{
+			id: "Sonora",
+			label: "Sonora"
 		},
 		{
 			id: "modulos",
@@ -36,12 +41,10 @@ export const ReporteExpedicion = () => {
 
 	const loadAutorizados = async () => {
 		autorizados = await loadAutorizadosGlobal();
-		console.log("Secargo autorizados!!");
 	};
 
 	const loadExpedicion = async () => {
 		expedicion = await loadAvanceSuperficieExpedida();
-		console.log("Secargo autorizados!!");
 	};
 
 	useEffect(() => {
@@ -49,20 +52,30 @@ export const ReporteExpedicion = () => {
 		loadAutorizados();
 	}, []);
 
-	const imprimir = () => {
-		console.log(filterReportData(mergeReportData(autorizados, expedicion), "global"));
-		// console.table(mergeReportData(autorizados, expedicion));
-		// console.table(expedicion);
-		// console.log(expedicion, autorizados);
-		// console.table(expedicion);
-		// console.log(autorizados);
+	const getModulos = () => {
+		const modulos = [];
+		Object.keys(modulosValues).forEach((modulo) => {
+			modulosValues[modulo] && modulos.push(modulo);
+		});
+
+		return modulos;
 	};
+
+	// const imprimir = () => {
+	// 	// console.log(getModulos());
+	// 	// console.log(filterReportData(mergeReportData(autorizados, expedicion), "global"));
+	// 	console.log(mergeReportData(autorizados, expedicion));
+	// 	// console.table(expedicion);
+	// 	// console.log(expedicion, autorizados);
+	// 	// console.table(expedicion);
+	// 	// console.log(autorizados);
+	// };
 
 	return (
 		<div>
-			<button onClick={imprimir} className="btn btn-primary">
+			{/* <button onClick={imprimir} className="btn btn-primary">
 				imprimir
-			</button>
+			</button> */}
 
 			<div className="row m-0 ">
 				<div className="col-sm-12 p-3 d-flex justify-content-center">
@@ -86,6 +99,36 @@ export const ReporteExpedicion = () => {
 						modulosValues={modulosValues}
 						handleModulosInputChange={handleModulosInputChange}
 					/>
+				</div>
+			)}
+
+			{(reportOptionsValues.opcion === "global" ||
+				reportOptionsValues.opcion === "Baja California" ||
+				reportOptionsValues.opcion === "Sonora") && (
+				<div className="row mt-3">
+					<div className="col-sm-12 pt-5">
+						<ExpedicionTable
+							data={filterReportData(
+								mergeReportData(autorizados, expedicion),
+								reportOptionsValues.opcion,
+								[]
+							)}
+						/>
+					</div>
+				</div>
+			)}
+
+			{reportOptionsValues.opcion === "modulos" && getModulos().length > 0 && (
+				<div className="row mt-3">
+					<div className="col-sm-12 pt-5">
+						<ExpedicionTable
+							data={filterReportData(
+								mergeReportData(autorizados, expedicion),
+								reportOptionsValues.opcion,
+								getModulos()
+							)}
+						/>
+					</div>
 				</div>
 			)}
 		</div>

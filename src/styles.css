@@ -92,6 +92,10 @@
 	text-align: center;
 }
 
+.font12 {
+	font-size: 12px;
+}
+
 .printModal p {
 	font-size: 12px;
 	text-align: justify;

@@ -8,11 +8,28 @@ export const ModulosCheckbox = ({ modulosValues, handleModulosInputChange }) => 
 		button: "btn btn-outline-primary"
 	};
 
+	// TODO: Usar un custom Hook para mejorar los checkbox
+	const selectUnidad = (modulos) => {
+		modulos.forEach((modulo) => {
+			modulosValues[modulo] = true;
+			handleModulosInputChange({
+				target: { type: "checkbox", name: modulo, checked: true }
+			});
+		});
+	};
+
 	return (
 		<>
 			<div className="col-sm-4 mt-5">
 				<div className="row d-flex flex-column align-content-center">
-					<p className=" d-flex justify-content-center"> Primera Unidad </p>
+					<div className=" d-flex justify-content-center mb-3">
+						<button
+							className="btn btn-outline-primary"
+							onClick={() => selectUnidad(modulos.primeraUnidad)}
+						>
+							Primera Unidad
+						</button>
+					</div>
 
 					<CheckboxButtonGroup
 						options={modulos.primeraUnidad}
@@ -25,7 +42,14 @@ export const ModulosCheckbox = ({ modulosValues, handleModulosInputChange }) => 
 
 			<div className="col-sm-4 mt-5">
 				<div className="row d-flex flex-column align-content-center">
-					<p className=" d-flex justify-content-center"> Segunda Unidad </p>
+					<div className=" d-flex justify-content-center mb-3">
+						<button
+							className="btn btn-outline-primary"
+							onClick={() => selectUnidad(modulos.segundaUnidad)}
+						>
+							Segunda Unidad
+						</button>
+					</div>
 
 					<CheckboxButtonGroup
 						options={modulos.segundaUnidad}
@@ -38,7 +62,14 @@ export const ModulosCheckbox = ({ modulosValues, handleModulosInputChange }) => 
 
 			<div className="col-sm-4 mt-5">
 				<div className="row d-flex flex-column align-content-center">
-					<p className=" d-flex justify-content-center"> Tercera Unidad </p>
+					<div className=" d-flex justify-content-center mb-3">
+						<button
+							className="btn btn-outline-primary"
+							onClick={() => selectUnidad(modulos.terceraUnidad)}
+						>
+							Tercera Unidad
+						</button>
+					</div>
 
 					<CheckboxButtonGroup
 						options={modulos.terceraUnidad}

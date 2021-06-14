@@ -160,6 +160,7 @@ export const savePermiso = async (allData) => {
 								if (allData.tipo === "normal") {
 									permisosPorCultivoRef.set({
 										subciclo: data.subciclo,
+										estado: data.estado,
 										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
@@ -172,6 +173,7 @@ export const savePermiso = async (allData) => {
 								if (allData.tipo === "extra") {
 									permisosPorCultivoRef.set({
 										subciclo: data.subciclo,
+										estado: data.estado,
 										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
@@ -186,6 +188,7 @@ export const savePermiso = async (allData) => {
 								if (allData.tipo === "normal") {
 									permisosPorCultivoRef.set({
 										subciclo: data.subciclo,
+										estado: data.estado,
 										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
@@ -198,6 +201,7 @@ export const savePermiso = async (allData) => {
 								if (allData.tipo === "extra") {
 									permisosPorCultivoRef.set({
 										subciclo: data.subciclo,
+										estado: data.estado,
 										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
@@ -212,6 +216,7 @@ export const savePermiso = async (allData) => {
 								if (allData.tipo === "normal") {
 									permisosPorCultivoRef.set({
 										subciclo: data.subciclo,
+										estado: data.estado,
 										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,
@@ -226,6 +231,7 @@ export const savePermiso = async (allData) => {
 								if (allData.tipo === "extra") {
 									permisosPorCultivoRef.set({
 										subciclo: data.subciclo,
+										estado: data.estado,
 										modulo: data.modulo,
 										clave: allData.claveCultivo,
 										cultivo: allData.nombreCultivo,

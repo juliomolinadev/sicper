@@ -36,11 +36,50 @@ const accumulate = (
 	ref.supPozoPartRealizad = ref.supPozoPartRealizad + supPozoPartRealizad;
 };
 
-const filterGlobalReport = (data) => {
+const checkModulo = (modulos, modulo) => {
+	let isOk = false;
+
+	if (modulos.length > 0) {
+		modulos.forEach((okModulo) => {
+			if (modulo.toString() === okModulo) isOk = true;
+		});
+	} else isOk = true;
+
+	return isOk;
+};
+
+const isRegisterInclude = (opcion, modulos, modulo, estado) => {
+	switch (opcion) {
+		case "modulos":
+			return checkModulo(modulos, modulo);
+
+		case "Baja California":
+		case "Sonora":
+			if (opcion === estado) {
+				return true;
+			} else return false;
+
+		case "global":
+			return true;
+
+		default:
+			return false;
+	}
+};
+
+export const filterReportData = (data, option, modulos) => {
+	Object.keys(reportData).forEach((subciclo) => {
+		Object.keys(reportData[subciclo]).forEach((cultivo) => {
+			reportData[subciclo][cultivo] = { ...initialObject };
+		});
+	});
+
 	Object.values(data).forEach(
 		({
 			subciclo,
 			cultivo,
+			modulo,
+			estado,
 			supGravedadProgramada,
 			supGravedadExpedida,
 			supGravedadRealizada,
@@ -51,83 +90,63 @@ const filterGlobalReport = (data) => {
 			supPozoPartExpedida,
 			supPozoPartRealizad
 		}) => {
-			if (reportData[subciclo][cultivo]) {
-				accumulate(
-					reportData[subciclo][cultivo],
-					supGravedadProgramada,
-					supGravedadExpedida,
-					supGravedadRealizada,
-					supPozoProgramada,
-					supPozoExpedida,
-					supPozoRealizada,
-					supPozoPartProgramada,
-					supPozoPartExpedida,
-					supPozoPartRealizad
-				);
+			if (isRegisterInclude(option, modulos, modulo, estado)) {
+				if (reportData[subciclo][cultivo]) {
+					accumulate(
+						reportData[subciclo][cultivo],
+						supGravedadProgramada,
+						supGravedadExpedida,
+						supGravedadRealizada,
+						supPozoProgramada,
+						supPozoExpedida,
+						supPozoRealizada,
+						supPozoPartProgramada,
+						supPozoPartExpedida,
+						supPozoPartRealizad
+					);
 
-				accumulate(
-					reportData[subciclo].SUBTOTAL,
-					supGravedadProgramada,
-					supGravedadExpedida,
-					supGravedadRealizada,
-					supPozoProgramada,
-					supPozoExpedida,
-					supPozoRealizada,
-					supPozoPartProgramada,
-					supPozoPartExpedida,
-					supPozoPartRealizad
-				);
-			} else {
-				accumulate(
-					reportData[subciclo].VARIOS,
-					supGravedadProgramada,
-					supGravedadExpedida,
-					supGravedadRealizada,
-					supPozoProgramada,
-					supPozoExpedida,
-					supPozoRealizada,
-					supPozoPartProgramada,
-					supPozoPartExpedida,
-					supPozoPartRealizad
-				);
+					accumulate(
+						reportData[subciclo].SUBTOTAL,
+						supGravedadProgramada,
+						supGravedadExpedida,
+						supGravedadRealizada,
+						supPozoProgramada,
+						supPozoExpedida,
+						supPozoRealizada,
+						supPozoPartProgramada,
+						supPozoPartExpedida,
+						supPozoPartRealizad
+					);
+				} else {
+					accumulate(
+						reportData[subciclo].VARIOS,
+						supGravedadProgramada,
+						supGravedadExpedida,
+						supGravedadRealizada,
+						supPozoProgramada,
+						supPozoExpedida,
+						supPozoRealizada,
+						supPozoPartProgramada,
+						supPozoPartExpedida,
+						supPozoPartRealizad
+					);
 
-				accumulate(
-					reportData[subciclo].SUBTOTAL,
-					supGravedadProgramada,
-					supGravedadExpedida,
-					supGravedadRealizada,
-					supPozoProgramada,
-					supPozoExpedida,
-					supPozoRealizada,
-					supPozoPartProgramada,
-					supPozoPartExpedida,
-					supPozoPartRealizad
-				);
+					accumulate(
+						reportData[subciclo].SUBTOTAL,
+						supGravedadProgramada,
+						supGravedadExpedida,
+						supGravedadRealizada,
+						supPozoProgramada,
+						supPozoExpedida,
+						supPozoRealizada,
+						supPozoPartProgramada,
+						supPozoPartExpedida,
+						supPozoPartRealizad
+					);
+				}
 			}
 		}
 	);
 
 	return reportData;
-};
-
-export const filterReportData = (data, option) => {
-	Object.keys(reportData).forEach((subciclo) => {
-		Object.keys(reportData[subciclo]).forEach((cultivo) => {
-			reportData[subciclo][cultivo] = { ...initialObject };
-		});
-	});
-
-	switch (option) {
-		case "global":
-			return filterGlobalReport(data);
-
-		// case "bcSon":
-		// 	return filterBcSonReport(data);
-
-		// case "modulos":
-		// 	return filterModulosReport(data);
-
-		default:
-			return data;
-	}
 };
