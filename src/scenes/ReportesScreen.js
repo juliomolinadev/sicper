@@ -22,7 +22,7 @@ export const ReportesScreen = () => {
 	];
 
 	const checkboxStyles = {
-		group: "btn-group btn-group-toggle",
+		group: "btn-group btn-group-toggle d-print-none",
 		button: "btn btn-outline-primary"
 	};
 

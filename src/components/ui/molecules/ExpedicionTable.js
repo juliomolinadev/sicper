@@ -4,7 +4,7 @@ export const ExpedicionTable = ({ data }) => {
 	return (
 		<div className="table-responsive-sm">
 			<table className="table table-sm table-bordered font12">
-				<thead className="thead-light">
+				<thead>
 					<tr>
 						<th scope="row" rowSpan="2">
 							CULTIVO
@@ -23,23 +23,23 @@ export const ExpedicionTable = ({ data }) => {
 						</th>
 					</tr>
 					<tr>
-						<th scope="col">S. Prog.</th>
-						<th scope="col">S. Expedida</th>
+						<th scope="col">Sup. Prog.</th>
+						<th scope="col">Sup. Expedida</th>
 						<th scope="col">Realizado</th>
-						<th scope="col">S. Prog.</th>
-						<th scope="col">S. Expedida</th>
+						<th scope="col">Sup. Prog.</th>
+						<th scope="col">Sup. Expedida</th>
 						<th scope="col">Realizado</th>
-						<th scope="col">S. Prog.</th>
-						<th scope="col">S. Expedida</th>
+						<th scope="col">Sup. Prog.</th>
+						<th scope="col">Sup. Expedida</th>
 						<th scope="col">Realizado</th>
-						<th scope="col">S. Prog.</th>
-						<th scope="col">S. Expedida</th>
+						<th scope="col">Sup. Prog.</th>
+						<th scope="col">Sup. Expedida</th>
 						<th scope="col">Realizado</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<th scope="row" colSpan="13">
+						<th scope="row" colSpan="13" className="pt-4">
 							OTOÑO - INVIERNO
 						</th>
 					</tr>
@@ -49,27 +49,27 @@ export const ExpedicionTable = ({ data }) => {
 						return (
 							<tr key={nombreCultivo}>
 								<th scope="row">{nombreCultivo}</th>
-								<td>{cultivo.supGravedadProgramada}</td>
-								<td>{cultivo.supGravedadExpedida}</td>
-								<td>{cultivo.supGravedadRealizada}</td>
-								<td>{cultivo.supPozoProgramada}</td>
-								<td>{cultivo.supPozoExpedida}</td>
-								<td>{cultivo.supPozoRealizada}</td>
-								<td>{cultivo.supPozoPartProgramada}</td>
-								<td>{cultivo.supPozoPartExpedida}</td>
-								<td>{cultivo.supPozoPartRealizada}</td>
+								<td className="text-right">{cultivo.supGravedadProgramada}</td>
+								<td className="text-right">{cultivo.supGravedadExpedida}</td>
+								<td className="text-right">{cultivo.supGravedadRealizada}</td>
+								<td className="text-right">{cultivo.supPozoProgramada}</td>
+								<td className="text-right">{cultivo.supPozoExpedida}</td>
+								<td className="text-right">{cultivo.supPozoRealizada}</td>
+								<td className="text-right">{cultivo.supPozoPartProgramada}</td>
+								<td className="text-right">{cultivo.supPozoPartExpedida}</td>
+								<td className="text-right">{cultivo.supPozoPartRealizada}</td>
 
-								<td>
+								<td className="text-right">
 									{cultivo.supGravedadProgramada +
 										cultivo.supPozoProgramada +
 										cultivo.supPozoPartProgramada}
 								</td>
-								<td>
+								<td className="text-right">
 									{cultivo.supGravedadExpedida +
 										cultivo.supPozoExpedida +
 										cultivo.supPozoPartExpedida}
 								</td>
-								<td>
+								<td className="text-right">
 									{cultivo.supGravedadRealizada +
 										cultivo.supPozoRealizada +
 										cultivo.supPozoPartRealizada}
@@ -79,7 +79,7 @@ export const ExpedicionTable = ({ data }) => {
 					})}
 
 					<tr>
-						<th scope="row" colSpan="13">
+						<th scope="row" colSpan="13" className="pt-4">
 							PERENNES
 						</th>
 					</tr>
@@ -89,27 +89,27 @@ export const ExpedicionTable = ({ data }) => {
 						return (
 							<tr key={nombreCultivo}>
 								<th scope="row">{nombreCultivo}</th>
-								<td>{cultivo.supGravedadProgramada}</td>
-								<td>{cultivo.supGravedadExpedida}</td>
-								<td>{cultivo.supGravedadRealizada}</td>
-								<td>{cultivo.supPozoProgramada}</td>
-								<td>{cultivo.supPozoExpedida}</td>
-								<td>{cultivo.supPozoRealizada}</td>
-								<td>{cultivo.supPozoPartProgramada}</td>
-								<td>{cultivo.supPozoPartExpedida}</td>
-								<td>{cultivo.supPozoPartRealizada}</td>
+								<td className="text-right">{cultivo.supGravedadProgramada}</td>
+								<td className="text-right">{cultivo.supGravedadExpedida}</td>
+								<td className="text-right">{cultivo.supGravedadRealizada}</td>
+								<td className="text-right">{cultivo.supPozoProgramada}</td>
+								<td className="text-right">{cultivo.supPozoExpedida}</td>
+								<td className="text-right">{cultivo.supPozoRealizada}</td>
+								<td className="text-right">{cultivo.supPozoPartProgramada}</td>
+								<td className="text-right">{cultivo.supPozoPartExpedida}</td>
+								<td className="text-right">{cultivo.supPozoPartRealizada}</td>
 
-								<td>
+								<td className="text-right">
 									{cultivo.supGravedadProgramada +
 										cultivo.supPozoProgramada +
 										cultivo.supPozoPartProgramada}
 								</td>
-								<td>
+								<td className="text-right">
 									{cultivo.supGravedadExpedida +
 										cultivo.supPozoExpedida +
 										cultivo.supPozoPartExpedida}
 								</td>
-								<td>
+								<td className="text-right">
 									{cultivo.supGravedadRealizada +
 										cultivo.supPozoRealizada +
 										cultivo.supPozoPartRealizada}
@@ -119,7 +119,7 @@ export const ExpedicionTable = ({ data }) => {
 					})}
 
 					<tr>
-						<th scope="row" colSpan="13">
+						<th scope="row" colSpan="13" className="pt-4">
 							PRIMAVERA-VERANO
 						</th>
 					</tr>
@@ -129,27 +129,27 @@ export const ExpedicionTable = ({ data }) => {
 						return (
 							<tr key={nombreCultivo}>
 								<th scope="row">{nombreCultivo}</th>
-								<td>{cultivo.supGravedadProgramada}</td>
-								<td>{cultivo.supGravedadExpedida}</td>
-								<td>{cultivo.supGravedadRealizada}</td>
-								<td>{cultivo.supPozoProgramada}</td>
-								<td>{cultivo.supPozoExpedida}</td>
-								<td>{cultivo.supPozoRealizada}</td>
-								<td>{cultivo.supPozoPartProgramada}</td>
-								<td>{cultivo.supPozoPartExpedida}</td>
-								<td>{cultivo.supPozoPartRealizada}</td>
+								<td className="text-right">{cultivo.supGravedadProgramada}</td>
+								<td className="text-right">{cultivo.supGravedadExpedida}</td>
+								<td className="text-right">{cultivo.supGravedadRealizada}</td>
+								<td className="text-right">{cultivo.supPozoProgramada}</td>
+								<td className="text-right">{cultivo.supPozoExpedida}</td>
+								<td className="text-right">{cultivo.supPozoRealizada}</td>
+								<td className="text-right">{cultivo.supPozoPartProgramada}</td>
+								<td className="text-right">{cultivo.supPozoPartExpedida}</td>
+								<td className="text-right">{cultivo.supPozoPartRealizada}</td>
 
-								<td>
+								<td className="text-right">
 									{cultivo.supGravedadProgramada +
 										cultivo.supPozoProgramada +
 										cultivo.supPozoPartProgramada}
 								</td>
-								<td>
+								<td className="text-right">
 									{cultivo.supGravedadExpedida +
 										cultivo.supPozoExpedida +
 										cultivo.supPozoPartExpedida}
 								</td>
-								<td>
+								<td className="text-right">
 									{cultivo.supGravedadRealizada +
 										cultivo.supPozoRealizada +
 										cultivo.supPozoPartRealizada}

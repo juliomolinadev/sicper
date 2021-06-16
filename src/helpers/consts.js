@@ -1,7 +1,19 @@
 export const modulosPorUnidad = {
-	primeraUnidad: ["4", "5", "6", "14", "15", "16"],
-	segundaUnidad: ["7", "8", "9A", "9B", "10", "11", "12", "17", "18", "19", "20"],
-	terceraUnidad: ["1", "2", "3", "21", "22", "FL"]
+	primeraUnidad: { 4: false, 5: false, 6: false, 14: false, 15: false, 16: false },
+	segundaUnidad: {
+		7: false,
+		8: false,
+		"9A": false,
+		"9B": false,
+		10: false,
+		11: false,
+		12: false,
+		17: false,
+		18: false,
+		19: false,
+		20: false
+	},
+	terceraUnidad: { 1: false, 2: false, 3: false, 21: false, 22: false, FL: false }
 };
 
 export const modulosPorEstado = {

@@ -1,81 +1,59 @@
 import React from "react";
-import { modulosPorUnidad as modulos } from "../../../helpers/consts";
-import { CheckboxButtonGroup } from "../molecules/CheckboxButtonGroup";
+// import { modulosPorUnidad as modulos } from "../../../helpers/consts";
+// import { CheckboxButtonGroup } from "../molecules/CheckboxButtonGroup";
+// import { useSingleSelectionButtonGroup } from "../../../hooks/useSingleSelectionButtonGroup";
+import { ButtonGroup } from "../molecules/ButtonGroup";
 
-export const ModulosCheckbox = ({ modulosValues, handleModulosInputChange }) => {
-	const checkboxStyles = {
-		group: "btn-group btn-group-toggle",
-		button: "btn btn-outline-primary"
-	};
-
-	// TODO: Usar un custom Hook para mejorar los checkbox
-	const selectUnidad = (modulos) => {
-		modulos.forEach((modulo) => {
-			modulosValues[modulo] = true;
-			handleModulosInputChange({
-				target: { type: "checkbox", name: modulo, checked: true }
-			});
-		});
+export const ModulosCheckbox = ({
+	buttonValues,
+	handleSelectButton,
+	primeraValues,
+	primeraInputChange,
+	segundaValues,
+	segundaInputChange,
+	terceraValues,
+	terceraInputChange
+}) => {
+	const buttonClasses = {
+		on: "btn btn-primary",
+		off: "btn btn-outline-primary"
 	};
 
 	return (
 		<>
-			<div className="col-sm-4 mt-5">
-				<div className="row d-flex flex-column align-content-center">
-					<div className=" d-flex justify-content-center mb-3">
-						<button
-							className="btn btn-outline-primary"
-							onClick={() => selectUnidad(modulos.primeraUnidad)}
-						>
-							Primera Unidad
-						</button>
-					</div>
-
-					<CheckboxButtonGroup
-						options={modulos.primeraUnidad}
-						formValues={modulosValues}
-						setFunction={handleModulosInputChange}
-						styles={checkboxStyles}
-					/>
-				</div>
+			<div className="row justify-content-center mt-5">
+				<ButtonGroup
+					options={buttonValues}
+					setFunction={handleSelectButton}
+					groupStyles="btn-group btn-group-toggle"
+					buttonStyles={buttonClasses}
+				/>
 			</div>
 
-			<div className="col-sm-4 mt-5">
-				<div className="row d-flex flex-column align-content-center">
-					<div className=" d-flex justify-content-center mb-3">
-						<button
-							className="btn btn-outline-primary"
-							onClick={() => selectUnidad(modulos.segundaUnidad)}
-						>
-							Segunda Unidad
-						</button>
-					</div>
-
-					<CheckboxButtonGroup
-						options={modulos.segundaUnidad}
-						formValues={modulosValues}
-						setFunction={handleModulosInputChange}
-						styles={checkboxStyles}
+			<div className="row d-flex justify-content-around">
+				<div className="mt-3">
+					<ButtonGroup
+						options={primeraValues}
+						setFunction={primeraInputChange}
+						groupStyles="btn-group btn-group-toggle"
+						buttonStyles={buttonClasses}
 					/>
 				</div>
-			</div>
 
-			<div className="col-sm-4 mt-5">
-				<div className="row d-flex flex-column align-content-center">
-					<div className=" d-flex justify-content-center mb-3">
-						<button
-							className="btn btn-outline-primary"
-							onClick={() => selectUnidad(modulos.terceraUnidad)}
-						>
-							Tercera Unidad
-						</button>
-					</div>
-
-					<CheckboxButtonGroup
-						options={modulos.terceraUnidad}
-						formValues={modulosValues}
-						setFunction={handleModulosInputChange}
-						styles={checkboxStyles}
+				<div className="mt-3">
+					<ButtonGroup
+						options={segundaValues}
+						setFunction={segundaInputChange}
+						groupStyles="btn-group btn-group-toggle"
+						buttonStyles={buttonClasses}
+					/>
+				</div>
+				<div className="mt-3">
+					<ButtonGroup
+						options={terceraValues}
+						setFunction={terceraInputChange}
+						groupStyles="btn-group btn-group-toggle"
+						buttonStyles={buttonClasses}
 					/>
 				</div>
 			</div>
