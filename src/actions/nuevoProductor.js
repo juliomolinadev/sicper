@@ -12,18 +12,13 @@ export const closeNuevoProductorModal = () => ({
 
 // TODO: Comprobar que el rfc no exista
 export const startSaveProductor = (productor) => {
-	return (dispatch) => {
+	return () => {
 		db.collection("productores")
 			.add(productor)
-			.then(
-				/* async ({ user }) => {
-				await user.updateProfile({ displayName: name });
-				dispatch(login(user.uid, user.displayName));
-      } */
-				(docRef) => {
-					console.log(docRef.id);
-				}
-			)
+			.then(() => {
+				console.log("Productor registrado");
+				Swal.fire("Productor registrado", "Se registraron con éxito los cambios.", "success");
+			})
 			.catch((e) => {
 				console.log(e);
 				Swal.fire("Error", e, "error");

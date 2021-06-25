@@ -42,7 +42,8 @@ export const NuevoProductorModal = () => {
 		rfc = "",
 		cp = "",
 		genero = "",
-		telefono = ""
+		telefono = "",
+		curp = ""
 	} = formValues;
 
 	const handleRegister = (e) => {
@@ -59,6 +60,7 @@ export const NuevoProductorModal = () => {
 					estado: estado.toUpperCase(),
 					municipio: municipio.toUpperCase(),
 					rfc: rfc.toUpperCase(),
+					curp: curp.toUpperCase(),
 					telefono: telefono.replace(/ /g, "")
 				})
 			);
@@ -89,6 +91,9 @@ export const NuevoProductorModal = () => {
 			return false;
 		} else if (rfc.trim().length < 12) {
 			dispatch(setError("RFC no valido"));
+			return false;
+		} else if (curp.trim().length < 18) {
+			dispatch(setError("CURP no valido"));
 			return false;
 		} else if (cp.trim().length < 5) {
 			dispatch(setError("Codigo postal no valido"));
@@ -125,7 +130,7 @@ export const NuevoProductorModal = () => {
 						<input
 							type="text"
 							className="form-control"
-							placeholder="Apellido Paterno"
+							placeholder="* Apellido Paterno"
 							name="apPaterno"
 							autoComplete="off"
 							onChange={handleInputChange}
@@ -136,7 +141,7 @@ export const NuevoProductorModal = () => {
 						<input
 							type="text"
 							className="form-control"
-							placeholder="Direccion"
+							placeholder="* Direccion"
 							name="direccion"
 							autoComplete="waa"
 							onChange={handleInputChange}
@@ -149,7 +154,7 @@ export const NuevoProductorModal = () => {
 						<input
 							type="text"
 							className="form-control"
-							placeholder="Apellido Materno"
+							placeholder="* Apellido Materno"
 							name="apMaterno"
 							autoComplete="waa"
 							onChange={handleInputChange}
@@ -160,7 +165,7 @@ export const NuevoProductorModal = () => {
 						<input
 							type="text"
 							className="form-control"
-							placeholder="Estado"
+							placeholder="* Estado"
 							name="estado"
 							autoComplete="waa"
 							onChange={handleInputChange}
@@ -173,7 +178,7 @@ export const NuevoProductorModal = () => {
 						<input
 							type="text"
 							className="form-control"
-							placeholder="Nombre"
+							placeholder="* Nombre"
 							name="nombre"
 							autoComplete="off"
 							onChange={handleInputChange}
@@ -184,7 +189,7 @@ export const NuevoProductorModal = () => {
 						<input
 							type="text"
 							className="form-control"
-							placeholder="Municipio"
+							placeholder="* Municipio"
 							name="municipio"
 							autoComplete="waa"
 							onChange={handleInputChange}
@@ -197,7 +202,7 @@ export const NuevoProductorModal = () => {
 						<input
 							type="text"
 							className="form-control"
-							placeholder="RFC"
+							placeholder="* RFC"
 							name="rfc"
 							autoComplete="waa"
 							onChange={handleInputChange}
@@ -208,7 +213,7 @@ export const NuevoProductorModal = () => {
 						<input
 							type="text"
 							className="form-control"
-							placeholder="CP"
+							placeholder="* CP"
 							name="cp"
 							autoComplete="waa"
 							onChange={handleInputChange}
@@ -217,7 +222,32 @@ export const NuevoProductorModal = () => {
 				</div>
 
 				<div className="row p-2">
+					<div className="col-sm-6">
+						<input
+							type="text"
+							className="form-control"
+							placeholder="* CURP"
+							name="curp"
+							autoComplete="off"
+							onChange={handleInputChange}
+						/>
+					</div>
+
+					<div className="col-sm-6">
+						<input
+							type="text"
+							className="form-control"
+							placeholder="* Telefono"
+							name="telefono"
+							autoComplete="off"
+							onChange={handleInputChange}
+						/>
+					</div>
+				</div>
+
+				<div className="row p-2">
 					<div className="col-sm-6 d-flex align-items-baseline pt-2">
+						<span>*</span>
 						<div className="px-4">
 							<input
 								type="radio"
@@ -240,17 +270,6 @@ export const NuevoProductorModal = () => {
 							<span> </span>
 							<label htmlFor="femenino"> Femenino</label>
 						</div>
-					</div>
-
-					<div className="col-sm-6">
-						<input
-							type="text"
-							className="form-control"
-							placeholder="Telefono"
-							name="telefono"
-							autoComplete="off"
-							onChange={handleInputChange}
-						/>
 					</div>
 				</div>
 
