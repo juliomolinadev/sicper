@@ -13,7 +13,7 @@ export const UsuariosInput = () => {
 		if (usuario.length > 0) {
 			dispatch(startLoadUsuarios(usuario.toUpperCase(), modulo));
 		} else {
-			Swal.fire("Nada para buscar", "Ingrese apellido paterno del usuario", "warning");
+			Swal.fire("Nada para buscar", "Ingrese apellido paterno o cuenta del usuario", "warning");
 		}
 	};
 
@@ -36,7 +36,7 @@ export const UsuariosInput = () => {
 					<input
 						type="text"
 						className="form-control"
-						placeholder="Apellido paterno"
+						placeholder="Apellido paterno o numero de cuenta"
 						name="usuario"
 						autoComplete="off"
 						value={usuario}
