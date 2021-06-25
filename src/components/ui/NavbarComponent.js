@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { startLogout } from "../../actions/auth";
 import { Navbar, Nav, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export const NavbarComponent = () => {
 	const { privilegios } = useSelector((state) => state.auth);
@@ -28,57 +28,57 @@ export const NavbarComponent = () => {
 				<Navbar.Collapse id="basic-navbar-nav">
 					<Nav className="mr-auto">
 						{privilegios.pantallaInicio && (
-							<Link to="/sicper" className="nav-link">
+							<NavLink to="/sicper" className="nav-link">
 								Inicio
-							</Link>
+							</NavLink>
 						)}
 
 						{privilegios.pantallaPadron && (
-							<Link to="/padron" className="nav-link">
+							<NavLink to="/padron" className="nav-link">
 								Padron
-							</Link>
+							</NavLink>
 						)}
 
 						{privilegios.pantallaPermisos && (
-							<Link to="/permisos" className="nav-link">
+							<NavLink to="/permisos" className="nav-link">
 								Permisos
-							</Link>
+							</NavLink>
 						)}
 
 						{privilegios.pantallaTransferencias && (
-							<Link to="/transferencias" className="nav-link">
+							<NavLink to="/transferencias" className="nav-link">
 								Transferencias
-							</Link>
+							</NavLink>
 						)}
 
 						{privilegios.pantallaAsignacion && (
-							<Link to="/asignacion" className="nav-link">
+							<NavLink to="/asignacion" className="nav-link">
 								Asignacion
-							</Link>
+							</NavLink>
 						)}
 
 						{privilegios.pantallaLabores && (
-							<Link to="/labores" className="nav-link">
+							<NavLink to="/labores" className="nav-link">
 								Labores
-							</Link>
+							</NavLink>
 						)}
 
 						{privilegios.pantallaAutorizados && (
-							<Link to="/autorizados" className="nav-link">
+							<NavLink to="/autorizados" className="nav-link">
 								Autorizados
-							</Link>
+							</NavLink>
 						)}
 
 						{privilegios.pantallaReportes && (
-							<Link to="/reportes" className="nav-link">
+							<NavLink to="/reportes" className="nav-link">
 								Reportes
-							</Link>
+							</NavLink>
 						)}
 
 						{privilegios.pantallaConfiguracion && (
-							<Link to="/configuracion" className="nav-link">
+							<NavLink to="/configuracion" className="nav-link">
 								Configuracion
-							</Link>
+							</NavLink>
 						)}
 					</Nav>
 
