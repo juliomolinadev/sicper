@@ -5,6 +5,7 @@ import { loadAvanceSuperficieExpedida } from "../../../helpers/DB/loadAvanceSupe
 import { filterReportData } from "../../../helpers/functions/filterReportData";
 import { mergeReportData } from "../../../helpers/functions/mergeReportData";
 import { useForm } from "../../../hooks/useForm";
+import { modulosCheckboxReducer } from "../../../reducers/modulosCheckboxReducer";
 import { ExpedicionTable } from "../molecules/ExpedicionTable";
 import { RadioButtonGroup } from "../molecules/RadioButtonGroup";
 import { ModulosCheckbox } from "./ModulosCkeckbox";
@@ -20,69 +21,10 @@ const unidades = {
 
 const initialState = { unidades, modulosPorUnidad };
 
-const reducer = (state, action) => {
-	const { unidades, modulosPorUnidad } = state;
-	const { type, payload } = action;
-
-	switch (type) {
-		case "setUnidad":
-			if (unidades[payload]) {
-				return {
-					...state,
-					unidades: {
-						...unidades,
-						[payload]: false
-					}
-				};
-			} else {
-				const newValues = {};
-				Object.keys(unidades).forEach((newValueKey) => {
-					newValues[newValueKey] = false;
-				});
-				return {
-					...state,
-					unidades: {
-						...newValues,
-						[payload]: true
-					}
-				};
-			}
-
-		case "changeModulo":
-			const { unidad, modulo } = payload;
-			return {
-				...state,
-				modulosPorUnidad: {
-					...modulosPorUnidad,
-					[unidad]: {
-						...modulosPorUnidad[unidad],
-						[modulo]: !modulosPorUnidad[unidad][modulo]
-					}
-				}
-			};
-
-		case "changeGroup":
-			const newModulosState = { ...modulosPorUnidad };
-			Object.keys(state.unidades).forEach((unidad) => {
-				Object.keys(state.modulosPorUnidad[unidad]).forEach((modulo) => {
-					newModulosState[unidad][modulo] = state.unidades[unidad];
-				});
-			});
-
-			return {
-				...state,
-				modulosPorUnidad: newModulosState
-			};
-
-		default:
-			break;
-	}
-};
-
 export const ReporteExpedicion = () => {
 	const [reportOptionsValues, handleReportOptionsInputChange] = useForm();
 
-	const [state, dispatch] = useReducer(reducer, initialState);
+	const [state, dispatch] = useReducer(modulosCheckboxReducer, initialState);
 	const { unidades, modulosPorUnidad } = state;
 	const { primeraUnidad, segundaUnidad, terceraUnidad } = modulosPorUnidad;
 
