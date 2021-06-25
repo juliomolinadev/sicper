@@ -3,12 +3,10 @@ import { CustomTable } from "../tables/CustomTable";
 import { usuariosColumns } from "../tables/configTables";
 import { startSetUsuarioSelected } from "../../actions/usuarios";
 import { UsuarioInput } from "../permisos/inputsNuevosPermisos/UsuarioInput";
-import { /* useDispatch, */ useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { UsuarioSelectedDetail } from "./UsuarioSelectedDetail";
 
 export const PadronScreen = () => {
-	// const dispatch = useDispatch();
-
 	const { usuarios, idUsuarioSelected } = useSelector((state) => state.altaPermisos);
 
 	let data = [];
@@ -23,9 +21,7 @@ export const PadronScreen = () => {
 				<UsuarioInput />
 			</div>
 
-			{data.length === 0 ? (
-				<></>
-			) : (
+			{data.length > 0 && (
 				<div className="row">
 					<div className="col-sm-8 mb-3">
 						<CustomTable
@@ -36,7 +32,7 @@ export const PadronScreen = () => {
 						></CustomTable>
 					</div>
 
-					<div className="col-sm-4">{idUsuarioSelected ? <UsuarioSelectedDetail /> : <></>}</div>
+					<div className="col-sm-4">{idUsuarioSelected && <UsuarioSelectedDetail />}</div>
 				</div>
 			)}
 		</>
