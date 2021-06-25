@@ -1,55 +1,90 @@
-import React, { useEffect } from "react";
-import { modulosPorUnidad as modulos } from "../../../helpers/consts";
+import React, { useEffect, useReducer } from "react";
+import { modulosPorUnidad } from "../../../helpers/consts";
 import { loadAutorizadosGlobal } from "../../../helpers/DB/loadAutorizadosGlobal";
 import { loadAvanceSuperficieExpedida } from "../../../helpers/DB/loadAvanceSuperficieExpedida";
 import { filterReportData } from "../../../helpers/functions/filterReportData";
 import { mergeReportData } from "../../../helpers/functions/mergeReportData";
 import { useForm } from "../../../hooks/useForm";
-import { useMultipleSelectionButtonGroup } from "../../../hooks/useMultipleSelectionButtonGroup";
-import { useSingleSelectionButtonGroup } from "../../../hooks/useSingleSelectionButtonGroup";
 import { ExpedicionTable } from "../molecules/ExpedicionTable";
 import { RadioButtonGroup } from "../molecules/RadioButtonGroup";
-import { ModulosCheckbox } from "./ModulosCheckbox";
+import { ModulosCheckbox } from "./ModulosCkeckbox";
 
 let expedicion = [];
 let autorizados = [];
 
+const unidades = {
+	primeraUnidad: false,
+	segundaUnidad: false,
+	terceraUnidad: false
+};
+
+const initialState = { unidades, modulosPorUnidad };
+
+const reducer = (state, action) => {
+	const { unidades, modulosPorUnidad } = state;
+	const { type, payload } = action;
+
+	switch (type) {
+		case "setUnidad":
+			if (unidades[payload]) {
+				return {
+					...state,
+					unidades: {
+						...unidades,
+						[payload]: false
+					}
+				};
+			} else {
+				const newValues = {};
+				Object.keys(unidades).forEach((newValueKey) => {
+					newValues[newValueKey] = false;
+				});
+				return {
+					...state,
+					unidades: {
+						...newValues,
+						[payload]: true
+					}
+				};
+			}
+
+		case "changeModulo":
+			const { unidad, modulo } = payload;
+			return {
+				...state,
+				modulosPorUnidad: {
+					...modulosPorUnidad,
+					[unidad]: {
+						...modulosPorUnidad[unidad],
+						[modulo]: !modulosPorUnidad[unidad][modulo]
+					}
+				}
+			};
+
+		case "changeGroup":
+			const newModulosState = { ...modulosPorUnidad };
+			Object.keys(state.unidades).forEach((unidad) => {
+				Object.keys(state.modulosPorUnidad[unidad]).forEach((modulo) => {
+					newModulosState[unidad][modulo] = state.unidades[unidad];
+				});
+			});
+
+			return {
+				...state,
+				modulosPorUnidad: newModulosState
+			};
+
+		default:
+			break;
+	}
+};
+
 export const ReporteExpedicion = () => {
 	const [reportOptionsValues, handleReportOptionsInputChange] = useForm();
 
-	const unidades = {
-		primeraUnidad: false,
-		segundaUnidad: false,
-		terceraUnidad: false
-	};
-	const [unidadButtonValues, handleUnidadSelect] = useSingleSelectionButtonGroup(unidades);
-
-	const [primeraUnidad, handlePrimeraUnidadInputChange, handlePrimeraChange] =
-		useMultipleSelectionButtonGroup(modulos.primeraUnidad);
-	const [segundaUnidad, handleSegundaUnidadInputChange, handleSegundaChange] =
-		useMultipleSelectionButtonGroup(modulos.segundaUnidad);
-	const [terceraUnidad, handleTerceraUnidadInputChange, handleTerceraChange] =
-		useMultipleSelectionButtonGroup(modulos.terceraUnidad);
-
-	useEffect(() => {
-		const primera = {};
-		Object.keys(modulos.primeraUnidad).forEach((key) => {
-			primera[key] = unidadButtonValues.primeraUnidad;
-		});
-		handlePrimeraChange(primera);
-
-		const segunda = {};
-		Object.keys(modulos.segundaUnidad).forEach((key) => {
-			segunda[key] = unidadButtonValues.segundaUnidad;
-		});
-		handleSegundaChange(segunda);
-
-		const tercera = {};
-		Object.keys(modulos.terceraUnidad).forEach((key) => {
-			tercera[key] = unidadButtonValues.terceraUnidad;
-		});
-		handleTerceraChange(tercera);
-	}, [unidadButtonValues]);
+	const [state, dispatch] = useReducer(reducer, initialState);
+	const { unidades, modulosPorUnidad } = state;
+	const { primeraUnidad, segundaUnidad, terceraUnidad } = modulosPorUnidad;
 
 	const reportOptions = [
 		{
@@ -82,6 +117,12 @@ export const ReporteExpedicion = () => {
 	const loadExpedicion = async () => {
 		expedicion = await loadAvanceSuperficieExpedida();
 	};
+
+	useEffect(() => {
+		dispatch({
+			type: "changeGroup"
+		});
+	}, [unidades]);
 
 	useEffect(() => {
 		loadExpedicion();
@@ -140,16 +181,7 @@ export const ReporteExpedicion = () => {
 			</div>
 
 			{reportOptionsValues.opcion === "modulos" && (
-				<ModulosCheckbox
-					buttonValues={unidadButtonValues}
-					handleSelectButton={handleUnidadSelect}
-					primeraValues={primeraUnidad}
-					primeraInputChange={handlePrimeraUnidadInputChange}
-					segundaValues={segundaUnidad}
-					segundaInputChange={handleSegundaUnidadInputChange}
-					terceraValues={terceraUnidad}
-					terceraInputChange={handleTerceraUnidadInputChange}
-				/>
+				<ModulosCheckbox state={state} dispatch={dispatch} />
 			)}
 
 			{(reportOptionsValues.opcion === "global" ||
