@@ -4,9 +4,12 @@ import { useForm } from "../../hooks/useForm";
 import { removeError, setError } from "../../actions/ui";
 import { saveTransfer } from "../../helpers/saveTransfer";
 import { startSetUsuarioSelected } from "../../actions/usuarios";
+import { ProductorInput2 } from "../permisos/inputsNuevosPermisos/ProductorInput2";
 
 export const TransferForm = () => {
 	const { usuario } = useSelector((state) => state.entidades);
+	const { nombreProductor, rfcProductor } = useSelector((state) => state.altaPermisos);
+
 	const [
 		{ superficieTransferida, loteDestino, localidadDestino, moduloDestino },
 		handleInputChange
@@ -43,6 +46,9 @@ export const TransferForm = () => {
 		} else if (localidadDestino.trim().length === 0) {
 			dispatch(setError("Indique la localidad destino"));
 			return false;
+		} else if (rfcProductor === null) {
+			dispatch(setError("Indique Productor"));
+			return false;
 		}
 		dispatch(removeError());
 
@@ -65,6 +71,8 @@ export const TransferForm = () => {
 				loteOrigen: usuario.predio,
 				localidadOrigen: usuario.ejido,
 				moduloOrigen: usuario.modulo,
+				nombreProductor,
+				rfcProductor,
 				fecha: new Date()
 			};
 			saveTransfer(transfer, ciclo);
@@ -89,7 +97,7 @@ export const TransferForm = () => {
 						{/* TODO: resaltar mensaje de error */}
 						{msgError && <div className="auth__alert-error">{msgError}</div>}
 						<div className=" row d-flex p-3">
-							<label htmlFor="">Superficie a transferir (ha):</label>
+							<label htmlFor="">* Superficie a transferir (ha):</label>
 							<input
 								type="number"
 								className="form-control ml-1"
@@ -101,9 +109,14 @@ export const TransferForm = () => {
 								onKeyUp={handleKeyUp}
 							/>
 						</div>
+
+						<div className="row d-flex p-3">
+							<ProductorInput2 />
+						</div>
+
 						{/* TODO: menu para seleccionar */}
 						<div className=" row d-flex p-3">
-							<label htmlFor="">Modulo destino:</label>
+							<label htmlFor="">* Modulo destino:</label>
 							<input
 								type="text"
 								className="form-control ml-1"
@@ -117,7 +130,7 @@ export const TransferForm = () => {
 						</div>
 
 						<div className=" row d-flex p-3">
-							<label htmlFor="">Lote destino:</label>
+							<label htmlFor="">* Lote destino:</label>
 							<input
 								type="text"
 								className="form-control ml-1"
@@ -132,7 +145,7 @@ export const TransferForm = () => {
 
 						<div className=" row d-flex p-3">
 							{/* TODO: Implementar lista de localidades */}
-							<label htmlFor="">Localidad destino:</label>
+							<label htmlFor="">* Localidad destino:</label>
 							<input
 								type="text"
 								className="form-control ml-1"

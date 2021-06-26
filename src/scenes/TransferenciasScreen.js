@@ -2,6 +2,8 @@ import React from "react";
 import { UserCard } from "../components/cards/UserCard";
 import { TransferForm } from "../components/forms/TransferForm";
 import { UsuariosInput } from "../components/inputs/UsuariosInput";
+import { NuevoProductorModal } from "../components/modals/NuevoProductorModal";
+import { ProductorModal } from "../components/modals/ProductorModal";
 import { UsuariosTable } from "../components/tables/UsuariosTable";
 
 export const TransferenciasScreen = () => {
@@ -22,6 +24,8 @@ export const TransferenciasScreen = () => {
 					<TransferForm />
 				</div>
 			</div>
+			<ProductorModal />
+			<NuevoProductorModal />
 		</>
 	);
 };
