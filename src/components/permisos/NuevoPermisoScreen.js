@@ -229,7 +229,7 @@ export const NuevoPermisoScreen = () => {
 
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">Variedad:</label>
+							<label className="col-sm-3">* Variedad:</label>
 							<div className="flex-grow-1 ">
 								<input
 									type="text"
@@ -247,7 +247,7 @@ export const NuevoPermisoScreen = () => {
 				<div className="row">
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">Superficie:</label>
+							<label className="col-sm-3">* Superficie:</label>
 							<div className="flex-grow-1 ">
 								<input
 									type="number"
@@ -263,7 +263,7 @@ export const NuevoPermisoScreen = () => {
 					</div>
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">Fuente de credito:</label>
+							<label className="col-sm-3">* Fuente de credito:</label>
 							<div className="flex-grow-1 ">
 								<input
 									type="text"
@@ -282,7 +282,7 @@ export const NuevoPermisoScreen = () => {
 				<div className="row">
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">Cultivo anterior:</label>
+							<label className="col-sm-3">* Cultivo anterior:</label>
 							<div className="flex-grow-1 ">
 								<input
 									type="text"
