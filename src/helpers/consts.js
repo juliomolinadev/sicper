@@ -103,3 +103,32 @@ export const modulos = [
 	"FL",
 	"Pozo Particular"
 ];
+
+export const privileges = {
+	pantallaInicio: false,
+	pantallaPadron: false,
+	pantallaPermisos: false,
+	pantallaTransferencias: false,
+	pantallaAsignacion: false,
+	pantallaLabores: false,
+	pantallaAutorizados: false,
+	pantallaReportes: false,
+	pantallaConfiguracion: false,
+	consultarExpedicion: false,
+	consultarAutorizados: false,
+	expedirPermisos: false,
+	consultarPermisos: false,
+	cancelarPermisos: false,
+	solicitarTransferencias: false,
+	asignarTécnico: false,
+	consultarLabores: false,
+	registrarLabores: false,
+	pagarLabores: false,
+	imprimirLabores: false,
+	reportesPermisos: false,
+	reportesExpedición: false,
+	reportesAutorizados: false,
+	asignarRoles: false,
+	editarRoles: false,
+	testArea: false
+};

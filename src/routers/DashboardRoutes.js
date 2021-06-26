@@ -12,6 +12,7 @@ import { LaboresScreen } from "../scenes/LaboresScreen";
 import { AutorizadosScreen } from "../components/autorizados/AutorizadosScreen";
 import { ReportesScreen } from "../scenes/ReportesScreen";
 import { ConfiguracionScreen } from "../scenes/ConfiguracionScreen";
+import { TestArea } from "../components/templates/TestArea";
 import Header from "../components/ui/Header";
 
 export const DashboardRoutes = () => {
@@ -30,6 +31,7 @@ export const DashboardRoutes = () => {
 				<Route exact path="/autorizados" component={AutorizadosScreen} />
 				<Route exact path="/reportes" component={ReportesScreen} />
 				<Route exact path="/configuracion" component={ConfiguracionScreen} />
+				<Route exact path="/test" component={TestArea} />
 
 				<Redirect to="/sicper" />
 			</Switch>

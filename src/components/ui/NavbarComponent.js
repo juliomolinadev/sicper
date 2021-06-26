@@ -80,6 +80,12 @@ export const NavbarComponent = () => {
 								Configuracion
 							</NavLink>
 						)}
+
+						{privilegios.testArea && (
+							<NavLink to="/test" className="nav-link">
+								Test
+							</NavLink>
+						)}
 					</Nav>
 
 					<Button variant="outline-secondary btn-sm" onClick={handleLogout} to="/login">
