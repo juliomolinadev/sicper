@@ -5,10 +5,13 @@ import { removeError, setError } from "../../actions/ui";
 import { saveTransfer } from "../../helpers/saveTransfer";
 import { startSetUsuarioSelected } from "../../actions/usuarios";
 import { ProductorInput2 } from "../permisos/inputsNuevosPermisos/ProductorInput2";
+import { CultivoInput2 } from "../permisos/inputsNuevosPermisos/CultivoInput2";
 
 export const TransferForm = () => {
 	const { usuario } = useSelector((state) => state.entidades);
-	const { nombreProductor, rfcProductor } = useSelector((state) => state.altaPermisos);
+	const { nombreProductor, rfcProductor, nombreCultivo, claveCultivo } = useSelector(
+		(state) => state.altaPermisos
+	);
 
 	const [
 		{ superficieTransferida, loteDestino, localidadDestino, moduloDestino },
@@ -49,6 +52,9 @@ export const TransferForm = () => {
 		} else if (rfcProductor === null) {
 			dispatch(setError("Indique Productor"));
 			return false;
+		} else if (nombreCultivo === null) {
+			dispatch(setError("Indique Cultivo"));
+			return false;
 		}
 		dispatch(removeError());
 
@@ -73,6 +79,8 @@ export const TransferForm = () => {
 				moduloOrigen: usuario.modulo,
 				nombreProductor,
 				rfcProductor,
+				nombreCultivo,
+				claveCultivo,
 				fecha: new Date()
 			};
 			saveTransfer(transfer, ciclo);
@@ -108,6 +116,10 @@ export const TransferForm = () => {
 								onChange={handleInputChange}
 								onKeyUp={handleKeyUp}
 							/>
+						</div>
+
+						<div className="row d-flex p-3">
+							<CultivoInput2 />
 						</div>
 
 						<div className="row d-flex p-3">

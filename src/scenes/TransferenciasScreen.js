@@ -4,6 +4,7 @@ import { TransferForm } from "../components/forms/TransferForm";
 import { UsuariosInput } from "../components/inputs/UsuariosInput";
 import { NuevoProductorModal } from "../components/modals/NuevoProductorModal";
 import { ProductorModal } from "../components/modals/ProductorModal";
+import { CultivoModal } from "../components/modals/CultivoModal";
 import { UsuariosTable } from "../components/tables/UsuariosTable";
 
 export const TransferenciasScreen = () => {
@@ -26,6 +27,7 @@ export const TransferenciasScreen = () => {
 			</div>
 			<ProductorModal />
 			<NuevoProductorModal />
+			<CultivoModal />
 		</>
 	);
 };
