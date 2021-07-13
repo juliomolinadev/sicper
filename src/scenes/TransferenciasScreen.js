@@ -6,6 +6,7 @@ import { NuevoProductorModal } from "../components/modals/NuevoProductorModal";
 import { ProductorModal } from "../components/modals/ProductorModal";
 import { CultivoModal } from "../components/modals/CultivoModal";
 import { UsuariosTable } from "../components/tables/UsuariosTable";
+import { LocalidadesModal } from "../components/modals/LocalidadesModal";
 
 export const TransferenciasScreen = () => {
 	return (
@@ -28,6 +29,7 @@ export const TransferenciasScreen = () => {
 			<ProductorModal />
 			<NuevoProductorModal />
 			<CultivoModal />
+			<LocalidadesModal />
 		</>
 	);
 };

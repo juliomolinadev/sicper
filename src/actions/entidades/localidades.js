@@ -2,6 +2,7 @@ import { types } from "../../types/types";
 import { loadLocaltiesFromUnassignedPermits } from "../../helpers/loadLocaltiesFromUnassignedPermits";
 import { loadLocaltiesGroup } from "../../helpers/loadLocaltiesGroup";
 import { assignTechnician } from "../../helpers/assignTechnician";
+import { loadLocalties } from "../../helpers/DB/loadLocalties";
 
 export const startLoadLocaltiesFromUnassignedPermits = () => {
 	return async (dispatch) => {
@@ -21,6 +22,13 @@ export const startAssignTechnician = (ciclo, modulo, localtiesNames, uid) => {
 	};
 };
 
+export const startLoadLocalties = (localtie) => {
+	return async (dispatch) => {
+		const localties = await loadLocalties(localtie);
+		dispatch(setLocalties(localties));
+	};
+};
+
 export const setLocalties = (localties) => ({
 	type: types.setLocalties,
 	payload: localties
@@ -37,4 +45,21 @@ export const setSelectedLocalties = (localties) => ({
 
 export const unsetSelectedLocalties = () => ({
 	type: types.unsetSelectedLocalties
+});
+
+export const setLocaltieSelected = (localtie) => ({
+	type: types.setLocaltieSelected,
+	payload: localtie
+});
+
+export const unsetLocaltieSelected = () => ({
+	type: types.unsetLocaltieSelected
+});
+
+export const openLocaltiesModal = () => ({
+	type: types.openLocaltiesModal
+});
+
+export const closeLocaltiesModal = () => ({
+	type: types.closeLocaltiesModal
 });

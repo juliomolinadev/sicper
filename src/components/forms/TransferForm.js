@@ -6,20 +6,17 @@ import { saveTransfer } from "../../helpers/saveTransfer";
 import { startSetUsuarioSelected } from "../../actions/usuarios";
 import { ProductorInput2 } from "../permisos/inputsNuevosPermisos/ProductorInput2";
 import { CultivoInput2 } from "../permisos/inputsNuevosPermisos/CultivoInput2";
+import { LocalidadInput } from "../permisos/inputsNuevosPermisos/LocalidadInput";
 
 export const TransferForm = () => {
-	const { usuario } = useSelector((state) => state.entidades);
+	const { usuario, localtieSelected } = useSelector((state) => state.entidades);
 	const { nombreProductor, rfcProductor, nombreCultivo, claveCultivo } = useSelector(
 		(state) => state.altaPermisos
 	);
 
-	const [
-		{ superficieTransferida, loteDestino, localidadDestino, moduloDestino },
-		handleInputChange
-	] = useForm({
+	const [{ superficieTransferida, loteDestino, moduloDestino }, handleInputChange] = useForm({
 		superficieTransferida: 0,
 		loteDestino: "",
-		localidadDestino: "",
 		moduloDestino: ""
 	});
 	const { msgError } = useSelector((state) => state.ui);
@@ -33,10 +30,10 @@ export const TransferForm = () => {
 	const dispatch = useDispatch();
 
 	const isFormValid = () => {
-		if (superficieTransferida === 0) {
+		if (parseInt(superficieTransferida) <= 0) {
 			dispatch(setError("Indique superficie a transferir"));
 			return false;
-		} else if (superficieTransferida > superficieDisponible) {
+		} else if (parseInt(superficieTransferida) > superficieDisponible) {
 			dispatch(setError("La superficie a transferir excede a la superficie disponible"));
 			return false;
 		} else if (moduloDestino.trim().length === 0) {
@@ -46,14 +43,14 @@ export const TransferForm = () => {
 		} else if (loteDestino.trim().length === 0) {
 			dispatch(setError("Indique el lote en el que se aplicará la transferencia"));
 			return false;
-		} else if (localidadDestino.trim().length === 0) {
-			dispatch(setError("Indique la localidad destino"));
-			return false;
 		} else if (rfcProductor === null) {
 			dispatch(setError("Indique Productor"));
 			return false;
 		} else if (nombreCultivo === null) {
 			dispatch(setError("Indique Cultivo"));
+			return false;
+		} else if (localtieSelected === null) {
+			dispatch(setError("Indique la localidad destino"));
 			return false;
 		}
 		dispatch(removeError());
@@ -70,7 +67,8 @@ export const TransferForm = () => {
 			const transfer = {
 				superficieTransferida: parseInt(superficieTransferida),
 				loteDestino,
-				localidadDestino,
+				localidadDestino: localtieSelected.nombre,
+				clavelocalidadDestino: localtieSelected.clave,
 				moduloDestino,
 				cuentaOrigen: `${usuario.cuenta}.${usuario.subcta}`,
 				usuario: `${usuario.apPaterno} ${usuario.apMaterno} ${usuario.nombre}`,
@@ -142,6 +140,10 @@ export const TransferForm = () => {
 						</div>
 
 						<div className=" row d-flex p-3">
+							<LocalidadInput />
+						</div>
+
+						<div className=" row d-flex p-3">
 							<label htmlFor="">* Lote destino:</label>
 							<input
 								type="text"
@@ -150,21 +152,6 @@ export const TransferForm = () => {
 								name="loteDestino"
 								autoComplete="off"
 								value={loteDestino}
-								onChange={handleInputChange}
-								onKeyUp={handleKeyUp}
-							/>
-						</div>
-
-						<div className=" row d-flex p-3">
-							{/* TODO: Implementar lista de localidades */}
-							<label htmlFor="">* Localidad destino:</label>
-							<input
-								type="text"
-								className="form-control ml-1"
-								placeholder="Localidad"
-								name="localidadDestino"
-								autoComplete="off"
-								value={localidadDestino}
 								onChange={handleInputChange}
 								onKeyUp={handleKeyUp}
 							/>

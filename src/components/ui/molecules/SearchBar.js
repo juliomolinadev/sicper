@@ -1,7 +1,7 @@
 import React from "react";
 
 export const SearchBar = ({ styles, inputName, placeholder, formValues, handleInputChange }) => {
-	const { localidadInForm } = formValues;
+	const { localidad } = formValues;
 
 	return (
 		<div className={styles.box}>
@@ -11,7 +11,7 @@ export const SearchBar = ({ styles, inputName, placeholder, formValues, handleIn
 				placeholder={placeholder}
 				name={inputName}
 				autoComplete="off"
-				value={localidadInForm}
+				value={localidad}
 				onChange={handleInputChange}
 				// onKeyUp={handleKeyUp}
 			/>

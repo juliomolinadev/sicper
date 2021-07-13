@@ -114,6 +114,27 @@ export const entidadesReducer = (state = {}, action) => {
 				selectedLocalties: null
 			};
 
+		case types.setLocaltieSelected:
+			return {
+				...state,
+				localtieSelected: action.payload
+			};
+		case types.unsetLocaltieSelected:
+			return {
+				...state,
+				localtieSelected: null
+			};
+		case types.openLocaltiesModal:
+			return {
+				...state,
+				openLocaltiesModal: true
+			};
+		case types.closeLocaltiesModal:
+			return {
+				...state,
+				openLocaltiesModal: false
+			};
+
 		default:
 			return state;
 	}
