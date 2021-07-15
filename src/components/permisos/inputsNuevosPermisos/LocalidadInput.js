@@ -55,7 +55,10 @@ export const LocalidadInput = () => {
 	return (
 		<>
 			<div className="form-group d-flex align-items-baseline row p-3">
-				<label>* Localidad destino: </label>
+				<label>
+					<span className="text-warning">* </span>
+					Localidad destino:{" "}
+				</label>
 
 				{idLocaltieSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
 

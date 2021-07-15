@@ -53,7 +53,10 @@ export const UsuarioInput = () => {
 	return (
 		<div className="col-sm-6">
 			<div className="form-group d-flex align-items-baseline row p-3">
-				<label className="col-sm-3">* Usuario: </label>
+				<label className="col-sm-3">
+					<span className="text-warning">* </span>
+					Usuario:{" "}
+				</label>
 				<label>{usuarioLabel} </label>
 				{idUsuarioSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
 				{idUsuarioSelected ? (

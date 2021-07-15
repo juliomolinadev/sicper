@@ -53,7 +53,10 @@ export const CultivoInput2 = () => {
 	return (
 		<>
 			<div className="form-group d-flex align-items-baseline row p-3">
-				<label>* Cultivo: </label>
+				<label>
+					<span className="text-warning">* </span>
+					Cultivo:{" "}
+				</label>
 
 				{idCultivoSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
 

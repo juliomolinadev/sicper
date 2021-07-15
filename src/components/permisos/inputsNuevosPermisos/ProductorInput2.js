@@ -53,7 +53,10 @@ export const ProductorInput2 = () => {
 	return (
 		<>
 			<div className="form-group d-flex align-items-baseline row p-3">
-				<label>* Productor: </label>
+				<label>
+					<span className="text-warning">* </span>
+					Productor:{" "}
+				</label>
 
 				{idProductorSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
 

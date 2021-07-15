@@ -123,6 +123,8 @@ export const NuevoProductorModal = () => {
 				<h1>Registro de nuevo productor</h1>
 			</div>
 
+			<div className="row m-3 d-flex justify-content-center">* Campos obligatorios</div>
+
 			<form className="container pb-4" autoComplete="waa" onSubmit={handleRegister}>
 				{msgError && <div className="auth__alert-error">{msgError}</div>}
 				<div className="row p-2">
@@ -273,7 +275,7 @@ export const NuevoProductorModal = () => {
 					</div>
 				</div>
 
-				<div className="row d-flex justify-content-center pt-5">
+				<div className="row d-flex justify-content-center pt-3">
 					<button type="submit" className="btn btn-outline-primary">
 						<i className="far fa-save"></i>
 						<span> Guardar</span>

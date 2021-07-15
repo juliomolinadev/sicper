@@ -99,11 +99,17 @@ export const TransferForm = () => {
 					<div className="col-12 d-flex justify-content-center border-bottom border-info p-2">
 						<h3>Transferencia</h3>
 					</div>
+
 					<div className="col-12 d-flex flex-column p-3">
+						<div className="row d-flex p-3 text-warning">* Campos obligatorios</div>
+
 						{/* TODO: resaltar mensaje de error */}
 						{msgError && <div className="auth__alert-error">{msgError}</div>}
 						<div className=" row d-flex p-3">
-							<label htmlFor="">* Superficie a transferir (ha):</label>
+							<label htmlFor="">
+								<span className="text-warning">* </span>
+								Superficie a transferir (ha):
+							</label>
 							<input
 								type="number"
 								className="form-control ml-1"
@@ -126,7 +132,10 @@ export const TransferForm = () => {
 
 						{/* TODO: menu para seleccionar */}
 						<div className=" row d-flex p-3">
-							<label htmlFor="">* Modulo destino:</label>
+							<label htmlFor="">
+								<span className="text-warning">* </span>
+								Modulo destino:
+							</label>
 							<input
 								type="text"
 								className="form-control ml-1"
@@ -144,7 +153,10 @@ export const TransferForm = () => {
 						</div>
 
 						<div className=" row d-flex p-3">
-							<label htmlFor="">* Lote destino:</label>
+							<label htmlFor="">
+								<span className="text-warning">* </span>
+								Lote destino:
+							</label>
 							<input
 								type="text"
 								className="form-control ml-1"

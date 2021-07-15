@@ -219,6 +219,8 @@ export const NuevoPermisoScreen = () => {
 				{idUsuarioSelected ? <UsuarioSelected /> : <></>}
 				{idProductorSelected ? <ProductorSelected /> : <></>}
 
+				<div className="row text-warning">* Campos obligatorios</div>
+
 				<div className="row">
 					<UsuarioInput />
 					<ProductorInput />
@@ -229,7 +231,10 @@ export const NuevoPermisoScreen = () => {
 
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">* Variedad:</label>
+							<label className="col-sm-3">
+								<span className="text-warning">* </span>
+								Variedad:
+							</label>
 							<div className="flex-grow-1 ">
 								<input
 									type="text"
@@ -247,7 +252,10 @@ export const NuevoPermisoScreen = () => {
 				<div className="row">
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">* Superficie:</label>
+							<label className="col-sm-3">
+								<span className="text-warning">* </span>
+								Superficie:
+							</label>
 							<div className="flex-grow-1 ">
 								<input
 									type="number"
@@ -263,7 +271,10 @@ export const NuevoPermisoScreen = () => {
 					</div>
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">* Fuente de credito:</label>
+							<label className="col-sm-3">
+								<span className="text-warning">* </span>
+								Fuente de credito:
+							</label>
 							<div className="flex-grow-1 ">
 								<input
 									type="text"
@@ -282,7 +293,10 @@ export const NuevoPermisoScreen = () => {
 				<div className="row">
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">* Cultivo anterior:</label>
+							<label className="col-sm-3">
+								<span className="text-warning">* </span>
+								Cultivo anterior:
+							</label>
 							<div className="flex-grow-1 ">
 								<input
 									type="text"
