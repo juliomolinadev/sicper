@@ -51,24 +51,39 @@ export const CultivoInput2 = () => {
 	};
 
 	return (
-		<>
-			<div className="form-group d-flex align-items-baseline row p-3">
-				<label>
-					<span className="text-warning">* </span>
-					Cultivo:{" "}
-				</label>
+		<div className="form-group flex-column row p-3">
+			<label className="mr-2">
+				<span className="text-warning">* </span>
+				Cultivo:
+			</label>
 
-				{idCultivoSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
+			{idCultivoSelected ? (
+				<div className="d-flex align-items-baseline">
+					<label className="">{cultivoLabel} </label>
 
-				{idCultivoSelected ? (
+					<i className="fas fa-check text-success p-3"></i>
+
 					<button
-						className=" btn btn-outline-primary d-sm-block ml-auto"
+						className="btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
 						onClick={clearCultivoInput}
 					>
 						<i className="fas fa-trash"></i>
 					</button>
-				) : (
+				</div>
+			) : (
+				<div className="d-flex">
+					<input
+						type="text"
+						className="form-control"
+						placeholder="Cultivo"
+						name="cultivo"
+						autoComplete="off"
+						value={cultivo}
+						onChange={handleInputChange}
+						onKeyUp={handleKeyUp}
+					/>
+
 					<button
 						className=" btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
@@ -76,26 +91,8 @@ export const CultivoInput2 = () => {
 					>
 						<i className="fas fa-search"></i>
 					</button>
-				)}
-
-				<label className="">{cultivoLabel} </label>
-				{idCultivoSelected ? (
-					<></>
-				) : (
-					<div className="flex-grow-1">
-						<input
-							type="text"
-							className="form-control"
-							placeholder="Cultivo"
-							name="cultivo"
-							autoComplete="off"
-							value={cultivo}
-							onChange={handleInputChange}
-							onKeyUp={handleKeyUp}
-						/>
-					</div>
-				)}
-			</div>
-		</>
+				</div>
+			)}
+		</div>
 	);
 };

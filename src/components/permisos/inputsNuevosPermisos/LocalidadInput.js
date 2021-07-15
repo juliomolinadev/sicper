@@ -53,24 +53,39 @@ export const LocalidadInput = () => {
 	};
 
 	return (
-		<>
-			<div className="form-group d-flex align-items-baseline row p-3">
-				<label>
-					<span className="text-warning">* </span>
-					Localidad destino:{" "}
-				</label>
+		<div className="form-group d-flex flex-column row p-3">
+			<label className="mr-2">
+				<span className="text-warning">* </span>
+				Localidad destino:
+			</label>
 
-				{idLocaltieSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
+			{idLocaltieSelected ? (
+				<div className="d-flex align-items-baseline">
+					<label>{localtieLabel} </label>
 
-				{idLocaltieSelected ? (
+					<i className="fas fa-check text-success p-3"></i>
+
 					<button
-						className=" btn btn-outline-primary d-sm-block ml-auto"
+						className="btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
 						onClick={clearLocaltieInput}
 					>
 						<i className="fas fa-trash"></i>
 					</button>
-				) : (
+				</div>
+			) : (
+				<div className="d-flex">
+					<input
+						type="text"
+						className="form-control d-flex"
+						placeholder="Localidad"
+						name="localtie"
+						autoComplete="off"
+						value={localtie}
+						onChange={handleInputChange}
+						onKeyUp={handleKeyUp}
+					/>
+
 					<button
 						className=" btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
@@ -78,26 +93,8 @@ export const LocalidadInput = () => {
 					>
 						<i className="fas fa-search"></i>
 					</button>
-				)}
-
-				<label className="">{localtieLabel} </label>
-				{idLocaltieSelected ? (
-					<></>
-				) : (
-					<div className="flex-grow-1">
-						<input
-							type="text"
-							className="form-control"
-							placeholder="Localidad"
-							name="localtie"
-							autoComplete="off"
-							value={localtie}
-							onChange={handleInputChange}
-							onKeyUp={handleKeyUp}
-						/>
-					</div>
-				)}
-			</div>
-		</>
+				</div>
+			)}
+		</div>
 	);
 };

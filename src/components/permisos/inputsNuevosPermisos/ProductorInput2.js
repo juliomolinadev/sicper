@@ -51,24 +51,39 @@ export const ProductorInput2 = () => {
 	};
 
 	return (
-		<>
-			<div className="form-group d-flex align-items-baseline row p-3">
-				<label>
-					<span className="text-warning">* </span>
-					Productor:{" "}
-				</label>
+		<div className="form-group d-flex flex-column row p-3">
+			<label className="mr-2">
+				<span className="text-warning">* </span>
+				Productor:
+			</label>
 
-				{idProductorSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
+			{idProductorSelected ? (
+				<div className="d-flex align-items-baseline">
+					<label>{productorLabel} </label>
 
-				{idProductorSelected ? (
+					<i className="fas fa-check text-success p-3"></i>
+
 					<button
-						className=" btn btn-outline-primary d-sm-block ml-auto"
+						className="btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
 						onClick={clearProductorInput}
 					>
 						<i className="fas fa-trash"></i>
 					</button>
-				) : (
+				</div>
+			) : (
+				<div className="d-flex align-items-baseline">
+					<input
+						type="text"
+						className="form-control"
+						placeholder="Apellido paterno"
+						name="productor"
+						autoComplete="off"
+						value={productor}
+						onChange={handleInputChange}
+						onKeyUp={handleKeyUp}
+					/>
+
 					<button
 						className=" btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
@@ -76,26 +91,8 @@ export const ProductorInput2 = () => {
 					>
 						<i className="fas fa-search"></i>
 					</button>
-				)}
-
-				<label>{productorLabel} </label>
-				{idProductorSelected ? (
-					<></>
-				) : (
-					<div className="flex-grow-1">
-						<input
-							type="text"
-							className="form-control"
-							placeholder="Apellido paterno"
-							name="productor"
-							autoComplete="off"
-							value={productor}
-							onChange={handleInputChange}
-							onKeyUp={handleKeyUp}
-						/>
-					</div>
-				)}
-			</div>
-		</>
+				</div>
+			)}
+		</div>
 	);
 };

@@ -105,6 +105,7 @@ export const TransferForm = () => {
 
 						{/* TODO: resaltar mensaje de error */}
 						{msgError && <div className="auth__alert-error">{msgError}</div>}
+
 						<div className=" row d-flex p-3">
 							<label htmlFor="">
 								<span className="text-warning">* </span>
@@ -122,11 +123,11 @@ export const TransferForm = () => {
 							/>
 						</div>
 
-						<div className="row d-flex p-3">
+						<div className="pt-3">
 							<CultivoInput2 />
 						</div>
 
-						<div className="row d-flex p-3">
+						<div className="pt-3">
 							<ProductorInput2 />
 						</div>
 
@@ -148,7 +149,7 @@ export const TransferForm = () => {
 							/>
 						</div>
 
-						<div className=" row d-flex p-3">
+						<div className="pt-3">
 							<LocalidadInput />
 						</div>
 
