@@ -103,7 +103,7 @@ export const TransferForm = () => {
 
 	const handleKeyUp = (event) => {
 		if (event.key === "Enter") {
-			startSaveTransfer();
+			startSaveTransfer(event);
 		}
 	};
 
