@@ -137,7 +137,7 @@ export const TransferForm = () => {
 								<span className="text-warning">* </span>
 								Modulo destino:
 							</label>
-							<input
+							{/* <input
 								type="text"
 								className="form-control ml-1"
 								placeholder="Modulo"
@@ -146,7 +146,44 @@ export const TransferForm = () => {
 								value={moduloDestino}
 								onChange={handleInputChange}
 								onKeyUp={handleKeyUp}
-							/>
+								/> */}
+							<select
+								type="text"
+								// name="modulo"
+								name="moduloDestino"
+								// value={modulo}
+								value={moduloDestino}
+								onChange={handleInputChange}
+								// className="auth__input"
+								className="form-control ml-1"
+							>
+								<option hidden defaultValue={false}>
+									Modulo
+								</option>
+								<option value="1">Modulo 1</option>
+								<option value="2">Modulo 2</option>
+								<option value="3">Modulo 3</option>
+								<option value="4">Modulo 4</option>
+								<option value="5">Modulo 5</option>
+								<option value="6">Modulo 6</option>
+								<option value="7">Modulo 7</option>
+								<option value="8">Modulo 8</option>
+								<option value="9">Modulo 9</option>
+								<option value="9B">Modulo 9B</option>
+								<option value="10">Modulo 10</option>
+								<option value="11">Modulo 11</option>
+								<option value="12">Modulo 12</option>
+								<option value="14">Modulo 14</option>
+								<option value="15">Modulo 15</option>
+								<option value="16">Modulo 16</option>
+								<option value="17">Modulo 17</option>
+								<option value="18">Modulo 18</option>
+								<option value="19">Modulo 19</option>
+								<option value="20">Modulo 20</option>
+								<option value="21">Modulo 21</option>
+								<option value="22">Modulo 22</option>
+								<option value="FL">Modulo FL</option>
+							</select>
 						</div>
 
 						<div className="pt-3">
