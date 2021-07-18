@@ -2,14 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
-import { useForm } from "../../../hooks/useForm";
 import {
 	openCultivosModal,
 	startLoadCultivos,
 	unsetCultivoSelected
 } from "../../../actions/cultivos";
 
-export const CultivoInput2 = () => {
+export const CultivoInput2 = ({ cultivo, handleInputChange }) => {
 	const dispatch = useDispatch();
 
 	const handleOpenCultivosModal = () => {
@@ -35,14 +34,8 @@ export const CultivoInput2 = () => {
 
 	const clearCultivoInput = () => {
 		dispatch(unsetCultivoSelected());
-		formValues.cultivo = "";
+		cultivo = "";
 	};
-
-	const [formValues, handleInputChange] = useForm({
-		cultivo: ""
-	});
-
-	const { cultivo } = formValues;
 
 	const handleKeyUp = (event) => {
 		if (event.key === "Enter") {

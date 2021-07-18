@@ -7,6 +7,9 @@ import { startSetUsuarioSelected } from "../../actions/usuarios";
 import { ProductorInput2 } from "../permisos/inputsNuevosPermisos/ProductorInput2";
 import { CultivoInput2 } from "../permisos/inputsNuevosPermisos/CultivoInput2";
 import { LocalidadInput } from "../permisos/inputsNuevosPermisos/LocalidadInput";
+import { unsetCultivoSelected } from "../../actions/cultivos";
+import { unsetProductorSelected } from "../../actions/productores";
+import { unsetLocaltieSelected } from "../../actions/entidades/localidades";
 
 export const TransferForm = () => {
 	const { usuario, localtieSelected } = useSelector((state) => state.entidades);
@@ -14,11 +17,19 @@ export const TransferForm = () => {
 		(state) => state.altaPermisos
 	);
 
-	const [{ superficieTransferida, loteDestino, moduloDestino }, handleInputChange] = useForm({
+	const [
+		{ superficieTransferida, loteDestino, moduloDestino, cultivo, productor, localtie },
+		handleInputChange,
+		reset
+	] = useForm({
 		superficieTransferida: 0,
 		loteDestino: "",
-		moduloDestino: ""
+		moduloDestino: "",
+		cultivo: "",
+		productor: "",
+		localtie: ""
 	});
+
 	const { msgError } = useSelector((state) => state.ui);
 
 	let superficieDisponible;
@@ -83,6 +94,10 @@ export const TransferForm = () => {
 			};
 			saveTransfer(transfer, ciclo);
 			dispatch(startSetUsuarioSelected(usuario));
+			reset();
+			dispatch(unsetCultivoSelected());
+			dispatch(unsetProductorSelected());
+			dispatch(unsetLocaltieSelected());
 		}
 	};
 
@@ -124,37 +139,23 @@ export const TransferForm = () => {
 						</div>
 
 						<div className="pt-3">
-							<CultivoInput2 />
+							<CultivoInput2 cultivo={cultivo} handleInputChange={handleInputChange} />
 						</div>
 
 						<div className="pt-3">
-							<ProductorInput2 />
+							<ProductorInput2 productor={productor} handleInputChange={handleInputChange} />
 						</div>
 
-						{/* TODO: menu para seleccionar */}
 						<div className=" row d-flex p-3">
 							<label htmlFor="">
 								<span className="text-warning">* </span>
 								Modulo destino:
 							</label>
-							{/* <input
-								type="text"
-								className="form-control ml-1"
-								placeholder="Modulo"
-								name="moduloDestino"
-								autoComplete="off"
-								value={moduloDestino}
-								onChange={handleInputChange}
-								onKeyUp={handleKeyUp}
-								/> */}
 							<select
 								type="text"
-								// name="modulo"
 								name="moduloDestino"
-								// value={modulo}
 								value={moduloDestino}
 								onChange={handleInputChange}
-								// className="auth__input"
 								className="form-control ml-1"
 							>
 								<option hidden defaultValue={false}>
@@ -187,7 +188,7 @@ export const TransferForm = () => {
 						</div>
 
 						<div className="pt-3">
-							<LocalidadInput />
+							<LocalidadInput localtie={localtie} handleInputChange={handleInputChange} />
 						</div>
 
 						<div className=" row d-flex p-3">
