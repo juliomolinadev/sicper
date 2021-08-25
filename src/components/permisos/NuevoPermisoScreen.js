@@ -1,22 +1,22 @@
-import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import moment from 'moment';
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 
-import { useForm } from '../../hooks/useForm';
-import { CultivoModal } from '../modals/CultivoModal';
-import { UsuarioModal } from '../modals/UsuarioModal';
-import { ProductorModal } from '../modals/ProductorModal';
-import { NuevoProductorModal } from '../modals/NuevoProductorModal';
-import { PrintPermisoModal } from '../modals/PrintPermisoModal';
-import { CultivoInput } from './inputsNuevosPermisos/CultivoInput';
-import { UsuarioInput } from './inputsNuevosPermisos/UsuarioInput';
-import { ProductorInput } from './inputsNuevosPermisos/ProductorInput';
-import { UsuarioSelected } from './inputsNuevosPermisos/UsuarioSelected';
-import { ProductorSelected } from './inputsNuevosPermisos/ProductorSelected';
-import { setFormValues, setOnSubmitData, openPrintPermisoModal } from '../../actions/altaPermisos';
-import { loadContador } from '../../helpers/loadContador';
-import { removeError, setError } from '../../actions/ui';
-import { startLoadAutorizados } from '../../actions/autorizadosScreen';
+import { useForm } from "../../hooks/useForm";
+import { CultivoModal } from "../modals/CultivoModal";
+import { UsuarioModal } from "../modals/UsuarioModal";
+import { ProductorModal } from "../modals/ProductorModal";
+import { NuevoProductorModal } from "../modals/NuevoProductorModal";
+import { PrintPermisoModal } from "../modals/PrintPermisoModal";
+import { CultivoInput } from "./inputsNuevosPermisos/CultivoInput";
+import { UsuarioInput } from "./inputsNuevosPermisos/UsuarioInput";
+import { ProductorInput } from "./inputsNuevosPermisos/ProductorInput";
+import { UsuarioSelected } from "./inputsNuevosPermisos/UsuarioSelected";
+import { ProductorSelected } from "./inputsNuevosPermisos/ProductorSelected";
+import { setFormValues, setOnSubmitData, openPrintPermisoModal } from "../../actions/altaPermisos";
+import { loadContador } from "../../helpers/loadContador";
+import { removeError, setError } from "../../actions/ui";
+import { startLoadAutorizados } from "../../actions/autorizadosScreen";
 
 export const NuevoPermisoScreen = () => {
 	const { idUsuarioSelected, idProductorSelected, subciclo, nombreCultivo } = useSelector(
@@ -28,14 +28,14 @@ export const NuevoPermisoScreen = () => {
 	const { autorizados } = useSelector((state) => state.autorizadosScreen);
 
 	const [formValues, handleInputChange] = useForm({
-		variedad: '',
+		variedad: "",
 		supAutorizada: 0,
-		fuenteCredito: '',
-		latitud: '',
-		longitud: '',
-		observaciones: '',
-		cultivoAnterior: '',
-		transferencia: ''
+		fuenteCredito: "",
+		latitud: "",
+		longitud: "",
+		observaciones: "",
+		cultivoAnterior: "",
+		transferencia: ""
 	});
 
 	const {
@@ -58,7 +58,7 @@ export const NuevoPermisoScreen = () => {
 	const dispatch = useDispatch();
 
 	// TODO: Determinar el ciclo segun la fecha
-	const ciclo = '2020-2021';
+	const ciclo = "2020-2021";
 
 	if (autorizados.length === 0) {
 		dispatch(startLoadAutorizados(ciclo, auth.modulo));
@@ -80,30 +80,30 @@ export const NuevoPermisoScreen = () => {
 	const isFormValid = () => {
 		// TODO: Validar formulario de nuevos permisos
 		if (!altaPermisos.usuario) {
-			dispatch(setError('El campo usuario es obligatorio.'));
+			dispatch(setError("El campo usuario es obligatorio."));
 			return false;
 		} else if (!altaPermisos.nombreProductor) {
-			dispatch(setError('El campo productor es obligatorio.'));
+			dispatch(setError("El campo productor es obligatorio."));
 			return false;
 		} else if (!altaPermisos.nombreCultivo) {
-			dispatch(setError('El campo cultivo es obligatorio.'));
+			dispatch(setError("El campo cultivo es obligatorio."));
 			return false;
 		} else if (supAutorizada <= 0) {
-			dispatch(setError('Ingrese la superficie que será autorizada en este permiso.'));
+			dispatch(setError("Ingrese la superficie que será autorizada en este permiso."));
 			return false;
 		} else if (altaPermisos.supDerecho - altaPermisos.supPrevia < supAutorizada) {
 			dispatch(
-				setError('La superficie excede la superficie disponible de la cuenta seleccionada.')
+				setError("La superficie excede la superficie disponible de la cuenta seleccionada.")
 			);
 			return false;
 		} else if (!fuenteCredito) {
-			dispatch(setError('Especifique la fuente de crédito.'));
+			dispatch(setError("Especifique la fuente de crédito."));
 			return false;
 		} else if (!cultivoAnterior) {
-			dispatch(setError('Especifique el cultivo anterior.'));
+			dispatch(setError("Especifique el cultivo anterior."));
 			return false;
-		} else if (defineTipoPermiso() === 'Superficie no disponible') {
-			dispatch(setError('Superficie no disponible.'));
+		} else if (defineTipoPermiso() === "Superficie no disponible") {
+			dispatch(setError("Superficie no disponible."));
 			return false;
 		}
 
@@ -118,7 +118,7 @@ export const NuevoPermisoScreen = () => {
 			numeroPermiso: await defineNumeroPermiso(),
 			fechaEmicion: moment(),
 			// TODO: Verificar la fecha limite de siembra
-			fechaLimite: moment().add(10, 'days'),
+			fechaLimite: moment().add(10, "days"),
 			vigencia: defineVigencia(subciclo),
 			estadoPermiso: await defineEstadoPermiso(nombreCultivo)
 		};
@@ -129,22 +129,22 @@ export const NuevoPermisoScreen = () => {
 	// TODO: Probar defineTipoPermiso (es necesario conciderar el acumulado de lo expedido para cada cultivo)
 
 	const defineTipoPermiso = () => {
-		let tipo = '';
+		let tipo = "";
 		autorizados.forEach((cultivo) => {
 			if (
 				cultivo.cultivo === altaPermisos.nombreCultivo &&
 				cultivo.clave === altaPermisos.claveCultivo
 			) {
-				if (altaPermisos.sistema === 'Gravedad') {
+				if (altaPermisos.sistema === "Gravedad") {
 					console.log(cultivo.gravedadNormalAsignada, Number(supAutorizada));
 					console.log(cultivo.gravedadNormalAsignada >= Number(supAutorizada));
-					if (cultivo.gravedadNormalAsignada >= Number(supAutorizada)) tipo = 'normal';
-					else if (cultivo.gravedadExtraAsignada >= supAutorizada) tipo = 'extra';
-					else tipo = 'Superficie no disponible';
-				} else if (altaPermisos.sistema === 'Pozo Federal') {
-					if (cultivo.pozoNormalAsignada >= supAutorizada) tipo = 'normal';
-					else if (cultivo.pozoExtraAsignada >= supAutorizada) tipo = 'extra';
-					else tipo = 'Superficie no disponible';
+					if (cultivo.gravedadNormalAsignada >= Number(supAutorizada)) tipo = "normal";
+					else if (cultivo.gravedadExtraAsignada >= supAutorizada) tipo = "extra";
+					else tipo = "Superficie no disponible";
+				} else if (altaPermisos.sistema === "Pozo Federal") {
+					if (cultivo.pozoNormalAsignada >= supAutorizada) tipo = "normal";
+					else if (cultivo.pozoExtraAsignada >= supAutorizada) tipo = "extra";
+					else tipo = "Superficie no disponible";
 				}
 			}
 		});
@@ -154,7 +154,7 @@ export const NuevoPermisoScreen = () => {
 
 	const defineCiclo = () => {
 		// TODO: Determinar el ciclo segun la fecha
-		const ciclo = '2020-2021';
+		const ciclo = "2020-2021";
 		return ciclo;
 	};
 
@@ -166,31 +166,31 @@ export const NuevoPermisoScreen = () => {
 		return permiso;
 	};
 
-	const fill = (number, len) => '0'.repeat(len - number.toString().length) + number.toString();
+	const fill = (number, len) => "0".repeat(len - number.toString().length) + number.toString();
 
 	const defineVigencia = (subciclo) => {
 		// TODO: Determinar la vigencia segun subciclo y fecha de emicion
 		let vigencia = null;
 		if (subciclo) {
 			switch (subciclo) {
-				case 'PRIMAVERA-VERANO':
-					vigencia = moment('09/30/2021');
+				case "PRIMAVERA-VERANO":
+					vigencia = moment("09/30/2021");
 					break;
 
-				case 'OTOÑO-INVIERNO':
-					vigencia = moment('05/31/2021');
+				case "OTOÑO-INVIERNO":
+					vigencia = moment("05/31/2021");
 					break;
 
-				case 'PERENNES':
-					vigencia = moment('09/30/2021');
+				case "PERENNES":
+					vigencia = moment("09/30/2021");
 					break;
 
-				case 'PERENES':
-					vigencia = moment('09/30/2021');
+				case "PERENES":
+					vigencia = moment("09/30/2021");
 					break;
 
 				default:
-					vigencia = '';
+					vigencia = "";
 					break;
 			}
 		}
@@ -198,10 +198,10 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const defineEstadoPermiso = async (cultivo) => {
-		let estado = '';
+		let estado = "";
 
-		if (cultivo === 'ALGODONERO') estado = 'pendiente';
-		else estado = 'activo';
+		if (cultivo === "ALGODONERO") estado = "pendiente";
+		else estado = "activo";
 
 		return estado;
 	};
