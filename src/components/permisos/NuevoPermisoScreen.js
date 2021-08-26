@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
@@ -16,7 +16,7 @@ import { ProductorSelected } from "./inputsNuevosPermisos/ProductorSelected";
 import { setFormValues, setOnSubmitData, openPrintPermisoModal } from "../../actions/altaPermisos";
 import { loadContador } from "../../helpers/loadContador";
 import { removeError, setError } from "../../actions/ui";
-import { startLoadAutorizados } from "../../actions/autorizadosScreen";
+import { startLoadAutorizadoPorCultivo } from "../../actions/autorizadosScreen";
 
 export const NuevoPermisoScreen = () => {
 	const { idUsuarioSelected, idProductorSelected, subciclo, nombreCultivo } = useSelector(
@@ -25,7 +25,7 @@ export const NuevoPermisoScreen = () => {
 	const altaPermisos = useSelector((state) => state.altaPermisos);
 	const auth = useSelector((state) => state.auth);
 	const { msgError } = useSelector((state) => state.ui);
-	const { autorizados } = useSelector((state) => state.autorizadosScreen);
+	const { autorizadosPorCultivo } = useSelector((state) => state.autorizadosScreen);
 
 	const [formValues, handleInputChange] = useForm({
 		variedad: "",
@@ -60,16 +60,20 @@ export const NuevoPermisoScreen = () => {
 	// TODO: Determinar el ciclo segun la fecha
 	const ciclo = "2020-2021";
 
-	if (autorizados.length === 0) {
-		dispatch(startLoadAutorizados(ciclo, auth.modulo));
-	}
+	// if (autorizados.length === 0) {
+	// 	dispatch(startLoadAutorizados(ciclo, auth.modulo));
+	// }
+
+	useEffect(() => {
+		dispatch(startLoadAutorizadoPorCultivo(ciclo, auth.modulo, altaPermisos.claveCultivo));
+	}, [dispatch, auth.modulo, altaPermisos.claveCultivo]);
 
 	const handleOpenPrintPermisoModal = () => {
 		dispatch(openPrintPermisoModal());
 	};
 
 	const onSendForm = async (e) => {
-		if (isFormValid()) {
+		if (await isFormValid()) {
 			e.preventDefault();
 			dispatch(setFormValues(formValues));
 			dispatch(setOnSubmitData(await getOnSubmitData()));
@@ -102,7 +106,7 @@ export const NuevoPermisoScreen = () => {
 		} else if (!cultivoAnterior) {
 			dispatch(setError("Especifique el cultivo anterior."));
 			return false;
-		} else if (defineTipoPermiso() === "Superficie no disponible") {
+		} else if (defineTipoPermiso(autorizadosPorCultivo) === "Superficie no disponible") {
 			dispatch(setError("Superficie no disponible."));
 			return false;
 		}
@@ -113,7 +117,7 @@ export const NuevoPermisoScreen = () => {
 
 	const getOnSubmitData = async () => {
 		const data = {
-			tipo: defineTipoPermiso(),
+			tipo: defineTipoPermiso(autorizadosPorCultivo),
 			ciclo: defineCiclo(),
 			numeroPermiso: await defineNumeroPermiso(),
 			fechaEmicion: moment(),
@@ -127,29 +131,26 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	// TODO: Probar defineTipoPermiso (es necesario conciderar el acumulado de lo expedido para cada cultivo)
+	const defineTipoPermiso = ({
+		gravedadNormalAsignada,
+		gravedadExtraAsignada,
+		pozoNormalAsignada,
+		pozoExtraAsignada
+	}) => {
+		switch (altaPermisos.sistema) {
+			case "Gravedad":
+				if (gravedadNormalAsignada >= supAutorizada) return "normal";
+				if (gravedadExtraAsignada >= supAutorizada) return "extra";
+				return "Superficie no disponible";
 
-	const defineTipoPermiso = () => {
-		let tipo = "";
-		autorizados.forEach((cultivo) => {
-			if (
-				cultivo.cultivo === altaPermisos.nombreCultivo &&
-				cultivo.clave === altaPermisos.claveCultivo
-			) {
-				if (altaPermisos.sistema === "Gravedad") {
-					console.log(cultivo.gravedadNormalAsignada, Number(supAutorizada));
-					console.log(cultivo.gravedadNormalAsignada >= Number(supAutorizada));
-					if (cultivo.gravedadNormalAsignada >= Number(supAutorizada)) tipo = "normal";
-					else if (cultivo.gravedadExtraAsignada >= supAutorizada) tipo = "extra";
-					else tipo = "Superficie no disponible";
-				} else if (altaPermisos.sistema === "Pozo Federal") {
-					if (cultivo.pozoNormalAsignada >= supAutorizada) tipo = "normal";
-					else if (cultivo.pozoExtraAsignada >= supAutorizada) tipo = "extra";
-					else tipo = "Superficie no disponible";
-				}
-			}
-		});
+			case "Pozo Federal":
+				if (pozoNormalAsignada >= supAutorizada) return "normal";
+				if (pozoExtraAsignada >= supAutorizada) return "extra";
+				return "Superficie no disponible";
 
-		return tipo;
+			default:
+				return "Superficie no disponible";
+		}
 	};
 
 	const defineCiclo = () => {

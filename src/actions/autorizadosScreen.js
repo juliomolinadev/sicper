@@ -1,4 +1,4 @@
-import { loadAutorizados } from "../helpers/loadAutorizados";
+import { loadAutorizadoPorCultivo, loadAutorizados } from "../helpers/loadAutorizados";
 import { types } from "../types/types";
 
 export const setModulo = (modulo) => ({
@@ -30,6 +30,13 @@ export const startLoadAutorizados = (ciclo, modulo) => {
 	};
 };
 
+export const startLoadAutorizadoPorCultivo = (ciclo, modulo, clave) => {
+	return async (dispatch) => {
+		const autorizados = await loadAutorizadoPorCultivo(ciclo, modulo, clave);
+		dispatch(setAutorizadosPorCultivo(autorizados));
+	};
+};
+
 export const updateAutorizados = (autorizados, autorizadoSelected) => {
 	autorizados.forEach((autorizado) => {
 		if (autorizado.cultivo === autorizadoSelected.cultivo) {
@@ -45,6 +52,11 @@ export const updateAutorizados = (autorizados, autorizadoSelected) => {
 
 export const setAutorizados = (autorizados) => ({
 	type: types.autorizadosScreenSetAutorizados,
+	payload: autorizados
+});
+
+export const setAutorizadosPorCultivo = (autorizados) => ({
+	type: types.setAutorizadosPorCultivo,
 	payload: autorizados
 });
 

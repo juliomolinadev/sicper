@@ -73,6 +73,7 @@ export const types = {
 	unsetSuperficieReferencia: "[Autorizados Screen] Unset superficie referencia",
 	setFormError: "[Autorizados Screen] Set Form Error",
 	removeFormError: "[Autorizados Screen] Unset Form Error",
+	setAutorizadosPorCultivo: "[Autorizados Screen] Set autorizados por cultivo",
 
 	sicperScreenSetAutorizados: "[Sicper Screen] Set autorizados",
 	sicperScreenUnsetAutorizados: "[Sicper Screen] Unset autorizados",

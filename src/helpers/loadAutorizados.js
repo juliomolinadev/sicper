@@ -41,3 +41,24 @@ export const loadAutorizados = async (ciclo, modulo) => {
 
 	return autorizados;
 };
+
+export const loadAutorizadoPorCultivo = async (ciclo, modulo, clave) => {
+	const autorizadosSnap = await db
+		.collection(`autorizados`)
+		.doc(ciclo)
+		.collection("modulos")
+		.doc(`Modulo-${modulo}`)
+		.collection(`autorizados`)
+		.where("clave", "==", clave)
+		.get();
+
+	const autorizados = [];
+
+	autorizadosSnap.forEach((snapHijo) => {
+		autorizados.push({
+			...snapHijo.data()
+		});
+	});
+
+	return autorizados[0];
+};

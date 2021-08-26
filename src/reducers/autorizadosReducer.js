@@ -23,6 +23,12 @@ export const autorizadosReducer = (state = initialState, action) => {
 				modulo: null
 			};
 
+		case types.setAutorizadosPorCultivo:
+			return {
+				...state,
+				autorizadosPorCultivo: action.payload
+			};
+
 		case types.autorizadosScreenSetAutorizados:
 			return {
 				...state,
