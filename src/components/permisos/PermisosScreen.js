@@ -17,6 +17,7 @@ import { setPermisoInCancelProces } from "../../helpers/setPermisoInCancelProces
 import { useForm } from "../../hooks/useForm";
 import { SuperficiesChart } from "../charts/SuperficiesChart";
 import { NuevoPermisoButton } from "../buttons/NuevoPermisoButton";
+import { PermitsCancellationModule } from "../ui/organisms/PermitsCancellationModule";
 
 export const PermisosScreen = () => {
 	const dispatch = useDispatch();
@@ -286,6 +287,8 @@ export const PermisosScreen = () => {
 					</div>
 				)}
 			</div>
+
+			<PermitsCancellationModule />
 			<PrintPermisoModal data={dataPermisoImprecion} isNew={false} />
 		</>
 	);

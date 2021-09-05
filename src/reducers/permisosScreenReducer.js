@@ -20,6 +20,18 @@ export const permisosScreenReducer = (state = initialState, action) => {
 				permisos: []
 			};
 
+		case types.permisosScreenSetPreCancelPermits:
+			return {
+				...state,
+				preCancelPermits: action.payload
+			};
+
+		case types.permisosScreenUnsetPreCancelPermits:
+			return {
+				...state,
+				preCancelPermits: []
+			};
+
 		case types.permisosScreenSetPermisoSelected:
 			return {
 				...state,

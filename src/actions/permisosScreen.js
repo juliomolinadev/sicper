@@ -2,6 +2,7 @@ import { types } from "../types/types";
 import { loadUltimosPermisos } from "../helpers/loadUltimosPermisos";
 import { loadPermisos } from "../helpers/loadPermisos";
 import { loadSuperficiesCultivos } from "../helpers/loadSuperficiesCultivos";
+import { loadPreCancelPermits } from "../helpers/DB/loadPreCancelPermits";
 
 export const startLoadPermisos = (modulo, ciclo) => {
 	return async (dispatch) => {
@@ -14,6 +15,13 @@ export const startLoadPermisosSearch = (palabra, modulo, ciclo) => {
 	return async (dispatch) => {
 		const permisos = await loadPermisos(palabra, modulo, ciclo);
 		dispatch(setPermisos(permisos));
+	};
+};
+
+export const startLoadPreCancelPermits = (ciclo) => {
+	return async (dispatch) => {
+		const permisos = await loadPreCancelPermits(ciclo);
+		dispatch(setPreCancelPermits(permisos));
 	};
 };
 
@@ -39,6 +47,15 @@ export const setPermisos = (permisos) => ({
 });
 
 export const unsetPermisos = () => ({
+	type: types.permisosScreenUnsetPermisos
+});
+
+export const setPreCancelPermits = (permits) => ({
+	type: types.permisosScreenSetPreCancelPermits,
+	payload: permits
+});
+
+export const unsetPreCancelPermits = () => ({
 	type: types.permisosScreenUnsetPermisos
 });
 
