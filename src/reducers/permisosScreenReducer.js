@@ -44,6 +44,18 @@ export const permisosScreenReducer = (state = initialState, action) => {
 				permisoSelected: null
 			};
 
+		case types.permisosScreenSetPermitToCancel:
+			return {
+				...state,
+				permitToCancelSelected: action.payload
+			};
+
+		case types.permisosScreenUnsetPermitToCancel:
+			return {
+				...state,
+				permitToCancelSelected: null
+			};
+
 		case types.permisosScreenSetSuperficies:
 			return {
 				...state,

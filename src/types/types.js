@@ -62,6 +62,8 @@ export const types = {
 	permisosScreenUnsetSuperficies: "[Permisos Screen] Unset superficies",
 	permisosScreenSetPreCancelPermits: "[Permisos Screen] Set Pre Cancel Permits",
 	permisosScreenUnsetPreCancelPermits: "[Permisos Screen] Unset Pre Cancel Permits",
+	permisosScreenSetPermitToCancel: "[Permisos Screen] Set Pre Permit To Cancel",
+	permisosScreenUnsetPermitToCancel: "[Permisos Screen] Unset Pre Permit To Cancel",
 
 	autorizadosScreenSetModulo: "[Autorizados Screen] Set modulo",
 	autorizadosScreenUnsetModulo: "[Autorizados Screen] Unset modulo",

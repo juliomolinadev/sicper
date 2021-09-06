@@ -67,3 +67,12 @@ export const setPermisoSelected = (permiso) => ({
 export const unsetPermisoSelected = () => ({
 	type: types.permisosScreenUnsetPermisoSelected
 });
+
+export const setPermitToCancel = (permiso) => ({
+	type: types.permisosScreenSetPermitToCancel,
+	payload: permiso.id
+});
+
+export const unsetPermitToCancel = () => ({
+	type: types.permisosScreenUnsetPermitToCancel
+});

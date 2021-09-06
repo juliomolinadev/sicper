@@ -19,10 +19,4 @@ export const loadPreCancelPermits = async (ciclo) => {
 
 	console.log("Entro en load", { permisos });
 	return permisos;
-
-	// db.collection(`permisos`)
-	// 	.doc(ciclo)
-	// 	.collection("modulos")
-	// 	.doc(`Modulo-${modulo}`)
-	// 	.collection(`permisos`);
 };

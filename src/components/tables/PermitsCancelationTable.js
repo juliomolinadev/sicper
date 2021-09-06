@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
-import { startLoadPreCancelPermits } from "../../actions/permisosScreen";
+import { setPermitToCancel, startLoadPreCancelPermits } from "../../actions/permisosScreen";
 import { permisosColumns } from "./configTables";
 import { CustomTable } from "./CustomTable";
 
@@ -37,7 +37,7 @@ export const PermitsCancelationTable = () => {
 			title="Permisos en proceso de cancelación"
 			columns={permisosColumns}
 			data={permisosFormateados}
-			// setFunction={setpermisoselected}
+			setFunction={setPermitToCancel}
 		></CustomTable>
 	);
 };
