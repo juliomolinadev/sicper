@@ -17,6 +17,5 @@ export const loadPreCancelPermits = async (ciclo) => {
 		});
 	});
 
-	console.log("Entro en load", { permisos });
 	return permisos;
 };
