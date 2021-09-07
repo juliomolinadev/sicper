@@ -15,7 +15,6 @@ export const PermitsCancelationTable = () => {
 	const dispatch = useDispatch();
 
 	if (!preCancelPermits) {
-		console.log("preCancelPermits en Table: ", preCancelPermits);
 		dispatch(startLoadPreCancelPermits(ciclo));
 	}
 
