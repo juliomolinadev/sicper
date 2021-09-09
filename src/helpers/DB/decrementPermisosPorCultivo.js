@@ -2,7 +2,7 @@ import { db } from "../../firebase/firebase-config";
 import firebase from "firebase/app";
 import "firebase/firestore";
 
-export const updatePermisosPorCultivo = (
+export const decrementPermisosPorCultivo = (
 	ciclo,
 	modulo,
 	claveCultivo,

@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { startLoadPreCancelPermits, unsetPermitToCancel } from "../../actions/permisosScreen";
 import { cancelPermit } from "../../helpers/DB/cancelPermit";
-import { updatePermisosPorCultivo } from "../../helpers/DB/updatePermisosPorCultivo";
+import { decrementPermisosExpedidos } from "../../helpers/DB/decrementPermisosExpedidos";
+import { decrementPermisosPorCultivo } from "../../helpers/DB/decrementPermisosPorCultivo";
 
 export const PermitToCancelCard = () => {
 	const { preCancelPermits, permitToCancelSelected } = useSelector((state) => state.permisosScreen);
@@ -12,7 +13,6 @@ export const PermitToCancelCard = () => {
 	const {
 		numeroPermiso,
 		motivoCancelacion,
-
 		modulo,
 		claveCultivo,
 		nombreCultivo,
@@ -48,7 +48,7 @@ export const PermitToCancelCard = () => {
 		}).then(({ isConfirmed }) => {
 			if (isConfirmed) {
 				cancelPermit(permitToCancelSelected, modulo, ciclo, new Date());
-				updatePermisosPorCultivo(
+				decrementPermisosPorCultivo(
 					ciclo,
 					modulo,
 					claveCultivo,
@@ -57,6 +57,7 @@ export const PermitToCancelCard = () => {
 					tipo,
 					supAutorizada
 				);
+				decrementPermisosExpedidos(ciclo, modulo, supAutorizada);
 				dispatch(startLoadPreCancelPermits(ciclo));
 				dispatch(unsetPermitToCancel());
 				Swal.fire(
