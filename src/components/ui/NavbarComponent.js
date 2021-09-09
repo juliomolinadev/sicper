@@ -17,12 +17,21 @@ export const NavbarComponent = () => {
 		<div className="fixed-top">
 			<Navbar bg="dark" variant="dark" expand="lg">
 				<Navbar.Brand href="/">
-					<img
-						src="./logos/cna.png"
-						height="50"
-						className="d-inline-block align-top"
-						alt="Logo comisión nacional del agua"
-					/>
+					<div className="d-flex">
+						<img
+							src="./logos/cna.png"
+							height="50"
+							className="d-inline-block align-top align-self-center"
+							alt="Logo comisión nacional del agua"
+						/>
+
+						<img
+							src="./logos/sader.png"
+							height="25"
+							className="d-inline-block align-top align-self-center ml-2"
+							alt="Logo comisión nacional del agua"
+						/>
+					</div>
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="basic-navbar-nav" />
 				<Navbar.Collapse id="basic-navbar-nav">
