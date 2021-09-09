@@ -3,13 +3,23 @@ import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { startLoadPreCancelPermits, unsetPermitToCancel } from "../../actions/permisosScreen";
 import { cancelPermit } from "../../helpers/DB/cancelPermit";
+import { updatePermisosPorCultivo } from "../../helpers/DB/updatePermisosPorCultivo";
 
 export const PermitToCancelCard = () => {
 	const { preCancelPermits, permitToCancelSelected } = useSelector((state) => state.permisosScreen);
-	const { modulo } = useSelector((state) => state.auth);
 
 	const permit = preCancelPermits.find((perm) => perm.id === permitToCancelSelected);
-	const { numeroPermiso, motivoCancelacion } = permit;
+	const {
+		numeroPermiso,
+		motivoCancelacion,
+
+		modulo,
+		claveCultivo,
+		nombreCultivo,
+		sistema,
+		tipo,
+		supAutorizada
+	} = permit;
 
 	const elements = {
 		MODULO: permit.modulo,
@@ -25,10 +35,8 @@ export const PermitToCancelCard = () => {
 	const dispatch = useDispatch();
 
 	const cancelarPermiso = () => {
+		console.log({ ciclo, modulo, claveCultivo, nombreCultivo, sistema, tipo, supAutorizada });
 		Swal.fire({
-			// input: "textarea",
-			// inputPlaceholder: "Indique la razón por la que desea cancelar el permiso",
-
 			title: "Atención!!",
 			text: `Está a punto de cancelar el permiso ${numeroPermiso}, ¿Realmente desea cancelar este permiso?`,
 			icon: "warning",
@@ -40,6 +48,15 @@ export const PermitToCancelCard = () => {
 		}).then(({ isConfirmed }) => {
 			if (isConfirmed) {
 				cancelPermit(permitToCancelSelected, modulo, ciclo, new Date());
+				updatePermisosPorCultivo(
+					ciclo,
+					modulo,
+					claveCultivo,
+					nombreCultivo,
+					sistema,
+					tipo,
+					supAutorizada
+				);
 				dispatch(startLoadPreCancelPermits(ciclo));
 				dispatch(unsetPermitToCancel());
 				Swal.fire(
