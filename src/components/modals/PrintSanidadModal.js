@@ -49,11 +49,7 @@ export const PrintSanidadModal = ({ data }) => {
 				</div>
 				<div className="col-2">
 					<div className="d-flex justify-content-center">
-						<img
-							src={"./logos/sanidad.webp"}
-							alt="Logo sanidad vegetal"
-							style={{ maxHeight: 80 }}
-						/>
+						<img src={"./logos/cesvbc.webp"} alt="Logo sanidad vegetal" style={{ maxHeight: 80 }} />
 					</div>
 				</div>
 			</div>

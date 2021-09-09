@@ -2,9 +2,14 @@ import React from "react";
 import { UserRoleModal } from "../components/modals/UserRoleModal";
 import { UsersRoleManagement } from "../components/modulos/UsersRoleManagement";
 import { useSelector } from "react-redux";
+// import { actualizarEntidades } from "../helpers/DB/actualizarEntidades";
 
 export const ConfiguracionScreen = () => {
 	const { privilegios } = useSelector((state) => state.auth);
+
+	// const handleActualizarEntidades = () => {
+	// 	actualizarEntidades();
+	// };
 
 	return (
 		<>
@@ -19,6 +24,16 @@ export const ConfiguracionScreen = () => {
 					{privilegios.asignarRoles ? <UsersRoleManagement /> : <></>}
 				</div>
 			</div>
+
+			{/* <div className="mb-3 d-flex justify-content-center">
+				<button
+					type="button"
+					className="btn btn-outline-primary"
+					onClick={handleActualizarEntidades}
+				>
+					<span> Actualizar Entidades</span>
+				</button>
+			</div> */}
 
 			<UserRoleModal />
 		</>

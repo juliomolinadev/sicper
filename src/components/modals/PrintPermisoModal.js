@@ -80,7 +80,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						<img src={"./logos/sader.png"} alt="Logo SADER" style={{ maxHeight: 35 }} />
 					</div>
 					<div className="d-flex justify-content-center mt-3">
-						<img src={"./logos/crl.png"} alt="Logo CRL" style={{ maxHeight: 70 }} />
+						<img src={"./logos/srl.png"} alt="Logo CRL" style={{ maxHeight: 70 }} />
 					</div>
 					<div className="d-flex justify-content-center">
 						<span className="printPermisoSubLogo">DISTRITO DE RIEGO RÍO COLORADO</span>
@@ -361,11 +361,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			<div className="row m-3 ">
 				<div className="col-3 d-flex flex-column">
 					<div className="d-flex justify-content-center">
-						<img
-							src={"./logos/sanidad.webp"}
-							alt="Logo sanidad vegetal"
-							style={{ maxHeight: 70 }}
-						/>
+						<img src={"./logos/cesvbc.webp"} alt="Logo sanidad vegetal" style={{ maxHeight: 70 }} />
 					</div>
 					<div className="mt-4 d-flex justify-content-center">COMITÉ ESTATAL DE</div>
 					<div className="d-flex justify-content-center">SANIDAD VEGETAL DE</div>
