@@ -8,6 +8,7 @@ export const loadSuperficiePrevia = async (cuenta, modulo, ciclo) => {
 		.doc(`Modulo-${modulo}`)
 		.collection(`permisos`)
 		.where("cuenta", "==", cuenta)
+		.where("estadoPermiso", "!=", "Cancelado")
 		.get();
 
 	const permisos = [];
