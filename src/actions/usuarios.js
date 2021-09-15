@@ -80,3 +80,11 @@ export const setUsuarioSelected = (usuario) => {
 export const unsetUsuarioSelected = () => ({
 	type: types.unsetUsuario
 });
+
+export const setUpdatingPadron = () => ({
+	type: types.setUpdatingPadron
+});
+
+export const unsetUpdatingPadron = () => ({
+	type: types.unsetUpdatingPadron
+});

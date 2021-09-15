@@ -5,6 +5,7 @@ import { startSetUsuarioSelected } from "../../actions/usuarios";
 import { UsuarioInput } from "../permisos/inputsNuevosPermisos/UsuarioInput";
 import { useSelector } from "react-redux";
 import { UsuarioSelectedDetail } from "./UsuarioSelectedDetail";
+import { UpdatePadronModule } from "../ui/organisms/UpdatePadronModule";
 
 export const PadronScreen = () => {
 	const { usuarios, idUsuarioSelected } = useSelector((state) => state.altaPermisos);
@@ -35,6 +36,19 @@ export const PadronScreen = () => {
 					<div className="col-sm-4">{idUsuarioSelected && <UsuarioSelectedDetail />}</div>
 				</div>
 			)}
+
+			<div className="border border-info rounded p-3 mt-3">
+				<h3 className="row d-flex justify-content-center">Actualizar padron de usuarios</h3>
+				<div className="row">
+					<div className="col-sm-6 mt-3 mb-3">
+						<UpdatePadronModule />
+					</div>
+
+					<div className="col-sm-6 mt-3 mb-3">
+						<h5>Cargar reacomodos</h5>
+					</div>
+				</div>
+			</div>
 		</>
 	);
 };

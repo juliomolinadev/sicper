@@ -3,6 +3,9 @@ import { types } from "../../types/types";
 const initialState = {
 	reportesScreen: {
 		openImprimirReporteModal: false
+	},
+	padronScreen: {
+		updatingPadron: false
 	}
 };
 
@@ -21,6 +24,22 @@ export const scenesReducer = (state = initialState, action) => {
 				...state,
 				reportesScreen: {
 					openImprimirReporteModal: false
+				}
+			};
+
+		case types.setUpdatingPadron:
+			return {
+				...state,
+				padronScreen: {
+					updatingPadron: true
+				}
+			};
+
+		case types.unsetUpdatingPadron:
+			return {
+				...state,
+				padronScreen: {
+					updatingPadron: false
 				}
 			};
 
