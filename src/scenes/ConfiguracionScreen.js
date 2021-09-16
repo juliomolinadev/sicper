@@ -25,15 +25,17 @@ export const ConfiguracionScreen = () => {
 				</div>
 			</div>
 
-			<div className="mb-3 d-flex justify-content-center mt-4">
-				<button
-					type="button"
-					className="btn btn-outline-primary"
-					onClick={handleActualizarEntidades}
-				>
-					<span> Actualizar Entidades</span>
-				</button>
-			</div>
+			{privilegios.actualizarEntidades && (
+				<div className="mb-3 d-flex justify-content-center mt-4">
+					<button
+						type="button"
+						className="btn btn-outline-primary"
+						onClick={handleActualizarEntidades}
+					>
+						<span> Actualizar Entidades</span>
+					</button>
+				</div>
+			)}
 
 			<UserRoleModal />
 		</>

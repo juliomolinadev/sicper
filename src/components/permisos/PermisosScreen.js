@@ -128,13 +128,7 @@ export const PermisosScreen = () => {
 				<div className="col-sm-8">
 					<div className="row d-flex">
 						<div className="d-flex justify-content-center col-sm-4 p-2">
-							{privilegios.expedirPermisos ? <NuevoPermisoButton /> : <></>}
-							{/* <Link to="/nuevo-permiso">
-								<button className="btn btn-outline-primary" type="button">
-									<span>Nuevo Permiso </span>
-									<i className="fas fa-plus"></i>
-								</button>
-							</Link> */}
+							{privilegios.expedirPermisos && <NuevoPermisoButton />}
 						</div>
 
 						<div className="col-sm-8 d-inline-flex p-2 pr-4">
@@ -259,21 +253,15 @@ export const PermisosScreen = () => {
 									</button>
 								</div>
 								<div className="col-6 d-flex justify-content-center">
-									{dataPermiso.estadoPermiso === "activo" ? (
-										privilegios.cancelarPermisos ? (
-											<button
-												type="button"
-												className="btn btn-outline-danger"
-												onClick={cancelarPermiso}
-											>
-												<i className="fas fa-times"></i>
-												<span> Cancelar</span>
-											</button>
-										) : (
-											<></>
-										)
-									) : (
-										<></>
+									{dataPermiso.estadoPermiso === "activo" && privilegios.solicitarCancelarPermisos && (
+										<button
+											type="button"
+											className="btn btn-outline-danger"
+											onClick={cancelarPermiso}
+										>
+											<i className="fas fa-times"></i>
+											<span> Cancelar</span>
+										</button>
 									)}
 								</div>
 							</div>
@@ -288,7 +276,8 @@ export const PermisosScreen = () => {
 				)}
 			</div>
 
-			<PermitsCancellationModule />
+			{privilegios.cancelarPermisos && <PermitsCancellationModule />}
+
 			<PrintPermisoModal data={dataPermisoImprecion} isNew={false} />
 		</>
 	);

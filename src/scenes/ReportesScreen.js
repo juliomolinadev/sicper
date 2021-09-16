@@ -7,7 +7,6 @@ import { RadioButtonGroup } from "../components/ui/molecules/RadioButtonGroup";
 
 export const ReportesScreen = () => {
 	const { privilegios } = useSelector((state) => state.auth);
-	const { reportesPermisos } = privilegios;
 	const [reportTypeValues, handleReportTipeInputChange] = useForm();
 
 	const reportTypes = [
@@ -39,10 +38,12 @@ export const ReportesScreen = () => {
 			</div>
 
 			<div className="mt-5">
-				{reportTypeValues.reportType === "expedicion" && <ReporteExpedicion />}
+				{reportTypeValues.reportType === "expedicion" && privilegios.consultarExpedicion && (
+					<ReporteExpedicion />
+				)}
 			</div>
 			<div className="mt-5">
-				{reportTypeValues.reportType === "permisos" && reportesPermisos && (
+				{reportTypeValues.reportType === "permisos" && privilegios.consultarPermisos && (
 					<ModuloInformesPermisos />
 				)}
 			</div>

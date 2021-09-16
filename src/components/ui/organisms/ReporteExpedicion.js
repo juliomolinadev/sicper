@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer } from "react";
+import { useSelector } from "react-redux";
 import { modulosPorUnidad } from "../../../helpers/consts";
 import { loadAutorizadosGlobal } from "../../../helpers/DB/loadAutorizadosGlobal";
 import { loadAvanceSuperficieExpedida } from "../../../helpers/DB/loadAvanceSuperficieExpedida";
@@ -22,6 +23,8 @@ const unidades = {
 const initialState = { unidades, modulosPorUnidad };
 
 export const ReporteExpedicion = () => {
+	const { privilegios, modulo } = useSelector((state) => state.auth);
+
 	const [reportOptionsValues, handleReportOptionsInputChange] = useForm();
 
 	const [state, dispatch] = useReducer(modulosCheckboxReducer, initialState);
@@ -113,20 +116,22 @@ export const ReporteExpedicion = () => {
 			</div>
 
 			<div className="row justify-content-center">
-				<RadioButtonGroup
-					inputName={"opcion"}
-					options={reportOptions}
-					formValues={reportOptionsValues}
-					setFunction={handleReportOptionsInputChange}
-					styles={checkboxStyles}
-				/>
+				{privilegios.accesoGlobal && (
+					<RadioButtonGroup
+						inputName={"opcion"}
+						options={reportOptions}
+						formValues={reportOptionsValues}
+						setFunction={handleReportOptionsInputChange}
+						styles={checkboxStyles}
+					/>
+				)}
 			</div>
 
 			{reportOptionsValues.opcion === "modulos" && (
 				<ModulosCheckbox state={state} dispatch={dispatch} />
 			)}
 
-			{(reportOptionsValues.opcion === "global" ||
+			{((privilegios.accesoGlobal && reportOptionsValues.opcion === "global") ||
 				reportOptionsValues.opcion === "Baja California" ||
 				reportOptionsValues.opcion === "Sonora") && (
 				<div className="row mt-3">
@@ -142,14 +147,30 @@ export const ReporteExpedicion = () => {
 				</div>
 			)}
 
-			{reportOptionsValues.opcion === "modulos" && getModulos().length > 0 && (
+			{privilegios.accesoGlobal &&
+				reportOptionsValues.opcion === "modulos" &&
+				getModulos().length > 0 && (
+					<div className="row mt-3">
+						<div className="col-sm-12 pt-5">
+							<ExpedicionTable
+								data={filterReportData(
+									mergeReportData(autorizados, expedicion),
+									reportOptionsValues.opcion,
+									getModulos()
+								)}
+							/>
+						</div>
+					</div>
+				)}
+
+			{!privilegios.accesoGlobal && (
 				<div className="row mt-3">
 					<div className="col-sm-12 pt-5">
 						<ExpedicionTable
 							data={filterReportData(
 								mergeReportData(autorizados, expedicion),
 								reportOptionsValues.opcion,
-								getModulos()
+								[modulo]
 							)}
 						/>
 					</div>

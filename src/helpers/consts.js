@@ -105,6 +105,10 @@ export const modulos = [
 ];
 
 export const privileges = {
+	//Ui
+	accesoGlobal: false,
+
+	//Pantallas
 	pantallaInicio: false,
 	pantallaPadron: false,
 	pantallaPermisos: false,
@@ -114,23 +118,35 @@ export const privileges = {
 	pantallaAutorizados: false,
 	pantallaReportes: false,
 	pantallaConfiguracion: false,
-	consultarExpedicion: false,
-	consultarAutorizados: false,
+	testArea: false,
+
+	//Padron
+	actualizarPadron: false,
+
+	//Permisos
 	expedirPermisos: false,
 	consultarPermisos: false,
+	solicitarCancelarPermisos: false,
 	cancelarPermisos: false,
+	consultarExpedicion: false,
+
+	//Autorizados
+	consultarAutorizados: false,
+
+	//Transferencias
 	solicitarTransferencias: false,
+
+	//Labores
 	asignarTécnico: false,
 	consultarLabores: false,
 	registrarLabores: false,
 	pagarLabores: false,
 	imprimirLabores: false,
-	reportesPermisos: false,
-	reportesExpedición: false,
-	reportesAutorizados: false,
+
+	//Configuracion
+	actualizarEntidades: false,
 	asignarRoles: false,
-	editarRoles: false,
-	testArea: false
+	editarRoles: false
 };
 
 export const entidades = [
