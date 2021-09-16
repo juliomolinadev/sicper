@@ -15,11 +15,17 @@ export const RegisterScreen = () => {
 
 	const { name, email, password, password2, modulo } = formValues;
 
+	const decideModulo = (modulo) => {
+		if (modulo === "9A") return "9";
+		if (modulo === "9B") return "92";
+		return modulo;
+	};
+
 	const handleRegister = (e) => {
 		e.preventDefault();
 
 		if (isFormValid()) {
-			dispatch(startRegisterWithEmailPasswordName(email, password, name, modulo));
+			dispatch(startRegisterWithEmailPasswordName(email, password, name, decideModulo(modulo)));
 		}
 	};
 
@@ -73,7 +79,7 @@ export const RegisterScreen = () => {
 					<option value="6">Modulo 6</option>
 					<option value="7">Modulo 7</option>
 					<option value="8">Modulo 8</option>
-					<option value="9">Modulo 9</option>
+					<option value="9A">Modulo 9A</option>
 					<option value="9B">Modulo 9B</option>
 					<option value="10">Modulo 10</option>
 					<option value="11">Modulo 11</option>

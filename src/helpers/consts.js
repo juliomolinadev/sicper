@@ -228,9 +228,16 @@ export const entidades = [
 	{
 		clave: "9",
 		dotacion: 117,
-		nombre: "Usuarios del módulo No. 9",
+		nombre: "Usuarios del módulo No. 9A",
 		titular: "???",
-		img: "m9.jpg"
+		img: "m9a.jpg"
+	},
+	{
+		clave: "92",
+		dotacion: 117,
+		nombre: "Usuarios del módulo No. 9B",
+		titular: "???",
+		img: "m9b.jpg"
 	},
 	{
 		clave: "10",

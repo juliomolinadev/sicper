@@ -12,7 +12,7 @@ export const Header = () => {
 						<img
 							className="align-self-center"
 							src={`./logos/${img}`}
-							alt="Logo de modulo 19"
+							alt="Logo de la entidad"
 							style={{ maxHeight: 100 }}
 						/>
 					</div>
