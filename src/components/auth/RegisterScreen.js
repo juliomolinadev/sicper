@@ -45,8 +45,8 @@ export const RegisterScreen = () => {
 		} else if (!password) {
 			dispatch(setError("Se requiere password"));
 			return false;
-		} else if (password !== password2 || password.length < 5) {
-			dispatch(setError("Password diferentes o menor de 5 caracteres"));
+		} else if (password !== password2 || password.length < 6) {
+			dispatch(setError("Password diferentes o menor de 6 caracteres"));
 			return false;
 		}
 
