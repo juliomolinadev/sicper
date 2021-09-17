@@ -158,28 +158,28 @@ export const entidades = [
 		img: "dev.png"
 	},
 	{
-		clave: "cna",
+		clave: "CNA",
 		dotacion: 117,
 		nombre: "Comisión Nacional del Agua",
 		titular: "???",
 		img: "cna.png"
 	},
 	{
-		clave: "sader",
+		clave: "SADER",
 		dotacion: 117,
 		nombre: "Secretaría de Agricultura y Desarrollo Rural",
 		titular: "???",
 		img: "sader.png"
 	},
 	{
-		clave: "cesvbc",
+		clave: "CESVBC",
 		dotacion: 117,
 		nombre: "Comité Estatal de Sanidad Vegetal de Baja California",
 		titular: "???",
 		img: "cesvbc.webp"
 	},
 	{
-		clave: "srl",
+		clave: "SRL",
 		dotacion: 117,
 		nombre: "Distrito de Riego 014, Río Colorado S. de R.L.",
 		titular: "???",
@@ -338,5 +338,12 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 22",
 		titular: "???",
 		img: "m22.jpg"
+	},
+	{
+		clave: "23",
+		dotacion: 117,
+		nombre: "Usuarios del módulo No. 23",
+		titular: "???",
+		img: "srl.png"
 	}
 ];

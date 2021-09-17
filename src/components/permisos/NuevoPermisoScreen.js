@@ -107,7 +107,10 @@ export const NuevoPermisoScreen = () => {
 		} else if (!cultivoAnterior) {
 			dispatch(setError("Especifique el cultivo anterior."));
 			return false;
-		} else if (defineTipoPermiso(autorizadosPorCultivo) === "Superficie no disponible") {
+		} else if (
+			autorizadosPorCultivo === undefined ||
+			defineTipoPermiso(autorizadosPorCultivo) === "Superficie no disponible"
+		) {
 			dispatch(setError("Superficie no disponible."));
 			return false;
 		}
