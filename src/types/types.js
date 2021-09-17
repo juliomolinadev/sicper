@@ -20,6 +20,7 @@ export const types = {
 	clearCultivos: "[Alta Permisos] Clear cultivos",
 	setCultivo: "[Alta Permisos] Set cultivo",
 	unsetCultivo: "[Alta Permisos] unset cultivo",
+	setCuotaCultivo: "[Alta Permisos] Set Cuota Cultivo",
 
 	altaPermisoOpenUsuariosModal: "[Alta Permisos] Open usuarios modal",
 	altaPermisoCloseUsuariosModal: "[Alta Permisos] Close usuarios modal",

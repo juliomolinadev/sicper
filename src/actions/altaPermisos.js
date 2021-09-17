@@ -45,3 +45,8 @@ export const startEnablePrintButton = () => ({
 export const startDisablePrintButton = () => ({
 	type: types.altaPermisosDisablePrintButton
 });
+
+export const setCuotaCultivo = (cuota) => ({
+	type: types.setCuotaCultivo,
+	payload: cuota
+});

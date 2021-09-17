@@ -13,7 +13,12 @@ import { UsuarioInput } from "./inputsNuevosPermisos/UsuarioInput";
 import { ProductorInput } from "./inputsNuevosPermisos/ProductorInput";
 import { UsuarioSelected } from "./inputsNuevosPermisos/UsuarioSelected";
 import { ProductorSelected } from "./inputsNuevosPermisos/ProductorSelected";
-import { setFormValues, setOnSubmitData, openPrintPermisoModal } from "../../actions/altaPermisos";
+import {
+	setFormValues,
+	setOnSubmitData,
+	openPrintPermisoModal,
+	setCuotaCultivo
+} from "../../actions/altaPermisos";
 import { loadContador } from "../../helpers/loadContador";
 import { removeError, setError } from "../../actions/ui";
 
@@ -36,18 +41,18 @@ export const NuevoPermisoScreen = () => {
 		longitud: "",
 		observaciones: "",
 		cultivoAnterior: "",
-		transferencia: ""
+		transferencia: "",
+		cuotaSanidad: true
 	});
 
 	const {
 		variedad,
 		supAutorizada,
 		fuenteCredito,
-		// latitud,
-		// longitud,
 		observaciones,
 		cultivoAnterior,
-		transferencia
+		transferencia,
+		cuotaSanidad
 	} = formValues;
 
 	const permisoData = {
@@ -61,13 +66,28 @@ export const NuevoPermisoScreen = () => {
 	// TODO: Determinar el ciclo segun la fecha
 	const ciclo = "2020-2021";
 
-	// if (autorizados.length === 0) {
-	// 	dispatch(startLoadAutorizados(ciclo, auth.modulo));
-	// }
-
 	useEffect(() => {
 		dispatch(startLoadAutorizadoPorCultivo(ciclo, auth.modulo, altaPermisos.claveCultivo));
 	}, [dispatch, auth.modulo, altaPermisos.claveCultivo]);
+
+	useEffect(() => {
+		const cultivoSelected = altaPermisos.cultivos.find(
+			(cultivo) => cultivo.id === altaPermisos.idCultivoSelected
+		);
+
+		const defineCuota = () => {
+			if (!cuotaSanidad) return 0;
+			if (altaPermisos.idCultivoSelected) return cultivoSelected.costoHectarea;
+		};
+
+		dispatch(setCuotaCultivo(defineCuota()));
+	}, [
+		dispatch,
+		altaPermisos.cuotaCultivo,
+		cuotaSanidad,
+		altaPermisos.cultivos,
+		altaPermisos.idCultivoSelected
+	]);
 
 	const handleOpenPrintPermisoModal = () => {
 		dispatch(openPrintPermisoModal());
@@ -83,7 +103,6 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const isFormValid = () => {
-		// TODO: Validar formulario de nuevos permisos
 		if (!altaPermisos.usuario) {
 			dispatch(setError("El campo usuario es obligatorio."));
 			return false;
@@ -331,6 +350,31 @@ export const NuevoPermisoScreen = () => {
 									autoComplete="off"
 									onChange={handleInputChange}
 								/>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div className="row">
+					<div className="col-sm-6">
+						<div className="form-group row p-3">
+							<label className="mr-3">
+								<span className="text-warning">* </span>
+							</label>
+
+							<div className="form-group form-check">
+								<input
+									type="checkbox"
+									className="form-check-input"
+									id="cuotaSanidad"
+									name="cuotaSanidad"
+									value={cuotaSanidad}
+									onChange={handleInputChange}
+									checked={cuotaSanidad}
+								/>
+								<label className="form-check-label" htmlFor="cuotaSanidad">
+									Cobrar cuota de sanidad vegetal
+								</label>
 							</div>
 						</div>
 					</div>

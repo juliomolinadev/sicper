@@ -61,7 +61,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			onRequestClose={closeModal}
 			style={customStyles}
 			closeTimeoutMS={200}
-			className="printModal"
+			className="printModal pl-5 pr-5"
 			overlayClassName="modal-fondo"
 		>
 			{/* Marca de agua ***************************************************************** */}
