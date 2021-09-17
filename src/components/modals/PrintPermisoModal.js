@@ -275,7 +275,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			<div className="row m-3 d-flex flex-column justify-content-center border rounded">
 				<div className="d-flex justify-content-center ">TRANSFERENCIA</div>
 
-				<div className="d-flex border-top p-1">Ninguna</div>
+				<div className="d-flex border-top p-1">{data.transferencia}</div>
 			</div>
 
 			{/* Firmas  ************************************************************* */}
