@@ -15,7 +15,7 @@ export const FichaExpedicion = () => {
 	// TODO: crear funcion para definir ciclo
 	const ciclo = "2020-2021";
 	if (autorizados.length === 0) {
-		dispatch(startLoadAutorizados(modulo));
+		dispatch(startLoadAutorizados(ciclo, modulo));
 	}
 
 	if (superficies === null) {
