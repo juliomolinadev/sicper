@@ -88,3 +88,11 @@ export const setUpdatingPadron = () => ({
 export const unsetUpdatingPadron = () => ({
 	type: types.unsetUpdatingPadron
 });
+
+export const setUpdatingReacomodos = () => ({
+	type: types.setUpdatingReacomodos
+});
+
+export const unsetUpdatingReacomodos = () => ({
+	type: types.unsetUpdatingReacomodos
+});

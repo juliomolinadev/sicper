@@ -32,6 +32,8 @@ export const types = {
 	unsetUsuario: "[Alta Permisos] Unset usuario",
 	setUpdatingPadron: "[Padron] Set Updating Padron",
 	unsetUpdatingPadron: "[Padron] Unset Updating Padron",
+	setUpdatingReacomodos: "[Padron] Set Updating Reacomodos",
+	unsetUpdatingReacomodos: "[Padron] Unset Updating Reacomodos",
 
 	altaPermisoOpenProductoresModal: "[Alta Permisos] Open productores modal",
 	altaPermisoCloseProductoresModal: "[Alta Permisos] Close productores modal",

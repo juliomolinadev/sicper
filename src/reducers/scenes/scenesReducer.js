@@ -5,7 +5,8 @@ const initialState = {
 		openImprimirReporteModal: false
 	},
 	padronScreen: {
-		updatingPadron: false
+		updatingPadron: false,
+		updatingReacomodos: false
 	}
 };
 
@@ -40,6 +41,22 @@ export const scenesReducer = (state = initialState, action) => {
 				...state,
 				padronScreen: {
 					updatingPadron: false
+				}
+			};
+
+		case types.setUpdatingReacomodos:
+			return {
+				...state,
+				padronScreen: {
+					updatingReacomodos: true
+				}
+			};
+
+		case types.unsetUpdatingReacomodos:
+			return {
+				...state,
+				padronScreen: {
+					updatingReacomodos: false
 				}
 			};
 
