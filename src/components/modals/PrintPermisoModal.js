@@ -134,6 +134,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						<b>{data.municipio}</b>, <b>{data.estado}</b>. Módulo <b>{data.modulo}</b>, sección{" "}
 						<b>{data.seccion}</b> del canal <b>{data.canal}</b> toma <b>{data.toma}</b> con sistema
 						de riego por <b>{data.sistema}</b>.
+						{data.reacomodo && <b> Reacomodo: {data.reacomodo}</b>}
 					</p>
 				</div>
 			</div>

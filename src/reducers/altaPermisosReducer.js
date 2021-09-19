@@ -159,7 +159,8 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				canal: `${action.payload.cp}-${action.payload.lt}-${action.payload.slt}-${action.payload.ra}-${action.payload.sra}-${action.payload.ssra}`,
 				toma: action.payload.pControl,
 				sistema: action.payload.sistRiego,
-				supPrevia: action.payload.supPrevia
+				supPrevia: action.payload.supPrevia,
+				reacomodo: action.payload.reacomodo
 			};
 
 		case types.unsetUsuario:

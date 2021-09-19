@@ -8,7 +8,6 @@ export const UsuarioSelected = () => {
 
 	return (
 		<div className="border rounded mb-4 p-2">
-			{/* TODO: Poner alerta cuando la cuenta no tenga superficie disponible */}
 			<div className="row">
 				<div className="col-sm-6">Cuenta: {`${usuario.cuenta}.${usuario.subcta}`}</div>
 				<div className="col-sm-3">Colonia/Ejido: {usuario.localidad}</div>
