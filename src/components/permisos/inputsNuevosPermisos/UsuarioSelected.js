@@ -4,42 +4,34 @@ import { useSelector } from "react-redux";
 export const UsuarioSelected = () => {
 	const { usuarios, idUsuarioSelected, supPrevia } = useSelector((state) => state.altaPermisos);
 
-	let localidad = "";
-	let cuenta = "";
-	let derecho = "";
-	let lote = "";
-	let derechoDisponible = "";
-	let nombreUsuario = "";
-	let seccion = "";
-
-	usuarios.forEach((usuario) => {
-		if (usuario.id === idUsuarioSelected) {
-			cuenta = `${usuario.cuenta}.${usuario.subcta}`;
-			localidad = usuario.localidad;
-			derecho = usuario.supRiego;
-			lote = usuario.predio;
-			derechoDisponible = derecho - supPrevia;
-			nombreUsuario = `${usuario.apPaterno} ${usuario.apMaterno} ${usuario.nombre}`;
-			seccion = usuario.seccion;
-		}
-	});
+	const usuario = usuarios.find((usuario) => usuario.id === idUsuarioSelected);
 
 	return (
 		<div className="border rounded mb-4 p-2">
 			{/* TODO: Poner alerta cuando la cuenta no tenga superficie disponible */}
 			<div className="row">
-				<div className="col-sm-6">Cuenta: {cuenta}</div>
-				<div className="col-sm-3">Colonia/Ejido: {localidad}</div>
-				<div className="col-sm-3">Sup. Derecho: {derecho}</div>
+				<div className="col-sm-6">Cuenta: {`${usuario.cuenta}.${usuario.subcta}`}</div>
+				<div className="col-sm-3">Colonia/Ejido: {usuario.localidad}</div>
+				<div className="col-sm-3">Sup. Derecho: {usuario.supRiego}</div>
 			</div>
 			<div className="row">
-				<div className="col-sm-6">Usuario: {nombreUsuario}</div>
-				<div className="col-sm-3">Lote: {lote}</div>
-				<div className="col-sm-3">Sup. Disponible: {derechoDisponible}</div>
+				<div className="col-sm-6">
+					Usuario: {`${usuario.apPaterno} ${usuario.apMaterno} ${usuario.nombre}`}
+				</div>
+				<div className="col-sm-3">Lote: {usuario.predio}</div>
+				{usuario.supRiego - supPrevia === 0 ? (
+					<div className="col-sm-3 text-danger">
+						Sup. Disponible: {usuario.supRiego - supPrevia}
+					</div>
+				) : (
+					<div className="col-sm-3">Sup. Disponible: {usuario.supRiego - supPrevia}</div>
+				)}
 			</div>
 			<div className="row">
-				<div className="col-sm-6"></div>
-				<div className="col-sm-3">Seccion: {seccion}</div>
+				<div className="col-sm-6">
+					{usuario.reacomodo && <div className="text-info">Reacomodo: {usuario.reacomodo}</div>}
+				</div>
+				<div className="col-sm-3">Seccion: {usuario.seccion}</div>
 			</div>
 		</div>
 	);
