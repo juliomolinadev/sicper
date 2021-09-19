@@ -4,26 +4,28 @@ import { db } from "../firebase/firebase-config";
 
 export const loadUsuarios = async (usuario, modulo) => {
 	const campos = ["apPaterno", "cuenta"];
-	const qryPromises = [];
+	const qryUsuarios = [];
 	const usuarios = [];
+	const reacomodos = [];
+	const qryReacomodos = [];
 
-	const pad = db.collection(`derechos`).where("modulo", "==", parseInt(modulo));
+	const padUsuarios = db.collection(`derechos`).where("modulo", "==", parseInt(modulo));
 
 	campos.forEach((campo) => {
-		qryPromises.push(
-			pad
+		qryUsuarios.push(
+			padUsuarios
 				.orderBy(campo)
 				.startAt(usuario)
 				.endAt(usuario + "\uf8ff")
 				.get()
 		);
 
-		qryPromises.push(pad.where(campo, "==", Number(usuario)).get());
+		qryUsuarios.push(padUsuarios.where(campo, "==", Number(usuario)).get());
 	});
 
-	const resolvedQrys = await Promise.all(qryPromises);
+	const resolvedUsuariosQrys = await Promise.all(qryUsuarios);
 
-	resolvedQrys.forEach((snap) => {
+	resolvedUsuariosQrys.forEach((snap) => {
 		snap.forEach((snapHijo) => {
 			usuarios.push({
 				id: snapHijo.id,
@@ -32,22 +34,27 @@ export const loadUsuarios = async (usuario, modulo) => {
 		});
 	});
 
-	// const usuariosSnap = await db
-	// 	.collection(`derechos`)
-	// 	.where("modulo", "==", parseInt(modulo))
-	// 	.orderBy("apPaterno")
-	// 	.startAt(usuario)
-	// 	.endAt(usuario + "\uf8ff")
-	// 	.get();
+	usuarios.forEach((usuario) => {
+		qryReacomodos.push(db.collection(`reacomodos`).doc(usuario.id).get());
+	});
 
-	// const usuarios = [];
+	const resolvedReacomodosQrys = await Promise.all(qryReacomodos);
 
-	// usuariosSnap.forEach((snapHijo) => {
-	// 	usuarios.push({
-	// 		id: snapHijo.id,
-	// 		...snapHijo.data()
-	// 	});
-	// });
+	resolvedReacomodosQrys.forEach((reacomodo) => {
+		if (reacomodo.data()) {
+			reacomodos.push({
+				id: reacomodo.id,
+				...reacomodo.data()
+			});
+		}
+	});
+
+	usuarios.forEach((usuario, i) => {
+		const reacomodo = reacomodos.find((reacomodo) => reacomodo.id === usuario.id);
+		if (reacomodo) {
+			usuarios[i].reacomodo = reacomodo.reacomodo;
+		}
+	});
 
 	return usuarios;
 };
