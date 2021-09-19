@@ -4,36 +4,18 @@ import { useSelector } from "react-redux";
 export const UsuarioSelectedDetail = () => {
 	const { usuarios, idUsuarioSelected, supPrevia } = useSelector((state) => state.altaPermisos);
 
-	let localidad = "";
-	let cuenta = "";
-	let derecho = "";
-	let lote = "";
-	let derechoDisponible = "";
-	let nombreUsuario = "";
-	let seccion = "";
-
-	usuarios.forEach((usuario) => {
-		if (usuario.id === idUsuarioSelected) {
-			cuenta = `${usuario.cuenta}.${usuario.subcta}`;
-			localidad = usuario.localidad;
-			derecho = usuario.supRiego;
-			lote = usuario.predio;
-			derechoDisponible = derecho - supPrevia;
-			nombreUsuario = `${usuario.apPaterno} ${usuario.apMaterno} ${usuario.nombre}`;
-			seccion = usuario.seccion;
-		}
-	});
+	const usuario = usuarios.find((usuario) => usuario.id === idUsuarioSelected);
 
 	return (
 		<div className="border rounded mb-4 p-2">
-			<div>Cuenta: {cuenta}</div>
-			<div>Colonia/Ejido: {localidad}</div>
-			<div>Sup. Derecho: {derecho}</div>
-			<div>Usuario: {nombreUsuario}</div>
-			<div>Lote: {lote}</div>
-			<div>Sup. Disponible: {derechoDisponible}</div>
-			<div></div>
-			<div>Seccion: {seccion}</div>
+			<div>Cuenta: {`${usuario.cuenta}.${usuario.subcta}`}</div>
+			<div>Usuario: {`${usuario.apPaterno} ${usuario.apMaterno} ${usuario.nombre}`}</div>
+			<div>Colonia/Ejido: {usuario.localidad}</div>
+			<div>Lote: {usuario.predio}</div>
+			<div>Seccion: {usuario.seccion}</div>
+			<div>Sup. Derecho: {usuario.supRiego}</div>
+			<div>Sup. Disponible: {usuario.supRiego - supPrevia}</div>
+			{usuario.reacomodo && <div className="text-info">Reacomodo: {usuario.reacomodo}</div>}
 		</div>
 	);
 };
