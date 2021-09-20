@@ -228,10 +228,10 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 							<div>l.p.s./24 hrs/hr Parcela</div>
 						</div>
 						<div className="col-2 border">
-							<div>{data.supDerecho * data.dotacion}</div>
+							<div>{roundToN(data.supDerecho * data.dotacion, 3)}</div>
 						</div>
 						<div className="col-2 border">
-							<div>{data.supPrevia * data.dotacion}</div>
+							<div>{roundToN(data.supPrevia * data.dotacion, 3)}</div>
 						</div>
 						<div className="col-3 border">
 							<div>{roundToN(data.supAutorizada * data.dotacion, 3)}</div>
@@ -330,7 +330,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			<div className="row m-3 d-flex justify-content-between border-top">
 				<div className="border rounded mt-2 p-2">Folio: {data.numeroPermiso}</div>
 				<div className="border rounded mt-2 p-2">
-					Bueno por: $ {data.cuotaCultivo * data.supAutorizada} pesos M.N.
+					Bueno por: $ {roundToN(data.cuotaCultivo * data.supAutorizada, 3)} pesos M.N.
 				</div>
 			</div>
 
@@ -340,7 +340,8 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 				<u>
 					Recibimos de El/la C.{" "}
 					<b>
-						{data.usuario} La cantidad de {data.cuotaCultivo * data.supAutorizada} pesos M.N.
+						{data.usuario} La cantidad de {roundToN(data.cuotaCultivo * data.supAutorizada, 3)}{" "}
+						pesos M.N.
 					</b>{" "}
 					Por concepto de aportación a las campañas Fitosanitarias, para el sostenimiento del comité
 					Estatal de Sanidad Vegetal.
