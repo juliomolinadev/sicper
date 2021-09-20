@@ -48,7 +48,8 @@ export const savePermiso = async (allData) => {
 		titular: allData.titular,
 		transferencia: allData.transferencia,
 		estadoPermiso: allData.estadoPermiso,
-		reacomodo: allData.reacomodo ? allData.reacomodo : ""
+		reacomodo: allData.reacomodo ? allData.reacomodo : "",
+		direccion: allData.direccion
 	};
 
 	if (data.nombreCultivo === "ALGODONERO") {

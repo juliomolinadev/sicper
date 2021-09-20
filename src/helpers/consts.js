@@ -154,6 +154,7 @@ export const entidades = [
 		clave: "dev",
 		dotacion: 117,
 		titular: "dev",
+		direccion: "",
 		nombre: "Desarrollo",
 		img: "dev.png"
 	},
@@ -162,6 +163,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Comisión Nacional del Agua",
 		titular: "???",
+		direccion: "",
 		img: "cna.png"
 	},
 	{
@@ -169,6 +171,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Secretaría de Agricultura y Desarrollo Rural",
 		titular: "???",
+		direccion: "",
 		img: "sader.png"
 	},
 	{
@@ -176,6 +179,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Comité Estatal de Sanidad Vegetal de Baja California",
 		titular: "???",
+		direccion: "",
 		img: "cesvbc.webp"
 	},
 	{
@@ -183,6 +187,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Distrito de Riego 014, Río Colorado S. de R.L.",
 		titular: "???",
+		direccion: "",
 		img: "srl.png"
 	},
 	{
@@ -190,6 +195,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 1",
 		titular: "???",
+		direccion: "",
 		img: "m1.jpg"
 	},
 	{
@@ -197,6 +203,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 2",
 		titular: "???",
+		direccion: "",
 		img: "m2.jpg"
 	},
 	{
@@ -204,6 +211,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 3",
 		titular: "???",
+		direccion: "",
 		img: "m3.jpg"
 	},
 	{
@@ -211,6 +219,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 4",
 		titular: "???",
+		direccion: "",
 		img: "m4.jpg"
 	},
 	{
@@ -218,6 +227,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 5",
 		titular: "???",
+		direccion: "",
 		img: "m5.jpg"
 	},
 	{
@@ -225,6 +235,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 6",
 		titular: "???",
+		direccion: "",
 		img: "m6.jpg"
 	},
 	{
@@ -232,6 +243,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 7",
 		titular: "???",
+		direccion: "",
 		img: "m7.jpg"
 	},
 	{
@@ -239,6 +251,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 8",
 		titular: "???",
+		direccion: "",
 		img: "m8.jpg"
 	},
 	{
@@ -246,6 +259,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 9A",
 		titular: "???",
+		direccion: "",
 		img: "m9a.jpg"
 	},
 	{
@@ -253,6 +267,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 9B",
 		titular: "???",
+		direccion: "",
 		img: "m9b.jpg"
 	},
 	{
@@ -260,6 +275,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 10",
 		titular: "???",
+		direccion: "",
 		img: "m10.jpg"
 	},
 	{
@@ -267,6 +283,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 11",
 		titular: "???",
+		direccion: "",
 		img: "m11.jpg"
 	},
 	{
@@ -274,6 +291,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 12",
 		titular: "???",
+		direccion: "",
 		img: "m12.jpg"
 	},
 	{
@@ -281,6 +299,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 14",
 		titular: "???",
+		direccion: "",
 		img: "m14.jpg"
 	},
 	{
@@ -288,6 +307,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 15",
 		titular: "???",
+		direccion: "",
 		img: "m15.jpg"
 	},
 	{
@@ -295,6 +315,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 16",
 		titular: "???",
+		direccion: "",
 		img: "m16.jpg"
 	},
 	{
@@ -302,6 +323,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 17",
 		titular: "???",
+		direccion: "",
 		img: "m17.jpg"
 	},
 	{
@@ -309,6 +331,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 18",
 		titular: "???",
+		direccion: "",
 		img: "m18.jpg"
 	},
 	{
@@ -316,6 +339,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 19",
 		titular: "???",
+		direccion: "Carretera a San Felipe Km 1.5 S/N, Col. Xochimilco C.P. 21380. Mexicali B.C.",
 		img: "m19.png"
 	},
 	{
@@ -323,6 +347,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 20",
 		titular: "???",
+		direccion: "",
 		img: "m20.jpg"
 	},
 	{
@@ -330,6 +355,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 21",
 		titular: "???",
+		direccion: "",
 		img: "m21.jpg"
 	},
 	{
@@ -337,6 +363,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 22",
 		titular: "???",
+		direccion: "",
 		img: "m22.jpg"
 	},
 	{
@@ -344,6 +371,7 @@ export const entidades = [
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 23",
 		titular: "???",
+		direccion: "",
 		img: "srl.png"
 	}
 ];

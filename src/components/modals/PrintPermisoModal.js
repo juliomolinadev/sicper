@@ -103,6 +103,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						{" "}
 						<b>Ciclo Agrícola {data.ciclo}</b>{" "}
 					</h2>
+					<h3 className="d-flex justify-content-center">{data.direccion}</h3>
 				</div>
 
 				<div className="col-2 d-flex flex-column justify-content-center">
@@ -134,7 +135,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						hectáreas del lote: <b>{data.lote}</b> en la colonia/ejido <b>{data.localidad}</b>,{" "}
 						<b>{data.municipio}</b>, <b>{data.estado}</b>. Módulo <b>{data.modulo}</b>, sección{" "}
 						<b>{data.seccion}</b> del canal <b>{data.canal}</b> toma <b>{data.toma}</b> con sistema
-						de riego por <b>{data.sistema}</b>.
+						de riego por <b>{data.sistema}</b>.<br />
 						{data.reacomodo && <b> Reacomodo: {data.reacomodo}</b>}
 					</p>
 				</div>

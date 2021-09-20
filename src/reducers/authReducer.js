@@ -16,6 +16,7 @@ export const authReducer = (state = {}, action) => {
 				claveEntidad: action.payload.claveEntidad,
 				dotacion: action.payload.dotacion,
 				titular: action.payload.titular,
+				direccion: action.payload.direccion,
 				rol: action.payload.rol,
 				modulo: action.payload.modulo
 			};

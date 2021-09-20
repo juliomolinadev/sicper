@@ -27,10 +27,12 @@ export const AppRouter = () => {
 				const entity = await loadEntity(user.uid);
 				const entityData = await loadEntityData(entity.claveEntidad);
 				const privilegios = await loadPrivilegios(entity.rol);
-				const { nombre, img, clave, dotacion, titular } = entityData;
+				const { nombre, img, clave, dotacion, titular, direccion } = entityData;
 
 				dispatch(login(user.uid, user.displayName));
-				dispatch(setEntity(nombre, img, clave, dotacion, titular, entity.rol, entity.modulo));
+				dispatch(
+					setEntity(nombre, img, clave, dotacion, titular, direccion, entity.rol, entity.modulo)
+				);
 				dispatch(setPrivilegios(privilegios));
 				setIsLoggedIn(true);
 			} else {
