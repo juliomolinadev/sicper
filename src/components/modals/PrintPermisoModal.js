@@ -262,7 +262,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						<br />
 						Productor:{" "}
 						<b>
-							{data.nombreProductor} ({data.rfcProductor})
+							{data.nombreProductor} ({data.curpProductor})
 						</b>
 						<br />
 					</div>

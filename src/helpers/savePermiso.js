@@ -23,6 +23,7 @@ export const savePermiso = async (allData) => {
 		idProductorSelected: allData.idProductorSelected,
 		nombreProductor: allData.nombreProductor,
 		rfcProductor: allData.rfcProductor,
+		curpProductor: allData.curpProductor,
 		idCultivoSelected: allData.idCultivoSelected,
 		nombreCultivo: allData.nombreCultivo,
 		claveCultivo: allData.claveCultivo,

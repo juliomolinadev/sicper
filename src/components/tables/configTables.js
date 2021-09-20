@@ -35,7 +35,7 @@ export const productoresColumns = [
 	{ name: "PATERNO", selector: "apPaterno", width: "140px", sortable: true },
 	{ name: "MATERNO", selector: "apMaterno", width: "140px", sortable: true },
 	{ name: "NOMBRE", selector: "nombre", width: "200px", sortable: true },
-	{ name: "RFC", selector: "rfc", sortable: true, width: "140px", center: true }
+	{ name: "CURP", selector: "curp", sortable: true, width: "180px", center: true }
 ];
 
 export const cultivosColumns = [
