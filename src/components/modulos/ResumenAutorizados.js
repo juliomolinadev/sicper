@@ -5,6 +5,7 @@ import {
 	setSuperficieNormal,
 	startLoadExpedicion
 } from "../../actions/sicperScreen";
+import { roundToN } from "../../helpers/functions/roundToN";
 
 export const ResumenAutorizados = () => {
 	const { expedicion, superficie } = useSelector((state) => state.sicperScreen);
@@ -104,10 +105,10 @@ export const ResumenAutorizados = () => {
 											</td>
 											<td>
 												<div className="text-center">
-													{cultivo.gravedadNormalAsignada - cultivo.gravedadNormal}
+													{roundToN(cultivo.gravedadNormalAsignada - cultivo.gravedadNormal, 3)}
 												</div>
 												<div className="text-center">
-													{cultivo.pozoNormalAsignada - cultivo.pozoNormal}
+													{roundToN(cultivo.pozoNormalAsignada - cultivo.pozoNormal, 3)}
 												</div>
 											</td>
 										</tr>
