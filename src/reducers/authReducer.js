@@ -27,6 +27,12 @@ export const authReducer = (state = {}, action) => {
 				privilegios: action.payload
 			};
 
+		case types.setVariablesGlobales:
+			return {
+				...state,
+				variablesGlobales: action.payload
+			};
+
 		case types.logout:
 			return {};
 

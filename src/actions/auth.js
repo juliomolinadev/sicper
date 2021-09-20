@@ -22,6 +22,10 @@ export const startLoginEmailPassword = (email, password) => {
 					setEntity(nombre, img, clave, dotacion, titular, direccion, entity.rol, entity.modulo)
 				);
 				dispatch(setPrivilegios(privilegios));
+
+				const variablesGlovales = await loadVariablesGlobales();
+				dispatch(setVariablesGlobales(variablesGlovales));
+
 				dispatch(finishLoading());
 			})
 			.catch((e) => {
@@ -97,6 +101,11 @@ export const setEntity = (
 	}
 });
 
+export const setVariablesGlobales = (data) => ({
+	type: types.setVariablesGlobales,
+	payload: data
+});
+
 export const startLogout = () => {
 	return async (dispatch) => {
 		await firebase.auth().signOut();
@@ -148,6 +157,20 @@ export const loadPrivilegios = async (rol) => {
 	});
 
 	return privilegios;
+};
+
+export const loadVariablesGlobales = async () => {
+	const roles = await db.collection(`app`).doc("variablesGlobales").get();
+
+	// let variablesGlobales = {};
+
+	// roles.forEach((snapHijo) => {
+	// 	if (snapHijo.id === rol) {
+	// 		variablesGlobales = { ...snapHijo.data() };
+	// 	}
+	// });
+
+	return roles.data();
 };
 
 export const setPrivilegios = (privilegios) => ({

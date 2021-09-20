@@ -5,6 +5,7 @@ export const types = {
 	entity: "[Login] Entity",
 	logout: "[Login] Logout",
 	setPrivilegios: "[Login] Privilegios",
+	setVariablesGlobales: "[Login] Set Variables Globales",
 
 	uiSetError: "[UI] Set Error",
 	uiRemoveError: "[UI] Remove Error",
