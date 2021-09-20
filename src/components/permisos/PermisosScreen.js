@@ -18,6 +18,7 @@ import { useForm } from "../../hooks/useForm";
 import { SuperficiesChart } from "../charts/SuperficiesChart";
 import { NuevoPermisoButton } from "../buttons/NuevoPermisoButton";
 import { PermitsCancellationModule } from "../ui/organisms/PermitsCancellationModule";
+import { roundToN } from "../../helpers/functions/roundToN";
 
 export const PermisosScreen = () => {
 	const dispatch = useDispatch();
@@ -197,7 +198,9 @@ export const PermisosScreen = () => {
 							</div>
 							<div className="row p-1 pl-2">
 								<div className="col-4">DOTACION:</div>
-								<div className="col-8">{dataPermiso.dotacion * dataPermiso.supAutorizada} lts</div>
+								<div className="col-8">
+									{roundToN(dataPermiso.dotacion * dataPermiso.supAutorizada, 3)} lts
+								</div>
 							</div>
 							<div className="row p-1 pl-2">
 								<div className="col-4">SISTEMA:</div>

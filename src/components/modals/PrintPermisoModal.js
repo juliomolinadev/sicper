@@ -17,6 +17,7 @@ import { unsetCultivoSelected } from "../../actions/cultivos";
 import { unsetProductorSelected } from "../../actions/productores";
 import { unsetUsuarioSelected } from "../../actions/usuarios";
 import { savePermiso } from "../../helpers/savePermiso";
+import { roundToN } from "../../helpers/functions/roundToN";
 
 const customStyles = {
 	content: {
@@ -217,7 +218,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 							<div>{data.supAutorizada}</div>
 						</div>
 						<div className="col-2 border">
-							<div>{data.supDerecho - data.supPrevia - data.supAutorizada}</div>
+							<div>{roundToN(data.supDerecho - data.supPrevia - data.supAutorizada, 3)}</div>
 						</div>
 					</div>
 
@@ -232,10 +233,15 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 							<div>{data.supPrevia * data.dotacion}</div>
 						</div>
 						<div className="col-3 border">
-							<div>{data.supAutorizada * data.dotacion}</div>
+							<div>{roundToN(data.supAutorizada * data.dotacion, 3)}</div>
 						</div>
 						<div className="col-2 border">
-							<div>{(data.supDerecho - data.supPrevia - data.supAutorizada) * data.dotacion}</div>
+							<div>
+								{roundToN(
+									(data.supDerecho - data.supPrevia - data.supAutorizada) * data.dotacion,
+									3
+								)}
+							</div>
 						</div>
 					</div>
 				</div>
