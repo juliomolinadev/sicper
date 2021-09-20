@@ -77,7 +77,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 			<div className="row m-3 d-flex justify-content-center">
 				<div className="col-2 d-flex flex-column justify-content-center">
-					<div className="d-flex justify-content-center">
+					{/* <div className="d-flex justify-content-center">
 						<img src={"./logos/sader.png"} alt="Logo SADER" style={{ maxHeight: 35 }} />
 					</div>
 					<div className="d-flex justify-content-center mt-3">
@@ -89,7 +89,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 					<div className="d-flex justify-content-center">
 						<span className="printPermisoSubLogo">S DE R.L. DE I.P. DE C.V.</span>
 					</div>
-					<div className="border rounded d-flex justify-content-left mt-4 w-200">Folio: </div>
+					<div className="border rounded d-flex justify-content-left mt-4 w-200">Folio: </div> */}
 				</div>
 
 				<div className="col-8 d-flex flex-column justify-content-center">
@@ -107,11 +107,11 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 				<div className="col-2 d-flex flex-column justify-content-center">
 					<div className="d-flex justify-content-center">
-						<img
+						{/* <img
 							src={"./logos/cna.png"}
 							alt="Logo comisión nacional del agua"
 							style={{ maxHeight: 50 }}
-						/>
+						/> */}
 					</div>
 					<div className="border rounded d-flex justify-content-center mt-4">
 						Folio: {data.numeroPermiso}
@@ -348,11 +348,20 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 			{/* Datos usuario sanidad  ************************************************************* */}
 
-			<div className="row m-3 d-flex flex-column justify-content-center border rounded">
-				<div className="d-flex justify-content-center ">DATOS DEL USUARIO</div>
+			<div className="row m-3">
+				<div className="col-3 d-flex flex-column">
+					<div className="d-flex justify-content-center">
+						<img src={"./logos/cesvbc.webp"} alt="Logo sanidad vegetal" style={{ maxHeight: 70 }} />
+					</div>
+					<div className="d-flex justify-content-center font12">COMITÉ ESTATAL DE</div>
+					<div className="d-flex justify-content-center font12">SANIDAD VEGETAL DE</div>
+					<div className="d-flex justify-content-center font12">BAJA CALIFORNIA</div>
+				</div>
 
-				<div className="d-flex justify-content-center border-top p-1">
-					<p>
+				<div className="col-9 d-flex flex-column border rounded p-0">
+					<div className="d-flex justify-content-center border-bottom">DATOS DEL USUARIO</div>
+
+					<p className="m-2">
 						El/la C.<b> {data.usuario}</b> con cuenta: <b>{data.cuenta}</b> tiene un derecho normal
 						de <b>{data.supDerecho} </b>
 						hectáreas del lote: <b>{data.lote}</b> en la colonia <b>{data.localidad}</b>,{" "}
@@ -365,16 +374,8 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 			{/* Logo sanidad  y botones************************************************************* */}
 
-			<div className="row m-3 ">
-				<div className="col-3 d-flex flex-column">
-					<div className="d-flex justify-content-center">
-						<img src={"./logos/cesvbc.webp"} alt="Logo sanidad vegetal" style={{ maxHeight: 70 }} />
-					</div>
-					<div className="mt-4 d-flex justify-content-center">COMITÉ ESTATAL DE</div>
-					<div className="d-flex justify-content-center">SANIDAD VEGETAL DE</div>
-					<div className="d-flex justify-content-center">BAJA CALIFORNIA</div>
-				</div>
-				<div className="col-6 d-flex justify-content-center align-items-center pt-5">
+			<div className="row">
+				<div className="col-12 d-flex justify-content-center align-items-center pt-2">
 					{enableSaveButton ? (
 						isNew ? (
 							<button
