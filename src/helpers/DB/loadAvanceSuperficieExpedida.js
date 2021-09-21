@@ -12,11 +12,11 @@ const loadExpedicion = (modulo, ciclo) => {
 		.get();
 };
 
-export const loadAvanceSuperficieExpedida = async () => {
+export const loadAvanceSuperficieExpedida = async (ciclo) => {
 	let expedicion = [];
 
 	const expedicionPromises = modulos.map((modulo) => {
-		return loadExpedicion(modulo, "2020-2021");
+		return loadExpedicion(modulo, ciclo);
 	});
 
 	const data = await Promise.all(expedicionPromises);

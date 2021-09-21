@@ -12,11 +12,11 @@ const loadAutorizados = (modulo, ciclo) => {
 		.get();
 };
 
-export const loadAutorizadosGlobal = async () => {
+export const loadAutorizadosGlobal = async (ciclo) => {
 	let autorizados = [];
 
 	const autorizadosPromises = modulos.map((modulo) => {
-		return loadAutorizados(modulo, "2020-2021");
+		return loadAutorizados(modulo, ciclo);
 	});
 
 	const data = await Promise.all(autorizadosPromises);

@@ -8,9 +8,11 @@ import {
 	loadEntity,
 	loadEntityData,
 	loadPrivilegios,
+	loadVariablesGlobales,
 	login,
 	setEntity,
-	setPrivilegios
+	setPrivilegios,
+	setVariablesGlobales
 } from "../actions/auth";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
@@ -34,6 +36,10 @@ export const AppRouter = () => {
 					setEntity(nombre, img, clave, dotacion, titular, direccion, entity.rol, entity.modulo)
 				);
 				dispatch(setPrivilegios(privilegios));
+
+				const variablesGlovales = await loadVariablesGlobales();
+				dispatch(setVariablesGlobales(variablesGlovales));
+
 				setIsLoggedIn(true);
 			} else {
 				setIsLoggedIn(false);

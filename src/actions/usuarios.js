@@ -3,6 +3,7 @@ import { loadUsuarios } from "../helpers/loadUsuarios";
 import { loadLocalidad } from "../helpers/loadLocalidad";
 import { loadSuperficiePrevia } from "../helpers/loadSuperficiePrevia";
 import { loadUserTransfer } from "../helpers/loadUserTransfer";
+import { loadCiclo } from "../helpers/DB/loadCiclo";
 
 export const openUsuariosModal = () => ({
 	type: types.altaPermisoOpenUsuariosModal
@@ -27,10 +28,8 @@ export const setUsuarios = (usuarios) => ({
 export const startSetUsuarioSelected = (usuario) => {
 	unsetUsuarioSelected();
 
-	// TODO: crear funcion para definir ciclo
-	const ciclo = "2020-2021";
-
 	return async (dispatch) => {
+		const ciclo = await loadCiclo();
 		const localidad = await loadLocalidad(usuario.ejido);
 		const supPrevia = await loadSuperficiePrevia(
 			`${usuario.cuenta}.${usuario.subcta}`,

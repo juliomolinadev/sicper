@@ -6,7 +6,6 @@ import {
 } from "../../actions/entidades/sistemUsers";
 import { systemUsersColumns } from "../tables/configTables";
 import { CustomTable } from "../tables/CustomTable";
-// import { startSetUsuarioSelected } from "../../actions/usuarios";
 
 export const SystemUsersTable = () => {
 	const { systemUsers } = useSelector((state) => state.entidades);

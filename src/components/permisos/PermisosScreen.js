@@ -30,8 +30,8 @@ export const PermisosScreen = () => {
 	const { permisos, permisoSelected, superficies } = useSelector((state) => state.permisosScreen);
 	const { modulo, privilegios } = useSelector((state) => state.auth);
 
-	// TODO: crear funcion para definir ciclo
-	const ciclo = "2020-2021";
+	const auth = useSelector((state) => state.auth);
+	const ciclo = auth.variablesGlobales.cicloActual;
 
 	if (permisos.length === 0) {
 		dispatch(startLoadPermisos(modulo, ciclo));

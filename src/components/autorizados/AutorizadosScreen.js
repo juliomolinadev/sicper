@@ -47,6 +47,9 @@ export const AutorizadosScreen = () => {
 		(state) => state.autorizadosScreen
 	);
 
+	const auth = useSelector((state) => state.auth);
+	const ciclo = auth.variablesGlobales.cicloActual;
+
 	let totalGravedadNormalAutorizada = 0;
 	let totalGravedadNormalAsignada = 0;
 	let totalGravedadExtraAutorizada = 0;
@@ -79,9 +82,6 @@ export const AutorizadosScreen = () => {
 			totalPozoExtraAutorizada +
 			totalPozoExtraAsignada;
 	}
-
-	// TODO: crear funcion para definir ciclo
-	const ciclo = "2020-2021";
 
 	const setModuloToEdit = (moduloToEdit) => {
 		dispatch(setModulo(moduloToEdit));

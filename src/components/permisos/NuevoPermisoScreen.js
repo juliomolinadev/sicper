@@ -30,6 +30,7 @@ export const NuevoPermisoScreen = () => {
 	);
 	const altaPermisos = useSelector((state) => state.altaPermisos);
 	const auth = useSelector((state) => state.auth);
+	const ciclo = auth.variablesGlobales.cicloActual;
 	const { msgError } = useSelector((state) => state.ui);
 	const { autorizadosPorCultivo } = useSelector((state) => state.autorizadosScreen);
 
@@ -63,12 +64,9 @@ export const NuevoPermisoScreen = () => {
 
 	const dispatch = useDispatch();
 
-	// TODO: Determinar el ciclo segun la fecha
-	const ciclo = "2020-2021";
-
 	useEffect(() => {
 		dispatch(startLoadAutorizadoPorCultivo(ciclo, auth.modulo, altaPermisos.claveCultivo));
-	}, [dispatch, auth.modulo, altaPermisos.claveCultivo]);
+	}, [ciclo, dispatch, auth.modulo, altaPermisos.claveCultivo]);
 
 	useEffect(() => {
 		const cultivoSelected = altaPermisos.cultivos.find(
@@ -82,6 +80,7 @@ export const NuevoPermisoScreen = () => {
 
 		dispatch(setCuotaCultivo(defineCuota()));
 	}, [
+		ciclo,
 		dispatch,
 		altaPermisos.cuotaCultivo,
 		cuotaSanidad,
@@ -141,7 +140,7 @@ export const NuevoPermisoScreen = () => {
 	const getOnSubmitData = async () => {
 		const data = {
 			tipo: defineTipoPermiso(autorizadosPorCultivo),
-			ciclo: defineCiclo(),
+			ciclo,
 			numeroPermiso: await defineNumeroPermiso(),
 			fechaEmicion: moment(),
 			// TODO: Verificar la fecha limite de siembra
@@ -176,17 +175,8 @@ export const NuevoPermisoScreen = () => {
 		}
 	};
 
-	const defineCiclo = () => {
-		// TODO: Determinar el ciclo segun la fecha
-		const ciclo = "2020-2021";
-		return ciclo;
-	};
-
 	const defineNumeroPermiso = async () => {
-		const permiso = `MOD${auth.modulo}-${fill(
-			(await loadContador(auth.modulo, defineCiclo())) + 1,
-			3
-		)}`;
+		const permiso = `MOD${auth.modulo}-${fill((await loadContador(auth.modulo, ciclo)) + 1, 3)}`;
 		return permiso;
 	};
 

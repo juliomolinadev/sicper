@@ -31,6 +31,9 @@ export const ReporteExpedicion = () => {
 	const { unidades, modulosPorUnidad } = state;
 	const { primeraUnidad, segundaUnidad, terceraUnidad } = modulosPorUnidad;
 
+	const auth = useSelector((state) => state.auth);
+	const ciclo = auth.variablesGlobales.cicloActual;
+
 	const reportOptions = [
 		{
 			id: "global",
@@ -56,11 +59,11 @@ export const ReporteExpedicion = () => {
 	};
 
 	const loadAutorizados = async () => {
-		autorizados = await loadAutorizadosGlobal();
+		autorizados = await loadAutorizadosGlobal(ciclo);
 	};
 
 	const loadExpedicion = async () => {
-		expedicion = await loadAvanceSuperficieExpedida();
+		expedicion = await loadAvanceSuperficieExpedida(ciclo);
 	};
 
 	useEffect(() => {
@@ -72,7 +75,7 @@ export const ReporteExpedicion = () => {
 	useEffect(() => {
 		loadExpedicion();
 		loadAutorizados();
-	}, []);
+	});
 
 	const getModulos = () => {
 		const modulos = [];

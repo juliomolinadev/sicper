@@ -29,13 +29,12 @@ export const PermitToCancelCard = () => {
 		"SUPERFICIE (ha)": permit.supAutorizada
 	};
 
-	// TODO: crear funcion para definir ciclo
-	const ciclo = "2020-2021";
+	const auth = useSelector((state) => state.auth);
+	const ciclo = auth.variablesGlobales.cicloActual;
 
 	const dispatch = useDispatch();
 
 	const cancelarPermiso = () => {
-		console.log({ ciclo, modulo, claveCultivo, nombreCultivo, sistema, tipo, supAutorizada });
 		Swal.fire({
 			title: "Atención!!",
 			text: `Está a punto de cancelar el permiso ${numeroPermiso}, ¿Realmente desea cancelar este permiso?`,

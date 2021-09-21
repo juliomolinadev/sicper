@@ -19,7 +19,8 @@ export const CheckSanidad = () => {
 		}
 	});
 
-	const ciclo = "2020-2021";
+	const auth = useSelector((state) => state.auth);
+	const ciclo = auth.variablesGlobales.cicloActual;
 
 	const setUnset = (objeto, e) => {
 		e.preventDefault();

@@ -12,8 +12,9 @@ export const FichaExpedicion = () => {
 
 	const dispatch = useDispatch();
 
-	// TODO: crear funcion para definir ciclo
-	const ciclo = "2020-2021";
+	const auth = useSelector((state) => state.auth);
+	const ciclo = auth.variablesGlobales.cicloActual;
+
 	if (autorizados.length === 0) {
 		dispatch(startLoadAutorizados(ciclo, modulo));
 	}

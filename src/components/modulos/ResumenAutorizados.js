@@ -13,8 +13,8 @@ export const ResumenAutorizados = () => {
 
 	const dispatch = useDispatch();
 
-	// TODO: crear funcion para definir ciclo
-	const ciclo = "2020-2021";
+	const auth = useSelector((state) => state.auth);
+	const ciclo = auth.variablesGlobales.cicloActual;
 
 	if (expedicion === null) {
 		dispatch(startLoadExpedicion(modulo, ciclo));

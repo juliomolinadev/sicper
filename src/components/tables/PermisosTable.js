@@ -12,8 +12,8 @@ export const PermisosTable = () => {
 
 	const dispatch = useDispatch();
 
-	// TODO: crear funcion para definir ciclo
-	const ciclo = "2020-2021";
+	const auth = useSelector((state) => state.auth);
+	const ciclo = auth.variablesGlobales.cicloActual;
 
 	if (!permisos) {
 		dispatch(startLoadPermisos("", modulo, ciclo, ["nombreCultivo"]));

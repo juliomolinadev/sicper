@@ -161,15 +161,6 @@ export const loadPrivilegios = async (rol) => {
 
 export const loadVariablesGlobales = async () => {
 	const roles = await db.collection(`app`).doc("variablesGlobales").get();
-
-	// let variablesGlobales = {};
-
-	// roles.forEach((snapHijo) => {
-	// 	if (snapHijo.id === rol) {
-	// 		variablesGlobales = { ...snapHijo.data() };
-	// 	}
-	// });
-
 	return roles.data();
 };
 

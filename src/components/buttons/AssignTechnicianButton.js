@@ -5,12 +5,12 @@ import { startAssignTechnician } from "../../actions/entidades/localidades";
 export const AssignTechnicianButton = () => {
 	const { selectedLocalties } = useSelector((state) => state.entidades);
 	const { uid, modulo } = useSelector((state) => state.auth);
+	const auth = useSelector((state) => state.auth);
+	const ciclo = auth.variablesGlobales.cicloActual;
 
 	const dispatch = useDispatch();
 
 	const localtiesNames = [];
-
-	const ciclo = "2020-2021";
 
 	if (selectedLocalties) {
 		selectedLocalties.forEach((location) => {

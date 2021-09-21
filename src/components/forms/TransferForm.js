@@ -69,8 +69,8 @@ export const TransferForm = () => {
 		return true;
 	};
 
-	// TODO: crear funcion para definir ciclo
-	const ciclo = "2020-2021";
+	const auth = useSelector((state) => state.auth);
+	const ciclo = auth.variablesGlobales.cicloActual;
 
 	const startSaveTransfer = (e) => {
 		e.preventDefault();
@@ -169,8 +169,8 @@ export const TransferForm = () => {
 								<option value="6">Modulo 6</option>
 								<option value="7">Modulo 7</option>
 								<option value="8">Modulo 8</option>
-								<option value="9">Modulo 9</option>
-								<option value="9B">Modulo 9B</option>
+								<option value="9">Modulo 9A</option>
+								<option value="92">Modulo 9B</option>
 								<option value="10">Modulo 10</option>
 								<option value="11">Modulo 11</option>
 								<option value="12">Modulo 12</option>
@@ -183,7 +183,7 @@ export const TransferForm = () => {
 								<option value="20">Modulo 20</option>
 								<option value="21">Modulo 21</option>
 								<option value="22">Modulo 22</option>
-								<option value="FL">Modulo FL</option>
+								<option value="23">Modulo FL</option>
 							</select>
 						</div>
 

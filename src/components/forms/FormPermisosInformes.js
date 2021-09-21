@@ -17,8 +17,8 @@ export const FormPermisosInformes = () => {
 	const [fechaInicial, onChangeFechaInicial] = useState(new Date(2020, 9, 1));
 	const [fechaFinal, onChangeFechaFinal] = useState(new Date(2021, 8, 30));
 
-	// TODO: crear funcion para definir ciclo
-	const ciclo = "2020-2021";
+	const auth = useSelector((state) => state.auth);
+	const ciclo = auth.variablesGlobales.cicloActual;
 
 	const buscarPermisos = () => {
 		if (campo) {

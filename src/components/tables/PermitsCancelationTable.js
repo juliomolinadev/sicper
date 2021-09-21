@@ -9,8 +9,8 @@ import { CustomTable } from "./CustomTable";
 export const PermitsCancelationTable = () => {
 	const { preCancelPermits } = useSelector((state) => state.permisosScreen);
 
-	// TODO: crear funcion para definir ciclo
-	const ciclo = "2020-2021";
+	const auth = useSelector((state) => state.auth);
+	const ciclo = auth.variablesGlobales.cicloActual;
 
 	const dispatch = useDispatch();
 
