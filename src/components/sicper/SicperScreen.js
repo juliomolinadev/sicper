@@ -7,13 +7,15 @@ import { UnassignedPrivilegesMessage } from "../cards/UnassignedPrivilegesMessag
 
 export const SicperScreen = () => {
 	const { privilegios, rol } = useSelector((state) => state.auth);
+	const { variablesGlobales } = useSelector((state) => state.auth);
+	const { expedicionActiva } = variablesGlobales;
 
 	return (
 		<>
 			<div className="row pt-5">
 				<div className="col-sm-8">{privilegios.consultarAutorizados && <ResumenAutorizados />}</div>
 				<div className="col-sm-4">
-					{privilegios.expedirPermisos && <NuevoPermisoButton />}
+					{expedicionActiva && privilegios.expedirPermisos && <NuevoPermisoButton />}
 					{privilegios.consultarExpedicion && <FichaExpedicion />}
 				</div>
 			</div>

@@ -30,8 +30,8 @@ export const PermisosScreen = () => {
 	const { permisos, permisoSelected, superficies } = useSelector((state) => state.permisosScreen);
 	const { modulo, privilegios } = useSelector((state) => state.auth);
 
-	const auth = useSelector((state) => state.auth);
-	const ciclo = auth.variablesGlobales.cicloActual;
+	const { variablesGlobales } = useSelector((state) => state.auth);
+	const { cicloActual: ciclo, expedicionActiva } = variablesGlobales;
 
 	if (permisos.length === 0) {
 		dispatch(startLoadPermisos(modulo, ciclo));
@@ -129,7 +129,7 @@ export const PermisosScreen = () => {
 				<div className="col-sm-8">
 					<div className="row d-flex">
 						<div className="d-flex justify-content-center col-sm-4 p-2">
-							{privilegios.expedirPermisos && <NuevoPermisoButton />}
+							{expedicionActiva && privilegios.expedirPermisos && <NuevoPermisoButton />}
 						</div>
 
 						<div className="col-sm-8 d-inline-flex p-2 pr-4">

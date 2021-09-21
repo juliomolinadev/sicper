@@ -30,7 +30,8 @@ export const NuevoPermisoScreen = () => {
 	);
 	const altaPermisos = useSelector((state) => state.altaPermisos);
 	const auth = useSelector((state) => state.auth);
-	const ciclo = auth.variablesGlobales.cicloActual;
+	const { variablesGlobales } = auth;
+	const { cicloActual: ciclo, expedicionActiva } = variablesGlobales;
 	const { msgError } = useSelector((state) => state.ui);
 	const { autorizadosPorCultivo } = useSelector((state) => state.autorizadosScreen);
 
@@ -102,7 +103,10 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const isFormValid = () => {
-		if (!altaPermisos.usuario) {
+		if (!expedicionActiva) {
+			dispatch(setError("Expedición cerrada! Por el momento no es posible expedir permisos."));
+			return false;
+		} else if (!altaPermisos.usuario) {
 			dispatch(setError("El campo usuario es obligatorio."));
 			return false;
 		} else if (!altaPermisos.nombreProductor) {

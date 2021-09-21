@@ -101,6 +101,14 @@ export const setEntity = (
 	}
 });
 
+export const startSetVariablesGlobales = () => {
+	return async (dispatch) => {
+		console.log("Entro en set");
+		const variablesGlovales = await loadVariablesGlobales();
+		dispatch(setVariablesGlobales(variablesGlovales));
+	};
+};
+
 export const setVariablesGlobales = (data) => ({
 	type: types.setVariablesGlobales,
 	payload: data
