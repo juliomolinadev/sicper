@@ -12,6 +12,8 @@ export const types = {
 	uiStartLoading: "[UI] Start Loading",
 	uiFinishLoading: "[UI] Finish Loading",
 
+	setEntities: "[Configuracion] Set Entities",
+
 	altaPermisoOpenPrintPermisoModal: "[Alta Permisos] Open permiso modal",
 	altaPermisoClosePrintPermisoModal: "[Alta Permisos] Close permiso modal",
 

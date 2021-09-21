@@ -156,7 +156,8 @@ export const entidades = [
 		titular: "dev",
 		direccion: "",
 		nombre: "Desarrollo",
-		img: "dev.png"
+		img: "dev.png",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "CNA",
@@ -196,7 +197,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 1",
 		titular: "???",
 		direccion: "",
-		img: "m1.jpg"
+		img: "m1.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "2",
@@ -204,7 +206,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 2",
 		titular: "???",
 		direccion: "",
-		img: "m2.jpg"
+		img: "m2.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "3",
@@ -212,7 +215,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 3",
 		titular: "???",
 		direccion: "",
-		img: "m3.jpg"
+		img: "m3.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "4",
@@ -220,7 +224,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 4",
 		titular: "???",
 		direccion: "",
-		img: "m4.jpg"
+		img: "m4.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "5",
@@ -228,7 +233,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 5",
 		titular: "???",
 		direccion: "",
-		img: "m5.jpg"
+		img: "m5.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "6",
@@ -236,7 +242,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 6",
 		titular: "???",
 		direccion: "",
-		img: "m6.jpg"
+		img: "m6.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "7",
@@ -244,7 +251,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 7",
 		titular: "???",
 		direccion: "",
-		img: "m7.jpg"
+		img: "m7.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "8",
@@ -252,7 +260,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 8",
 		titular: "???",
 		direccion: "",
-		img: "m8.jpg"
+		img: "m8.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "9",
@@ -260,7 +269,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 9A",
 		titular: "???",
 		direccion: "",
-		img: "m9a.jpg"
+		img: "m9a.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "92",
@@ -268,7 +278,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 9B",
 		titular: "???",
 		direccion: "",
-		img: "m9b.jpg"
+		img: "m9b.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "10",
@@ -276,7 +287,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 10",
 		titular: "???",
 		direccion: "",
-		img: "m10.jpg"
+		img: "m10.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "11",
@@ -284,7 +296,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 11",
 		titular: "???",
 		direccion: "",
-		img: "m11.jpg"
+		img: "m11.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "12",
@@ -292,7 +305,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 12",
 		titular: "???",
 		direccion: "",
-		img: "m12.jpg"
+		img: "m12.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "14",
@@ -300,7 +314,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 14",
 		titular: "???",
 		direccion: "",
-		img: "m14.jpg"
+		img: "m14.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "15",
@@ -308,7 +323,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 15",
 		titular: "???",
 		direccion: "",
-		img: "m15.jpg"
+		img: "m15.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "16",
@@ -316,7 +332,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 16",
 		titular: "???",
 		direccion: "",
-		img: "m16.jpg"
+		img: "m16.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "17",
@@ -324,7 +341,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 17",
 		titular: "???",
 		direccion: "",
-		img: "m17.jpg"
+		img: "m17.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "18",
@@ -332,7 +350,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 18",
 		titular: "???",
 		direccion: "",
-		img: "m18.jpg"
+		img: "m18.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "19",
@@ -340,7 +359,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 19",
 		titular: "???",
 		direccion: "Carretera a San Felipe Km 1.5 S/N, Col. Xochimilco C.P. 21380. Mexicali B.C.",
-		img: "m19.png"
+		img: "m19.png",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "20",
@@ -348,7 +368,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 20",
 		titular: "???",
 		direccion: "",
-		img: "m20.jpg"
+		img: "m20.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "21",
@@ -356,7 +377,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 21",
 		titular: "???",
 		direccion: "",
-		img: "m21.jpg"
+		img: "m21.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "22",
@@ -364,7 +386,8 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 22",
 		titular: "???",
 		direccion: "",
-		img: "m22.jpg"
+		img: "m22.jpg",
+		expedicionActivaModulo: true
 	},
 	{
 		clave: "23",
@@ -372,6 +395,7 @@ export const entidades = [
 		nombre: "Usuarios del módulo No. 23",
 		titular: "???",
 		direccion: "",
-		img: "srl.png"
+		img: "srl.png",
+		expedicionActivaModulo: true
 	}
 ];

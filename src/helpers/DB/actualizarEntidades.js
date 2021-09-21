@@ -3,7 +3,6 @@ import "firebase/firestore";
 import { entidades } from "../consts";
 
 export const actualizarEntidades = (data = entidades) => {
-	console.log(data);
 	const ref = db.collection("entidades");
 
 	data.forEach((entidad) => {
@@ -16,7 +15,7 @@ export const actualizarEntidades = (data = entidades) => {
 					console.log(`Se actualizo entidad (${entidad.clave})`);
 				} else {
 					ref.doc(entidad.clave).set(entidad);
-					console.log(`Se agrogo entidad (${entidad.clave})`);
+					console.log(`Se agrego entidad (${entidad.clave})`);
 				}
 			})
 			.catch((e) => {
