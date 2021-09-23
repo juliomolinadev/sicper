@@ -7,22 +7,39 @@ export const startLoadExpedicion = (modulo, ciclo) => {
 		const expedicion = await loadExpedicion(modulo, ciclo);
 		const autorizados = await loadAutorizados(ciclo, modulo);
 
+		const findCultivo = (expedicion, autorizadoId) => {
+			const cultivo = expedicion.find((cultivo) => cultivo.id === autorizadoId);
+
+			return cultivo;
+		};
+
 		let superficies = [];
 
 		if (autorizados) {
 			autorizados.forEach((cultivoAutorizado) => {
 				if (cultivoAutorizado.superficieTotal > 0) {
-					if (expedicion) {
-						expedicion.forEach((cultivoExpedido) => {
-							if (
-								cultivoExpedido.id === `${cultivoAutorizado.clave}-${cultivoAutorizado.cultivo}`
-							) {
-								superficies.push({ ...cultivoAutorizado, ...cultivoExpedido });
-							} else {
-								superficies.push({ ...cultivoAutorizado });
-							}
-						});
+					const cultivo = findCultivo(
+						expedicion,
+						`${cultivoAutorizado.clave}-${cultivoAutorizado.cultivo}`
+					);
+
+					if (cultivo) {
+						superficies.push({ ...cultivoAutorizado, ...cultivo });
+					} else {
+						superficies.push({ ...cultivoAutorizado });
 					}
+
+					// if (expedicion) {
+					// 	expedicion.forEach((cultivoExpedido) => {
+					// 		if (
+					// 			cultivoExpedido.id === `${cultivoAutorizado.clave}-${cultivoAutorizado.cultivo}`
+					// 		) {
+					// 			superficies.push({ ...cultivoAutorizado, ...cultivoExpedido });
+					// 		}
+					// 	});
+					// } else {
+					// 	superficies.push({ ...cultivoAutorizado });
+					// }
 				}
 			});
 		}

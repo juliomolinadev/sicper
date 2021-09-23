@@ -15,6 +15,8 @@ export const FichaExpedicion = () => {
 	const auth = useSelector((state) => state.auth);
 	const ciclo = auth.variablesGlobales.cicloActual;
 
+	// useEffect(() => {});
+
 	if (autorizados.length === 0) {
 		dispatch(startLoadAutorizados(ciclo, modulo));
 	}
