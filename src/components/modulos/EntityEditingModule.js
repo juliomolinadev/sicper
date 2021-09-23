@@ -14,9 +14,12 @@ export const EntityEditingModule = () => {
 
 	return (
 		<div>
-			<h2 className="mb-5">Edición de entidades</h2>
-			{entities !== formValues && privilegios.actualizarEntidades && (
-				<div className="mb-3 d-flex justify-content-center mt-4">
+			<div className="mb-4">
+				<h3>Edición de entidades</h3>
+			</div>
+
+			{entities !== formValues && privilegios.editarEntidades && (
+				<div className="row mb-3 d-flex justify-content-center mt-4">
 					<button
 						type="button"
 						className="btn btn-outline-primary"
@@ -74,7 +77,8 @@ export const EntityEditingModule = () => {
 										</div>
 									</div>
 
-									{entitie.clave !== "SADER" &&
+									{privilegios.cerrarExpedicionModulos &&
+										entitie.clave !== "SADER" &&
 										entitie.clave !== "CNA" &&
 										entitie.clave !== "SRL" &&
 										entitie.clave !== "CESVBC" && (
@@ -115,7 +119,7 @@ export const EntityEditingModule = () => {
 					} else return <div key={entitie.clave}></div>;
 				})}
 			</form>
-			{entities !== formValues && privilegios.actualizarEntidades && (
+			{entities !== formValues && privilegios.editarEntidades && (
 				<div className="mb-3 d-flex justify-content-center mt-4">
 					<button
 						type="button"

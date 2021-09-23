@@ -4,11 +4,12 @@ import { SystemUsersTable } from "../tables/SystemUsersTable";
 
 export const UsersRoleManagement = () => {
 	return (
-		<>
-			<div className="row">
+		<div>
+			<div className="">
 				<h3>Gestión de roles de usuarios</h3>
 			</div>
-			<div className="row pt-4">
+
+			<div className="row mt-4">
 				<div className="col-sm-8">
 					<SystemUsersTable />
 				</div>
@@ -17,6 +18,6 @@ export const UsersRoleManagement = () => {
 					<SystemUserCard />
 				</div>
 			</div>
-		</>
+		</div>
 	);
 };

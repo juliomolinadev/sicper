@@ -144,9 +144,11 @@ export const privileges = {
 	imprimirLabores: false,
 
 	//Configuracion
-	actualizarEntidades: false,
+	editarEntidades: false,
 	asignarRoles: false,
-	editarRoles: false
+	editarRoles: false,
+	cerrarExpedicionModulos: false,
+	variablesGlobales: false
 };
 
 export const entidades = [
