@@ -18,10 +18,10 @@ export const startLoadExpedicion = (modulo, ciclo) => {
 								cultivoExpedido.id === `${cultivoAutorizado.clave}-${cultivoAutorizado.cultivo}`
 							) {
 								superficies.push({ ...cultivoAutorizado, ...cultivoExpedido });
+							} else {
+								superficies.push({ ...cultivoAutorizado });
 							}
 						});
-					} else {
-						superficies.push({ ...cultivoAutorizado });
 					}
 				}
 			});
