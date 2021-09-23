@@ -24,7 +24,7 @@ export const AutorizadosScreen = () => {
 		7,
 		8,
 		9,
-		"9B",
+		92,
 		10,
 		11,
 		12,

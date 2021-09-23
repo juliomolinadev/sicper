@@ -7,10 +7,13 @@ export const startLoadExpedicion = (modulo, ciclo) => {
 		const expedicion = await loadExpedicion(modulo, ciclo);
 		const autorizados = await loadAutorizados(ciclo, modulo);
 
-		const findCultivo = (expedicion, autorizadoId) => {
-			const cultivo = expedicion.find((cultivo) => cultivo.id === autorizadoId);
+		console.log(expedicion);
 
-			return cultivo;
+		const findCultivo = (expedicion, autorizadoId) => {
+			if (expedicion) {
+				const cultivo = expedicion.find((cultivo) => cultivo.id === autorizadoId);
+				return cultivo;
+			} else return false;
 		};
 
 		let superficies = [];
