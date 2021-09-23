@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../../hooks/useForm";
 import Swal from "sweetalert2";
 import {
+	closeUsuariosModal,
 	openUsuariosModal,
 	startLoadUsuarios,
 	unsetUsuarioSelected
@@ -22,6 +23,12 @@ export const UsuarioInput = () => {
 			Swal.fire("Nada para buscar", "Ingrese apellido paterno o cuenta del usuario", "warning");
 		}
 	};
+
+	useEffect(() => {
+		console.log("Effect: UsuarioInput");
+		dispatch(unsetUsuarioSelected());
+		dispatch(closeUsuariosModal());
+	}, [dispatch]);
 
 	const handleLoadUsuarios = () => {
 		dispatch(startLoadUsuarios(usuario.toUpperCase(), modulo));

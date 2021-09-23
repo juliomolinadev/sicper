@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "../../../hooks/useForm";
 import Swal from "sweetalert2";
 
 import {
+	closeProductoresModal,
 	openProductoresModal,
 	startLoadProductores,
 	unsetProductorSelected
@@ -11,6 +12,12 @@ import {
 
 export const ProductorInput = () => {
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		console.log("Effect: ProductorInput");
+		dispatch(unsetProductorSelected());
+		dispatch(closeProductoresModal());
+	}, [dispatch]);
 
 	const handleOpenProductoresModal = () => {
 		handleLoadProductores();

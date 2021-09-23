@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import Swal from "sweetalert2";
@@ -27,19 +27,25 @@ export const PermisosScreen = () => {
 
 	const { palabra } = formValues;
 
-	const { permisos, permisoSelected, superficies } = useSelector((state) => state.permisosScreen);
+	const { permisos, permisoSelected } = useSelector((state) => state.permisosScreen);
 	const { modulo, privilegios } = useSelector((state) => state.auth);
 
 	const { variablesGlobales } = useSelector((state) => state.auth);
 	const { cicloActual: ciclo, expedicionActiva } = variablesGlobales;
 
-	if (permisos.length === 0) {
+	useEffect(() => {
+		console.log("Effect: PermisosScreen");
 		dispatch(startLoadPermisos(modulo, ciclo));
-	}
-
-	if (superficies === null) {
 		dispatch(startLoadSuperficies(modulo, ciclo));
-	}
+	}, [dispatch, modulo, ciclo]);
+
+	// if (permisos.length === 0) {
+	// 	dispatch(startLoadPermisos(modulo, ciclo));
+	// }
+
+	// if (superficies === null) {
+	// 	dispatch(startLoadSuperficies(modulo, ciclo));
+	// }
 
 	const buscarPermisos = () => {
 		if (palabra.length > 0) {

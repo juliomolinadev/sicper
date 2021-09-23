@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
 import { useForm } from "../../../hooks/useForm";
 import {
+	closeCultivosModal,
 	openCultivosModal,
 	startLoadCultivos,
 	unsetCultivoSelected
@@ -11,6 +12,12 @@ import {
 
 export const CultivoInput = () => {
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		console.log("Effect: CultivoInput");
+		dispatch(unsetCultivoSelected());
+		dispatch(closeCultivosModal());
+	}, [dispatch]);
 
 	const handleOpenCultivosModal = () => {
 		handleLoadCultivos();
