@@ -1,20 +1,32 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CustomTable } from "../tables/CustomTable";
 import { usuariosColumns } from "../tables/configTables";
-import { startSetUsuarioSelected } from "../../actions/usuarios";
+import {
+	startSetUsuarioSelected,
+	unsetUsuarios,
+	unsetUsuarioSelected
+} from "../../actions/usuarios";
 import { UsuarioInput } from "../permisos/inputsNuevosPermisos/UsuarioInput";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { UsuarioSelectedDetail } from "./UsuarioSelectedDetail";
 import { UpdatePadronModule } from "../ui/organisms/UpdatePadronModule";
 import { UpdateReacomodosModule } from "../ui/organisms/UpdateReacomodosModule";
 
 export const PadronScreen = () => {
-	const { usuarios, idUsuarioSelected } = useSelector((state) => state.altaPermisos);
+	const { usuarios, usuario } = useSelector((state) => state.entidades);
 	const { privilegios } = useSelector((state) => state.auth);
+
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		console.log("Effect: PadronScreen");
+		dispatch(unsetUsuarioSelected());
+		dispatch(unsetUsuarios());
+	}, [dispatch]);
 
 	let data = [];
 
-	if (usuarios.length > 0) {
+	if (usuarios) {
 		data = Object.values(usuarios);
 	}
 
@@ -24,7 +36,7 @@ export const PadronScreen = () => {
 				<UsuarioInput />
 			</div>
 
-			{data.length > 0 && (
+			{usuarios && (
 				<div className="row">
 					<div className="col-sm-8 mb-3">
 						<CustomTable
@@ -35,7 +47,7 @@ export const PadronScreen = () => {
 						></CustomTable>
 					</div>
 
-					<div className="col-sm-4">{idUsuarioSelected && <UsuarioSelectedDetail />}</div>
+					<div className="col-sm-4">{usuario && <UsuarioSelectedDetail />}</div>
 				</div>
 			)}
 

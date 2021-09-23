@@ -30,10 +30,22 @@ export const entidadesReducer = (state = {}, action) => {
 				usuarios: action.payload
 			};
 
+		case types.unsetUsuarios:
+			return {
+				...state,
+				usuarios: false
+			};
+
 		case types.setUsuario:
 			return {
 				...state,
 				usuario: action.payload
+			};
+
+		case types.unsetUsuario:
+			return {
+				...state,
+				usuario: false
 			};
 
 		case types.setUserRoles:

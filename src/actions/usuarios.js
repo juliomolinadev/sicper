@@ -24,6 +24,9 @@ export const setUsuarios = (usuarios) => ({
 	type: types.setUsuarios,
 	payload: usuarios
 });
+export const unsetUsuarios = () => ({
+	type: types.unsetUsuarios
+});
 
 export const startSetUsuarioSelected = (usuario) => {
 	unsetUsuarioSelected();

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
 	setSuperficieExtra,
@@ -16,9 +16,15 @@ export const ResumenAutorizados = () => {
 	const auth = useSelector((state) => state.auth);
 	const ciclo = auth.variablesGlobales.cicloActual;
 
-	if (expedicion === null) {
+	useEffect(() => {
+		console.log("Effect: ResumenAutorizados");
 		dispatch(startLoadExpedicion(modulo, ciclo));
-	}
+	}, [dispatch, modulo, ciclo]);
+
+	// if (expedicion === null) {
+	// 	console.log("Se ejecuto con null");
+	// 	dispatch(startLoadExpedicion(modulo, ciclo));
+	// }
 
 	const setNormal = () => {
 		dispatch(setSuperficieNormal());
