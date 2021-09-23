@@ -1,69 +1,131 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { useForm } from "../../hooks/useForm";
+import { actualizarEntidades } from "../../helpers/DB/actualizarEntidades";
+import { useFormArray } from "../../hooks/useFormArray";
 
 export const EntityEditingModule = () => {
 	const { entities } = useSelector((state) => state.entidades);
+	const { privilegios } = useSelector((state) => state.auth);
 
-	const [formValues, handleInputChange] = useForm(entities);
-
-	console.log(formValues);
+	const [formValues, handleInputChange] = useFormArray(entities);
+	const handleActualizarEntidades = () => {
+		actualizarEntidades(formValues);
+	};
 
 	return (
 		<div>
 			<h2 className="mb-5">Edición de entidades</h2>
+			{entities !== formValues && privilegios.actualizarEntidades && (
+				<div className="mb-3 d-flex justify-content-center mt-4">
+					<button
+						type="button"
+						className="btn btn-outline-primary"
+						onClick={handleActualizarEntidades}
+					>
+						<span> Actualizar Entidades</span>
+					</button>
+				</div>
+			)}
 			<form>
-				{entities.map((entitie) => {
-					return (
-						<div key={entitie.clave} className="d-flex flex-column mb-5">
-							<h5>{entitie.nombre}</h5>
-							<div className="row">
-								<div className="col-sm-8">
-									<div className="d-flex">
-										<label
-											className="align-self-center col-sm-3"
-											htmlFor={`titular${entitie.clave}`}
-										>
-											Titular:
-										</label>
-										<input
-											type="text"
-											className="form-control ml-2"
-											id={`titular${entitie.clave}`}
-											name={`titular${entitie.clave}`}
-											autoComplete="off"
-											value={entitie.titular}
-											onChange={handleInputChange}
+				{entities.map((entitie, i) => {
+					if (entitie.clave !== "dev") {
+						return (
+							<div key={entitie.clave} className="d-flex flex-column mb-5">
+								<h5>{entitie.nombre}</h5>
+								<div className="row">
+									<div className="col-sm-2 mt-3 h-100 d-flex justify-content-center align-items-center">
+										<img
+											className="align-self-center"
+											src={`./logos/${entitie.img}`}
+											alt="Logo de la entidad"
+											style={{ maxHeight: 70, maxWidth: 100 }}
 										/>
 									</div>
 
-									<div className="d-flex">
-										<label
-											className="align-self-center col-sm-3"
-											htmlFor={`direccion${entitie.clave}`}
-										>
-											Direccion:
-										</label>
-										<input
-											type="text"
-											className="form-control ml-2"
-											id={`direccion${entitie.clave}`}
-											name={`direccion${entitie.clave}`}
-											autoComplete="off"
-											value={entitie.direccion}
-											onChange={handleInputChange}
-										/>
-									</div>
-								</div>
+									<div className="col-sm-8 mt-3">
+										<div className="d-flex">
+											<label className="align-self-center col-sm-2" htmlFor={`${i}-titular`}>
+												Titular:
+											</label>
+											<input
+												type="text"
+												className="form-control ml-2"
+												id={`${i}-titular`}
+												name={`${i}-titular`}
+												autoComplete="off"
+												value={formValues[i].titular}
+												onChange={handleInputChange}
+											/>
+										</div>
 
-								<div className="col-sm-4">
-									<h5>Botones</h5>
+										<div className="d-flex mt-2">
+											<label className="align-self-center col-sm-2" htmlFor={`${i}-direccion`}>
+												Direccion:
+											</label>
+											<input
+												type="text"
+												className="form-control ml-2"
+												id={`${i}-direccion`}
+												name={`${i}-direccion`}
+												autoComplete="off"
+												value={entities[i].direccion}
+												onChange={handleInputChange}
+											/>
+										</div>
+									</div>
+
+									{entitie.clave !== "SADER" &&
+										entitie.clave !== "CNA" &&
+										entitie.clave !== "SRL" &&
+										entitie.clave !== "CESVBC" && (
+											<div className="col-sm-2 mt-3">
+												Expedición:
+												<div className="btn-group" role="group">
+													<button
+														type="button"
+														name={`${i}-expedicionActivaModulo`}
+														className={
+															entities[i].expedicionActivaModulo
+																? "btn btn-primary"
+																: "btn btn-outline-primary"
+														}
+														onClick={handleInputChange}
+													>
+														Activa
+													</button>
+
+													<button
+														type="button"
+														name={`${i}-expedicionActivaModulo`}
+														className={
+															entities[i].expedicionActivaModulo
+																? "btn btn-outline-primary"
+																: "btn btn-primary"
+														}
+														onClick={handleInputChange}
+													>
+														Cerrada
+													</button>
+												</div>
+											</div>
+										)}
 								</div>
 							</div>
-						</div>
-					);
+						);
+					} else return <div key={entitie.clave}></div>;
 				})}
 			</form>
+			{entities !== formValues && privilegios.actualizarEntidades && (
+				<div className="mb-3 d-flex justify-content-center mt-4">
+					<button
+						type="button"
+						className="btn btn-outline-primary"
+						onClick={handleActualizarEntidades}
+					>
+						<span> Actualizar Entidades</span>
+					</button>
+				</div>
+			)}
 		</div>
 	);
 };

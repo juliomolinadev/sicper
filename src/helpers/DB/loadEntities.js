@@ -1,7 +1,7 @@
 import { db } from "../../firebase/firebase-config";
 
 export const loadEntities = async () => {
-	const entidadesSnap = await db.collection(`entidades`).get();
+	const entidadesSnap = await db.collection(`entidades`).orderBy("nombre").get();
 
 	const entities = [];
 
