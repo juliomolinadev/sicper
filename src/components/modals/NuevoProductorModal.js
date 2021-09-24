@@ -28,6 +28,7 @@ export const NuevoProductorModal = () => {
 
 	const closeModal = () => {
 		dispatch(closeNuevoProductorModal());
+		dispatch(removeError());
 	};
 
 	const [formValues, handleInputChange] = useForm();
@@ -45,8 +46,6 @@ export const NuevoProductorModal = () => {
 		telefono = "",
 		curp = ""
 	} = formValues;
-
-	console.log(formValues);
 
 	const handleRegister = (e) => {
 		e.preventDefault();
