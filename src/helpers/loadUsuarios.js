@@ -27,10 +27,12 @@ export const loadUsuarios = async (usuario, modulo) => {
 
 	resolvedUsuariosQrys.forEach((snap) => {
 		snap.forEach((snapHijo) => {
-			usuarios.push({
-				id: snapHijo.id,
-				...snapHijo.data()
-			});
+			if (snapHijo.data().equipo !== 1) {
+				usuarios.push({
+					id: snapHijo.id,
+					...snapHijo.data()
+				});
+			}
 		});
 	});
 
