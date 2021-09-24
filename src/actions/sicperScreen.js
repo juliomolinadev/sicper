@@ -7,8 +7,6 @@ export const startLoadExpedicion = (modulo, ciclo) => {
 		const expedicion = await loadExpedicion(modulo, ciclo);
 		const autorizados = await loadAutorizados(ciclo, modulo);
 
-		console.log(expedicion);
-
 		const findCultivo = (expedicion, autorizadoId) => {
 			if (expedicion) {
 				const cultivo = expedicion.find((cultivo) => cultivo.id === autorizadoId);

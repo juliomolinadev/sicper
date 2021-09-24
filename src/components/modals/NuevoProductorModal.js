@@ -46,6 +46,8 @@ export const NuevoProductorModal = () => {
 		curp = ""
 	} = formValues;
 
+	console.log(formValues);
+
 	const handleRegister = (e) => {
 		e.preventDefault();
 
@@ -204,8 +206,8 @@ export const NuevoProductorModal = () => {
 						<input
 							type="text"
 							className="form-control"
-							placeholder="* RFC"
-							name="rfc"
+							placeholder="* CURP"
+							name="curp"
 							autoComplete="waa"
 							onChange={handleInputChange}
 						/>
@@ -228,8 +230,8 @@ export const NuevoProductorModal = () => {
 						<input
 							type="text"
 							className="form-control"
-							placeholder="* CURP"
-							name="curp"
+							placeholder="* RFC"
+							name="rfc"
 							autoComplete="off"
 							onChange={handleInputChange}
 						/>
@@ -248,7 +250,7 @@ export const NuevoProductorModal = () => {
 				</div>
 
 				<div className="row p-2">
-					<div className="col-sm-6 d-flex align-items-baseline pt-2">
+					<div className="col-sm-12 d-flex align-items-baseline pt-2">
 						<span>*</span>
 						<div className="px-4">
 							<input
@@ -271,6 +273,17 @@ export const NuevoProductorModal = () => {
 							/>
 							<span> </span>
 							<label htmlFor="femenino"> Femenino</label>
+						</div>
+						<div className="px-4">
+							<input
+								type="radio"
+								id="femenino"
+								name="genero"
+								value="MORAL"
+								onChange={handleInputChange}
+							/>
+							<span> </span>
+							<label htmlFor="femenino"> Persona Moral</label>
 						</div>
 					</div>
 				</div>
