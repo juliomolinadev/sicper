@@ -2,7 +2,7 @@ import React from "react";
 import Datatable from "react-data-table-component";
 import { useDispatch } from "react-redux";
 
-export const CustomPrintTable = ({ title, data, setFunction, closeFunction }) => {
+export const CustomPrintTable = ({ title, data, columns, setFunction, closeFunction }) => {
 	const dispatch = useDispatch();
 
 	const getRowSelected = (row) => {
@@ -14,21 +14,6 @@ export const CustomPrintTable = ({ title, data, setFunction, closeFunction }) =>
 			dispatch(closeFunction());
 		}
 	};
-
-	const columns = [
-		{ name: "id", selector: "id", omit: true },
-		{ name: "PERMISO", selector: "numeroPermiso", sortable: true, width: "70px" },
-		{ name: "CUENTA", selector: "cuenta", sortable: true, width: "60px" },
-		{ name: "USUARIO", selector: "usuario", sortable: true, width: "180px" },
-		{ name: "PRODUCTOR", selector: "nombreProductor", width: "180px", sortable: true },
-		{ name: "CULTIVO", selector: "nombreCultivo", width: "100px", sortable: true },
-		{ name: "SUP(ha)", selector: "supAutorizada", width: "40px", sortable: true, center: true },
-		{ name: "LOTE", selector: "lote", sortable: true, width: "40px", center: true },
-		{ name: "LOCALIDAD", selector: "localidad", sortable: true, width: "80px" },
-		{ name: "EMICION", selector: "fechaEmicion", sortable: true, width: "70px" },
-		{ name: "VIGENCIA", selector: "vigencia", sortable: true, width: "70px" },
-		{ name: "ESTADO", selector: "estadoPermiso", sortable: true, width: "70px" }
-	];
 
 	const customStyles = {
 		headCells: {
