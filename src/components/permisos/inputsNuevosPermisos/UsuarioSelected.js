@@ -31,6 +31,7 @@ export const UsuarioSelected = () => {
 					{usuario.reacomodo && <div className="text-info">Reacomodo: {usuario.reacomodo}</div>}
 				</div>
 				<div className="col-sm-3">Seccion: {usuario.seccion}</div>
+				<div className="col-sm-3">Sistema: {usuario.sistRiego}</div>
 			</div>
 		</div>
 	);
