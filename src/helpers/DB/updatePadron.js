@@ -11,6 +11,15 @@ export const updatePadron = (file) => {
 		let i = 1;
 		const batchSize = 500;
 
+		const definePredio = (grupo, predio) => {
+			if (predio) {
+				if (grupo > 0) {
+					return `${grupo}${predio}`;
+				}
+				return predio;
+			} else return "?";
+		};
+
 		if (checkPadron(data)) {
 			data.forEach((element) => {
 				const itemToUpload = {
@@ -28,7 +37,7 @@ export const updatePadron = (file) => {
 					municipio: element.MUNICIPIO !== undefined ? element.MUNICIPIO : "?",
 					nombre: element.NOMBRE !== undefined ? element.NOMBRE : "?",
 					pControl: element.PCONTROL !== undefined ? element.PCONTROL : "?",
-					predio: element.PREDIO !== undefined ? element.PREDIO : "?",
+					predio: definePredio(element.GRUPO, element.PREDIO),
 					ra: element.RA !== undefined ? element.RA : "?",
 					referencia: element.REFERENCIA !== undefined ? element.REFERENCIA : "?",
 					seccion: element.SECCION !== undefined ? element.SECCION : "?",
