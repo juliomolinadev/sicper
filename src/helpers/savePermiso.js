@@ -73,195 +73,221 @@ export const savePermiso = async (allData) => {
 		.collection(`permisosPorCultivo`)
 		.doc(`${data.claveCultivo}-${data.nombreCultivo}`);
 
-	const isSave = await db
+	const permisoRef = await db
 		.collection(`permisos`)
 		.doc(data.ciclo)
 		.collection("modulos")
 		.doc(`Modulo-${data.modulo}`)
 		.collection(`permisos`)
-		.add(data)
-		.then(() => {
-			db.collection(`permisos`)
-				.doc(data.ciclo)
-				.collection("modulos")
-				.doc(`Modulo-${data.modulo}`)
-				.update({
-					numeroPermisosModulo: firebase.firestore.FieldValue.increment(1),
-					superficieModulo: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+		.doc(data.numeroPermiso);
+
+	const isSave = await permisoRef
+		.get()
+		.then((doc) => {
+			if (doc.exists) {
+				Swal.fire(
+					"El permiso ya existe",
+					"Está intentando sobreescribir un permiso ya existente, verifique su conexión.",
+					"error"
+				);
+			} else {
+				permisoRef.set(data).then(() => {
+					db.collection(`permisos`)
+						.doc(data.ciclo)
+						.collection("modulos")
+						.doc(`Modulo-${data.modulo}`)
+						.update({
+							numeroPermisosModulo: firebase.firestore.FieldValue.increment(1),
+							superficieModulo: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+						});
+
+					permisosPorCultivoRef
+						.get()
+						.then((doc) => {
+							if (doc.exists) {
+								switch (allData.sistema) {
+									case "Gravedad":
+										if (allData.tipo === "normal") {
+											permisosPorCultivoRef.update({
+												numeroPermisos: firebase.firestore.FieldValue.increment(1),
+												superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+												gravedadNormal: firebase.firestore.FieldValue.increment(
+													allData.supAutorizada
+												)
+											});
+										}
+
+										if (allData.tipo === "extra") {
+											permisosPorCultivoRef.update({
+												numeroPermisos: firebase.firestore.FieldValue.increment(1),
+												superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+												gravedadExtra: firebase.firestore.FieldValue.increment(
+													allData.supAutorizada
+												)
+											});
+										}
+										break;
+
+									case "Pozo Federal":
+										if (allData.tipo === "normal") {
+											permisosPorCultivoRef.update({
+												numeroPermisos: firebase.firestore.FieldValue.increment(1),
+												superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+												pozoNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+											});
+										}
+
+										if (allData.tipo === "extra") {
+											permisosPorCultivoRef.update({
+												numeroPermisos: firebase.firestore.FieldValue.increment(1),
+												superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+												pozoExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+											});
+										}
+										break;
+
+									case "Pozo Particular":
+										if (allData.tipo === "normal") {
+											permisosPorCultivoRef.update({
+												numeroPermisos: firebase.firestore.FieldValue.increment(1),
+												superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+												pozoParticularNormal: firebase.firestore.FieldValue.increment(
+													allData.supAutorizada
+												)
+											});
+										}
+
+										if (allData.tipo === "extra") {
+											permisosPorCultivoRef.update({
+												numeroPermisos: firebase.firestore.FieldValue.increment(1),
+												superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+												pozoParticularExtra: firebase.firestore.FieldValue.increment(
+													allData.supAutorizada
+												)
+											});
+										}
+										break;
+
+									default:
+										console.log("Sistema de riego indefinido");
+										break;
+								}
+							} else {
+								switch (allData.sistema) {
+									case "Gravedad":
+										if (allData.tipo === "normal") {
+											permisosPorCultivoRef.set({
+												subciclo: data.subciclo,
+												estado: data.estado,
+												modulo: data.modulo,
+												clave: allData.claveCultivo,
+												cultivo: allData.nombreCultivo,
+												numeroPermisos: firebase.firestore.FieldValue.increment(1),
+												superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+												gravedadNormal: firebase.firestore.FieldValue.increment(
+													allData.supAutorizada
+												)
+											});
+										}
+
+										if (allData.tipo === "extra") {
+											permisosPorCultivoRef.set({
+												subciclo: data.subciclo,
+												estado: data.estado,
+												modulo: data.modulo,
+												clave: allData.claveCultivo,
+												cultivo: allData.nombreCultivo,
+												numeroPermisos: firebase.firestore.FieldValue.increment(1),
+												superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+												gravedadExtra: firebase.firestore.FieldValue.increment(
+													allData.supAutorizada
+												)
+											});
+										}
+										break;
+
+									case "Pozo Federal":
+										if (allData.tipo === "normal") {
+											permisosPorCultivoRef.set({
+												subciclo: data.subciclo,
+												estado: data.estado,
+												modulo: data.modulo,
+												clave: allData.claveCultivo,
+												cultivo: allData.nombreCultivo,
+												numeroPermisos: firebase.firestore.FieldValue.increment(1),
+												superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+												pozoNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+											});
+										}
+
+										if (allData.tipo === "extra") {
+											permisosPorCultivoRef.set({
+												subciclo: data.subciclo,
+												estado: data.estado,
+												modulo: data.modulo,
+												clave: allData.claveCultivo,
+												cultivo: allData.nombreCultivo,
+												numeroPermisos: firebase.firestore.FieldValue.increment(1),
+												superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+												pozoExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+											});
+										}
+										break;
+
+									case "Pozo Particular":
+										if (allData.tipo === "normal") {
+											permisosPorCultivoRef.set({
+												subciclo: data.subciclo,
+												estado: data.estado,
+												modulo: data.modulo,
+												clave: allData.claveCultivo,
+												cultivo: allData.nombreCultivo,
+												numeroPermisos: firebase.firestore.FieldValue.increment(1),
+												superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+												pozoParticularNormal: firebase.firestore.FieldValue.increment(
+													allData.supAutorizada
+												)
+											});
+										}
+
+										if (allData.tipo === "extra") {
+											permisosPorCultivoRef.set({
+												subciclo: data.subciclo,
+												estado: data.estado,
+												modulo: data.modulo,
+												clave: allData.claveCultivo,
+												cultivo: allData.nombreCultivo,
+												numeroPermisos: firebase.firestore.FieldValue.increment(1),
+												superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
+												pozoParticularExtra: firebase.firestore.FieldValue.increment(
+													allData.supAutorizada
+												)
+											});
+										}
+										break;
+
+									default:
+										console.log("Sistema de riego indefinido");
+										break;
+								}
+							}
+						})
+						.catch((e) => {
+							console.log("Error al obtener permisos por cultivo", e);
+						});
+
+					Swal.fire(
+						"Permiso Guardado",
+						"Se registró con éxito el nuevo permiso de riego.",
+						"success"
+					);
 				});
-
-			permisosPorCultivoRef
-				.get()
-				.then((doc) => {
-					if (doc.exists) {
-						switch (allData.sistema) {
-							case "Gravedad":
-								if (allData.tipo === "normal") {
-									permisosPorCultivoRef.update({
-										numeroPermisos: firebase.firestore.FieldValue.increment(1),
-										superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-										gravedadNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada)
-									});
-								}
-
-								if (allData.tipo === "extra") {
-									permisosPorCultivoRef.update({
-										numeroPermisos: firebase.firestore.FieldValue.increment(1),
-										superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-										gravedadExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada)
-									});
-								}
-								break;
-
-							case "Pozo Federal":
-								if (allData.tipo === "normal") {
-									permisosPorCultivoRef.update({
-										numeroPermisos: firebase.firestore.FieldValue.increment(1),
-										superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-										pozoNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada)
-									});
-								}
-
-								if (allData.tipo === "extra") {
-									permisosPorCultivoRef.update({
-										numeroPermisos: firebase.firestore.FieldValue.increment(1),
-										superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-										pozoExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada)
-									});
-								}
-								break;
-
-							case "Pozo Particular":
-								if (allData.tipo === "normal") {
-									permisosPorCultivoRef.update({
-										numeroPermisos: firebase.firestore.FieldValue.increment(1),
-										superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-										pozoParticularNormal: firebase.firestore.FieldValue.increment(
-											allData.supAutorizada
-										)
-									});
-								}
-
-								if (allData.tipo === "extra") {
-									permisosPorCultivoRef.update({
-										numeroPermisos: firebase.firestore.FieldValue.increment(1),
-										superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-										pozoParticularExtra: firebase.firestore.FieldValue.increment(
-											allData.supAutorizada
-										)
-									});
-								}
-								break;
-
-							default:
-								console.log("Sistema de riego indefinido");
-								break;
-						}
-					} else {
-						switch (allData.sistema) {
-							case "Gravedad":
-								if (allData.tipo === "normal") {
-									permisosPorCultivoRef.set({
-										subciclo: data.subciclo,
-										estado: data.estado,
-										modulo: data.modulo,
-										clave: allData.claveCultivo,
-										cultivo: allData.nombreCultivo,
-										numeroPermisos: firebase.firestore.FieldValue.increment(1),
-										superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-										gravedadNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada)
-									});
-								}
-
-								if (allData.tipo === "extra") {
-									permisosPorCultivoRef.set({
-										subciclo: data.subciclo,
-										estado: data.estado,
-										modulo: data.modulo,
-										clave: allData.claveCultivo,
-										cultivo: allData.nombreCultivo,
-										numeroPermisos: firebase.firestore.FieldValue.increment(1),
-										superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-										gravedadExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada)
-									});
-								}
-								break;
-
-							case "Pozo Federal":
-								if (allData.tipo === "normal") {
-									permisosPorCultivoRef.set({
-										subciclo: data.subciclo,
-										estado: data.estado,
-										modulo: data.modulo,
-										clave: allData.claveCultivo,
-										cultivo: allData.nombreCultivo,
-										numeroPermisos: firebase.firestore.FieldValue.increment(1),
-										superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-										pozoNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada)
-									});
-								}
-
-								if (allData.tipo === "extra") {
-									permisosPorCultivoRef.set({
-										subciclo: data.subciclo,
-										estado: data.estado,
-										modulo: data.modulo,
-										clave: allData.claveCultivo,
-										cultivo: allData.nombreCultivo,
-										numeroPermisos: firebase.firestore.FieldValue.increment(1),
-										superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-										pozoExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada)
-									});
-								}
-								break;
-
-							case "Pozo Particular":
-								if (allData.tipo === "normal") {
-									permisosPorCultivoRef.set({
-										subciclo: data.subciclo,
-										estado: data.estado,
-										modulo: data.modulo,
-										clave: allData.claveCultivo,
-										cultivo: allData.nombreCultivo,
-										numeroPermisos: firebase.firestore.FieldValue.increment(1),
-										superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-										pozoParticularNormal: firebase.firestore.FieldValue.increment(
-											allData.supAutorizada
-										)
-									});
-								}
-
-								if (allData.tipo === "extra") {
-									permisosPorCultivoRef.set({
-										subciclo: data.subciclo,
-										estado: data.estado,
-										modulo: data.modulo,
-										clave: allData.claveCultivo,
-										cultivo: allData.nombreCultivo,
-										numeroPermisos: firebase.firestore.FieldValue.increment(1),
-										superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-										pozoParticularExtra: firebase.firestore.FieldValue.increment(
-											allData.supAutorizada
-										)
-									});
-								}
-								break;
-
-							default:
-								console.log("Sistema de riego indefinido");
-								break;
-						}
-					}
-				})
-				.catch((e) => {
-					console.log("Error al obtener permisos por cultivo", e);
-				});
-
-			Swal.fire("Permiso Guardado", "Se registró con éxito el nuevo permiso de riego.", "success");
-			return true;
+				return true;
+			}
 		})
 		.catch((e) => {
 			console.log("Error al guardar permiso", e);
+			Swal.fire("Error", `Verifique su conexión: ${e.message}`, "error");
 		});
 
 	return isSave;

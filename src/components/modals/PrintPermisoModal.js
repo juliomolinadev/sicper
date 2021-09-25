@@ -41,6 +41,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 		dispatch(unsetUsuarioSelected());
 		dispatch(startEnableSaveButton());
 		dispatch(startDisablePrintButton());
+		dispatch(unsetEnEspera());
 	};
 
 	const handleSavePermiso = async () => {
