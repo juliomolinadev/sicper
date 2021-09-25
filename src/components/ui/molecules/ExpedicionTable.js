@@ -1,4 +1,5 @@
 import React from "react";
+import { roundToN } from "../../../helpers/functions/roundToN";
 
 export const ExpedicionTable = ({ data }) => {
 	return (
@@ -10,30 +11,30 @@ export const ExpedicionTable = ({ data }) => {
 							CULTIVO
 						</th>
 						<th scope="row" colSpan="3">
-							GRAVEDAD
+							SUP. GRAVEDAD (ha)
 						</th>
 						<th scope="row" colSpan="3">
-							POZO FEDERAL
+							SUP. POZO FEDERAL (ha)
 						</th>
 						<th scope="row" colSpan="3">
-							POZO PARTICULAR
+							SUP. POZO PARTICULAR (ha)
 						</th>
 						<th scope="row" colSpan="3">
-							TOTAL
+							SUP. TOTAL (ha)
 						</th>
 					</tr>
 					<tr>
-						<th scope="col">Sup. Prog.</th>
-						<th scope="col">Sup. Expedida</th>
+						<th scope="col">Programada</th>
+						<th scope="col">Expedida</th>
 						<th scope="col">Realizado</th>
-						<th scope="col">Sup. Prog.</th>
-						<th scope="col">Sup. Expedida</th>
+						<th scope="col">Programada</th>
+						<th scope="col">Expedida</th>
 						<th scope="col">Realizado</th>
-						<th scope="col">Sup. Prog.</th>
-						<th scope="col">Sup. Expedida</th>
+						<th scope="col">Programada</th>
+						<th scope="col">Expedida</th>
 						<th scope="col">Realizado</th>
-						<th scope="col">Sup. Prog.</th>
-						<th scope="col">Sup. Expedida</th>
+						<th scope="col">Programada</th>
+						<th scope="col">Expedida</th>
 						<th scope="col">Realizado</th>
 					</tr>
 				</thead>
@@ -49,30 +50,39 @@ export const ExpedicionTable = ({ data }) => {
 						return (
 							<tr key={nombreCultivo}>
 								<th scope="row">{nombreCultivo}</th>
-								<td className="text-right">{cultivo.supGravedadProgramada}</td>
-								<td className="text-right">{cultivo.supGravedadExpedida}</td>
-								<td className="text-right">{cultivo.supGravedadRealizada}</td>
-								<td className="text-right">{cultivo.supPozoProgramada}</td>
-								<td className="text-right">{cultivo.supPozoExpedida}</td>
-								<td className="text-right">{cultivo.supPozoRealizada}</td>
-								<td className="text-right">{cultivo.supPozoPartProgramada}</td>
-								<td className="text-right">{cultivo.supPozoPartExpedida}</td>
-								<td className="text-right">{cultivo.supPozoPartRealizada}</td>
+								<td className="text-right">{roundToN(cultivo.supGravedadProgramada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supGravedadExpedida, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supGravedadRealizada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoProgramada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoExpedida, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoRealizada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoPartProgramada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoPartExpedida, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoPartRealizada, 3)}</td>
 
 								<td className="text-right">
-									{cultivo.supGravedadProgramada +
-										cultivo.supPozoProgramada +
-										cultivo.supPozoPartProgramada}
+									{roundToN(
+										cultivo.supGravedadProgramada +
+											cultivo.supPozoProgramada +
+											cultivo.supPozoPartProgramada,
+										3
+									)}
 								</td>
 								<td className="text-right">
-									{cultivo.supGravedadExpedida +
-										cultivo.supPozoExpedida +
-										cultivo.supPozoPartExpedida}
+									{roundToN(
+										cultivo.supGravedadExpedida +
+											cultivo.supPozoExpedida +
+											cultivo.supPozoPartExpedida,
+										3
+									)}
 								</td>
 								<td className="text-right">
-									{cultivo.supGravedadRealizada +
-										cultivo.supPozoRealizada +
-										cultivo.supPozoPartRealizada}
+									{roundToN(
+										cultivo.supGravedadRealizada +
+											cultivo.supPozoRealizada +
+											cultivo.supPozoPartRealizada,
+										3
+									)}
 								</td>
 							</tr>
 						);
@@ -89,30 +99,39 @@ export const ExpedicionTable = ({ data }) => {
 						return (
 							<tr key={nombreCultivo}>
 								<th scope="row">{nombreCultivo}</th>
-								<td className="text-right">{cultivo.supGravedadProgramada}</td>
-								<td className="text-right">{cultivo.supGravedadExpedida}</td>
-								<td className="text-right">{cultivo.supGravedadRealizada}</td>
-								<td className="text-right">{cultivo.supPozoProgramada}</td>
-								<td className="text-right">{cultivo.supPozoExpedida}</td>
-								<td className="text-right">{cultivo.supPozoRealizada}</td>
-								<td className="text-right">{cultivo.supPozoPartProgramada}</td>
-								<td className="text-right">{cultivo.supPozoPartExpedida}</td>
-								<td className="text-right">{cultivo.supPozoPartRealizada}</td>
+								<td className="text-right">{roundToN(cultivo.supGravedadProgramada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supGravedadExpedida, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supGravedadRealizada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoProgramada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoExpedida, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoRealizada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoPartProgramada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoPartExpedida, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoPartRealizada, 3)}</td>
 
 								<td className="text-right">
-									{cultivo.supGravedadProgramada +
-										cultivo.supPozoProgramada +
-										cultivo.supPozoPartProgramada}
+									{roundToN(
+										cultivo.supGravedadProgramada +
+											cultivo.supPozoProgramada +
+											cultivo.supPozoPartProgramada,
+										3
+									)}
 								</td>
 								<td className="text-right">
-									{cultivo.supGravedadExpedida +
-										cultivo.supPozoExpedida +
-										cultivo.supPozoPartExpedida}
+									{roundToN(
+										cultivo.supGravedadExpedida +
+											cultivo.supPozoExpedida +
+											cultivo.supPozoPartExpedida,
+										3
+									)}
 								</td>
 								<td className="text-right">
-									{cultivo.supGravedadRealizada +
-										cultivo.supPozoRealizada +
-										cultivo.supPozoPartRealizada}
+									{roundToN(
+										cultivo.supGravedadRealizada +
+											cultivo.supPozoRealizada +
+											cultivo.supPozoPartRealizada,
+										3
+									)}
 								</td>
 							</tr>
 						);
@@ -129,30 +148,39 @@ export const ExpedicionTable = ({ data }) => {
 						return (
 							<tr key={nombreCultivo}>
 								<th scope="row">{nombreCultivo}</th>
-								<td className="text-right">{cultivo.supGravedadProgramada}</td>
-								<td className="text-right">{cultivo.supGravedadExpedida}</td>
-								<td className="text-right">{cultivo.supGravedadRealizada}</td>
-								<td className="text-right">{cultivo.supPozoProgramada}</td>
-								<td className="text-right">{cultivo.supPozoExpedida}</td>
-								<td className="text-right">{cultivo.supPozoRealizada}</td>
-								<td className="text-right">{cultivo.supPozoPartProgramada}</td>
-								<td className="text-right">{cultivo.supPozoPartExpedida}</td>
-								<td className="text-right">{cultivo.supPozoPartRealizada}</td>
+								<td className="text-right">{roundToN(cultivo.supGravedadProgramada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supGravedadExpedida, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supGravedadRealizada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoProgramada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoExpedida, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoRealizada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoPartProgramada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoPartExpedida, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoPartRealizada, 3)}</td>
 
 								<td className="text-right">
-									{cultivo.supGravedadProgramada +
-										cultivo.supPozoProgramada +
-										cultivo.supPozoPartProgramada}
+									{roundToN(
+										cultivo.supGravedadProgramada +
+											cultivo.supPozoProgramada +
+											cultivo.supPozoPartProgramada,
+										3
+									)}
 								</td>
 								<td className="text-right">
-									{cultivo.supGravedadExpedida +
-										cultivo.supPozoExpedida +
-										cultivo.supPozoPartExpedida}
+									{roundToN(
+										cultivo.supGravedadExpedida +
+											cultivo.supPozoExpedida +
+											cultivo.supPozoPartExpedida,
+										3
+									)}
 								</td>
 								<td className="text-right">
-									{cultivo.supGravedadRealizada +
-										cultivo.supPozoRealizada +
-										cultivo.supPozoPartRealizada}
+									{roundToN(
+										cultivo.supGravedadRealizada +
+											cultivo.supPozoRealizada +
+											cultivo.supPozoPartRealizada,
+										3
+									)}
 								</td>
 							</tr>
 						);

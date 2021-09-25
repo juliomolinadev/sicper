@@ -57,6 +57,12 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 		window.print();
 	};
 
+	const toUpper = (string) => {
+		let str = "";
+		if (string) str = string;
+		return str.toUpperCase();
+	};
+
 	return (
 		<Modal
 			isOpen={openPrintPermisoModal}
@@ -168,7 +174,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 				<div className="col-4 d-flex flex-column border rounded p-0">
 					<div className="d-flex justify-content-center ">DETALLES DEL CULTIVO</div>
 					<div className="border-top p-1">
-						Tipo de permiso: <b>{data.tipo}</b>
+						Tipo de permiso: <b>{toUpper(data.tipo)}</b>
 						<br />
 						Cultivo:{" "}
 						<b>

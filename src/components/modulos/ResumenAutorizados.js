@@ -21,11 +21,6 @@ export const ResumenAutorizados = () => {
 		dispatch(startLoadExpedicion(modulo, ciclo));
 	}, [dispatch, modulo, ciclo]);
 
-	// if (expedicion === null) {
-	// 	console.log("Se ejecuto con null");
-	// 	dispatch(startLoadExpedicion(modulo, ciclo));
-	// }
-
 	const setNormal = () => {
 		dispatch(setSuperficieNormal());
 	};
@@ -152,10 +147,10 @@ export const ResumenAutorizados = () => {
 											</td>
 											<td>
 												<div className="text-center">
-													{cultivo.gravedadExtraAsignada - cultivo.gravedadExtra}
+													{roundToN(cultivo.gravedadExtraAsignada - cultivo.gravedadExtra, 3)}
 												</div>
 												<div className="text-center">
-													{cultivo.pozoExtraAsignada - cultivo.pozoExtra}
+													{roundToN(cultivo.pozoExtraAsignada - cultivo.pozoExtra, 3)}
 												</div>
 											</td>
 										</tr>
