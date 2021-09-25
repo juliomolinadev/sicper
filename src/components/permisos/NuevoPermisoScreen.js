@@ -395,8 +395,8 @@ export const NuevoPermisoScreen = () => {
 					// onClick={handleOpenPrintPermisoModal}
 				>
 					<button type="button" className="btn btn-outline-primary" onClick={onSendForm}>
-						<i className="far fa-save"></i>
-						<span> Guardar</span>
+						<i className="far fa-file"></i>
+						<span> Revisar</span>
 					</button>
 				</div>
 			</form>
