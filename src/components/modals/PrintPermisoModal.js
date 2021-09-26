@@ -134,7 +134,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			</div>
 
 			{/* Datos del usuario ******************************************************************* */}
-			<div className="row mt-2"></div>
+			<div className="row mt-4"></div>
 			<div className="row mt-5"></div>
 			<h3 className="row d-flex justify-content-center">
 				<div>{data.direccion}</div>
