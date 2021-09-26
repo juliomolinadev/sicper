@@ -2,23 +2,26 @@ import { db } from "../../firebase/firebase-config";
 import Swal from "sweetalert2";
 import { setUpdatingPadron, unsetUpdatingPadron } from "../../actions/usuarios";
 import { readExcel } from "../functions/readExcel";
+import { loadLocalties } from "./loadLocalties";
+import { loadReacomodos } from "./loadReacomodos";
 
 export const updatePadron = (file) => {
 	return async (dispatch) => {
 		await dispatch(setUpdatingPadron());
+		const localties = await loadLocalties("");
+		const reacomodos = await loadReacomodos();
+
 		const data = await readExcel(file);
 		let batch = db.batch();
 		let i = 1;
 		const batchSize = 500;
 
-		const definePredio = (grupo, predio) => {
-			if (predio) {
-				if (grupo > 0) {
-					return `${grupo}${predio}`;
-				}
-				return predio;
-			} else return "?";
-		};
+		await data.forEach((usuario, i) => {
+			const reacomodo = reacomodos.find((reacomodo) => reacomodo.id === usuario.id);
+			if (reacomodo) {
+				data[i].reacomodo = reacomodo.reacomodo;
+			}
+		});
 
 		if (checkPadron(data)) {
 			data.forEach((element) => {
@@ -28,6 +31,8 @@ export const updatePadron = (file) => {
 					cp: element.CP !== undefined ? element.CP : "?",
 					cuenta: element.CUENTA !== undefined ? element.CUENTA : "?",
 					ejido: element.EJIDO !== undefined ? element.EJIDO : "?",
+					nombreLocalidad:
+						element.EJIDO !== undefined ? getLocaltie(localties, element.EJIDO) : "?",
 					equipo: element.EQUIPO !== undefined ? element.EQUIPO : "?",
 					estado: element.ESTADO !== undefined ? element.ESTADO : "?",
 					fecha: element.FECHA !== undefined ? element.FECHA : "?",
@@ -107,4 +112,20 @@ const checkPadron = (data) => {
 	isOk ? console.log("ok, todo en orden!") : console.log("Esto no es un padron");
 
 	return isOk;
+};
+
+const getLocaltie = (data, id) => {
+	const localtieFind = data.find((localtie) => localtie.clave === id);
+
+	if (localtieFind) return localtieFind.nombre;
+	else return "?";
+};
+
+const definePredio = (grupo, predio) => {
+	if (predio) {
+		if (grupo > 0) {
+			return `${grupo}${predio}`;
+		}
+		return predio;
+	} else return "?";
 };
