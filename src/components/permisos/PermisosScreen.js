@@ -19,6 +19,7 @@ import { SuperficiesChart } from "../charts/SuperficiesChart";
 import { NuevoPermisoButton } from "../buttons/NuevoPermisoButton";
 import { PermitsCancellationModule } from "../ui/organisms/PermitsCancellationModule";
 import { roundToN } from "../../helpers/functions/roundToN";
+import { unsetUsuarioSelected } from "../../actions/usuarios";
 
 export const PermisosScreen = () => {
 	const dispatch = useDispatch();
@@ -37,6 +38,7 @@ export const PermisosScreen = () => {
 		console.log("Effect: PermisosScreen");
 		dispatch(startLoadPermisos(modulo, ciclo));
 		dispatch(startLoadSuperficies(modulo, ciclo));
+		dispatch(unsetUsuarioSelected());
 	}, [dispatch, modulo, ciclo]);
 
 	// if (permisos.length === 0) {
