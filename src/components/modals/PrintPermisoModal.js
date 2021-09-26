@@ -82,8 +82,10 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 			{/* Header ************************************************************************ */}
 
-			<div className="row m-3 d-flex justify-content-center">
-				<div className="col-2 d-flex flex-column justify-content-center">
+			<div className="row mt-5"></div>
+
+			<div className="row mt-5 d-flex justify-content-center bgc">
+				<div className="col-3 d-flex flex-column justify-content-center">
 					{/* <div className="d-flex justify-content-center">
 						<img src={"./logos/sader.png"} alt="Logo SADER" style={{ maxHeight: 35 }} />
 					</div>
@@ -99,21 +101,22 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 					<div className="border rounded d-flex justify-content-left mt-4 w-200">Folio: </div> */}
 				</div>
 
-				<div className="col-8 d-flex flex-column justify-content-center">
-					<h1 className="d-flex justify-content-center">
+				<div className="col-6 d-flex flex-column justify-content-center">
+					{/* <h1 className="d-flex justify-content-center">
 						<b>PERMISO ÚNICO DE SIEMBRA</b>
 					</h1>
 					<h3 className="d-flex justify-content-center">
 						<b>DISTRITO DE RIEGO 014 RÍO COLORADO</b>
-					</h3>
-					<h2 className="d-flex justify-content-center pt-4">
-						{" "}
-						<b>Ciclo Agrícola {data.ciclo}</b>{" "}
+					</h3> */}
+					<h2 className="d-flex justify-content-center">
+						<b>Ciclo Agrícola {data.ciclo}</b>
 					</h2>
-					<h3 className="d-flex justify-content-center">{data.direccion}</h3>
+					{/* <h3 className="d-flex flex-column justify-content-center">
+						<div>{data.direccion}</div>
+					</h3> */}
 				</div>
 
-				<div className="col-2 d-flex flex-column justify-content-center">
+				<div className="col-3 d-flex flex-column justify-content-center">
 					<div className="d-flex justify-content-center">
 						{/* <img
 							src={"./logos/cna.png"}
@@ -121,22 +124,26 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 							style={{ maxHeight: 50 }}
 						/> */}
 					</div>
-					<div className="border rounded d-flex justify-content-center mt-4">
+					<div className="border rounded d-flex justify-content-center">
 						Folio: {data.numeroPermiso}
 					</div>
-					<div className="d-flex justify-content-center mt-4">
+					<div className="d-flex justify-content-center">
 						{moment(data.fechaEmicion).format("DD/MM/YYYY")}
 					</div>
 				</div>
 			</div>
 
 			{/* Datos del usuario ******************************************************************* */}
-
+			<div className="row mt-5"></div>
+			<div className="row mt-5"></div>
+			<h3 className="row d-flex justify-content-center">
+				<div>{data.direccion}</div>
+			</h3>
 			<div className="row m-3 d-flex flex-column justify-content-center border rounded">
 				<div className="d-flex justify-content-center ">DATOS DEL USUARIO</div>
 
-				<div className="d-flex justify-content-center border-top p-1">
-					<p>
+				<div className="d-flex justify-content-center border-top p-1 pb-0 bgc">
+					<div>
 						El/la C.<b> {data.usuario}</b> con cuenta: <b>{data.cuenta}</b> tiene un derecho normal
 						de <b>{data.supDerecho} </b>
 						hectáreas del lote: <b>{data.lote}</b> en la colonia/ejido <b>{data.nombreLocalidad}</b>
@@ -144,7 +151,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						<b>{data.seccion}</b> del canal <b>{data.canal}</b> toma <b>{data.toma}</b> con sistema
 						de riego por <b>{data.sistema}</b>.<br />
 						{data.reacomodo && <b> Reacomodo: {data.reacomodo}</b>}
-					</p>
+					</div>
 				</div>
 			</div>
 
@@ -295,7 +302,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 			{/* Firmas  ************************************************************* */}
 
-			<div className="row m-3 ">
+			<div className="row m-2 ">
 				<div className="col-4 d-flex flex-column">
 					<div className="border-top firma d-flex justify-content-center">Módulo</div>
 					<div className="d-flex justify-content-center">
@@ -317,48 +324,49 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 			{/* Advertencias  ************************************************************* */}
 
-			<div className="row m-3">
-				<p>
-					<b>
-						<br />
-						<u>
-							ADVERTENCIAS: (1) Es responsabilidad del usuario de este permiso, disponer de la
-							totalidad del volumen adicional requerido por el cultivo a establecer. (2) Para los
-							sistemas de Gravedad y Pozo Federal un derecho de riego de 20 ha. alcanza para regar
-							una superficie sembrada para el cultivo de Trigo = 20ha., Algodón = 15ha., Alfalfa
-							13ha., Esparrago = 16ha., y Sorgo forrajero temprano = 18ha.
-						</u>
-					</b>
-				</p>
+			<div className="row m-2">
+				<b>
+					<u>
+						ADVERTENCIAS: (1) Es responsabilidad del usuario de este permiso, disponer de la
+						totalidad del volumen adicional requerido por el cultivo a establecer. (2) Para los
+						sistemas de Gravedad y Pozo Federal un derecho de riego de 20 ha. alcanza para regar una
+						superficie sembrada para el cultivo de Trigo = 20ha., Algodón = 15ha., Alfalfa 13ha.,
+						Esparrago = 16ha., y Sorgo forrajero temprano = 18ha.
+					</u>
+				</b>
 			</div>
 
 			{/* Encavezado sanidad  ************************************************************* */}
+			<div className="row m-3 mt-5">
+				<div className="col-2"></div>
+				<div className="col-10">
+					<div className="row d-flex justify-content-between">
+						<div className="border rounded mt-2 p-2">Folio: {data.numeroPermiso}</div>
+						<div className="border rounded mt-2 p-2">
+							Bueno por: $ {roundToN(data.cuotaCultivo * data.supAutorizada, 3)} pesos M.N.
+						</div>
+					</div>
 
-			<div className="row m-3 d-flex justify-content-between border-top">
-				<div className="border rounded mt-2 p-2">Folio: {data.numeroPermiso}</div>
-				<div className="border rounded mt-2 p-2">
-					Bueno por: $ {roundToN(data.cuotaCultivo * data.supAutorizada, 3)} pesos M.N.
+					{/* Resivo Sanidad  ************************************************************* */}
+
+					<div className="row">
+						<u>
+							Recibimos de El/la C.{" "}
+							<b>
+								{data.usuario} La cantidad de {roundToN(data.cuotaCultivo * data.supAutorizada, 3)}{" "}
+								pesos M.N.
+							</b>{" "}
+							Por concepto de aportación a las campañas Fitosanitarias, para el sostenimiento del
+							comité Estatal de Sanidad Vegetal.
+						</u>
+					</div>
 				</div>
-			</div>
-
-			{/* Resivo Sanidad  ************************************************************* */}
-
-			<div className="roe m-3">
-				<u>
-					Recibimos de El/la C.{" "}
-					<b>
-						{data.usuario} La cantidad de {roundToN(data.cuotaCultivo * data.supAutorizada, 3)}{" "}
-						pesos M.N.
-					</b>{" "}
-					Por concepto de aportación a las campañas Fitosanitarias, para el sostenimiento del comité
-					Estatal de Sanidad Vegetal.
-				</u>
 			</div>
 
 			{/* Datos usuario sanidad  ************************************************************* */}
 
 			<div className="row m-3">
-				<div className="col-3 d-flex flex-column">
+				<div className="col-2 d-flex flex-column">
 					{/* <div className="d-flex justify-content-center">
 						<img src={"./logos/cesvbc.webp"} alt="Logo sanidad vegetal" style={{ maxHeight: 70 }} />
 					</div>
@@ -367,7 +375,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 					<div className="d-flex justify-content-center font12">BAJA CALIFORNIA</div> */}
 				</div>
 
-				<div className="col-9 d-flex flex-column border rounded p-0">
+				<div className="col-10 d-flex flex-column border rounded p-0">
 					<div className="d-flex justify-content-center border-bottom">DATOS DEL USUARIO</div>
 
 					<p className="m-2">
