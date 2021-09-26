@@ -359,12 +359,12 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 			<div className="row m-3">
 				<div className="col-3 d-flex flex-column">
-					<div className="d-flex justify-content-center">
+					{/* <div className="d-flex justify-content-center">
 						<img src={"./logos/cesvbc.webp"} alt="Logo sanidad vegetal" style={{ maxHeight: 70 }} />
 					</div>
 					<div className="d-flex justify-content-center font12">COMITÉ ESTATAL DE</div>
 					<div className="d-flex justify-content-center font12">SANIDAD VEGETAL DE</div>
-					<div className="d-flex justify-content-center font12">BAJA CALIFORNIA</div>
+					<div className="d-flex justify-content-center font12">BAJA CALIFORNIA</div> */}
 				</div>
 
 				<div className="col-9 d-flex flex-column border rounded p-0">
