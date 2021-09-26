@@ -11,16 +11,16 @@ export const ExpedicionTable = ({ data }) => {
 							CULTIVO
 						</th>
 						<th scope="row" colSpan="3">
-							SUP. GRAVEDAD (ha)
+							SUP. GRAVEDAD
 						</th>
 						<th scope="row" colSpan="3">
-							SUP. POZO FEDERAL (ha)
+							SUP. POZO FEDERAL
 						</th>
 						<th scope="row" colSpan="3">
-							SUP. POZO PARTICULAR (ha)
+							SUP. POZO PARTICULAR
 						</th>
 						<th scope="row" colSpan="3">
-							SUP. TOTAL (ha)
+							SUP. TOTAL
 						</th>
 					</tr>
 					<tr>

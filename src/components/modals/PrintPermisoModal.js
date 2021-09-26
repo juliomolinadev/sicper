@@ -134,7 +134,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			</div>
 
 			{/* Datos del usuario ******************************************************************* */}
-			{/* <div className="row mt-5"></div> */}
+			<div className="row mt-2"></div>
 			<div className="row mt-5"></div>
 			<h3 className="row d-flex justify-content-center">
 				<div>{data.direccion}</div>
@@ -158,7 +158,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			{/* Parrafo legal ********************************************************************** */}
 
 			<div className="row m-3 d-flex flex-column justify-content-center">
-				<p>
+				<div>
 					Con base en el Acuerdo Nacional de Colaboración entre la Secretaría de Agricultura,
 					Ganadería, Desarrollo Rural, Pesca y Alimentación y el Acuerdo de Concertación entre la
 					SAGARPA, CONAGUA, Distrito de Riego Río Colorado y la Sociedad de Responsabilidad Limitada
@@ -172,12 +172,12 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 					establezca exclusivamente el cultivo y superficie que se indica, apercibiendose que se
 					puede suspender el servicio de riego si se siembra superficie adicional o cultivo
 					diferente al autorizado en este permiso.
-				</p>
+				</div>
 			</div>
 
 			{/* Detalle de cultivo y superficie ***************************************************** */}
 
-			<div className="row m-3 d-flex">
+			<div className="row m-3 mt-0 d-flex">
 				<div className="col-4 d-flex flex-column border rounded p-0">
 					<div className="d-flex justify-content-center ">DETALLES DEL CULTIVO</div>
 					<div className="border-top p-1">
@@ -302,7 +302,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 			{/* Firmas  ************************************************************* */}
 
-			<div className="row m-2 ">
+			<div className="row">
 				<div className="col-4 d-flex flex-column">
 					<div className="border-top firma d-flex justify-content-center">Módulo</div>
 					<div className="d-flex justify-content-center">
