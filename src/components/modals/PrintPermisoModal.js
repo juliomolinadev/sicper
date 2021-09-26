@@ -139,8 +139,8 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 					<p>
 						El/la C.<b> {data.usuario}</b> con cuenta: <b>{data.cuenta}</b> tiene un derecho normal
 						de <b>{data.supDerecho} </b>
-						hectáreas del lote: <b>{data.lote}</b> en la colonia/ejido <b>{data.localidad}</b>,{" "}
-						<b>{data.municipio}</b>, <b>{data.estado}</b>. Módulo <b>{data.modulo}</b>, sección{" "}
+						hectáreas del lote: <b>{data.lote}</b> en la colonia/ejido <b>{data.nombreLocalidad}</b>
+						, <b>{data.municipio}</b>, <b>{data.estado}</b>. Módulo <b>{data.modulo}</b>, sección{" "}
 						<b>{data.seccion}</b> del canal <b>{data.canal}</b> toma <b>{data.toma}</b> con sistema
 						de riego por <b>{data.sistema}</b>.<br />
 						{data.reacomodo && <b> Reacomodo: {data.reacomodo}</b>}
@@ -373,7 +373,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 					<p className="m-2">
 						El/la C.<b> {data.usuario}</b> con cuenta: <b>{data.cuenta}</b> tiene un derecho normal
 						de <b>{data.supDerecho} </b>
-						hectáreas del lote: <b>{data.lote}</b> en la colonia <b>{data.localidad}</b>,{" "}
+						hectáreas del lote: <b>{data.lote}</b> en la colonia <b>{data.nombreLocalidad}</b>,{" "}
 						<b>{data.municipio}</b>, <b>{data.estado}</b>. Módulo <b>{data.modulo}</b>, sección{" "}
 						<b>{data.seccion}</b> del canal <b>{data.canal}</b> toma <b>{data.toma}</b> con sistema
 						de riego por <b>{data.sistema}</b>.

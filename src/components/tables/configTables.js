@@ -20,12 +20,12 @@ export const usuariosColumns = [
 	{ name: "id", selector: "id", omit: true },
 	{ name: "CUENTA", selector: "cuenta", sortable: true, width: "80px" },
 	{ name: "SUBCTA", selector: "subcta", sortable: true, width: "40px", center: true },
-	{ name: "PATERNO", selector: "apPaterno", width: "140px", sortable: true },
-	{ name: "MATERNO", selector: "apMaterno", width: "140px", sortable: true },
-	{ name: "NOMBRE", selector: "nombre", width: "200px", sortable: true },
+	{ name: "PATERNO", selector: "apPaterno", width: "120px", sortable: true },
+	{ name: "MATERNO", selector: "apMaterno", width: "120px", sortable: true },
+	{ name: "NOMBRE", selector: "nombre", width: "150px", sortable: true },
 	{ name: "DERECHO(ha)", selector: "supRiego", sortable: true, width: "80px", center: true },
 	{ name: "LOTE", selector: "predio", sortable: true, width: "60px", center: true },
-	{ name: "EJIDO", selector: "ejido", sortable: true, width: "60px", center: true },
+	{ name: "LOCALIDAD", selector: "nombreLocalidad", sortable: true, width: "200px" },
 	{ name: "SECCION", selector: "seccion", sortable: true, width: "60px", center: true },
 	{ name: "MODULO", selector: "modulo", sortable: true, width: "60px", center: true }
 ];

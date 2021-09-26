@@ -1,6 +1,5 @@
 import { types } from "../types/types";
 import { loadUsuarios } from "../helpers/loadUsuarios";
-import { loadLocalidad } from "../helpers/loadLocalidad";
 import { loadSuperficiePrevia } from "../helpers/loadSuperficiePrevia";
 import { loadUserTransfer } from "../helpers/loadUserTransfer";
 import { loadCiclo } from "../helpers/DB/loadCiclo";
@@ -33,7 +32,6 @@ export const startSetUsuarioSelected = (usuario) => {
 
 	return async (dispatch) => {
 		const ciclo = await loadCiclo();
-		const localidad = await loadLocalidad(usuario.ejido);
 		const supPrevia = await loadSuperficiePrevia(
 			`${usuario.cuenta}.${usuario.subcta}`,
 			usuario.modulo,
@@ -45,7 +43,6 @@ export const startSetUsuarioSelected = (usuario) => {
 			ciclo
 		);
 
-		usuario.localidad = localidad;
 		usuario.supPrevia = supPrevia + transfers;
 		dispatch(setUsuarioSelected(usuario));
 	};

@@ -160,7 +160,8 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				toma: action.payload.pControl,
 				sistema: action.payload.sistRiego,
 				supPrevia: action.payload.supPrevia,
-				reacomodo: action.payload.reacomodo
+				reacomodo: action.payload.reacomodo,
+				nombreLocalidad: action.payload.nombreLocalidad
 			};
 
 		case types.unsetUsuario:

@@ -12,7 +12,8 @@ export const savePermiso = async (allData) => {
 		supDerecho: allData.supDerecho,
 		lote: allData.lote,
 		// TODO: Poner nombre de localidad antes de guardar
-		localidad: allData.localidad,
+		localidad: allData.nombreLocalidad,
+		nombreLocalidad: allData.nombreLocalidad,
 		municipio: allData.municipio,
 		estado: allData.estado,
 		modulo: allData.modulo,

@@ -18,7 +18,9 @@ export const updatePadron = (file) => {
 
 		if (checkPadron(data)) {
 			await data.forEach((usuario, i) => {
-				const reacomodo = reacomodos.find((reacomodo) => reacomodo.id === usuario.id);
+				const reacomodo = reacomodos.find(
+					(reacomodo) => reacomodo.id === `${usuario.CUENTA}-${usuario.SUBCTA}`
+				);
 				if (reacomodo) {
 					data[i].reacomodo = reacomodo.reacomodo;
 				}
@@ -59,7 +61,8 @@ export const updatePadron = (file) => {
 					supRiego: element.SUPRIEGO !== undefined ? element.SUPRIEGO : "?",
 					tenencia: element.TENENCIA !== undefined ? element.TENENCIA : "?",
 					unidad: element.UNIDAD !== undefined ? element.UNIDAD : "?",
-					zona: element.ZONA !== undefined ? element.ZONA : "?"
+					zona: element.ZONA !== undefined ? element.ZONA : "?",
+					reacomodo: element.reacomodo !== undefined ? element.reacomodo : false
 				};
 
 				const ref = db.collection("derechos").doc(`${itemToUpload.cuenta}-${itemToUpload.subcta}`);
@@ -126,7 +129,7 @@ const getLocaltie = (localidades, id) => {
 };
 
 const definePredio = (grupo, predio) => {
-	if (predio) {
+	if (predio >= 0) {
 		if (grupo > 0) {
 			return `${grupo}${predio}`;
 		}

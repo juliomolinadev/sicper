@@ -10,7 +10,7 @@ export const UsuarioSelected = () => {
 		<div className="border rounded mb-4 p-2">
 			<div className="row">
 				<div className="col-sm-6">Cuenta: {`${usuario.cuenta}.${usuario.subcta}`}</div>
-				<div className="col-sm-3">Colonia/Ejido: {usuario.localidad}</div>
+				<div className="col-sm-3">Colonia/Ejido: {usuario.nombreLocalidad}</div>
 				<div className="col-sm-3">Sup. Derecho: {usuario.supRiego}</div>
 			</div>
 			<div className="row">
