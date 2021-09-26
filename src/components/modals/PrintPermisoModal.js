@@ -84,7 +84,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 			<div className="row mt-5"></div>
 
-			<div className="row mt-5 d-flex justify-content-center bgc">
+			<div className="row mt-5 d-flex justify-content-center">
 				<div className="col-3 d-flex flex-column justify-content-center">
 					{/* <div className="d-flex justify-content-center">
 						<img src={"./logos/sader.png"} alt="Logo SADER" style={{ maxHeight: 35 }} />
@@ -134,7 +134,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			</div>
 
 			{/* Datos del usuario ******************************************************************* */}
-			<div className="row mt-5"></div>
+			{/* <div className="row mt-5"></div> */}
 			<div className="row mt-5"></div>
 			<h3 className="row d-flex justify-content-center">
 				<div>{data.direccion}</div>
@@ -142,7 +142,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			<div className="row m-3 d-flex flex-column justify-content-center border rounded">
 				<div className="d-flex justify-content-center ">DATOS DEL USUARIO</div>
 
-				<div className="d-flex justify-content-center border-top p-1 pb-0 bgc">
+				<div className="d-flex justify-content-center border-top p-1 pb-0">
 					<div>
 						El/la C.<b> {data.usuario}</b> con cuenta: <b>{data.cuenta}</b> tiene un derecho normal
 						de <b>{data.supDerecho} </b>
