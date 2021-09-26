@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { useForm } from "../../../hooks/useForm";
 import Swal from "sweetalert2";
 
 import {
@@ -35,14 +34,7 @@ export const ProductorInput2 = ({ productor, handleInputChange }) => {
 
 	const clearProductorInput = () => {
 		dispatch(unsetProductorSelected());
-		// formValues.productor = "";
 	};
-
-	// const [formValues, handleInputChange] = useForm({
-	// 	productor: ""
-	// });
-
-	// const { productor } = formValues;
 
 	const handleKeyUp = (event) => {
 		if (event.key === "Enter") {

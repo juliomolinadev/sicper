@@ -43,7 +43,6 @@ export const AppRouter = () => {
 				setIsLoggedIn(true);
 			} else {
 				setIsLoggedIn(false);
-				// dispatch(logout());
 			}
 			setChecking(false);
 		});

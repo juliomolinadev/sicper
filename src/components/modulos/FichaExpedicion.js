@@ -8,7 +8,6 @@ import { startLoadAutorizados } from "../../actions/autorizadosScreen";
 export const FichaExpedicion = () => {
 	const { autorizados } = useSelector((state) => state.autorizadosScreen);
 	const { modulo } = useSelector((state) => state.auth);
-	// const { superficies } = useSelector((state) => state.permisosScreen);
 
 	const dispatch = useDispatch();
 
@@ -16,18 +15,9 @@ export const FichaExpedicion = () => {
 	const ciclo = auth.variablesGlobales.cicloActual;
 
 	useEffect(() => {
-		console.log("Effect: FichaExpedicion");
 		dispatch(startLoadAutorizados(ciclo, modulo));
 		dispatch(startLoadSuperficies(modulo, ciclo));
 	}, [dispatch, ciclo, modulo]);
-
-	// if (autorizados.length === 0) {
-	// 	dispatch(startLoadAutorizados(ciclo, modulo));
-	// }
-
-	// if (superficies === null) {
-	// 	dispatch(startLoadSuperficies(modulo, ciclo));
-	// }
 
 	return (
 		<div className="border border-primary rounded detallePermiso text-secondary mt-3">

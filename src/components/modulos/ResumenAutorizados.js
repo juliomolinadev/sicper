@@ -17,7 +17,6 @@ export const ResumenAutorizados = () => {
 	const ciclo = auth.variablesGlobales.cicloActual;
 
 	useEffect(() => {
-		console.log("Effect: ResumenAutorizados");
 		dispatch(startLoadExpedicion(modulo, ciclo));
 	}, [dispatch, modulo, ciclo]);
 

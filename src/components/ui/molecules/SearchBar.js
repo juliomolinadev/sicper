@@ -13,14 +13,9 @@ export const SearchBar = ({ styles, inputName, placeholder, formValues, handleIn
 				autoComplete="off"
 				value={localidad}
 				onChange={handleInputChange}
-				// onKeyUp={handleKeyUp}
 			/>
 
-			<button
-				className={styles.button}
-				type="button"
-				// onClick={handleOpenCultivosModal}
-			>
+			<button className={styles.button} type="button">
 				<i className={styles.icon}></i>
 			</button>
 		</div>

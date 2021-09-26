@@ -14,7 +14,6 @@ export const ProductorInput = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		console.log("Effect: ProductorInput");
 		dispatch(unsetProductorSelected());
 		dispatch(closeProductoresModal());
 	}, [dispatch]);

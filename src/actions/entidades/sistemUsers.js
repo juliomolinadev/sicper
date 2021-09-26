@@ -34,7 +34,6 @@ export const startSetSystemUserSelected = (user) => {
 
 export const startSetUserRoles = () => {
 	return async (dispatch) => {
-		// dispatch(unsetUserRoles());
 		const roles = await loadUserRoles();
 		dispatch(setUserRoles(roles));
 	};

@@ -35,19 +35,10 @@ export const PermisosScreen = () => {
 	const { cicloActual: ciclo, expedicionActiva } = variablesGlobales;
 
 	useEffect(() => {
-		console.log("Effect: PermisosScreen");
 		dispatch(startLoadPermisos(modulo, ciclo));
 		dispatch(startLoadSuperficies(modulo, ciclo));
 		dispatch(unsetUsuarioSelected());
 	}, [dispatch, modulo, ciclo]);
-
-	// if (permisos.length === 0) {
-	// 	dispatch(startLoadPermisos(modulo, ciclo));
-	// }
-
-	// if (superficies === null) {
-	// 	dispatch(startLoadSuperficies(modulo, ciclo));
-	// }
 
 	const buscarPermisos = () => {
 		if (palabra.length > 0) {

@@ -25,7 +25,6 @@ export const UsuarioInput = () => {
 	};
 
 	useEffect(() => {
-		console.log("Effect: UsuarioInput");
 		dispatch(unsetUsuarioSelected());
 		dispatch(closeUsuariosModal());
 	}, [dispatch]);

@@ -53,7 +53,6 @@ export const CheckSanidad = () => {
 	const formatter = new Intl.NumberFormat("es-MX", {
 		style: "currency",
 		currency: "MXN"
-		// minimumFractionDigits: 0
 	});
 
 	const handleOpenSanidadModal = () => {
@@ -146,11 +145,7 @@ export const CheckSanidad = () => {
 								<i className="fas fa-check"></i>
 							</button>
 						) : (
-							<button
-								className=" btn btn-outline-secondary btn-sm "
-								type="button"
-								// onClick={setError}
-							>
+							<button className=" btn btn-outline-secondary btn-sm " type="button">
 								<i className="fas fa-check"></i>
 							</button>
 						)}
@@ -177,11 +172,7 @@ export const CheckSanidad = () => {
 								<i className="fas fa-check"></i>
 							</button>
 						) : (
-							<button
-								className=" btn btn-outline-secondary btn-sm "
-								type="button"
-								// onClick={setError}
-							>
+							<button className=" btn btn-outline-secondary btn-sm " type="button">
 								<i className="fas fa-check"></i>
 							</button>
 						)}
@@ -208,11 +199,7 @@ export const CheckSanidad = () => {
 								<i className="fas fa-check"></i>
 							</button>
 						) : (
-							<button
-								className=" btn btn-outline-secondary btn-sm "
-								type="button"
-								// onClick={setError}
-							>
+							<button className=" btn btn-outline-secondary btn-sm " type="button">
 								<i className="fas fa-check"></i>
 							</button>
 						)}
@@ -239,11 +226,7 @@ export const CheckSanidad = () => {
 								<i className="fas fa-check"></i>
 							</button>
 						) : (
-							<button
-								className=" btn btn-outline-secondary btn-sm "
-								type="button"
-								// onClick={setError}
-							>
+							<button className=" btn btn-outline-secondary btn-sm " type="button">
 								<i className="fas fa-check"></i>
 							</button>
 						)}
@@ -295,11 +278,7 @@ export const CheckSanidad = () => {
 								<i className="fas fa-check"></i>
 							</button>
 						) : (
-							<button
-								className=" btn btn-outline-secondary btn-sm "
-								type="button"
-								// onClick={setError}
-							>
+							<button className=" btn btn-outline-secondary btn-sm " type="button">
 								<i className="fas fa-check"></i>
 							</button>
 						)}

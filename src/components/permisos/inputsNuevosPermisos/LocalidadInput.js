@@ -2,7 +2,6 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
-// import { useForm } from "../../../hooks/useForm";
 import {
 	openLocaltiesModal,
 	startLoadLocalties,
@@ -37,14 +36,7 @@ export const LocalidadInput = ({ localtie, handleInputChange }) => {
 
 	const clearLocaltieInput = () => {
 		dispatch(unsetLocaltieSelected());
-		// formValues.localtie = "";
 	};
-
-	// const [formValues, handleInputChange] = useForm({
-	// 	localtie: ""
-	// });
-
-	// const { localtie } = formValues;
 
 	const handleKeyUp = (event) => {
 		if (event.key === "Enter") {

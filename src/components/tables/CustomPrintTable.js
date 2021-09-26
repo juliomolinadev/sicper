@@ -18,7 +18,7 @@ export const CustomPrintTable = ({ title, data, columns, setFunction, closeFunct
 	const customStyles = {
 		headCells: {
 			style: {
-				paddingLeft: "5px", // override the cell padding for head cells
+				paddingLeft: "5px",
 				paddingRight: "5px"
 			}
 		},
@@ -32,7 +32,7 @@ export const CustomPrintTable = ({ title, data, columns, setFunction, closeFunct
 		cells: {
 			style: {
 				fontSize: "10px",
-				paddingLeft: "5px", // override the cell padding for data cells
+				paddingLeft: "5px",
 				paddingRight: "5px"
 			}
 		}

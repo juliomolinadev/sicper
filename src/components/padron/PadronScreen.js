@@ -19,7 +19,6 @@ export const PadronScreen = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		console.log("Effect: PadronScreen");
 		dispatch(unsetUsuarioSelected());
 		dispatch(unsetUsuarios());
 	}, [dispatch]);

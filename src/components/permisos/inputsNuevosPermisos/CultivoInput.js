@@ -14,7 +14,6 @@ export const CultivoInput = () => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		console.log("Effect: CultivoInput");
 		dispatch(unsetCultivoSelected());
 		dispatch(closeCultivosModal());
 	}, [dispatch]);

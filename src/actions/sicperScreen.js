@@ -29,18 +29,6 @@ export const startLoadExpedicion = (modulo, ciclo) => {
 					} else {
 						superficies.push({ ...cultivoAutorizado });
 					}
-
-					// if (expedicion) {
-					// 	expedicion.forEach((cultivoExpedido) => {
-					// 		if (
-					// 			cultivoExpedido.id === `${cultivoAutorizado.clave}-${cultivoAutorizado.cultivo}`
-					// 		) {
-					// 			superficies.push({ ...cultivoAutorizado, ...cultivoExpedido });
-					// 		}
-					// 	});
-					// } else {
-					// 	superficies.push({ ...cultivoAutorizado });
-					// }
 				}
 			});
 		}
