@@ -16,23 +16,27 @@ export const updatePadron = (file) => {
 		let i = 1;
 		const batchSize = 500;
 
-		await data.forEach((usuario, i) => {
-			const reacomodo = reacomodos.find((reacomodo) => reacomodo.id === usuario.id);
-			if (reacomodo) {
-				data[i].reacomodo = reacomodo.reacomodo;
-			}
-		});
-
 		if (checkPadron(data)) {
-			data.forEach((element) => {
+			await data.forEach((usuario, i) => {
+				const reacomodo = reacomodos.find((reacomodo) => reacomodo.id === usuario.id);
+				if (reacomodo) {
+					data[i].reacomodo = reacomodo.reacomodo;
+				}
+			});
+
+			await data.forEach((usuario, i) => {
+				const localidad = getLocaltie(localties, usuario.EJIDO);
+				data[i].nombreLocalidad = localidad;
+			});
+
+			await data.forEach((element) => {
 				const itemToUpload = {
 					apMaterno: element.APMATERNO !== undefined ? element.APMATERNO : "?",
 					apPaterno: element.APPATERNO !== undefined ? element.APPATERNO : "?",
 					cp: element.CP !== undefined ? element.CP : "?",
 					cuenta: element.CUENTA !== undefined ? element.CUENTA : "?",
 					ejido: element.EJIDO !== undefined ? element.EJIDO : "?",
-					nombreLocalidad:
-						element.EJIDO !== undefined ? getLocaltie(localties, element.EJIDO) : "?",
+					nombreLocalidad: element.nombreLocalidad,
 					equipo: element.EQUIPO !== undefined ? element.EQUIPO : "?",
 					estado: element.ESTADO !== undefined ? element.ESTADO : "?",
 					fecha: element.FECHA !== undefined ? element.FECHA : "?",
@@ -114,8 +118,8 @@ const checkPadron = (data) => {
 	return isOk;
 };
 
-const getLocaltie = (data, id) => {
-	const localtieFind = data.find((localtie) => localtie.clave === id);
+const getLocaltie = (localidades, id) => {
+	const localtieFind = localidades.find((localtie) => localtie.clave === id);
 
 	if (localtieFind) return localtieFind.nombre;
 	else return "?";
