@@ -5,6 +5,7 @@ import {
 	setModulo,
 	startLoadAutorizados
 } from "../../actions/autorizadosScreen";
+import { modulos } from "../../helpers/consts";
 import { sabeAutorizados } from "../../helpers/sabeAutorizados";
 import { AutorizadosModal } from "../modals/AutorizadosModal";
 import { AutorizadosPozoModal } from "../modals/AutorizadosPozoModal";
@@ -14,33 +15,6 @@ import { ResumenAutorizados } from "./ResumenAutorizados";
 import { ResumenAutorizadosPozo } from "./ResumenAutorizadosPozo";
 
 export const AutorizadosScreen = () => {
-	const modulos = [
-		1,
-		2,
-		3,
-		4,
-		5,
-		6,
-		7,
-		8,
-		9,
-		92,
-		10,
-		11,
-		12,
-		14,
-		15,
-		16,
-		17,
-		18,
-		19,
-		20,
-		21,
-		22,
-		"FL",
-		"Pozo Particular"
-	];
-
 	const dispatch = useDispatch();
 
 	const { modulo, autorizados, autorizadoSelected, superficieReferencia } = useSelector(

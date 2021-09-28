@@ -44,7 +44,7 @@ export const updatePadron = (file) => {
 					fecha: element.FECHA !== undefined ? element.FECHA : "?",
 					grupo: element.GRUPO !== undefined ? element.GRUPO : "?",
 					lt: element.LT !== undefined ? element.LT : "?",
-					modulo: element.ZONA !== undefined ? element.ZONA : "?",
+					modulo: element.ZONA !== undefined ? defineModulo(element.ZONA) : "?",
 					municipio: element.MUNICIPIO !== undefined ? element.MUNICIPIO : "?",
 					nombre: element.NOMBRE !== undefined ? element.NOMBRE : "?",
 					pControl: element.PCONTROL !== undefined ? element.PCONTROL : "?",
@@ -135,4 +135,10 @@ const definePredio = (grupo, predio) => {
 		}
 		return predio;
 	} else return "?";
+};
+
+const defineModulo = (modulo) => {
+	if (modulo === 9) return "9A";
+	else if (modulo === 92) return "9B";
+	else return modulo;
 };

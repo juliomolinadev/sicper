@@ -7,7 +7,7 @@ export const loadUsuarios = async (usuario, modulo) => {
 	const qryUsuarios = [];
 	const usuarios = [];
 
-	const padUsuarios = db.collection(`derechos`).where("modulo", "==", parseInt(modulo));
+	const padUsuarios = db.collection(`derechos`).where("modulo", "==", defineModulo(modulo));
 
 	campos.forEach((campo) => {
 		qryUsuarios.push(
@@ -35,4 +35,10 @@ export const loadUsuarios = async (usuario, modulo) => {
 	});
 
 	return usuarios;
+};
+
+const defineModulo = (modulo) => {
+	if (modulo === "9A") return modulo;
+	else if (modulo === "9B") return modulo;
+	else return parseInt(modulo);
 };

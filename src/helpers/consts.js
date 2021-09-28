@@ -86,8 +86,8 @@ export const modulos = [
 	6,
 	7,
 	8,
-	9,
-	92,
+	"9A",
+	"9B",
 	10,
 	11,
 	12,
@@ -266,7 +266,7 @@ export const entidades = [
 		expedicionActivaModulo: true
 	},
 	{
-		clave: "9",
+		clave: "9A",
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 9A",
 		titular: "???",
@@ -275,7 +275,7 @@ export const entidades = [
 		expedicionActivaModulo: true
 	},
 	{
-		clave: "92",
+		clave: "9B",
 		dotacion: 117,
 		nombre: "Usuarios del módulo No. 9B",
 		titular: "???",
