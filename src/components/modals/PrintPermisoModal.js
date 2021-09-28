@@ -125,7 +125,9 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						/> */}
 					</div>
 					<div className="border rounded d-flex justify-content-center">
-						Folio: {data.numeroPermiso}
+						<h2 className="m-0">
+							<b>Folio: {data.numeroPermiso}</b>
+						</h2>
 					</div>
 					<div className="d-flex justify-content-center">
 						{moment(data.fechaEmicion).format("DD/MM/YYYY")}
@@ -239,7 +241,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 					<div className="row border-top d-flex text-dotacion">
 						<div className="col-3 border">
-							<div>l.p.s./24 hrs/hr Parcela</div>
+							<div>l.p.s./24 hrs en P.C.M.</div>
 						</div>
 						<div className="col-2 border">
 							<div>{roundToN(data.supDerecho * data.dotacion, 3)}</div>
