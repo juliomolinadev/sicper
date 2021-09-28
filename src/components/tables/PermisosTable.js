@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
 import { CustomPrintTable } from "./CustomPrintTable";
-import { permisosColumns, printPermisosColumns } from "./configTables";
+import { printPermisosColumns } from "./configTables";
 import { startLoadPermisos } from "../../actions/entidades/permisos";
 
 export const PermisosTable = () => {
@@ -14,8 +14,6 @@ export const PermisosTable = () => {
 
 	const auth = useSelector((state) => state.auth);
 	const ciclo = auth.variablesGlobales.cicloActual;
-
-	console.log(permisosColumns);
 
 	if (!permisos) {
 		dispatch(startLoadPermisos("", modulo, ciclo, ["nombreCultivo"]));

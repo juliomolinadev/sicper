@@ -1,8 +1,6 @@
 import React, { useEffect, useReducer } from "react";
 import { useSelector } from "react-redux";
 import { modulosPorUnidad } from "../../../helpers/consts";
-import { loadAutorizadosGlobal } from "../../../helpers/DB/loadAutorizadosGlobal";
-import { loadAvanceSuperficieExpedida } from "../../../helpers/DB/loadAvanceSuperficieExpedida";
 import { filterReportData } from "../../../helpers/functions/filterReportData";
 import { mergeReportData } from "../../../helpers/functions/mergeReportData";
 import { useForm } from "../../../hooks/useForm";
@@ -10,9 +8,6 @@ import { modulosCheckboxReducer } from "../../../reducers/modulosCheckboxReducer
 import { ExpedicionTable } from "../molecules/ExpedicionTable";
 import { RadioButtonGroup } from "../molecules/RadioButtonGroup";
 import { ModulosCheckbox } from "./ModulosCkeckbox";
-
-let expedicion = [];
-let autorizados = [];
 
 const unidades = {
 	primeraUnidad: false,
@@ -24,15 +19,15 @@ const initialState = { unidades, modulosPorUnidad };
 
 export const ReporteExpedicion = () => {
 	const { privilegios, modulo } = useSelector((state) => state.auth);
+	const { autorizados, expedicion } = useSelector((state) => state.scenes.reportesScreen);
 
-	const [reportOptionsValues, handleReportOptionsInputChange] = useForm();
+	const [reportOptionsValues, handleReportOptionsInputChange, , setAValue] = useForm();
+
+	if (Object.keys(reportOptionsValues).length === 0) setAValue({ opcion: "modulo" });
 
 	const [state, dispatch] = useReducer(modulosCheckboxReducer, initialState);
 	const { unidades, modulosPorUnidad } = state;
 	const { primeraUnidad, segundaUnidad, terceraUnidad } = modulosPorUnidad;
-
-	const auth = useSelector((state) => state.auth);
-	const ciclo = auth.variablesGlobales.cicloActual;
 
 	const reportOptions = [
 		{
@@ -58,24 +53,11 @@ export const ReporteExpedicion = () => {
 		button: "btn btn-outline-primary"
 	};
 
-	const loadAutorizados = async () => {
-		autorizados = await loadAutorizadosGlobal(ciclo);
-	};
-
-	const loadExpedicion = async () => {
-		expedicion = await loadAvanceSuperficieExpedida(ciclo);
-	};
-
 	useEffect(() => {
 		dispatch({
 			type: "changeGroup"
 		});
 	}, [unidades]);
-
-	useEffect(() => {
-		loadExpedicion();
-		loadAutorizados();
-	});
 
 	const getModulos = () => {
 		const modulos = [];
@@ -100,6 +82,9 @@ export const ReporteExpedicion = () => {
 			case "Baja California":
 			case "Sonora":
 				return true;
+
+			case "modulo":
+				return privilegios.accesoGlobal ? false : true;
 
 			case "modulos":
 				if (getModulos().length > 0) return true;
@@ -169,13 +154,15 @@ export const ReporteExpedicion = () => {
 			{!privilegios.accesoGlobal && (
 				<div className="row mt-3">
 					<div className="col-sm-12 pt-5">
-						<ExpedicionTable
-							data={filterReportData(
-								mergeReportData(autorizados, expedicion),
-								reportOptionsValues.opcion,
-								[modulo]
-							)}
-						/>
+						{autorizados && expedicion && (
+							<ExpedicionTable
+								data={filterReportData(
+									mergeReportData(autorizados, expedicion),
+									reportOptionsValues.opcion,
+									[modulo]
+								)}
+							/>
+						)}
 					</div>
 				</div>
 			)}

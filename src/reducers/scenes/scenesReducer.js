@@ -12,6 +12,24 @@ const initialState = {
 
 export const scenesReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case types.setAutorizados:
+			return {
+				...state,
+				reportesScreen: {
+					...state.reportesScreen,
+					autorizados: action.payload
+				}
+			};
+
+		case types.setExpedicion:
+			return {
+				...state,
+				reportesScreen: {
+					...state.reportesScreen,
+					expedicion: action.payload
+				}
+			};
+
 		case types.openImprimirReporteModal:
 			return {
 				...state,

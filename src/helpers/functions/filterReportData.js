@@ -51,6 +51,7 @@ const checkModulo = (modulos, modulo) => {
 const isRegisterInclude = (opcion, modulos, modulo, estado) => {
 	switch (opcion) {
 		case "modulos":
+		case "modulo":
 			return checkModulo(modulos, modulo);
 
 		case "Baja California":

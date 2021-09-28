@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ModuloInformesPermisos } from "../components/modulos/ModuloInformesPermisos";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ReporteExpedicion } from "../components/ui/organisms/ReporteExpedicion";
 import { useForm } from "../hooks/useForm";
 import { RadioButtonGroup } from "../components/ui/molecules/RadioButtonGroup";
+import { startSetAutorizados, startSetExpedicion } from "../actions/scenes/reportesScreen";
 
 export const ReportesScreen = () => {
-	const { privilegios } = useSelector((state) => state.auth);
+	const { privilegios, variablesGlobales } = useSelector((state) => state.auth);
+	const { cicloActual: ciclo } = variablesGlobales;
 	const [reportTypeValues, handleReportTipeInputChange] = useForm();
+
+	const dispatch = useDispatch();
 
 	const reportTypes = [
 		{
@@ -24,6 +28,11 @@ export const ReportesScreen = () => {
 		group: "btn-group btn-group-toggle d-print-none",
 		button: "btn btn-outline-primary"
 	};
+
+	useEffect(() => {
+		dispatch(startSetExpedicion(ciclo));
+		dispatch(startSetAutorizados(ciclo));
+	}, [dispatch, ciclo]);
 
 	return (
 		<div className={"mt-5"}>

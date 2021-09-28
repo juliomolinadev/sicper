@@ -127,6 +127,9 @@ export const types = {
 	openLocaltiesModal: "[Entidades] Open Localties Modal",
 	closeLocaltiesModal: "[Entidades] Close Localties Modal",
 
+	setExpedicion: "[Reportes] Set Expedicion",
+	setAutorizados: "[Reportes] Set Autorizados",
+
 	openUserRoleModal: "[UI] Open User Role Modal",
 	closeUserRoleModal: "[UI] Close User Role Modal"
 };
