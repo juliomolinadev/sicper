@@ -15,11 +15,22 @@ export const startLoginEmailPassword = (email, password) => {
 				const entityData = await loadEntityData(entity.claveEntidad);
 				const privilegios = await loadPrivilegios(entity.rol);
 
-				const { nombre, img, clave, dotacion, titular, direccion } = entityData;
+				const { nombre, img, clave, dotacionGravedad, dotacionPozo, titular, direccion } =
+					entityData;
 
 				dispatch(login(user.uid, user.displayName));
 				dispatch(
-					setEntity(nombre, img, clave, dotacion, titular, direccion, entity.rol, entity.modulo)
+					setEntity(
+						nombre,
+						img,
+						clave,
+						dotacionGravedad,
+						dotacionPozo,
+						titular,
+						direccion,
+						entity.rol,
+						entity.modulo
+					)
 				);
 				dispatch(setPrivilegios(privilegios));
 
@@ -82,7 +93,8 @@ export const setEntity = (
 	entidad,
 	img,
 	claveEntidad,
-	dotacion,
+	dotacionGravedad,
+	dotacionPozo,
 	titular,
 	direccion,
 	rol,
@@ -93,7 +105,8 @@ export const setEntity = (
 		entidad,
 		img,
 		claveEntidad,
-		dotacion,
+		dotacionGravedad,
+		dotacionPozo,
 		titular,
 		direccion,
 		rol,

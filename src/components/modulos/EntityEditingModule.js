@@ -75,6 +75,49 @@ export const EntityEditingModule = () => {
 												onChange={handleInputChange}
 											/>
 										</div>
+
+										{entitie.clave !== "SADER" &&
+											entitie.clave !== "CNA" &&
+											entitie.clave !== "SRL" &&
+											entitie.clave !== "CESVBC" && (
+												<>
+													<div className="d-flex mt-2">
+														<label
+															className="align-self-center col-sm-2"
+															htmlFor={`${i}-dotacionGravedad`}
+														>
+															Dotación Gravedad:
+														</label>
+														<input
+															type="number"
+															className="form-control ml-2 w-25"
+															id={`${i}-dotacionGravedad`}
+															name={`${i}-dotacionGravedad`}
+															autoComplete="off"
+															value={entities[i].dotacionGravedad}
+															onChange={handleInputChange}
+														/>
+													</div>
+
+													<div className="d-flex mt-2">
+														<label
+															className="align-self-center col-sm-2"
+															htmlFor={`${i}-dotacionPozo`}
+														>
+															Dotación Pozo:
+														</label>
+														<input
+															type="number"
+															className="form-control ml-2 w-25"
+															id={`${i}-dotacionPozo`}
+															name={`${i}-dotacionPozo`}
+															autoComplete="off"
+															value={entities[i].dotacionPozo}
+															onChange={handleInputChange}
+														/>
+													</div>
+												</>
+											)}
 									</div>
 
 									{privilegios.cerrarExpedicionModulos &&

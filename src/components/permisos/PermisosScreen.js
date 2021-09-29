@@ -122,6 +122,12 @@ export const PermisosScreen = () => {
 		});
 	};
 
+	const getDotacion = (sistema) => {
+		if (sistema === "Gravedad") return dataPermiso.dotacionGravedad;
+		if (sistema === "Pozo Federal") return dataPermiso.dotacionPozo;
+		if (sistema === "Pozo Particular") return dataPermiso.dotacionPozo;
+	};
+
 	return (
 		<>
 			<div className="row mt-5">
@@ -198,7 +204,7 @@ export const PermisosScreen = () => {
 							<div className="row p-1 pl-2">
 								<div className="col-4">DOTACION:</div>
 								<div className="col-8">
-									{roundToN(dataPermiso.dotacion * dataPermiso.supAutorizada, 3)} lts
+									{roundToN(getDotacion(dataPermiso.sistema) * dataPermiso.supAutorizada, 3)} lts
 								</div>
 							</div>
 							<div className="row p-1 pl-2">

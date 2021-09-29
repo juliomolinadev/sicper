@@ -1,9 +1,11 @@
 import { db } from "../../firebase/firebase-config";
 import "firebase/firestore";
 import { entidades } from "../consts";
+import Swal from "sweetalert2";
 
-export const actualizarEntidades = (data = entidades) => {
+export const actualizarEntidades = async (data = entidades) => {
 	const ref = db.collection("entidades");
+	const promices = [];
 
 	data.forEach((entidad) => {
 		ref
@@ -11,15 +13,21 @@ export const actualizarEntidades = (data = entidades) => {
 			.get()
 			.then((doc) => {
 				if (doc.exist) {
-					ref.doc(entidad.clave).update(entidad);
-					console.log(`Se actualizo entidad (${entidad.clave})`);
+					promices.push(ref.doc(entidad.clave).update(entidad));
 				} else {
-					ref.doc(entidad.clave).set(entidad);
-					console.log(`Se agrego entidad (${entidad.clave})`);
+					promices.push(ref.doc(entidad.clave).set(entidad));
 				}
 			})
 			.catch((e) => {
 				console.log(`Error al actualizar entidad (${entidad.clave})`, e);
 			});
 	});
+
+	await Promise.all(promices).then(
+		Swal.fire(
+			"Cambios guardados",
+			"Se actualizaron con éxito los datos de las entidades.",
+			"success"
+		)
+	);
 };

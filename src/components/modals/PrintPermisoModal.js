@@ -63,6 +63,12 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 		return str.toUpperCase();
 	};
 
+	const getDotacion = (sistema) => {
+		if (sistema === "Gravedad") return data.dotacionGravedad;
+		if (sistema === "Pozo Federal") return data.dotacionPozo;
+		if (sistema === "Pozo Particular") return data.dotacionPozo;
+	};
+
 	return (
 		<Modal
 			isOpen={openPrintPermisoModal}
@@ -244,18 +250,19 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 							<div>l.p.s./24 hrs en P.C.M.</div>
 						</div>
 						<div className="col-2 border">
-							<div>{roundToN(data.supDerecho * data.dotacion, 3)}</div>
+							<div>{roundToN(data.supDerecho * getDotacion(data.sistema), 3)}</div>
 						</div>
 						<div className="col-2 border">
-							<div>{roundToN(data.supPrevia * data.dotacion, 3)}</div>
+							<div>{roundToN(data.supPrevia * getDotacion(data.sistema), 3)}</div>
 						</div>
 						<div className="col-3 border">
-							<div>{roundToN(data.supAutorizada * data.dotacion, 3)}</div>
+							<div>{roundToN(data.supAutorizada * getDotacion(data.sistema), 3)}</div>
 						</div>
 						<div className="col-2 border">
 							<div>
 								{roundToN(
-									(data.supDerecho - data.supPrevia - data.supAutorizada) * data.dotacion,
+									(data.supDerecho - data.supPrevia - data.supAutorizada) *
+										getDotacion(data.sistema),
 									3
 								)}
 							</div>

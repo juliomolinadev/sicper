@@ -154,7 +154,8 @@ export const privileges = {
 export const entidades = [
 	{
 		clave: "dev",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		titular: "dev",
 		direccion: "",
 		nombre: "Desarrollo",
@@ -163,7 +164,8 @@ export const entidades = [
 	},
 	{
 		clave: "CNA",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Comisión Nacional del Agua",
 		titular: "???",
 		direccion: "",
@@ -171,7 +173,8 @@ export const entidades = [
 	},
 	{
 		clave: "SADER",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Secretaría de Agricultura y Desarrollo Rural",
 		titular: "???",
 		direccion: "",
@@ -179,7 +182,8 @@ export const entidades = [
 	},
 	{
 		clave: "CESVBC",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Comité Estatal de Sanidad Vegetal de Baja California",
 		titular: "???",
 		direccion: "",
@@ -187,7 +191,8 @@ export const entidades = [
 	},
 	{
 		clave: "SRL",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Distrito de Riego 014, Río Colorado S. de R.L.",
 		titular: "???",
 		direccion: "",
@@ -195,7 +200,8 @@ export const entidades = [
 	},
 	{
 		clave: "1",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 1",
 		titular: "???",
 		direccion: "",
@@ -204,7 +210,8 @@ export const entidades = [
 	},
 	{
 		clave: "2",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 2",
 		titular: "???",
 		direccion: "",
@@ -213,7 +220,8 @@ export const entidades = [
 	},
 	{
 		clave: "3",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 3",
 		titular: "???",
 		direccion: "",
@@ -222,7 +230,8 @@ export const entidades = [
 	},
 	{
 		clave: "4",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 4",
 		titular: "???",
 		direccion: "",
@@ -231,7 +240,8 @@ export const entidades = [
 	},
 	{
 		clave: "5",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 5",
 		titular: "???",
 		direccion: "",
@@ -240,7 +250,8 @@ export const entidades = [
 	},
 	{
 		clave: "6",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 6",
 		titular: "???",
 		direccion: "",
@@ -249,7 +260,8 @@ export const entidades = [
 	},
 	{
 		clave: "7",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 7",
 		titular: "???",
 		direccion: "",
@@ -258,7 +270,8 @@ export const entidades = [
 	},
 	{
 		clave: "8",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 8",
 		titular: "???",
 		direccion: "",
@@ -267,7 +280,8 @@ export const entidades = [
 	},
 	{
 		clave: "9A",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 9A",
 		titular: "???",
 		direccion: "",
@@ -276,7 +290,8 @@ export const entidades = [
 	},
 	{
 		clave: "9B",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 9B",
 		titular: "???",
 		direccion: "",
@@ -285,7 +300,8 @@ export const entidades = [
 	},
 	{
 		clave: "10",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 10",
 		titular: "???",
 		direccion: "",
@@ -294,7 +310,8 @@ export const entidades = [
 	},
 	{
 		clave: "11",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 11",
 		titular: "???",
 		direccion: "",
@@ -303,7 +320,8 @@ export const entidades = [
 	},
 	{
 		clave: "12",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 12",
 		titular: "???",
 		direccion: "",
@@ -312,7 +330,8 @@ export const entidades = [
 	},
 	{
 		clave: "14",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 14",
 		titular: "???",
 		direccion: "",
@@ -321,7 +340,8 @@ export const entidades = [
 	},
 	{
 		clave: "15",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 15",
 		titular: "???",
 		direccion: "",
@@ -330,7 +350,8 @@ export const entidades = [
 	},
 	{
 		clave: "16",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 16",
 		titular: "???",
 		direccion: "",
@@ -339,7 +360,8 @@ export const entidades = [
 	},
 	{
 		clave: "17",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 17",
 		titular: "???",
 		direccion: "",
@@ -348,7 +370,8 @@ export const entidades = [
 	},
 	{
 		clave: "18",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 18",
 		titular: "???",
 		direccion: "",
@@ -357,7 +380,8 @@ export const entidades = [
 	},
 	{
 		clave: "19",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 19",
 		titular: "???",
 		direccion: "Carretera a San Felipe Km 1.5 S/N, Col. Xochimilco C.P. 21380. Mexicali B.C.",
@@ -366,7 +390,8 @@ export const entidades = [
 	},
 	{
 		clave: "20",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 20",
 		titular: "???",
 		direccion: "",
@@ -375,7 +400,8 @@ export const entidades = [
 	},
 	{
 		clave: "21",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 21",
 		titular: "???",
 		direccion: "",
@@ -384,7 +410,8 @@ export const entidades = [
 	},
 	{
 		clave: "22",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 22",
 		titular: "???",
 		direccion: "",
@@ -393,7 +420,8 @@ export const entidades = [
 	},
 	{
 		clave: "23",
-		dotacion: 117,
+		dotacionGravedad: 117,
+		dotacionPozo: 0,
 		nombre: "Usuarios del módulo No. 23",
 		titular: "???",
 		direccion: "",

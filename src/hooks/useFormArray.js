@@ -14,6 +14,8 @@ export const useFormArray = (initialState = []) => {
 
 		if (target.type === "button") {
 			newState[index][name] = !newState[index][name];
+		} else if (target.type === "number") {
+			newState[index][name] = Number(target.value);
 		} else {
 			newState[index][name] = target.value;
 		}
