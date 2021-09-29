@@ -35,6 +35,12 @@ export const authReducer = (state = {}, action) => {
 				variablesGlobales: action.payload
 			};
 
+		case types.setEstadoExpedicionModulo:
+			return {
+				...state,
+				expedicionActivaModulo: action.payload
+			};
+
 		case types.logout:
 			return {};
 

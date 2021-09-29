@@ -107,7 +107,7 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const isFormValid = () => {
-		if (!expedicionActiva && !expedicionActivaModulo) {
+		if (!expedicionActiva || !expedicionActivaModulo) {
 			dispatch(setError("Expedición cerrada! Por el momento no es posible expedir permisos."));
 			return false;
 		} else if (!altaPermisos.usuario) {

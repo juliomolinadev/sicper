@@ -199,3 +199,22 @@ export const setPrivilegios = (privilegios) => ({
 	type: types.setPrivilegios,
 	payload: privilegios
 });
+
+export const loadEstadoExpedicionModulo = async (claveEntidad) => {
+	const entidad = await db.collection(`entidades`).doc(`${claveEntidad}`).get();
+
+	console.log("estadoExpedicion en action: ", entidad.data().expedicionActivaModulo);
+	return entidad.data().expedicionActivaModulo;
+};
+
+export const startSetEstadoExpedicionModulo = (claveEntidad) => {
+	return async (dispatch) => {
+		const estadoExpedicion = await loadEstadoExpedicionModulo(claveEntidad);
+		dispatch(setEstadoExpedicionModulo(estadoExpedicion));
+	};
+};
+
+export const setEstadoExpedicionModulo = (estadoExpedicion) => ({
+	type: types.setEstadoExpedicionModulo,
+	payload: estadoExpedicion
+});

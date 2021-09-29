@@ -3,6 +3,7 @@ import { loadUsuarios } from "../helpers/loadUsuarios";
 import { loadSuperficiePrevia } from "../helpers/loadSuperficiePrevia";
 import { loadUserTransfer } from "../helpers/loadUserTransfer";
 import { loadCiclo } from "../helpers/DB/loadCiclo";
+import { startSetEstadoExpedicionModulo } from "./auth";
 
 export const openUsuariosModal = () => ({
 	type: types.altaPermisoOpenUsuariosModal
@@ -16,6 +17,7 @@ export const startLoadUsuarios = (usuario, modulo) => {
 	return async (dispatch) => {
 		const usuarios = await loadUsuarios(usuario, modulo);
 		dispatch(setUsuarios(usuarios));
+		dispatch(startSetEstadoExpedicionModulo(modulo));
 	};
 };
 
