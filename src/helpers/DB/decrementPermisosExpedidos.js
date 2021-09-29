@@ -8,7 +8,7 @@ export const decrementPermisosExpedidos = (ciclo, modulo, supAutorizada) => {
 		.collection("modulos")
 		.doc(`Modulo-${modulo}`)
 		.update({
-			numeroPermisosModulo: firebase.firestore.FieldValue.increment(-1),
+			// numeroPermisosModulo: firebase.firestore.FieldValue.increment(-1),
 			superficieModulo: firebase.firestore.FieldValue.increment(supAutorizada * -1)
 		});
 };

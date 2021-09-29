@@ -29,7 +29,7 @@ export const PermisosScreen = () => {
 	const { palabra } = formValues;
 
 	const { permisos, permisoSelected } = useSelector((state) => state.permisosScreen);
-	const { modulo, privilegios, expedicionActivaModulo } = useSelector((state) => state.auth);
+	const { modulo, privilegios, expedicionActivaModulo, uid } = useSelector((state) => state.auth);
 
 	const { variablesGlobales } = useSelector((state) => state.auth);
 	const { cicloActual: ciclo, expedicionActiva } = variablesGlobales;
@@ -108,7 +108,7 @@ export const PermisosScreen = () => {
 		}).then(({ isConfirmed, value: motivo }) => {
 			if (isConfirmed) {
 				if (motivo.length > 0) {
-					setPermisoInCancelProces(permisoSelected, modulo, ciclo, motivo);
+					setPermisoInCancelProces(permisoSelected, modulo, ciclo, motivo, uid);
 					dispatch(startLoadPermisos(modulo, ciclo));
 					Swal.fire(
 						"Solicitud recibida",

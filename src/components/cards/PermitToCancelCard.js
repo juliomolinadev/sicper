@@ -8,6 +8,7 @@ import { decrementPermisosPorCultivo } from "../../helpers/DB/decrementPermisosP
 
 export const PermitToCancelCard = () => {
 	const { preCancelPermits, permitToCancelSelected } = useSelector((state) => state.permisosScreen);
+	const { uid } = useSelector((state) => state.auth);
 
 	const permit = preCancelPermits.find((perm) => perm.id === permitToCancelSelected);
 	const {
@@ -46,7 +47,7 @@ export const PermitToCancelCard = () => {
 			cancelButtonText: "No"
 		}).then(({ isConfirmed }) => {
 			if (isConfirmed) {
-				cancelPermit(permitToCancelSelected, modulo, ciclo, new Date());
+				cancelPermit(permitToCancelSelected, modulo, ciclo, new Date(), uid);
 				decrementPermisosPorCultivo(
 					ciclo,
 					modulo,

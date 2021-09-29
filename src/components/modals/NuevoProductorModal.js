@@ -25,6 +25,7 @@ export const NuevoProductorModal = () => {
 
 	const { isOpenNuevoProductorModal } = useSelector((state) => state.altaPermisos);
 	const { msgError } = useSelector((state) => state.ui);
+	const { uid } = useSelector((state) => state.auth);
 
 	const closeModal = () => {
 		dispatch(closeNuevoProductorModal());
@@ -62,7 +63,9 @@ export const NuevoProductorModal = () => {
 					municipio: municipio.toUpperCase(),
 					rfc: rfc.toUpperCase(),
 					curp: curp.toUpperCase(),
-					telefono: telefono.replace(/ /g, "")
+					telefono: telefono.replace(/ /g, ""),
+					uid,
+					fechaRegistro: new Date()
 				})
 			);
 			closeModal();
