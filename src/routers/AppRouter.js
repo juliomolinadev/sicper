@@ -29,8 +29,16 @@ export const AppRouter = () => {
 				const entity = await loadEntity(user.uid);
 				const entityData = await loadEntityData(entity.claveEntidad);
 				const privilegios = await loadPrivilegios(entity.rol);
-				const { nombre, img, clave, dotacionGravedad, dotacionPozo, titular, direccion } =
-					entityData;
+				const {
+					nombre,
+					img,
+					clave,
+					dotacionGravedad,
+					dotacionPozo,
+					titular,
+					direccion,
+					expedicionActivaModulo
+				} = entityData;
 
 				dispatch(login(user.uid, user.displayName));
 				dispatch(
@@ -42,6 +50,7 @@ export const AppRouter = () => {
 						dotacionPozo,
 						titular,
 						direccion,
+						expedicionActivaModulo,
 						entity.rol,
 						entity.modulo
 					)

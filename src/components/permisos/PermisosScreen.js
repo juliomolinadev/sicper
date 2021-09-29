@@ -29,7 +29,7 @@ export const PermisosScreen = () => {
 	const { palabra } = formValues;
 
 	const { permisos, permisoSelected } = useSelector((state) => state.permisosScreen);
-	const { modulo, privilegios } = useSelector((state) => state.auth);
+	const { modulo, privilegios, expedicionActivaModulo } = useSelector((state) => state.auth);
 
 	const { variablesGlobales } = useSelector((state) => state.auth);
 	const { cicloActual: ciclo, expedicionActiva } = variablesGlobales;
@@ -134,7 +134,9 @@ export const PermisosScreen = () => {
 				<div className="col-sm-8">
 					<div className="row d-flex">
 						<div className="d-flex justify-content-center col-sm-4 p-2">
-							{expedicionActiva && privilegios.expedirPermisos && <NuevoPermisoButton />}
+							{expedicionActiva && expedicionActivaModulo && privilegios.expedirPermisos && (
+								<NuevoPermisoButton />
+							)}
 						</div>
 
 						<div className="col-sm-8 d-inline-flex p-2 pr-4">

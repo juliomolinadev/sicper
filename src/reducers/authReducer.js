@@ -18,6 +18,7 @@ export const authReducer = (state = {}, action) => {
 				dotacionPozo: action.payload.dotacionPozo,
 				titular: action.payload.titular,
 				direccion: action.payload.direccion,
+				expedicionActivaModulo: action.payload.expedicionActivaModulo,
 				rol: action.payload.rol,
 				modulo: action.payload.modulo
 			};

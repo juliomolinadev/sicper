@@ -30,7 +30,7 @@ export const NuevoPermisoScreen = () => {
 	);
 	const altaPermisos = useSelector((state) => state.altaPermisos);
 	const auth = useSelector((state) => state.auth);
-	const { variablesGlobales } = auth;
+	const { variablesGlobales, expedicionActivaModulo } = auth;
 	const { cicloActual: ciclo, expedicionActiva } = variablesGlobales;
 	const { msgError } = useSelector((state) => state.ui);
 	const { autorizadosPorCultivo } = useSelector((state) => state.autorizadosScreen);
@@ -64,6 +64,10 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(removeError());
+	}, [dispatch]);
 
 	useEffect(() => {
 		dispatch(startLoadAutorizadoPorCultivo(ciclo, auth.modulo, altaPermisos.claveCultivo));
@@ -103,7 +107,7 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const isFormValid = () => {
-		if (!expedicionActiva) {
+		if (!expedicionActiva && !expedicionActivaModulo) {
 			dispatch(setError("Expedición cerrada! Por el momento no es posible expedir permisos."));
 			return false;
 		} else if (!altaPermisos.usuario) {
@@ -192,19 +196,19 @@ export const NuevoPermisoScreen = () => {
 		if (subciclo) {
 			switch (subciclo) {
 				case "PRIMAVERA-VERANO":
-					vigencia = moment("09/30/2021");
+					vigencia = moment("09/30/2022");
 					break;
 
 				case "OTOÑO-INVIERNO":
-					vigencia = moment("05/31/2021");
+					vigencia = moment("05/31/2022");
 					break;
 
 				case "PERENNES":
-					vigencia = moment("09/30/2021");
+					vigencia = moment("09/30/2022");
 					break;
 
 				case "PERENES":
-					vigencia = moment("09/30/2021");
+					vigencia = moment("09/30/2022");
 					break;
 
 				default:
