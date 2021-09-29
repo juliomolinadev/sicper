@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { closeCultivosModal, setCultivoSelected } from "../../actions/cultivos";
+import { closeCultivosModal, startSetCultivoSelected } from "../../actions/cultivos";
 import { CustomTable } from "../tables/CustomTable";
 import { cultivosColumns } from "../tables/configTables";
 
@@ -43,7 +43,7 @@ export const CultivoModal = () => {
 				title={data.length === 0 ? "No se encontraron cultivos" : "Cultivos"}
 				columns={cultivosColumns}
 				data={data}
-				setFunction={setCultivoSelected}
+				setFunction={startSetCultivoSelected}
 				closeFunction={closeCultivosModal}
 			></CustomTable>
 		</Modal>

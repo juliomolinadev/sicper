@@ -23,11 +23,17 @@ import { loadContador } from "../../helpers/loadContador";
 import { removeError, setError } from "../../actions/ui";
 
 import { startLoadAutorizadoPorCultivo } from "../../actions/autorizadosScreen";
+import { CultivoSelected } from "./inputsNuevosPermisos/CultivoSelected";
 
 export const NuevoPermisoScreen = () => {
-	const { idUsuarioSelected, idProductorSelected, subciclo, nombreCultivo } = useSelector(
-		(state) => state.altaPermisos
-	);
+	const {
+		idUsuarioSelected,
+		idProductorSelected,
+		idCultivoSelected,
+		subciclo,
+		nombreCultivo,
+		superficiePreviaCultivo
+	} = useSelector((state) => state.altaPermisos);
 	const altaPermisos = useSelector((state) => state.altaPermisos);
 	const auth = useSelector((state) => state.auth);
 	const { variablesGlobales, expedicionActivaModulo } = auth;
@@ -135,9 +141,10 @@ export const NuevoPermisoScreen = () => {
 			return false;
 		} else if (
 			autorizadosPorCultivo === undefined ||
-			defineTipoPermiso(autorizadosPorCultivo) === "Superficie no disponible"
+			defineTipoPermiso(superficiePreviaCultivo, autorizadosPorCultivo) ===
+				"Superficie no disponible"
 		) {
-			dispatch(setError("Superficie no disponible."));
+			dispatch(setError("La superficie asignada para el cultivo no es suficiente."));
 			return false;
 		}
 
@@ -147,7 +154,7 @@ export const NuevoPermisoScreen = () => {
 
 	const getOnSubmitData = async () => {
 		const data = {
-			tipo: defineTipoPermiso(autorizadosPorCultivo),
+			tipo: defineTipoPermiso(superficiePreviaCultivo, autorizadosPorCultivo),
 			ciclo,
 			numeroPermiso: await defineNumeroPermiso(),
 			fechaEmicion: moment(),
@@ -161,21 +168,26 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	// TODO: Probar defineTipoPermiso (es necesario conciderar el acumulado de lo expedido para cada cultivo)
-	const defineTipoPermiso = ({
-		gravedadNormalAsignada,
-		gravedadExtraAsignada,
-		pozoNormalAsignada,
-		pozoExtraAsignada
-	}) => {
+	const defineTipoPermiso = (superficiePreviaCultivo, autorizadosPorCultivo) => {
+		const { gravedadNormalAsignada, gravedadExtraAsignada, pozoNormalAsignada, pozoExtraAsignada } =
+			autorizadosPorCultivo;
+
+		const {
+			gravedadNormal: gravedadNormalPrevia,
+			gravedadExtra: gravedadExtraPrevia,
+			pozoNormal: pozoNormalPrevia,
+			pozoExtra: pozoExtraPrevia
+		} = superficiePreviaCultivo;
+
 		switch (altaPermisos.sistema) {
 			case "Gravedad":
-				if (gravedadNormalAsignada >= supAutorizada) return "normal";
-				if (gravedadExtraAsignada >= supAutorizada) return "extra";
+				if (gravedadNormalAsignada - gravedadNormalPrevia >= supAutorizada) return "normal";
+				if (gravedadExtraAsignada - gravedadExtraPrevia >= supAutorizada) return "extra";
 				return "Superficie no disponible";
 
 			case "Pozo Federal":
-				if (pozoNormalAsignada >= supAutorizada) return "normal";
-				if (pozoExtraAsignada >= supAutorizada) return "extra";
+				if (pozoNormalAsignada - pozoNormalPrevia >= supAutorizada) return "normal";
+				if (pozoExtraAsignada - pozoExtraPrevia >= supAutorizada) return "extra";
 				return "Superficie no disponible";
 
 			default:
@@ -240,8 +252,11 @@ export const NuevoPermisoScreen = () => {
 			<form className="container pb-4">
 				{/* TODO: Poner el mensaje de error en un lugar mas visible */}
 				{msgError && <div className="auth__alert-error">{msgError}</div>}
-				{idUsuarioSelected ? <UsuarioSelected /> : <></>}
-				{idProductorSelected ? <ProductorSelected /> : <></>}
+				{idUsuarioSelected && <UsuarioSelected />}
+				{idProductorSelected && <ProductorSelected />}
+				{idCultivoSelected && autorizadosPorCultivo && superficiePreviaCultivo && (
+					<CultivoSelected />
+				)}
 
 				<div className="row text-warning">* Campos obligatorios</div>
 

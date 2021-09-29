@@ -98,7 +98,8 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				nombreCultivo: action.payload.nombre,
 				claveCultivo: action.payload.clave,
 				subciclo: action.payload.subciclo,
-				cuotaCultivo: action.payload.costoHectarea
+				cuotaCultivo: action.payload.costoHectarea,
+				superficiePreviaCultivo: action.payload.superficiePrevia
 			};
 
 		case types.setCuotaCultivo:

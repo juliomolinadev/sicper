@@ -203,7 +203,6 @@ export const setPrivilegios = (privilegios) => ({
 export const loadEstadoExpedicionModulo = async (claveEntidad) => {
 	const entidad = await db.collection(`entidades`).doc(`${claveEntidad}`).get();
 
-	console.log("estadoExpedicion en action: ", entidad.data().expedicionActivaModulo);
 	return entidad.data().expedicionActivaModulo;
 };
 

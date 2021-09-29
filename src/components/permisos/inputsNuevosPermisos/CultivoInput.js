@@ -27,8 +27,9 @@ export const CultivoInput = () => {
 		}
 	};
 
+	const { claveEntidad } = useSelector((state) => state.auth);
 	const handleLoadCultivos = () => {
-		dispatch(startLoadCultivos(cultivo.toUpperCase()));
+		dispatch(startLoadCultivos(cultivo.toUpperCase(), claveEntidad));
 	};
 
 	const { idCultivoSelected, nombreCultivo } = useSelector((state) => state.altaPermisos);
