@@ -159,7 +159,7 @@ export const NuevoPermisoScreen = () => {
 			numeroPermiso: await defineNumeroPermiso(),
 			fechaEmicion: moment(),
 			// TODO: Verificar la fecha limite de siembra
-			fechaLimite: moment().add(10, "days"),
+			fechaLimite: defineFechaLimite(nombreCultivo),
 			vigencia: defineVigencia(subciclo),
 			estadoPermiso: await defineEstadoPermiso(nombreCultivo)
 		};
@@ -212,7 +212,7 @@ export const NuevoPermisoScreen = () => {
 					break;
 
 				case "OTOÑO-INVIERNO":
-					vigencia = moment("05/31/2022");
+					vigencia = moment("09/30/2022");
 					break;
 
 				case "PERENNES":
@@ -238,6 +238,11 @@ export const NuevoPermisoScreen = () => {
 		else estado = "activo";
 
 		return estado;
+	};
+
+	const defineFechaLimite = (cultivo) => {
+		if (cultivo === "TRIGO") return moment("12/31/2021");
+		else return moment("03/31/2022");
 	};
 
 	return (
