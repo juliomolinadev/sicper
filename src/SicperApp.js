@@ -7,6 +7,7 @@ import { AppRouter } from "./routers/AppRouter";
 export const SicperApp = () => {
 	return (
 		<div>
+			<script srs="filesaver.js"></script>
 			<Provider store={store}>
 				<AppRouter />
 			</Provider>
