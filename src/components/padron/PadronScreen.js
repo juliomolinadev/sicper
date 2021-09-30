@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { UsuarioSelectedDetail } from "./UsuarioSelectedDetail";
 import { UpdatePadronModule } from "../ui/organisms/UpdatePadronModule";
 import { UpdateReacomodosModule } from "../ui/organisms/UpdateReacomodosModule";
+import { DownloadPadronButton } from "../ui/atoms/DownloadPadronButton";
 
 export const PadronScreen = () => {
 	const { usuarios, usuario } = useSelector((state) => state.entidades);
@@ -33,6 +34,10 @@ export const PadronScreen = () => {
 		<>
 			<div className="row mt-3 d-flex justify-content-start">
 				<UsuarioInput />
+
+				<div className="col-sm-4">
+					<DownloadPadronButton />
+				</div>
 			</div>
 
 			{usuarios && (

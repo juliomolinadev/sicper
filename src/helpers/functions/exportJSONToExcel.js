@@ -4,7 +4,7 @@ import FileSaver from "file-saver";
 const EXCEL_TYPE =
 	"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
 
-export const exportJSONToExcel = (data, title, author, sheetName) => {
+export const exportJSONToExcel = (data, headers, title, author, sheetName) => {
 	const workBook = utils.book_new();
 	workBook.Props = {
 		Title: title,
@@ -14,7 +14,7 @@ export const exportJSONToExcel = (data, title, author, sheetName) => {
 
 	workBook.SheetNames.push(sheetName);
 
-	const workSheet = utils.json_to_sheet(data);
+	const workSheet = utils.json_to_sheet(data, headers);
 	workBook.Sheets[sheetName] = workSheet;
 
 	const excelBuffer = write(workBook, { bookType: "xlsx", type: "array" });

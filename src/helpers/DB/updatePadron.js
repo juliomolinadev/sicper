@@ -53,6 +53,7 @@ export const updatePadron = (file) => {
 					referencia: element.REFERENCIA !== undefined ? element.REFERENCIA : "?",
 					seccion: element.SECCION !== undefined ? element.SECCION : "?",
 					sistRiego: element.SISTRIEGO !== undefined ? element.SISTRIEGO : "?",
+					sistemaRiego: defineSistema(element.SISTRIEGO, element.EQUIPO),
 					slt: element.SLT !== undefined ? element.SLT : "?",
 					sra: element.SRA !== undefined ? element.SRA : "?",
 					ssra: element.SSRA !== undefined ? element.SSRA : "?",
@@ -141,4 +142,11 @@ const defineModulo = (modulo) => {
 	if (modulo === 9) return "9A";
 	else if (modulo === 92) return "9B";
 	else return modulo;
+};
+
+const defineSistema = (sistRiego, equipo) => {
+	if (sistRiego === 1) return "Gravedad";
+	else if (sistRiego === 2 && equipo === 1) return "Pozo Particular";
+	else if (sistRiego === 2 && equipo === 2) return "Pozo Federal";
+	else return "";
 };
