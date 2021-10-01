@@ -247,7 +247,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 					<div className="row border-top d-flex text-dotacion">
 						<div className="col-3 border">
-							<div>l.p.s./24 hrs en P.C.M.</div>
+							<div>l.p.s./24 hrs en Parcela</div>
 						</div>
 						<div className="col-2 border">
 							<div>{roundToN(data.supDerecho * getDotacion(data.sistema), 3)}</div>
