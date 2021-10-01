@@ -92,16 +92,22 @@ export const ResumenAutorizados = () => {
 												<div>Pozo</div>
 											</td>
 											<td>
-												<div className="text-center">{cultivo.gravedadNormalAutorizada}</div>
-												<div className="text-center">{cultivo.pozoNormalAutorizada}</div>
+												<div className="text-center">
+													{roundToN(cultivo.gravedadNormalAutorizada, 3)}
+												</div>
+												<div className="text-center">
+													{roundToN(cultivo.pozoNormalAutorizada, 3)}
+												</div>
 											</td>
 											<td>
-												<div className="text-center">{cultivo.gravedadNormalAsignada}</div>
-												<div className="text-center">{cultivo.pozoNormalAsignada}</div>
+												<div className="text-center">
+													{roundToN(cultivo.gravedadNormalAsignada, 3)}
+												</div>
+												<div className="text-center">{roundToN(cultivo.pozoNormalAsignada, 3)}</div>
 											</td>
 											<td>
-												<div className="text-center">{cultivo.gravedadNormal}</div>
-												<div className="text-center">{cultivo.pozoNormal}</div>
+												<div className="text-center">{roundToN(cultivo.gravedadNormal, 3)}</div>
+												<div className="text-center">{roundToN(cultivo.pozoNormal, 3)}</div>
 											</td>
 											<td>
 												<div className="text-center">
@@ -133,16 +139,22 @@ export const ResumenAutorizados = () => {
 												<div>Pozo</div>
 											</td>
 											<td>
-												<div className="text-center">{cultivo.gravedadExtraAutorizada}</div>
-												<div className="text-center">{cultivo.pozoExtraAutorizada}</div>
+												<div className="text-center">
+													{roundToN(cultivo.gravedadExtraAutorizada, 3)}
+												</div>
+												<div className="text-center">
+													{roundToN(cultivo.pozoExtraAutorizada, 3)}
+												</div>
 											</td>
 											<td>
-												<div className="text-center">{cultivo.gravedadExtraAsignada}</div>
-												<div className="text-center">{cultivo.pozoExtraAsignada}</div>
+												<div className="text-center">
+													{roundToN(cultivo.gravedadExtraAsignada, 3)}
+												</div>
+												<div className="text-center">{roundToN(cultivo.pozoExtraAsignada, 3)}</div>
 											</td>
 											<td>
-												<div className="text-center">{cultivo.gravedadExtra}</div>
-												<div className="text-center">{cultivo.pozoExtra}</div>
+												<div className="text-center">{roundToN(cultivo.gravedadExtra, 3)}</div>
+												<div className="text-center">{roundToN(cultivo.pozoExtra, 3)}</div>
 											</td>
 											<td>
 												<div className="text-center">

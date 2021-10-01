@@ -313,17 +313,21 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 			<div className="row">
 				<div className="col-4 d-flex flex-column">
-					<div className="border-top firma d-flex justify-content-center">Módulo</div>
+					<div className="border-top border-dark firma d-flex justify-content-center">Módulo</div>
 					<div className="d-flex justify-content-center">
 						<b>{data.titular}</b>
 					</div>
 					<div className="d-flex justify-content-center">PRESIDENTE</div>
 				</div>
 				<div className="col-4 d-flex flex-column">
-					<div className="border-top firma d-flex justify-content-center">Sanidad Vegetal</div>
+					<div className="border-top border-dark firma d-flex justify-content-center">
+						Sanidad Vegetal
+					</div>
 				</div>
 				<div className="col-4 d-flex flex-column">
-					<div className="border-top firma d-flex justify-content-center">FIRMA DEL PRODUCTOR</div>
+					<div className="border-top border-dark firma d-flex justify-content-center">
+						FIRMA DEL PRODUCTOR
+					</div>
 					<div className="d-flex justify-content-center">
 						<b>{data.usuario}</b>
 					</div>

@@ -1,4 +1,5 @@
 import { db } from "../firebase/firebase-config";
+import { roundToN } from "./functions/roundToN";
 
 export const loadSuperficiesCultivos = async (modulo, ciclo) => {
 	let data = {};
@@ -30,7 +31,7 @@ export const loadSuperficiesCultivos = async (modulo, ciclo) => {
 
 			superficies.forEach((cultivo) => {
 				if (contador >= 0) {
-					labels.push(`${cultivo.id} (${cultivo.superficie}ha)`);
+					labels.push(`${cultivo.id} (${roundToN(cultivo.superficie, 2)}ha)`);
 					superficiesCultivos.push(cultivo.superficie);
 					numeroPermisos.push(cultivo.numeroPermisos);
 					contador--;
@@ -40,8 +41,8 @@ export const loadSuperficiesCultivos = async (modulo, ciclo) => {
 				}
 			});
 
-			labels.push(`Otros cultivos (${restoSuperficie}ha)`);
-			superficiesCultivos.push(restoSuperficie);
+			labels.push(`Otros cultivos (${roundToN(restoSuperficie, 2)}ha)`);
+			superficiesCultivos.push(roundToN(restoSuperficie, 3));
 			numeroPermisos.push(restoPermisos);
 
 			data = {
