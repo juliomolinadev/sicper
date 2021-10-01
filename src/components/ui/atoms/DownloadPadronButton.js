@@ -11,45 +11,25 @@ export const DownloadPadronButton = () => {
 	// const data = [];
 	const headers = {
 		header: [
-			"id",
-			"cuenta",
-			"subcta",
-			"apPaterno",
-			"apMaterno",
-			"nombre",
-			"modulo",
-			"seccion",
-			"nombreLocalidad",
-			"predio",
-			"reacomodo",
-			"supRiego",
-			"sistemaRiego"
+			"CUENTA",
+			"APPATERNO",
+			"APMATERNO",
+			"NOMBRE",
+			"MODULO",
+			"SECCION",
+			"LOCALIDAD",
+			"PREDIO",
+			"REACOMODO",
+			"HA",
+			"SISTEMA"
 		]
 	};
-
-	// const cleanPadron = (padron) => {
-	// 	return padron.map((usuario) => ({
-	// 		id: usuario.usuario,
-	// 		cuenta: usuario.usuario,
-	// 		subcta: usuario.usuario,
-	// 		apPaterno: usuario.usuario,
-	// 		apMaterno: usuario.usuario,
-	// 		nombre: usuario.usuario,
-	// 		modulo: usuario.usuario,
-	// 		seccion: usuario.usuario,
-	// 		nombreLocalidad: usuario.usuario,
-	// 		predio: usuario.usuario,
-	// 		reacomodo: usuario.usuario,
-	// 		supRiego: usuario.usuario,
-	// 		sistemaRiego: usuario.usuario
-	// 	}));
-	// };
 
 	const startDowloadPadron = async () => {
 		Swal.fire({
 			title: "Atención!!",
 			text: `Al confirmar se iniciará la descarga del padrón de usuarios en formato excel.`,
-			icon: "warning",
+			icon: "question",
 			showCancelButton: true,
 			confirmButtonColor: "#3085d6",
 			cancelButtonColor: "#d33",
@@ -58,14 +38,28 @@ export const DownloadPadronButton = () => {
 		}).then(async ({ isConfirmed }) => {
 			if (isConfirmed) {
 				const usuarios = await loadUsuarios("", modulo);
+				const padron = usuarios.map((usuario) => ({
+					CUENTA: usuario.id,
+					APPATERNO: usuario.apPaterno,
+					APMATERNO: usuario.apMaterno,
+					NOMBRE: usuario.nombre,
+					MODULO: usuario.modulo,
+					SECCION: usuario.seccion,
+					LOCALIDAD: usuario.nombreLocalidad,
+					PREDIO: usuario.predio,
+					REACOMODO: usuario.reacomodo,
+					HA: usuario.supRiego,
+					SISTEMA: usuario.sistemaRiego
+				}));
 
-				exportJSONToExcel(usuarios, headers, title, name, title);
+				exportJSONToExcel(padron, headers, title, name, title);
 			}
 		});
 	};
 
 	return (
 		<button onClick={startDowloadPadron} className="btn btn-outline-primary m-3">
+			<i className="fas fa-download mr-2"></i>
 			Descargar Padron
 		</button>
 	);
