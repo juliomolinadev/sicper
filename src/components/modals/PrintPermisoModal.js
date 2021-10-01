@@ -104,7 +104,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 					<div className="d-flex justify-content-center">
 						<span className="printPermisoSubLogo">S DE R.L. DE I.P. DE C.V.</span>
 					</div>
-					<div className="border rounded d-flex justify-content-left mt-4 w-200">Folio: </div> */}
+					<div className="border border-dark rounded d-flex justify-content-left mt-4 w-200">Folio: </div> */}
 				</div>
 
 				<div className="col-6 d-flex flex-column justify-content-center">
@@ -130,7 +130,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 							style={{ maxHeight: 50 }}
 						/> */}
 					</div>
-					<div className="border rounded d-flex justify-content-center">
+					<div className="border border-dark rounded d-flex justify-content-center">
 						<h2 className="m-0">
 							<b>Folio: {data.numeroPermiso}</b>
 						</h2>
@@ -147,10 +147,10 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			<h3 className="row d-flex justify-content-center">
 				<div>{data.direccion}</div>
 			</h3>
-			<div className="row m-3 d-flex flex-column justify-content-center border rounded">
+			<div className="row m-3 d-flex flex-column justify-content-center border border-dark rounded">
 				<div className="d-flex justify-content-center ">DATOS DEL USUARIO</div>
 
-				<div className="d-flex justify-content-center border-top p-1 pb-0">
+				<div className="d-flex justify-content-center border-top border-dark p-1 pb-0">
 					<div>
 						El/la C.<b> {data.usuario}</b> con cuenta: <b>{data.cuenta}</b> tiene un derecho normal
 						de <b>{data.supDerecho} </b>
@@ -186,9 +186,9 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			{/* Detalle de cultivo y superficie ***************************************************** */}
 
 			<div className="row m-3 mt-0 d-flex">
-				<div className="col-4 d-flex flex-column border rounded p-0">
+				<div className="col-4 d-flex flex-column border border-dark rounded p-0">
 					<div className="d-flex justify-content-center ">DETALLES DEL CULTIVO</div>
-					<div className="border-top p-1">
+					<div className="border-top border-dark p-1">
 						Tipo de permiso: <b>{toUpper(data.tipo)}</b>
 						<br />
 						Cultivo:{" "}
@@ -207,9 +207,9 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 				<div className="col-1"></div>
 
-				<div className="col-7 d-flex flex-column border rounded">
+				<div className="col-7 d-flex flex-column border border-dark rounded">
 					<div className="d-flex justify-content-center ">SUPERFICIE Y DOTACIÓN VOLUMÉTRICA</div>
-					<div className="row border-top d-flex text-dotacion">
+					<div className="row border-top border-dark d-flex text-dotacion">
 						<div className="col-3 border">
 							<div>Descripción</div>
 						</div>
@@ -274,9 +274,9 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			{/* Datos complementarios  ************************************************************* */}
 
 			<div className="row m-3 d-flex">
-				<div className="col-4 d-flex flex-column border rounded p-0">
+				<div className="col-4 d-flex flex-column border border-dark rounded p-0">
 					<div className="d-flex justify-content-center ">DATOS COMPLEMENTARIOS</div>
-					<div className="border-top p-1">
+					<div className="border-top border-dark p-1">
 						Cultivo Anterior: <b>{data.cultivoAnterior}</b>
 						<br />
 						Fuente de crédito: <b>{data.fuenteCredito}</b>
@@ -293,9 +293,9 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 				<div className="col-1"></div>
 
-				<div className="col-7 d-flex flex-column border rounded">
+				<div className="col-7 d-flex flex-column border border-dark rounded">
 					<div className="d-flex justify-content-center ">OBSERVACIONES</div>
-					<div className="row border-top d-flex text-dotacion p-1">
+					<div className="row border-top border-dark d-flex text-dotacion p-1">
 						<p>{data.observaciones}</p>
 					</div>
 				</div>
@@ -303,10 +303,10 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 			{/* Transferencia  ************************************************************* */}
 
-			<div className="row m-3 d-flex flex-column justify-content-center border rounded">
+			<div className="row m-3 d-flex flex-column justify-content-center border border-dark rounded">
 				<div className="d-flex justify-content-center ">TRANSFERENCIA</div>
 
-				<div className="d-flex border-top p-1">{data.transferencia}</div>
+				<div className="d-flex border-top border-dark p-1">{data.transferencia}</div>
 			</div>
 
 			{/* Firmas  ************************************************************* */}
@@ -354,8 +354,8 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 				<div className="col-2"></div>
 				<div className="col-10">
 					<div className="row d-flex justify-content-between">
-						<div className="border rounded mt-2 p-2">Folio: {data.numeroPermiso}</div>
-						<div className="border rounded mt-2 p-2">
+						<div className="border border-dark rounded mt-2 p-2">Folio: {data.numeroPermiso}</div>
+						<div className="border border-dark rounded mt-2 p-2">
 							Bueno por: $ {roundToN(data.cuotaCultivo * data.supAutorizada, 3)} pesos M.N.
 						</div>
 					</div>
@@ -388,8 +388,10 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 					<div className="d-flex justify-content-center font12">BAJA CALIFORNIA</div> */}
 				</div>
 
-				<div className="col-10 d-flex flex-column border rounded p-0">
-					<div className="d-flex justify-content-center border-bottom">DATOS DEL USUARIO</div>
+				<div className="col-10 d-flex flex-column border border-dark rounded p-0">
+					<div className="d-flex justify-content-center border-bottom border-dark">
+						DATOS DEL USUARIO
+					</div>
 
 					<p className="m-2">
 						El/la C.<b> {data.usuario}</b> con cuenta: <b>{data.cuenta}</b> tiene un derecho normal
@@ -431,7 +433,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 					)}
 
 					{enEspera ? (
-						<div className="spinner-border text-primary" role="status">
+						<div className="spinner-border border-dark text-primary" role="status">
 							<span className="sr-only">Loading...</span>
 						</div>
 					) : (
