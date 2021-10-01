@@ -13,8 +13,19 @@ export const SicperScreen = () => {
 	return (
 		<>
 			<div className="row pt-5">
-				<div className="col-sm-8">{privilegios.consultarAutorizados && <ResumenAutorizados />}</div>
-				<div className="col-sm-4">
+				<div className="col-sm-8">
+					{privilegios.consultarAutorizados && <ResumenAutorizados />}
+
+					<button
+						className="btn btn-outline-primary mt-4 no-printme"
+						type="button"
+						onClick={() => window.print()}
+					>
+						<span>Imprimir</span>
+						<i className="fas fa-print"></i>
+					</button>
+				</div>
+				<div className="col-sm-4 no-printme">
 					{expedicionActiva && expedicionActivaModulo && privilegios.expedirPermisos && (
 						<NuevoPermisoButton />
 					)}
