@@ -68,7 +68,7 @@ export const NuevoProductorModal = () => {
 					fechaRegistro: new Date()
 				})
 			);
-			closeModal();
+			// closeModal();
 			// TODO: Seleccionar el nuebo productor recien guardado
 			// TODO: Enviar mensaje de confirmacion para nuevo productor
 		}
@@ -138,6 +138,7 @@ export const NuevoProductorModal = () => {
 							className="form-control"
 							placeholder="* Apellido Paterno"
 							name="apPaterno"
+							value={apPaterno}
 							autoComplete="off"
 							onChange={handleInputChange}
 						/>
@@ -149,6 +150,7 @@ export const NuevoProductorModal = () => {
 							className="form-control"
 							placeholder="* Direccion"
 							name="direccion"
+							value={direccion}
 							autoComplete="waa"
 							onChange={handleInputChange}
 						/>
@@ -162,6 +164,7 @@ export const NuevoProductorModal = () => {
 							className="form-control"
 							placeholder="* Apellido Materno"
 							name="apMaterno"
+							value={apMaterno}
 							autoComplete="waa"
 							onChange={handleInputChange}
 						/>
@@ -173,6 +176,7 @@ export const NuevoProductorModal = () => {
 							className="form-control"
 							placeholder="* Estado"
 							name="estado"
+							value={estado}
 							autoComplete="waa"
 							onChange={handleInputChange}
 						/>
@@ -186,6 +190,7 @@ export const NuevoProductorModal = () => {
 							className="form-control"
 							placeholder="* Nombre"
 							name="nombre"
+							value={nombre}
 							autoComplete="off"
 							onChange={handleInputChange}
 						/>
@@ -197,6 +202,7 @@ export const NuevoProductorModal = () => {
 							className="form-control"
 							placeholder="* Municipio"
 							name="municipio"
+							value={municipio}
 							autoComplete="waa"
 							onChange={handleInputChange}
 						/>
@@ -210,6 +216,7 @@ export const NuevoProductorModal = () => {
 							className="form-control"
 							placeholder="* CURP"
 							name="curp"
+							value={curp}
 							autoComplete="waa"
 							onChange={handleInputChange}
 						/>
@@ -221,6 +228,7 @@ export const NuevoProductorModal = () => {
 							className="form-control"
 							placeholder="* CP"
 							name="cp"
+							value={cp}
 							autoComplete="waa"
 							onChange={handleInputChange}
 						/>
@@ -234,6 +242,7 @@ export const NuevoProductorModal = () => {
 							className="form-control"
 							placeholder="* RFC"
 							name="rfc"
+							value={rfc}
 							autoComplete="off"
 							onChange={handleInputChange}
 						/>
@@ -245,6 +254,7 @@ export const NuevoProductorModal = () => {
 							className="form-control"
 							placeholder="* Telefono"
 							name="telefono"
+							value={telefono}
 							autoComplete="off"
 							onChange={handleInputChange}
 						/>

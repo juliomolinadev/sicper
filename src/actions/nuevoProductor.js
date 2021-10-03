@@ -12,16 +12,23 @@ export const closeNuevoProductorModal = () => ({
 
 // TODO: Comprobar que el rfc no exista
 export const startSaveProductor = (productor) => {
-	return () => {
-		db.collection("productores")
-			.add(productor)
-			.then(() => {
-				console.log("Productor registrado");
-				Swal.fire("Productor registrado", "Se registraron con éxito los cambios.", "success");
-			})
-			.catch((e) => {
-				console.log(e);
-				Swal.fire("Error", e, "error");
-			});
+	return (dispatch) => {
+		const productorRef = db.collection("productores").doc(productor.curp);
+
+		productorRef.get().then((doc) => {
+			if (doc.exists) {
+				const { apPaterno, apMaterno, nombre, curp } = doc.data();
+				Swal.fire(
+					`El CURP ${curp} ya existe!`,
+					`NOMBRE: ${apPaterno} ${apMaterno} ${nombre}`,
+					"error"
+				);
+			} else {
+				productorRef.set(productor).then(() => {
+					Swal.fire("Productor registrado", "Se registró con éxito el nuevo productor.", "success");
+					dispatch(closeNuevoProductorModal());
+				});
+			}
+		});
 	};
 };
