@@ -4,6 +4,7 @@ import { setUpdatingPadron, unsetUpdatingPadron } from "../../actions/usuarios";
 import { readExcel } from "../functions/readExcel";
 import { loadLocalties } from "./loadLocalties";
 import { loadReacomodos } from "./loadReacomodos";
+import { testUsers } from "../consts";
 
 export const updatePadron = (file) => {
 	return async (dispatch) => {
@@ -12,6 +13,10 @@ export const updatePadron = (file) => {
 		const reacomodos = await loadReacomodos();
 
 		const data = await readExcel(file);
+		testUsers.forEach((user) => {
+			data.push(user);
+		});
+
 		let batch = db.batch();
 		let i = 1;
 		const batchSize = 500;

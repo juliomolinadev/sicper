@@ -93,7 +93,8 @@ export const savePermiso = async (allData) => {
 					"error"
 				);
 			} else {
-				permisoRef.set(data).then(() => {
+				permisoRef.set(data).then((resp) => {
+					console.log("Respuesta al guardar permiso: ", resp);
 					db.collection(`permisos`)
 						.doc(data.ciclo)
 						.collection("modulos")

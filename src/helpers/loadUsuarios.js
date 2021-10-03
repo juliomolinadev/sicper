@@ -40,5 +40,6 @@ export const loadUsuarios = async (usuario, modulo) => {
 const defineModulo = (modulo) => {
 	if (modulo === "9A") return modulo;
 	else if (modulo === "9B") return modulo;
+	else if (modulo === "dev") return modulo;
 	else return parseInt(modulo);
 };
