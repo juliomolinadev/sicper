@@ -18,7 +18,6 @@ export const ConfiguracionScreen = () => {
 	}
 
 	const [modules, modulesChange] = useForm();
-	console.log(modules);
 
 	const modulesNames = [
 		{

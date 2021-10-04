@@ -18,20 +18,23 @@ export const SicperScreen = () => {
 			<div className="row pt-5">
 				<div className="col-sm-8">
 					{privilegios.consultarAutorizados && <ResumenAutorizados />}
-					<div className="row">
-						<div className="col-sm-10">
-							<button
-								className="btn btn-outline-primary mt-4 no-printme"
-								type="button"
-								onClick={() => window.print()}
-							>
-								<span>Imprimir</span>
-								<i className="fas fa-print"></i>
-							</button>
+					{privilegios.consultarAutorizados && (
+						<div className="row">
+							<div className="col-sm-10">
+								<button
+									className="btn btn-outline-primary mt-4 no-printme"
+									type="button"
+									onClick={() => window.print()}
+								>
+									<span>Imprimir</span>
+									<i className="fas fa-print"></i>
+								</button>
+							</div>
+							<div className="col-sm-2 mt-2">{fechaActual.toLocaleDateString()}</div>
 						</div>
-						<div className="col-sm-2 mt-2">{fechaActual.toLocaleDateString()}</div>
-					</div>
+					)}
 				</div>
+
 				<div className="col-sm-4 no-printme">
 					{expedicionActiva && expedicionActivaModulo && privilegios.expedirPermisos && (
 						<NuevoPermisoButton />
