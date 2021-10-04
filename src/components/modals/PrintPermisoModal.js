@@ -75,7 +75,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			onRequestClose={closeModal}
 			style={customStyles}
 			closeTimeoutMS={200}
-			className="printModal pl-5 pr-5"
+			className="printModal pl-5 pr-5 pb-0 mb-0"
 			overlayClassName="modal-fondo"
 		>
 			{/* Marca de agua ***************************************************************** */}
@@ -406,7 +406,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 			{/* Logo sanidad  y botones************************************************************* */}
 
-			<div className="row">
+			<div className="row mb-0 pb-0">
 				<div className="col-12 d-flex justify-content-center align-items-center pt-2">
 					{enableSaveButton ? (
 						isNew ? (

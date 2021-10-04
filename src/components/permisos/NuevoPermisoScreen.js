@@ -414,7 +414,7 @@ export const NuevoPermisoScreen = () => {
 				</div>
 
 				{msgError && <div className="auth__alert-error">{msgError}</div>}
-				<div className="row d-flex justify-content-center pt-5">
+				<div className="row d-flex justify-content-center pt-5 d-print-none">
 					<button type="button" className="btn btn-outline-primary" onClick={onSendForm}>
 						<i className="far fa-file"></i>
 						<span> Revisar</span>
