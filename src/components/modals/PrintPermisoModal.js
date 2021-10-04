@@ -213,17 +213,21 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						<div className="col-3 border">
 							<div>Descripción</div>
 						</div>
-						<div className="col-2 border">
-							<div>Derecho de riego</div>
-						</div>
-						<div className="col-2 border">
-							<div>Utilizada Previamente</div>
-						</div>
-						<div className="col-3 border">
-							<div>Autorizada en este permiso</div>
-						</div>
-						<div className="col-2 border">
-							<div>Disponible</div>
+						<div className="col-9">
+							<div className="row">
+								<div className="col-3 border">
+									<div>Derecho de riego</div>
+								</div>
+								<div className="col-3 border">
+									<div>Utilizada Previamente</div>
+								</div>
+								<div className="col-4 border">
+									<div>Autorizada en este permiso</div>
+								</div>
+								<div className="col-2 border p-0">
+									<div>Disponible</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -231,17 +235,21 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						<div className="col-3 border">
 							<div>Hectáreas</div>
 						</div>
-						<div className="col-2 border">
-							<div>{data.supDerecho}</div>
-						</div>
-						<div className="col-2 border">
-							<div>{data.supPrevia}</div>
-						</div>
-						<div className="col-3 border">
-							<div>{data.supAutorizada}</div>
-						</div>
-						<div className="col-2 border">
-							<div>{roundToN(data.supDerecho - data.supPrevia - data.supAutorizada, 3)}</div>
+						<div className="col-9">
+							<div className="row">
+								<div className="col-3 border">
+									<div>{data.supDerecho}</div>
+								</div>
+								<div className="col-3 border">
+									<div>{data.supPrevia}</div>
+								</div>
+								<div className="col-4 border">
+									<div>{data.supAutorizada}</div>
+								</div>
+								<div className="col-2 border">
+									<div>{roundToN(data.supDerecho - data.supPrevia - data.supAutorizada, 3)}</div>
+								</div>
+							</div>
 						</div>
 					</div>
 
@@ -249,22 +257,31 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						<div className="col-3 border">
 							<div>l.p.s./24 hrs en Parcela</div>
 						</div>
-						<div className="col-2 border">
-							<div>{roundToN(data.supDerecho * getDotacion(data.sistema), 3)}</div>
-						</div>
-						<div className="col-2 border">
-							<div>{roundToN(data.supPrevia * getDotacion(data.sistema), 3)}</div>
-						</div>
-						<div className="col-3 border">
-							<div>{roundToN(data.supAutorizada * getDotacion(data.sistema), 3)}</div>
-						</div>
-						<div className="col-2 border">
-							<div>
-								{roundToN(
-									(data.supDerecho - data.supPrevia - data.supAutorizada) *
-										getDotacion(data.sistema),
-									3
-								)}
+						<div className="col-9">
+							<div className="row">
+								<div className="col-3 border align-self-start">
+									<div>{roundToN(data.supDerecho * getDotacion(data.sistema), 3)}</div>
+								</div>
+								<div className="col-3 border align-self-start">
+									<div>{roundToN(data.supPrevia * getDotacion(data.sistema), 3)}</div>
+								</div>
+								<div className="col-4 border align-self-start">
+									<div>{roundToN(data.supAutorizada * getDotacion(data.sistema), 3)}</div>
+								</div>
+								<div className="col-2 border align-self-start">
+									<div>
+										{roundToN(
+											(data.supDerecho - data.supPrevia - data.supAutorizada) *
+												getDotacion(data.sistema),
+											3
+										)}
+									</div>
+								</div>
+							</div>
+							<div className="row">
+								<div className="ml-2" style={{ fontSize: 12 }}>
+									Dotación en condición normal. No incluye ajuste por reducción Acta CILA 323.
+								</div>
 							</div>
 						</div>
 					</div>
