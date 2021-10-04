@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 import { /* startGoogleLogin, */ startLoginEmailPassword } from "../../actions/auth";
-import { useForm } from "../../hooks/useForm";
+import { useFormNoUpper } from "../../hooks/UseFormNoUpper";
 import "./_auth.scss";
 
 export const LoginScreen = () => {
 	const dispatch = useDispatch();
 	const { loading } = useSelector((state) => state.ui);
 
-	const [formValues, handleInputChange] = useForm({
+	const [formValues, handleInputChange] = useFormNoUpper({
 		email: "",
 		password: ""
 	});
