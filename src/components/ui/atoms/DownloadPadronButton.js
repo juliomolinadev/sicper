@@ -7,7 +7,7 @@ import { loadUsuarios } from "../../../helpers/loadUsuarios";
 export const DownloadPadronButton = () => {
 	const { modulo, name } = useSelector((state) => state.auth);
 
-	const title = `ParonM${modulo}`;
+	const title = `PadronM${modulo}`;
 	// const data = [];
 	const headers = {
 		header: [

@@ -93,11 +93,11 @@ export const NuevoProductorModal = () => {
 		} else if (municipio.trim().length === 0) {
 			dispatch(setError("Se requiere municipio"));
 			return false;
+		} else if (curp.trim().length < 18 || curp.trim().length > 18) {
+			dispatch(setError("CURP no valido"));
+			return false;
 		} else if (rfc.trim().length < 12) {
 			dispatch(setError("RFC no valido"));
-			return false;
-		} else if (curp.trim().length < 18) {
-			dispatch(setError("CURP no valido"));
 			return false;
 		} else if (cp.trim().length < 5) {
 			dispatch(setError("Codigo postal no valido"));
