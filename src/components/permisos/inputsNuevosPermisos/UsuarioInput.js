@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "../../../hooks/useForm";
 import Swal from "sweetalert2";
 import {
 	closeUsuariosModal,
@@ -8,6 +7,7 @@ import {
 	startLoadUsuarios,
 	unsetUsuarioSelected
 } from "../../../actions/usuarios";
+import { useFormToUpper } from "../../../hooks/UseFormToUpper";
 
 export const UsuarioInput = () => {
 	const { modulo } = useSelector((state) => state.auth);
@@ -44,7 +44,7 @@ export const UsuarioInput = () => {
 		formValues.usuario = "";
 	};
 
-	const [formValues, handleInputChange] = useForm({
+	const [formValues, handleInputChange] = useFormToUpper({
 		usuario: ""
 	});
 

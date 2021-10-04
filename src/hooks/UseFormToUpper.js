@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useFormNoUpper = (initialState = {}) => {
+export const useFormToUpper = (initialState = {}) => {
 	const [values, setValues] = useState(initialState);
 	const reset = () => {
 		setValues(initialState);
@@ -15,7 +15,7 @@ export const useFormNoUpper = (initialState = {}) => {
 		} else {
 			setValues({
 				...values,
-				[target.name]: target.value
+				[target.name]: target.value.toUpperCase()
 			});
 		}
 	};

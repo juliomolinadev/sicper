@@ -2,9 +2,9 @@ import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 import { closeNuevoProductorModal } from "../../actions/nuevoProductor";
-import { useForm } from "../../hooks/useForm";
 import { removeError, setError } from "../../actions/ui";
 import { startSaveProductor } from "../../actions/nuevoProductor";
+import { useFormToUpper } from "../../hooks/UseFormToUpper";
 
 const customStyles = {
 	content: {
@@ -32,7 +32,7 @@ export const NuevoProductorModal = () => {
 		dispatch(removeError());
 	};
 
-	const [formValues, handleInputChange] = useForm();
+	const [formValues, handleInputChange] = useFormToUpper();
 
 	const {
 		apPaterno = "",

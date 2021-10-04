@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
-import { useForm } from "../../hooks/useForm";
 import { CultivoModal } from "../modals/CultivoModal";
 import { UsuarioModal } from "../modals/UsuarioModal";
 import { ProductorModal } from "../modals/ProductorModal";
@@ -24,6 +23,7 @@ import { removeError, setError } from "../../actions/ui";
 
 import { startLoadAutorizadoPorCultivo } from "../../actions/autorizadosScreen";
 import { CultivoSelected } from "./inputsNuevosPermisos/CultivoSelected";
+import { useFormToUpper } from "../../hooks/UseFormToUpper";
 
 export const NuevoPermisoScreen = () => {
 	const {
@@ -41,7 +41,7 @@ export const NuevoPermisoScreen = () => {
 	const { msgError } = useSelector((state) => state.ui);
 	const { autorizadosPorCultivo } = useSelector((state) => state.autorizadosScreen);
 
-	const [formValues, handleInputChange] = useForm({
+	const [formValues, handleInputChange] = useFormToUpper({
 		variedad: "",
 		supAutorizada: 0,
 		fuenteCredito: "",

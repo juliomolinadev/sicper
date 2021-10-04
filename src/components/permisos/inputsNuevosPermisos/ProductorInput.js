@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "../../../hooks/useForm";
 import Swal from "sweetalert2";
 
 import {
@@ -9,6 +8,7 @@ import {
 	startLoadProductores,
 	unsetProductorSelected
 } from "../../../actions/productores";
+import { useFormToUpper } from "../../../hooks/UseFormToUpper";
 
 export const ProductorInput = () => {
 	const dispatch = useDispatch();
@@ -44,7 +44,7 @@ export const ProductorInput = () => {
 		formValues.productor = "";
 	};
 
-	const [formValues, handleInputChange] = useForm({
+	const [formValues, handleInputChange] = useFormToUpper({
 		productor: ""
 	});
 

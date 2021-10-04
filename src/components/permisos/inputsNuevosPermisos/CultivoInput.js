@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
-import { useForm } from "../../../hooks/useForm";
 import {
 	closeCultivosModal,
 	openCultivosModal,
 	startLoadCultivos,
 	unsetCultivoSelected
 } from "../../../actions/cultivos";
+import { useFormToUpper } from "../../../hooks/UseFormToUpper";
 
 export const CultivoInput = () => {
 	const dispatch = useDispatch();
@@ -45,7 +45,7 @@ export const CultivoInput = () => {
 		formValues.cultivo = "";
 	};
 
-	const [formValues, handleInputChange] = useForm({
+	const [formValues, handleInputChange] = useFormToUpper({
 		cultivo: ""
 	});
 
