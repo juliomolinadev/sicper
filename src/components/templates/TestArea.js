@@ -1,5 +1,5 @@
 import React from "react";
-import { ReportModule } from "../ui/organisms/ReportModule";
+import { PermitsReport } from "../ui/organisms/PermitsReport";
 
 export const TestArea = () => {
 	return (
@@ -9,7 +9,7 @@ export const TestArea = () => {
 			</div>
 
 			<div className="row">
-				<ReportModule />
+				<PermitsReport />
 			</div>
 		</>
 	);

@@ -9,9 +9,10 @@ export const loadPermisos = async (
 	estado = "todos",
 	tipo = "todos",
 	sistema = "todos",
-	fechaInicial = new Date(2020, 9, 1),
-	fechaFinal = new Date(2021, 8, 30)
+	fechaInicial = new Date(2021, 9, 1),
+	fechaFinal = new Date(2022, 8, 30)
 ) => {
+	console.log(palabra, modulo, ciclo);
 	const permisos = [];
 	const permisosCampo = [];
 
