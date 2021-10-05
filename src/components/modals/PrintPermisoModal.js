@@ -343,7 +343,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 				</div>
 				<div className="col-4 d-flex flex-column">
 					<div className="border-top border-dark firma d-flex justify-content-center">
-						FIRMA DEL PRODUCTOR
+						FIRMA DEL USUARIO
 					</div>
 					<div className="d-flex justify-content-center">
 						<b>{data.usuario}</b>

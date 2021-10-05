@@ -12,7 +12,6 @@ export const loadPermisos = async (
 	fechaInicial = new Date(2021, 9, 1),
 	fechaFinal = new Date(2022, 8, 30)
 ) => {
-	console.log(palabra, modulo, ciclo);
 	const permisos = [];
 	const permisosCampo = [];
 
