@@ -89,7 +89,8 @@ export const printPermisosColumns = [
 	{ name: "LOCALIDAD", selector: "localidad", sortable: true, width: "80px" },
 	{ name: "EMISIÓN", selector: "fechaEmicion", sortable: true, width: "70px" },
 	{ name: "VIGENCIA", selector: "vigencia", sortable: true, width: "70px" },
-	{ name: "ESTADO", selector: "estadoPermiso", sortable: true, width: "70px" }
+	{ name: "ESTADO", selector: "estadoPermiso", sortable: true, width: "70px" },
+	{ name: "CUOTA", selector: "cuotaCultivo", width: "80px", sortable: true, center: true }
 ];
 
 export const autorizadosColumns = [

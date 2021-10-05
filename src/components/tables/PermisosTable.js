@@ -5,6 +5,7 @@ import moment from "moment";
 import { CustomPrintTable } from "./CustomPrintTable";
 import { printPermisosColumns } from "./configTables";
 import { startLoadPermisos } from "../../actions/entidades/permisos";
+import { roundToN } from "../../helpers/functions/roundToN";
 
 export const PermisosTable = () => {
 	const { permisos } = useSelector((state) => state.entidades);
@@ -22,14 +23,27 @@ export const PermisosTable = () => {
 	let permisosFormateados = [];
 
 	if (permisos) {
+		const totales = {
+			numeroPermiso: "TOTALES",
+			supAutorizada: 0,
+			cuotaCultivo: 0
+		};
+
 		permisos.forEach((permiso) => {
+			totales.supAutorizada = totales.supAutorizada + permiso.supAutorizada;
+			totales.cuotaCultivo =
+				totales.cuotaCultivo + roundToN(permiso.cuotaCultivo * permiso.supAutorizada, 3);
+
 			permisosFormateados.push({
 				...permiso,
 				fechaEmicion: moment(permiso.fechaEmicion.toDate()).format("DD/MM/YYYY"),
 				fechaLimite: moment(permiso.fechaLimite.toDate()).format("DD/MM/YYYY"),
-				vigencia: moment(permiso.vigencia.toDate()).format("DD/MM/YYYY")
+				vigencia: moment(permiso.vigencia.toDate()).format("DD/MM/YYYY"),
+				cuotaCultivo: roundToN(permiso.cuotaCultivo * permiso.supAutorizada, 3)
 			});
 		});
+
+		permisosFormateados.push(totales);
 	}
 
 	const titulo = "";
