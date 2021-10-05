@@ -3,8 +3,8 @@ export const modulosPorUnidad = {
 	segundaUnidad: {
 		7: false,
 		8: false,
-		9: false,
-		92: false,
+		"9A": false,
+		"9B": false,
 		10: false,
 		11: false,
 		12: false,
@@ -13,7 +13,7 @@ export const modulosPorUnidad = {
 		19: false,
 		20: false
 	},
-	terceraUnidad: { 1: false, 2: false, 3: false, 21: false, 22: false, FL: false }
+	terceraUnidad: { 1: false, 2: false, 3: false, 21: false, 22: false, 23: false }
 };
 
 export const modulosPorEstado = {
