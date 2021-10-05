@@ -16,6 +16,9 @@ export const PermisosTable = () => {
 	const auth = useSelector((state) => state.auth);
 	const ciclo = auth.variablesGlobales.cicloActual;
 
+	const tiempo = Date.now();
+	const fechaActual = new Date(tiempo);
+
 	if (!permisos) {
 		dispatch(startLoadPermisos("", modulo, ciclo, ["nombreCultivo"]));
 	}
@@ -55,6 +58,7 @@ export const PermisosTable = () => {
 				columns={printPermisosColumns}
 				data={permisosFormateados}
 			></CustomPrintTable>
+			<div className="mt-1">{fechaActual.toLocaleDateString()}</div>
 		</div>
 	);
 };
