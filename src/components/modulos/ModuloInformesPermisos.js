@@ -13,13 +13,13 @@ export const ModuloInformesPermisos = () => {
 			</div>
 
 			<div className="row p-3 d-flex justify-content-center">
-				<div className="col-sm-9">
+				<div className="col-sm-9 no-printme">
 					<FormPermisosInformes />
 				</div>
 			</div>
 
 			<div className="row d-flex justify-content-center">
-				<div className="col-sm-5">
+				<div className="col-sm-5 no-printme">
 					<GraficoPrincipalesCultivos />
 				</div>
 			</div>

@@ -84,11 +84,11 @@ export const printPermisosColumns = [
 	{ name: "USUARIO", selector: "usuario", sortable: true, width: "180px" },
 	{ name: "PRODUCTOR", selector: "nombreProductor", width: "180px", sortable: true },
 	{ name: "CULTIVO", selector: "nombreCultivo", width: "100px", sortable: true },
-	{ name: "HA", selector: "supAutorizada", width: "40px", sortable: true, center: true },
+	{ name: "HA", selector: "supAutorizada", width: "80px", sortable: true, center: true },
 	{ name: "LOTE", selector: "lote", sortable: true, width: "40px", center: true },
 	{ name: "LOCALIDAD", selector: "localidad", sortable: true, width: "80px" },
 	{ name: "EMISIÓN", selector: "fechaEmicion", sortable: true, width: "70px" },
-	{ name: "VIGENCIA", selector: "vigencia", sortable: true, width: "70px" },
+	// { name: "VIGENCIA", selector: "vigencia", sortable: true, width: "70px" },
 	{ name: "ESTADO", selector: "estadoPermiso", sortable: true, width: "70px" },
 	{ name: "CUOTA", selector: "cuotaCultivo", width: "80px", sortable: true, center: true }
 ];

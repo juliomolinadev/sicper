@@ -15,7 +15,7 @@ export const FormPermisosInformes = () => {
 
 	// TODO: obtener fecha inicial y final del ciclo vigente
 	const [fechaInicial, onChangeFechaInicial] = useState(new Date(2021, 9, 1));
-	const [fechaFinal, onChangeFechaFinal] = useState(new Date(2022, 8, 30));
+	const [fechaFinal, onChangeFechaFinal] = useState(new Date());
 
 	const auth = useSelector((state) => state.auth);
 	const ciclo = auth.variablesGlobales.cicloActual;
