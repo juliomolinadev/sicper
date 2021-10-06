@@ -16,8 +16,8 @@ import {
 import { unsetCultivoSelected } from "../../actions/cultivos";
 import { unsetProductorSelected } from "../../actions/productores";
 import { unsetUsuarioSelected } from "../../actions/usuarios";
-import { savePermiso } from "../../helpers/savePermiso";
 import { roundToN } from "../../helpers/functions/roundToN";
+import { savePermitTransaction } from "../../helpers/DB/savePermitTransaction";
 
 const customStyles = {
 	content: {
@@ -47,7 +47,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 	const handleSavePermiso = async () => {
 		dispatch(startDisableSaveButton());
 		dispatch(setEnEspera());
-		if (await savePermiso(data)) {
+		if (await savePermitTransaction(data)) {
 			dispatch(unsetEnEspera());
 			dispatch(startEnablePrintButton());
 		}
@@ -213,21 +213,17 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						<div className="col-3 border">
 							<div>Descripción</div>
 						</div>
-						<div className="col-9">
-							<div className="row">
-								<div className="col-3 border">
-									<div>Derecho de riego</div>
-								</div>
-								<div className="col-3 border">
-									<div>Utilizada Previamente</div>
-								</div>
-								<div className="col-4 border">
-									<div>Autorizada en este permiso</div>
-								</div>
-								<div className="col-2 border p-0">
-									<div>Disponible</div>
-								</div>
-							</div>
+						<div className="col-2 border">
+							<div>Derecho de riego</div>
+						</div>
+						<div className="col-2 border">
+							<div>Utilizada Previamente</div>
+						</div>
+						<div className="col-3 border">
+							<div>Autorizada en este permiso</div>
+						</div>
+						<div className="col-2 border">
+							<div>Disponible</div>
 						</div>
 					</div>
 
@@ -235,53 +231,48 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						<div className="col-3 border">
 							<div>Hectáreas</div>
 						</div>
-						<div className="col-9">
-							<div className="row">
-								<div className="col-3 border">
-									<div>{data.supDerecho}</div>
-								</div>
-								<div className="col-3 border">
-									<div>{data.supPrevia}</div>
-								</div>
-								<div className="col-4 border">
-									<div>{data.supAutorizada}</div>
-								</div>
-								<div className="col-2 border">
-									<div>{roundToN(data.supDerecho - data.supPrevia - data.supAutorizada, 3)}</div>
-								</div>
-							</div>
+						<div className="col-2 border">
+							<div>{data.supDerecho}</div>
+						</div>
+						<div className="col-2 border">
+							<div>{data.supPrevia}</div>
+						</div>
+						<div className="col-3 border">
+							<div>{data.supAutorizada}</div>
+						</div>
+						<div className="col-2 border">
+							<div>{roundToN(data.supDerecho - data.supPrevia - data.supAutorizada, 3)}</div>
 						</div>
 					</div>
 
 					<div className="row border-top d-flex text-dotacion">
-						<div className="col-3 border">
-							<div>l.p.s./24 hrs en Parcela</div>
-						</div>
-						<div className="col-9">
-							<div className="row">
-								<div className="col-3 border align-self-start">
-									<div>{roundToN(data.supDerecho * getDotacion(data.sistema), 3)}</div>
-								</div>
-								<div className="col-3 border align-self-start">
-									<div>{roundToN(data.supPrevia * getDotacion(data.sistema), 3)}</div>
-								</div>
-								<div className="col-4 border align-self-start">
-									<div>{roundToN(data.supAutorizada * getDotacion(data.sistema), 3)}</div>
-								</div>
-								<div className="col-2 border align-self-start">
-									<div>
-										{roundToN(
-											(data.supDerecho - data.supPrevia - data.supAutorizada) *
-												getDotacion(data.sistema),
-											3
-										)}
-									</div>
-								</div>
+						<div className="col-3 border p-0">
+							<div className="p-0 ml-2" style={{ fontSize: 12 }}>
+								l.p.s./24 hrs en Parcela
 							</div>
-							<div className="row">
-								<div className="ml-2" style={{ fontSize: 12 }}>
-									Dotación en condición normal. No incluye ajuste por reducción Acta CILA 323.
-								</div>
+						</div>
+						<div className="col-2 border align-self-start">
+							<div>{roundToN(data.supDerecho * getDotacion(data.sistema), 3)}</div>
+						</div>
+						<div className="col-2 border align-self-start">
+							<div>{roundToN(data.supPrevia * getDotacion(data.sistema), 3)}</div>
+						</div>
+						<div className="col-3 border align-self-start">
+							<div>{roundToN(data.supAutorizada * getDotacion(data.sistema), 3)}</div>
+						</div>
+						<div className="col-2 border align-self-start">
+							<div>
+								{roundToN(
+									(data.supDerecho - data.supPrevia - data.supAutorizada) *
+										getDotacion(data.sistema),
+									3
+								)}
+							</div>
+						</div>
+						<div className="">
+							<div className="ml-2" style={{ fontSize: 12 }}>
+								Dotación en condiciones normales. No incluye ajuste por reducciones establecidas en
+								el acta 323 de la CILA que deberá ser aplicado por el Módulo de Riego.
 							</div>
 						</div>
 					</div>
