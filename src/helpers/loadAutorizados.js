@@ -37,6 +37,25 @@ export const loadAutorizados = async (ciclo, modulo) => {
 				pozoExtraAsignada: 0
 			});
 		});
+	} else {
+		nombresCultivos.forEach((cultivo) => {
+			const autorizado = autorizados.find((autorizado) => autorizado.clave === cultivo.clave);
+			if (autorizado === undefined) {
+				autorizados.push({
+					clave: cultivo.clave,
+					cultivo: cultivo.cultivo,
+					subciclo: cultivo.subciclo,
+					gravedadNormalAutorizada: 0,
+					gravedadNormalAsignada: 0,
+					gravedadExtraAutorizada: 0,
+					gravedadExtraAsignada: 0,
+					pozoNormalAutorizada: 0,
+					pozoNormalAsignada: 0,
+					pozoExtraAutorizada: 0,
+					pozoExtraAsignada: 0
+				});
+			}
+		});
 	}
 
 	return autorizados;
