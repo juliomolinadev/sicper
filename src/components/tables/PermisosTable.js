@@ -52,7 +52,7 @@ export const PermisosTable = () => {
 	const titulo = "";
 
 	return (
-		<div>
+		<div className="printme">
 			<CustomPrintTable
 				title={titulo}
 				columns={printPermisosColumns}

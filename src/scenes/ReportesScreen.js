@@ -35,7 +35,7 @@ export const ReportesScreen = () => {
 	}, [dispatch, ciclo]);
 
 	return (
-		<div className={"mt-5"}>
+		<div className="mt-5">
 			<div className="row justify-content-center">
 				<RadioButtonGroup
 					inputName={"reportType"}

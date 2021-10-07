@@ -2,7 +2,20 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export const Header = () => {
-	const { name, entidad, img, variablesGlobales } = useSelector((state) => state.auth);
+	const { name, entidad, img, variablesGlobales, claveEntidad } = useSelector(
+		(state) => state.auth
+	);
+
+	const setImgStyle = (entidad) => {
+		switch (entidad) {
+			case "SADER":
+			case "CNA":
+				return { maxWidth: 140 };
+
+			default:
+				return { maxHeight: 100 };
+		}
+	};
 
 	return (
 		<>
@@ -13,7 +26,7 @@ export const Header = () => {
 							className="align-self-center"
 							src={`./logos/${img}`}
 							alt="Logo de la entidad"
-							style={{ maxHeight: 100 }}
+							style={setImgStyle(claveEntidad)}
 						/>
 					</div>
 				</div>
