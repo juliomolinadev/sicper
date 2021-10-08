@@ -156,6 +156,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				municipio: action.payload.municipio,
 				estado: action.payload.estado,
 				modulo: action.payload.modulo,
+				zona: action.payload.zona,
 				seccion: action.payload.seccion,
 				canal: `${action.payload.cp}-${action.payload.lt}-${action.payload.slt}-${action.payload.ra}-${action.payload.sra}-${action.payload.ssra}`,
 				toma: action.payload.pControl,

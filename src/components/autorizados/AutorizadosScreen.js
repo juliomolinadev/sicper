@@ -163,7 +163,7 @@ export const AutorizadosScreen = () => {
 				)}
 			</div>
 			{autorizadoSelected ? (
-				modulo === "Pozo Particular" ? (
+				modulo === "UNI01" || modulo === "UNI02" || modulo === "UNI03" ? (
 					<AutorizadosPozoModal />
 				) : (
 					<AutorizadosModal />

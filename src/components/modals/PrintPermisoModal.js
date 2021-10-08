@@ -31,6 +31,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 	const { openPrintPermisoModal, enableSaveButton, enablePrintButton, enEspera } = useSelector(
 		(state) => state.altaPermisos
 	);
+
 	const dispatch = useDispatch();
 
 	const closeModal = () => {
@@ -67,6 +68,32 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 		if (sistema === "Gravedad") return data.dotacionGravedad;
 		if (sistema === "Pozo Federal") return data.dotacionPozo;
 		if (sistema === "Pozo Particular") return data.dotacionPozo;
+	};
+
+	const defineModulo = () => {
+		switch (data.modulo) {
+			case "UNI01":
+			case "UNI02":
+			case "UNI03":
+				if (data.zona === 9) return "9A";
+				else if (data.zona === 92) return "9B";
+				else return data.zona;
+
+			default:
+				return data.modulo;
+		}
+	};
+
+	const defineTituloFirmaTitular = () => {
+		switch (data.modulo) {
+			case "UNI01":
+			case "UNI02":
+			case "UNI03":
+				return "ENCARGADO/A";
+
+			default:
+				return "PRESIDENTE";
+		}
 	};
 
 	return (
@@ -155,7 +182,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						El/la C.<b> {data.usuario}</b> con cuenta: <b>{data.cuenta}</b> tiene un derecho normal
 						de <b>{data.supDerecho} </b>
 						hectáreas del lote: <b>{data.lote}</b> en la colonia/ejido <b>{data.nombreLocalidad}</b>
-						, <b>{data.municipio}</b>, <b>{data.estado}</b>. Módulo <b>{data.modulo}</b>, sección{" "}
+						, <b>{data.municipio}</b>, <b>{data.estado}</b>. Módulo <b>{defineModulo()}</b>, sección{" "}
 						<b>{data.seccion}</b> del canal <b>{data.canal}</b> toma <b>{data.toma}</b> con sistema
 						de riego por <b>{data.sistema}</b>.<br />
 						{data.reacomodo && <b> Reacomodo: {data.reacomodo}</b>}
@@ -325,7 +352,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 					<div className="d-flex justify-content-center">
 						<b>{data.titular}</b>
 					</div>
-					<div className="d-flex justify-content-center">PRESIDENTE</div>
+					<div className="d-flex justify-content-center">{defineTituloFirmaTitular()}</div>
 				</div>
 				<div className="col-4 d-flex flex-column">
 					<div className="border-top border-dark firma d-flex justify-content-center">
@@ -405,7 +432,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						El/la C.<b> {data.usuario}</b> con cuenta: <b>{data.cuenta}</b> tiene un derecho normal
 						de <b>{data.supDerecho} </b>
 						hectáreas del lote: <b>{data.lote}</b> en la colonia <b>{data.nombreLocalidad}</b>,{" "}
-						<b>{data.municipio}</b>, <b>{data.estado}</b>. Módulo <b>{data.modulo}</b>, sección{" "}
+						<b>{data.municipio}</b>, <b>{data.estado}</b>. Módulo <b>{defineModulo()}</b>, sección{" "}
 						<b>{data.seccion}</b> del canal <b>{data.canal}</b> toma <b>{data.toma}</b> con sistema
 						de riego por <b>{data.sistema}</b>.
 					</p>

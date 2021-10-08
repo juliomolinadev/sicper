@@ -186,6 +186,7 @@ export const NuevoPermisoScreen = () => {
 				return "Superficie no disponible";
 
 			case "Pozo Federal":
+			case "Pozo Particular":
 				if (pozoNormalAsignada - pozoNormalPrevia >= supAutorizada) return "normal";
 				if (pozoExtraAsignada - pozoExtraPrevia >= supAutorizada) return "extra";
 				return "Superficie no disponible";
@@ -196,8 +197,13 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const defineNumeroPermiso = async () => {
-		const permiso = `MOD${auth.modulo}-${fill((await loadContador(auth.modulo, ciclo)) + 1, 3)}`;
-		return permiso;
+		if (altaPermisos.sistema === "Pozo Particular") {
+			const permiso = `${auth.modulo}-${fill((await loadContador(auth.modulo, ciclo)) + 1, 3)}`;
+			return permiso;
+		} else {
+			const permiso = `MOD${auth.modulo}-${fill((await loadContador(auth.modulo, ciclo)) + 1, 3)}`;
+			return permiso;
+		}
 	};
 
 	const fill = (number, len) => "0".repeat(len - number.toString().length) + number.toString();

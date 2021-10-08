@@ -1,13 +1,11 @@
 import { db } from "../firebase/firebase-config";
 
-// TODO: Implementar busqueda de usuarios de pozo particular
-
 export const loadUsuarios = async (usuario, modulo) => {
 	const campos = ["apPaterno", "cuenta"];
 	const qryUsuarios = [];
 	const usuarios = [];
 
-	const padUsuarios = db.collection(`derechos`).where("modulo", "==", defineModulo(modulo));
+	const padUsuarios = defineRef(modulo);
 
 	campos.forEach((campo) => {
 		qryUsuarios.push(
@@ -25,15 +23,27 @@ export const loadUsuarios = async (usuario, modulo) => {
 
 	resolvedUsuariosQrys.forEach((snap) => {
 		snap.forEach((snapHijo) => {
-			if (snapHijo.data().equipo !== 1) {
-				usuarios.push({
-					id: snapHijo.id,
-					...snapHijo.data()
-				});
+			switch (modulo) {
+				case "UNI01":
+				case "UNI02":
+				case "UNI03":
+					usuarios.push({
+						id: snapHijo.id,
+						...snapHijo.data()
+					});
+					break;
+
+				default:
+					if (snapHijo.data().equipo !== 1) {
+						usuarios.push({
+							id: snapHijo.id,
+							...snapHijo.data()
+						});
+					}
+					break;
 			}
 		});
 	});
-
 	return usuarios;
 };
 
@@ -42,4 +52,23 @@ const defineModulo = (modulo) => {
 	else if (modulo === "9B") return modulo;
 	else if (modulo === "dev") return modulo;
 	else return parseInt(modulo);
+};
+
+const defineRef = (modulo) => {
+	switch (modulo) {
+		case "UNI01":
+			return db.collection(`derechos`).where("equipo", "==", 1).where("modulo", "in", [4, 5, 6]);
+
+		case "UNI02":
+			return db
+				.collection(`derechos`)
+				.where("equipo", "==", 1)
+				.where("modulo", "in", [7, 8, "9A", "9B"]);
+
+		case "UNI03":
+			return db.collection(`derechos`).where("equipo", "==", 1).where("modulo", "in", [1, 2, 3]);
+
+		default:
+			return db.collection(`derechos`).where("modulo", "==", defineModulo(modulo));
+	}
 };

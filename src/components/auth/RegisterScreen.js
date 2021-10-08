@@ -94,6 +94,9 @@ export const RegisterScreen = () => {
 					<option value="21">Modulo 21</option>
 					<option value="22">Modulo 22</option>
 					<option value="23">Modulo FL</option>
+					<option value="UNI01">1ra Unidad</option>
+					<option value="UNI02">2da Unidad</option>
+					<option value="UNI03">3ra Unidad</option>
 					<option value="SADER">SADER</option>
 					<option value="CNA">CNA</option>
 					<option value="CESVBC">CESVBC</option>

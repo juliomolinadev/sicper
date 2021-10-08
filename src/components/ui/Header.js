@@ -10,6 +10,9 @@ export const Header = () => {
 		switch (entidad) {
 			case "SADER":
 			case "CNA":
+			case "UNI01":
+			case "UNI02":
+			case "UNI03":
 				return { maxWidth: 140 };
 
 			default:

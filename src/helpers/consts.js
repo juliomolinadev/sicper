@@ -101,8 +101,10 @@ export const modulos = [
 	21,
 	22,
 	23,
-	"dev",
-	"Pozo Particular"
+	"UNI01",
+	"UNI02",
+	"UNI03",
+	"dev"
 ];
 
 export const privileges = {

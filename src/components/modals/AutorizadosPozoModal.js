@@ -34,6 +34,7 @@ export const AutorizadosPozoModal = () => {
 	const [formValues, handleInputChange] = useForm({
 		clave: autorizadoSelected.clave,
 		cultivo: autorizadoSelected.cultivo,
+		subciclo: autorizadoSelected.subciclo,
 		gravedadNormalAutorizada: autorizadoSelected.gravedadNormalAutorizada,
 		gravedadNormalAsignada: autorizadoSelected.gravedadNormalAsignada,
 		gravedadExtraAutorizada: autorizadoSelected.gravedadExtraAutorizada,
@@ -47,6 +48,7 @@ export const AutorizadosPozoModal = () => {
 	const {
 		clave,
 		cultivo,
+		subciclo,
 		gravedadNormalAutorizada,
 		gravedadNormalAsignada,
 		gravedadExtraAutorizada,
@@ -71,6 +73,7 @@ export const AutorizadosPozoModal = () => {
 					nuevosAutorizados.push({
 						clave: clave,
 						cultivo: cultivo,
+						subciclo: subciclo,
 						gravedadNormalAutorizada: Number(gravedadNormalAutorizada),
 						gravedadNormalAsignada: Number(gravedadNormalAsignada),
 						gravedadExtraAutorizada: Number(gravedadExtraAutorizada),
