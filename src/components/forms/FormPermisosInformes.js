@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import DateTimePicker from "react-datetime-picker";
+import DatePicker from "react-date-picker";
 
 import { useForm } from "../../hooks/useForm";
 import { startLoadPermisos } from "../../actions/entidades/permisos";
@@ -14,7 +14,8 @@ export const FormPermisosInformes = () => {
 	const { palabra, campo, activosCancelados, tipoSuperficie, sistema } = formValues;
 
 	// TODO: obtener fecha inicial y final del ciclo vigente
-	const [fechaInicial, onChangeFechaInicial] = useState(new Date(2021, 9, 1));
+
+	const [fechaInicial, onChangeFechaInicial] = useState(new Date(2021, 8, 1));
 	const [fechaFinal, onChangeFechaFinal] = useState(new Date());
 
 	const auth = useSelector((state) => state.auth);
@@ -254,7 +255,8 @@ export const FormPermisosInformes = () => {
 						<label className="form-check-label">Fecha inicial</label>
 
 						<div>
-							<DateTimePicker
+							<DatePicker
+								type="date"
 								onChange={onChangeFechaInicial}
 								value={fechaInicial}
 								format={"dd/MM/yyyy"}
@@ -266,7 +268,8 @@ export const FormPermisosInformes = () => {
 						<label className="form-check-label">Fecha final</label>
 
 						<div>
-							<DateTimePicker
+							<DatePicker
+								type="date"
 								onChange={onChangeFechaFinal}
 								value={fechaFinal}
 								format={"dd/MM/yyyy"}

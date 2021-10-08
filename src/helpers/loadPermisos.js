@@ -1,6 +1,12 @@
 import { db } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
 
+function addDays(date, days) {
+	var result = new Date(date);
+	result.setDate(result.getDate() + days);
+	return result;
+}
+
 export const loadPermisos = async (
 	palabra,
 	modulo,
@@ -9,7 +15,7 @@ export const loadPermisos = async (
 	estado = "todos",
 	tipo = "todos",
 	sistema = "todos",
-	fechaInicial = new Date(2021, 9, 1),
+	fechaInicial = new Date(2021, 8, 1),
 	fechaFinal = new Date(2022, 8, 30)
 ) => {
 	const permisos = [];
@@ -26,7 +32,20 @@ export const loadPermisos = async (
 
 	if (estado !== "todos") filtros = filtros.where("estadoPermiso", "==", estado);
 	if (tipo !== "todos") filtros = filtros.where("tipo", "==", tipo);
-	if (sistema !== "todos") filtros = filtros.where("sistema", "==", sistema);
+	if (sistema !== "todos") {
+		switch (sistema) {
+			case "Gravedad":
+				filtros = filtros.where("sistema", "==", sistema);
+				break;
+
+			case "Pozo":
+				filtros = filtros.where("sistema", "in", ["Pozo Particular", "Pozo Federal"]);
+				break;
+
+			default:
+				break;
+		}
+	}
 
 	campos.forEach((campo) => {
 		permisosCampo.push(
@@ -44,7 +63,7 @@ export const loadPermisos = async (
 		permisosResueltos[i].forEach((snapHijo) => {
 			const fecha = snapHijo.data().fechaEmicion.toDate();
 
-			if (fecha >= fechaInicial && fecha <= fechaFinal) {
+			if (fecha >= fechaInicial && fecha <= addDays(fechaFinal, 1)) {
 				permisos.push({
 					id: snapHijo.id,
 					...snapHijo.data()
