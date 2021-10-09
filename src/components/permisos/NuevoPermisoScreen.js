@@ -281,6 +281,7 @@ export const NuevoPermisoScreen = () => {
 							</label>
 							<div className="flex-grow-1 ">
 								<input
+									tabIndex="6"
 									type="text"
 									className="form-control"
 									placeholder="variedad"
@@ -302,6 +303,7 @@ export const NuevoPermisoScreen = () => {
 							</label>
 							<div className="flex-grow-1 ">
 								<input
+									tabIndex="3"
 									type="number"
 									className="form-control"
 									placeholder="superficie"
@@ -321,6 +323,7 @@ export const NuevoPermisoScreen = () => {
 							</label>
 							<div className="flex-grow-1 ">
 								<input
+									tabIndex="7"
 									type="text"
 									className="form-control"
 									placeholder="fuente de credito"
@@ -335,25 +338,6 @@ export const NuevoPermisoScreen = () => {
 				</div>
 
 				<div className="row">
-					{/* <div className="col-sm-6">
-						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">
-								<span className="text-warning">* </span>
-								Cultivo anterior:
-							</label>
-							<div className="flex-grow-1 ">
-								<input
-									type="text"
-									className="form-control"
-									placeholder="Cultivo anterior"
-									name="cultivoAnterior"
-									value={cultivoAnterior}
-									autoComplete="off"
-									onChange={handleInputChange}
-								/>
-							</div>
-						</div>
-					</div> */}
 					<CultivoAnteriorInput />
 
 					<div className="col-sm-6">
@@ -361,6 +345,7 @@ export const NuevoPermisoScreen = () => {
 							<label className="col-sm-3">Transferencia interna:</label>
 							<div className="flex-grow-1 ">
 								<input
+									tabIndex="8"
 									type="text"
 									className="form-control"
 									placeholder="Cuenta destino"
@@ -383,6 +368,7 @@ export const NuevoPermisoScreen = () => {
 
 							<div className="form-group form-check">
 								<input
+									tabIndex="9"
 									type="checkbox"
 									className="form-check-input"
 									id="cuotaSanidad"
@@ -401,6 +387,7 @@ export const NuevoPermisoScreen = () => {
 
 				<div className="form-group">
 					<textarea
+						tabIndex="10"
 						type="text"
 						className="form-control"
 						placeholder="Observaciones"
@@ -416,7 +403,12 @@ export const NuevoPermisoScreen = () => {
 
 				{msgError && <div className="auth__alert-error">{msgError}</div>}
 				<div className="row d-flex justify-content-center pt-5 d-print-none">
-					<button type="button" className="btn btn-outline-primary" onClick={onSendForm}>
+					<button
+						tabIndex="11"
+						type="button"
+						className="btn btn-outline-primary"
+						onClick={onSendForm}
+					>
 						<i className="far fa-file"></i>
 						<span> Revisar</span>
 					</button>

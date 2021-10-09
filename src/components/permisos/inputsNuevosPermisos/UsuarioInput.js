@@ -70,6 +70,7 @@ export const UsuarioInput = () => {
 				) : (
 					<div className="flex-grow-1">
 						<input
+							tabIndex="1"
 							type="text"
 							className="form-control"
 							placeholder="Apellido paterno o numero de cuenta"

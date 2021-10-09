@@ -70,6 +70,7 @@ export const CultivoAnteriorInput = () => {
 				) : (
 					<div className="flex-grow-1">
 						<input
+							tabIndex="4"
 							type="text"
 							className="form-control"
 							placeholder="Clave o nombre del cultivo"
