@@ -11,6 +11,14 @@ export const closeCultivosModal = () => ({
 	type: types.altaPermisoCloseCultivosModal
 });
 
+export const openCultivoAnteriorModal = () => ({
+	type: types.altaPermisoOpenCultivoAnteriorModal
+});
+
+export const closeCultivoAnteriorModal = () => ({
+	type: types.altaPermisoCloseCultivoAnteriorModal
+});
+
 export const startLoadCultivos = (cultivo, modulo) => {
 	return async (dispatch) => {
 		const cultivos = await loadCultivos(cultivo);
@@ -24,6 +32,18 @@ export const startLoadCultivos = (cultivo, modulo) => {
 
 export const setCultivos = (cultivos) => ({
 	type: types.loadCultivos,
+	payload: cultivos
+});
+
+export const startLoadCultivosAnteriores = (cultivo) => {
+	return async (dispatch) => {
+		const cultivos = await loadCultivos(cultivo);
+		dispatch(setCultivosAnteriores(cultivos));
+	};
+};
+
+export const setCultivosAnteriores = (cultivos) => ({
+	type: types.setCultivosAnteriores,
 	payload: cultivos
 });
 
@@ -69,4 +89,13 @@ export const setCultivoSelected = (cultivo) => ({
 
 export const unsetCultivoSelected = () => ({
 	type: types.unsetCultivo
+});
+
+export const setCultivoAnteriorSelected = (cultivo) => ({
+	type: types.setCultivoAnterior,
+	payload: cultivo
+});
+
+export const unsetCultivoAnteriorSelected = () => ({
+	type: types.unsetCultivoAnterior
 });

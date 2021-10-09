@@ -8,9 +8,11 @@ const initialState = {
 	openProductoresModal: false,
 	isOpenNuevoProductorModal: false,
 	openCultivosModal: false,
+	openCultivoAnteriorModal: false,
 	isOpenPrintPermisoModal: false,
 	usuarios: [],
 	cultivos: [],
+	cultivosAnteriores: [],
 	productores: [],
 	idUsuarioSelected: null,
 	cuenta: null,
@@ -34,6 +36,9 @@ const initialState = {
 	subciclo: null,
 	cuotaCultivo: null,
 	supPrevia: 0,
+	idCultivoAnteriorSelected: null,
+	cultivoAnterior: null,
+	claveCultivoAnterior: null,
 	tipo: null,
 	ciclo: null,
 	numeroPermiso: null,
@@ -46,7 +51,6 @@ const initialState = {
 	fuenteCredito: "",
 	latitud: "",
 	longitud: "",
-	cultivoAnterior: "",
 	observaciones: ""
 };
 
@@ -79,10 +83,28 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				openCultivosModal: false
 			};
 
+		case types.altaPermisoOpenCultivoAnteriorModal:
+			return {
+				...state,
+				openCultivoAnteriorModal: true
+			};
+
+		case types.altaPermisoCloseCultivoAnteriorModal:
+			return {
+				...state,
+				openCultivoAnteriorModal: false
+			};
+
 		case types.loadCultivos:
 			return {
 				...state,
 				cultivos: action.payload
+			};
+
+		case types.setCultivosAnteriores:
+			return {
+				...state,
+				cultivosAnteriores: action.payload
 			};
 
 		case types.clearCultivos:
@@ -116,6 +138,22 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				claveCultivo: null,
 				subciclo: null,
 				cuotaCultivo: null
+			};
+
+		case types.setCultivoAnterior:
+			return {
+				...state,
+				idCultivoAnteriorSelected: action.payload.id,
+				cultivoAnterior: action.payload.nombre,
+				claveCultivoAnterior: action.payload.clave
+			};
+
+		case types.unsetCultivoAnterior:
+			return {
+				...state,
+				idCultivoAnteriorSelected: null,
+				cultivoAnterior: null,
+				claveCultivoAnterior: null
 			};
 
 		//Usuarios **************************************
@@ -251,7 +289,6 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				fuenteCredito: action.payload.fuenteCredito,
 				latitud: action.payload.latitud,
 				longitud: action.payload.longitud,
-				cultivoAnterior: action.payload.cultivoAnterior,
 				observaciones: action.payload.observaciones
 			};
 

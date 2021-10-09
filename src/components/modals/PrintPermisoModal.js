@@ -13,7 +13,7 @@ import {
 	startEnableSaveButton,
 	startDisablePrintButton
 } from "../../actions/altaPermisos";
-import { unsetCultivoSelected } from "../../actions/cultivos";
+import { unsetCultivoAnteriorSelected, unsetCultivoSelected } from "../../actions/cultivos";
 import { unsetProductorSelected } from "../../actions/productores";
 import { unsetUsuarioSelected } from "../../actions/usuarios";
 import { roundToN } from "../../helpers/functions/roundToN";
@@ -38,6 +38,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 		dispatch(closePrintPermisoModal());
 		dispatch(unsetOnSubmitData());
 		dispatch(unsetCultivoSelected());
+		dispatch(unsetCultivoAnteriorSelected());
 		dispatch(unsetProductorSelected());
 		dispatch(unsetUsuarioSelected());
 		dispatch(startEnableSaveButton());

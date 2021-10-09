@@ -24,6 +24,8 @@ import { removeError, setError } from "../../actions/ui";
 import { startLoadAutorizadoPorCultivo } from "../../actions/autorizadosScreen";
 import { CultivoSelected } from "./inputsNuevosPermisos/CultivoSelected";
 import { useFormToUpper } from "../../hooks/UseFormToUpper";
+import { CultivoAnteriorModal } from "../modals/CultivoAnteriorModal";
+import { CultivoAnteriorInput } from "./inputsNuevosPermisos/CultivoAnteriorInput";
 
 export const NuevoPermisoScreen = () => {
 	const {
@@ -48,20 +50,12 @@ export const NuevoPermisoScreen = () => {
 		latitud: "",
 		longitud: "",
 		observaciones: "",
-		cultivoAnterior: "",
 		transferencia: "",
 		cuotaSanidad: true
 	});
 
-	const {
-		variedad,
-		supAutorizada,
-		fuenteCredito,
-		observaciones,
-		cultivoAnterior,
-		transferencia,
-		cuotaSanidad
-	} = formValues;
+	const { variedad, supAutorizada, fuenteCredito, observaciones, transferencia, cuotaSanidad } =
+		formValues;
 
 	const permisoData = {
 		...formValues,
@@ -136,7 +130,7 @@ export const NuevoPermisoScreen = () => {
 		} else if (!fuenteCredito) {
 			dispatch(setError("Especifique la fuente de crédito."));
 			return false;
-		} else if (!cultivoAnterior) {
+		} else if (!altaPermisos.cultivoAnterior) {
 			dispatch(setError("Especifique el cultivo anterior."));
 			return false;
 		} else if (
@@ -341,7 +335,7 @@ export const NuevoPermisoScreen = () => {
 				</div>
 
 				<div className="row">
-					<div className="col-sm-6">
+					{/* <div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
 							<label className="col-sm-3">
 								<span className="text-warning">* </span>
@@ -359,7 +353,8 @@ export const NuevoPermisoScreen = () => {
 								/>
 							</div>
 						</div>
-					</div>
+					</div> */}
+					<CultivoAnteriorInput />
 
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
@@ -428,6 +423,7 @@ export const NuevoPermisoScreen = () => {
 				</div>
 			</form>
 			<CultivoModal />
+			<CultivoAnteriorModal />
 			<UsuarioModal />
 			<ProductorModal />
 			<NuevoProductorModal />

@@ -10,7 +10,6 @@ export const savePermitTransaction = async (allData) => {
 		usuario: allData.usuario,
 		supDerecho: allData.supDerecho,
 		lote: allData.lote,
-		// TODO: Poner nombre de localidad antes de guardar
 		localidad: allData.nombreLocalidad,
 		nombreLocalidad: allData.nombreLocalidad,
 		municipio: allData.municipio,
@@ -43,6 +42,8 @@ export const savePermitTransaction = async (allData) => {
 		latitud: allData.latitud,
 		longitud: allData.longitud,
 		cultivoAnterior: allData.cultivoAnterior,
+		idCultivoAnteriorSelected: allData.idCultivoAnteriorSelected,
+		claveCultivoAnterior: allData.claveCultivoAnterior,
 		observaciones: allData.observaciones,
 		uid: allData.uid,
 		name: allData.name,
