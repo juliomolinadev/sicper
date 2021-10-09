@@ -73,7 +73,7 @@ export const CultivoInput = () => {
 						<input
 							type="text"
 							className="form-control"
-							placeholder="Cultivo"
+							placeholder="Clave o nombre del cultivo"
 							name="cultivo"
 							autoComplete="off"
 							value={cultivo}
