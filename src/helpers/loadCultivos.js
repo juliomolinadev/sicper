@@ -1,6 +1,6 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadCultivos = async (cultivo) => {
+export const loadCultivos = async (cultivo, include0) => {
 	const campos = ["clave", "nombre"];
 	const qrysCultivos = [];
 	const cultivos = [];
@@ -22,10 +22,12 @@ export const loadCultivos = async (cultivo) => {
 
 	resolvedCultivosQrys.forEach((snap) => {
 		snap.forEach((snapHijo) => {
-			cultivos.push({
-				id: snapHijo.id,
-				...snapHijo.data()
-			});
+			if (include0) {
+				cultivos.push({
+					id: snapHijo.id,
+					...snapHijo.data()
+				});
+			}
 		});
 	});
 
