@@ -22,11 +22,25 @@ export const loadCultivos = async (cultivo, include0) => {
 
 	resolvedCultivosQrys.forEach((snap) => {
 		snap.forEach((snapHijo) => {
+			switch (include0) {
+				case "nuevo":
+					if (snapHijo.data().clave !== 0) {
+						cultivos.push({
+							id: snapHijo.id,
+							...snapHijo.data()
+						});
+					}
+
+					break;
+
+				default:
+					cultivos.push({
+						id: snapHijo.id,
+						...snapHijo.data()
+					});
+					break;
+			}
 			if (include0) {
-				cultivos.push({
-					id: snapHijo.id,
-					...snapHijo.data()
-				});
 			}
 		});
 	});

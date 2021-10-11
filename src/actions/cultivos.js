@@ -22,7 +22,7 @@ export const closeCultivoAnteriorModal = () => ({
 
 export const startLoadCultivos = (cultivo, modulo) => {
 	return async (dispatch) => {
-		const cultivos = await loadCultivos(cultivo, false);
+		const cultivos = await loadCultivos(cultivo, "nuevo");
 		const cultivosConModulo = [];
 		cultivos.forEach((cultivo) => {
 			cultivosConModulo.push({ ...cultivo, modulo });
@@ -38,7 +38,7 @@ export const setCultivos = (cultivos) => ({
 
 export const startLoadCultivosAnteriores = (cultivo) => {
 	return async (dispatch) => {
-		const cultivos = await loadCultivos(cultivo, true);
+		const cultivos = await loadCultivos(cultivo, "anterior");
 		dispatch(setCultivosAnteriores(cultivos));
 	};
 };

@@ -17,6 +17,10 @@ export const PermitsReport = () => {
 	// 	console.log("permisos en useState: ", permisos);
 	// }, [permisos]);
 
+	const onlyUnique = (value, index, self) => {
+		return self.indexOf(value) === index;
+	};
+
 	const filters = ["usuario", "nombreCultivo", "supAutorizada"];
 
 	const getPermisos = async () => {
