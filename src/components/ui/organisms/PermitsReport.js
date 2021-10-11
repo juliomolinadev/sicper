@@ -17,12 +17,12 @@ export const PermitsReport = () => {
 	// 	console.log("permisos en useState: ", permisos);
 	// }, [permisos]);
 
+	const filters = ["usuario", "nombreCultivo", "supAutorizada"];
+
 	const getPermisos = async () => {
 		const permisosToSet = await simpleLoadPermits(palabra, "numeroPermiso", modulo, cicloActual);
 		setPermisos(permisosToSet);
 	};
-
-	const filters = ["usuario", "nombreCultivo", "supAutorizada"];
 
 	const setFilter = () => {
 		permisos.sort((a, b) => {

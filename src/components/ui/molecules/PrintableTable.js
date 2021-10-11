@@ -9,7 +9,7 @@ export const PrintableTable = forwardRef((props, ref) => {
 		const marginRight = 60;
 		const marginBottom = 60;
 		const marginLeft = 60;
-		return `@page { margin: ${marginTop} ${marginRight} ${marginBottom} ${marginLeft} !important; }`;
+		return `@page { margin: ${marginTop} ${marginRight} ${marginBottom} ${marginLeft} !important; size:letter;}`;
 	};
 
 	return (
