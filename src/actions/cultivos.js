@@ -2,6 +2,7 @@ import { types } from "../types/types";
 import { loadCultivos } from "../helpers/loadCultivos";
 import { db } from "../firebase/firebase-config";
 import { loadCiclo } from "../helpers/DB/loadCiclo";
+import { goToElement } from "../helpers/functions/assets";
 
 export const openCultivosModal = () => ({
 	type: types.altaPermisoOpenCultivosModal
@@ -79,6 +80,7 @@ export const startSetCultivoSelected = (cultivo) => {
 		);
 
 		dispatch(setCultivoSelected({ ...cultivo, superficiePrevia }));
+		goToElement("superficieInput");
 	};
 };
 
@@ -91,10 +93,13 @@ export const unsetCultivoSelected = () => ({
 	type: types.unsetCultivo
 });
 
-export const setCultivoAnteriorSelected = (cultivo) => ({
-	type: types.setCultivoAnterior,
-	payload: cultivo
-});
+export const setCultivoAnteriorSelected = (cultivo) => {
+	goToElement("productorInput");
+	return {
+		type: types.setCultivoAnterior,
+		payload: cultivo
+	};
+};
 
 export const unsetCultivoAnteriorSelected = () => ({
 	type: types.unsetCultivoAnterior

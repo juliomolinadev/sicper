@@ -70,6 +70,7 @@ export const ProductorInput = () => {
 				) : (
 					<div className="flex-grow-1">
 						<input
+							id="productorInput"
 							tabIndex="5"
 							type="text"
 							className="form-control"
@@ -84,6 +85,7 @@ export const ProductorInput = () => {
 				)}
 				{idProductorSelected ? (
 					<button
+						tabIndex="-1"
 						className=" btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
 						onClick={clearProductorInput}
@@ -92,6 +94,7 @@ export const ProductorInput = () => {
 					</button>
 				) : (
 					<button
+						tabIndex="-1"
 						className=" btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
 						onClick={handleOpenProductoresModal}

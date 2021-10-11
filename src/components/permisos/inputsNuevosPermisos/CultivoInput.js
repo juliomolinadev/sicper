@@ -71,6 +71,7 @@ export const CultivoInput = () => {
 				) : (
 					<div className="flex-grow-1">
 						<input
+							id="cultivoInput"
 							tabIndex="2"
 							type="text"
 							className="form-control"
@@ -85,6 +86,7 @@ export const CultivoInput = () => {
 				)}
 				{idCultivoSelected ? (
 					<button
+						tabIndex="-1"
 						className=" btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
 						onClick={clearCultivoInput}
@@ -93,6 +95,7 @@ export const CultivoInput = () => {
 					</button>
 				) : (
 					<button
+						tabIndex="-1"
 						className=" btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
 						onClick={handleOpenCultivosModal}

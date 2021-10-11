@@ -79,11 +79,13 @@ export const UsuarioInput = () => {
 							value={usuario}
 							onChange={handleInputChange}
 							onKeyUp={handleKeyUp}
+							autoFocus
 						/>
 					</div>
 				)}
 				{idUsuarioSelected ? (
 					<button
+						tabIndex="-1"
 						className=" btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
 						onClick={clearUsuarioInput}
@@ -92,6 +94,7 @@ export const UsuarioInput = () => {
 					</button>
 				) : (
 					<button
+						tabIndex="-1"
 						className=" btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
 						onClick={handleOpenUsuariosModal}

@@ -4,6 +4,7 @@ import { loadSuperficiePrevia } from "../helpers/loadSuperficiePrevia";
 import { loadUserTransfer } from "../helpers/loadUserTransfer";
 import { loadCiclo } from "../helpers/DB/loadCiclo";
 import { startSetEstadoExpedicionModulo } from "./auth";
+import { goToElement } from "../helpers/functions/assets";
 
 export const openUsuariosModal = () => ({
 	type: types.altaPermisoOpenUsuariosModal
@@ -47,6 +48,7 @@ export const startSetUsuarioSelected = (usuario) => {
 
 		usuario.supPrevia = supPrevia + transfers;
 		dispatch(setUsuarioSelected(usuario));
+		goToElement("cultivoInput");
 	};
 };
 

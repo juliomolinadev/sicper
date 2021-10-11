@@ -281,6 +281,7 @@ export const NuevoPermisoScreen = () => {
 							</label>
 							<div className="flex-grow-1 ">
 								<input
+									id="variedadInput"
 									tabIndex="6"
 									type="text"
 									className="form-control"
@@ -303,6 +304,7 @@ export const NuevoPermisoScreen = () => {
 							</label>
 							<div className="flex-grow-1 ">
 								<input
+									id="superficieInput"
 									tabIndex="3"
 									type="number"
 									className="form-control"

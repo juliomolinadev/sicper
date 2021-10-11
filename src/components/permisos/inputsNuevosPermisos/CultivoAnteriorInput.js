@@ -84,6 +84,7 @@ export const CultivoAnteriorInput = () => {
 				)}
 				{idCultivoAnteriorSelected ? (
 					<button
+						tabIndex="-1"
 						className=" btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
 						onClick={clearCultivoInput}
@@ -92,6 +93,7 @@ export const CultivoAnteriorInput = () => {
 					</button>
 				) : (
 					<button
+						tabIndex="-1"
 						className=" btn btn-outline-primary d-sm-block ml-auto"
 						type="button"
 						onClick={handleOpenCultivoAnteriorModal}

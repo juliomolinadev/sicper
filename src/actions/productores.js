@@ -1,5 +1,6 @@
 import { types } from "../types/types";
 import { loadProductores } from "../helpers/loadProductores";
+import { goToElement } from "../helpers/functions/assets";
 
 export const openProductoresModal = () => ({
 	type: types.altaPermisoOpenProductoresModal
@@ -21,10 +22,13 @@ export const setProductores = (productores) => ({
 	payload: productores
 });
 
-export const setProductorSelected = (idProductor) => ({
-	type: types.setProductor,
-	payload: idProductor
-});
+export const setProductorSelected = (idProductor) => {
+	goToElement("variedadInput");
+	return {
+		type: types.setProductor,
+		payload: idProductor
+	};
+};
 
 export const unsetProductorSelected = () => ({
 	type: types.unsetProductor
