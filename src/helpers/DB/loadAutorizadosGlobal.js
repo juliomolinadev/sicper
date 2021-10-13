@@ -23,10 +23,12 @@ export const loadAutorizadosGlobal = async (ciclo) => {
 
 	data.forEach((item) => {
 		item.forEach((childItem) => {
-			autorizados.push({
-				id: childItem.id,
-				...childItem.data()
-			});
+			if (childItem.id !== "0-SIN CULTIVO") {
+				autorizados.push({
+					id: childItem.id,
+					...childItem.data()
+				});
+			}
 		});
 	});
 

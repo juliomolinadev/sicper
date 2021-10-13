@@ -19,9 +19,9 @@ export const ReportHeader = ({ title }) => {
 			</div>
 
 			<div className="col-4 p-3">
-				<div className="">{`${entidad} - Operador: ${name}`} </div>
+				<div className="">{entidad} </div>
 				<div className="">Distrito de riego 014 Rio Colorado</div>
-				<div className="">Plataforma digital</div>
+				<div className="">{`Operador: ${name}`} </div>
 			</div>
 			<div className="col-4 p-3 d-flex flex-column">
 				<b>{title}</b>
