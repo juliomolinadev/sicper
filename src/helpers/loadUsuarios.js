@@ -57,13 +57,13 @@ const defineModulo = (modulo) => {
 const defineRef = (modulo) => {
 	switch (modulo) {
 		case "UNI01":
-			return db.collection(`derechos`).where("equipo", "==", 1).where("modulo", "in", [4, 5, 6]);
+			return db.collection(`derechos`).where("equipo", "==", 1).where("modulo", "in", [4, 5, 6, 7]);
 
 		case "UNI02":
 			return db
 				.collection(`derechos`)
 				.where("equipo", "==", 1)
-				.where("modulo", "in", [7, 8, "9A", "9B"]);
+				.where("modulo", "in", [8, "9A", "9B"]);
 
 		case "UNI03":
 			return db.collection(`derechos`).where("equipo", "==", 1).where("modulo", "in", [1, 2, 3]);
