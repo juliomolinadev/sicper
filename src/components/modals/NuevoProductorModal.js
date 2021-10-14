@@ -75,6 +75,7 @@ export const NuevoProductorModal = () => {
 	};
 
 	const isFormValid = () => {
+		console.log(genero.length);
 		if (apPaterno.trim().length === 0) {
 			dispatch(setError("Se requiere apellido paterno"));
 			return false;
@@ -96,14 +97,17 @@ export const NuevoProductorModal = () => {
 		} else if (curp.trim().length < 18 || curp.trim().length > 18) {
 			dispatch(setError("CURP no valido"));
 			return false;
-		} else if (rfc.trim().length < 12) {
+		} else if (genero.length === 0) {
+			dispatch(setError("Se requiere genero"));
+			return false;
+		} else if (genero === "MORAL" && rfc.trim().length !== 12) {
+			dispatch(setError("RFC no valido"));
+			return false;
+		} else if (genero !== "MORAL" && rfc.trim().length !== 13) {
 			dispatch(setError("RFC no valido"));
 			return false;
 		} else if (cp.trim().length < 5) {
 			dispatch(setError("Codigo postal no valido"));
-			return false;
-		} else if (!genero) {
-			dispatch(setError("Se requiere genero"));
 			return false;
 		} else if (telefono.replace(/ /g, "").length < 10) {
 			dispatch(setError("Telefono no valido"));

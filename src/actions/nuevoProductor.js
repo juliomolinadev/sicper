@@ -13,7 +13,10 @@ export const closeNuevoProductorModal = () => ({
 // TODO: Comprobar que el rfc no exista
 export const startSaveProductor = (productor) => {
 	return (dispatch) => {
-		const productorRef = db.collection("productores").doc(productor.curp);
+		let productorRef = db.collection("productores").doc(productor.curp);
+		if (productor.genero === "MORAL") {
+			productorRef = db.collection("productores").doc(`${productor.curp}-PM`);
+		}
 
 		productorRef.get().then((doc) => {
 			if (doc.exists) {
