@@ -9,7 +9,7 @@ export const TestArea = () => {
 			</div>
 
 			<div className="row">
-				<PermitsReport />;
+				<PermitsReport />
 			</div>
 		</>
 	);
