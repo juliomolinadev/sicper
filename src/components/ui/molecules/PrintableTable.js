@@ -22,9 +22,9 @@ export const PrintableTable = forwardRef((props, ref) => {
 	return (
 		<div ref={ref}>
 			{separateData.map((dataPart, i) => (
-				<div key={i} className="page-break" style={{ width: "100%" }}>
+				<div key={i} className="page-break">
 					<style>{getPageMargins()}</style>
-					<ReportHeader title={title} />
+					<ReportHeader title={title} pages={separateData.length} page={i + 1} />
 
 					<table className="table table-sm table-striped border mt-4" style={{ fontSize: 12 }}>
 						<thead className="thead-light">

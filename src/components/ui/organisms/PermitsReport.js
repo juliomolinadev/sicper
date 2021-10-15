@@ -115,6 +115,7 @@ export const PermitsReport = () => {
 					Filtrar
 				</button> */}
 			</div>
+
 			{permisos.length > 0 && (
 				<ReportModule
 					title={title}
