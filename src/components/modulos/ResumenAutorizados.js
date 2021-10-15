@@ -28,6 +28,18 @@ export const ResumenAutorizados = () => {
 		dispatch(setSuperficieExtra());
 	};
 
+	const isModulo = (modulo) => {
+		switch (modulo) {
+			case "UNI01":
+			case "UNI02":
+			case "UNI03":
+				return false;
+
+			default:
+				return true;
+		}
+	};
+
 	return (
 		<div>
 			<div className="d-flex justify-content-center">
@@ -107,15 +119,27 @@ export const ResumenAutorizados = () => {
 											</td>
 											<td>
 												<div className="text-center">{roundToN(cultivo.gravedadNormal, 3)}</div>
-												<div className="text-center">{roundToN(cultivo.pozoNormal, 3)}</div>
+												{isModulo(modulo) ? (
+													<div className="text-center">{roundToN(cultivo.pozoNormal, 3)}</div>
+												) : (
+													<div className="text-center">
+														{roundToN(cultivo.pozoParticularNormal, 3)}
+													</div>
+												)}
 											</td>
 											<td>
 												<div className="text-center">
 													{roundToN(cultivo.gravedadNormalAsignada - cultivo.gravedadNormal, 3)}
 												</div>
-												<div className="text-center">
-													{roundToN(cultivo.pozoNormalAsignada - cultivo.pozoNormal, 3)}
-												</div>
+												{isModulo(modulo) ? (
+													<div className="text-center">
+														{roundToN(cultivo.pozoNormalAsignada - cultivo.pozoNormal, 3)}
+													</div>
+												) : (
+													<div className="text-center">
+														{roundToN(cultivo.pozoNormalAsignada - cultivo.pozoParticularNormal, 3)}
+													</div>
+												)}
 											</td>
 										</tr>
 									);

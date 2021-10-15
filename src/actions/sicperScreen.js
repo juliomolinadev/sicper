@@ -38,6 +38,8 @@ export const startLoadExpedicion = (modulo, ciclo) => {
 			if (cultivo.gravedadExtra === undefined) cultivo.gravedadExtra = 0;
 			if (cultivo.pozoNormal === undefined) cultivo.pozoNormal = 0;
 			if (cultivo.pozoExtra === undefined) cultivo.pozoExtra = 0;
+			if (cultivo.pozoParticularNormal === undefined) cultivo.pozoParticularNormal = 0;
+			if (cultivo.pozoParticularExtra === undefined) cultivo.pozoParticularExtra = 0;
 		});
 
 		if (superficies.length === 0) {
@@ -57,6 +59,8 @@ export const startLoadExpedicion = (modulo, ciclo) => {
 					pozoNormal: 0,
 					gravedadExtra: 0,
 					pozoExtra: 0
+					// pozoParticularNormal: 0,
+					// pozoParticularExtra: 0
 				}
 			];
 		}

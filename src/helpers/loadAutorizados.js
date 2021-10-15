@@ -35,6 +35,8 @@ export const loadAutorizados = async (ciclo, modulo) => {
 				pozoNormalAsignada: 0,
 				pozoExtraAutorizada: 0,
 				pozoExtraAsignada: 0
+				// pozoParticularNormal: 0,
+				// pozoParticularExtra: 0
 			});
 		});
 	} else {
@@ -53,6 +55,8 @@ export const loadAutorizados = async (ciclo, modulo) => {
 					pozoNormalAsignada: 0,
 					pozoExtraAutorizada: 0,
 					pozoExtraAsignada: 0
+					// pozoParticularNormal: 0,
+					// pozoParticularExtra: 0
 				});
 			}
 		});
