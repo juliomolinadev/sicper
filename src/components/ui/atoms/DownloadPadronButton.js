@@ -8,7 +8,6 @@ export const DownloadPadronButton = () => {
 	const { modulo, name } = useSelector((state) => state.auth);
 
 	const title = `PadronM${modulo}`;
-	// const data = [];
 	const headers = {
 		header: [
 			"CUENTA",

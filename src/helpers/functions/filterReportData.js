@@ -22,8 +22,8 @@ const accumulate = (
 	supPozoExpedida,
 	supPozoRealizada,
 	supPozoPartProgramada,
-	supPozoPartExpedida,
-	supPozoPartRealizad
+	supPozoPartExpedida
+	// supPozoPartRealizad
 ) => {
 	ref.supGravedadProgramada = ref.supGravedadProgramada + supGravedadProgramada;
 	ref.supGravedadExpedida = ref.supGravedadExpedida + supGravedadExpedida;
@@ -33,7 +33,7 @@ const accumulate = (
 	ref.supPozoRealizada = ref.supPozoRealizada + supPozoRealizada;
 	ref.supPozoPartProgramada = ref.supPozoPartProgramada + supPozoPartProgramada;
 	ref.supPozoPartExpedida = ref.supPozoPartExpedida + supPozoPartExpedida;
-	ref.supPozoPartRealizad = ref.supPozoPartRealizad + supPozoPartRealizad;
+	// ref.supPozoPartRealizad = ref.supPozoPartRealizad + supPozoPartRealizad;
 };
 
 const checkModulo = (modulos, modulo) => {
@@ -88,8 +88,8 @@ export const filterReportData = (data, option, modulos) => {
 			supPozoExpedida,
 			supPozoRealizada,
 			supPozoPartProgramada,
-			supPozoPartExpedida,
-			supPozoPartRealizad
+			supPozoPartExpedida
+			// supPozoPartRealizad
 		}) => {
 			if (isRegisterInclude(option, modulos, modulo, estado)) {
 				if (reportData[subciclo][cultivo]) {
@@ -102,8 +102,8 @@ export const filterReportData = (data, option, modulos) => {
 						supPozoExpedida,
 						supPozoRealizada,
 						supPozoPartProgramada,
-						supPozoPartExpedida,
-						supPozoPartRealizad
+						supPozoPartExpedida
+						// supPozoPartRealizad
 					);
 
 					accumulate(
@@ -115,8 +115,8 @@ export const filterReportData = (data, option, modulos) => {
 						supPozoExpedida,
 						supPozoRealizada,
 						supPozoPartProgramada,
-						supPozoPartExpedida,
-						supPozoPartRealizad
+						supPozoPartExpedida
+						// supPozoPartRealizad
 					);
 				} else {
 					accumulate(
@@ -128,8 +128,8 @@ export const filterReportData = (data, option, modulos) => {
 						supPozoExpedida,
 						supPozoRealizada,
 						supPozoPartProgramada,
-						supPozoPartExpedida,
-						supPozoPartRealizad
+						supPozoPartExpedida
+						// supPozoPartRealizad
 					);
 
 					accumulate(
@@ -141,8 +141,8 @@ export const filterReportData = (data, option, modulos) => {
 						supPozoExpedida,
 						supPozoRealizada,
 						supPozoPartProgramada,
-						supPozoPartExpedida,
-						supPozoPartRealizad
+						supPozoPartExpedida
+						// supPozoPartRealizad
 					);
 				}
 			}

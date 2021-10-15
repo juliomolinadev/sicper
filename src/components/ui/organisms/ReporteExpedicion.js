@@ -125,6 +125,7 @@ export const ReporteExpedicion = () => {
 				<div className="row mt-3">
 					<div className="col-sm-12 pt-5">
 						<ExpedicionTable
+							modulos={[]}
 							data={filterReportData(
 								mergeReportData(autorizados, expedicion),
 								reportOptionsValues.opcion,
@@ -141,6 +142,7 @@ export const ReporteExpedicion = () => {
 					<div className="row mt-3">
 						<div className="col-sm-12 pt-5">
 							<ExpedicionTable
+								modulos={getModulos()}
 								data={filterReportData(
 									mergeReportData(autorizados, expedicion),
 									reportOptionsValues.opcion,
@@ -156,6 +158,7 @@ export const ReporteExpedicion = () => {
 					<div className="col-sm-12 pt-5">
 						{autorizados && expedicion && (
 							<ExpedicionTable
+								modulos={[modulo]}
 								data={filterReportData(
 									mergeReportData(autorizados, expedicion),
 									reportOptionsValues.opcion,

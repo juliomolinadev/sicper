@@ -1,7 +1,34 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { exportJSONToExcel } from "../../../helpers/functions/exportJSONToExcel";
 import { roundToN } from "../../../helpers/functions/roundToN";
 
-export const ExpedicionTable = ({ data }) => {
+export const ExpedicionTable = ({ data, modulos }) => {
+	const { name } = useSelector((state) => state.auth);
+
+	const exportToExcel = () => {
+		const title = setTitle(modulos);
+		const headers = {
+			header: [
+				"CULTIVO",
+				"GRAVEDAD PROGRAMADA",
+				"GRAVEDAD EXPEDIDA",
+				"GRAVEDAD REALIZADA",
+				"POZO PROGRAMADA",
+				"POZO EXPEDIDA",
+				"POZO REALIZADA",
+				"POZO PART PROGRAMADA",
+				"POZO PART EXPEDIDA",
+				"POZO PART REALIZADA",
+				"TOTAL PROGRAMADA",
+				"TOTAL EXPEDIDA",
+				"TOTAL REALIZADA"
+			]
+		};
+
+		exportJSONToExcel(setUpData(data), headers, title, name, title);
+	};
+
 	return (
 		<div className="table-responsive-sm">
 			<table className="table table-sm table-bordered font12">
@@ -187,6 +214,63 @@ export const ExpedicionTable = ({ data }) => {
 					})}
 				</tbody>
 			</table>
+
+			<button onClick={exportToExcel} className="btn btn-outline-primary">
+				Descargar
+			</button>
 		</div>
 	);
+};
+
+const setUpData = (expedicion) => {
+	const data = [];
+	const subCiclos = Object.entries(expedicion);
+
+	subCiclos.forEach((subCiclo) => {
+		data.push({ cultivo: subCiclo[0] });
+		const cultivos = Object.entries(subCiclo[1]);
+		cultivos.forEach((cultivo) => {
+			data.push({ cultivo: cultivo[0], ...cultivo[1] });
+		});
+	});
+
+	const expedicionTable = data.map((cultivo) => {
+		if (Object.keys(cultivo).length > 1) {
+			return {
+				CULTIVO: cultivo.cultivo,
+				"GRAVEDAD PROGRAMADA": cultivo.supGravedadProgramada,
+				"GRAVEDAD EXPEDIDA": cultivo.supGravedadExpedida,
+				"GRAVEDAD REALIZADA": cultivo.supGravedadRealizada,
+				"POZO PROGRAMADA": cultivo.supPozoProgramada,
+				"POZO EXPEDIDA": cultivo.supPozoExpedida,
+				"POZO REALIZADA": cultivo.supPozoRealizada,
+				"POZO PART PROGRAMADA": cultivo.supPozoPartProgramada,
+				"POZO PART EXPEDIDA": cultivo.supPozoPartExpedida,
+				"POZO PART REALIZADA": cultivo.supPozoPartRealizada,
+				"TOTAL PROGRAMADA":
+					cultivo.supGravedadProgramada + cultivo.supPozoProgramada + cultivo.supPozoPartProgramada,
+				"TOTAL EXPEDIDA":
+					cultivo.supGravedadExpedida + cultivo.supPozoExpedida + cultivo.supPozoPartExpedida,
+				"TOTAL REALIZADA":
+					cultivo.supGravedadRealizada + cultivo.supPozoRealizada + cultivo.supPozoPartRealizada
+			};
+		} else {
+			return { CULTIVO: cultivo.cultivo };
+		}
+	});
+
+	return expedicionTable;
+};
+
+const setTitle = (modulos) => {
+	switch (modulos.length) {
+		case 0:
+			return "ExpedicionGlobal";
+		case 1:
+			return `ExpedicionM${modulos[0]}`;
+
+		default:
+			const modulosString = modulos.join("-");
+			return `Exp${modulosString}`;
+	}
 };
