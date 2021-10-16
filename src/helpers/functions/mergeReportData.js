@@ -47,15 +47,27 @@ const createNewAutorizadosItem = ({
 	pozoNormalAutorizada = 0
 }) => {
 	if (subciclo === "PERENES") subciclo = "PERENNES";
-	mergedData[`${id}-${modulo}`] = {
-		...plantillaRegistro,
-		cultivo: id,
-		modulo,
-		subciclo,
-		estado,
-		supGravedadProgramada: gravedadNormalAutorizada + gravedadExtraAutorizada,
-		supPozoProgramada: pozoNormalAutorizada + pozoExtraAutorizada
-	};
+	if (isPozoParticular(modulo)) {
+		mergedData[`${id}-${modulo}`] = {
+			...plantillaRegistro,
+			cultivo: id,
+			modulo,
+			subciclo,
+			estado,
+			supGravedadProgramada: gravedadNormalAutorizada + gravedadExtraAutorizada,
+			supPozoPartProgramada: pozoNormalAutorizada + pozoExtraAutorizada
+		};
+	} else {
+		mergedData[`${id}-${modulo}`] = {
+			...plantillaRegistro,
+			cultivo: id,
+			modulo,
+			subciclo,
+			estado,
+			supGravedadProgramada: gravedadNormalAutorizada + gravedadExtraAutorizada,
+			supPozoProgramada: pozoNormalAutorizada + pozoExtraAutorizada
+		};
+	}
 };
 
 export const mergeReportData = (autorizados, expedicion) => {
@@ -68,4 +80,16 @@ export const mergeReportData = (autorizados, expedicion) => {
 	});
 
 	return mergedData;
+};
+
+const isPozoParticular = (modulo) => {
+	switch (modulo) {
+		case "UNI01":
+		case "UNI02":
+		case "UNI03":
+			return true;
+
+		default:
+			return false;
+	}
 };
