@@ -16,7 +16,9 @@ export const loadAvanceSuperficieExpedida = async (ciclo) => {
 	let expedicion = [];
 
 	const expedicionPromises = modulos.map((modulo) => {
-		return loadExpedicion(modulo, ciclo);
+		if (modulo !== "dev") {
+			return loadExpedicion(modulo, ciclo);
+		} else return loadExpedicion(99, ciclo);
 	});
 
 	const data = await Promise.all(expedicionPromises);

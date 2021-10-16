@@ -16,7 +16,9 @@ export const loadAutorizadosGlobal = async (ciclo) => {
 	let autorizados = [];
 
 	const autorizadosPromises = modulos.map((modulo) => {
-		return loadAutorizados(modulo, ciclo);
+		if (modulo !== "dev") {
+			return loadAutorizados(modulo, ciclo);
+		} else return loadAutorizados(99, ciclo);
 	});
 
 	const data = await Promise.all(autorizadosPromises);
