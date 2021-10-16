@@ -12,7 +12,8 @@ import { ModulosCheckbox } from "./ModulosCkeckbox";
 const unidades = {
 	primeraUnidad: false,
 	segundaUnidad: false,
-	terceraUnidad: false
+	terceraUnidad: false,
+	pozosParticulares: false
 };
 
 const initialState = { unidades, modulosPorUnidad };
@@ -27,7 +28,7 @@ export const ReporteExpedicion = () => {
 
 	const [state, dispatch] = useReducer(modulosCheckboxReducer, initialState);
 	const { unidades, modulosPorUnidad } = state;
-	const { primeraUnidad, segundaUnidad, terceraUnidad } = modulosPorUnidad;
+	const { primeraUnidad, segundaUnidad, terceraUnidad, pozosParticulares } = modulosPorUnidad;
 
 	const reportOptions = [
 		{
@@ -71,6 +72,10 @@ export const ReporteExpedicion = () => {
 
 		Object.keys(terceraUnidad).forEach((modulo) => {
 			terceraUnidad[modulo] && modulos.push(modulo);
+		});
+
+		Object.keys(pozosParticulares).forEach((modulo) => {
+			pozosParticulares[modulo] && modulos.push(modulo);
 		});
 
 		return modulos;

@@ -13,7 +13,8 @@ export const modulosPorUnidad = {
 		19: false,
 		20: false
 	},
-	terceraUnidad: { 1: false, 2: false, 3: false, 21: false, 22: false, 23: false }
+	terceraUnidad: { 1: false, 2: false, 3: false, 21: false, 22: false, 23: false },
+	pozosParticulares: { UNI01: false, UNI02: false, UNI03: false }
 };
 
 export const modulosPorEstado = {

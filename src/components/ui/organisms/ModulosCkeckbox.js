@@ -3,7 +3,7 @@ import { ButtonGroup } from "../molecules/ButtonGroup";
 
 export const ModulosCheckbox = ({ state, dispatch }) => {
 	const { unidades, modulosPorUnidad } = state;
-	const { primeraUnidad, segundaUnidad, terceraUnidad } = modulosPorUnidad;
+	const { primeraUnidad, segundaUnidad, terceraUnidad, pozosParticulares } = modulosPorUnidad;
 
 	const buttonClasses = {
 		on: "btn btn-primary",
@@ -51,6 +51,7 @@ export const ModulosCheckbox = ({ state, dispatch }) => {
 						buttonStyles={buttonClasses}
 					/>
 				</div>
+
 				<div className="mt-3">
 					<ButtonGroup
 						options={terceraUnidad}
@@ -58,6 +59,20 @@ export const ModulosCheckbox = ({ state, dispatch }) => {
 							dispatch({
 								type: "changeModulo",
 								payload: { unidad: "terceraUnidad", modulo: modulo }
+							});
+						}}
+						groupStyles="btn-group btn-group-toggle"
+						buttonStyles={buttonClasses}
+					/>
+				</div>
+
+				<div className="mt-3">
+					<ButtonGroup
+						options={pozosParticulares}
+						setFunction={(modulo) => {
+							dispatch({
+								type: "changeModulo",
+								payload: { unidad: "pozosParticulares", modulo: modulo }
 							});
 						}}
 						groupStyles="btn-group btn-group-toggle"
