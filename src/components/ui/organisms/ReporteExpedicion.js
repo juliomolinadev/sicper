@@ -81,25 +81,6 @@ export const ReporteExpedicion = () => {
 		return modulos;
 	};
 
-	const showPrintButton = () => {
-		switch (reportOptionsValues.opcion) {
-			case "global":
-			case "Baja California":
-			case "Sonora":
-				return true;
-
-			case "modulo":
-				return privilegios.accesoGlobal ? false : true;
-
-			case "modulos":
-				if (getModulos().length > 0) return true;
-				break;
-
-			default:
-				return false;
-		}
-	};
-
 	return (
 		<div>
 			<div className="row m-0 ">
@@ -173,17 +154,6 @@ export const ReporteExpedicion = () => {
 						)}
 					</div>
 				</div>
-			)}
-
-			{showPrintButton() && (
-				<button
-					type="button"
-					className="btn btn-outline-primary ml-5 d-print-none"
-					onClick={() => window.print()}
-				>
-					<i className="fas fa-print"></i>
-					<span> Imprimir</span>
-				</button>
 			)}
 		</div>
 	);

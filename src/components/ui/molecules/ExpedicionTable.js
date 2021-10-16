@@ -215,8 +215,22 @@ export const ExpedicionTable = ({ data, modulos }) => {
 				</tbody>
 			</table>
 
-			<button onClick={exportToExcel} className="btn btn-outline-primary">
-				Descargar
+			<button
+				type="button"
+				onClick={exportToExcel}
+				className="btn btn-outline-primary d-print-none"
+			>
+				<i className="fas fa-download"></i>
+				<span> Descargar</span>
+			</button>
+
+			<button
+				type="button"
+				className="btn btn-outline-primary ml-5 d-print-none"
+				onClick={() => window.print()}
+			>
+				<i className="fas fa-print"></i>
+				<span> Imprimir</span>
 			</button>
 		</div>
 	);
@@ -270,7 +284,6 @@ const setTitle = (modulos) => {
 			return `ExpedicionM${modulos[0]}`;
 
 		default:
-			const modulosString = modulos.join("-");
-			return `Exp${modulosString}`;
+			return "Expedicion";
 	}
 };
