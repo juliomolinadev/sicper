@@ -1,40 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { permitsHeaders } from "../../../helpers/constants/reportsColumns";
 import { simpleLoadPermits } from "../../../helpers/DB/simpleLoadPermits";
 import { useFilteredData } from "../../../hooks/useFilteredData";
 import { useForm } from "../../../hooks/useForm";
 import { ReportModule } from "./ReportModule";
 
 export const CustomPermitsReport = () => {
-	const headers = [
-		{ id: "cuenta", header: "CUENTA", styles: "", sum: false, count: false },
-		{ id: "numeroPermiso", header: "PERMISO", styles: "", sum: false, count: true },
-		{ id: "usuario", header: "USUARIO", styles: "", sum: false, count: false },
-		{ id: "nombreProductor", header: "PRODUCTOR", styles: "longCell", sum: false, count: false },
-		{ id: "seccion", header: "SECCION", styles: "text-center", sum: false, count: false },
-		{ id: "localidad", header: "LOCALIDAD", styles: "", sum: false, count: false },
-		{ id: "lote", header: "LOTE", styles: "text-center", sum: false, count: false },
-		{ id: "nombreCultivo", header: "CULTIVO", styles: "", sum: false, count: false },
-		{ id: "supAutorizada", header: "SUPERFICIE", styles: "text-center", sum: true, count: false }
-	];
-
 	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
 	const { cicloActual } = variablesGlobales;
 
 	const [formValues, handleInputChange] = useForm({ palabra: "", campo: "" });
 	const { palabra, campo } = formValues;
 
-	const [data, setData, filters, handleFiltersChange] = useFilteredData(headers, []);
-	const { filter, order1 } = filters;
+	const [headers, setHeaders] = useState(permitsHeaders);
+	const handleColumn = ({ target }) => {
+		const index = headers.findIndex((header) => header.id === target.id);
+
+		const newHeaders = headers.map((header) => header);
+		newHeaders.splice(index, 1, {
+			...headers[index],
+			display: !headers[index].display
+		});
+		setHeaders(newHeaders);
+	};
 
 	const getTitle = () => {
 		const campoForTitle = headers.find((header) => header.id === campo);
 		if (campoForTitle) return `REPORTE DE PERMISOS POR ${campoForTitle.header}`;
 		else return `REPORTE DE PERMISOS`;
 	};
-
 	const title = getTitle();
 
+	const [data, setData, filters, handleFiltersChange] = useFilteredData(headers, []);
+	const { filter, order1 } = filters;
 	const getPermisos = async () => {
 		if (campo.length) {
 			const permisosToSet = await simpleLoadPermits(palabra, campo, modulo, cicloActual);
@@ -133,6 +132,29 @@ export const CustomPermitsReport = () => {
 										</option>
 									))}
 								</select>
+							</div>
+						</div>
+
+						<div className="row mt-4">
+							<div className="col-sm-12">
+								{headers.map((header) => {
+									if (header.selectable) {
+										const style = header.display
+											? "btn btn-sm btn-primary m-1"
+											: "btn btn-sm btn-outline-primary m-1";
+										return (
+											<button
+												key={`0-${header.header}`}
+												className={style}
+												onClick={handleColumn}
+												id={header.id}
+												value={header.selectable}
+											>
+												{header.header}
+											</button>
+										);
+									} else return <div key={`1-${header.header}`} style={{ display: "none" }}></div>;
+								})}
 							</div>
 						</div>
 					</>

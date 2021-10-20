@@ -29,22 +29,33 @@ export const PrintableTable = forwardRef((props, ref) => {
 					<table className="table table-sm table-striped border mt-4" style={{ fontSize: 12 }}>
 						<thead className="thead-light">
 							<tr>
-								{headers.map((element) => (
-									<th key={`${i}-${element.id}`} scope="col" className={element.styles}>
-										{element.header}
-									</th>
-								))}
+								{headers.map((element) => {
+									if (element.display) {
+										return (
+											<th key={`${i}-${element.id}`} scope="col" className={element.styles}>
+												{element.header}
+											</th>
+										);
+									} else return <th key={`${i}-${element.id}`} style={{ display: "none" }}></th>;
+								})}
 							</tr>
 						</thead>
 						<tbody>
 							{dataPart &&
 								dataPart.map((row, j) => (
 									<tr key={`${i}-${j}-${row[0]}`}>
-										{headers.map((element, k) => (
-											<td key={`${i}-${k}-${element.id}`} className={element.styles}>
-												{row[element.id]}
-											</td>
-										))}
+										{headers.map((element, k) => {
+											if (element.display) {
+												return (
+													<td key={`${i}-${k}-${element.id}`} className={element.styles}>
+														{row[element.id]}
+													</td>
+												);
+											} else
+												return (
+													<td key={`${i}-${k}-${element.id}`} style={{ display: "none" }}></td>
+												);
+										})}
 									</tr>
 								))}
 						</tbody>
