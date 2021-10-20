@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { simpleLoadPermits } from "../../../helpers/DB/simpleLoadPermits";
+import { useFilteredData } from "../../../hooks/useFilteredData";
 import { useForm } from "../../../hooks/useForm";
 import { ReportModule } from "./ReportModule";
 
@@ -20,15 +21,11 @@ export const CustomPermitsReport = () => {
 	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
 	const { cicloActual } = variablesGlobales;
 
-	const [formValues, handleInputChange] = useForm({
-		palabra: "",
-		campo: "",
-		filter: "",
-		order1: ""
-	});
-	const { palabra, campo, filter, order1 } = formValues;
-	const [permisos, setPermisos] = useState([]);
-	console.log(permisos);
+	const [formValues, handleInputChange] = useForm({ palabra: "", campo: "" });
+	const { palabra, campo } = formValues;
+
+	const [data, setData, filters, handleFiltersChange] = useFilteredData(headers, []);
+	const { filter, order1 } = filters;
 
 	const getTitle = () => {
 		const campoForTitle = headers.find((header) => header.id === campo);
@@ -38,82 +35,11 @@ export const CustomPermitsReport = () => {
 
 	const title = getTitle();
 
-	const onlyUnique = (objectsArray, key) => {
-		const unique = [];
-		objectsArray.forEach((element) => {
-			const index = unique.indexOf(element[key]);
-			if (index === -1) {
-				unique.push(element[key]);
-			}
-		});
-
-		unique.sort((a, b) => {
-			if (a > b) return 1;
-			if (a < b) return -1;
-			return 0;
-		});
-
-		return unique;
-	};
-
 	const getPermisos = async () => {
 		if (campo.length) {
 			const permisosToSet = await simpleLoadPermits(palabra, campo, modulo, cicloActual);
-			setPermisos(permisosToSet);
+			setData(permisosToSet);
 		}
-	};
-
-	const setFilter = () => {
-		const cleanPermisos = permisos.filter(
-			(permiso) => permiso.cuenta !== "SUBTOTAL" && permiso.cuenta !== "TOTAL"
-		);
-		const unique = onlyUnique(cleanPermisos, filter);
-		const separateData = [];
-		const finalData = [];
-		const totalRow = { cuenta: "TOTAL" };
-
-		unique.forEach((value) => {
-			separateData.push(cleanPermisos.filter((permiso) => permiso[filter] === value));
-		});
-
-		separateData.forEach((filterItem) => {
-			const subTotalRow = { cuenta: "SUBTOTAL" };
-
-			filterItem.sort((a, b) => {
-				if (a[order1] < b[order1]) {
-					return 1;
-				}
-				if (a[order1] > b[order1]) {
-					return -1;
-				}
-				return 0;
-			});
-
-			filterItem.forEach((order1Item) => {
-				headers.forEach((header) => {
-					if (header.sum) {
-						if (subTotalRow[header.id]) subTotalRow[header.id] += order1Item[header.id];
-						else subTotalRow[header.id] = order1Item[header.id];
-
-						if (totalRow[header.id]) totalRow[header.id] += order1Item[header.id];
-						else totalRow[header.id] = order1Item[header.id];
-					}
-
-					if (header.count) {
-						if (subTotalRow[header.id]) subTotalRow[header.id]++;
-						else subTotalRow[header.id] = 1;
-
-						if (totalRow[header.id]) totalRow[header.id]++;
-						else totalRow[header.id] = 1;
-					}
-				});
-				finalData.push(order1Item);
-			});
-			finalData.push(subTotalRow);
-		});
-
-		finalData.push(totalRow);
-		setPermisos(finalData);
 	};
 
 	const handleKeyUp = (event) => {
@@ -148,7 +74,7 @@ export const CustomPermitsReport = () => {
 							className="form-control ml-2"
 						>
 							<option hidden defaultValue={false}>
-								BUSCAR EN
+								BUSCAR EN:
 							</option>
 
 							{headers.map((header) => (
@@ -164,7 +90,7 @@ export const CustomPermitsReport = () => {
 					</div>
 				</div>
 
-				{permisos.length > 0 && (
+				{data.length > 0 && (
 					<>
 						<div className="row mt-2">
 							<div className="d-flex col-sm-8">
@@ -172,11 +98,11 @@ export const CustomPermitsReport = () => {
 									name="filter"
 									type="text"
 									value={filter}
-									onChange={handleInputChange}
+									onChange={handleFiltersChange}
 									className="form-control ml-2"
 								>
 									<option hidden defaultValue={false}>
-										ORDENAR POR
+										SUBTOTALES POR:
 									</option>
 
 									{headers.map((header) => (
@@ -194,11 +120,11 @@ export const CustomPermitsReport = () => {
 									name="order1"
 									type="text"
 									value={order1}
-									onChange={handleInputChange}
+									onChange={handleFiltersChange}
 									className="form-control ml-2"
 								>
 									<option hidden defaultValue={false}>
-										ORDENAR POR
+										ORDENAR POR:
 									</option>
 
 									{headers.map((header) => (
@@ -208,26 +134,16 @@ export const CustomPermitsReport = () => {
 									))}
 								</select>
 							</div>
-
-							<div className="d-flex col-sm-4">
-								<button
-									className=" btn btn-outline-primary d-sm-block ml-2 "
-									type="button"
-									onClick={() => setFilter()}
-								>
-									Filtrar
-								</button>
-							</div>
 						</div>
 					</>
 				)}
 			</div>
 
-			{permisos.length > 0 && (
+			{data.length > 0 && (
 				<ReportModule
 					title={title}
 					headers={headers}
-					data={permisos}
+					data={data}
 					rowsPerPage={24}
 					orientation="landscape"
 				/>
