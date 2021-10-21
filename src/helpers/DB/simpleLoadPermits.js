@@ -1,7 +1,20 @@
 import { db } from "../../firebase/firebase-config";
 import Swal from "sweetalert2";
 
-export const simpleLoadPermits = async (palabra, campo, modulo, ciclo) => {
+const addDays = (date, days) => {
+	var result = new Date(date);
+	result.setDate(result.getDate() + days);
+	return result;
+};
+
+export const simpleLoadPermits = async (
+	palabra = 0,
+	campo,
+	modulo,
+	ciclo,
+	fechaInicial,
+	fechaFinal
+) => {
 	const permisos = [];
 	const qrysPermisos = [];
 	const permisosRef = db
@@ -11,24 +24,31 @@ export const simpleLoadPermits = async (palabra, campo, modulo, ciclo) => {
 		.doc(`Modulo-${modulo}`)
 		.collection(`permisos`);
 
-	qrysPermisos.push(
-		permisosRef
-			.orderBy(campo)
-			.startAt(palabra.toUpperCase())
-			.endAt(palabra.toUpperCase() + "\uf8ff")
-			.get()
-	);
+	if (palabra.length === 0) qrysPermisos.push(permisosRef.orderBy(campo).get());
+	else {
+		qrysPermisos.push(
+			permisosRef
+				.orderBy(campo)
+				.startAt(palabra.toUpperCase())
+				.endAt(palabra.toUpperCase() + "\uf8ff")
+				.get()
+		);
 
-	qrysPermisos.push(permisosRef.where(campo, "==", Number(palabra)).get());
+		qrysPermisos.push(permisosRef.where(campo, "==", Number(palabra)).get());
+	}
 
 	const resolvedPermisosQrys = await Promise.all(qrysPermisos);
 
 	resolvedPermisosQrys.forEach((snap) => {
 		snap.forEach((snapHijo) => {
-			permisos.push({
-				id: snapHijo.id,
-				...snapHijo.data()
-			});
+			const fecha = snapHijo.data().fechaEmicion.toDate();
+
+			if (fecha >= fechaInicial && fecha <= addDays(fechaFinal, 1)) {
+				permisos.push({
+					id: snapHijo.id,
+					...snapHijo.data()
+				});
+			}
 		});
 	});
 

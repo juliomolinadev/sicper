@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { permitsHeaders } from "../../../helpers/constants/reportsColumns";
+
+import DatePicker from "react-date-picker";
+
 import { simpleLoadPermits } from "../../../helpers/DB/simpleLoadPermits";
+import { permitsHeaders } from "../../../helpers/constants/reportsColumns";
 import { useFilteredData } from "../../../hooks/useFilteredData";
 import { useForm } from "../../../hooks/useForm";
 import { ReportModule } from "./ReportModule";
@@ -12,6 +15,9 @@ export const CustomPermitsReport = () => {
 
 	const [formValues, handleInputChange] = useForm({ palabra: "", campo: "" });
 	const { palabra, campo } = formValues;
+
+	const [fechaInicial, onChangeFechaInicial] = useState(new Date(2021, 8, 1));
+	const [fechaFinal, onChangeFechaFinal] = useState(new Date());
 
 	const [headers, setHeaders] = useState(permitsHeaders);
 	const handleColumn = ({ target }) => {
@@ -36,7 +42,14 @@ export const CustomPermitsReport = () => {
 	const { filter, order1 } = filters;
 	const getPermisos = async () => {
 		if (campo.length) {
-			const permisosToSet = await simpleLoadPermits(palabra, campo, modulo, cicloActual);
+			const permisosToSet = await simpleLoadPermits(
+				palabra,
+				campo,
+				modulo,
+				cicloActual,
+				fechaInicial,
+				fechaFinal
+			);
 			setData(permisosToSet);
 		}
 	};
@@ -86,6 +99,34 @@ export const CustomPermitsReport = () => {
 						<button className="btn btn-outline-primary ml-2" type="button" onClick={getPermisos}>
 							<i className="fas fa-search"></i>
 						</button>
+					</div>
+				</div>
+
+				<div className="row mt-4">
+					<div className="col-sm-5  pb-2">
+						<label className="form-check-label">Fecha inicial</label>
+
+						<div>
+							<DatePicker
+								type="date"
+								onChange={onChangeFechaInicial}
+								value={fechaInicial}
+								format={"dd/MM/yyyy"}
+							/>
+						</div>
+					</div>
+
+					<div className="col-sm-5 pb-2">
+						<label className="form-check-label">Fecha final</label>
+
+						<div>
+							<DatePicker
+								type="date"
+								onChange={onChangeFechaFinal}
+								value={fechaFinal}
+								format={"dd/MM/yyyy"}
+							/>
+						</div>
 					</div>
 				</div>
 
