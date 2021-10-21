@@ -44,11 +44,13 @@ export const simpleLoadPermits = async (
 			const fecha = snapHijo.data().fechaEmicion.toDate();
 			const cuota = snapHijo.data().cuotaCultivo * snapHijo.data().supAutorizada;
 
+			// console.log(fecha.toLocaleDateString());
 			if (fecha >= fechaInicial && fecha <= addDays(fechaFinal, 1)) {
 				permisos.push({
 					id: snapHijo.id,
 					...snapHijo.data(),
-					cuotaCultivo: cuota
+					cuotaCultivo: cuota,
+					fechaEmicion: fecha.toLocaleDateString()
 				});
 			}
 		});
