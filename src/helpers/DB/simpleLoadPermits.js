@@ -34,6 +34,14 @@ export const simpleLoadPermits = async (
 				.get()
 		);
 
+		qrysPermisos.push(
+			permisosRef
+				.orderBy(campo)
+				.startAt(palabra)
+				.endAt(palabra + "\uf8ff")
+				.get()
+		);
+
 		qrysPermisos.push(permisosRef.where(campo, "==", Number(palabra)).get());
 	}
 
@@ -44,7 +52,6 @@ export const simpleLoadPermits = async (
 			const fecha = snapHijo.data().fechaEmicion.toDate();
 			const cuota = snapHijo.data().cuotaCultivo * snapHijo.data().supAutorizada;
 
-			// console.log(fecha.toLocaleDateString());
 			if (fecha >= fechaInicial && fecha <= addDays(fechaFinal, 1)) {
 				permisos.push({
 					id: snapHijo.id,
