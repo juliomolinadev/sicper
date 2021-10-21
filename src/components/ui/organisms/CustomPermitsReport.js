@@ -71,12 +71,13 @@ export const CustomPermitsReport = () => {
 		<>
 			<div className="container mb-4 col-sm-8">
 				<div className="row">
-					<div className="d-flex col-sm-8">
+					<div className="col-sm-8">
+						<label htmlFor="palabra">PARAMETRO DE BUSQUEDA:</label>
 						<input
 							type="text"
 							className="form-control"
-							placeholder="PARAMETRO DE BUSQUEDA"
 							name="palabra"
+							id="palabra"
 							autoComplete="off"
 							value={palabra}
 							onChange={handleInputChange}
@@ -84,28 +85,32 @@ export const CustomPermitsReport = () => {
 						/>
 					</div>
 
-					<div className="d-flex col-sm-4">
-						<select
-							name="campo"
-							type="text"
-							value={campo}
-							onChange={handleInputChange}
-							className="form-control ml-2"
-						>
-							<option hidden defaultValue={false}>
-								BUSCAR EN:
-							</option>
-
-							{headers.map((header) => (
-								<option key={header.id} value={header.id}>
-									{header.header}
+					<div className="col-sm-4">
+						<label htmlFor="campo">BUSCAR EN:</label>
+						<div className="d-flex">
+							<select
+								name="campo"
+								id="campo"
+								type="text"
+								value={campo}
+								onChange={handleInputChange}
+								className="form-control"
+							>
+								<option hidden defaultValue={false}>
+									-
 								</option>
-							))}
-						</select>
 
-						<button className="btn btn-outline-primary ml-2" type="button" onClick={getPermisos}>
-							<i className="fas fa-search"></i>
-						</button>
+								{headers.map((header) => (
+									<option key={header.id} value={header.id}>
+										{header.header}
+									</option>
+								))}
+							</select>
+
+							<button className="btn btn-outline-primary ml-2" type="button" onClick={getPermisos}>
+								<i className="fas fa-search"></i>
+							</button>
+						</div>
 					</div>
 				</div>
 
@@ -141,15 +146,18 @@ export const CustomPermitsReport = () => {
 					<>
 						<div className="row mt-4">
 							<div className="col-sm-8">
+								<label htmlFor="filter">ORDENADO Y SUBTOTALES POR:</label>
+
 								<select
 									name="filter"
+									id="filter"
 									type="text"
 									value={filter}
 									onChange={handleFiltersChange}
-									className="form-control ml-2"
+									className="form-control"
 								>
 									<option hidden defaultValue={false}>
-										SUBTOTALES POR:
+										-
 									</option>
 
 									{headers.map((header) => (
@@ -163,15 +171,18 @@ export const CustomPermitsReport = () => {
 
 						<div className="row mt-2">
 							<div className="col-sm-8">
+								<label htmlFor="order1">SUB-ORDENADO POR:</label>
+
 								<select
 									name="order1"
+									id="order1"
 									type="text"
 									value={order1}
 									onChange={handleFiltersChange}
-									className="form-control ml-2"
+									className="form-control"
 								>
 									<option hidden defaultValue={false}>
-										ORDENAR POR:
+										-
 									</option>
 
 									{headers.map((header) => (
