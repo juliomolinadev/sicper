@@ -91,7 +91,7 @@ export const permitsHeaders = [
 	},
 	{
 		id: "supAutorizada",
-		header: "SUPERFICIE",
+		header: "HA",
 		styles: "text-center",
 		sum: true,
 		count: false,
@@ -104,13 +104,13 @@ export const permitsHeaders = [
 		styles: "",
 		sum: false,
 		count: false,
-		display: false,
+		display: true,
 		selectable: true
 	},
 
 	{
 		id: "cultivoAnterior",
-		header: "ANTERIOR",
+		header: "CUL. ANT.",
 		styles: "",
 		sum: false,
 		count: false,

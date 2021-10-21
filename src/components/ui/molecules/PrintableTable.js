@@ -46,11 +46,21 @@ export const PrintableTable = forwardRef((props, ref) => {
 									<tr key={`${i}-${j}-${row[0]}`}>
 										{headers.map((element, k) => {
 											if (element.display) {
-												return (
-													<td key={`${i}-${k}-${element.id}`} className={element.styles}>
-														{row[element.id]}
-													</td>
-												);
+												if (typeof row[element.id] === "object") {
+													const fechaObject = row[element.id].toDate();
+													const fecha = fechaObject.toLocaleDateString();
+													return (
+														<td key={`${i}-${k}-${fecha}`} className={element.styles}>
+															{fecha}
+														</td>
+													);
+												} else {
+													return (
+														<td key={`${i}-${k}-${element.id}`} className={element.styles}>
+															{row[element.id]}
+														</td>
+													);
+												}
 											} else
 												return (
 													<td key={`${i}-${k}-${element.id}`} style={{ display: "none" }}></td>

@@ -81,13 +81,15 @@ const onlyUnique = (objectsArray, key) => {
 };
 
 const sortFunction = (a, b) => {
-	if (!isNaN(a)) {
-		if (a < b) return 1;
-		if (a > b) return -1;
-		return 0;
-	} else {
-		if (a > b) return 1;
-		if (a < b) return -1;
-		return 0;
+	switch (typeof a) {
+		case "number":
+			if (a < b) return 1;
+			if (a > b) return -1;
+			return 0;
+
+		default:
+			if (a > b) return 1;
+			if (a < b) return -1;
+			return 0;
 	}
 };
