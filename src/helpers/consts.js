@@ -55,6 +55,9 @@ export const cultivosPrincipales = {
 	},
 	PERENNES: {
 		"50-ALFALFA": {},
+		"145-COMP. VOL. ALFALFA": {},
+		"51-ALFALFA NUEVA": {},
+		"145.1-COMP. DE VOL. ALF. NVA.": {},
 		"52-ESPARRAGO": {},
 		"53-VID": {},
 		FRUTALES: {},
