@@ -38,6 +38,13 @@ export const CustomPermitsReport = () => {
 	};
 	const title = getTitle();
 
+	const getExcelTitle = () => {
+		const campoForTitle = headers.find((header) => header.id === campo);
+		if (campoForTitle) return `PERMISOS POR ${campoForTitle.header}`;
+		else return `PERMISOS`;
+	};
+	const excelTitle = getExcelTitle();
+
 	const [data, setData, filters, handleFiltersChange] = useFilteredData(headers, []);
 	const { filter, order1 } = filters;
 	const getPermisos = async () => {
@@ -102,8 +109,8 @@ export const CustomPermitsReport = () => {
 					</div>
 				</div>
 
-				<div className="row mt-4">
-					<div className="col-sm-5  pb-2">
+				<div className="row mt-2">
+					<div className="col-sm-5">
 						<label className="form-check-label">Fecha inicial</label>
 
 						<div>
@@ -116,7 +123,7 @@ export const CustomPermitsReport = () => {
 						</div>
 					</div>
 
-					<div className="col-sm-5 pb-2">
+					<div className="col-sm-5">
 						<label className="form-check-label">Fecha final</label>
 
 						<div>
@@ -132,8 +139,8 @@ export const CustomPermitsReport = () => {
 
 				{data.length > 0 && (
 					<>
-						<div className="row mt-2">
-							<div className="d-flex col-sm-8">
+						<div className="row mt-4">
+							<div className="col-sm-8">
 								<select
 									name="filter"
 									type="text"
@@ -155,7 +162,7 @@ export const CustomPermitsReport = () => {
 						</div>
 
 						<div className="row mt-2">
-							<div className="d-flex col-sm-8">
+							<div className="col-sm-8">
 								<select
 									name="order1"
 									type="text"
@@ -205,6 +212,7 @@ export const CustomPermitsReport = () => {
 			{data.length > 0 && (
 				<ReportModule
 					title={title}
+					excelTitle={excelTitle}
 					headers={headers}
 					data={data}
 					rowsPerPage={24}
