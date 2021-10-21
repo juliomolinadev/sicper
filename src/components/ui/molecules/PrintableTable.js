@@ -57,7 +57,9 @@ export const PrintableTable = forwardRef((props, ref) => {
 												} else {
 													return (
 														<td key={`${i}-${k}-${element.id}`} className={element.styles}>
-															{row[element.id]}
+															{element.float
+																? row[element.id].toFixed(element.float)
+																: row[element.id]}
 														</td>
 													);
 												}

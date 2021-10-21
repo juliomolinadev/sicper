@@ -5,6 +5,7 @@ export const permitsHeaders = [
 		styles: "",
 		sum: false,
 		count: false,
+		float: false,
 		display: true,
 		selectable: false
 	},
@@ -14,6 +15,7 @@ export const permitsHeaders = [
 		styles: "",
 		sum: false,
 		count: true,
+		float: false,
 		display: true,
 		selectable: false
 	},
@@ -23,6 +25,7 @@ export const permitsHeaders = [
 		styles: "",
 		sum: false,
 		count: false,
+		float: false,
 		display: true,
 		selectable: true
 	},
@@ -32,6 +35,7 @@ export const permitsHeaders = [
 		styles: "longCell",
 		sum: false,
 		count: false,
+		float: false,
 		display: false,
 		selectable: true
 	},
@@ -41,6 +45,7 @@ export const permitsHeaders = [
 		styles: "text-center",
 		sum: false,
 		count: false,
+		float: false,
 		display: true,
 		selectable: true
 	},
@@ -50,6 +55,7 @@ export const permitsHeaders = [
 		styles: "",
 		sum: false,
 		count: false,
+		float: false,
 		display: true,
 		selectable: true
 	},
@@ -59,6 +65,7 @@ export const permitsHeaders = [
 		styles: "text-center",
 		sum: false,
 		count: false,
+		float: false,
 		display: true,
 		selectable: true
 	},
@@ -68,6 +75,7 @@ export const permitsHeaders = [
 		styles: "text-center",
 		sum: false,
 		count: false,
+		float: false,
 		display: false,
 		selectable: true
 	},
@@ -77,6 +85,7 @@ export const permitsHeaders = [
 		styles: "",
 		sum: false,
 		count: false,
+		float: false,
 		display: true,
 		selectable: true
 	},
@@ -86,6 +95,7 @@ export const permitsHeaders = [
 		styles: "",
 		sum: false,
 		count: false,
+		float: false,
 		display: false,
 		selectable: true
 	},
@@ -95,7 +105,18 @@ export const permitsHeaders = [
 		styles: "text-center",
 		sum: true,
 		count: false,
+		float: 3,
 		display: true,
+		selectable: true
+	},
+	{
+		id: "cuotaCultivo",
+		header: "CUOTA",
+		styles: "text-center moneda",
+		sum: true,
+		count: false,
+		float: 2,
+		display: false,
 		selectable: true
 	},
 	{
@@ -104,6 +125,7 @@ export const permitsHeaders = [
 		styles: "",
 		sum: false,
 		count: false,
+		float: false,
 		display: true,
 		selectable: true
 	},
@@ -114,6 +136,7 @@ export const permitsHeaders = [
 		styles: "",
 		sum: false,
 		count: false,
+		float: false,
 		display: false,
 		selectable: true
 	},
@@ -123,6 +146,7 @@ export const permitsHeaders = [
 		styles: "",
 		sum: false,
 		count: false,
+		float: false,
 		display: false,
 		selectable: true
 	},
@@ -132,6 +156,7 @@ export const permitsHeaders = [
 		styles: "",
 		sum: false,
 		count: false,
+		float: false,
 		display: false,
 		selectable: true
 	}
