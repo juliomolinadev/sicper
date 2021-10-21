@@ -12,8 +12,8 @@ export const simpleLoadPermits = async (
 	campo,
 	modulo,
 	ciclo,
-	fechaInicial,
-	fechaFinal
+	fechaInicial = new Date(2021, 8, 1),
+	fechaFinal = new Date(2022, 8, 30)
 ) => {
 	const permisos = [];
 	const qrysPermisos = [];

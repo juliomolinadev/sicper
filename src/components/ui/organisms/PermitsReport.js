@@ -1,22 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { permitsHeaders } from "../../../helpers/constants/reportsColumns";
 import { simpleLoadPermits } from "../../../helpers/DB/simpleLoadPermits";
 import { useForm } from "../../../hooks/useForm";
 import { ReportModule } from "./ReportModule";
 
 export const PermitsReport = () => {
 	const title = "Reporte de permisos";
-	const headers = [
-		{ id: "cuenta", header: "CUENTA", styles: "", sum: false, count: false },
-		{ id: "numeroPermiso", header: "PERMISO", styles: "", sum: false, count: true },
-		{ id: "usuario", header: "USUARIO", styles: "", sum: false, count: false },
-		{ id: "nombreProductor", header: "PRODUCTOR", styles: "longCell", sum: false, count: false },
-		{ id: "seccion", header: "SECCION", styles: "text-center", sum: false, count: false },
-		{ id: "localidad", header: "LOCALIDAD", styles: "", sum: false, count: false },
-		{ id: "lote", header: "LOTE", styles: "text-center", sum: false, count: false },
-		{ id: "nombreCultivo", header: "CULTIVO", styles: "", sum: false, count: false },
-		{ id: "supAutorizada", header: "SUPERFICIE", styles: "text-center", sum: true, count: false }
-	];
 
 	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
 	const { cicloActual } = variablesGlobales;
@@ -49,7 +39,6 @@ export const PermitsReport = () => {
 	const getPermisos = async () => {
 		const permisosToSet = await simpleLoadPermits(palabra, "seccion", modulo, cicloActual);
 		setPermisos(setFilter(permisosToSet));
-		// setFilter();
 	};
 
 	const setFilter = (permisos) => {
@@ -107,19 +96,13 @@ export const PermitsReport = () => {
 				>
 					<i className="fas fa-search"></i>
 				</button>
-				{/* <button
-					className=" btn btn-outline-primary d-sm-block ml-auto"
-					type="button"
-					onClick={setFilter}
-				>
-					Filtrar
-				</button> */}
 			</div>
 
 			{permisos.length > 0 && (
 				<ReportModule
 					title={title}
-					headers={headers}
+					excelTitle={"REPORTE DE PERMISOS POR SECCION"}
+					headers={permitsHeaders}
 					data={permisos}
 					rowsPerPage={24}
 					orientation="landscape"

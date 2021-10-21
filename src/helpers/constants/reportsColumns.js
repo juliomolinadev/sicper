@@ -36,7 +36,7 @@ export const permitsHeaders = [
 		sum: false,
 		count: false,
 		float: false,
-		display: false,
+		display: true,
 		selectable: true
 	},
 	{
