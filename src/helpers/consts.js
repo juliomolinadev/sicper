@@ -139,6 +139,7 @@ export const privileges = {
 
 	//Autorizados
 	consultarAutorizados: false,
+	editarAutorizados: false,
 
 	//Transferencias
 	solicitarTransferencias: false,

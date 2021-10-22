@@ -21,8 +21,8 @@ export const AutorizadosScreen = () => {
 		(state) => state.autorizadosScreen
 	);
 
-	const auth = useSelector((state) => state.auth);
-	const ciclo = auth.variablesGlobales.cicloActual;
+	const { variablesGlobales, privilegios } = useSelector((state) => state.auth);
+	const ciclo = variablesGlobales.cicloActual;
 
 	let totalGravedadNormalAutorizada = 0;
 	let totalGravedadNormalAsignada = 0;
@@ -137,9 +137,7 @@ export const AutorizadosScreen = () => {
 								<></>
 							)}
 
-							{superficieReferencia === superficieTotal ? (
-								<></>
-							) : (
+							{privilegios.editarAutorizados && superficieReferencia !== superficieTotal && (
 								<div className="row p-1 pl-2  d-flex flex-column">
 									<div className="d-flex justify-content-center pt-5 text-warning">
 										! Hay modificaciones sin guardar !
