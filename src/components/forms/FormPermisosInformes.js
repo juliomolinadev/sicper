@@ -128,7 +128,7 @@ export const FormPermisosInformes = () => {
 									type="radio"
 									name="activosCancelados"
 									id="cancelados"
-									value="cancelado"
+									value="Cancelado"
 									onChange={handleInputChange}
 								/>
 								<label className="form-check-label" htmlFor="cancelados">
