@@ -6,7 +6,7 @@ import { useForm } from "../../../hooks/useForm";
 import { ReportModule } from "./ReportModule";
 
 export const PermitsReport = () => {
-	const title = "Reporte de permisos";
+	const title = "REPORTE DE PERMISOS POR SECCION";
 
 	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
 	const { cicloActual } = variablesGlobales;
@@ -35,6 +35,9 @@ export const PermitsReport = () => {
 
 	const filter = "seccion";
 	const order1 = "localidad";
+
+	const fechaInicial = new Date(2021, 8, 1);
+	const fechaFinal = new Date();
 
 	const getPermisos = async () => {
 		const permisosToSet = await simpleLoadPermits(palabra, "seccion", modulo, cicloActual);
@@ -106,6 +109,8 @@ export const PermitsReport = () => {
 					data={permisos}
 					rowsPerPage={24}
 					orientation="landscape"
+					fechaInicial={fechaInicial}
+					fechaFinal={fechaFinal}
 				/>
 			)}
 		</>
