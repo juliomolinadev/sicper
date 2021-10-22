@@ -25,6 +25,7 @@ export const usuariosColumns = [
 	{ name: "NOMBRE", selector: "nombre", width: "150px", sortable: true },
 	{ name: "DERECHO(ha)", selector: "supRiego", sortable: true, width: "80px", center: true },
 	{ name: "LOTE", selector: "predio", sortable: true, width: "60px", center: true },
+	{ name: "EJ/COL", selector: "tipoLocalidad", sortable: true, width: "80px" },
 	{ name: "LOCALIDAD", selector: "nombreLocalidad", sortable: true, width: "200px" },
 	{ name: "SECCION", selector: "seccion", sortable: true, width: "60px", center: true },
 	{ name: "MODULO", selector: "modulo", sortable: true, width: "60px", center: true }

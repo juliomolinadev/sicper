@@ -12,6 +12,8 @@ export const savePermitTransaction = async (allData) => {
 		lote: allData.lote,
 		localidad: allData.nombreLocalidad,
 		nombreLocalidad: allData.nombreLocalidad,
+		tipoLocalidad: allData.tipoLocalidad,
+		claveLocalidad: allData.claveLocalidad,
 		municipio: allData.municipio,
 		estado: allData.estado,
 		modulo: allData.modulo,

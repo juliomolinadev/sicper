@@ -33,41 +33,43 @@ export const updatePadron = (file) => {
 
 			await data.forEach((usuario, i) => {
 				const localidad = getLocaltie(localties, usuario.EJIDO);
-				data[i].nombreLocalidad = localidad;
+				data[i].nombreLocalidad = localidad.nombre !== undefined ? localidad.nombre : "";
+				data[i].tipoLocalidad = localidad.tipo !== undefined ? localidad.tipo : "";
 			});
 
 			await data.forEach((element) => {
 				const itemToUpload = {
-					apMaterno: element.APMATERNO !== undefined ? element.APMATERNO : "?",
-					apPaterno: element.APPATERNO !== undefined ? element.APPATERNO : "?",
-					cp: element.CP !== undefined ? element.CP : "?",
-					cuenta: element.CUENTA !== undefined ? element.CUENTA : "?",
-					ejido: element.EJIDO !== undefined ? element.EJIDO : "?",
+					apMaterno: element.APMATERNO !== undefined ? element.APMATERNO : "",
+					apPaterno: element.APPATERNO !== undefined ? element.APPATERNO : "",
+					cp: element.CP !== undefined ? element.CP : "",
+					cuenta: element.CUENTA !== undefined ? element.CUENTA : "",
+					ejido: element.EJIDO !== undefined ? element.EJIDO : "",
 					nombreLocalidad: element.nombreLocalidad,
-					equipo: element.EQUIPO !== undefined ? element.EQUIPO : "?",
-					estado: element.ESTADO !== undefined ? element.ESTADO : "?",
-					fecha: element.FECHA !== undefined ? element.FECHA : "?",
-					grupo: element.GRUPO !== undefined ? element.GRUPO : "?",
-					lt: element.LT !== undefined ? element.LT : "?",
-					modulo: element.ZONA !== undefined ? defineModulo(element.ZONA) : "?",
-					municipio: element.MUNICIPIO !== undefined ? element.MUNICIPIO : "?",
-					nombre: element.NOMBRE !== undefined ? element.NOMBRE : "?",
-					pControl: element.PCONTROL !== undefined ? element.PCONTROL : "?",
+					tipoLocalidad: element.tipoLocalidad,
+					equipo: element.EQUIPO !== undefined ? element.EQUIPO : "",
+					estado: element.ESTADO !== undefined ? element.ESTADO : "",
+					fecha: element.FECHA !== undefined ? element.FECHA : "",
+					grupo: element.GRUPO !== undefined ? element.GRUPO : "",
+					lt: element.LT !== undefined ? element.LT : "",
+					modulo: element.ZONA !== undefined ? defineModulo(element.ZONA) : "",
+					municipio: element.MUNICIPIO !== undefined ? element.MUNICIPIO : "",
+					nombre: element.NOMBRE !== undefined ? element.NOMBRE : "",
+					pControl: element.PCONTROL !== undefined ? element.PCONTROL : "",
 					predio: definePredio(element.GRUPO, element.PREDIO),
-					ra: element.RA !== undefined ? element.RA : "?",
-					referencia: element.REFERENCIA !== undefined ? element.REFERENCIA : "?",
-					seccion: element.SECCION !== undefined ? element.SECCION : "?",
-					sistRiego: element.SISTRIEGO !== undefined ? element.SISTRIEGO : "?",
+					ra: element.RA !== undefined ? element.RA : "",
+					referencia: element.REFERENCIA !== undefined ? element.REFERENCIA : "",
+					seccion: element.SECCION !== undefined ? element.SECCION : "",
+					sistRiego: element.SISTRIEGO !== undefined ? element.SISTRIEGO : "",
 					sistemaRiego: defineSistema(element.SISTRIEGO, element.EQUIPO),
-					slt: element.SLT !== undefined ? element.SLT : "?",
-					sra: element.SRA !== undefined ? element.SRA : "?",
-					ssra: element.SSRA !== undefined ? element.SSRA : "?",
-					subcta: element.SUBCTA !== undefined ? element.SUBCTA : "?",
-					supFisica: element.SUPFISICA !== undefined ? element.SUPFISICA : "?",
-					supRiego: element.SUPRIEGO !== undefined ? element.SUPRIEGO : "?",
-					tenencia: element.TENENCIA !== undefined ? element.TENENCIA : "?",
-					unidad: element.UNIDAD !== undefined ? element.UNIDAD : "?",
-					zona: element.ZONA !== undefined ? element.ZONA : "?",
+					slt: element.SLT !== undefined ? element.SLT : "",
+					sra: element.SRA !== undefined ? element.SRA : "",
+					ssra: element.SSRA !== undefined ? element.SSRA : "",
+					subcta: element.SUBCTA !== undefined ? element.SUBCTA : "",
+					supFisica: element.SUPFISICA !== undefined ? element.SUPFISICA : "",
+					supRiego: element.SUPRIEGO !== undefined ? element.SUPRIEGO : "",
+					tenencia: element.TENENCIA !== undefined ? element.TENENCIA : "",
+					unidad: element.UNIDAD !== undefined ? element.UNIDAD : "",
+					zona: element.ZONA !== undefined ? element.ZONA : "",
 					reacomodo: element.reacomodo !== undefined ? element.reacomodo : false
 				};
 
@@ -130,8 +132,8 @@ const checkPadron = (data) => {
 const getLocaltie = (localidades, id) => {
 	const localtieFind = localidades.find((localtie) => localtie.clave === id);
 
-	if (localtieFind) return localtieFind.nombre;
-	else return "?";
+	if (localtieFind) return localtieFind;
+	else return "";
 };
 
 const definePredio = (grupo, predio) => {
@@ -140,7 +142,7 @@ const definePredio = (grupo, predio) => {
 			return `${grupo}${predio}`;
 		}
 		return predio;
-	} else return "?";
+	} else return "";
 };
 
 const defineModulo = (modulo) => {

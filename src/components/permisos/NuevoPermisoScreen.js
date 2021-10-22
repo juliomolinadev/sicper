@@ -252,7 +252,6 @@ export const NuevoPermisoScreen = () => {
 			</div>
 
 			{/* TODO: indicar cuando un campo es incorrecto directamente en los inputs */}
-			{/* TODO: Cambiar el flujo de los tab para que no se seleccionen las lupas */}
 			{/* TODO: Checkbox para transferencia interna */}
 			<form className="container pb-4">
 				{/* TODO: Poner el mensaje de error en un lugar mas visible */}
