@@ -2,7 +2,15 @@ import React, { forwardRef } from "react";
 import { ReportHeader } from "./ReportHeader";
 
 export const PrintableTable = forwardRef((props, ref) => {
-	const { title, headers, data, rowsPerPage, orientation = "portrait" } = props;
+	const {
+		title,
+		headers,
+		data,
+		rowsPerPage,
+		orientation = "portrait",
+		fechaInicial,
+		fechaFinal
+	} = props;
 
 	const getPageMargins = () => {
 		const marginTop = 60;
@@ -24,7 +32,13 @@ export const PrintableTable = forwardRef((props, ref) => {
 			{separateData.map((dataPart, i) => (
 				<div key={i} className="page-break">
 					<style>{getPageMargins()}</style>
-					<ReportHeader title={title} pages={separateData.length} page={i + 1} />
+					<ReportHeader
+						title={title}
+						pages={separateData.length}
+						page={i + 1}
+						fechaInicial={fechaInicial}
+						fechaFinal={fechaFinal}
+					/>
 
 					<table className="table table-sm table-striped border mt-4" style={{ fontSize: 12 }}>
 						<thead className="thead-light">

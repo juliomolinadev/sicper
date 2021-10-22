@@ -40,7 +40,7 @@ export const AppRouter = () => {
 					expedicionActivaModulo
 				} = entityData;
 
-				dispatch(login(user.uid, user.displayName));
+				dispatch(login(user.uid, user.displayName, user.email));
 				dispatch(
 					setEntity(
 						nombre,

@@ -26,7 +26,7 @@ export const startLoginEmailPassword = (email, password) => {
 					expedicionActivaModulo
 				} = entityData;
 
-				dispatch(login(user.uid, user.displayName));
+				dispatch(login(user.uid, user.displayName, user.email));
 				dispatch(
 					setEntity(
 						nombre,
@@ -90,11 +90,12 @@ export const startGoogleLogin = () => {
 	};
 };
 
-export const login = (uid, displayName) => ({
+export const login = (uid, displayName, email) => ({
 	type: types.login,
 	payload: {
 		uid,
-		displayName
+		displayName,
+		email
 	}
 });
 

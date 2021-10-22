@@ -4,7 +4,16 @@ import ReactToPrint from "react-to-print";
 import { exportJSONToExcel } from "../../../helpers/functions/exportJSONToExcel";
 import { PrintableTable } from "../molecules/PrintableTable";
 
-export const ReportModule = ({ title, excelTitle, headers, data, rowsPerPage, orientation }) => {
+export const ReportModule = ({
+	title,
+	excelTitle,
+	headers,
+	data,
+	rowsPerPage,
+	orientation,
+	fechaInicial,
+	fechaFinal
+}) => {
 	const componentRef = createRef();
 	const { name } = useSelector((state) => state.auth);
 
@@ -68,6 +77,8 @@ export const ReportModule = ({ title, excelTitle, headers, data, rowsPerPage, or
 				rowsPerPage={rowsPerPage}
 				orientation={orientation}
 				className={"mt-0"}
+				fechaInicial={fechaInicial}
+				fechaFinal={fechaFinal}
 			/>
 		</div>
 	);

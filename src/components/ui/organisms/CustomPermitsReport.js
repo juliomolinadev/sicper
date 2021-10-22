@@ -228,6 +228,8 @@ export const CustomPermitsReport = () => {
 					data={data}
 					rowsPerPage={24}
 					orientation="landscape"
+					fechaInicial={fechaInicial}
+					fechaFinal={fechaFinal}
 				/>
 			)}
 		</>
