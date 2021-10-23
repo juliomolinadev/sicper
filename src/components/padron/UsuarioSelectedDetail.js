@@ -8,7 +8,9 @@ export const UsuarioSelectedDetail = () => {
 		<div className="border rounded mb-4 p-2">
 			<div>Cuenta: {altaPermisos.cuenta}</div>
 			<div>Usuario: {altaPermisos.usuario}</div>
-			<div>Colonia/Ejido: {altaPermisos.nombreLocalidad}</div>
+			<div>
+				{altaPermisos.tipoLocalidad}: {altaPermisos.nombreLocalidad}
+			</div>
 			<div>Lote: {altaPermisos.lote}</div>
 			<div>Seccion: {altaPermisos.seccion}</div>
 			<div>Sup. Derecho: {altaPermisos.supDerecho}</div>

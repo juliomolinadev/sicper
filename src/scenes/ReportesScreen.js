@@ -5,7 +5,6 @@ import { ReporteExpedicion } from "../components/ui/organisms/ReporteExpedicion"
 import { useForm } from "../hooks/useForm";
 import { RadioButtonGroup } from "../components/ui/molecules/RadioButtonGroup";
 import { startSetAutorizados, startSetExpedicion } from "../actions/scenes/reportesScreen";
-import { PermitsReport } from "../components/ui/organisms/PermitsReport";
 
 export const ReportesScreen = () => {
 	const { privilegios, variablesGlobales } = useSelector((state) => state.auth);
@@ -22,10 +21,6 @@ export const ReportesScreen = () => {
 		{
 			id: "permisos",
 			label: "permisos"
-		},
-		{
-			id: "permisos/seccion",
-			label: "permisos/seccion"
 		}
 	];
 
@@ -59,11 +54,6 @@ export const ReportesScreen = () => {
 			<div className="mt-5">
 				{reportTypeValues.reportType === "permisos" && privilegios.consultarPermisos && (
 					<ModuloInformesPermisos />
-				)}
-			</div>
-			<div className="mt-5">
-				{reportTypeValues.reportType === "permisos/seccion" && privilegios.consultarPermisos && (
-					<PermitsReport />
 				)}
 			</div>
 			<div className="pb-5"></div>

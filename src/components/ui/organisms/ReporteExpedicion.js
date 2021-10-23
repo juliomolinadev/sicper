@@ -85,7 +85,7 @@ export const ReporteExpedicion = () => {
 		<div>
 			<div className="row m-0 ">
 				<div className="col-sm-12 p-3 d-flex justify-content-center">
-					<h2>Reporte Expedición</h2>
+					<h2>Reporte de expedición</h2>
 				</div>
 			</div>
 
