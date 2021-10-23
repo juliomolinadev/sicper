@@ -50,6 +50,16 @@ export const permitsHeaders = [
 		selectable: true
 	},
 	{
+		id: "tipoLocalidad",
+		header: "EJ/COL",
+		styles: "",
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true
+	},
+	{
 		id: "localidad",
 		header: "LOCALIDAD",
 		styles: "",
