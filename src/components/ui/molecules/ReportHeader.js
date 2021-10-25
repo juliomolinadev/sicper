@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-export const ReportHeader = ({ title, pages, page, fechaInicial, fechaFinal }) => {
+export const ReportHeader = ({ title, pages, page, range = "" }) => {
 	const { name, email, entidad, img, variablesGlobales } = useSelector((state) => state.auth);
 
 	const tiempo = Date.now();
@@ -27,9 +27,7 @@ export const ReportHeader = ({ title, pages, page, fechaInicial, fechaFinal }) =
 					<b>{title}</b>
 				</div>
 				<div className="d-flex justify-content-center">
-					<div>
-						Del {fechaInicial.toLocaleDateString()} al {fechaFinal.toLocaleDateString()}
-					</div>
+					<div>{range}</div>
 				</div>
 			</div>
 

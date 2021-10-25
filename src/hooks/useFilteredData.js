@@ -22,21 +22,22 @@ export const useFilteredData = (
 	return [data, setData, filters, handleFiltersChange];
 };
 
-const aplyFilter = (permisos, headers, filter, order1) => {
-	const cleanPermisos = permisos.filter(
-		(permiso) => permiso.cuenta !== "SUBTOTAL" && permiso.cuenta !== "TOTAL"
+const aplyFilter = (dataSet, headers, filter, order1) => {
+	const mainKey = headers[0].id;
+	const cleanDataSet = dataSet.filter(
+		(row) => row[mainKey] !== "SUBTOTAL" && row[mainKey] !== "TOTAL"
 	);
-	const unique = onlyUnique(cleanPermisos, filter);
+	const unique = onlyUnique(cleanDataSet, filter);
 	const separateData = [];
 	const finalData = [];
-	const totalRow = { cuenta: "TOTAL" };
+	const totalRow = { [mainKey]: "TOTAL" };
 
 	unique.forEach((value) => {
-		separateData.push(cleanPermisos.filter((permiso) => permiso[filter] === value));
+		separateData.push(cleanDataSet.filter((row) => row[filter] === value));
 	});
 
 	separateData.forEach((filterItem) => {
-		const subTotalRow = { cuenta: "SUBTOTAL" };
+		const subTotalRow = { [mainKey]: "SUBTOTAL" };
 
 		filterItem.sort((a, b) => sortFunction(a[order1], b[order1]));
 

@@ -34,7 +34,7 @@ export const ModuloInformesPermisos = () => {
 		<div>
 			<div className="row m-0 ">
 				<div className="col-sm-12 p-3 d-flex justify-content-center">
-					<h2>Reporte de permisos</h2>
+					<h2>Reportes de permisos</h2>
 				</div>
 			</div>
 
