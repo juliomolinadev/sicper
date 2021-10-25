@@ -13,9 +13,8 @@ export const ReportHeader = ({ title, pages, page, range = "" }) => {
 				<img src={`./logos/${img}`} alt="Logo de la entidad" style={{ maxHeight: 80 }} />
 			</div>
 
-			<div className="col-2 p-3">
-				<div>Operador:</div>
-				<div>{name}</div>
+			<div className="col-3 p-3" style={{ maxHeight: 80 }}>
+				<div>Operador: {name}</div>
 				<div>{email}</div>
 			</div>
 
@@ -31,7 +30,7 @@ export const ReportHeader = ({ title, pages, page, range = "" }) => {
 				</div>
 			</div>
 
-			<div className="col-3 p-3 d-flex flex-column">
+			<div className="col-2 p-3 d-flex flex-column">
 				<b>Ciclo: {variablesGlobales.cicloActual}</b>
 				<div>Fecha: {fechaActual.toLocaleDateString()}</div>
 				<div>

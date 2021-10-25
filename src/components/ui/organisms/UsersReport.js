@@ -189,7 +189,7 @@ export const UsersReport = () => {
 					excelTitle={excelTitle}
 					headers={headers}
 					data={data}
-					rowsPerPage={24}
+					rowsPerPage={25}
 					orientation="landscape"
 				/>
 			)}

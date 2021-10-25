@@ -126,7 +126,7 @@ export const permitsHeaders = [
 		styles: "text-center",
 		sum: true,
 		count: false,
-		float: 3,
+		float: 4,
 		display: true,
 		selectable: true,
 		search: false
@@ -496,7 +496,7 @@ export const usersHeaders = [
 		styles: "",
 		sum: true,
 		count: false,
-		float: false,
+		float: 4,
 		display: true,
 		selectable: true,
 		search: false
@@ -507,7 +507,7 @@ export const usersHeaders = [
 		styles: "",
 		sum: true,
 		count: false,
-		float: false,
+		float: 4,
 		display: false,
 		selectable: true,
 		search: false
