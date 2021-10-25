@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { roundToN } from "../helpers/functions/roundToN";
 
 export const useFilteredData = (
 	headers,
@@ -61,6 +62,9 @@ const aplyFilter = (dataSet, headers, filter, order1) => {
 			});
 			finalData.push(order1Item);
 		});
+		for (const key in subTotalRow) {
+			if (typeof subTotalRow[key] === "number") subTotalRow[key] = roundToN(subTotalRow[key], 4);
+		}
 		finalData.push(subTotalRow);
 	});
 

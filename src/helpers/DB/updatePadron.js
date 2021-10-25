@@ -70,7 +70,7 @@ export const updatePadron = (file) => {
 					tenencia: element.TENENCIA !== undefined ? element.TENENCIA : "",
 					unidad: element.UNIDAD !== undefined ? element.UNIDAD : "",
 					zona: element.ZONA !== undefined ? element.ZONA : "",
-					reacomodo: element.reacomodo !== undefined ? element.reacomodo : false
+					reacomodo: element.reacomodo !== undefined ? element.reacomodo : ""
 				};
 
 				const ref = db.collection("derechos").doc(`${itemToUpload.cuenta}-${itemToUpload.subcta}`);

@@ -1,20 +1,19 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 
-import { producersHeaders } from "../../../helpers/constants/reportsColumns";
+import { usersHeaders } from "../../../helpers/constants/reportsColumns";
 import { useFilteredData } from "../../../hooks/useFilteredData";
 import { useForm } from "../../../hooks/useForm";
 import { ReportModule } from "./ReportModule";
-import { simpleLoadProducers } from "../../../helpers/DB/simpleLoadProducers";
+import { simpleLoadUsers } from "../../../helpers/DB/simpleLoadUsers";
+import { useSelector } from "react-redux";
 
-export const ProducersReport = () => {
-	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
-	const { cicloActual } = variablesGlobales;
+export const UsersReport = () => {
+	const { modulo } = useSelector((state) => state.auth);
 
 	const [formValues, handleInputChange] = useForm({ palabra: "", campo: "" });
 	const { palabra, campo } = formValues;
 
-	const [headers, setHeaders] = useState(producersHeaders);
+	const [headers, setHeaders] = useState(usersHeaders);
 	const handleColumn = ({ target }) => {
 		const index = headers.findIndex((header) => header.id === target.id);
 
@@ -28,30 +27,30 @@ export const ProducersReport = () => {
 
 	const getTitle = () => {
 		const campoForTitle = headers.find((header) => header.id === campo);
-		if (campoForTitle) return `REPORTE DE PRODUCTORES POR ${campoForTitle.header}`;
-		else return `REPORTE DE PRODUCTORES`;
+		if (campoForTitle) return `REPORTE DE USUARIOS POR ${campoForTitle.header}`;
+		else return `REPORTE DE USUARIOS`;
 	};
 	const title = getTitle();
 
 	const getExcelTitle = () => {
 		const campoForTitle = headers.find((header) => header.id === campo);
-		if (campoForTitle) return `PRODUCTORES POR ${campoForTitle.header}`;
-		else return `PRODUCTORES`;
+		if (campoForTitle) return `USUARIOS POR ${campoForTitle.header}`;
+		else return `USUARIOS`;
 	};
 	const excelTitle = getExcelTitle();
 
 	const [data, setData, filters, handleFiltersChange] = useFilteredData(headers, []);
 	const { filter, order1 } = filters;
-	const getProducers = async () => {
+	const getUsers = async () => {
 		if (campo.length) {
-			const producersToSet = await simpleLoadProducers(palabra, campo, cicloActual, modulo);
-			setData(producersToSet);
+			const usersToSet = await simpleLoadUsers(palabra, campo, modulo);
+			setData(usersToSet);
 		}
 	};
 
 	const handleKeyUp = (event) => {
 		if (event.key === "Enter") {
-			getProducers();
+			getUsers();
 		}
 	};
 
@@ -99,7 +98,7 @@ export const ProducersReport = () => {
 								})}
 							</select>
 
-							<button className="btn btn-outline-primary ml-2" type="button" onClick={getProducers}>
+							<button className="btn btn-outline-primary ml-2" type="button" onClick={getUsers}>
 								<i className="fas fa-search"></i>
 							</button>
 						</div>

@@ -2,15 +2,16 @@ import React from "react";
 import { useForm } from "../../hooks/useForm";
 import { RadioButtonGroup } from "../ui/molecules/RadioButtonGroup";
 import { ProducersReport } from "../ui/organisms/ProducersReport";
+import { UsersReport } from "../ui/organisms/UsersReport";
 
 export const ModuloInformesPadron = () => {
 	const [reportTypeValues, handleReportTipeInputChange] = useForm();
 
 	const reportTypes = [
-		// {
-		// 	id: "usuarios",
-		// 	label: "Padron de usuarios"
-		// },
+		{
+			id: "usuarios",
+			label: "Padron de usuarios"
+		},
 		{
 			id: "productores",
 			label: "Padron de productores"
@@ -40,7 +41,7 @@ export const ModuloInformesPadron = () => {
 				/>
 			</div>
 
-			{reportTypeValues.reportType === "usuarios" && <ProducersReport />}
+			{reportTypeValues.reportType === "usuarios" && <UsersReport />}
 
 			{reportTypeValues.reportType === "productores" && <ProducersReport />}
 		</div>

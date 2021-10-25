@@ -101,11 +101,15 @@ export const CustomPermitsReport = () => {
 									-
 								</option>
 
-								{headers.map((header) => (
-									<option key={header.id} value={header.id}>
-										{header.header}
-									</option>
-								))}
+								{headers.map((header) => {
+									if (header.search) {
+										return (
+											<option key={header.id} value={header.id}>
+												{header.header}
+											</option>
+										);
+									} else return <option key={header.id} style={{ display: "none" }}></option>;
+								})}
 							</select>
 
 							<button className="btn btn-outline-primary ml-2" type="button" onClick={getPermisos}>
