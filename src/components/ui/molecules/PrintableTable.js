@@ -29,14 +29,14 @@ export const PrintableTable = forwardRef((props, ref) => {
 					<table className="table table-sm table-striped border mt-4" style={{ fontSize: 12 }}>
 						<thead className="thead-light">
 							<tr>
-								{headers.map((element) => {
-									if (element.display) {
+								{headers.map((header) => {
+									if (header.display) {
 										return (
-											<th key={`${i}-${element.id}`} scope="col" className={element.styles}>
-												{element.header}
+											<th key={`${i}-${header.id}`} scope="col" className={header.styles}>
+												{header.header}
 											</th>
 										);
-									} else return <th key={`${i}-${element.id}`} style={{ display: "none" }}></th>;
+									} else return <th key={`${i}-${header.id}`} style={{ display: "none" }}></th>;
 								})}
 							</tr>
 						</thead>
@@ -44,29 +44,25 @@ export const PrintableTable = forwardRef((props, ref) => {
 							{dataPart &&
 								dataPart.map((row, j) => (
 									<tr key={`${i}-${j}-${row[0]}`}>
-										{headers.map((element, k) => {
-											if (element.display) {
-												if (typeof row[element.id] === "object") {
-													const fechaObject = row[element.id].toDate();
+										{headers.map((header, k) => {
+											if (header.display) {
+												if (typeof row[header.id] === "object") {
+													const fechaObject = row[header.id].toDate();
 													const fecha = fechaObject.toLocaleDateString();
 													return (
-														<td key={`${i}-${k}-${fecha}`} className={element.styles}>
+														<td key={`${i}-${k}-${fecha}`} className={header.styles}>
 															{fecha}
 														</td>
 													);
 												} else {
 													return (
-														<td key={`${i}-${k}-${element.id}`} className={element.styles}>
-															{element.float
-																? row[element.id].toFixed(element.float)
-																: row[element.id]}
+														<td key={`${i}-${k}-${header.id}`} className={header.styles}>
+															{header.float ? row[header.id].toFixed(header.float) : row[header.id]}
 														</td>
 													);
 												}
 											} else
-												return (
-													<td key={`${i}-${k}-${element.id}`} style={{ display: "none" }}></td>
-												);
+												return <td key={`${i}-${k}-${header.id}`} style={{ display: "none" }}></td>;
 										})}
 									</tr>
 								))}

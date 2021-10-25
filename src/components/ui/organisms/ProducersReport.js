@@ -41,6 +41,8 @@ export const ProducersReport = () => {
 	const excelTitle = getExcelTitle();
 
 	const [data, setData, filters, handleFiltersChange] = useFilteredData(headers, []);
+	console.log(data);
+
 	const { filter, order1 } = filters;
 	const getProducers = async () => {
 		if (campo.length) {

@@ -32,7 +32,7 @@ export const ReportHeader = ({ title, pages, page, range = "" }) => {
 
 			<div className="col-2 p-3 d-flex flex-column">
 				<b>Ciclo: {variablesGlobales.cicloActual}</b>
-				<div>Fecha: {fechaActual.toLocaleDateString()}</div>
+				<div>{fechaActual.toLocaleDateString()}</div>
 				<div>
 					Pagina {page} de {pages}
 				</div>
