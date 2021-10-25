@@ -1,26 +1,20 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
-import DatePicker from "react-date-picker";
-
-import { simpleLoadPermits } from "../../../helpers/DB/simpleLoadPermits";
-import { permitsHeaders } from "../../../helpers/constants/reportsColumns";
+import { producersHeaders } from "../../../helpers/constants/reportsColumns";
 import { useFilteredData } from "../../../hooks/useFilteredData";
 import { useForm } from "../../../hooks/useForm";
 import { ReportModule } from "./ReportModule";
+import { simpleLoadProducers } from "../../../helpers/DB/simpleLoadProducers";
 
-export const CustomPermitsReport = () => {
+export const ProducersReport = () => {
 	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
 	const { cicloActual } = variablesGlobales;
 
 	const [formValues, handleInputChange] = useForm({ palabra: "", campo: "" });
 	const { palabra, campo } = formValues;
 
-	const [fechaInicial, onChangeFechaInicial] = useState(new Date(2021, 8, 1));
-	const [fechaFinal, onChangeFechaFinal] = useState(new Date());
-	const range = `Del ${fechaInicial.toLocaleDateString()} al ${fechaFinal.toLocaleDateString()}`;
-
-	const [headers, setHeaders] = useState(permitsHeaders);
+	const [headers, setHeaders] = useState(producersHeaders);
 	const handleColumn = ({ target }) => {
 		const index = headers.findIndex((header) => header.id === target.id);
 
@@ -34,37 +28,30 @@ export const CustomPermitsReport = () => {
 
 	const getTitle = () => {
 		const campoForTitle = headers.find((header) => header.id === campo);
-		if (campoForTitle) return `REPORTE DE PERMISOS POR ${campoForTitle.header}`;
-		else return `REPORTE DE PERMISOS`;
+		if (campoForTitle) return `REPORTE DE PRODUCTORES POR ${campoForTitle.header}`;
+		else return `REPORTE DE PRODUCTORES`;
 	};
 	const title = getTitle();
 
 	const getExcelTitle = () => {
 		const campoForTitle = headers.find((header) => header.id === campo);
-		if (campoForTitle) return `PERMISOS POR ${campoForTitle.header}`;
-		else return `PERMISOS`;
+		if (campoForTitle) return `PRODUCTORES POR ${campoForTitle.header}`;
+		else return `PRODUCTORES`;
 	};
 	const excelTitle = getExcelTitle();
 
 	const [data, setData, filters, handleFiltersChange] = useFilteredData(headers, []);
 	const { filter, order1 } = filters;
-	const getPermisos = async () => {
+	const getProducers = async () => {
 		if (campo.length) {
-			const permisosToSet = await simpleLoadPermits(
-				palabra,
-				campo,
-				modulo,
-				cicloActual,
-				fechaInicial,
-				fechaFinal
-			);
-			setData(permisosToSet);
+			const producersToSet = await simpleLoadProducers(palabra, campo, cicloActual, modulo);
+			setData(producersToSet);
 		}
 	};
 
 	const handleKeyUp = (event) => {
 		if (event.key === "Enter") {
-			getPermisos();
+			getProducers();
 		}
 	};
 
@@ -108,37 +95,9 @@ export const CustomPermitsReport = () => {
 								))}
 							</select>
 
-							<button className="btn btn-outline-primary ml-2" type="button" onClick={getPermisos}>
+							<button className="btn btn-outline-primary ml-2" type="button" onClick={getProducers}>
 								<i className="fas fa-search"></i>
 							</button>
-						</div>
-					</div>
-				</div>
-
-				<div className="row mt-2">
-					<div className="col-sm-5">
-						<label className="form-check-label">Fecha inicial</label>
-
-						<div>
-							<DatePicker
-								type="date"
-								onChange={onChangeFechaInicial}
-								value={fechaInicial}
-								format={"dd/MM/yyyy"}
-							/>
-						</div>
-					</div>
-
-					<div className="col-sm-5">
-						<label className="form-check-label">Fecha final</label>
-
-						<div>
-							<DatePicker
-								type="date"
-								onChange={onChangeFechaFinal}
-								value={fechaFinal}
-								format={"dd/MM/yyyy"}
-							/>
 						</div>
 					</div>
 				</div>
@@ -229,7 +188,6 @@ export const CustomPermitsReport = () => {
 					data={data}
 					rowsPerPage={24}
 					orientation="landscape"
-					range={range}
 				/>
 			)}
 		</>

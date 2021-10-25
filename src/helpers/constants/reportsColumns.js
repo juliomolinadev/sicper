@@ -1,7 +1,7 @@
 export const permitsHeaders = [
 	{
-		id: "cuenta",
-		header: "CUENTA",
+		id: "numeroPermiso",
+		header: "PERMISO",
 		styles: "",
 		sum: false,
 		count: false,
@@ -10,8 +10,8 @@ export const permitsHeaders = [
 		selectable: false
 	},
 	{
-		id: "numeroPermiso",
-		header: "PERMISO",
+		id: "cuenta",
+		header: "CUENTA",
 		styles: "",
 		sum: false,
 		count: true,
@@ -170,4 +170,127 @@ export const permitsHeaders = [
 		display: false,
 		selectable: true
 	}
+];
+
+export const producersHeaders = [
+	{
+		id: "curp",
+		header: "CURP",
+		styles: "",
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: false
+	},
+	{
+		id: "apPaterno",
+		header: "AP PATERNO",
+		styles: "",
+		sum: false,
+		count: true,
+		float: false,
+		display: true,
+		selectable: false
+	},
+	{
+		id: "apMaterno",
+		header: "AP MATERNO",
+		styles: "",
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: false
+	},
+	{
+		id: "nombre",
+		header: "NOMBRE",
+		styles: "",
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: false
+	},
+	{
+		id: "rfc",
+		header: "RFC",
+		styles: "",
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true
+	},
+	{
+		id: "genero",
+		header: "GENERO",
+		styles: "",
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true
+	},
+	{
+		id: "direccion",
+		header: "DIRECCION",
+		styles: "",
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true
+	},
+	{
+		id: "municipio",
+		header: "MUNICIPIO",
+		styles: "",
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true
+	},
+	{
+		id: "estado",
+		header: "ESTADO",
+		styles: "",
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true
+	},
+	{
+		id: "cp",
+		header: "CP",
+		styles: "",
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true
+	},
+	{
+		id: "telefono",
+		header: "TELEFONO",
+		styles: "",
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true
+	}
+	// {
+	// 	id: "fechaRegistro",
+	// 	header: "REGISTRO",
+	// 	styles: "",
+	// 	sum: false,
+	// 	count: false,
+	// 	float: false,
+	// 	display: false,
+	// 	selectable: true
+	// }
 ];

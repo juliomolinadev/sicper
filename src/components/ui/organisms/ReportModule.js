@@ -11,8 +11,7 @@ export const ReportModule = ({
 	data,
 	rowsPerPage,
 	orientation,
-	fechaInicial,
-	fechaFinal
+	range
 }) => {
 	const componentRef = createRef();
 	const { name } = useSelector((state) => state.auth);
@@ -77,8 +76,7 @@ export const ReportModule = ({
 				rowsPerPage={rowsPerPage}
 				orientation={orientation}
 				className={"mt-0"}
-				fechaInicial={fechaInicial}
-				fechaFinal={fechaFinal}
+				range={range}
 			/>
 		</div>
 	);
