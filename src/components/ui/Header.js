@@ -1,10 +1,19 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { startLoadEntities } from "../../actions/entidades/entities";
+import { EntitySelector } from "./molecules/EntitySelector";
 
 export const Header = () => {
 	const { name, entidad, img, variablesGlobales, claveEntidad } = useSelector(
 		(state) => state.auth
 	);
+
+	const { entities } = useSelector((state) => state.entidades);
+
+	const dispatch = useDispatch();
+	useEffect(() => {
+		dispatch(startLoadEntities());
+	}, [dispatch]);
 
 	const setImgStyle = (entidad) => {
 		switch (entidad) {
@@ -43,8 +52,11 @@ export const Header = () => {
 						</div>
 
 						<div className="card-body text-dark">
-							<h5 className="card-title">Plataforma digital</h5>
-							<p className="card-text">Distrito de riego 014 Rio Colorado</p>
+							<h5 className="card-title">Plataforma digital</h5>{" "}
+							<div className="row">
+								<div className="col-sm-6 card-text">Distrito de riego 014 Rio Colorado</div>
+								<div className="col-sm-6">{entities && <EntitySelector />}</div>
+							</div>
 						</div>
 					</div>
 				</div>
