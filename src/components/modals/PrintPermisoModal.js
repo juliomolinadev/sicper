@@ -194,7 +194,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			{/* Parrafo legal ********************************************************************** */}
 
 			<div className="row m-3 d-flex flex-column justify-content-center">
-				<div>
+				<p clssName="paragraph">
 					Con base en el Acuerdo Nacional de Colaboración entre la Secretaría de Agricultura,
 					Ganadería, Desarrollo Rural, Pesca y Alimentación y el Acuerdo de Concertación entre la
 					SAGARPA, CONAGUA, Distrito de Riego Río Colorado y la Sociedad de Responsabilidad Limitada
@@ -208,7 +208,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 					establezca exclusivamente el cultivo y superficie que se indica, apercibiendose que se
 					puede suspender el servicio de riego si se siembra superficie adicional o cultivo
 					diferente al autorizado en este permiso.
-				</div>
+				</p>
 			</div>
 
 			{/* Detalle de cultivo y superficie ***************************************************** */}
@@ -329,20 +329,23 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 				<div className="col-1"></div>
 
-				<div className="col-7 d-flex flex-column border border-dark rounded">
-					<div className="d-flex justify-content-center ">OBSERVACIONES</div>
-					<div className="row border-top border-dark d-flex text-dotacion p-1">
-						<p>{data.observaciones}</p>
+				<div className="col-7 d-flex flex-column p-0">
+					{/* Observaciones  ************************************************************* */}
+					<div className="border border-dark rounded">
+						<div className="d-flex justify-content-center ">OBSERVACIONES</div>
+						<div className="border-top border-dark d-flex text-dotacion p-1">
+							<p>{data.observaciones}</p>
+						</div>
+					</div>
+
+					{/* Transferencia  ************************************************************* */}
+					<div className="border border-dark rounded mt-3">
+						<div className="d-flex justify-content-center ">TRANSFERENCIA</div>
+						<div className="border-top border-dark d-flex text-dotacion p-1">
+							<p>{data.transferencia}</p>
+						</div>
 					</div>
 				</div>
-			</div>
-
-			{/* Transferencia  ************************************************************* */}
-
-			<div className="row m-3 d-flex flex-column justify-content-center border border-dark rounded">
-				<div className="d-flex justify-content-center ">TRANSFERENCIA</div>
-
-				<div className="d-flex border-top border-dark p-1">{data.transferencia}</div>
 			</div>
 
 			{/* Firmas  ************************************************************* */}
@@ -373,7 +376,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 
 			{/* Advertencias  ************************************************************* */}
 
-			<div className="row m-2">
+			<p className="row m-2">
 				<b>
 					<u>
 						ADVERTENCIAS: (1) Es responsabilidad del usuario de este permiso, disponer de la
@@ -383,7 +386,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 						Esparrago = 16ha., y Sorgo forrajero temprano = 18ha.
 					</u>
 				</b>
-			</div>
+			</p>
 
 			{/* Encavezado sanidad  ************************************************************* */}
 			<div className="row m-3 mt-5">

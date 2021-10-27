@@ -108,6 +108,7 @@
 .printModal p {
 	font-size: 15px;
 	text-align: justify;
+	text-justify: inter-word;
 }
 
 .printModal h1 {
@@ -160,6 +161,11 @@
 
 .moneda::before {
 	content: "$";
+}
+
+.paragraph div {
+	text-align: justify;
+	text-justify: inter-word;
 }
 
 @page {
