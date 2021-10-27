@@ -32,7 +32,7 @@ export const CultivoSelected = () => {
 										Asignada
 									</th>
 									<th scope="col" className="text-center">
-										Previa
+										Expedida
 									</th>
 									<th scope="col" className="text-center">
 										Disponible
