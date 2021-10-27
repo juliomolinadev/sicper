@@ -164,8 +164,8 @@ export const ProducersReport = () => {
 								{headers.map((header) => {
 									if (header.selectable) {
 										const style = header.display
-											? "btn btn-sm btn-primary m-1"
-											: "btn btn-sm btn-outline-primary m-1";
+											? "btn btn-sm btn-info m-1"
+											: "btn btn-sm btn-outline-info m-1";
 										return (
 											<button
 												key={`0-${header.header}`}

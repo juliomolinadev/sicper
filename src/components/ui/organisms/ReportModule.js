@@ -1,4 +1,4 @@
-import React, { createRef } from "react";
+import React, { createRef, useState } from "react";
 import { useSelector } from "react-redux";
 import ReactToPrint from "react-to-print";
 import { exportJSONToExcel } from "../../../helpers/functions/exportJSONToExcel";
@@ -9,8 +9,8 @@ export const ReportModule = ({
 	excelTitle,
 	headers,
 	data,
-	rowsPerPage,
-	orientation,
+	// rowsPerPage,
+	// orientation,
 	range
 }) => {
 	const componentRef = createRef();
@@ -48,24 +48,90 @@ export const ReportModule = ({
 		);
 	};
 
+	const [pageConfig, setPageConfig] = useState({ orientation: "landscape", rowsPerPage: 25 });
+	const { orientation, rowsPerPage } = pageConfig;
+
+	const setLandscape = () => {
+		setPageConfig({ rowsPerPage: 25, orientation: "landscape" });
+	};
+	const setPortrait = () => {
+		setPageConfig({ rowsPerPage: 50, orientation: "portrait" });
+	};
+	const addRow = () => {
+		setPageConfig({ ...pageConfig, rowsPerPage: rowsPerPage + 1 });
+	};
+	const removeRow = () => {
+		setPageConfig({ ...pageConfig, rowsPerPage: rowsPerPage - 1 });
+	};
+
 	return (
 		<div className="container">
-			<div className="mb-4">
-				<ReactToPrint
-					trigger={() => (
-						<button className="btn btn-outline-primary d-print-none ">
-							<i className="fas fa-print"></i>
-							<span> Imprimir</span>
+			<div className="row mb-4">
+				<div className="col-sm-4 d-flex mt-4">
+					<label htmlFor="orientation">
+						Lineas por pagina: <b>{rowsPerPage}</b>
+					</label>
+					<div className="btn-group btn-group-toggle d-print-none mr-4 ml-2" id="orientation">
+						<button
+							onClick={addRow}
+							className="btn btn-sm btn-outline-primary"
+							style={{ width: 40 }}
+						>
+							+
 						</button>
-					)}
-					content={() => componentRef.current}
-					pageStyle="bootstrap/dist/css/bootstrap.min.css"
-				/>
+						<button
+							onClick={removeRow}
+							className="btn btn-sm btn-outline-primary"
+							style={{ width: 40 }}
+						>
+							-
+						</button>
+					</div>
+				</div>
 
-				<button type="button" onClick={exportToExcel} className="btn btn-outline-primary ml-4">
-					<i className="fas fa-download"></i>
-					<span> Descargar</span>
-				</button>
+				<div className="col-sm-4 d-flex mt-4">
+					<label htmlFor="orientation">Orientacion:</label>
+					<div className="btn-group btn-group-toggle d-print-none mr-4 ml-2" id="orientation">
+						<button
+							onClick={setLandscape}
+							className={`btn btn-sm ${
+								orientation === "landscape" ? "btn-primary" : "btn-outline-primary"
+							}`}
+						>
+							Horizontal
+						</button>
+						<button
+							onClick={setPortrait}
+							className={`btn btn-sm ${
+								orientation === "portrait" ? "btn-primary" : "btn-outline-primary"
+							}`}
+						>
+							Vertical
+						</button>
+					</div>
+				</div>
+
+				<div className="col-sm-4 d-flex justify-content-end mt-4">
+					<ReactToPrint
+						trigger={() => (
+							<button className="btn btn-sm btn-outline-primary d-print-none ">
+								<i className="fas fa-print"></i>
+								<span> Imprimir</span>
+							</button>
+						)}
+						content={() => componentRef.current}
+						pageStyle="bootstrap/dist/css/bootstrap.min.css"
+					/>
+
+					<button
+						type="button"
+						onClick={exportToExcel}
+						className="btn btn-sm btn-outline-primary ml-2"
+					>
+						<i className="fas fa-download"></i>
+						<span> Descargar</span>
+					</button>
+				</div>
 			</div>
 
 			<PrintableTable
