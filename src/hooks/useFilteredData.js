@@ -25,9 +25,17 @@ export const useFilteredData = (
 
 const aplyFilter = (dataSet, headers, filter, order1) => {
 	const mainKey = headers[0].id;
-	const cleanDataSet = dataSet.filter(
-		(row) => row[mainKey] !== "SUBTOTAL" && row[mainKey] !== "TOTAL"
-	);
+	const ids = [];
+	const cleanDataSet = dataSet.filter((row) => {
+		if (
+			row[mainKey] !== "SUBTOTAL" &&
+			row[mainKey] !== "TOTAL" &&
+			!ids.find((id) => id === row[mainKey])
+		) {
+			ids.push(row[mainKey]);
+			return true;
+		} else return false;
+	});
 	const unique = onlyUnique(cleanDataSet, filter);
 	const separateData = [];
 	const finalData = [];
