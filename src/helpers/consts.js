@@ -281,7 +281,7 @@ export const entidades = [
 		clave: "8",
 		dotacionGravedad: 117,
 		dotacionPozo: 0,
-		nombre: "Usuarios del Módulo No. 8",
+		nombre: "Usuarios del Módulo 8",
 		titular: "???",
 		direccion: "",
 		img: "m8.jpg",

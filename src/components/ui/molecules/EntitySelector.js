@@ -1,8 +1,12 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setEntity } from "../../../actions/auth";
 
 export const EntitySelector = () => {
 	const { entities } = useSelector((state) => state.entidades);
+	const { rol } = useSelector((state) => state.auth);
+
+	const dispatch = useDispatch();
 
 	const modulos = entities.filter((entity) => {
 		switch (entity.id) {
@@ -16,13 +20,26 @@ export const EntitySelector = () => {
 				return true;
 		}
 	});
-	// console.log("entities en lugar: ", entities);
 
 	const [entity, setentity] = useState("");
-	console.log("entity en lugar: ", entity);
 
 	const handleSetEntity = ({ target }) => {
 		setentity(target.value);
+		const entity = entities.find((entity) => entity.id === target.value);
+		dispatch(
+			setEntity(
+				entity.nombre,
+				entity.img,
+				entity.clave,
+				entity.dotacionGravedad,
+				entity.dotacionPozo,
+				entity.titular,
+				entity.direccion,
+				entity.expedicionActivaModulo,
+				rol,
+				entity.clave
+			)
+		);
 	};
 
 	return (

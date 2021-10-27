@@ -4,9 +4,10 @@ import { startLoadEntities } from "../../actions/entidades/entities";
 import { EntitySelector } from "./molecules/EntitySelector";
 
 export const Header = () => {
-	const { name, entidad, img, variablesGlobales, claveEntidad } = useSelector(
+	const { name, entidad, img, variablesGlobales, claveEntidad, privilegios } = useSelector(
 		(state) => state.auth
 	);
+	const global = privilegios.accesoGlobal;
 
 	const { entities } = useSelector((state) => state.entidades);
 
@@ -55,7 +56,7 @@ export const Header = () => {
 							<h5 className="card-title">Plataforma digital</h5>{" "}
 							<div className="row">
 								<div className="col-sm-6 card-text">Distrito de riego 014 Rio Colorado</div>
-								<div className="col-sm-6">{entities && <EntitySelector />}</div>
+								<div className="col-sm-6">{entities && global && <EntitySelector />}</div>
 							</div>
 						</div>
 					</div>
