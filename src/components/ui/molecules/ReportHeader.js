@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export const ReportHeader = ({ title, pages, page, range = "" }) => {
-	const { name, email, entidad, img, variablesGlobales } = useSelector((state) => state.auth);
+	const { email, entidad, img, variablesGlobales } = useSelector((state) => state.auth);
 
 	const tiempo = Date.now();
 	const fechaActual = new Date(tiempo);
@@ -13,12 +13,12 @@ export const ReportHeader = ({ title, pages, page, range = "" }) => {
 				<img src={`./logos/${img}`} alt="Logo de la entidad" style={{ maxHeight: 80 }} />
 			</div>
 
-			<div className="col-3 p-3" style={{ maxHeight: 80 }}>
-				<div>Operador: {name}</div>
+			<div className="col-2 p-3" style={{ maxHeight: 80 }}>
+				<div>Operador:</div>
 				<div>{email}</div>
 			</div>
 
-			<div className="col-5 p-3 justify-content-center">
+			<div className="col-6 p-3 justify-content-center">
 				<div className="d-flex justify-content-center">
 					<b>{entidad}</b>
 				</div>

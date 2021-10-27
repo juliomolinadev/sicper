@@ -6,7 +6,6 @@ export const CultivoSelected = () => {
 		(state) => state.altaPermisos
 	);
 	const { autorizadosPorCultivo } = useSelector((state) => state.autorizadosScreen);
-	console.log("sistema en lugar: ", sistema);
 
 	return (
 		<div className="border rounded mb-4 p-2">

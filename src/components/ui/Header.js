@@ -4,7 +4,7 @@ import { startLoadEntities } from "../../actions/entidades/entities";
 import { EntitySelector } from "./molecules/EntitySelector";
 
 export const Header = () => {
-	const { name, entidad, img, variablesGlobales, claveEntidad, privilegios } = useSelector(
+	const { email, entidad, img, variablesGlobales, claveEntidad, privilegios } = useSelector(
 		(state) => state.auth
 	);
 	const global = privilegios.accesoGlobal;
@@ -46,7 +46,7 @@ export const Header = () => {
 				<div className="col-sm-10">
 					<div className="card border">
 						<div className="card-header d-inline-flex">
-							<div className="div">{`${entidad} - Operador: ${name}`} </div>
+							<div className="div">{`${entidad} - Operador: ${email}`} </div>
 							<div className="div ml-5">
 								<b>Ciclo: {variablesGlobales.cicloActual}</b>
 							</div>
