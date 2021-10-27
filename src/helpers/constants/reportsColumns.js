@@ -203,7 +203,7 @@ export const producersHeaders = [
 	},
 	{
 		id: "apPaterno",
-		header: "AP PATERNO",
+		header: "PATERNO",
 		styles: "",
 		sum: false,
 		count: true,
@@ -214,7 +214,7 @@ export const producersHeaders = [
 	},
 	{
 		id: "apMaterno",
-		header: "AP MATERNO",
+		header: "MATERNO",
 		styles: "",
 		sum: false,
 		count: false,
@@ -327,7 +327,7 @@ export const producersHeaders = [
 export const usersHeaders = [
 	{
 		id: "id",
-		header: "ID",
+		header: "CUENTA",
 		styles: "",
 		sum: false,
 		count: false,
@@ -338,29 +338,29 @@ export const usersHeaders = [
 	},
 	{
 		id: "cuenta",
-		header: "CUENTA",
+		header: "CTA",
 		styles: "",
 		sum: false,
 		count: true,
 		float: false,
 		display: true,
-		selectable: false,
+		selectable: true,
 		search: true
 	},
 	{
 		id: "subcta",
 		header: "SUBCTA",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
 		display: true,
-		selectable: false,
+		selectable: true,
 		search: false
 	},
 	{
 		id: "apPaterno",
-		header: "AP PATERNO",
+		header: "PATERNO",
 		styles: "",
 		sum: false,
 		count: false,
@@ -371,7 +371,7 @@ export const usersHeaders = [
 	},
 	{
 		id: "apMaterno",
-		header: "AP MATERNO",
+		header: "MATERNO",
 		styles: "",
 		sum: false,
 		count: false,
@@ -390,17 +390,6 @@ export const usersHeaders = [
 		display: true,
 		selectable: false,
 		search: true
-	},
-	{
-		id: "ejido",
-		header: "CLAVE L",
-		styles: "",
-		sum: false,
-		count: false,
-		float: false,
-		display: false,
-		selectable: true,
-		search: false
 	},
 	{
 		id: "tipoLocalidad",
@@ -425,9 +414,20 @@ export const usersHeaders = [
 		search: true
 	},
 	{
+		id: "ejido",
+		header: "CLAVE",
+		styles: "text-center",
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
 		id: "predio",
 		header: "PREDIO",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -449,7 +449,7 @@ export const usersHeaders = [
 	{
 		id: "seccion",
 		header: "SECCION",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -460,7 +460,7 @@ export const usersHeaders = [
 	{
 		id: "modulo",
 		header: "MODULO",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -471,7 +471,7 @@ export const usersHeaders = [
 	{
 		id: "municipio",
 		header: "MUNICIPIO",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -482,7 +482,7 @@ export const usersHeaders = [
 	{
 		id: "estado",
 		header: "ESTADO",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -493,7 +493,7 @@ export const usersHeaders = [
 	{
 		id: "supRiego",
 		header: "SUPRIEGO",
-		styles: "",
+		styles: "text-center",
 		sum: true,
 		count: false,
 		float: 4,
@@ -504,7 +504,7 @@ export const usersHeaders = [
 	{
 		id: "supFisica",
 		header: "SUPFISICA",
-		styles: "",
+		styles: "text-center",
 		sum: true,
 		count: false,
 		float: 4,
@@ -526,7 +526,7 @@ export const usersHeaders = [
 	{
 		id: "cp",
 		header: "CP",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -537,7 +537,7 @@ export const usersHeaders = [
 	{
 		id: "equipo",
 		header: "EQUIPO",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -548,7 +548,7 @@ export const usersHeaders = [
 	{
 		id: "grupo",
 		header: "GRUPO",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -559,7 +559,7 @@ export const usersHeaders = [
 	{
 		id: "lt",
 		header: "LT",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -570,7 +570,7 @@ export const usersHeaders = [
 	{
 		id: "pControl",
 		header: "PCONTROL",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -581,7 +581,7 @@ export const usersHeaders = [
 	{
 		id: "ra",
 		header: "RA",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -591,8 +591,8 @@ export const usersHeaders = [
 	},
 	{
 		id: "referencia",
-		header: "REFERENCIA",
-		styles: "",
+		header: "REF",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -603,7 +603,7 @@ export const usersHeaders = [
 	{
 		id: "slt",
 		header: "SLT",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -614,7 +614,7 @@ export const usersHeaders = [
 	{
 		id: "sra",
 		header: "SRA",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -625,7 +625,7 @@ export const usersHeaders = [
 	{
 		id: "ssra",
 		header: "SSRA",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
@@ -636,7 +636,7 @@ export const usersHeaders = [
 	{
 		id: "tenencia",
 		header: "TENENCIA",
-		styles: "",
+		styles: "text-center",
 		sum: false,
 		count: false,
 		float: false,
