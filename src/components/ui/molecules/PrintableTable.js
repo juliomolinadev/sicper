@@ -57,7 +57,11 @@ export const PrintableTable = forwardRef((props, ref) => {
 												} else {
 													return (
 														<td key={`${i}-${k}-${header.id}`} className={header.styles}>
-															{header.float ? row[header.id].toFixed(header.float) : row[header.id]}
+															{header.float
+																? Intl.NumberFormat("en-IN", {
+																		minimumFractionDigits: header.float
+																  }).format(row[header.id])
+																: row[header.id]}
 														</td>
 													);
 												}
