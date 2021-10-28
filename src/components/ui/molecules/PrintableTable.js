@@ -58,15 +58,7 @@ export const PrintableTable = forwardRef((props, ref) => {
 													return (
 														<td key={`${i}-${k}-${header.id}`} className={header.styles}>
 															{header.float
-																? isNaN(
-																		Intl.NumberFormat("en-IN", {
-																			minimumFractionDigits: header.float
-																		}).format(row[header.id])
-																  )
-																	? "-"
-																	: Intl.NumberFormat("en-IN", {
-																			minimumFractionDigits: header.float
-																	  }).format(row[header.id])
+																? getValue(row[header.id], header.float, header.currency)
 																: row[header.id]}
 														</td>
 													);
@@ -83,3 +75,24 @@ export const PrintableTable = forwardRef((props, ref) => {
 		</div>
 	);
 });
+
+const getValue = (value, frac, currency) => {
+	// console.log(typeof value);
+
+	switch (typeof value) {
+		case "number":
+			if (currency)
+				return Intl.NumberFormat("en-IN", {
+					minimumFractionDigits: frac,
+					style: "currency",
+					currency: "USD",
+					currencyDisplay: "symbol"
+				}).format(value);
+			else
+				return Intl.NumberFormat("en-IN", {
+					minimumFractionDigits: frac
+				}).format(value);
+		default:
+			return value;
+	}
+};

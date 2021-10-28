@@ -80,11 +80,13 @@ const aplyFilter = (dataSet, headers, filter, order1) => {
 				}
 
 				if (header.count) {
-					if (subTotalRow[header.id]) subTotalRow[header.id]++;
-					else subTotalRow[header.id] = 1;
+					if (row[header.id]) {
+						if (subTotalRow[header.id]) subTotalRow[header.id]++;
+						else subTotalRow[header.id] = 1;
 
-					if (totalRow[header.id]) totalRow[header.id]++;
-					else totalRow[header.id] = 1;
+						if (totalRow[header.id]) totalRow[header.id]++;
+						else totalRow[header.id] = 1;
+					}
 				}
 			});
 			finalData.push(row);
@@ -95,7 +97,6 @@ const aplyFilter = (dataSet, headers, filter, order1) => {
 		}
 		finalData.push(subTotalRow);
 	});
-
 	finalData.push(totalRow);
 	return finalData;
 };
