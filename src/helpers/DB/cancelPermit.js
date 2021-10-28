@@ -7,5 +7,10 @@ export const cancelPermit = (permiso, modulo, ciclo, fecha, uid) => {
 		.doc(`Modulo-${modulo}`)
 		.collection(`permisos`)
 		.doc(permiso)
-		.update({ estadoPermiso: "Cancelado", fechaCancelacion: fecha, apruebaCancelacion: uid });
+		.update({
+			estadoPermiso: "Cancelado",
+			cuotaCultivo: 0,
+			fechaCancelacion: fecha,
+			apruebaCancelacion: uid
+		});
 };

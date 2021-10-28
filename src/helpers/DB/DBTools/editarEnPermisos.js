@@ -9,30 +9,25 @@ export const editarEnPermisos = async (modulo) => {
 		.doc(`Modulo-${modulo}`)
 		.collection(`permisos`);
 
-	const derechosRef = db.collection("derechos");
-
-	const permisosSnap = await permisosRef.get();
+	const permisosSnap = await permisosRef.where("estadoPermiso", "==", "Cancelado").get();
 
 	permisosSnap.forEach(async (snapHijo) => {
-		const cuentaSeparada = snapHijo.data().cuenta.split(".");
-		const usuario = await derechosRef.doc(`${cuentaSeparada[0]}-${cuentaSeparada[1]}`).get();
+		permisosRef
+			.doc(snapHijo.id)
+			.update({
+				cuotaCultivo: 0
+			})
+			.then(console.log("Actualizando: ", snapHijo.id));
 
-		if (usuario.data().ejido && usuario.data().tipoLocalidad) {
-			permisosRef
-				.doc(snapHijo.id)
-				.update({
-					claveLocalidad: usuario.data().ejido,
-					tipoLocalidad: usuario.data().tipoLocalidad
-				})
-				.then(console.log("Actualizando: ", snapHijo.id));
-		} else {
-			console.log({
-				modulo,
-				idPermiso: snapHijo.id,
-				idUsuario: `${cuentaSeparada[0]}-${cuentaSeparada[1]}`,
-				claveLocalidad: usuario.data().ejido,
-				tipoLocalidad: usuario.data().tipoLocalidad
-			});
-		}
+		// if (usuario.data().ejido && usuario.data().tipoLocalidad) {
+		// } else {
+		// 	console.log({
+		// 		modulo,
+		// 		idPermiso: snapHijo.id,
+		// 		idUsuario: `${cuentaSeparada[0]}-${cuentaSeparada[1]}`,
+		// 		claveLocalidad: usuario.data().ejido,
+		// 		tipoLocalidad: usuario.data().tipoLocalidad
+		// 	});
+		// }
 	});
 };
