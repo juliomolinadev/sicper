@@ -231,8 +231,6 @@ export const CustomPermitsReport = () => {
 					excelTitle={excelTitle}
 					headers={headers}
 					data={data}
-					rowsPerPage={24}
-					orientation="landscape"
 					range={range}
 				/>
 			)}

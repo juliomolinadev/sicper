@@ -4,15 +4,7 @@ import ReactToPrint from "react-to-print";
 import { exportJSONToExcel } from "../../../helpers/functions/exportJSONToExcel";
 import { PrintableTable } from "../molecules/PrintableTable";
 
-export const ReportModule = ({
-	title,
-	excelTitle,
-	headers,
-	data,
-	// rowsPerPage,
-	// orientation,
-	range
-}) => {
+export const ReportModule = ({ title, excelTitle, headers, data, range }) => {
 	const componentRef = createRef();
 	const { name } = useSelector((state) => state.auth);
 

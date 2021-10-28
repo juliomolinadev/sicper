@@ -28,6 +28,7 @@ const aplyFilter = (dataSet, headers, filter, order1) => {
 	const ids = [];
 	const cleanDataSet = dataSet.filter((row) => {
 		if (
+			row[mainKey] !== "-" &&
 			row[mainKey] !== "SUBTOTAL" &&
 			row[mainKey] !== "TOTAL" &&
 			!ids.find((id) => id === row[mainKey])
@@ -45,19 +46,37 @@ const aplyFilter = (dataSet, headers, filter, order1) => {
 		separateData.push(cleanDataSet.filter((row) => row[filter] === value));
 	});
 
-	separateData.forEach((filterItem) => {
+	separateData.forEach((batch) => {
 		const subTotalRow = { [mainKey]: "SUBTOTAL" };
+		const emtyRow = { [mainKey]: "-" };
+		const separateBatch = [];
+		const finalBatch = [];
 
-		filterItem.sort((a, b) => sortFunction(a[order1], b[order1]));
+		batch.sort((a, b) => sortFunction(a[order1], b[order1]));
+		const uniqueOrder1 = onlyUnique(batch, order1);
+		uniqueOrder1.forEach((value) => {
+			separateBatch.push(batch.filter((row) => row[order1] === value));
+		});
 
-		filterItem.forEach((order1Item) => {
+		separateBatch.forEach((subBatch) => {
+			subBatch.forEach((row) => {
+				finalBatch.push(row);
+			});
+			finalBatch.push(emtyRow);
+		});
+
+		finalBatch.pop();
+
+		finalBatch.forEach((row) => {
 			headers.forEach((header) => {
 				if (header.sum) {
-					if (subTotalRow[header.id]) subTotalRow[header.id] += order1Item[header.id];
-					else subTotalRow[header.id] = order1Item[header.id];
+					if (row[header.id]) {
+						if (subTotalRow[header.id]) subTotalRow[header.id] += row[header.id];
+						else subTotalRow[header.id] = row[header.id];
 
-					if (totalRow[header.id]) totalRow[header.id] += order1Item[header.id];
-					else totalRow[header.id] = order1Item[header.id];
+						if (totalRow[header.id]) totalRow[header.id] += row[header.id];
+						else totalRow[header.id] = row[header.id];
+					}
 				}
 
 				if (header.count) {
@@ -68,8 +87,9 @@ const aplyFilter = (dataSet, headers, filter, order1) => {
 					else totalRow[header.id] = 1;
 				}
 			});
-			finalData.push(order1Item);
+			finalData.push(row);
 		});
+
 		for (const key in subTotalRow) {
 			if (typeof subTotalRow[key] === "number") subTotalRow[key] = roundToN(subTotalRow[key], 4);
 		}

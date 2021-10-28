@@ -186,14 +186,7 @@ export const ProducersReport = () => {
 			</div>
 
 			{data.length > 0 && (
-				<ReportModule
-					title={title}
-					excelTitle={excelTitle}
-					headers={headers}
-					data={data}
-					rowsPerPage={24}
-					orientation="landscape"
-				/>
+				<ReportModule title={title} excelTitle={excelTitle} headers={headers} data={data} />
 			)}
 		</>
 	);

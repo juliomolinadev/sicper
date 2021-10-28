@@ -184,14 +184,7 @@ export const UsersReport = () => {
 			</div>
 
 			{data.length > 0 && (
-				<ReportModule
-					title={title}
-					excelTitle={excelTitle}
-					headers={headers}
-					data={data}
-					// rowsPerPage={25}
-					// orientation="landscape"
-				/>
+				<ReportModule title={title} excelTitle={excelTitle} headers={headers} data={data} />
 			)}
 		</>
 	);
