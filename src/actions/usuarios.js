@@ -37,7 +37,7 @@ export const startSetUsuarioSelected = (usuario) => {
 		const ciclo = await loadCiclo();
 		const supPrevia = await loadSuperficiePrevia(
 			`${usuario.cuenta}.${usuario.subcta}`,
-			usuario.modulo,
+			usuario.entidad,
 			ciclo
 		);
 		const transfers = await loadUserTransfer(

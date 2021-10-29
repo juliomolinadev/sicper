@@ -1,6 +1,7 @@
 import { db } from "../firebase/firebase-config";
 
 export const loadUsuarios = async (usuario, modulo) => {
+	console.log("modulo en lugar: ", modulo);
 	const campos = ["apPaterno", "cuenta"];
 	const qryUsuarios = [];
 	const usuarios = [];
@@ -29,6 +30,7 @@ export const loadUsuarios = async (usuario, modulo) => {
 				case "UNI03":
 					usuarios.push({
 						id: snapHijo.id,
+						entidad: modulo,
 						...snapHijo.data()
 					});
 					break;
@@ -37,6 +39,7 @@ export const loadUsuarios = async (usuario, modulo) => {
 					if (snapHijo.data().equipo !== 1) {
 						usuarios.push({
 							id: snapHijo.id,
+							entidad: modulo,
 							...snapHijo.data()
 						});
 					}

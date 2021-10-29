@@ -39,7 +39,6 @@ export const UsuarioModal = () => {
 			className="modal"
 			overlayClassName="modal-fondo"
 		>
-			{/* TODO: Poner el nobre de la localidad en lugar de la clave */}
 			<CustomTable
 				title={data.length === 0 ? "No se encontraron usuarios" : "Usuarios"}
 				columns={usuariosColumns}
