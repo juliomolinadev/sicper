@@ -5,19 +5,7 @@ export const simpleLoadUsers = async (palabra = 0, campo, modulo) => {
 	const usuarios = [];
 	const qrysUsuarios = [];
 
-	const getModulo = (modulo) => {
-		switch (modulo) {
-			case "9A":
-			case "9B":
-			case "dev":
-				return modulo;
-
-			default:
-				return parseInt(modulo);
-		}
-	};
-
-	const usuariosRef = db.collection(`derechos`).where("modulo", "==", getModulo(modulo));
+	const usuariosRef = defineRef(modulo);
 
 	if (palabra.length === 0) qrysUsuarios.push(usuariosRef.orderBy(campo).get());
 	else {
@@ -44,10 +32,27 @@ export const simpleLoadUsers = async (palabra = 0, campo, modulo) => {
 
 	resolvedUsuariosQrys.forEach((snap) => {
 		snap.forEach((snapHijo) => {
-			usuarios.push({
-				id: snapHijo.id,
-				...snapHijo.data()
-			});
+			switch (modulo) {
+				case "UNI01":
+				case "UNI02":
+				case "UNI03":
+					usuarios.push({
+						id: snapHijo.id,
+						entidad: modulo,
+						...snapHijo.data()
+					});
+					break;
+
+				default:
+					if (snapHijo.data().equipo !== 1) {
+						usuarios.push({
+							id: snapHijo.id,
+							entidad: modulo,
+							...snapHijo.data()
+						});
+					}
+					break;
+			}
 		});
 	});
 
@@ -55,4 +60,35 @@ export const simpleLoadUsers = async (palabra = 0, campo, modulo) => {
 		Swal.fire("No se encontraron usuarios ", "...", "warning");
 	}
 	return usuarios;
+};
+
+const defineModulo = (modulo) => {
+	switch (modulo) {
+		case "9A":
+		case "9B":
+		case "dev":
+			return modulo;
+
+		default:
+			return parseInt(modulo);
+	}
+};
+
+const defineRef = (modulo) => {
+	switch (modulo) {
+		case "UNI01":
+			return db.collection(`derechos`).where("equipo", "==", 1).where("modulo", "in", [4, 5, 6, 7]);
+
+		case "UNI02":
+			return db
+				.collection(`derechos`)
+				.where("equipo", "==", 1)
+				.where("modulo", "in", [8, "9A", "9B"]);
+
+		case "UNI03":
+			return db.collection(`derechos`).where("equipo", "==", 1).where("modulo", "in", [1, 2, 3]);
+
+		default:
+			return db.collection(`derechos`).where("modulo", "==", defineModulo(modulo));
+	}
 };
