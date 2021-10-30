@@ -5,6 +5,7 @@ import { startLoadPreCancelPermits, unsetPermitToCancel } from "../../actions/pe
 import { cancelPermit } from "../../helpers/DB/cancelPermit";
 import { decrementPermisosExpedidos } from "../../helpers/DB/decrementPermisosExpedidos";
 import { decrementPermisosPorCultivo } from "../../helpers/DB/decrementPermisosPorCultivo";
+import { getPermitStatus } from "../../helpers/DB/getPermitStatus";
 
 export const PermitToCancelCard = () => {
 	const { preCancelPermits, permitToCancelSelected } = useSelector((state) => state.permisosScreen);
@@ -45,26 +46,31 @@ export const PermitToCancelCard = () => {
 			cancelButtonColor: "#d33",
 			confirmButtonText: "Si",
 			cancelButtonText: "No"
-		}).then(({ isConfirmed }) => {
+		}).then(async ({ isConfirmed }) => {
 			if (isConfirmed) {
-				cancelPermit(permitToCancelSelected, modulo, ciclo, new Date(), uid);
-				decrementPermisosPorCultivo(
-					ciclo,
-					modulo,
-					claveCultivo,
-					nombreCultivo,
-					sistema,
-					tipo,
-					supAutorizada
-				);
-				decrementPermisosExpedidos(ciclo, modulo, supAutorizada);
-				dispatch(startLoadPreCancelPermits(ciclo));
-				dispatch(unsetPermitToCancel());
-				Swal.fire(
-					"Permiso cancelado",
-					`Se canceló con exito el permiso ${numeroPermiso}`,
-					"success"
-				);
+				const permitStatus = await getPermitStatus(permitToCancelSelected, modulo, ciclo);
+				console.log("permitStatus en lugar: ", permitStatus);
+
+				if (permitStatus === "En proceso de cancelación") {
+					cancelPermit(permitToCancelSelected, modulo, ciclo, new Date(), uid);
+					decrementPermisosPorCultivo(
+						ciclo,
+						modulo,
+						claveCultivo,
+						nombreCultivo,
+						sistema,
+						tipo,
+						supAutorizada
+					);
+					decrementPermisosExpedidos(ciclo, modulo, supAutorizada);
+					dispatch(startLoadPreCancelPermits(ciclo));
+					dispatch(unsetPermitToCancel());
+					Swal.fire(
+						"Permiso cancelado",
+						`Se canceló con exito el permiso ${numeroPermiso}`,
+						"success"
+					);
+				}
 			}
 		});
 	};
