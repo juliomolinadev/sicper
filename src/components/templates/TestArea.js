@@ -1,5 +1,6 @@
 import React from "react";
 // import { useSelector } from "react-redux";
+// import { verificarExpedicion } from "../../helpers/DB/DBTools/verificarExpedicion";
 // import { editarEnPermisos } from "../../helpers/DB/DBTools/editarEnPermisos";
 import { ProducersReport } from "../ui/organisms/ProducersReport";
 
@@ -16,7 +17,10 @@ export const TestArea = () => {
 				<ProducersReport />
 			</div>
 
-			{/* <button onClick={() => editarEnPermisos(modulo)} className="btn btn-primary mt-5">
+			{/* <button
+				onClick={() => verificarExpedicion(modulo, "2021-2022", false)}
+				className="btn btn-primary mt-5"
+			>
 				Actualizar
 			</button> */}
 		</>
