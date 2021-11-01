@@ -48,6 +48,7 @@ export const cultivosPrincipales = {
 		"3-TRIGO": {},
 		"8-AVENA": {},
 		"2-CEBADA": {},
+		"1-CARTAMO": {},
 		"4-RYE-GRASS": {},
 		"12-CEBOLLIN O-I": {},
 		VARIOS: {},
