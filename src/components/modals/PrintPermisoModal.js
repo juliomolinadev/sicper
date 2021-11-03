@@ -49,9 +49,16 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 	const handleSavePermiso = async () => {
 		dispatch(startDisableSaveButton());
 		dispatch(setEnEspera());
-		if (await savePermitTransaction(data)) {
+
+		const isSave = await savePermitTransaction(data);
+		console.log("isSave en lugar: ", isSave);
+
+		if (isSave) {
 			dispatch(unsetEnEspera());
 			dispatch(startEnablePrintButton());
+		} else {
+			dispatch(unsetEnEspera());
+			dispatch(startEnableSaveButton());
 		}
 	};
 

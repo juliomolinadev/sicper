@@ -281,31 +281,8 @@ export const savePermitTransaction = async (allData) => {
 
 		return isSave;
 	} catch (error) {
+		Swal.fire("Error de conexión", "Por favor intente más tarde.", "error");
 		console.error(error);
-		throw error;
+		return false;
 	}
-
-	// const sfDocRef = doc(db, "cities", "SF");
-
-	// try {
-	// 	const newPopulation = await runTransaction(db, async (transaction) => {
-	// 		const sfDoc = await transaction.get(sfDocRef);
-	// 		if (!sfDoc.exists()) {
-	// 			throw "Document does not exist!";
-	// 		}
-
-	// 		const newPop = sfDoc.data().population + 1;
-	// 		if (newPop <= 1000000) {
-	// 			transaction.update(sfDocRef, { population: newPop });
-	// 			return newPop;
-	// 		} else {
-	// 			return Promise.reject("Sorry! Population is too big");
-	// 		}
-	// 	});
-
-	// 	console.log("Population increased to ", newPopulation);
-	// } catch (e) {
-	// 	// This will be a "population is too big" error.
-	// 	console.error(e);
-	// }
 };
