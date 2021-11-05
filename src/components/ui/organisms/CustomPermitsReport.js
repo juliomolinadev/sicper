@@ -46,8 +46,10 @@ export const CustomPermitsReport = () => {
 	};
 	const excelTitle = getExcelTitle();
 
-	const [data, setData, filters, handleFiltersChange] = useFilteredData(headers, []);
+	const [data, setData, filters, handleFiltersChange, extraRows, handleExtraRowsChange] =
+		useFilteredData(headers, []);
 	const { filter, order1 } = filters;
+	const { includeEmtyRow, includeSubtotalRow } = extraRows;
 	const getPermisos = async () => {
 		if (campo.length) {
 			const permisosToSet = await simpleLoadPermits(
@@ -151,7 +153,7 @@ export const CustomPermitsReport = () => {
 					<>
 						<div className="row mt-4">
 							<div className="col-sm-8">
-								<label htmlFor="filter">ORDENADO Y SUBTOTALES POR:</label>
+								<label htmlFor="filter">ORDENADO POR:</label>
 
 								<select
 									name="filter"
@@ -171,6 +173,21 @@ export const CustomPermitsReport = () => {
 										</option>
 									))}
 								</select>
+							</div>
+
+							<div className="col-sm-4 align-self-end">
+								<div className="form-group form-check">
+									<input
+										type="checkbox"
+										name="includeSubtotalRow"
+										id="includeSubtotalRow"
+										value={includeSubtotalRow}
+										checked={includeSubtotalRow}
+										onChange={handleExtraRowsChange}
+										className="form-check-input"
+									></input>
+									<label htmlFor="includeSubtotalRow"> INCLUIR SUBTOTALES </label>
+								</div>
 							</div>
 						</div>
 
@@ -196,6 +213,21 @@ export const CustomPermitsReport = () => {
 										</option>
 									))}
 								</select>
+							</div>
+
+							<div className="col-sm-4 align-self-end">
+								<div className="form-group form-check">
+									<input
+										type="checkbox"
+										name="includeEmtyRow"
+										id="includeEmtyRow"
+										value={includeEmtyRow}
+										checked={includeEmtyRow}
+										onChange={handleExtraRowsChange}
+										className="form-check-input"
+									></input>
+									<label htmlFor="includeEmtyRow"> INCLUIR SEPARACIÓN </label>
+								</div>
 							</div>
 						</div>
 

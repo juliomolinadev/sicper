@@ -4,11 +4,14 @@ import { roundToN } from "../helpers/functions/roundToN";
 export const useFilteredData = (
 	headers,
 	initialData = [],
-	initialFilters = { filter: "", order1: "" }
+	initialFilters = { filter: "", order1: "" },
+	initialExtraRows = { includeEmtyRow: false, includeSubtotalRow: false }
 ) => {
 	const [data, setData] = useState(initialData);
 	const [filters, setFilters] = useState(initialFilters);
 	const { filter, order1 } = filters;
+	const [extraRows, setExtraRows] = useState(initialExtraRows);
+	const { includeEmtyRow, includeSubtotalRow } = extraRows;
 
 	const handleFiltersChange = ({ target }) => {
 		setFilters({
@@ -16,14 +19,29 @@ export const useFilteredData = (
 			[target.name]: target.value
 		});
 
-		if (target.name === "filter") setData(aplyFilter(data, headers, target.value, order1));
-		if (target.name === "order1") setData(aplyFilter(data, headers, filter, target.value));
+		if (target.name === "filter")
+			setData(aplyFilter(data, headers, target.value, order1, includeEmtyRow, includeSubtotalRow));
+		if (target.name === "order1")
+			setData(aplyFilter(data, headers, filter, target.value, includeEmtyRow, includeSubtotalRow));
 	};
 
-	return [data, setData, filters, handleFiltersChange];
+	const handleExtraRowsChange = ({ target }) => {
+		console.log(target.name, target.checked);
+		setExtraRows({
+			...extraRows,
+			[target.name]: target.checked
+		});
+
+		if (target.name === "includeEmtyRow")
+			setData(aplyFilter(data, headers, filter, order1, target.checked, includeSubtotalRow));
+		if (target.name === "includeSubtotalRow")
+			setData(aplyFilter(data, headers, filter, order1, includeEmtyRow, target.checked));
+	};
+
+	return [data, setData, filters, handleFiltersChange, extraRows, handleExtraRowsChange];
 };
 
-const aplyFilter = (dataSet, headers, filter, order1) => {
+const aplyFilter = (dataSet, headers, filter, order1, includeEmtyRow, includeSubtotalRow) => {
 	const mainKey = headers[0].id;
 	const ids = [];
 	const cleanDataSet = dataSet.filter((row) => {
@@ -62,7 +80,7 @@ const aplyFilter = (dataSet, headers, filter, order1) => {
 			subBatch.forEach((row) => {
 				finalBatch.push(row);
 			});
-			finalBatch.push(emtyRow);
+			if (includeEmtyRow) finalBatch.push(emtyRow);
 		});
 
 		finalBatch.pop();
@@ -95,7 +113,7 @@ const aplyFilter = (dataSet, headers, filter, order1) => {
 		for (const key in subTotalRow) {
 			if (typeof subTotalRow[key] === "number") subTotalRow[key] = roundToN(subTotalRow[key], 4);
 		}
-		finalData.push(subTotalRow);
+		if (includeSubtotalRow) finalData.push(subTotalRow);
 	});
 	finalData.push(totalRow);
 	return finalData;
