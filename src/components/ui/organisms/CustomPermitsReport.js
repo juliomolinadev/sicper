@@ -32,21 +32,9 @@ export const CustomPermitsReport = () => {
 		setHeaders(newHeaders);
 	};
 
-	// const getTitle = () => {
-	// 	const campoForTitle = headers.find((header) => header.id === campo);
-	// 	if (campoForTitle) return `REPORTE DE PERMISOS POR ${campoForTitle.header}`;
-	// 	else return `REPORTE DE PERMISOS`;
-	// };
-
-	// const getExcelTitle = () => {
-	// 	const campoForTitle = headers.find((header) => header.id === campo);
-	// 	if (campoForTitle) return `PERMISOS POR ${campoForTitle.header}`;
-	// 	else return `PERMISOS`;
-	// };
-	// const excelTitle = getExcelTitle();
-
 	const [data, setData, filters, handleFiltersChange, extraRows, handleExtraRowsChange] =
 		useFilteredData(headers, []);
+
 	const { filter, order1 } = filters;
 	const { includeEmtyRow, includeSubtotalRow } = extraRows;
 

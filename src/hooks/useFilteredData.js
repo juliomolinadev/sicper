@@ -81,8 +81,7 @@ const aplyFilter = (dataSet, headers, filter, order1, includeEmtyRow, includeSub
 			});
 			if (includeEmtyRow) finalBatch.push(emtyRow);
 		});
-
-		finalBatch.pop();
+		if (includeEmtyRow) finalBatch.pop();
 
 		finalBatch.forEach((row) => {
 			headers.forEach((header) => {
@@ -115,6 +114,7 @@ const aplyFilter = (dataSet, headers, filter, order1, includeEmtyRow, includeSub
 		if (includeSubtotalRow) finalData.push(subTotalRow);
 	});
 	finalData.push(totalRow);
+
 	return finalData;
 };
 
