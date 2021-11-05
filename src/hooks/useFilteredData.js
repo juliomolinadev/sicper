@@ -26,7 +26,6 @@ export const useFilteredData = (
 	};
 
 	const handleExtraRowsChange = ({ target }) => {
-		console.log(target.name, target.checked);
 		setExtraRows({
 			...extraRows,
 			[target.name]: target.checked

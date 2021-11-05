@@ -39,8 +39,11 @@ export const UsersReport = () => {
 	};
 	const excelTitle = getExcelTitle();
 
-	const [data, setData, filters, handleFiltersChange] = useFilteredData(headers, []);
+	const [data, setData, filters, handleFiltersChange, extraRows, handleExtraRowsChange] =
+		useFilteredData(headers, []);
 	const { filter, order1 } = filters;
+	const { includeEmtyRow, includeSubtotalRow } = extraRows;
+
 	const getUsers = async () => {
 		if (campo.length) {
 			const usersToSet = await simpleLoadUsers(palabra, campo, modulo);
@@ -130,6 +133,21 @@ export const UsersReport = () => {
 									))}
 								</select>
 							</div>
+
+							<div className="col-sm-4 align-self-end">
+								<div className="form-group form-check">
+									<input
+										type="checkbox"
+										name="includeSubtotalRow"
+										id="includeSubtotalRow"
+										value={includeSubtotalRow}
+										checked={includeSubtotalRow}
+										onChange={handleExtraRowsChange}
+										className="form-check-input"
+									></input>
+									<label htmlFor="includeSubtotalRow"> INCLUIR SUBTOTALES </label>
+								</div>
+							</div>
 						</div>
 
 						<div className="row mt-2">
@@ -154,6 +172,21 @@ export const UsersReport = () => {
 										</option>
 									))}
 								</select>
+							</div>
+
+							<div className="col-sm-4 align-self-end">
+								<div className="form-group form-check">
+									<input
+										type="checkbox"
+										name="includeEmtyRow"
+										id="includeEmtyRow"
+										value={includeEmtyRow}
+										checked={includeEmtyRow}
+										onChange={handleExtraRowsChange}
+										className="form-check-input"
+									></input>
+									<label htmlFor="includeEmtyRow"> INCLUIR SEPARACIÓN </label>
+								</div>
 							</div>
 						</div>
 

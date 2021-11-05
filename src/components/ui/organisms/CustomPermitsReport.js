@@ -50,6 +50,7 @@ export const CustomPermitsReport = () => {
 		useFilteredData(headers, []);
 	const { filter, order1 } = filters;
 	const { includeEmtyRow, includeSubtotalRow } = extraRows;
+
 	const getPermisos = async () => {
 		if (campo.length) {
 			const permisosToSet = await simpleLoadPermits(
