@@ -25,20 +25,6 @@ export const UsersReport = () => {
 		setHeaders(newHeaders);
 	};
 
-	const getTitle = () => {
-		const campoForTitle = headers.find((header) => header.id === campo);
-		if (campoForTitle) return `REPORTE DE USUARIOS POR ${campoForTitle.header}`;
-		else return `REPORTE DE USUARIOS`;
-	};
-	const title = getTitle();
-
-	const getExcelTitle = () => {
-		const campoForTitle = headers.find((header) => header.id === campo);
-		if (campoForTitle) return `USUARIOS POR ${campoForTitle.header}`;
-		else return `USUARIOS`;
-	};
-	const excelTitle = getExcelTitle();
-
 	const [data, setData, filters, handleFiltersChange, extraRows, handleExtraRowsChange] =
 		useFilteredData(headers, []);
 	const { filter, order1 } = filters;
@@ -56,6 +42,20 @@ export const UsersReport = () => {
 			getUsers();
 		}
 	};
+
+	const getTitle = (titleFor, reportOf) => {
+		const campoForTitle =
+			filter.length > 0
+				? headers.find((header) => header.id === filter)
+				: headers.find((header) => header.id === campo);
+
+		if (!campoForTitle) return `PERMISOS`;
+		if (titleFor === "report") return `REPORTE DE ${reportOf} POR ${campoForTitle.header}`;
+		if (titleFor === "excel") return `${reportOf} POR ${campoForTitle.header}`;
+	};
+
+	const title = getTitle("report", "USUARIOS");
+	const excelTitle = getTitle("excel", "USUARIOS");
 
 	return (
 		<>

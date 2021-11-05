@@ -32,19 +32,18 @@ export const CustomPermitsReport = () => {
 		setHeaders(newHeaders);
 	};
 
-	const getTitle = () => {
-		const campoForTitle = headers.find((header) => header.id === campo);
-		if (campoForTitle) return `REPORTE DE PERMISOS POR ${campoForTitle.header}`;
-		else return `REPORTE DE PERMISOS`;
-	};
-	const title = getTitle();
+	// const getTitle = () => {
+	// 	const campoForTitle = headers.find((header) => header.id === campo);
+	// 	if (campoForTitle) return `REPORTE DE PERMISOS POR ${campoForTitle.header}`;
+	// 	else return `REPORTE DE PERMISOS`;
+	// };
 
-	const getExcelTitle = () => {
-		const campoForTitle = headers.find((header) => header.id === campo);
-		if (campoForTitle) return `PERMISOS POR ${campoForTitle.header}`;
-		else return `PERMISOS`;
-	};
-	const excelTitle = getExcelTitle();
+	// const getExcelTitle = () => {
+	// 	const campoForTitle = headers.find((header) => header.id === campo);
+	// 	if (campoForTitle) return `PERMISOS POR ${campoForTitle.header}`;
+	// 	else return `PERMISOS`;
+	// };
+	// const excelTitle = getExcelTitle();
 
 	const [data, setData, filters, handleFiltersChange, extraRows, handleExtraRowsChange] =
 		useFilteredData(headers, []);
@@ -70,6 +69,20 @@ export const CustomPermitsReport = () => {
 			getPermisos();
 		}
 	};
+
+	const getTitle = (titleFor, reportOf) => {
+		const campoForTitle =
+			filter.length > 0
+				? headers.find((header) => header.id === filter)
+				: headers.find((header) => header.id === campo);
+
+		if (!campoForTitle) return `PERMISOS`;
+		if (titleFor === "report") return `REPORTE DE ${reportOf} POR ${campoForTitle.header}`;
+		if (titleFor === "excel") return `${reportOf} POR ${campoForTitle.header}`;
+	};
+
+	const title = getTitle("report", "PERMISOS");
+	const excelTitle = getTitle("excel", "PERMISOS");
 
 	return (
 		<>

@@ -26,20 +26,6 @@ export const ProducersReport = () => {
 		setHeaders(newHeaders);
 	};
 
-	const getTitle = () => {
-		const campoForTitle = headers.find((header) => header.id === campo);
-		if (campoForTitle) return `REPORTE DE PRODUCTORES POR ${campoForTitle.header}`;
-		else return `REPORTE DE PRODUCTORES`;
-	};
-	const title = getTitle();
-
-	const getExcelTitle = () => {
-		const campoForTitle = headers.find((header) => header.id === campo);
-		if (campoForTitle) return `PRODUCTORES POR ${campoForTitle.header}`;
-		else return `PRODUCTORES`;
-	};
-	const excelTitle = getExcelTitle();
-
 	const [data, setData, filters, handleFiltersChange, extraRows, handleExtraRowsChange] =
 		useFilteredData(headers, []);
 	const { filter, order1 } = filters;
@@ -57,6 +43,20 @@ export const ProducersReport = () => {
 			getProducers();
 		}
 	};
+
+	const getTitle = (titleFor, reportOf) => {
+		const campoForTitle =
+			filter.length > 0
+				? headers.find((header) => header.id === filter)
+				: headers.find((header) => header.id === campo);
+
+		if (!campoForTitle) return `PERMISOS`;
+		if (titleFor === "report") return `REPORTE DE ${reportOf} POR ${campoForTitle.header}`;
+		if (titleFor === "excel") return `${reportOf} POR ${campoForTitle.header}`;
+	};
+
+	const title = getTitle("report", "PRODUCTORES");
+	const excelTitle = getTitle("excel", "PRODUCTORES");
 
 	return (
 		<>
