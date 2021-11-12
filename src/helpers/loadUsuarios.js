@@ -1,7 +1,6 @@
 import { db } from "../firebase/firebase-config";
 
 export const loadUsuarios = async (usuario, modulo) => {
-	console.log("modulo en lugar: ", modulo);
 	const campos = ["apPaterno", "cuenta"];
 	const qryUsuarios = [];
 	const usuarios = [];

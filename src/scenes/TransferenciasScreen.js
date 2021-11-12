@@ -7,8 +7,11 @@ import { ProductorModal } from "../components/modals/ProductorModal";
 import { CultivoModal } from "../components/modals/CultivoModal";
 import { UsuariosTable } from "../components/tables/UsuariosTable";
 import { LocalidadesModal } from "../components/modals/LocalidadesModal";
+import { useSelector } from "react-redux";
 
 export const TransferenciasScreen = () => {
+	const { usuario } = useSelector((state) => state.entidades);
+
 	return (
 		<>
 			<div className="row mt-4">
@@ -22,8 +25,12 @@ export const TransferenciasScreen = () => {
 					<UsuariosTable />
 				</div>
 				<div className="col-sm-4">
-					<UserCard />
-					<TransferForm />
+					{usuario && (
+						<>
+							<UserCard />
+							<TransferForm />
+						</>
+					)}
 				</div>
 			</div>
 			<ProductorModal />
