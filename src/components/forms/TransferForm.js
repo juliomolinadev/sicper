@@ -56,11 +56,8 @@ export const TransferForm = () => {
 		} else if (parseInt(superficieTransferida) > superficieDisponible) {
 			dispatch(setError("La superficie a transferir excede a la superficie disponible"));
 			return false;
-		} else if (moduloDestino.trim().length === 0) {
-			dispatch(setError("Indique el módulo destino"));
-			return false;
-		} else if (loteDestino.trim().length === 0) {
-			dispatch(setError("Indique el lote en el que se aplicará la transferencia"));
+		} else if (nombreCultivo === null) {
+			dispatch(setError("Indique Cultivo"));
 			return false;
 		} else if (apPaternoSolicitante.trim().length === 0) {
 			dispatch(setError("Indique apellido paterno del solicitante"));
@@ -71,11 +68,14 @@ export const TransferForm = () => {
 		} else if (nombreSolicitante.trim().length === 0) {
 			dispatch(setError("Indique nombre del solicitante"));
 			return false;
-		} else if (nombreCultivo === null) {
-			dispatch(setError("Indique Cultivo"));
+		} else if (moduloDestino.trim().length === 0) {
+			dispatch(setError("Indique el módulo destino"));
 			return false;
-		} else if (localtieSelected === null) {
+		} else if (localtieSelected === null || localtieSelected === undefined) {
 			dispatch(setError("Indique la localidad destino"));
+			return false;
+		} else if (loteDestino.trim().length === 0) {
+			dispatch(setError("Indique el lote en el que se aplicará la transferencia"));
 			return false;
 		}
 		dispatch(removeError());
@@ -144,7 +144,6 @@ export const TransferForm = () => {
 				<div className="col-12 d-flex flex-column p-3">
 					<div className="row d-flex p-3 text-warning">* Campos obligatorios</div>
 
-					{/* TODO: resaltar mensaje de error */}
 					{msgError && <div className="auth__alert-error">{msgError}</div>}
 
 					<div className=" row d-flex p-3">
@@ -281,6 +280,8 @@ export const TransferForm = () => {
 							onKeyUp={handleKeyUp}
 						/>
 					</div>
+
+					{msgError && <div className="auth__alert-error">{msgError}</div>}
 
 					<div className=" row d-flex p-3">
 						<button
