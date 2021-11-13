@@ -1,45 +1,26 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { removeError, setError } from "../../actions/ui";
-import { saveTransfer } from "../../helpers/saveTransfer";
-import { startSetUsuarioSelected } from "../../actions/usuarios";
 import { CultivoInput2 } from "../permisos/inputsNuevosPermisos/CultivoInput2";
 import { LocalidadInput } from "../permisos/inputsNuevosPermisos/LocalidadInput";
-import { unsetCultivoSelected } from "../../actions/cultivos";
-import { unsetLocaltieSelected } from "../../actions/entidades/localidades";
 import { getTranseferCount } from "../../helpers/DB/getTransferCount";
-import { useFormToUpper } from "../../hooks/UseFormToUpper";
 import { openTransferModal, setTransferencia } from "../../actions/transferenciasScreen";
 
-export const TransferForm = () => {
+export const TransferForm = ({ values, handleInputChange }) => {
 	const { usuario, localtieSelected } = useSelector((state) => state.entidades);
 	const { nombreCultivo, claveCultivo } = useSelector((state) => state.altaPermisos);
-
-	const [
-		{
-			superficieTransferida,
-			loteDestino,
-			moduloDestino,
-			cultivo,
-			localtie,
-			apPaternoSolicitante,
-			apMaternoSolicitante,
-			nombreSolicitante
-		},
-		handleInputChange,
-		reset
-	] = useFormToUpper({
-		superficieTransferida: 0,
-		loteDestino: "",
-		moduloDestino: "",
-		cultivo: "",
-		localtie: "",
-		apPaternoSolicitante: "",
-		apMaternoSolicitante: "",
-		nombreSolicitante: ""
-	});
-
 	const { msgError } = useSelector((state) => state.ui);
+
+	const {
+		superficieTransferida,
+		loteDestino,
+		moduloDestino,
+		cultivo,
+		localtie,
+		apPaternoSolicitante,
+		apMaternoSolicitante,
+		nombreSolicitante
+	} = values;
 
 	let superficieDisponible;
 
@@ -119,17 +100,8 @@ export const TransferForm = () => {
 			};
 
 			if (transfer.folio !== null) {
-				console.log("transfer en form: ", transfer);
 				dispatch(setTransferencia(transfer));
 				dispatch(openTransferModal());
-				// const isSave = await saveTransfer(transfer, ciclo);
-
-				// if (isSave) {
-				// 	dispatch(startSetUsuarioSelected(usuario)); //Al actualizar el usuario se actualiza la sup previa
-				// 	reset();
-				// 	dispatch(unsetCultivoSelected());
-				// 	dispatch(unsetLocaltieSelected());
-				// }
 			}
 		}
 	};

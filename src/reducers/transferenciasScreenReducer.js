@@ -2,7 +2,8 @@ import { types } from "../types/types";
 
 const initialState = {
 	printTransferModal: false,
-	transferencia: null
+	transferencia: null,
+	transferPrintButton: false
 };
 
 export const transferenciasScreenReducer = (state = initialState, action) => {
@@ -19,8 +20,19 @@ export const transferenciasScreenReducer = (state = initialState, action) => {
 				printTransferModal: false
 			};
 
+		case types.enablePrintButton:
+			return {
+				...state,
+				transferPrintButton: true
+			};
+
+		case types.disablePrintButton:
+			return {
+				...state,
+				transferPrintButton: false
+			};
+
 		case types.setTransferencia:
-			console.log("action.payload en reducer: ", action.payload);
 			return {
 				...state,
 				transferencia: action.payload

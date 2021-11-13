@@ -9,10 +9,22 @@ import { UsuariosTable } from "../components/tables/UsuariosTable";
 import { LocalidadesModal } from "../components/modals/LocalidadesModal";
 import { useSelector } from "react-redux";
 import { PrintTransferModal } from "../components/modals/PrintTransferModal";
+import { useFormToUpper } from "../hooks/UseFormToUpper";
 
 export const TransferenciasScreen = () => {
 	const { usuario } = useSelector((state) => state.entidades);
 	const { transferencia } = useSelector((state) => state.transferenciasScreen);
+
+	const [values, handleInputChange, reset] = useFormToUpper({
+		superficieTransferida: 0,
+		loteDestino: "",
+		moduloDestino: "",
+		cultivo: "",
+		localtie: "",
+		apPaternoSolicitante: "",
+		apMaternoSolicitante: "",
+		nombreSolicitante: ""
+	});
 
 	return (
 		<>
@@ -30,7 +42,7 @@ export const TransferenciasScreen = () => {
 					{usuario && (
 						<>
 							<UserCard />
-							<TransferForm />
+							<TransferForm values={values} handleInputChange={handleInputChange} />
 						</>
 					)}
 				</div>
@@ -39,7 +51,7 @@ export const TransferenciasScreen = () => {
 			<NuevoProductorModal />
 			<CultivoModal />
 			<LocalidadesModal />
-			{transferencia && <PrintTransferModal transferencia={transferencia} />}
+			{transferencia && <PrintTransferModal transferencia={transferencia} reset={reset} />}
 		</>
 	);
 };

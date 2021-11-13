@@ -107,6 +107,8 @@ export const types = {
 	closeSanidadModal: "[Algodonero Screen] Close Modal Sanidad",
 	openTransferModal: "[Transferencias Screen] Open Modal Transferencias",
 	closeTransferModal: "[Transferencias Screen] Close Modal Transferencias",
+	enablePrintButton: "[Transferencias Screen] Enable Print Button",
+	disablePrintButton: "[Transferencias Screen] Disable Print Button",
 	setTransferencia: "[Transferencias Screen] Set Transferencia",
 	unsetTransferencia: "[Transferencias Screen] Unset  Transferencia",
 

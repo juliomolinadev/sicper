@@ -1,11 +1,18 @@
 import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
+import { unsetCultivoSelected } from "../../actions/cultivos";
+import { unsetLocaltieSelected } from "../../actions/entidades/localidades";
 
-import { closeTransferModal } from "../../actions/transferenciasScreen";
+import {
+	closeTransferModal,
+	disablePrintButton,
+	enablePrintButton
+} from "../../actions/transferenciasScreen";
+import { startSetUsuarioSelected } from "../../actions/usuarios";
+import { saveTransfer } from "../../helpers/saveTransfer";
 
-export const PrintTransferModal = ({ transferencia }) => {
-	console.log("transferencia en modal: ", transferencia);
+export const PrintTransferModal = ({ transferencia, reset }) => {
 	const {
 		ciclo,
 		apPaterno,
@@ -29,12 +36,16 @@ export const PrintTransferModal = ({ transferencia }) => {
 
 	const dateOptions = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
 
-	const { printTransferModal } = useSelector((state) => state.transferenciasScreen);
+	const { usuario } = useSelector((state) => state.entidades);
+	const { printTransferModal, transferPrintButton } = useSelector(
+		(state) => state.transferenciasScreen
+	);
 
 	const dispatch = useDispatch();
 
 	const closeModal = () => {
 		dispatch(closeTransferModal());
+		dispatch(disablePrintButton());
 	};
 
 	const imprimir = () => {
@@ -46,6 +57,18 @@ export const PrintTransferModal = ({ transferencia }) => {
 			width: "1125px",
 			height: "1500px",
 			overflow: "auto"
+		}
+	};
+
+	const handleSaveTransfer = async () => {
+		const isSave = await saveTransfer(transferencia, ciclo);
+
+		if (isSave) {
+			dispatch(enablePrintButton());
+			dispatch(startSetUsuarioSelected(usuario)); //Al actualizar el usuario se actualiza la sup previa
+			reset();
+			dispatch(unsetCultivoSelected());
+			dispatch(unsetLocaltieSelected());
 		}
 	};
 
@@ -118,7 +141,7 @@ export const PrintTransferModal = ({ transferencia }) => {
 						SOLICITANTE: <br />
 						{apPaterno} {apMaterno} {nombre}
 						<br />
-						LOTE: {predio} en {tipoLocalidad} {nombreLocalidad}
+						LOTE: {predio} EN {tipoLocalidad.toUpperCase()} {nombreLocalidad}
 						<br />
 						{superficieTransferida} HECTÁREAS DE {nombreCultivo}
 						<br />
@@ -130,7 +153,7 @@ export const PrintTransferModal = ({ transferencia }) => {
 						<br />
 						{apPaternoSolicitante} {apMaternoSolicitante} {nombreSolicitante}
 						<br />
-						LOTE: {loteDestino} en {tipolocalidadDestino} {localidadDestino}
+						LOTE: {loteDestino} EN {tipolocalidadDestino.toUpperCase()} {localidadDestino}
 						<br />
 					</p>
 				</div>
@@ -172,14 +195,21 @@ export const PrintTransferModal = ({ transferencia }) => {
 			</div>
 
 			<div className="row m-3 d-flex justify-content-center pt-5">
-				<button
-					type="button"
-					className="btn btn-outline-primary ml-5 d-print-none"
-					onClick={imprimir}
-				>
-					<i className="fas fa-print"></i>
-					<span> Imprimir</span>
-				</button>
+				{transferPrintButton ? (
+					<button type="button" className="btn btn-outline-primary d-print-none" onClick={imprimir}>
+						<i className="fas fa-print"></i>
+						<span> Imprimir</span>
+					</button>
+				) : (
+					<button
+						type="button"
+						className="btn btn-outline-primary ml-5 d-print-none"
+						onClick={handleSaveTransfer}
+					>
+						<i className="fas fa-save"></i>
+						<span> Guardar </span>
+					</button>
+				)}
 
 				<button
 					type="button"
