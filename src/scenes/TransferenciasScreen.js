@@ -8,9 +8,11 @@ import { CultivoModal } from "../components/modals/CultivoModal";
 import { UsuariosTable } from "../components/tables/UsuariosTable";
 import { LocalidadesModal } from "../components/modals/LocalidadesModal";
 import { useSelector } from "react-redux";
+import { PrintTransferModal } from "../components/modals/PrintTransferModal";
 
 export const TransferenciasScreen = () => {
 	const { usuario } = useSelector((state) => state.entidades);
+	const { transferencia } = useSelector((state) => state.transferenciasScreen);
 
 	return (
 		<>
@@ -37,6 +39,7 @@ export const TransferenciasScreen = () => {
 			<NuevoProductorModal />
 			<CultivoModal />
 			<LocalidadesModal />
+			{transferencia && <PrintTransferModal transferencia={transferencia} />}
 		</>
 	);
 };

@@ -105,6 +105,10 @@ export const types = {
 	algodoneroScreenUnsetPermisos: "[Algodonero Screen] Unset permisos",
 	openSanidadModal: "[Algodonero Screen] Open Modal Sanidad",
 	closeSanidadModal: "[Algodonero Screen] Close Modal Sanidad",
+	openTransferModal: "[Transferencias Screen] Open Modal Transferencias",
+	closeTransferModal: "[Transferencias Screen] Close Modal Transferencias",
+	setTransferencia: "[Transferencias Screen] Set Transferencia",
+	unsetTransferencia: "[Transferencias Screen] Unset  Transferencia",
 
 	setDataPrincipalesCultivos: "[Entidades] Set Data Principales Cultivos",
 	unsetDataPrincipalesCultivos: "[Entidades] Unset Data Principales Cultivos",

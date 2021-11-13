@@ -10,6 +10,7 @@ import { sicperReducer } from "../reducers/sicperReducer";
 import { algodoneroScreenReducer } from "../reducers/algodoneroScreenReducer";
 import { entidadesReducer } from "../reducers/entidades/entidadesReducer";
 import { scenesReducer } from "../reducers/scenes/scenesReducer";
+import { transferenciasScreenReducer } from "../reducers/transferenciasScreenReducer";
 
 const composeEnhancers =
 	(typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -22,6 +23,7 @@ const reducers = combineReducers({
 	sicperScreen: sicperReducer,
 	permisosScreen: permisosScreenReducer,
 	algodoneroScreen: algodoneroScreenReducer,
+	transferenciasScreen: transferenciasScreenReducer,
 	altaPermisos: altaPermisosReducer,
 	autorizadosScreen: autorizadosReducer
 });

@@ -56,6 +56,8 @@ export const saveTransfer = async (transfer, ciclo) => {
 				"Se registró con éxito la transferncia de volumen.",
 				"success"
 			);
+
+			return true;
 		}
 	} catch (error) {
 		Swal.fire("Error de conexión", "Error al intntar guardar transferencia.", "error");

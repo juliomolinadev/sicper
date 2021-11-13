@@ -6,10 +6,10 @@ import { startSetUsuarioSelected } from "../../actions/usuarios";
 import { CultivoInput2 } from "../permisos/inputsNuevosPermisos/CultivoInput2";
 import { LocalidadInput } from "../permisos/inputsNuevosPermisos/LocalidadInput";
 import { unsetCultivoSelected } from "../../actions/cultivos";
-import { unsetProductorSelected } from "../../actions/productores";
 import { unsetLocaltieSelected } from "../../actions/entidades/localidades";
 import { getTranseferCount } from "../../helpers/DB/getTransferCount";
 import { useFormToUpper } from "../../hooks/UseFormToUpper";
+import { openTransferModal, setTransferencia } from "../../actions/transferenciasScreen";
 
 export const TransferForm = () => {
 	const { usuario, localtieSelected } = useSelector((state) => state.entidades);
@@ -102,6 +102,7 @@ export const TransferForm = () => {
 			const transfer = {
 				...usuario,
 				folio: await defineFolio(),
+				ciclo,
 				estadoTransferencia: "PENDIENTE",
 				superficieTransferida: parseInt(superficieTransferida),
 				loteDestino,
@@ -118,12 +119,17 @@ export const TransferForm = () => {
 			};
 
 			if (transfer.folio !== null) {
-				saveTransfer(transfer, ciclo);
-				dispatch(startSetUsuarioSelected(usuario));
-				reset();
-				dispatch(unsetCultivoSelected());
-				dispatch(unsetProductorSelected());
-				dispatch(unsetLocaltieSelected());
+				console.log("transfer en form: ", transfer);
+				dispatch(setTransferencia(transfer));
+				dispatch(openTransferModal());
+				// const isSave = await saveTransfer(transfer, ciclo);
+
+				// if (isSave) {
+				// 	dispatch(startSetUsuarioSelected(usuario)); //Al actualizar el usuario se actualiza la sup previa
+				// 	reset();
+				// 	dispatch(unsetCultivoSelected());
+				// 	dispatch(unsetLocaltieSelected());
+				// }
 			}
 		}
 	};
@@ -289,8 +295,8 @@ export const TransferForm = () => {
 							type="button"
 							onClick={startSaveTransfer}
 						>
-							<span>Guardar </span>
-							<i className="fas fa-save"></i>
+							<span>Revisar </span>
+							<i className="far fa-file"></i>
 						</button>
 					</div>
 				</div>
