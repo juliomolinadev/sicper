@@ -31,6 +31,28 @@ export const usuariosColumns = [
 	{ name: "MODULO", selector: "modulo", sortable: true, width: "60px", center: true }
 ];
 
+export const transferColumns = [
+	{ name: "id", selector: "id", omit: true },
+	{ name: "FOLIO", selector: "folio", sortable: true, width: "100px", center: true },
+	{ name: "ESTADO", selector: "estadoTransferencia", sortable: true, width: "120px", center: true },
+	{ name: "MODULO", selector: "modulo", sortable: true, width: "60px", center: true },
+	{
+		name: "SUP(ha)",
+		selector: "superficieTransferida",
+		sortable: true,
+		width: "80px",
+		center: true
+	},
+	{ name: "CUENTA", selector: "cuenta", sortable: true, width: "80px" },
+	{ name: "SUBCTA", selector: "subcta", sortable: true, width: "40px", center: true },
+	{ name: "PATERNO", selector: "apPaterno", width: "120px", sortable: true },
+	{ name: "MATERNO", selector: "apMaterno", width: "120px", sortable: true },
+	{ name: "NOMBRE", selector: "nombre", width: "150px", sortable: true },
+	{ name: "LOTE", selector: "predio", sortable: true, width: "60px", center: true },
+	{ name: "EJ/COL", selector: "tipoLocalidad", sortable: true, width: "80px" },
+	{ name: "LOCALIDAD", selector: "nombreLocalidad", sortable: true, width: "200px" }
+];
+
 export const productoresColumns = [
 	{ name: "id", selector: "id", omit: true },
 	{ name: "PATERNO", selector: "apPaterno", width: "140px", sortable: true },

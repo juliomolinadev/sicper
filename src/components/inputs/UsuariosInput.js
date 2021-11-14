@@ -29,30 +29,28 @@ export const UsuariosInput = () => {
 		}
 	};
 	return (
-		<div>
-			<div className="row form-group d-flex align-items-baseline pt-3">
-				<label className="col-sm-3">Usuario: </label>
-				<div className="col-sm-9 d-flex">
-					<input
-						type="text"
-						className="form-control"
-						placeholder="Apellido paterno o numero de cuenta"
-						name="usuario"
-						autoComplete="off"
-						value={usuario}
-						onChange={handleInputChange}
-						onKeyUp={handleKeyUp}
-					/>
+		<>
+			<div className="form-group d-flex align-items-baseline">
+				<label>Usuario: </label>
+				<input
+					type="text"
+					className="form-control ml-5"
+					placeholder="Apellido paterno o numero de cuenta"
+					name="usuario"
+					autoComplete="off"
+					value={usuario}
+					onChange={handleInputChange}
+					onKeyUp={handleKeyUp}
+				/>
 
-					<button
-						className=" btn btn-outline-primary d-sm-block ml-auto"
-						type="button"
-						onClick={handleLoadUsuarios}
-					>
-						<i className="fas fa-search"></i>
-					</button>
-				</div>
+				<button
+					className=" btn btn-outline-primary d-sm-block"
+					type="button"
+					onClick={handleLoadUsuarios}
+				>
+					<i className="fas fa-search"></i>
+				</button>
 			</div>
-		</div>
+		</>
 	);
 };

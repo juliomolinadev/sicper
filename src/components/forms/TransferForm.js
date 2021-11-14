@@ -4,7 +4,7 @@ import { removeError, setError } from "../../actions/ui";
 import { CultivoInput2 } from "../permisos/inputsNuevosPermisos/CultivoInput2";
 import { LocalidadInput } from "../permisos/inputsNuevosPermisos/LocalidadInput";
 import { getTranseferCount } from "../../helpers/DB/getTransferCount";
-import { openTransferModal, setTransferencia } from "../../actions/transferenciasScreen";
+import { openTransferModal, setNuevaTransferencia } from "../../actions/transferenciasScreen";
 
 export const TransferForm = ({ values, handleInputChange }) => {
 	const { usuario, localtieSelected } = useSelector((state) => state.entidades);
@@ -100,7 +100,7 @@ export const TransferForm = ({ values, handleInputChange }) => {
 			};
 
 			if (transfer.folio !== null) {
-				dispatch(setTransferencia(transfer));
+				dispatch(setNuevaTransferencia(transfer));
 				dispatch(openTransferModal());
 			}
 		}
@@ -114,12 +114,12 @@ export const TransferForm = ({ values, handleInputChange }) => {
 
 	return (
 		<>
-			<div className="row border border-info rounded mt-4 m-1">
-				<div className="col-12 d-flex justify-content-center border-bottom border-info p-2">
+			<div className="border border-info rounded mt-4">
+				<div className="d-flex justify-content-center border-bottom border-info p-2">
 					<h3>Transferencia</h3>
 				</div>
 
-				<div className="col-12 d-flex flex-column p-3">
+				<div className="d-flex flex-column p-3">
 					<div className="row d-flex p-3 text-warning">* Campos obligatorios</div>
 
 					{msgError && <div className="auth__alert-error">{msgError}</div>}

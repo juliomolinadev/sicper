@@ -109,8 +109,12 @@ export const types = {
 	closeTransferModal: "[Transferencias Screen] Close Modal Transferencias",
 	enablePrintButton: "[Transferencias Screen] Enable Print Button",
 	disablePrintButton: "[Transferencias Screen] Disable Print Button",
+	setNuevaTransferencia: "[Transferencias Screen] Set Nueva Transferencia",
+	unsetNuevaTransferencia: "[Transferencias Screen] Unset Nueva Transferencia",
 	setTransferencia: "[Transferencias Screen] Set Transferencia",
-	unsetTransferencia: "[Transferencias Screen] Unset  Transferencia",
+	unsetTransferencia: "[Transferencias Screen] Unset Transferencia",
+	setTransferencias: "[Transferencias Screen] Set Transferencias",
+	unsetTransferencias: "[Transferencias Screen] Unset  Transferencias",
 
 	setDataPrincipalesCultivos: "[Entidades] Set Data Principales Cultivos",
 	unsetDataPrincipalesCultivos: "[Entidades] Unset Data Principales Cultivos",

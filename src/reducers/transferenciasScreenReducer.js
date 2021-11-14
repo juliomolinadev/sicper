@@ -2,8 +2,10 @@ import { types } from "../types/types";
 
 const initialState = {
 	printTransferModal: false,
+	nuevaTransferencia: null,
 	transferencia: null,
-	transferPrintButton: false
+	transferPrintButton: false,
+	transferencias: []
 };
 
 export const transferenciasScreenReducer = (state = initialState, action) => {
@@ -32,6 +34,18 @@ export const transferenciasScreenReducer = (state = initialState, action) => {
 				transferPrintButton: false
 			};
 
+		case types.setNuevaTransferencia:
+			return {
+				...state,
+				nuevaTransferencia: action.payload
+			};
+
+		case types.unsetNuevaTransferencia:
+			return {
+				...state,
+				nuevaTransferencia: null
+			};
+
 		case types.setTransferencia:
 			return {
 				...state,
@@ -42,6 +56,18 @@ export const transferenciasScreenReducer = (state = initialState, action) => {
 			return {
 				...state,
 				transferencia: null
+			};
+
+		case types.setTransferencias:
+			return {
+				...state,
+				transferencias: action.payload
+			};
+
+		case types.unsetTransferencias:
+			return {
+				...state,
+				transferencias: []
 			};
 
 		default:
