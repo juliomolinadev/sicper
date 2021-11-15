@@ -11,18 +11,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { PrintTransferModal } from "../components/modals/PrintTransferModal";
 import { useFormToUpper } from "../hooks/UseFormToUpper";
 import { TransferTable } from "../components/tables/TransferTable";
-import { startSetTransferencias } from "../actions/transferenciasScreen";
+import { startSetTransferencias, unsetTransferencia } from "../actions/transferenciasScreen";
+import { TransferCard } from "../components/cards/TransferCard";
 
 export const TransferenciasScreen = () => {
 	const { usuario } = useSelector((state) => state.entidades);
 	const { variablesGlobales, modulo } = useSelector((state) => state.auth);
 	const { cicloActual: ciclo } = variablesGlobales;
 	const { nuevaTransferencia } = useSelector((state) => state.transferenciasScreen);
+	const { transferencia } = useSelector((state) => state.transferenciasScreen);
+	console.log(transferencia);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(startSetTransferencias(ciclo, modulo));
+		dispatch(unsetTransferencia());
 	}, [dispatch, ciclo, modulo]);
 
 	const [values, handleInputChange, reset] = useFormToUpper({
@@ -59,6 +63,7 @@ export const TransferenciasScreen = () => {
 							<TransferForm values={values} handleInputChange={handleInputChange} />
 						</>
 					)}
+					{transferencia && <TransferCard transferencia={transferencia} />}
 				</div>
 			</div>
 
@@ -69,6 +74,7 @@ export const TransferenciasScreen = () => {
 			{nuevaTransferencia && (
 				<PrintTransferModal transferencia={nuevaTransferencia} reset={reset} />
 			)}
+			{transferencia && <PrintTransferModal transferencia={transferencia} reset={reset} />}
 		</>
 	);
 };

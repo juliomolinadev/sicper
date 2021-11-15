@@ -1,5 +1,6 @@
 import { loadTransferencias } from "../helpers/DB/loadTransferencias";
 import { types } from "../types/types";
+import { unsetUsuarioSelected } from "./usuarios";
 
 export const setNuevaTransferencia = (transferencia) => ({
 	type: types.setNuevaTransferencia,
@@ -10,6 +11,12 @@ export const unsetNuevaTransferencia = () => ({
 	type: types.unsetNuevaTransferencia
 });
 
+export const startSetTransferencia = (transferencia) => {
+	return (dispatch) => {
+		dispatch(unsetUsuarioSelected());
+		dispatch(setTransferencia(transferencia));
+	};
+};
 export const setTransferencia = (transferencia) => ({
 	type: types.setTransferencia,
 	payload: transferencia

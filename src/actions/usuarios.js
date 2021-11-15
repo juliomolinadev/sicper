@@ -5,6 +5,7 @@ import { loadUserTransfer } from "../helpers/loadUserTransfer";
 import { loadCiclo } from "../helpers/DB/loadCiclo";
 import { startSetEstadoExpedicionModulo } from "./auth";
 import { goToElement } from "../helpers/functions/assets";
+import { unsetTransferencia } from "./transferenciasScreen";
 
 export const openUsuariosModal = () => ({
 	type: types.altaPermisoOpenUsuariosModal
@@ -47,6 +48,7 @@ export const startSetUsuarioSelected = (usuario) => {
 		);
 
 		usuario.supPrevia = supPrevia + transfers;
+		dispatch(unsetTransferencia());
 		dispatch(setUsuarioSelected(usuario));
 		goToElement("cultivoInput");
 	};
