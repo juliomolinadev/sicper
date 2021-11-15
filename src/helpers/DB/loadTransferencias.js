@@ -14,6 +14,7 @@ export const loadTransferencias = async (ciclo, modulo) => {
 	transferenciasSnap.forEach((snapHijo) => {
 		transferencias.push({
 			...snapHijo.data(),
+			fecha: snapHijo.data().fecha.toDate(),
 			id: snapHijo.id
 		});
 	});

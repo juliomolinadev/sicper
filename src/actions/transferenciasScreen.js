@@ -1,4 +1,5 @@
 import { loadTransferencias } from "../helpers/DB/loadTransferencias";
+import { updateTransfer } from "../helpers/DB/updateTransfer";
 import { types } from "../types/types";
 import { unsetUsuarioSelected } from "./usuarios";
 
@@ -17,6 +18,7 @@ export const startSetTransferencia = (transferencia) => {
 		dispatch(setTransferencia(transferencia));
 	};
 };
+
 export const setTransferencia = (transferencia) => ({
 	type: types.setTransferencia,
 	payload: transferencia
@@ -57,3 +59,15 @@ export const enablePrintButton = () => ({
 export const disablePrintButton = () => ({
 	type: types.disablePrintButton
 });
+
+export const startUpdateTransfer = (transferencia, estado) => {
+	const { ciclo, moduloDestino: modulo } = transferencia;
+	return async (dispatch) => {
+		const newTransfer = await updateTransfer(transferencia, estado);
+
+		if (newTransfer) {
+			dispatch(setTransferencia(newTransfer));
+			dispatch(startSetTransferencias(ciclo, modulo));
+		}
+	};
+};

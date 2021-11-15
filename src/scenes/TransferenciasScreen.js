@@ -13,6 +13,7 @@ import { useFormToUpper } from "../hooks/UseFormToUpper";
 import { TransferTable } from "../components/tables/TransferTable";
 import { startSetTransferencias, unsetTransferencia } from "../actions/transferenciasScreen";
 import { TransferCard } from "../components/cards/TransferCard";
+import { unsetUsuarios, unsetUsuarioSelected } from "../actions/usuarios";
 
 export const TransferenciasScreen = () => {
 	const { usuario } = useSelector((state) => state.entidades);
@@ -20,13 +21,14 @@ export const TransferenciasScreen = () => {
 	const { cicloActual: ciclo } = variablesGlobales;
 	const { nuevaTransferencia } = useSelector((state) => state.transferenciasScreen);
 	const { transferencia } = useSelector((state) => state.transferenciasScreen);
-	console.log(transferencia);
 
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(startSetTransferencias(ciclo, modulo));
 		dispatch(unsetTransferencia());
+		dispatch(unsetUsuarios());
+		dispatch(unsetUsuarioSelected());
 	}, [dispatch, ciclo, modulo]);
 
 	const [values, handleInputChange, reset] = useFormToUpper({

@@ -1,6 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { enablePrintButton, openTransferModal } from "../../actions/transferenciasScreen";
+import {
+	enablePrintButton,
+	openTransferModal,
+	startUpdateTransfer
+} from "../../actions/transferenciasScreen";
 
 export const TransferCard = ({ transferencia }) => {
 	const dispatch = useDispatch();
@@ -37,6 +41,14 @@ export const TransferCard = ({ transferencia }) => {
 	const openPrintModal = () => {
 		dispatch(openTransferModal());
 		dispatch(enablePrintButton());
+	};
+
+	const activateTransfer = () => {
+		dispatch(startUpdateTransfer(transferencia, "ACTIVA"));
+	};
+
+	const cancelTransfer = () => {
+		dispatch(startUpdateTransfer(transferencia, "CANCELADA"));
 	};
 
 	return (
@@ -80,15 +92,19 @@ export const TransferCard = ({ transferencia }) => {
 					<span> Imprimir</span>
 				</button>
 
-				<button type="button" className="btn btn-outline-success mt-4" onClick={openPrintModal}>
-					<i className="fas fa-check"></i>
-					<span> Autorizar</span>
-				</button>
+				{estadoTransferencia !== "ACTIVA" && (
+					<button type="button" className="btn btn-outline-success mt-4" onClick={activateTransfer}>
+						<i className="fas fa-check"></i>
+						<span> Autorizar</span>
+					</button>
+				)}
 
-				<button type="button" className="btn btn-outline-danger mt-4" onClick={openPrintModal}>
-					<i className="fas fa-times"></i>
-					<span> Cancelar</span>
-				</button>
+				{estadoTransferencia !== "CANCELADA" && (
+					<button type="button" className="btn btn-outline-danger mt-4" onClick={cancelTransfer}>
+						<i className="fas fa-times"></i>
+						<span> Cancelar</span>
+					</button>
+				)}
 			</div>
 		</div>
 	);
