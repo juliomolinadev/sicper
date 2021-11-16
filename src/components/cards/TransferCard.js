@@ -15,7 +15,6 @@ export const TransferCard = ({ transferencia }) => {
 		nombreLocalidad,
 		supRiego,
 		predio,
-		supPrevia,
 		apPaterno,
 		apMaterno,
 		nombre,
@@ -34,7 +33,6 @@ export const TransferCard = ({ transferencia }) => {
 		estadoTransferencia
 	} = transferencia;
 
-	const derechoDisponible = supRiego - supPrevia;
 	const nombreUsuario = `${apPaterno} ${apMaterno} ${nombre}`;
 	const nombreAdjudicatario = `${apPaternoSolicitante} ${apMaternoSolicitante} ${nombreSolicitante}`;
 
@@ -69,7 +67,6 @@ export const TransferCard = ({ transferencia }) => {
 				<div>Lote: {predio}</div>
 				<div>Modulo Origen: {zona}</div>
 				<div>Sup. Derecho: {supRiego} ha</div>
-				<div>Sup. Disponible: {derechoDisponible} ha</div>
 			</div>
 
 			<div className="d-flex flex-column border-bottom border-info p-4">

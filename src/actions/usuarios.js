@@ -1,7 +1,7 @@
 import { types } from "../types/types";
 import { loadUsuarios } from "../helpers/loadUsuarios";
 import { loadSuperficiePrevia } from "../helpers/loadSuperficiePrevia";
-import { loadUserTransfer } from "../helpers/loadUserTransfer";
+import { loadUserTransfer } from "../helpers/DB/loadUserTransfer";
 import { loadCiclo } from "../helpers/DB/loadCiclo";
 import { startSetEstadoExpedicionModulo } from "./auth";
 import { goToElement } from "../helpers/functions/assets";
@@ -41,11 +41,7 @@ export const startSetUsuarioSelected = (usuario) => {
 			usuario.entidad,
 			ciclo
 		);
-		const transfers = await loadUserTransfer(
-			`${usuario.cuenta}.${usuario.subcta}`,
-			usuario.modulo,
-			ciclo
-		);
+		const transfers = await loadUserTransfer(`${usuario.cuenta}-${usuario.subcta}`, ciclo);
 
 		usuario.supPrevia = supPrevia + transfers;
 		dispatch(unsetTransferencia());
