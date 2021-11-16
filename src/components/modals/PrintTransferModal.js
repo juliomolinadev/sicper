@@ -14,6 +14,7 @@ import { saveTransfer } from "../../helpers/saveTransfer";
 
 export const PrintTransferModal = ({ transferencia, reset }) => {
 	const {
+		folio,
 		ciclo,
 		apPaterno,
 		apMaterno,
@@ -117,7 +118,11 @@ export const PrintTransferModal = ({ transferencia, reset }) => {
 				</h5>
 			</div>
 
-			<div className="row m-3 d-flex flex-column justify-content-center mt-5">
+			<div className="row m-3 justify-content-end mt-5">
+				<p>NO. OP./{folio}</p>
+			</div>
+
+			<div className="row m-3 d-flex flex-column justify-content-center mt-2">
 				<p clssName="paragraph">
 					&nbsp;&nbsp;&nbsp;&nbsp; EN BASE A LO DISPUESTO EN EL ARTÍCULO 49 DE LA LEY DE AGUAS
 					NACIONALES EN EL CUAL ESPECIFICA QUE LOS DERECHOS DE EXPLOTACIÓN, USO O APROVECHAMIENTO DE

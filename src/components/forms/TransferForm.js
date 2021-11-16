@@ -72,7 +72,7 @@ export const TransferForm = ({ values, handleInputChange }) => {
 	const defineFolio = async () => {
 		const counter = await getTranseferCount(moduloDestino, ciclo);
 		if (counter !== false) {
-			const folio = `T-M${moduloDestino}-${fill(counter + 1, 3)}`;
+			const folio = `M${moduloDestino}-${fill(counter + 1, 3)}`;
 			return folio;
 		} else return null;
 	};
