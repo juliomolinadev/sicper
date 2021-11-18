@@ -121,9 +121,18 @@ const aplyFilter = (dataSet, headers, filter, order1, includeEmtyRow, includeSub
 const onlyUnique = (objectsArray, key) => {
 	const unique = [];
 	objectsArray.forEach((element) => {
-		const index = unique.indexOf(element[key]);
-		if (index === -1) {
-			unique.push(element[key]);
+		if (typeof element[key] === "object") {
+			const fecha = element[key].toDate();
+			console.log(fecha.toLocaleDateString());
+			const index = unique.indexOf(fecha.toLocaleDateString());
+			if (index === -1) {
+				unique.push(fecha.toLocaleDateString());
+			}
+		} else {
+			const index = unique.indexOf(element[key]);
+			if (index === -1) {
+				unique.push(element[key]);
+			}
 		}
 	});
 
@@ -132,6 +141,17 @@ const onlyUnique = (objectsArray, key) => {
 };
 
 const sortFunction = (a, b) => {
+	const isDate = isADate(a);
+
+	if (isDate) {
+		const dateA = new Date(usDate(a));
+		const dateB = new Date(usDate(b));
+
+		if (dateA > dateB) return 1;
+		if (dateA < dateB) return -1;
+		return 0;
+	}
+
 	switch (typeof a) {
 		case "number":
 			if (a < b) return 1;
@@ -143,4 +163,17 @@ const sortFunction = (a, b) => {
 			if (a < b) return -1;
 			return 0;
 	}
+};
+
+const isADate = (value) => {
+	if (value) {
+		const arrayDate = value.split("/");
+
+		if (arrayDate.length === 3) return true;
+	} else return false;
+};
+
+const usDate = (date) => {
+	const dateSplit = date.split("/");
+	return `${dateSplit[1]}/${dateSplit[0]}/${dateSplit[2]}`;
 };
