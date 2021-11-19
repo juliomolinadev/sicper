@@ -9,7 +9,7 @@ export const TransferTable = () => {
 
 	return (
 		<CustomTable
-			title={transferencias.length === 0 ? "No se encontraron tramsferencias" : "Transferencias"}
+			title={transferencias.length === 0 ? "No se encontraron transferencias" : "Transferencias"}
 			columns={transferColumns}
 			data={transferencias}
 			setFunction={startSetTransferencia}
