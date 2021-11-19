@@ -34,7 +34,8 @@ export const NuevoPermisoScreen = () => {
 		idCultivoSelected,
 		subciclo,
 		nombreCultivo,
-		superficiePreviaCultivo
+		superficiePreviaCultivo,
+		usuarios
 	} = useSelector((state) => state.altaPermisos);
 	const altaPermisos = useSelector((state) => state.altaPermisos);
 	const auth = useSelector((state) => state.auth);
@@ -43,7 +44,7 @@ export const NuevoPermisoScreen = () => {
 	const { msgError } = useSelector((state) => state.ui);
 	const { autorizadosPorCultivo } = useSelector((state) => state.autorizadosScreen);
 
-	const [formValues, handleInputChange] = useFormToUpper({
+	const [formValues, handleInputChange, , , setValuePerKey] = useFormToUpper({
 		variedad: "",
 		supAutorizada: 0,
 		fuenteCredito: "",
@@ -152,7 +153,6 @@ export const NuevoPermisoScreen = () => {
 			ciclo,
 			numeroPermiso: await defineNumeroPermiso(),
 			fechaEmicion: moment(),
-			// TODO: Verificar la fecha limite de siembra
 			fechaLimite: defineFechaLimite(nombreCultivo),
 			vigencia: defineVigencia(subciclo),
 			estadoPermiso: await defineEstadoPermiso(nombreCultivo)
@@ -245,6 +245,20 @@ export const NuevoPermisoScreen = () => {
 		else return moment("03/31/2022");
 	};
 
+	useEffect(() => {
+		if (idUsuarioSelected) {
+			const usuario = usuarios.find((usuario) => usuario.id === idUsuarioSelected);
+			if (usuario.folio) {
+				setValuePerKey(
+					`TRANSFERENCIA FOLIO ${usuario.folio} EN EL LOTE ${
+						usuario.loteDestino
+					}, ${usuario.tipolocalidadDestino.toUpperCase()} ${usuario.localidadDestino}`,
+					"observaciones"
+				);
+			}
+		}
+	}, [idUsuarioSelected, usuarios]);
+
 	return (
 		<>
 			<div className="row m-3 d-flex justify-content-center">
@@ -254,7 +268,6 @@ export const NuevoPermisoScreen = () => {
 			{/* TODO: indicar cuando un campo es incorrecto directamente en los inputs */}
 			{/* TODO: Checkbox para transferencia interna */}
 			<form className="container pb-4">
-				{/* TODO: Poner el mensaje de error en un lugar mas visible */}
 				{msgError && <div className="auth__alert-error">{msgError}</div>}
 				{idUsuarioSelected && <UsuarioSelected />}
 				{idProductorSelected && <ProductorSelected />}

@@ -10,7 +10,9 @@ import {
 import { useFormToUpper } from "../../../hooks/UseFormToUpper";
 
 export const UsuarioInput = () => {
-	const { modulo } = useSelector((state) => state.auth);
+	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
+	const { cicloActual: ciclo } = variablesGlobales;
+
 	const { idUsuarioSelected, usuario: nombreUsuario } = useSelector((state) => state.altaPermisos);
 
 	const dispatch = useDispatch();
@@ -30,7 +32,7 @@ export const UsuarioInput = () => {
 	}, [dispatch]);
 
 	const handleLoadUsuarios = () => {
-		dispatch(startLoadUsuarios(usuario.toUpperCase(), modulo));
+		dispatch(startLoadUsuarios(usuario.toUpperCase(), modulo, ciclo));
 	};
 
 	let usuarioLabel = "";

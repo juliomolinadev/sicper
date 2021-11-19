@@ -13,7 +13,11 @@ export const UsuarioSelected = () => {
 				<div className="col-sm-3">
 					{usuario.tipoLocalidad}: {usuario.nombreLocalidad}
 				</div>
-				<div className="col-sm-3">Sup. Derecho: {usuario.supRiego}</div>
+				{usuario.folio ? (
+					<div className="col-sm-3">Sup. Derecho: {usuario.superficieTransferida}</div>
+				) : (
+					<div className="col-sm-3">Sup. Derecho: {usuario.supRiego}</div>
+				)}
 			</div>
 			<div className="row">
 				<div className="col-sm-6">

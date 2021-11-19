@@ -1,13 +1,29 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadUsuarios = async (usuario, modulo) => {
+export const loadUsuarios = async (usuario, modulo, ciclo) => {
 	const campos = ["apPaterno", "cuenta"];
 	const qryUsuarios = [];
 	const usuarios = [];
 
 	const padUsuarios = defineRef(modulo);
 
+	const transferRef = db
+		.collection("transferencias")
+		.doc(ciclo)
+		.collection("modulos")
+		.doc(`Modulo-${modulo}`)
+		.collection("transferencias")
+		.where("estadoTransferencia", "==", "ACTIVA");
+
 	campos.forEach((campo) => {
+		qryUsuarios.push(
+			transferRef
+				.orderBy(campo)
+				.startAt(usuario)
+				.endAt(usuario + "\uf8ff")
+				.get()
+		);
+
 		qryUsuarios.push(
 			padUsuarios
 				.orderBy(campo)
@@ -16,6 +32,7 @@ export const loadUsuarios = async (usuario, modulo) => {
 				.get()
 		);
 
+		qryUsuarios.push(transferRef.where(campo, "==", Number(usuario)).get());
 		qryUsuarios.push(padUsuarios.where(campo, "==", Number(usuario)).get());
 	});
 

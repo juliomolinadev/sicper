@@ -15,9 +15,9 @@ export const closeUsuariosModal = () => ({
 	type: types.altaPermisoCloseUsuariosModal
 });
 
-export const startLoadUsuarios = (usuario, modulo) => {
+export const startLoadUsuarios = (usuario, modulo, ciclo) => {
 	return async (dispatch) => {
-		const usuarios = await loadUsuarios(usuario, modulo);
+		const usuarios = await loadUsuarios(usuario, modulo, ciclo);
 		dispatch(setUsuarios(usuarios));
 		dispatch(startSetEstadoExpedicionModulo(modulo));
 	};
@@ -36,17 +36,36 @@ export const startSetUsuarioSelected = (usuario) => {
 
 	return async (dispatch) => {
 		const ciclo = await loadCiclo();
-		const supPrevia = await loadSuperficiePrevia(
-			`${usuario.cuenta}.${usuario.subcta}`,
-			usuario.entidad,
-			ciclo
-		);
-		const transfers = await loadUserTransfer(`${usuario.cuenta}-${usuario.subcta}`, ciclo);
 
-		usuario.supPrevia = supPrevia + transfers;
-		dispatch(unsetTransferencia());
-		dispatch(setUsuarioSelected(usuario));
-		goToElement("cultivoInput");
+		// Verifica si los derechos corresponden a una transferencia
+		if (usuario.folio) {
+			const supPrevia = await loadSuperficiePrevia(
+				`${usuario.cuenta}.${usuario.subcta}`,
+				usuario.moduloDestino,
+				ciclo
+			);
+
+			usuario.supRiego = usuario.superficieTransferida;
+			usuario.supPrevia = supPrevia;
+
+			dispatch(unsetTransferencia());
+			dispatch(setUsuarioSelected(usuario));
+			goToElement("cultivoInput");
+		} else {
+			const supPrevia = await loadSuperficiePrevia(
+				`${usuario.cuenta}.${usuario.subcta}`,
+				usuario.entidad,
+				ciclo
+			);
+
+			const transfers = await loadUserTransfer(`${usuario.cuenta}-${usuario.subcta}`, ciclo);
+
+			usuario.supPrevia = supPrevia + transfers;
+
+			dispatch(unsetTransferencia());
+			dispatch(setUsuarioSelected(usuario));
+			goToElement("cultivoInput");
+		}
 	};
 };
 

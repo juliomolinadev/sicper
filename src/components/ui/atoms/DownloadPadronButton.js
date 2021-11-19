@@ -5,7 +5,8 @@ import { exportJSONToExcel } from "../../../helpers/functions/exportJSONToExcel"
 import { loadUsuarios } from "../../../helpers/loadUsuarios";
 
 export const DownloadPadronButton = () => {
-	const { modulo, name } = useSelector((state) => state.auth);
+	const { modulo, name, variablesGlobales } = useSelector((state) => state.auth);
+	const { cicloActual: ciclo } = variablesGlobales;
 
 	const title = `PadronM${modulo}`;
 	const headers = {
@@ -37,7 +38,7 @@ export const DownloadPadronButton = () => {
 			cancelButtonText: "Cancelar"
 		}).then(async ({ isConfirmed }) => {
 			if (isConfirmed) {
-				const usuarios = await loadUsuarios("", modulo);
+				const usuarios = await loadUsuarios("", modulo, ciclo);
 				const padron = usuarios.map((usuario) => ({
 					CUENTA: usuario.id,
 					APPATERNO: usuario.apPaterno,

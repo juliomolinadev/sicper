@@ -70,9 +70,9 @@ export const TransferForm = ({ values, handleInputChange }) => {
 	const fill = (number, len) => "0".repeat(len - number.toString().length) + number.toString();
 
 	const defineFolio = async () => {
-		const counter = await getTranseferCount(moduloDestino, ciclo);
+		const counter = await getTranseferCount(moduloDestino === "DEV" ? "dev" : moduloDestino, ciclo);
 		if (counter !== false) {
-			const folio = `M${moduloDestino}-${fill(counter + 1, 3)}`;
+			const folio = `M${moduloDestino === "DEV" ? "dev" : moduloDestino}-${fill(counter + 1, 3)}`;
 			return folio;
 		} else return null;
 	};
@@ -87,7 +87,7 @@ export const TransferForm = ({ values, handleInputChange }) => {
 				estadoTransferencia: "PENDIENTE",
 				superficieTransferida: parseInt(superficieTransferida),
 				loteDestino,
-				moduloDestino,
+				moduloDestino: moduloDestino === "DEV" ? "dev" : moduloDestino,
 				apPaternoSolicitante,
 				apMaternoSolicitante,
 				nombreSolicitante,
@@ -235,6 +235,7 @@ export const TransferForm = ({ values, handleInputChange }) => {
 							<option value="21">Modulo 21</option>
 							<option value="22">Modulo 22</option>
 							<option value="23">Modulo 23</option>
+							<option value="dev">Modulo dev</option>
 						</select>
 					</div>
 

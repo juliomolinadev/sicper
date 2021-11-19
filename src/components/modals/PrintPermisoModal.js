@@ -88,7 +88,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 				else return data.zona;
 
 			default:
-				return data.modulo;
+				return data.zona;
 		}
 	};
 

@@ -5,13 +5,14 @@ import Swal from "sweetalert2";
 import { startLoadUsuarios } from "../../actions/usuarios";
 
 export const UsuariosInput = () => {
-	const { modulo } = useSelector((state) => state.auth);
+	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
+	const { cicloActual: ciclo } = variablesGlobales;
 
 	const dispatch = useDispatch();
 
 	const handleLoadUsuarios = () => {
 		if (usuario.length > 0) {
-			dispatch(startLoadUsuarios(usuario.toUpperCase(), modulo));
+			dispatch(startLoadUsuarios(usuario.toUpperCase(), modulo, ciclo));
 		} else {
 			Swal.fire("Nada para buscar", "Ingrese apellido paterno o cuenta del usuario", "warning");
 		}

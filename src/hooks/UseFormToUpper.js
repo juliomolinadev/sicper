@@ -24,5 +24,10 @@ export const useFormToUpper = (initialState = {}) => {
 		setValues(value);
 	};
 
-	return [values, handleInputChange, reset, setAValue];
+	const setValuePerKey = (value, key) => {
+		console.log({ key, value });
+		setValues((state) => ({ ...state, [key]: value }));
+	};
+
+	return [values, handleInputChange, reset, setAValue, setValuePerKey];
 };
