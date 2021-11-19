@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
@@ -44,7 +44,7 @@ export const NuevoPermisoScreen = () => {
 	const { msgError } = useSelector((state) => state.ui);
 	const { autorizadosPorCultivo } = useSelector((state) => state.autorizadosScreen);
 
-	const [formValues, handleInputChange, , , setValuePerKey] = useFormToUpper({
+	const [formValues, handleInputChange, , , setValues] = useFormToUpper({
 		variedad: "",
 		supAutorizada: 0,
 		fuenteCredito: "",
@@ -245,19 +245,29 @@ export const NuevoPermisoScreen = () => {
 		else return moment("03/31/2022");
 	};
 
+	const setTransferComent = useCallback(
+		(folio, lote, tipolocalidad, localidad) => {
+			setValues((values) => ({
+				...values,
+				observaciones: `TRANSFERENCIA FOLIO ${folio} EN EL LOTE ${lote}, ${tipolocalidad.toUpperCase()} ${localidad}`
+			}));
+		},
+		[setValues]
+	);
+
 	useEffect(() => {
 		if (idUsuarioSelected) {
 			const usuario = usuarios.find((usuario) => usuario.id === idUsuarioSelected);
 			if (usuario.folio) {
-				setValuePerKey(
-					`TRANSFERENCIA FOLIO ${usuario.folio} EN EL LOTE ${
-						usuario.loteDestino
-					}, ${usuario.tipolocalidadDestino.toUpperCase()} ${usuario.localidadDestino}`,
-					"observaciones"
+				setTransferComent(
+					usuario.folio,
+					usuario.loteDestino,
+					usuario.tipolocalidadDestino,
+					usuario.localidadDestino
 				);
 			}
 		}
-	}, [idUsuarioSelected, usuarios]);
+	}, [idUsuarioSelected, usuarios, setTransferComent]);
 
 	return (
 		<>
