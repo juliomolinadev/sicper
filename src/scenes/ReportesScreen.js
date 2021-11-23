@@ -6,6 +6,7 @@ import { useForm } from "../hooks/useForm";
 import { RadioButtonGroup } from "../components/ui/molecules/RadioButtonGroup";
 import { startSetAutorizados, startSetExpedicion } from "../actions/scenes/reportesScreen";
 import { ModuloInformesPadron } from "../components/modulos/ModuloInformesPadron";
+import { ModuloInformesTransferencias } from "../components/modulos/ModuloInformesTransferencias";
 
 export const ReportesScreen = () => {
 	const { privilegios, variablesGlobales } = useSelector((state) => state.auth);
@@ -17,15 +18,19 @@ export const ReportesScreen = () => {
 	const reportTypes = [
 		{
 			id: "expedicion",
-			label: "expedicion"
+			label: "Expedición"
 		},
 		{
 			id: "permisos",
-			label: "permisos"
+			label: "Permisos"
 		},
 		{
 			id: "padron",
-			label: "padron"
+			label: "Padrón"
+		},
+		{
+			id: "transferencias",
+			label: "Transferencias"
 		}
 	];
 
@@ -56,15 +61,22 @@ export const ReportesScreen = () => {
 					<ReporteExpedicion />
 				)}
 			</div>
+
 			<div className="mt-5">
 				{reportTypeValues.reportType === "permisos" && privilegios.consultarPermisos && (
 					<ModuloInformesPermisos />
 				)}
 			</div>
+
 			<div className="mt-5">
 				{reportTypeValues.reportType === "padron" && privilegios.consultarPadron && (
 					<ModuloInformesPadron />
 				)}
+			</div>
+
+			<div className="mt-5">
+				{reportTypeValues.reportType === "transferencias" &&
+					privilegios.consultarTransferencias && <ModuloInformesTransferencias />}
 			</div>
 			<div className="pb-5"></div>
 		</div>

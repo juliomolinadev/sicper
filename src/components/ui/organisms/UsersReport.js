@@ -49,7 +49,7 @@ export const UsersReport = () => {
 				? headers.find((header) => header.id === filter)
 				: headers.find((header) => header.id === campo);
 
-		if (!campoForTitle) return `PERMISOS`;
+		if (!campoForTitle) return `USUARIOS`;
 		if (titleFor === "report") return `REPORTE DE ${reportOf} POR ${campoForTitle.header}`;
 		if (titleFor === "excel") return `${reportOf} POR ${campoForTitle.header}`;
 	};

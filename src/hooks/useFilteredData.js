@@ -167,9 +167,11 @@ const sortFunction = (a, b) => {
 
 const isADate = (value) => {
 	if (value) {
-		const arrayDate = value.split("/");
-
-		if (arrayDate.length === 3) return true;
+		if (typeof value === "string") {
+			const arrayDate = value.split("/");
+			if (arrayDate.length === 3) return true;
+			else return false;
+		} else return false;
 	} else return false;
 };
 

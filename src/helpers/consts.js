@@ -145,6 +145,7 @@ export const privileges = {
 
 	//Transferencias
 	solicitarTransferencias: false,
+	consultarTransferencias: false,
 
 	//Labores
 	asignarTécnico: false,
