@@ -6,7 +6,6 @@ import DatePicker from "react-date-picker";
 import { simpleLoadPermits } from "../../../helpers/DB/simpleLoadPermits";
 import { permitsHeaders } from "../../../helpers/constants/reportsColumns";
 import { useFilteredData } from "../../../hooks/useFilteredData";
-// import { useForm } from "../../../hooks/useForm";
 import { ReportModule } from "./ReportModule";
 import { useMultiInput } from "../../../hooks/useMultiInput";
 

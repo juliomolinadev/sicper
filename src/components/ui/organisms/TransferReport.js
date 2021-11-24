@@ -2,17 +2,18 @@ import React, { useState } from "react";
 
 import { transferHeaders } from "../../../helpers/constants/reportsColumns";
 import { useFilteredData } from "../../../hooks/useFilteredData";
-import { useForm } from "../../../hooks/useForm";
 import { ReportModule } from "./ReportModule";
 import { useSelector } from "react-redux";
 import { simpleLoadTransfer } from "../../../helpers/DB/simpleLoadTransfer";
+import { useMultiInput } from "../../../hooks/useMultiInput";
 
 export const TransferReport = ({ global }) => {
 	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
 	const { cicloActual: ciclo } = variablesGlobales;
 
-	const [formValues, handleInputChange] = useForm({ palabra: "", campo: "" });
-	const { palabra, campo } = formValues;
+	const [formValues, handleInputChange, addPair, removePair] = useMultiInput([
+		{ palabra: "", campo: "" }
+	]);
 
 	const [headers, setHeaders] = useState(transferHeaders);
 	const handleColumn = ({ target }) => {
@@ -39,8 +40,8 @@ export const TransferReport = ({ global }) => {
 	const { includeEmtyRow, includeSubtotalRow } = extraRows;
 
 	const getTransfer = async () => {
-		if (campo.length) {
-			const transfersToSet = await simpleLoadTransfer(palabra, campo, modulo, ciclo, global);
+		if (formValues[0].campo.length) {
+			const transfersToSet = await simpleLoadTransfer(formValues, modulo, ciclo, global);
 			resetFilters();
 			setData(transfersToSet);
 		}
@@ -56,7 +57,7 @@ export const TransferReport = ({ global }) => {
 		const campoForTitle =
 			filter.length > 0
 				? headers.find((header) => header.id === filter)
-				: headers.find((header) => header.id === campo);
+				: headers.find((header) => header.id === formValues[0].campo);
 
 		if (!campoForTitle) return `TRANSFERENCIAS`;
 		if (titleFor === "report") return `REPORTE DE ${reportOf} POR ${campoForTitle.header}`;
@@ -69,53 +70,69 @@ export const TransferReport = ({ global }) => {
 	return (
 		<>
 			<div className="container mb-4 col-sm-8">
-				<div className="row">
-					<div className="col-sm-8">
-						<label htmlFor="palabra">PARAMETRO DE BUSQUEDA:</label>
-						<input
-							type="text"
-							className="form-control"
-							name="palabra"
-							id="palabra"
-							autoComplete="off"
-							value={palabra}
-							onChange={handleInputChange}
-							onKeyUp={handleKeyUp}
-						/>
-					</div>
+				<div className="row d-flex justify-content-end">
+					{formValues.length > 1 && (
+						<button className="btn btn-outline-primary ml-2" type="button" onClick={removePair}>
+							<i className="fas fa-minus"></i>
+						</button>
+					)}
 
-					<div className="col-sm-4">
-						<label htmlFor="campo">BUSCAR EN:</label>
-						<div className="d-flex">
-							<select
-								name="campo"
-								id="campo"
+					<button className="btn btn-outline-primary ml-2" type="button" onClick={addPair}>
+						<i className="fas fa-plus"></i>
+					</button>
+
+					<button className="btn btn-outline-primary ml-2" type="button" onClick={getTransfer}>
+						<i className="fas fa-search"></i>
+					</button>
+				</div>
+
+				{formValues.map((pair, i) => (
+					<div className="row mt-2" key={`form${i}`}>
+						<div className="col-sm-8">
+							<label htmlFor="palabra">PARAMETRO DE BUSQUEDA:</label>
+							<input
+								index={i}
 								type="text"
-								value={campo}
-								onChange={handleInputChange}
 								className="form-control"
-							>
-								<option hidden defaultValue={false}>
-									-
-								</option>
+								name="palabra"
+								id="palabra"
+								autoComplete="off"
+								value={pair.palabra}
+								onChange={handleInputChange}
+								onKeyUp={handleKeyUp}
+							/>
+						</div>
 
-								{headers.map((header) => {
-									if (header.search) {
-										return (
-											<option key={header.id} value={header.id}>
-												{header.header}
-											</option>
-										);
-									} else return <option key={header.id} style={{ display: "none" }}></option>;
-								})}
-							</select>
+						<div className="col-sm-4">
+							<label htmlFor="campo">BUSCAR EN:</label>
+							<div className="d-flex">
+								<select
+									index={i}
+									name="campo"
+									id="campo"
+									type="text"
+									value={pair.campo}
+									onChange={handleInputChange}
+									className="form-control"
+								>
+									<option hidden defaultValue={false}>
+										-
+									</option>
 
-							<button className="btn btn-outline-primary ml-2" type="button" onClick={getTransfer}>
-								<i className="fas fa-search"></i>
-							</button>
+									{headers.map((header) => {
+										if (header.search) {
+											return (
+												<option key={header.id} value={header.id}>
+													{header.header}
+												</option>
+											);
+										} else return <option key={header.id} style={{ display: "none" }}></option>;
+									})}
+								</select>
+							</div>
 						</div>
 					</div>
-				</div>
+				))}
 
 				{data.length > 0 && (
 					<>

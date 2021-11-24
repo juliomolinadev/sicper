@@ -61,7 +61,6 @@ export const simpleLoadPermits = async (
 	permisosFiltrados.push(permisos);
 
 	if (pairs.length > 1) {
-		console.log(pairs);
 		for (let i = 1; i <= pairs.length - 1; i++) {
 			const permisos = permisosFiltrados.pop();
 			permisosFiltrados.push(

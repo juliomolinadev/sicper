@@ -1,8 +1,10 @@
 import { db } from "../../firebase/firebase-config";
 import Swal from "sweetalert2";
 
-export const simpleLoadUsers = async (palabra = 0, campo, modulo) => {
+export const simpleLoadUsers = async (pairs, modulo) => {
+	const { palabra = 0, campo } = pairs[0];
 	const usuarios = [];
+	const usuariosFiltrados = [];
 	const qrysUsuarios = [];
 
 	const usuariosRef = defineRef(modulo);
@@ -56,10 +58,24 @@ export const simpleLoadUsers = async (palabra = 0, campo, modulo) => {
 		});
 	});
 
+	usuariosFiltrados.push(usuarios);
+
+	if (pairs.length > 1) {
+		for (let i = 1; i <= pairs.length - 1; i++) {
+			const usuarios = usuariosFiltrados.pop();
+			usuariosFiltrados.push(
+				usuarios.filter(
+					(usuario) => usuario[pairs[i].campo] === ifIsNumber(pairs[i].campo, pairs[i].palabra)
+				)
+			);
+		}
+	}
+
 	if (usuarios.length === 0) {
 		Swal.fire("No se encontraron usuarios ", "...", "warning");
 	}
-	return usuarios;
+
+	return usuariosFiltrados.pop();
 };
 
 const defineModulo = (modulo) => {
@@ -90,5 +106,15 @@ const defineRef = (modulo) => {
 
 		default:
 			return db.collection(`derechos`).where("modulo", "==", defineModulo(modulo));
+	}
+};
+
+const ifIsNumber = (campo, value) => {
+	switch (campo) {
+		case "seccion":
+			return parseInt(value);
+
+		default:
+			return value;
 	}
 };

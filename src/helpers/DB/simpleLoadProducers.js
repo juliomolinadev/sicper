@@ -2,8 +2,10 @@ import { db } from "../../firebase/firebase-config";
 import Swal from "sweetalert2";
 import { loadProducersPerModulo } from "./loadProducersPerModulo";
 
-export const simpleLoadProducers = async (palabra = "", campo, ciclo, modulo) => {
+export const simpleLoadProducers = async (pairs, ciclo, modulo) => {
+	const { palabra = 0, campo } = pairs[0];
 	const producers = [];
+	const producersFiltrados = [];
 	const qrysProducers = [];
 	const producersRef = db.collection(`productores`);
 	const curps = await loadProducersPerModulo(ciclo, modulo);
@@ -22,14 +24,35 @@ export const simpleLoadProducers = async (palabra = "", campo, ciclo, modulo) =>
 		});
 	});
 
-	if (palabra.length > 0) {
-		const filteredProducers = producers.filter((producer) =>
-			producer[campo].includes(palabra.toUpperCase())
-		);
+	const filteredProducers = producers.filter((producer) =>
+		producer[campo].includes(palabra.toUpperCase())
+	);
 
-		if (filteredProducers.length === 0) {
-			Swal.fire("No se encontraron productores ", "...", "warning");
+	producersFiltrados.push(filteredProducers);
+
+	if (pairs.length > 1) {
+		for (let i = 1; i <= pairs.length - 1; i++) {
+			const producers = producersFiltrados.pop();
+			producersFiltrados.push(
+				producers.filter(
+					(producer) => producer[pairs[i].campo] === ifIsNumber(pairs[i].campo, pairs[i].palabra)
+				)
+			);
 		}
-		return filteredProducers;
-	} else return producers;
+	}
+
+	if (filteredProducers.length === 0) {
+		Swal.fire("No se encontraron productores ", "...", "warning");
+	}
+	return producersFiltrados.pop();
+};
+
+const ifIsNumber = (campo, value) => {
+	switch (campo) {
+		case "seccion":
+			return parseInt(value);
+
+		default:
+			return value;
+	}
 };

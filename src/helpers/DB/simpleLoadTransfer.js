@@ -2,8 +2,10 @@ import { db } from "../../firebase/firebase-config";
 import Swal from "sweetalert2";
 import { modulos } from "../consts";
 
-export const simpleLoadTransfer = async (palabra = 0, campo, modulo, ciclo, global) => {
+export const simpleLoadTransfer = async (pairs, modulo, ciclo, global) => {
+	const { palabra = 0, campo } = pairs[0];
 	const transferencias = [];
+	const transferenciasFiltradas = [];
 	const qrysTransferencias = [];
 
 	const transferRef = db
@@ -76,8 +78,37 @@ export const simpleLoadTransfer = async (palabra = 0, campo, modulo, ciclo, glob
 		});
 	});
 
+	transferenciasFiltradas.push(transferencias);
+
+	if (pairs.length > 1) {
+		for (let i = 1; i <= pairs.length - 1; i++) {
+			const transferencias = transferenciasFiltradas.pop();
+			transferenciasFiltradas.push(
+				transferencias.filter(
+					(transferencia) =>
+						transferencia[pairs[i].campo] === ifIsNumber(pairs[i].campo, pairs[i].palabra)
+				)
+			);
+		}
+	}
+
 	if (transferencias.length === 0) {
 		Swal.fire("No se encontraron transferencias ", "...", "warning");
 	}
-	return transferencias;
+	return transferenciasFiltradas.pop();
+};
+
+const ifIsNumber = (campo, value) => {
+	switch (campo) {
+		case "seccion":
+		case "claveCultivo":
+			return parseInt(value);
+
+		case "modulo":
+			if (value === "9A" || value === "9B") return value;
+			else return parseInt(value);
+
+		default:
+			return value;
+	}
 };
