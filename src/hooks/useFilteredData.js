@@ -37,7 +37,20 @@ export const useFilteredData = (
 			setData(aplyFilter(data, headers, filter, order1, includeEmtyRow, target.checked));
 	};
 
-	return [data, setData, filters, handleFiltersChange, extraRows, handleExtraRowsChange];
+	const resetFilters = () => {
+		setFilters(initialFilters);
+		setExtraRows(initialExtraRows);
+	};
+
+	return [
+		data,
+		setData,
+		filters,
+		handleFiltersChange,
+		extraRows,
+		handleExtraRowsChange,
+		resetFilters
+	];
 };
 
 const aplyFilter = (dataSet, headers, filter, order1, includeEmtyRow, includeSubtotalRow) => {

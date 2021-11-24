@@ -26,14 +26,22 @@ export const ProducersReport = () => {
 		setHeaders(newHeaders);
 	};
 
-	const [data, setData, filters, handleFiltersChange, extraRows, handleExtraRowsChange] =
-		useFilteredData(headers, []);
+	const [
+		data,
+		setData,
+		filters,
+		handleFiltersChange,
+		extraRows,
+		handleExtraRowsChange,
+		resetFilters
+	] = useFilteredData(headers, []);
 	const { filter, order1 } = filters;
 	const { includeEmtyRow, includeSubtotalRow } = extraRows;
 
 	const getProducers = async () => {
 		if (campo.length) {
 			const producersToSet = await simpleLoadProducers(palabra, campo, cicloActual, modulo);
+			resetFilters();
 			setData(producersToSet);
 		}
 	};

@@ -25,14 +25,22 @@ export const UsersReport = () => {
 		setHeaders(newHeaders);
 	};
 
-	const [data, setData, filters, handleFiltersChange, extraRows, handleExtraRowsChange] =
-		useFilteredData(headers, []);
+	const [
+		data,
+		setData,
+		filters,
+		handleFiltersChange,
+		extraRows,
+		handleExtraRowsChange,
+		resetFilters
+	] = useFilteredData(headers, []);
 	const { filter, order1 } = filters;
 	const { includeEmtyRow, includeSubtotalRow } = extraRows;
 
 	const getUsers = async () => {
 		if (campo.length) {
 			const usersToSet = await simpleLoadUsers(palabra, campo, modulo);
+			resetFilters();
 			setData(usersToSet);
 		}
 	};

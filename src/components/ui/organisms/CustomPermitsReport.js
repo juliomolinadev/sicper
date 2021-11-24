@@ -34,9 +34,15 @@ export const CustomPermitsReport = () => {
 		setHeaders(newHeaders);
 	};
 
-	const [data, setData, filters, handleFiltersChange, extraRows, handleExtraRowsChange] =
-		useFilteredData(headers, []);
-
+	const [
+		data,
+		setData,
+		filters,
+		handleFiltersChange,
+		extraRows,
+		handleExtraRowsChange,
+		resetFilters
+	] = useFilteredData(headers, []);
 	const { filter, order1 } = filters;
 	const { includeEmtyRow, includeSubtotalRow } = extraRows;
 
@@ -49,6 +55,7 @@ export const CustomPermitsReport = () => {
 				fechaInicial,
 				fechaFinal
 			);
+			resetFilters();
 			setData(permisosToSet);
 		}
 	};

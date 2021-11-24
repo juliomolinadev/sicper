@@ -26,14 +26,22 @@ export const TransferReport = ({ global }) => {
 		setHeaders(newHeaders);
 	};
 
-	const [data, setData, filters, handleFiltersChange, extraRows, handleExtraRowsChange] =
-		useFilteredData(headers, []);
+	const [
+		data,
+		setData,
+		filters,
+		handleFiltersChange,
+		extraRows,
+		handleExtraRowsChange,
+		resetFilters
+	] = useFilteredData(headers, []);
 	const { filter, order1 } = filters;
 	const { includeEmtyRow, includeSubtotalRow } = extraRows;
 
 	const getTransfer = async () => {
 		if (campo.length) {
 			const transfersToSet = await simpleLoadTransfer(palabra, campo, modulo, ciclo, global);
+			resetFilters();
 			setData(transfersToSet);
 		}
 	};
