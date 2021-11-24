@@ -743,7 +743,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "moduloDestino",
-		header: "MODULO-D",
+		header: "MODULO-DESTINO",
 		styles: "text-center",
 		currency: false,
 		sum: false,
@@ -755,7 +755,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "clavelocalidadDestino",
-		header: "CLAVE-D",
+		header: "CLAVE-DESTINO",
 		styles: "text-center",
 		currency: false,
 		sum: false,
@@ -767,7 +767,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "tipolocalidadDestino",
-		header: "EJ/COL-D",
+		header: "EJ/COL-DESTINO",
 		styles: "",
 		currency: false,
 		sum: false,
@@ -779,7 +779,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "localidadDestino",
-		header: "LOCALIDAD-D",
+		header: "LOCALIDAD-DESTINO",
 		styles: "",
 		currency: false,
 		sum: false,
@@ -791,7 +791,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "loteDestino",
-		header: "LOTE-D",
+		header: "LOTE-DESTINO",
 		styles: "text-center",
 		currency: false,
 		sum: false,
@@ -803,7 +803,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "apPaternoSolicitante",
-		header: "PATERNO-D",
+		header: "PATERNO-DESTINO",
 		styles: "",
 		currency: false,
 		sum: false,
@@ -815,7 +815,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "apMaternoSolicitante",
-		header: "MATERNO-D",
+		header: "MATERNO-DESTINO",
 		styles: "",
 		currency: false,
 		sum: false,
@@ -827,7 +827,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "nombreSolicitante",
-		header: "NOMBRE-D",
+		header: "NOMBRE-DESTINO",
 		styles: "",
 		currency: false,
 		sum: false,
@@ -839,7 +839,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "claveCultivo",
-		header: "C-CULTIVO",
+		header: "CLAVE-CULTIVO",
 		styles: "text-center",
 		currency: false,
 		sum: false,
@@ -863,7 +863,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "id",
-		header: "CUENTA-O",
+		header: "CUENTA-ORIGEN",
 		styles: "",
 		currency: false,
 		sum: false,
@@ -875,7 +875,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "apPaterno",
-		header: "PATERNO-O",
+		header: "PATERNO-ORIGEN",
 		styles: "",
 		currency: false,
 		sum: false,
@@ -887,7 +887,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "apMaterno",
-		header: "MATERNO-O",
+		header: "MATERNO-ORIGEN",
 		styles: "",
 		currency: false,
 		sum: false,
@@ -899,7 +899,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "nombre",
-		header: "NOMBRE-O",
+		header: "NOMBRE-ORIGEN",
 		styles: "",
 		currency: false,
 		sum: false,
@@ -911,7 +911,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "modulo",
-		header: "MODULO-O",
+		header: "MODULO-ORIGEN",
 		styles: "text-center",
 		currency: false,
 		sum: false,
@@ -923,7 +923,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "predio",
-		header: "LOTE-O",
+		header: "LOTE-ORIGEN",
 		styles: "text-center",
 		currency: false,
 		sum: false,
@@ -935,7 +935,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "ejido",
-		header: "CLAVE-O",
+		header: "CLAVE-ORIGEN",
 		styles: "text-center",
 		currency: false,
 		sum: false,
@@ -947,7 +947,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "tipoLocalidad",
-		header: "EJ/COL-O",
+		header: "EJ/COL-ORIGEN",
 		styles: "",
 		currency: false,
 		sum: false,
@@ -959,7 +959,7 @@ export const transferHeaders = [
 	},
 	{
 		id: "nombreLocalidad",
-		header: "LOCALIDAD-O",
+		header: "LOCALIDAD-ORIGEN",
 		styles: "",
 		currency: false,
 		sum: false,
