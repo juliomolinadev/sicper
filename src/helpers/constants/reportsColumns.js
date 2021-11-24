@@ -165,7 +165,7 @@ export const permitsHeaders = [
 		float: false,
 		display: true,
 		selectable: true,
-		search: true
+		search: false
 	},
 
 	{
