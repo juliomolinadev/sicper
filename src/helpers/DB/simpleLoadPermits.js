@@ -75,7 +75,7 @@ export const simpleLoadPermits = async (
 		Swal.fire("No se encontraron permisos ", "...", "warning");
 	}
 
-	return permisosFiltrados.pop();
+	return onlyUnique(permisosFiltrados.pop(), "numeroPermiso");
 };
 
 const addDays = (date, days) => {
@@ -92,4 +92,18 @@ const ifIsNumber = (campo, value) => {
 		default:
 			return value;
 	}
+};
+
+const onlyUnique = (objectsArray, key) => {
+	const unique = [];
+	const clearArray = [];
+	objectsArray.forEach((element) => {
+		const index = unique.indexOf(element[key]);
+		if (index === -1) {
+			unique.push(element[key]);
+			clearArray.push(element);
+		}
+	});
+
+	return clearArray;
 };

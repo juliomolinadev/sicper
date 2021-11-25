@@ -95,7 +95,7 @@ export const simpleLoadTransfer = async (pairs, modulo, ciclo, global) => {
 	if (transferencias.length === 0) {
 		Swal.fire("No se encontraron transferencias ", "...", "warning");
 	}
-	return transferenciasFiltradas.pop();
+	return onlyUnique(transferenciasFiltradas.pop(), "folio");
 };
 
 const ifIsNumber = (campo, value) => {
@@ -111,4 +111,18 @@ const ifIsNumber = (campo, value) => {
 		default:
 			return value;
 	}
+};
+
+const onlyUnique = (objectsArray, key) => {
+	const unique = [];
+	const clearArray = [];
+	objectsArray.forEach((element) => {
+		const index = unique.indexOf(element[key]);
+		if (index === -1) {
+			unique.push(element[key]);
+			clearArray.push(element);
+		}
+	});
+
+	return clearArray;
 };

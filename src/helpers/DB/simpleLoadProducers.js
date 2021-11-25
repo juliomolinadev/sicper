@@ -44,7 +44,7 @@ export const simpleLoadProducers = async (pairs, ciclo, modulo) => {
 	if (filteredProducers.length === 0) {
 		Swal.fire("No se encontraron productores ", "...", "warning");
 	}
-	return producersFiltrados.pop();
+	return onlyUnique(producersFiltrados.pop(), "curp");
 };
 
 const ifIsNumber = (campo, value) => {
@@ -55,4 +55,18 @@ const ifIsNumber = (campo, value) => {
 		default:
 			return value;
 	}
+};
+
+const onlyUnique = (objectsArray, key) => {
+	const unique = [];
+	const clearArray = [];
+	objectsArray.forEach((element) => {
+		const index = unique.indexOf(element[key]);
+		if (index === -1) {
+			unique.push(element[key]);
+			clearArray.push(element);
+		}
+	});
+
+	return clearArray;
 };

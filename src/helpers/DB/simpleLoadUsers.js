@@ -75,7 +75,7 @@ export const simpleLoadUsers = async (pairs, modulo) => {
 		Swal.fire("No se encontraron usuarios ", "...", "warning");
 	}
 
-	return usuariosFiltrados.pop();
+	return onlyUnique(usuariosFiltrados.pop(), "id");
 };
 
 const defineModulo = (modulo) => {
@@ -117,4 +117,18 @@ const ifIsNumber = (campo, value) => {
 		default:
 			return value;
 	}
+};
+
+const onlyUnique = (objectsArray, key) => {
+	const unique = [];
+	const clearArray = [];
+	objectsArray.forEach((element) => {
+		const index = unique.indexOf(element[key]);
+		if (index === -1) {
+			unique.push(element[key]);
+			clearArray.push(element);
+		}
+	});
+
+	return clearArray;
 };
