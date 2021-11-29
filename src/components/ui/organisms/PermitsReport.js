@@ -40,7 +40,11 @@ export const PermitsReport = () => {
 	const fechaFinal = new Date();
 
 	const getPermisos = async () => {
-		const permisosToSet = await simpleLoadPermits(palabra, "seccion", modulo, cicloActual);
+		const permisosToSet = await simpleLoadPermits(
+			[{ palabra, campo: "seccion" }],
+			modulo,
+			cicloActual
+		);
 		setPermisos(setFilter(permisosToSet));
 	};
 
