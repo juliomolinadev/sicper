@@ -13,6 +13,10 @@ export const ModuloInformesPadron = () => {
 			label: "Padron de usuarios"
 		},
 		{
+			id: "supDisponible",
+			label: "Superficie disponible"
+		},
+		{
 			id: "productores",
 			label: "Padron de productores"
 		}
@@ -41,7 +45,8 @@ export const ModuloInformesPadron = () => {
 				/>
 			</div>
 
-			{reportTypeValues.reportType === "usuarios" && <UsersReport />}
+			{reportTypeValues.reportType === "usuarios" && <UsersReport onlyAvailable={false} />}
+			{reportTypeValues.reportType === "supDisponible" && <UsersReport onlyAvailable={true} />}
 
 			{reportTypeValues.reportType === "productores" && <ProducersReport />}
 		</div>

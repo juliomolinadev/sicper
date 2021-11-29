@@ -7,8 +7,9 @@ import { simpleLoadUsers } from "../../../helpers/DB/simpleLoadUsers";
 import { useSelector } from "react-redux";
 import { useMultiInput } from "../../../hooks/useMultiInput";
 
-export const UsersReport = () => {
-	const { modulo } = useSelector((state) => state.auth);
+export const UsersReport = ({ onlyAvailable }) => {
+	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
+	const { cicloActual: ciclo } = variablesGlobales;
 
 	const [formValues, handleInputChange, addPair, removePair] = useMultiInput([
 		{ palabra: "", campo: "" }
@@ -40,7 +41,7 @@ export const UsersReport = () => {
 
 	const getUsers = async () => {
 		if (formValues[0].campo.length) {
-			const usersToSet = await simpleLoadUsers(formValues, modulo);
+			const usersToSet = await simpleLoadUsers(formValues, modulo, ciclo, onlyAvailable);
 			resetFilters();
 			setData(usersToSet);
 		}

@@ -1,13 +1,43 @@
 import { db } from "../../firebase/firebase-config";
 import Swal from "sweetalert2";
 
-export const simpleLoadUsers = async (pairs, modulo) => {
+export const simpleLoadUsers = async (pairs, modulo, ciclo, onlyAvailable) => {
 	const { palabra = 0, campo } = pairs[0];
 	const usuarios = [];
 	const usuariosFiltrados = [];
 	const qrysUsuarios = [];
+	const permisos = [];
+	const transferencias = [];
 
 	const usuariosRef = defineRef(modulo);
+	const permisosRef = db
+		.collection(`permisos`)
+		.doc(ciclo)
+		.collection("modulos")
+		.doc(`Modulo-${modulo}`)
+		.collection(`permisos`)
+		.where("estadoPermiso", "!=", "Cancelado");
+	const transferRef = db
+		.collection(`transferencias`)
+		.doc(ciclo)
+		.collection("modulos")
+		.doc(`Modulo-${modulo}`)
+		.collection(`transferencias`)
+		.where("estadoTransferencia", "!=", "CANCELADA");
+
+	if (onlyAvailable) {
+		const permisosSnap = await permisosRef.get();
+		const transferSnap = await transferRef.get();
+
+		permisosSnap.forEach((permiso) => {
+			permisos.push([permiso.data().cuenta.replace(".", "-"), permiso.data().supAutorizada]);
+		});
+
+		transferSnap.forEach((transferencia) => {
+			const cuenta = `${transferencia.data().cuenta}-${transferencia.data().subcta}`;
+			transferencias.push([cuenta, transferencia.data().superficieTransferida]);
+		});
+	}
 
 	if (palabra.length === 0) qrysUsuarios.push(usuariosRef.orderBy(campo).get());
 	else {
@@ -75,7 +105,10 @@ export const simpleLoadUsers = async (pairs, modulo) => {
 		Swal.fire("No se encontraron usuarios ", "...", "warning");
 	}
 
-	return onlyUnique(usuariosFiltrados.pop(), "id");
+	const finalUsers = onlyUnique(usuariosFiltrados.pop(), "id");
+
+	if (onlyAvailable) return filterOnlyAvailable(finalUsers, permisos, transferencias);
+	else return finalUsers;
 };
 
 const defineModulo = (modulo) => {
@@ -131,4 +164,26 @@ const onlyUnique = (objectsArray, key) => {
 	});
 
 	return clearArray;
+};
+
+const filterOnlyAvailable = (users, permisos, transferencias) => {
+	permisos.forEach((permiso) => {
+		const index = users.findIndex((user) => user.id === permiso[0]);
+
+		if (index >= 0) {
+			users[index].supRiego = users[index].supRiego - permiso[1];
+			if (users[index].supRiego <= 0) users.splice(index, 1);
+		}
+	});
+
+	transferencias.forEach((transfer) => {
+		const index = users.findIndex((user) => user.id === transfer[0]);
+
+		if (index >= 0) {
+			users[index].supRiego = users[index].supRiego - transfer[1];
+			if (users[index].supRiego <= 0) users.splice(index, 1);
+		}
+	});
+
+	return users;
 };
