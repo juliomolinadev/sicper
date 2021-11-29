@@ -7,6 +7,7 @@ import {
 	setAutorizados,
 	setFormError
 } from "../../actions/autorizadosScreen";
+import { roundToN } from "../../helpers/functions/roundToN";
 import { useForm } from "../../hooks/useForm";
 
 const customStyles = {
@@ -30,6 +31,16 @@ export const AutorizadosModal = () => {
 	const { openAutorizadosModal, autorizadoSelected, autorizados, formError } = useSelector(
 		(state) => state.autorizadosScreen
 	);
+
+	const { expedicion } = useSelector((state) => state.sicperScreen);
+	const cultivoExpedicion = expedicion.find(
+		(cultivo) => cultivo.id === `${autorizadoSelected.clave}-${autorizadoSelected.cultivo}`
+	);
+
+	const gravedadNormal = cultivoExpedicion ? cultivoExpedicion.gravedadNormal : 0;
+	const gravedadExtra = cultivoExpedicion ? cultivoExpedicion.gravedadExtra : 0;
+	const pozoNormal = cultivoExpedicion ? cultivoExpedicion.pozoNormal : 0;
+	const pozoExtra = cultivoExpedicion ? cultivoExpedicion.pozoExtra : 0;
 
 	const [formValues, handleInputChange] = useForm({
 		clave: autorizadoSelected.clave,
@@ -103,6 +114,8 @@ export const AutorizadosModal = () => {
 		const supAsignadaError =
 			"La superficie asignada no puede ser mayor a la superficie autorizada !";
 		const valorVacioError = "Es necesario asignar un valor a todas las superficies !";
+		const superficieExcedida =
+			"La superficie asignada no puede ser menor que la superficie expedida !";
 
 		if (Number(gravedadNormalAutorizada) < 0) {
 			dispatch(setFormError(valorNegativoError));
@@ -164,6 +177,18 @@ export const AutorizadosModal = () => {
 		} else if (pozoExtraAsignada > pozoExtraAutorizada) {
 			dispatch(setFormError(supAsignadaError));
 			return false;
+		} else if (gravedadExtraAsignada - gravedadExtra < 0) {
+			dispatch(setFormError(superficieExcedida));
+			return false;
+		} else if (gravedadNormalAsignada - gravedadNormal < 0) {
+			dispatch(setFormError(superficieExcedida));
+			return false;
+		} else if (pozoNormalAsignada - pozoNormal < 0) {
+			dispatch(setFormError(superficieExcedida));
+			return false;
+		} else if (pozoExtraAsignada - pozoExtra < 0) {
+			dispatch(setFormError(superficieExcedida));
+			return false;
 		}
 
 		dispatch(removeFormError());
@@ -207,8 +232,12 @@ export const AutorizadosModal = () => {
 								<th scope="col">Sistema</th>
 								<th scope="col">Autorizada</th>
 								<th scope="col">Asignada</th>
+								<th scope="col">Expedida</th>
+								<th scope="col">Disponible</th>
 								<th scope="col">Autorizada</th>
 								<th scope="col">Asignada</th>
+								<th scope="col">Expedida</th>
+								<th scope="col">Disponible</th>
 							</tr>
 						</thead>
 
@@ -239,6 +268,8 @@ export const AutorizadosModal = () => {
 										onKeyUp={handleKeyUp}
 									/>
 								</td>
+								<td>{roundToN(gravedadNormal, 4)}</td>
+								<td>{roundToN(gravedadNormalAsignada - gravedadNormal, 4)}</td>
 								<td>
 									<input
 										type="number"
@@ -263,6 +294,8 @@ export const AutorizadosModal = () => {
 										onKeyUp={handleKeyUp}
 									/>
 								</td>
+								<td>{roundToN(gravedadExtra, 4)}</td>
+								<td>{roundToN(gravedadExtraAsignada - gravedadExtra, 4)}</td>
 							</tr>
 
 							<tr>
@@ -291,6 +324,9 @@ export const AutorizadosModal = () => {
 										onKeyUp={handleKeyUp}
 									/>
 								</td>
+								<td>{roundToN(pozoNormal, 4)}</td>
+								<td>{roundToN(pozoNormalAsignada - pozoNormal, 4)}</td>
+
 								<td>
 									<input
 										type="number"
@@ -315,6 +351,8 @@ export const AutorizadosModal = () => {
 										onKeyUp={handleKeyUp}
 									/>
 								</td>
+								<td>{roundToN(pozoExtra, 4)}</td>
+								<td>{roundToN(pozoExtraAsignada - pozoExtra, 4)}</td>
 							</tr>
 						</tbody>
 					</table>

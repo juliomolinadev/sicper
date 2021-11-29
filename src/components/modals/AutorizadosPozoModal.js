@@ -7,6 +7,7 @@ import {
 	setAutorizados,
 	setFormError
 } from "../../actions/autorizadosScreen";
+import { roundToN } from "../../helpers/functions/roundToN";
 import { useForm } from "../../hooks/useForm";
 
 const customStyles = {
@@ -30,6 +31,14 @@ export const AutorizadosPozoModal = () => {
 	const { openAutorizadosModal, autorizadoSelected, autorizados, formError } = useSelector(
 		(state) => state.autorizadosScreen
 	);
+
+	const { expedicion } = useSelector((state) => state.sicperScreen);
+	const cultivoExpedicion = expedicion.find(
+		(cultivo) => cultivo.id === `${autorizadoSelected.clave}-${autorizadoSelected.cultivo}`
+	);
+
+	const pozoParticularNormal = cultivoExpedicion ? cultivoExpedicion.pozoParticularNormal : 0;
+	const pozoParticularExtra = cultivoExpedicion ? cultivoExpedicion.pozoParticularExtra : 0;
 
 	const [formValues, handleInputChange] = useForm({
 		clave: autorizadoSelected.clave,
@@ -103,6 +112,8 @@ export const AutorizadosPozoModal = () => {
 		const supAsignadaError =
 			"La superficie asignada no puede ser mayor a la superficie autorizada !";
 		const valorVacioError = "Es necesario asignar un valor a todas las superficies !";
+		const superficieExcedida =
+			"La superficie asignada no puede ser menor que la superficie expedida !";
 
 		if (Number(gravedadNormalAutorizada) < 0) {
 			dispatch(setFormError(valorNegativoError));
@@ -164,6 +175,12 @@ export const AutorizadosPozoModal = () => {
 		} else if (pozoExtraAsignada > pozoExtraAutorizada) {
 			dispatch(setFormError(supAsignadaError));
 			return false;
+		} else if (pozoNormalAsignada - pozoParticularNormal < 0) {
+			dispatch(setFormError(superficieExcedida));
+			return false;
+		} else if (pozoExtraAsignada - pozoParticularExtra < 0) {
+			dispatch(setFormError(superficieExcedida));
+			return false;
 		}
 
 		dispatch(removeFormError());
@@ -207,8 +224,12 @@ export const AutorizadosPozoModal = () => {
 								<th scope="col">Sistema</th>
 								<th scope="col">Autorizada</th>
 								<th scope="col">Asignada</th>
+								<th scope="col">Expedida</th>
+								<th scope="col">Disponible</th>
 								<th scope="col">Autorizada</th>
 								<th scope="col">Asignada</th>
+								<th scope="col">Expedida</th>
+								<th scope="col">Disponible</th>
 							</tr>
 						</thead>
 
@@ -239,6 +260,8 @@ export const AutorizadosPozoModal = () => {
 										onKeyUp={handleKeyUp}
 									/>
 								</td>
+								<td>{roundToN(pozoParticularNormal, 4)}</td>
+								<td>{roundToN(pozoNormalAsignada - pozoParticularNormal, 4)}</td>
 								<td>
 									<input
 										type="number"
@@ -263,6 +286,8 @@ export const AutorizadosPozoModal = () => {
 										onKeyUp={handleKeyUp}
 									/>
 								</td>
+								<td>{roundToN(pozoParticularExtra, 4)}</td>
+								<td>{roundToN(pozoExtraAsignada - pozoParticularExtra, 4)}</td>
 							</tr>
 						</tbody>
 					</table>

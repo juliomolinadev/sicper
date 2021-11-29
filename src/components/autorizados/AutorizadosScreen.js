@@ -5,6 +5,7 @@ import {
 	setModulo,
 	startLoadAutorizados
 } from "../../actions/autorizadosScreen";
+import { startLoadExpedicion } from "../../actions/sicperScreen";
 import { modulos } from "../../helpers/consts";
 import { sabeAutorizados } from "../../helpers/sabeAutorizados";
 import { AutorizadosModal } from "../modals/AutorizadosModal";
@@ -60,11 +61,13 @@ export const AutorizadosScreen = () => {
 	const setModuloToEdit = (moduloToEdit) => {
 		dispatch(setModulo(moduloToEdit));
 		dispatch(startLoadAutorizados(ciclo, moduloToEdit));
+		dispatch(startLoadExpedicion(moduloToEdit, ciclo));
 	};
 
 	const handleSaveAutorizados = () => {
 		sabeAutorizados(ciclo, modulo, autorizados);
 		dispatch(startLoadAutorizados(ciclo, modulo));
+		dispatch(startLoadExpedicion(modulo, ciclo));
 	};
 
 	return (
