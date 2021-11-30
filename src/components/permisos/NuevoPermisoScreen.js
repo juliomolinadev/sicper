@@ -170,7 +170,9 @@ export const NuevoPermisoScreen = () => {
 			gravedadNormal: gravedadNormalPrevia,
 			gravedadExtra: gravedadExtraPrevia,
 			pozoNormal: pozoNormalPrevia,
-			pozoExtra: pozoExtraPrevia
+			pozoExtra: pozoExtraPrevia,
+			pozoParticularNormal: pozoParticularNormalPrevia,
+			pozoParticularExtra: pozoParticularExtraPrevia
 		} = superficiePreviaCultivo;
 
 		switch (altaPermisos.sistema) {
@@ -180,9 +182,13 @@ export const NuevoPermisoScreen = () => {
 				return "Superficie no disponible";
 
 			case "Pozo Federal":
-			case "Pozo Particular":
 				if (pozoNormalAsignada - pozoNormalPrevia >= supAutorizada) return "normal";
 				if (pozoExtraAsignada - pozoExtraPrevia >= supAutorizada) return "extra";
+				return "Superficie no disponible";
+
+			case "Pozo Particular":
+				if (pozoNormalAsignada - pozoParticularNormalPrevia >= supAutorizada) return "normal";
+				if (pozoExtraAsignada - pozoParticularExtraPrevia >= supAutorizada) return "extra";
 				return "Superficie no disponible";
 
 			default:

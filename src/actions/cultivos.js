@@ -64,9 +64,14 @@ export const loadSuperficiePrevia = async (ciclo, modulo, cultivo) => {
 		gravedadNormal: dataSup.hasOwnProperty("gravedadNormal") ? dataSup.gravedadNormal : 0,
 		gravedadExtra: dataSup.hasOwnProperty("gravedadExtra") ? dataSup.gravedadExtra : 0,
 		pozoNormal: dataSup.hasOwnProperty("pozoNormal") ? dataSup.pozoNormal : 0,
-		pozoExtra: dataSup.hasOwnProperty("pozoExtra") ? dataSup.pozoExtra : 0
+		pozoExtra: dataSup.hasOwnProperty("pozoExtra") ? dataSup.pozoExtra : 0,
+		pozoParticularNormal: dataSup.hasOwnProperty("pozoParticularNormal")
+			? dataSup.pozoParticularNormal
+			: 0,
+		pozoParticularExtra: dataSup.hasOwnProperty("pozoParticularExtra")
+			? dataSup.pozoParticularExtra
+			: 0
 	};
-
 	return superficies;
 };
 

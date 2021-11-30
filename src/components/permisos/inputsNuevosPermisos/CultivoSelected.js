@@ -5,6 +5,7 @@ export const CultivoSelected = () => {
 	const { nombreCultivo, claveCultivo, subciclo, superficiePreviaCultivo, sistema } = useSelector(
 		(state) => state.altaPermisos
 	);
+
 	const { autorizadosPorCultivo } = useSelector((state) => state.autorizadosScreen);
 
 	return (
@@ -40,7 +41,7 @@ export const CultivoSelected = () => {
 							</thead>
 
 							<tbody>
-								{sistema !== "Pozo Federal" && sistema !== "Pozo Particular" && (
+								{sistema === "Gravedad" && (
 									<>
 										<tr>
 											<th scope="row">Gravedad Normal</th>
@@ -90,7 +91,7 @@ export const CultivoSelected = () => {
 									</>
 								)}
 
-								{sistema !== "Gravedad" && (
+								{sistema === "Pozo Federal" && (
 									<>
 										<tr>
 											<th scope="row">Pozo Normal</th>
@@ -127,6 +128,50 @@ export const CultivoSelected = () => {
 												<td className="text-center">
 													{autorizadosPorCultivo.pozoExtraAsignada -
 														superficiePreviaCultivo.pozoExtra}
+												</td>
+											)}
+										</tr>
+									</>
+								)}
+								{sistema === "Pozo Particular" && (
+									<>
+										<tr>
+											<th scope="row">Pozo Normal</th>
+											<td className="text-center">{autorizadosPorCultivo.pozoNormalAutorizada}</td>
+											<td className="text-center">{autorizadosPorCultivo.pozoNormalAsignada}</td>
+											<td className="text-center">
+												{superficiePreviaCultivo.pozoParticularNormal}
+											</td>
+											{autorizadosPorCultivo.pozoNormalAsignada -
+												superficiePreviaCultivo.pozoParticularNormal <=
+											0 ? (
+												<td className="text-center text-danger">
+													{autorizadosPorCultivo.pozoNormalAsignada -
+														superficiePreviaCultivo.pozoParticularNormal}
+												</td>
+											) : (
+												<td className="text-center">
+													{autorizadosPorCultivo.pozoNormalAsignada -
+														superficiePreviaCultivo.pozoParticularNormal}
+												</td>
+											)}
+										</tr>
+										<tr>
+											<th scope="row">Pozo Extra</th>
+											<td className="text-center">{autorizadosPorCultivo.pozoExtraAutorizada}</td>
+											<td className="text-center">{autorizadosPorCultivo.pozoExtraAsignada}</td>
+											<td className="text-center">{superficiePreviaCultivo.pozoParticularExtra}</td>
+											{autorizadosPorCultivo.pozoExtraAsignada -
+												superficiePreviaCultivo.pozoParticularExtra <=
+											0 ? (
+												<td className="text-center text-danger">
+													{autorizadosPorCultivo.pozoExtraAsignada -
+														superficiePreviaCultivo.pozoParticularExtra}
+												</td>
+											) : (
+												<td className="text-center">
+													{autorizadosPorCultivo.pozoExtraAsignada -
+														superficiePreviaCultivo.pozoParticularExtra}
 												</td>
 											)}
 										</tr>
