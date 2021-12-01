@@ -1,11 +1,11 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadUsuarios = async (usuario, modulo, ciclo) => {
+export const loadUsuarios = async (usuario, modulo, ciclo, global = false) => {
 	const campos = ["apPaterno", "cuenta"];
 	const qryUsuarios = [];
 	const usuarios = [];
 
-	const padUsuarios = defineRef(modulo);
+	const padUsuarios = defineRef(modulo, global);
 
 	const transferRef = db
 		.collection("transferencias")
@@ -73,21 +73,28 @@ const defineModulo = (modulo) => {
 	else return parseInt(modulo);
 };
 
-const defineRef = (modulo) => {
-	switch (modulo) {
-		case "UNI01":
-			return db.collection(`derechos`).where("equipo", "==", 1).where("modulo", "in", [4, 5, 6, 7]);
+const defineRef = (modulo, global) => {
+	if (global) {
+		return db.collection(`derechos`);
+	} else {
+		switch (modulo) {
+			case "UNI01":
+				return db
+					.collection(`derechos`)
+					.where("equipo", "==", 1)
+					.where("modulo", "in", [4, 5, 6, 7]);
 
-		case "UNI02":
-			return db
-				.collection(`derechos`)
-				.where("equipo", "==", 1)
-				.where("modulo", "in", [8, "9A", "9B"]);
+			case "UNI02":
+				return db
+					.collection(`derechos`)
+					.where("equipo", "==", 1)
+					.where("modulo", "in", [8, "9A", "9B"]);
 
-		case "UNI03":
-			return db.collection(`derechos`).where("equipo", "==", 1).where("modulo", "in", [1, 2, 3]);
+			case "UNI03":
+				return db.collection(`derechos`).where("equipo", "==", 1).where("modulo", "in", [1, 2, 3]);
 
-		default:
-			return db.collection(`derechos`).where("modulo", "==", defineModulo(modulo));
+			default:
+				return db.collection(`derechos`).where("modulo", "==", defineModulo(modulo));
+		}
 	}
 };

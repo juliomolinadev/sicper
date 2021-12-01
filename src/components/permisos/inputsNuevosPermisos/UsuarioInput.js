@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import {
@@ -10,7 +10,8 @@ import {
 import { useFormToUpper } from "../../../hooks/UseFormToUpper";
 
 export const UsuarioInput = () => {
-	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
+	const { modulo, variablesGlobales, privilegios } = useSelector((state) => state.auth);
+	const { accesoGlobal } = privilegios;
 	const { cicloActual: ciclo } = variablesGlobales;
 
 	const { idUsuarioSelected, usuario: nombreUsuario } = useSelector((state) => state.altaPermisos);
@@ -31,8 +32,13 @@ export const UsuarioInput = () => {
 		dispatch(closeUsuariosModal());
 	}, [dispatch]);
 
+	const [global, setGlobal] = useState(false);
+	const handleSetGlogal = () => {
+		setGlobal(!global);
+	};
+
 	const handleLoadUsuarios = () => {
-		dispatch(startLoadUsuarios(usuario.toUpperCase(), modulo, ciclo));
+		dispatch(startLoadUsuarios(usuario.toUpperCase(), modulo, ciclo, global));
 	};
 
 	let usuarioLabel = "";
@@ -66,6 +72,16 @@ export const UsuarioInput = () => {
 					Usuario:{" "}
 				</label>
 				<label>{usuarioLabel} </label>
+				{accesoGlobal &&
+					(global ? (
+						<button onClick={handleSetGlogal} className="btn btn-primary mr-3">
+							Global
+						</button>
+					) : (
+						<button onClick={handleSetGlogal} className="btn btn-outline-primary mr-3">
+							Global
+						</button>
+					))}
 				{idUsuarioSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
 				{idUsuarioSelected ? (
 					<></>
