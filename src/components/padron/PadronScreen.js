@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { CustomTable } from "../tables/CustomTable";
 import { usuariosColumns } from "../tables/configTables";
 import {
@@ -30,12 +30,29 @@ export const PadronScreen = () => {
 		data = Object.values(usuarios);
 	}
 
+	const [global, setGlobal] = useState(false);
+	const handleSetGlogal = () => {
+		setGlobal(!global);
+	};
+
 	return (
 		<>
 			<div className="row mt-3 d-flex justify-content-start">
-				<UsuarioInput />
+				<div className="col-sm-1 mt-3">
+					{privilegios.accesoGlobal &&
+						(global ? (
+							<button onClick={handleSetGlogal} className="btn btn-primary mr-3">
+								Global
+							</button>
+						) : (
+							<button onClick={handleSetGlogal} className="btn btn-outline-primary mr-3">
+								Global
+							</button>
+						))}
+				</div>
+				<UsuarioInput global={global} />
 
-				<div className="col-sm-4">
+				<div className="col-sm-3">
 					<DownloadPadronButton />
 				</div>
 			</div>
