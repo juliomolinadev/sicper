@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { roundToN } from "../../../helpers/functions/roundToN";
 
 export const CultivoSelected = () => {
 	const { nombreCultivo, claveCultivo, subciclo, superficiePreviaCultivo, sistema } = useSelector(
@@ -52,17 +53,25 @@ export const CultivoSelected = () => {
 												{autorizadosPorCultivo.gravedadNormalAsignada}
 											</td>
 											<td className="text-center">{superficiePreviaCultivo.gravedadNormal}</td>
-											{autorizadosPorCultivo.gravedadNormalAsignada -
-												superficiePreviaCultivo.gravedadNormal <=
-											0 ? (
+											{roundToN(
+												autorizadosPorCultivo.gravedadNormalAsignada -
+													superficiePreviaCultivo.gravedadNormal,
+												4
+											) <= 0 ? (
 												<td className="text-center text-danger">
-													{autorizadosPorCultivo.gravedadNormalAsignada -
-														superficiePreviaCultivo.gravedadNormal}
+													{roundToN(
+														autorizadosPorCultivo.gravedadNormalAsignada -
+															superficiePreviaCultivo.gravedadNormal,
+														4
+													)}
 												</td>
 											) : (
 												<td className="text-center">
-													{autorizadosPorCultivo.gravedadNormalAsignada -
-														superficiePreviaCultivo.gravedadNormal}
+													{roundToN(
+														autorizadosPorCultivo.gravedadNormalAsignada -
+															superficiePreviaCultivo.gravedadNormal,
+														4
+													)}
 												</td>
 											)}
 										</tr>
@@ -74,17 +83,25 @@ export const CultivoSelected = () => {
 											</td>
 											<td className="text-center">{autorizadosPorCultivo.gravedadExtraAsignada}</td>
 											<td className="text-center">{superficiePreviaCultivo.gravedadExtra}</td>
-											{autorizadosPorCultivo.gravedadExtraAsignada -
-												superficiePreviaCultivo.gravedadExtra <=
-											0 ? (
+											{roundToN(
+												autorizadosPorCultivo.gravedadExtraAsignada -
+													superficiePreviaCultivo.gravedadExtra,
+												4
+											) <= 0 ? (
 												<td className="text-center text-danger">
-													{autorizadosPorCultivo.gravedadExtraAsignada -
-														superficiePreviaCultivo.gravedadExtra}
+													{roundToN(
+														autorizadosPorCultivo.gravedadExtraAsignada -
+															superficiePreviaCultivo.gravedadExtra,
+														4
+													)}
 												</td>
 											) : (
 												<td className="text-center">
-													{autorizadosPorCultivo.gravedadExtraAsignada -
-														superficiePreviaCultivo.gravedadExtra}
+													{roundToN(
+														autorizadosPorCultivo.gravedadExtraAsignada -
+															superficiePreviaCultivo.gravedadExtra,
+														4
+													)}
 												</td>
 											)}
 										</tr>
@@ -98,17 +115,25 @@ export const CultivoSelected = () => {
 											<td className="text-center">{autorizadosPorCultivo.pozoNormalAutorizada}</td>
 											<td className="text-center">{autorizadosPorCultivo.pozoNormalAsignada}</td>
 											<td className="text-center">{superficiePreviaCultivo.pozoNormal}</td>
-											{autorizadosPorCultivo.pozoNormalAsignada -
-												superficiePreviaCultivo.pozoNormal <=
-											0 ? (
+											{roundToN(
+												autorizadosPorCultivo.pozoNormalAsignada -
+													superficiePreviaCultivo.pozoNormal,
+												4
+											) <= 0 ? (
 												<td className="text-center text-danger">
-													{autorizadosPorCultivo.pozoNormalAsignada -
-														superficiePreviaCultivo.pozoNormal}
+													{roundToN(
+														autorizadosPorCultivo.pozoNormalAsignada -
+															superficiePreviaCultivo.pozoNormal,
+														4
+													)}
 												</td>
 											) : (
 												<td className="text-center">
-													{autorizadosPorCultivo.pozoNormalAsignada -
-														superficiePreviaCultivo.pozoNormal}
+													{roundToN(
+														autorizadosPorCultivo.pozoNormalAsignada -
+															superficiePreviaCultivo.pozoNormal,
+														4
+													)}
 												</td>
 											)}
 										</tr>
@@ -117,17 +142,24 @@ export const CultivoSelected = () => {
 											<td className="text-center">{autorizadosPorCultivo.pozoExtraAutorizada}</td>
 											<td className="text-center">{autorizadosPorCultivo.pozoExtraAsignada}</td>
 											<td className="text-center">{superficiePreviaCultivo.pozoExtra}</td>
-											{autorizadosPorCultivo.pozoExtraAsignada -
-												superficiePreviaCultivo.pozoExtra <=
-											0 ? (
+											{roundToN(
+												autorizadosPorCultivo.pozoExtraAsignada - superficiePreviaCultivo.pozoExtra,
+												4
+											) <= 0 ? (
 												<td className="text-center text-danger">
-													{autorizadosPorCultivo.pozoExtraAsignada -
-														superficiePreviaCultivo.pozoExtra}
+													{roundToN(
+														autorizadosPorCultivo.pozoExtraAsignada -
+															superficiePreviaCultivo.pozoExtra,
+														4
+													)}
 												</td>
 											) : (
 												<td className="text-center">
-													{autorizadosPorCultivo.pozoExtraAsignada -
-														superficiePreviaCultivo.pozoExtra}
+													{roundToN(
+														autorizadosPorCultivo.pozoExtraAsignada -
+															superficiePreviaCultivo.pozoExtra,
+														4
+													)}
 												</td>
 											)}
 										</tr>
@@ -142,17 +174,25 @@ export const CultivoSelected = () => {
 											<td className="text-center">
 												{superficiePreviaCultivo.pozoParticularNormal}
 											</td>
-											{autorizadosPorCultivo.pozoNormalAsignada -
-												superficiePreviaCultivo.pozoParticularNormal <=
-											0 ? (
+											{roundToN(
+												autorizadosPorCultivo.pozoNormalAsignada -
+													superficiePreviaCultivo.pozoParticularNormal,
+												4
+											) <= 0 ? (
 												<td className="text-center text-danger">
-													{autorizadosPorCultivo.pozoNormalAsignada -
-														superficiePreviaCultivo.pozoParticularNormal}
+													{roundToN(
+														autorizadosPorCultivo.pozoNormalAsignada -
+															superficiePreviaCultivo.pozoParticularNormal,
+														4
+													)}
 												</td>
 											) : (
 												<td className="text-center">
-													{autorizadosPorCultivo.pozoNormalAsignada -
-														superficiePreviaCultivo.pozoParticularNormal}
+													{roundToN(
+														autorizadosPorCultivo.pozoNormalAsignada -
+															superficiePreviaCultivo.pozoParticularNormal,
+														4
+													)}
 												</td>
 											)}
 										</tr>
@@ -161,17 +201,25 @@ export const CultivoSelected = () => {
 											<td className="text-center">{autorizadosPorCultivo.pozoExtraAutorizada}</td>
 											<td className="text-center">{autorizadosPorCultivo.pozoExtraAsignada}</td>
 											<td className="text-center">{superficiePreviaCultivo.pozoParticularExtra}</td>
-											{autorizadosPorCultivo.pozoExtraAsignada -
-												superficiePreviaCultivo.pozoParticularExtra <=
-											0 ? (
+											{roundToN(
+												autorizadosPorCultivo.pozoExtraAsignada -
+													superficiePreviaCultivo.pozoParticularExtra,
+												4
+											) <= 0 ? (
 												<td className="text-center text-danger">
-													{autorizadosPorCultivo.pozoExtraAsignada -
-														superficiePreviaCultivo.pozoParticularExtra}
+													{roundToN(
+														autorizadosPorCultivo.pozoExtraAsignada -
+															superficiePreviaCultivo.pozoParticularExtra,
+														4
+													)}
 												</td>
 											) : (
 												<td className="text-center">
-													{autorizadosPorCultivo.pozoExtraAsignada -
-														superficiePreviaCultivo.pozoParticularExtra}
+													{roundToN(
+														autorizadosPorCultivo.pozoExtraAsignada -
+															superficiePreviaCultivo.pozoParticularExtra,
+														4
+													)}
 												</td>
 											)}
 										</tr>

@@ -26,6 +26,7 @@ import { CultivoSelected } from "./inputsNuevosPermisos/CultivoSelected";
 import { useFormToUpper } from "../../hooks/UseFormToUpper";
 import { CultivoAnteriorModal } from "../modals/CultivoAnteriorModal";
 import { CultivoAnteriorInput } from "./inputsNuevosPermisos/CultivoAnteriorInput";
+import { roundToN } from "../../helpers/functions/roundToN";
 
 export const NuevoPermisoScreen = () => {
 	const {
@@ -177,18 +178,22 @@ export const NuevoPermisoScreen = () => {
 
 		switch (altaPermisos.sistema) {
 			case "Gravedad":
-				if (gravedadNormalAsignada - gravedadNormalPrevia >= supAutorizada) return "normal";
-				if (gravedadExtraAsignada - gravedadExtraPrevia >= supAutorizada) return "extra";
+				if (roundToN(gravedadNormalAsignada - gravedadNormalPrevia, 4) >= supAutorizada)
+					return "normal";
+				if (roundToN(gravedadExtraAsignada - gravedadExtraPrevia, 4) >= supAutorizada)
+					return "extra";
 				return "Superficie no disponible";
 
 			case "Pozo Federal":
-				if (pozoNormalAsignada - pozoNormalPrevia >= supAutorizada) return "normal";
-				if (pozoExtraAsignada - pozoExtraPrevia >= supAutorizada) return "extra";
+				if (roundToN(pozoNormalAsignada - pozoNormalPrevia, 4) >= supAutorizada) return "normal";
+				if (roundToN(pozoExtraAsignada - pozoExtraPrevia, 4) >= supAutorizada) return "extra";
 				return "Superficie no disponible";
 
 			case "Pozo Particular":
-				if (pozoNormalAsignada - pozoParticularNormalPrevia >= supAutorizada) return "normal";
-				if (pozoExtraAsignada - pozoParticularExtraPrevia >= supAutorizada) return "extra";
+				if (roundToN(pozoNormalAsignada - pozoParticularNormalPrevia, 4) >= supAutorizada)
+					return "normal";
+				if (roundToN(pozoExtraAsignada - pozoParticularExtraPrevia, 4) >= supAutorizada)
+					return "extra";
 				return "Superficie no disponible";
 
 			default:
