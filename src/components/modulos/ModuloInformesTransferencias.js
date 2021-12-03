@@ -11,7 +11,11 @@ export const ModuloInformesTransferencias = () => {
 
 	const reportTypesGlobal = [
 		{
-			id: "recibidas",
+			id: "salientes",
+			label: "Transferencias salientes"
+		},
+		{
+			id: "entrantes",
 			label: "Transferencias recibidas"
 		},
 		{
@@ -49,9 +53,9 @@ export const ModuloInformesTransferencias = () => {
 				/>
 			</div>
 
-			{reportTypeValues.reportType === "recibidas" && <TransferReport global={false} />}
-
-			{reportTypeValues.reportType === "global" && global && <TransferReport global={true} />}
+			{reportTypeValues.reportType === "salientes" && <TransferReport tipo={"salientes"} />}
+			{reportTypeValues.reportType === "entrantes" && <TransferReport tipo={"entrantes"} />}
+			{reportTypeValues.reportType === "global" && global && <TransferReport tipo={"global"} />}
 		</div>
 	);
 };

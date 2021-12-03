@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { simpleLoadTransfer } from "../../../helpers/DB/simpleLoadTransfer";
 import { useMultiInput } from "../../../hooks/useMultiInput";
 
-export const TransferReport = ({ global }) => {
+export const TransferReport = ({ tipo }) => {
 	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
 	const { cicloActual: ciclo } = variablesGlobales;
 
@@ -41,7 +41,7 @@ export const TransferReport = ({ global }) => {
 
 	const getTransfer = async () => {
 		if (formValues[0].campo.length) {
-			const transfersToSet = await simpleLoadTransfer(formValues, modulo, ciclo, global);
+			const transfersToSet = await simpleLoadTransfer(formValues, modulo, ciclo, tipo);
 			resetFilters();
 			setData(transfersToSet);
 		}
