@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { permitsHeaders } from "../../../helpers/constants/reportsColumns";
-import { simpleLoadPermits } from "../../../helpers/DB/simpleLoadPermits";
+import { loadPermisosPorSeccion } from "../../../helpers/DB/loadPermisosPorSeccion";
 import { useForm } from "../../../hooks/useForm";
 import { ReportModule } from "./ReportModule";
 
@@ -40,11 +40,7 @@ export const PermitsReport = () => {
 	const fechaFinal = new Date();
 
 	const getPermisos = async () => {
-		const permisosToSet = await simpleLoadPermits(
-			[{ palabra, campo: "seccion" }],
-			modulo,
-			cicloActual
-		);
+		const permisosToSet = await loadPermisosPorSeccion(palabra, modulo, cicloActual);
 		setPermisos(setFilter(permisosToSet));
 	};
 
