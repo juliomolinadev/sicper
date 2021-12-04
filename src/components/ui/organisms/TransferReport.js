@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
-import { transferHeaders } from "../../../helpers/constants/reportsColumns";
+import {
+	transferEntrantesHeaders,
+	transferSalientesHeaders
+} from "../../../helpers/constants/reportsColumns";
 import { useFilteredData } from "../../../hooks/useFilteredData";
 import { ReportModule } from "./ReportModule";
 import { useSelector } from "react-redux";
@@ -15,7 +18,9 @@ export const TransferReport = ({ tipo }) => {
 		{ palabra: "", campo: "" }
 	]);
 
-	const [headers, setHeaders] = useState(transferHeaders);
+	const [headers, setHeaders] = useState(
+		tipo === "salientes" ? transferSalientesHeaders : transferEntrantesHeaders
+	);
 	const handleColumn = ({ target }) => {
 		const index = headers.findIndex((header) => header.id === target.id);
 

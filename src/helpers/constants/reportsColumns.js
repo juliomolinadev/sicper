@@ -704,7 +704,7 @@ export const usersHeaders = [
 	}
 ];
 
-export const transferHeaders = [
+export const transferEntrantesHeaders = [
 	{
 		id: "folio",
 		header: "FOLIO",
@@ -968,5 +968,273 @@ export const transferHeaders = [
 		display: true,
 		selectable: true,
 		search: true
+	}
+];
+
+export const transferSalientesHeaders = [
+	{
+		id: "folio",
+		header: "FOLIO",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: false,
+		search: true
+	},
+	{
+		id: "estadoTransferencia",
+		header: "ESTADO",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: true,
+		float: false,
+		display: true,
+		selectable: false,
+		search: true
+	},
+	{
+		id: "superficieTransferida",
+		header: "HA",
+		styles: "text-center",
+		currency: false,
+		sum: true,
+		count: false,
+		float: true,
+		display: true,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "id",
+		header: "CUENTA-ORIGEN",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: true
+	},
+	{
+		id: "apPaterno",
+		header: "PATERNO-ORIGEN",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: true
+	},
+	{
+		id: "apMaterno",
+		header: "MATERNO-ORIGEN",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: 4,
+		display: false,
+		selectable: true,
+		search: true
+	},
+	{
+		id: "nombre",
+		header: "NOMBRE-ORIGEN",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: 4,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "modulo",
+		header: "MODULO-ORIGEN",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: true
+	},
+	{
+		id: "predio",
+		header: "LOTE-ORIGEN",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "ejido",
+		header: "CLAVE-ORIGEN",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "tipoLocalidad",
+		header: "EJ/COL-ORIGEN",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "nombreLocalidad",
+		header: "LOCALIDAD-ORIGEN",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: true
+	},
+
+	{
+		id: "claveCultivo",
+		header: "CLAVE-CULTIVO",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: true
+	},
+	{
+		id: "nombreCultivo",
+		header: "CULTIVO",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: true
+	},
+	{
+		id: "moduloDestino",
+		header: "MODULO-DESTINO",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: true
+	},
+	{
+		id: "clavelocalidadDestino",
+		header: "CLAVE-DESTINO",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "tipolocalidadDestino",
+		header: "EJ/COL-DESTINO",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "localidadDestino",
+		header: "LOCALIDAD-DESTINO",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: true
+	},
+	{
+		id: "loteDestino",
+		header: "LOTE-DESTINO",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "apPaternoSolicitante",
+		header: "PATERNO-DESTINO",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: true
+	},
+	{
+		id: "apMaternoSolicitante",
+		header: "MATERNO-DESTINO",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: true
+	},
+	{
+		id: "nombreSolicitante",
+		header: "NOMBRE-DESTINO",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
 	}
 ];
