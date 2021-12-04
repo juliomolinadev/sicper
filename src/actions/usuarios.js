@@ -42,7 +42,8 @@ export const startSetUsuarioSelected = (usuario) => {
 			const supPrevia = await loadSuperficiePrevia(
 				`${usuario.cuenta}.${usuario.subcta}`,
 				usuario.moduloDestino,
-				ciclo
+				ciclo,
+				usuario.folio
 			);
 
 			usuario.supRiego = usuario.superficieTransferida;

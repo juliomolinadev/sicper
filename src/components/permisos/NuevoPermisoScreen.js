@@ -121,10 +121,12 @@ export const NuevoPermisoScreen = () => {
 		} else if (!altaPermisos.nombreCultivo) {
 			dispatch(setError("El campo cultivo es obligatorio."));
 			return false;
-		} else if (supAutorizada <= 0) {
+		} else if (parseInt(supAutorizada) <= 0) {
 			dispatch(setError("Ingrese la superficie que será autorizada en este permiso."));
 			return false;
-		} else if (altaPermisos.supDerecho - altaPermisos.supPrevia < supAutorizada) {
+		} else if (altaPermisos.supDerecho - altaPermisos.supPrevia < parseInt(supAutorizada)) {
+			const { supDerecho, supPrevia } = altaPermisos;
+			console.log({ supDerecho, supPrevia, supAutorizada });
 			dispatch(
 				setError("La superficie excede la superficie disponible de la cuenta seleccionada.")
 			);

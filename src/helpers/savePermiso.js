@@ -11,7 +11,6 @@ export const savePermiso = async (allData) => {
 		usuario: allData.usuario,
 		supDerecho: allData.supDerecho,
 		lote: allData.lote,
-		// TODO: Poner nombre de localidad antes de guardar
 		localidad: allData.nombreLocalidad,
 		nombreLocalidad: allData.nombreLocalidad,
 		municipio: allData.municipio,
@@ -52,6 +51,7 @@ export const savePermiso = async (allData) => {
 		transferencia: allData.transferencia,
 		estadoPermiso: allData.estadoPermiso,
 		reacomodo: allData.reacomodo ? allData.reacomodo : "",
+		folio: allData.folio ? allData.folio : false,
 		direccion: allData.direccion
 	};
 

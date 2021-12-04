@@ -54,9 +54,9 @@ export const loadUsuarios = async (usuario, modulo, ciclo, global = false) => {
 				default:
 					if (snapHijo.data().equipo !== 1) {
 						usuarios.push({
-							id: snapHijo.id,
+							...snapHijo.data(),
 							entidad: modulo,
-							...snapHijo.data()
+							id: snapHijo.id
 						});
 					}
 					break;

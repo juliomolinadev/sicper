@@ -52,7 +52,9 @@ export const CultivoSelected = () => {
 											<td className="text-center">
 												{autorizadosPorCultivo.gravedadNormalAsignada}
 											</td>
-											<td className="text-center">{superficiePreviaCultivo.gravedadNormal}</td>
+											<td className="text-center">
+												{roundToN(superficiePreviaCultivo.gravedadNormal, 4)}
+											</td>
 											{roundToN(
 												autorizadosPorCultivo.gravedadNormalAsignada -
 													superficiePreviaCultivo.gravedadNormal,
@@ -82,7 +84,9 @@ export const CultivoSelected = () => {
 												{autorizadosPorCultivo.gravedadExtraAutorizada}
 											</td>
 											<td className="text-center">{autorizadosPorCultivo.gravedadExtraAsignada}</td>
-											<td className="text-center">{superficiePreviaCultivo.gravedadExtra}</td>
+											<td className="text-center">
+												{roundToN(superficiePreviaCultivo.gravedadExtra, 4)}
+											</td>
 											{roundToN(
 												autorizadosPorCultivo.gravedadExtraAsignada -
 													superficiePreviaCultivo.gravedadExtra,
@@ -114,7 +118,9 @@ export const CultivoSelected = () => {
 											<th scope="row">Pozo Normal</th>
 											<td className="text-center">{autorizadosPorCultivo.pozoNormalAutorizada}</td>
 											<td className="text-center">{autorizadosPorCultivo.pozoNormalAsignada}</td>
-											<td className="text-center">{superficiePreviaCultivo.pozoNormal}</td>
+											<td className="text-center">
+												{roundToN(superficiePreviaCultivo.pozoNormal, 4)}
+											</td>
 											{roundToN(
 												autorizadosPorCultivo.pozoNormalAsignada -
 													superficiePreviaCultivo.pozoNormal,
@@ -141,7 +147,9 @@ export const CultivoSelected = () => {
 											<th scope="row">Pozo Extra</th>
 											<td className="text-center">{autorizadosPorCultivo.pozoExtraAutorizada}</td>
 											<td className="text-center">{autorizadosPorCultivo.pozoExtraAsignada}</td>
-											<td className="text-center">{superficiePreviaCultivo.pozoExtra}</td>
+											<td className="text-center">
+												{roundToN(superficiePreviaCultivo.pozoExtra, 4)}
+											</td>
 											{roundToN(
 												autorizadosPorCultivo.pozoExtraAsignada - superficiePreviaCultivo.pozoExtra,
 												4
@@ -172,7 +180,7 @@ export const CultivoSelected = () => {
 											<td className="text-center">{autorizadosPorCultivo.pozoNormalAutorizada}</td>
 											<td className="text-center">{autorizadosPorCultivo.pozoNormalAsignada}</td>
 											<td className="text-center">
-												{superficiePreviaCultivo.pozoParticularNormal}
+												{roundToN(superficiePreviaCultivo.pozoParticularNormal, 4)}
 											</td>
 											{roundToN(
 												autorizadosPorCultivo.pozoNormalAsignada -
@@ -200,7 +208,9 @@ export const CultivoSelected = () => {
 											<th scope="row">Pozo Extra</th>
 											<td className="text-center">{autorizadosPorCultivo.pozoExtraAutorizada}</td>
 											<td className="text-center">{autorizadosPorCultivo.pozoExtraAsignada}</td>
-											<td className="text-center">{superficiePreviaCultivo.pozoParticularExtra}</td>
+											<td className="text-center">
+												{roundToN(superficiePreviaCultivo.pozoParticularExtra, 4)}
+											</td>
 											{roundToN(
 												autorizadosPorCultivo.pozoExtraAsignada -
 													superficiePreviaCultivo.pozoParticularExtra,

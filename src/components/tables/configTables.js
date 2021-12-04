@@ -28,7 +28,8 @@ export const usuariosColumns = [
 	{ name: "EJ/COL", selector: "tipoLocalidad", sortable: true, width: "80px" },
 	{ name: "LOCALIDAD", selector: "nombreLocalidad", sortable: true, width: "200px" },
 	{ name: "SECCION", selector: "seccion", sortable: true, width: "60px", center: true },
-	{ name: "MODULO", selector: "modulo", sortable: true, width: "60px", center: true }
+	{ name: "MODULO", selector: "modulo", sortable: true, width: "60px", center: true },
+	{ name: "TRANSFERENCIA", selector: "folio", sortable: true, width: "80px" }
 ];
 
 export const transferColumns = [

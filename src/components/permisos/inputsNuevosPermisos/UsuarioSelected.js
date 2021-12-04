@@ -2,10 +2,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export const UsuarioSelected = () => {
-	const { usuarios, idUsuarioSelected, supPrevia } = useSelector((state) => state.altaPermisos);
-
+	const { usuarios, idUsuarioSelected, supPrevia, supDerecho } = useSelector(
+		(state) => state.altaPermisos
+	);
 	const usuario = usuarios.find((usuario) => usuario.id === idUsuarioSelected);
-
 	return (
 		<div className="border rounded mb-4 p-2">
 			<div className="row">
@@ -16,7 +16,7 @@ export const UsuarioSelected = () => {
 				{usuario.folio ? (
 					<div className="col-sm-3">Sup. Derecho: {usuario.superficieTransferida}</div>
 				) : (
-					<div className="col-sm-3">Sup. Derecho: {usuario.supRiego}</div>
+					<div className="col-sm-3">Sup. Derecho: {supDerecho}</div>
 				)}
 			</div>
 			<div className="row">
@@ -24,12 +24,10 @@ export const UsuarioSelected = () => {
 					Usuario: {`${usuario.apPaterno} ${usuario.apMaterno} ${usuario.nombre}`}
 				</div>
 				<div className="col-sm-3">Lote: {usuario.predio}</div>
-				{usuario.supRiego - supPrevia === 0 ? (
-					<div className="col-sm-3 text-danger">
-						Sup. Disponible: {usuario.supRiego - supPrevia}
-					</div>
+				{supDerecho - supPrevia === 0 ? (
+					<div className="col-sm-3 text-danger">Sup. Disponible: {supDerecho - supPrevia}</div>
 				) : (
-					<div className="col-sm-3">Sup. Disponible: {usuario.supRiego - supPrevia}</div>
+					<div className="col-sm-3">Sup. Disponible: {supDerecho - supPrevia}</div>
 				)}
 			</div>
 			<div className="row">
