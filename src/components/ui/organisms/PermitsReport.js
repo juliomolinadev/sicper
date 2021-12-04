@@ -6,7 +6,7 @@ import { useForm } from "../../../hooks/useForm";
 import { ReportModule } from "./ReportModule";
 
 export const PermitsReport = () => {
-	const title = "REPORTE DE PERMISOS POR SECCION";
+	const title = "REPORTE DE PERMISOS ACTIVOS POR SECCION";
 
 	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
 	const { cicloActual } = variablesGlobales;
