@@ -12,6 +12,7 @@ import { UsuarioSelectedDetail } from "./UsuarioSelectedDetail";
 import { UpdatePadronModule } from "../ui/organisms/UpdatePadronModule";
 import { UpdateReacomodosModule } from "../ui/organisms/UpdateReacomodosModule";
 import { DownloadPadronButton } from "../ui/atoms/DownloadPadronButton";
+import { PrintConstancyModal } from "../modals/PrintConstancyModal";
 
 export const PadronScreen = () => {
 	const { usuarios, usuario } = useSelector((state) => state.entidades);
@@ -34,6 +35,13 @@ export const PadronScreen = () => {
 	const handleSetGlogal = () => {
 		setGlobal(!global);
 	};
+
+	const [modalState, setModalState] = useState({
+		openModal: false,
+		constancySaved: false,
+		constancia: {}
+	});
+	const { openModal, constancia, constancySaved } = modalState;
 
 	return (
 		<>
@@ -68,7 +76,9 @@ export const PadronScreen = () => {
 						></CustomTable>
 					</div>
 
-					<div className="col-sm-4">{usuario && <UsuarioSelectedDetail />}</div>
+					<div className="col-sm-4">
+						{usuario && <UsuarioSelectedDetail setModalState={setModalState} />}
+					</div>
 				</div>
 			)}
 
@@ -87,6 +97,14 @@ export const PadronScreen = () => {
 						</div>
 					</div>
 				</div>
+			)}
+			{openModal && (
+				<PrintConstancyModal
+					openModal={openModal}
+					constancia={constancia}
+					constancySaved={constancySaved}
+					setModalState={setModalState}
+				/>
 			)}
 		</>
 	);
