@@ -167,10 +167,20 @@ export const PrintConstancyModal = ({ openModal, constancia, constancySaved, set
 					</div>
 				</b>
 			</div>
-			<div className="row m-3 mt-5">
-				Avenida Insurgentes Sur Número 2416, Colonia Copilco el Bajo, Alcaldía Coyoacán, Código
-				postal 04340, Ciudad de México. Teléfono: 55 5174 4000 www.gob.mx/conagua
-				<hr />
+			<div className="row">
+				<div className="col-10 d-flex">
+					<div className=" align-self-end">
+						Avenida Insurgentes Sur Número 2416, Colonia Copilco el Bajo, Alcaldía Coyoacán, Código
+						postal 04340, Ciudad de México. Teléfono: 55 5174 4000 www.gob.mx/conagua
+						<hr />
+					</div>
+				</div>
+
+				<div className="col-2">
+					<div className="d-flex justify-content-end">
+						<img src={"./logos/mexico2021.jpg"} alt="Logo mexico" style={{ maxHeight: 170 }} />
+					</div>
+				</div>
 			</div>
 
 			<div className="row m-3 d-flex justify-content-center pt-5">

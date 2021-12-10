@@ -13,6 +13,7 @@ import { UpdatePadronModule } from "../ui/organisms/UpdatePadronModule";
 import { UpdateReacomodosModule } from "../ui/organisms/UpdateReacomodosModule";
 import { DownloadPadronButton } from "../ui/atoms/DownloadPadronButton";
 import { PrintConstancyModal } from "../modals/PrintConstancyModal";
+import { ConstancyModule } from "../ui/organisms/ConstancyModule";
 
 export const PadronScreen = () => {
 	const { usuarios, usuario } = useSelector((state) => state.entidades);
@@ -44,8 +45,9 @@ export const PadronScreen = () => {
 	const { openModal, constancia, constancySaved } = modalState;
 
 	return (
-		<>
-			<div className="row mt-3 d-flex justify-content-start">
+		<div className="mt-5">
+			<h4>Consulta en padron de usuarios</h4>
+			<div className="row mt-2 d-flex justify-content-start">
 				<div className="col-sm-1 mt-3">
 					{privilegios.accesoGlobal &&
 						(global ? (
@@ -82,6 +84,14 @@ export const PadronScreen = () => {
 				</div>
 			)}
 
+			<div className="mt-5"></div>
+
+			{privilegios.generarConstancias && (
+				<ConstancyModule modalState={modalState} setModalState={setModalState} className="mt-5" />
+			)}
+
+			<div className="mt-5"></div>
+
 			{privilegios.actualizarPadron && (
 				<div className="border border-info rounded p-3 mt-3">
 					<h3 className="row d-flex justify-content-center">
@@ -98,6 +108,7 @@ export const PadronScreen = () => {
 					</div>
 				</div>
 			)}
+
 			{openModal && (
 				<PrintConstancyModal
 					openModal={openModal}
@@ -106,6 +117,6 @@ export const PadronScreen = () => {
 					setModalState={setModalState}
 				/>
 			)}
-		</>
+		</div>
 	);
 };
