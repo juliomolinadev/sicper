@@ -151,6 +151,8 @@ export const PrintConstancyModal = ({ openModal, constancia, constancySaved, set
 				<p>
 					<b>
 						<div className="col-12">
+							DR. JULIO ALFONSO NAVARRO URBINA,
+							<br />
 							ING. EN JEFE DEL DISTRITO DE RIEGO 014,
 							<br />
 							RÍO COLORADO, BAJA CALIFORNIA Y SONORA
@@ -162,8 +164,8 @@ export const PrintConstancyModal = ({ openModal, constancia, constancySaved, set
 			<div className="row m-3 mt-5">
 				<b>
 					<div className="col-12">
-						C.C.P. ARCHIVO <br />
-						VMMR/JDLA/PCF
+						C.c.p.- Archivo <br />
+						VMMR/JDLA/pcf
 					</div>
 				</b>
 			</div>
