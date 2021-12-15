@@ -127,7 +127,11 @@ export const ProductoresModule = () => {
 
 					{productorSelected && (
 						<div className="col-sm-4">
-							<ProductorDetail productor={productorSelected} dispatch={dispatch} />
+							<ProductorDetail
+								productor={productorSelected}
+								dispatch={dispatch}
+								reload={getProducers}
+							/>
 						</div>
 					)}
 				</div>

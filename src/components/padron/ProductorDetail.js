@@ -1,6 +1,8 @@
 import React from "react";
+import { deleteProducer } from "../../helpers/DB/deleteProducer";
+import Swal from "sweetalert2";
 
-export const ProductorDetail = ({ productor, dispatch }) => {
+export const ProductorDetail = ({ productor, dispatch, reload }) => {
 	const {
 		id,
 		apPaterno,
@@ -22,6 +24,30 @@ export const ProductorDetail = ({ productor, dispatch }) => {
 	const openEditModal = () => {
 		dispatch({
 			type: "openModal"
+		});
+	};
+
+	const handleDeleteProducer = () => {
+		Swal.fire({
+			title: "Atención!!",
+			text: `Está a punto de eliminar el registro del productor con el id: ${id}. ¿Realmente desea eliminarlo?`,
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Confirmar",
+			cancelButtonText: "Cancelar"
+		}).then(async ({ isConfirmed }) => {
+			if (isConfirmed) {
+				const isDeleted = await deleteProducer(id);
+
+				if (isDeleted) {
+					reload();
+					dispatch({
+						type: "unsetProductorSelected"
+					});
+				}
+			}
 		});
 	};
 
@@ -79,6 +105,10 @@ export const ProductorDetail = ({ productor, dispatch }) => {
 			<div className="mt-5 d-flex justify-content-center">
 				<button className="btn btn-outline-primary" onClick={openEditModal}>
 					Editar
+				</button>
+
+				<button className="btn btn-outline-danger ml-5" onClick={handleDeleteProducer}>
+					Borrar
 				</button>
 			</div>
 		</div>

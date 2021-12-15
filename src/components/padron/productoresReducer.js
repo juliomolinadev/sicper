@@ -12,6 +12,9 @@ export const productoresReducer = (state, action) => {
 		case "setProductorSelected":
 			return { ...state, productorSelected: action.payload };
 
+		case "unsetProductorSelected":
+			return { ...state, productorSelected: null };
+
 		case "openModal":
 			return { ...state, openEditModal: true };
 
