@@ -7,16 +7,29 @@ export const useFormToUpper = (initialState = {}) => {
 	};
 
 	const handleInputChange = ({ target }) => {
-		if (target.type === "checkbox") {
-			setValues({
-				...values,
-				[target.name]: target.checked
-			});
-		} else {
-			setValues({
-				...values,
-				[target.name]: target.value.toUpperCase()
-			});
+		switch (target.type) {
+			case "checkbox":
+				setValues({
+					...values,
+					[target.name]: target.checked
+				});
+
+				break;
+
+			case "number":
+				setValues({
+					...values,
+					[target.name]: target.value
+				});
+
+				break;
+
+			default:
+				setValues({
+					...values,
+					[target.name]: target.value.toUpperCase()
+				});
+				break;
 		}
 	};
 

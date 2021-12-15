@@ -31,10 +31,10 @@ export const TransferForm = ({ values, handleInputChange }) => {
 	const dispatch = useDispatch();
 
 	const isFormValid = () => {
-		if (parseInt(superficieTransferida) <= 0) {
+		if (superficieTransferida <= 0) {
 			dispatch(setError("Indique superficie a transferir"));
 			return false;
-		} else if (parseInt(superficieTransferida) > superficieDisponible) {
+		} else if (superficieTransferida > superficieDisponible) {
 			dispatch(setError("La superficie a transferir excede a la superficie disponible"));
 			return false;
 		} else if (nombreCultivo === null) {
@@ -85,7 +85,7 @@ export const TransferForm = ({ values, handleInputChange }) => {
 				folio: await defineFolio(),
 				ciclo,
 				estadoTransferencia: "PENDIENTE",
-				superficieTransferida: parseInt(superficieTransferida),
+				superficieTransferida,
 				loteDestino,
 				moduloDestino: moduloDestino === "DEV" ? "dev" : moduloDestino,
 				apPaternoSolicitante,
