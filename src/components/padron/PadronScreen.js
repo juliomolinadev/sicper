@@ -47,10 +47,6 @@ export const PadronScreen = () => {
 
 	return (
 		<div className="mt-5">
-			<div className="mt-4">
-				<ProductoresModule />
-			</div>
-
 			<h4>Consulta en padron de usuarios</h4>
 			<div className="row mt-2 d-flex justify-content-start">
 				<div className="col-sm-1 mt-3">
@@ -114,6 +110,12 @@ export const PadronScreen = () => {
 				</div>
 			)}
 
+			{privilegios.editarProductores && (
+				<div className="mt-4">
+					<ProductoresModule />
+				</div>
+			)}
+
 			{openModal && (
 				<PrintConstancyModal
 					openModal={openModal}
@@ -122,6 +124,7 @@ export const PadronScreen = () => {
 					setModalState={setModalState}
 				/>
 			)}
+			<br />
 		</div>
 	);
 };
