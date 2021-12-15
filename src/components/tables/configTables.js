@@ -55,11 +55,11 @@ export const transferColumns = [
 ];
 
 export const productoresColumns = [
-	{ name: "id", selector: "id", omit: true },
-	{ name: "PATERNO", selector: "apPaterno", width: "140px", sortable: true },
-	{ name: "MATERNO", selector: "apMaterno", width: "140px", sortable: true },
-	{ name: "NOMBRE", selector: "nombre", width: "200px", sortable: true },
-	{ name: "CURP", selector: "curp", sortable: true, width: "180px", center: true }
+	{ name: "CURP", selector: "id", width: "210px", sortable: true },
+	{ name: "PATERNO", selector: "apPaterno", width: "120px", sortable: true },
+	{ name: "MATERNO", selector: "apMaterno", width: "150px", sortable: true },
+	{ name: "NOMBRE", selector: "nombre", width: "180px", sortable: true },
+	{ name: "GENERO", selector: "genero", width: "120px", sortable: true }
 ];
 
 export const cultivosColumns = [

@@ -75,7 +75,6 @@ export const NuevoProductorModal = () => {
 	};
 
 	const isFormValid = () => {
-		console.log(genero.length);
 		if (apPaterno.trim().length === 0) {
 			dispatch(setError("Se requiere apellido paterno"));
 			return false;

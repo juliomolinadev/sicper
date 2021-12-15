@@ -14,6 +14,7 @@ import { UpdateReacomodosModule } from "../ui/organisms/UpdateReacomodosModule";
 import { DownloadPadronButton } from "../ui/atoms/DownloadPadronButton";
 import { PrintConstancyModal } from "../modals/PrintConstancyModal";
 import { ConstancyModule } from "../ui/organisms/ConstancyModule";
+import { ProductoresModule } from "./ProductoresModule";
 
 export const PadronScreen = () => {
 	const { usuarios, usuario } = useSelector((state) => state.entidades);
@@ -46,6 +47,10 @@ export const PadronScreen = () => {
 
 	return (
 		<div className="mt-5">
+			<div className="mt-4">
+				<ProductoresModule />
+			</div>
+
 			<h4>Consulta en padron de usuarios</h4>
 			<div className="row mt-2 d-flex justify-content-start">
 				<div className="col-sm-1 mt-3">
