@@ -46,7 +46,8 @@ export const EditProductorModal = ({
 		estado,
 		cp,
 		telefono,
-		genero
+		genero,
+		indice = ""
 	} = formValues;
 
 	// console.log(formValues);
@@ -61,7 +62,7 @@ export const EditProductorModal = ({
 		e.preventDefault();
 
 		const productor = {
-			id: genero === "MORAL" ? `${curp}-PM` : curp,
+			id: genero === "MORAL" ? `${curp}-PM${indice}` : curp,
 			curp,
 			apPaterno,
 			apMaterno,
@@ -340,6 +341,22 @@ export const EditProductorModal = ({
 							<span> </span>
 							<label htmlFor="femenino"> Persona Moral</label>
 						</div>
+
+						{genero === "MORAL" && (
+							<div className="d-flex">
+								<label htmlFor="indice">Subindice:</label>
+								<input
+									type="text"
+									className="form-control ml-3"
+									placeholder="Subindice"
+									id="indice"
+									name="indice"
+									value={indice}
+									autoComplete="waa"
+									onChange={handleInputChange}
+								/>
+							</div>
+						)}
 					</div>
 				</div>
 
