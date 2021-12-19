@@ -1,5 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
+
 import {
 	enablePrintButton,
 	openTransferModal,
@@ -46,7 +48,20 @@ export const TransferCard = ({ transferencia }) => {
 	};
 
 	const cancelTransfer = () => {
-		dispatch(startUpdateTransfer(transferencia, "CANCELADA"));
+		Swal.fire({
+			title: "Atención!!",
+			text: `Está a punto de cancelar la transferencia. ¿Realmente desea cancelarla?`,
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Confirmar",
+			cancelButtonText: "Cancelar"
+		}).then(({ isConfirmed }) => {
+			if (isConfirmed) {
+				dispatch(startUpdateTransfer(transferencia, "CANCELADA"));
+			}
+		});
 	};
 
 	return (

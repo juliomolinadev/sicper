@@ -83,10 +83,13 @@ export const PrintTransferModal = ({ transferencia, reset }) => {
 			overlayClassName="modal-fondo"
 		>
 			<div className="row p-5 ">
-				<div className="col-2">
-					<div className="d-flex justify-content-center">
-						<img src={"./logos/cna.png"} alt="Logo cna" style={{ maxHeight: 70 }} />
-					</div>
+				<div className="col-2 d-flex justify-content-center">
+					<img
+						className="align-self-center"
+						src={"./logos/cna.png"}
+						alt="Logo cna"
+						style={{ maxHeight: 70 }}
+					/>
 				</div>
 				<div className="col-8 text-center">
 					<h5>
@@ -99,14 +102,13 @@ export const PrintTransferModal = ({ transferencia, reset }) => {
 						JEFATURA DE OPERACIÓN
 					</h5>
 				</div>
-				<div className="col-2">
-					<div className="d-flex justify-content-center">
-						<img
-							src={"./logos/semarnat.png"}
-							alt="Logo sanidad vegetal"
-							style={{ maxHeight: 110 }}
-						/>
-					</div>
+				<div className="col-2 d-flex justify-content-center">
+					<img
+						className="align-self-center"
+						src={"./logos/medio.png"}
+						alt="Logo secretaria del medio ambiente"
+						style={{ maxWidth: 200 }}
+					/>
 				</div>
 			</div>
 
