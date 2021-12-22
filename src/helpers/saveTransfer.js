@@ -36,13 +36,13 @@ export const saveTransfer = async (transfer, ciclo) => {
 					transaction.update(contTransferRef, {
 						numeroTransferenciasModulo: firebase.firestore.FieldValue.increment(1),
 						superficieRecibidaModulo: firebase.firestore.FieldValue.increment(
-							transfer.superficieTransferida
+							Number(transfer.superficieTransferida)
 						)
 					});
 				} else {
 					transaction.set(contTransferRef, {
 						numeroTransferenciasModulo: 1,
-						superficieRecibidaModulo: transfer.superficieTransferida
+						superficieRecibidaModulo: Number(transfer.superficieTransferida)
 					});
 				}
 			}
@@ -60,7 +60,7 @@ export const saveTransfer = async (transfer, ciclo) => {
 			return true;
 		}
 	} catch (error) {
-		Swal.fire("Error de conexión", "Error al intntar guardar transferencia.", "error");
+		Swal.fire("Error de conexión", "Error al intentar guardar transferencia.", "error");
 		console.error(error);
 		return false;
 	}
