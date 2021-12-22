@@ -25,7 +25,11 @@ export const ModuloInformesTransferencias = () => {
 	];
 	const reportTypesModulo = [
 		{
-			id: "recibidas",
+			id: "salientes",
+			label: "Transferencias salientes"
+		},
+		{
+			id: "entrantes",
 			label: "Transferencias recibidas"
 		}
 	];
