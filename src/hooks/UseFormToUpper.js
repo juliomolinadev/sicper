@@ -19,7 +19,7 @@ export const useFormToUpper = (initialState = {}) => {
 			case "number":
 				setValues({
 					...values,
-					[target.name]: target.value
+					[target.name]: Number(target.value)
 				});
 
 				break;

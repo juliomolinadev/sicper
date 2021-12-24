@@ -32,7 +32,7 @@ export const TransferenciasScreen = () => {
 	}, [dispatch, ciclo, modulo]);
 
 	const [values, handleInputChange, reset] = useFormToUpper({
-		superficieTransferida: 0,
+		superficieTransferida: "",
 		loteDestino: "",
 		moduloDestino: "",
 		cultivo: "",
