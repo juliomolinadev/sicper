@@ -47,7 +47,7 @@ export const NuevoPermisoScreen = () => {
 
 	const [formValues, handleInputChange, , , setValues] = useFormToUpper({
 		variedad: "",
-		supAutorizada: 0,
+		supAutorizada: "",
 		fuenteCredito: "",
 		latitud: "",
 		longitud: "",
@@ -121,7 +121,7 @@ export const NuevoPermisoScreen = () => {
 		} else if (!altaPermisos.nombreCultivo) {
 			dispatch(setError("El campo cultivo es obligatorio."));
 			return false;
-		} else if (parseInt(supAutorizada) <= 0) {
+		} else if (supAutorizada <= 0) {
 			dispatch(setError("Ingrese la superficie que será autorizada en este permiso."));
 			return false;
 		} else if (altaPermisos.supDerecho - altaPermisos.supPrevia < parseInt(supAutorizada)) {
