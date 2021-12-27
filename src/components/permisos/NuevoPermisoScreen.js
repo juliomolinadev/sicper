@@ -205,10 +205,10 @@ export const NuevoPermisoScreen = () => {
 
 	const defineNumeroPermiso = async () => {
 		if (altaPermisos.sistema === "Pozo Particular") {
-			const permiso = `${auth.modulo}-${fill((await loadContador(auth.modulo, ciclo)) + 1, 3)}`;
+			const permiso = `${auth.modulo}-${fill((await loadContador(auth.modulo, ciclo)) + 1, 4)}`;
 			return permiso;
 		} else {
-			const permiso = `MOD${auth.modulo}-${fill((await loadContador(auth.modulo, ciclo)) + 1, 3)}`;
+			const permiso = `MOD${auth.modulo}-${fill((await loadContador(auth.modulo, ciclo)) + 1, 4)}`;
 			return permiso;
 		}
 	};
