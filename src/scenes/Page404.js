@@ -12,7 +12,7 @@ export const Page404 = () => {
 			</div>
 
 			<div className="d-flex justify-content-center mt-5">
-				<img src="./logos/gears.gif" alt="gears" style={{ maxWidth: 250 }} />
+				<img src="./logos/gears.jpeg" alt="gears" style={{ maxWidth: 400 }} />
 			</div>
 
 			<div className="d-flex justify-content-center mt-3">
