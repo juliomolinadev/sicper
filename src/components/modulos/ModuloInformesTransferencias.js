@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { useForm } from "../../hooks/useForm";
 import { RadioButtonGroup } from "../ui/molecules/RadioButtonGroup";
+import { TableTransferReport } from "../ui/organisms/TableTransferReport";
 import { TransferReport } from "../ui/organisms/TransferReport";
 
 export const ModuloInformesTransferencias = () => {
@@ -20,8 +21,12 @@ export const ModuloInformesTransferencias = () => {
 		},
 		{
 			id: "global",
-			label: "Reporte global de transferencias"
+			label: "Reportes global de transferencias"
 		}
+		// {
+		// 	id: "tabla",
+		// 	label: "Tabla de transferencias"
+		// }
 	];
 	const reportTypesModulo = [
 		{
@@ -60,6 +65,7 @@ export const ModuloInformesTransferencias = () => {
 			{reportTypeValues.reportType === "salientes" && <TransferReport tipo={"salientes"} />}
 			{reportTypeValues.reportType === "entrantes" && <TransferReport tipo={"entrantes"} />}
 			{reportTypeValues.reportType === "global" && global && <TransferReport tipo={"global"} />}
+			{reportTypeValues.reportType === "tabla" && global && <TableTransferReport tipo={"tabla"} />}
 		</div>
 	);
 };
