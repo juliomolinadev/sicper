@@ -1,9 +1,20 @@
 import { db } from "../../firebase/firebase-config";
-import { transferModulos as modulos } from "../consts";
+import { transferModulos } from "../consts";
 
 export const getTransferTable = async (ciclo) => {
 	const transferencias = [];
 	const table = [];
+	const modulos = [];
+	transferModulos.forEach((modulo) => modulos.push(modulo));
+	const size = modulos.length;
+
+	for (let i = 0; i < size; i++) {
+		const row = [];
+		for (let j = 0; j < size; j++) {
+			row.push(0);
+		}
+		table.push(row);
+	}
 
 	const transferSnap = await db.collectionGroup("transferencias").where("ciclo", "==", ciclo).get();
 
@@ -16,43 +27,40 @@ export const getTransferTable = async (ciclo) => {
 			});
 	});
 
-	// console.log(transferencias);
-
-	table.push(modulos);
-	modulos.forEach((modulo) => table.push([modulo]));
-
-	for (let i = 1; i <= modulos.length; i++) {
-		for (let j = 1; j <= modulos.length; j++) {
-			if (table[i][j] === undefined) table[i][j] = 0;
+	for (let i = 0; i < size; i++) {
+		for (let j = 0; j < size; j++) {
 			const transfersXY = transferencias.filter(
 				(transfer) => transfer.origen === modulos[i] && transfer.destino === modulos[j]
 			);
-
-			if (transfersXY.length > 0) console.log(transfersXY);
 
 			if (transfersXY.length > 0) transfersXY.forEach((transfer) => (table[i][j] += transfer.ha));
 		}
 	}
 
-	for (let i = 1; i <= modulos.length; i++) {
+	for (let i = 0; i < size; i++) {
 		let totalRow = 0;
-		for (let j = 1; j <= modulos.length; j++) {
+		for (let j = 0; j < size; j++) {
 			totalRow += table[i][j];
 		}
 		table[i].push(totalRow);
 	}
 
 	const totals = ["Total Destino"];
-	for (let i = 1; i <= modulos.length + 1; i++) {
+	for (let i = 0; i <= size; i++) {
 		let totalCol = 0;
-		for (let j = 1; j <= modulos.length; j++) {
+		for (let j = 0; j < size; j++) {
 			totalCol += table[j][i];
 		}
 		totals.push(totalCol);
 	}
 
-	table[0].unshift("x");
-	table[0].push("Total Origen");
+	modulos.unshift("x");
+	table.unshift(modulos);
+	modulos.forEach((modulo, i) => {
+		if (i !== 0) table[i].unshift([modulo]);
+	});
+	modulos.push("Total Origen");
 	table.push(totals);
+
 	return table;
 };

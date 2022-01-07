@@ -12,6 +12,7 @@ export const TableTransferReport = () => {
 	const [table, setTable] = useState([]);
 
 	useEffect(() => {
+		setTable([]);
 		getTransferTable(ciclo).then((table) => setTable(table));
 	}, [ciclo]);
 

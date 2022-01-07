@@ -22,11 +22,11 @@ export const ModuloInformesTransferencias = () => {
 		{
 			id: "global",
 			label: "Reportes global de transferencias"
+		},
+		{
+			id: "tabla",
+			label: "Tabla de transferencias"
 		}
-		// {
-		// 	id: "tabla",
-		// 	label: "Tabla de transferencias"
-		// }
 	];
 	const reportTypesModulo = [
 		{
