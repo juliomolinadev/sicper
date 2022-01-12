@@ -44,7 +44,7 @@ export const NavbarComponent = () => {
 
 						{privilegios.pantallaPadron && (
 							<NavLink to="/padron" className="nav-link">
-								Padron
+								Padrón
 							</NavLink>
 						)}
 
@@ -62,7 +62,7 @@ export const NavbarComponent = () => {
 
 						{privilegios.pantallaAsignacion && (
 							<NavLink to="/asignacion" className="nav-link">
-								Asignacion
+								Asignación
 							</NavLink>
 						)}
 
@@ -86,7 +86,7 @@ export const NavbarComponent = () => {
 
 						{privilegios.pantallaConfiguracion && (
 							<NavLink to="/configuracion" className="nav-link">
-								Configuracion
+								Configuración
 							</NavLink>
 						)}
 

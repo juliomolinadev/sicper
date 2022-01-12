@@ -24,7 +24,7 @@ export const CheckSanidad = () => {
 
 	const setUnset = (objeto, e) => {
 		e.preventDefault();
-		updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, ciclo, objeto);
+		updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, "2020-2021", objeto);
 		dispatch(startLoadPermisos());
 	};
 
