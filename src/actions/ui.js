@@ -24,3 +24,11 @@ export const openUserRoleModal = () => ({
 export const closeUserRoleModal = () => ({
 	type: types.closeUserRoleModal
 });
+
+export const setUpdatingPermisos = () => ({
+	type: types.setUpdatingPermisos
+});
+
+export const unsetUpdatingPermisos = () => ({
+	type: types.unsetUpdatingPermisos
+});

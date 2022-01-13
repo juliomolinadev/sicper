@@ -1,5 +1,6 @@
 import React from "react";
 import { ExpeditionCheckModule } from "../modulos/ExpeditionCheckModule";
+import { PermisosExcelModule } from "../modulos/PermisosExcelModule";
 import { ProducersReport } from "../ui/organisms/ProducersReport";
 
 export const TestArea = () => {
@@ -20,6 +21,10 @@ export const TestArea = () => {
 
 			<div className="row border rounded p-3 m-1">
 				<ExpeditionCheckModule />
+			</div>
+
+			<div className="row border rounded p-3 m-1 mt-5">
+				<PermisosExcelModule />
 			</div>
 		</>
 	);

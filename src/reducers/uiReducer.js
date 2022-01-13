@@ -2,7 +2,8 @@ import { types } from "../types/types";
 
 const initialState = {
 	loading: false,
-	msgError: null
+	msgError: null,
+	updatingPermisos: false
 };
 
 export const uiReducer = (state = initialState, action) => {
@@ -41,6 +42,18 @@ export const uiReducer = (state = initialState, action) => {
 			return {
 				...state,
 				isOpenUserRoleModal: false
+			};
+
+		case types.setUpdatingPermisos:
+			return {
+				...state,
+				updatingPermisos: true
+			};
+
+		case types.unsetUpdatingPermisos:
+			return {
+				...state,
+				updatingPermisos: false
 			};
 
 		default:

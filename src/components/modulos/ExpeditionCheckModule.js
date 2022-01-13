@@ -12,7 +12,7 @@ export const ExpeditionCheckModule = () => {
 
 	return (
 		<>
-			<h2>Verificar expedicion</h2>
+			<h3>Verificar expedicion</h3>
 
 			<div className="col-12 d-flex">
 				<h5>Modulo: {modulo}</h5>
