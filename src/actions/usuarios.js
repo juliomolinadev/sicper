@@ -6,6 +6,7 @@ import { loadCiclo } from "../helpers/DB/loadCiclo";
 import { startSetEstadoExpedicionModulo } from "./auth";
 import { goToElement } from "../helpers/functions/assets";
 import { unsetTransferencia } from "./transferenciasScreen";
+import { loadLaboresPendientes } from "../helpers/loadLaboresPendientes";
 
 export const openUsuariosModal = () => ({
 	type: types.altaPermisoOpenUsuariosModal
@@ -37,6 +38,13 @@ export const startSetUsuarioSelected = (usuario) => {
 	return async (dispatch) => {
 		const ciclo = await loadCiclo();
 
+		const laboresPendientes = await loadLaboresPendientes(
+			`${usuario.cuenta}.${usuario.subcta}`,
+			usuario.entidad,
+			// TODO: Poner ciclo de forma dinamica
+			"2020-2021"
+		);
+
 		// Verifica si los derechos corresponden a una transferencia
 		if (usuario.folio) {
 			const supPrevia = await loadSuperficiePrevia(
@@ -48,6 +56,7 @@ export const startSetUsuarioSelected = (usuario) => {
 
 			usuario.supRiego = usuario.superficieTransferida;
 			usuario.supPrevia = supPrevia;
+			usuario.laboresPendientes = laboresPendientes;
 
 			dispatch(unsetTransferencia());
 			dispatch(setUsuarioSelected(usuario));
@@ -61,6 +70,7 @@ export const startSetUsuarioSelected = (usuario) => {
 
 			const transfers = await loadUserTransfer(`${usuario.cuenta}-${usuario.subcta}`, ciclo);
 
+			usuario.laboresPendientes = laboresPendientes;
 			usuario.supPrevia = supPrevia + transfers;
 
 			dispatch(unsetTransferencia());

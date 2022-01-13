@@ -203,7 +203,8 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				reacomodo: action.payload.reacomodo,
 				nombreLocalidad: action.payload.nombreLocalidad,
 				tipoLocalidad: action.payload.tipoLocalidad,
-				claveLocalidad: action.payload.ejido
+				claveLocalidad: action.payload.ejido,
+				laboresPendientes: action.payload.laboresPendientes
 			};
 
 		case types.unsetUsuario:

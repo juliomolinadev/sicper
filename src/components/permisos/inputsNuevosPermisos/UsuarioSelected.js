@@ -8,6 +8,14 @@ export const UsuarioSelected = () => {
 	const usuario = usuarios.find((usuario) => usuario.id === idUsuarioSelected);
 	return (
 		<div className="border rounded mb-4 p-2">
+			{usuario.laboresPendientes && (
+				<div className="row mb-3">
+					<div className="col-sm-12 d-flex justify-content-center">
+						<div className="text-danger">Labores fitosanitarias pendientes.</div>
+					</div>
+				</div>
+			)}
+
 			<div className="row">
 				<div className="col-sm-6">Cuenta: {`${usuario.cuenta}.${usuario.subcta}`}</div>
 				<div className="col-sm-3">

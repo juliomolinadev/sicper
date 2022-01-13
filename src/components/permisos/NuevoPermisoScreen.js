@@ -125,11 +125,12 @@ export const NuevoPermisoScreen = () => {
 			dispatch(setError("Ingrese la superficie que será autorizada en este permiso."));
 			return false;
 		} else if (altaPermisos.supDerecho - altaPermisos.supPrevia < parseInt(supAutorizada)) {
-			const { supDerecho, supPrevia } = altaPermisos;
-			console.log({ supDerecho, supPrevia, supAutorizada });
 			dispatch(
 				setError("La superficie excede la superficie disponible de la cuenta seleccionada.")
 			);
+			return false;
+		} else if (altaPermisos.laboresPendientes) {
+			dispatch(setError("La cuenta seleccionada tiene labores fitosanitarias pendientes."));
 			return false;
 		} else if (!fuenteCredito) {
 			dispatch(setError("Especifique la fuente de crédito."));
