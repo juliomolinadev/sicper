@@ -13,7 +13,7 @@ export const loadSuperficiePrevia = async (cuenta, modulo, ciclo, folio = false)
 		.where("estadoPermiso", "!=", "Cancelado");
 
 	if (folio) {
-		const permisosSnap = await permisosPad.where("folio", "==", folio).get();
+		const permisosSnap = await permisosPad.where("idUsuarioSelected", "==", folio).get();
 
 		permisosSnap.forEach((snapHijo) => {
 			permisos.push({
