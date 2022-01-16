@@ -19,13 +19,11 @@ export const TechnicianTable = ({ state, dispatch }) => {
 	};
 
 	return (
-		<div>
-			<CustomTable
-				title={technicians.length === 0 ? "No se encontraron técnicos" : "Técnicos"}
-				columns={techniciansColumns}
-				data={technicians}
-				simpleSetFunction={handleSetTechnician}
-			/>
-		</div>
+		<CustomTable
+			title={technicians.length === 0 ? "No se encontraron técnicos" : "Técnicos"}
+			columns={techniciansColumns}
+			data={technicians}
+			simpleSetFunction={handleSetTechnician}
+		/>
 	);
 };
