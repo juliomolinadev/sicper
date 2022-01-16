@@ -8,13 +8,9 @@ import { UserPrivilegesForm } from "../forms/UserPrivilegesForm";
 
 const customStyles = {
 	content: {
-		top: "50%",
-		left: "50%",
-		right: "auto",
-		bottom: "auto",
-		marginRight: "-50%",
-		transform: "translate(-50%, -50%)",
-		height: "550px"
+		width: "1125px",
+		height: "1500px",
+		overflow: "auto"
 	}
 };
 
@@ -36,7 +32,7 @@ export const UserRoleModal = () => {
 			onRequestClose={closeModal}
 			style={customStyles}
 			closeTimeoutMS={200}
-			className="modal"
+			className="printModal"
 			overlayClassName="modal-fondo"
 		>
 			<div className="p-4">

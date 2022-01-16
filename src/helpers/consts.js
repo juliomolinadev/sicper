@@ -175,8 +175,10 @@ export const privileges = {
 	solicitarTransferencias: false,
 	consultarTransferencias: false,
 
+	//Asignacion
+	asignarTecnico: false,
+
 	//Labores
-	asignarTécnico: false,
 	consultarLabores: false,
 	registrarLabores: false,
 	pagarLabores: false,

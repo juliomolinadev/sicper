@@ -150,5 +150,9 @@ export const types = {
 	setAutorizados: "[Reportes] Set Autorizados",
 
 	openUserRoleModal: "[UI] Open User Role Modal",
-	closeUserRoleModal: "[UI] Close User Role Modal"
+	closeUserRoleModal: "[UI] Close User Role Modal",
+
+	setTechnicians: "[Asignacion Screen] Set Technicians",
+	setTechnicianSelected: "[Asignacion Screen] Set Technician Selected",
+	unsetTechnicianSelected: "[Asignacion Screen] Unset Technician Selected"
 };

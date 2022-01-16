@@ -32,6 +32,12 @@ export const usuariosColumns = [
 	{ name: "TRANSFERENCIA", selector: "folio", sortable: true, width: "80px" }
 ];
 
+export const techniciansColumns = [
+	{ name: "id", selector: "id", omit: true },
+	{ name: "NOMBRE", selector: "displayName", sortable: true },
+	{ name: "EMAIL", selector: "email", sortable: true }
+];
+
 export const transferColumns = [
 	{ name: "id", selector: "id", omit: true },
 	{ name: "FOLIO", selector: "folio", sortable: true, width: "100px", center: true },
