@@ -15,6 +15,9 @@ export const asignacionReducer = (state, action) => {
 		case types.setTechnicianSelected:
 			return { ...state, technicianSelected: action.payload };
 
+		case types.setBusqueda:
+			return { ...state, palabra: action.payload };
+
 		case types.updateTechnicians:
 			const updatedTechnicians = [];
 			state.technicians.forEach((technician, i) => {

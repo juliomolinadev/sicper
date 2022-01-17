@@ -1,14 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import moment from "moment";
 import Swal from "sweetalert2";
 import { CustomTable } from "../components/tables/CustomTable";
 import { laboresColumns } from "../components/tables/configTables";
-import {
-	// startLoadPermisos,
-	setPermisoSelected,
-	startLoadPermisosSearch
-} from "../actions/algodoneroScreen";
+import { setPermisoSelected, startLoadPermisosSearch } from "../actions/algodoneroScreen";
 import { useForm } from "../hooks/useForm";
 import { CheckSanidad } from "../components/modulos/CheckSanidad";
 import { PrintSanidadModal } from "../components/modals/PrintSanidadModal";
@@ -22,10 +17,6 @@ export const LaboresScreen = () => {
 
 	const { permisos, permisoSelected } = useSelector((state) => state.algodoneroScreen);
 	const { uid, rol } = useSelector((state) => state.auth);
-
-	// if (permisos.length === 0) {
-	// 	dispatch(startLoadPermisos(uid));
-	// }
 
 	const buscarPermisos = () => {
 		if (palabra.length > 0) {
@@ -44,17 +35,6 @@ export const LaboresScreen = () => {
 			buscarPermisos();
 		}
 	};
-
-	// let permisosFormateados = [];
-
-	// permisos.forEach((permiso) => {
-	// 	permisosFormateados.push({
-	// 		...permiso
-	// 		// fechaEmicion: moment(permiso.fechaEmicion.toDate()).format("DD/MM/YYYY"),
-	// 		// fechaLimite: moment(permiso.fechaLimite.toDate()).format("DD/MM/YYYY"),
-	// 		// vigencia: moment(permiso.vigencia.toDate()).format("DD/MM/YYYY")
-	// 	});
-	// });
 
 	let dataPermiso;
 
