@@ -15,6 +15,9 @@ export const AsignacionScreen = () => {
 		permitSelected: null
 	};
 
+	const { privilegios } = useSelector((state) => state.auth);
+	const { asignarTecnico } = privilegios;
+
 	const { permisoSelected } = useSelector((state) => state.algodoneroScreen);
 
 	const [state, dispatch] = useReducer(asignacionReducer, initialState);
@@ -39,16 +42,20 @@ export const AsignacionScreen = () => {
 				</div>
 			</div>
 
-			<div className="row d-flex justify-content-center mt-5">
-				<h4>Asignación individual</h4>
-			</div>
+			{asignarTecnico && (
+				<>
+					<div className="row d-flex justify-content-center mt-5">
+						<h4>Asignación individual</h4>
+					</div>
 
-			<div className="row">
-				<div className="col-sm-8">
-					<LaboresPermitsTable dispatch={dispatch} />
-				</div>
-				<div className="col-sm-4">{permisoSelected && <PermisoAsignacion state={state} />}</div>
-			</div>
+					<div className="row">
+						<div className="col-sm-8">
+							<LaboresPermitsTable dispatch={dispatch} />
+						</div>
+						<div className="col-sm-4">{permisoSelected && <PermisoAsignacion state={state} />}</div>
+					</div>
+				</>
+			)}
 
 			<div className="mt-5">
 				{" "}
