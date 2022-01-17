@@ -153,6 +153,7 @@ export const types = {
 	closeUserRoleModal: "[UI] Close User Role Modal",
 
 	setTechnicians: "[Asignacion Screen] Set Technicians",
+	updateTechnicians: "[Asignacion Screen] Update Technicians",
 	setTechnicianSelected: "[Asignacion Screen] Set Technician Selected",
 	unsetTechnicianSelected: "[Asignacion Screen] Unset Technician Selected"
 };

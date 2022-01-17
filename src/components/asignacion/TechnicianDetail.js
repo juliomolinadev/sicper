@@ -8,7 +8,7 @@ export const TechnicianDetail = ({ state, dispatch }) => {
 	const { email, displayName: name, modulos: modulosTechnician, id } = technician;
 
 	const [modulosCard, setModulosCard] = useState(modulosTechnician);
-	console.log({ modulosCard, modulosTechnician });
+	// console.log({ modulosCard, modulosTechnician });
 
 	useEffect(() => {
 		setModulosCard(modulosTechnician);
@@ -29,11 +29,21 @@ export const TechnicianDetail = ({ state, dispatch }) => {
 	};
 
 	const handleSaveChanges = async () => {
-		const isSave = await saveTechnicianModules(id, modulosCard);
-		if (isSave)
+		const otherTechnicians = [];
+		state.technicians.forEach((technician) => {
+			if (technician.id !== id) {
+				otherTechnicians.push({
+					id: technician.id,
+					modulos: technician.modulos ?? []
+				});
+			}
+		});
+
+		const updates = await saveTechnicianModules(id, modulosCard, otherTechnicians);
+		if (updates)
 			dispatch({
-				type: types.setTechnicianSelected,
-				payload: { ...technician, modulos: modulosCard }
+				type: types.updateTechnicians,
+				payload: updates
 			});
 	};
 

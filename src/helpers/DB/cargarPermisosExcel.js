@@ -6,6 +6,7 @@ import { db } from "../../firebase/firebase-config";
 export const cargarPermisosExcel = (file, ciclo) => {
 	return async (dispatch) => {
 		await dispatch(setUpdatingPermisos());
+
 		const data = await readExcel(file);
 
 		let batch = db.batch();
@@ -22,7 +23,9 @@ export const cargarPermisosExcel = (file, ciclo) => {
 				modulo,
 				cuenta,
 				estadoPermiso: "Activo",
-				laboresPendientes: true
+				laboresPendientes: true,
+				ciclo: "2020-2021",
+				tecnico: ""
 			};
 
 			const ref = db
