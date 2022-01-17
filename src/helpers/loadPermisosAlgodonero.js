@@ -1,9 +1,12 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadPermisosAlgodonero = async () => {
+export const loadPermisosAlgodonero = async (id) => {
 	const permisos = [];
 
-	const permisosSnap = db.collectionGroup("permisos").where("nombreCultivo", "==", "ALGODONERO");
+	const permisosSnap = db
+		.collectionGroup("permisos")
+		.where("tecnico", "==", id)
+		.where("ciclo", "==", "2020-2021");
 
 	await permisosSnap.get().then((querySnapshot) => {
 		querySnapshot.forEach((doc) => {

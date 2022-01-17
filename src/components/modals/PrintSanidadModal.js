@@ -25,6 +25,9 @@ export const PrintSanidadModal = ({ data }) => {
 		}
 	};
 
+	const dateOptions = { weekday: "long", year: "numeric", month: "long", day: "numeric" };
+	const fecha = new Date();
+
 	return (
 		<Modal
 			isOpen={printSanidadModal}
@@ -73,12 +76,12 @@ export const PrintSanidadModal = ({ data }) => {
 			<div className="row d-flex justify-content-center pt-5 text-justify">
 				<div className="col-8">
 					<p>
-						POR LA PRESENTE HACEMOS CONSTAR QUE EL C. {data.nombreProductor}, PRODUCTOR DEL LOTE NO.
-						{data.lote} DEL EJIDO/COLONIA {data.localidad}, CON SUPERFICIE SEMBRADA DE:
-						{data.supAutorizada} HA; REALIZÓ LAS LABORES FITOSANITARIAS EN UNA SUPERFICIE DESVARADA
-						DE: {data.supAutorizada} HA; SUPERFICIE DISQUEADA DE: {data.supAutorizada} HA;
-						SUPERFICIE BARBECHADA DE: {data.supAutorizada} HA; SUPERFICIE CON DESARRAIGO TOTAL DE:
-						{data.supAutorizada} HA.
+						POR LA PRESENTE HACEMOS CONSTAR QUE EL C. {data.nombre}, PRODUCTOR DEL LOTE NO.
+						{data.lote} DEL EJIDO/COLONIA {data.ubicacion}, CON SUPERFICIE SEMBRADA DE:
+						{data.superficie} HA; REALIZÓ LAS LABORES FITOSANITARIAS EN UNA SUPERFICIE DESVARADA DE:{" "}
+						{data.superficie} HA; SUPERFICIE DISQUEADA DE: {data.superficie} HA; SUPERFICIE
+						BARBECHADA DE: {data.superficie} HA; SUPERFICIE CON DESARRAIGO TOTAL DE:
+						{data.superficie} HA.
 					</p>
 
 					<p>
@@ -91,10 +94,10 @@ export const PrintSanidadModal = ({ data }) => {
 
 					<p>SIRVA EL PRESENTE DOCUMENTO PARA LA LIBERACIÓN DE CARTA DE GARANTÍA EMITIDA.</p>
 
-					<p>PROPIETARIO: {data.usuario}</p>
+					<p>PROPIETARIO: {data.nombre}</p>
 
 					<div className=" d-flex justify-content-end pt-5">
-						<p>MEXICALI, B.C., dia DE mes De anio</p>
+						<p>MEXICALI, B. C. , A {fecha.toLocaleString("es-MX", dateOptions).toUpperCase()}</p>
 					</div>
 				</div>
 			</div>

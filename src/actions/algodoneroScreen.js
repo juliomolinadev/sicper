@@ -3,16 +3,16 @@ import { loadPermisosAlgodonero } from "../helpers/loadPermisosAlgodonero";
 import { loadSuperficiesCultivos } from "../helpers/loadSuperficiesCultivos";
 import { loadSearchPermisosAlgodonero } from "../helpers/loadSearchPermisosAlgodonero";
 
-export const startLoadPermisos = () => {
+export const startLoadPermisos = (id) => {
 	return async (dispatch) => {
-		const permisos = await loadPermisosAlgodonero();
+		const permisos = await loadPermisosAlgodonero(id);
 		dispatch(setPermisos(permisos));
 	};
 };
 
-export const startLoadPermisosSearch = (palabra) => {
+export const startLoadPermisosSearch = (id, palabra) => {
 	return async (dispatch) => {
-		const permisos = await loadSearchPermisosAlgodonero(palabra);
+		const permisos = await loadSearchPermisosAlgodonero(id, palabra);
 		dispatch(setPermisos(permisos));
 	};
 };

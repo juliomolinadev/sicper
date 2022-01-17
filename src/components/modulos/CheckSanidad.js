@@ -1,17 +1,19 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { startLoadPermisos, openSanidadModal } from "../../actions/algodoneroScreen";
+import { openSanidadModal, startLoadPermisosSearch } from "../../actions/algodoneroScreen";
 import { updatePermisoAlgodonero } from "../../helpers/updatePermisoAlgodonero";
 
-export const CheckSanidad = () => {
+export const CheckSanidad = ({ palabra }) => {
 	const dispatch = useDispatch();
 
 	const { permisos, permisoSelected } = useSelector((state) => state.algodoneroScreen);
+	const { uid, privilegios, rol } = useSelector((state) => state.auth);
+	const { registrarLabores, pagarLabores, imprimirLabores } = privilegios;
 
 	let dataPermiso;
 
-	const cuotaSanidad = 20;
+	const cuotaSanidad = 10;
 
 	permisos.forEach((permiso) => {
 		if (permiso.id === permisoSelected) {
@@ -19,13 +21,20 @@ export const CheckSanidad = () => {
 		}
 	});
 
-	const auth = useSelector((state) => state.auth);
-	const ciclo = auth.variablesGlobales.cicloActual;
-
 	const setUnset = (objeto, e) => {
-		e.preventDefault();
-		updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, "2020-2021", objeto);
-		dispatch(startLoadPermisos());
+		if (registrarLabores) {
+			e.preventDefault();
+			updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, "2020-2021", objeto);
+			dispatch(startLoadPermisosSearch(uid, palabra));
+		}
+	};
+
+	const setUnsetPago = (objeto, e) => {
+		if (pagarLabores) {
+			e.preventDefault();
+			updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, "2020-2021", objeto);
+			dispatch(startLoadPermisosSearch(rol === "tecnicoCESVBC" ? uid : 0, palabra));
+		}
 	};
 
 	const addSuperficieMapeada = (superficieActual) => {
@@ -41,10 +50,10 @@ export const CheckSanidad = () => {
 			cancelButtonText: "Cancelar"
 		}).then((result) => {
 			if (result.isConfirmed) {
-				updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, ciclo, {
+				updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, "2020-2021", {
 					superficieMapeada: result.value
 				});
-				dispatch(startLoadPermisos());
+				dispatch(startLoadPermisosSearch(rol === "tecnicoCESVBC" ? uid : 0, palabra));
 				Swal.fire("OK", `Se actualiso la superficie mapeada`, "success");
 			}
 		});
@@ -73,16 +82,12 @@ export const CheckSanidad = () => {
 				</div>
 				<div className="row p-1 pl-2">
 					<div className="col-4">USUARIO:</div>
-					<div className="col-8">{dataPermiso.usuario}</div>
-				</div>
-				<div className="row p-1 pl-2">
-					<div className="col-4">PRODUCTOR:</div>
-					<div className="col-8">{dataPermiso.nombreProductor}</div>
+					<div className="col-8">{dataPermiso.nombre}</div>
 				</div>
 
 				<div className="row p-1 pl-2">
 					<div className="col-4">SUPERFICIE:</div>
-					<div className="col-8">{dataPermiso.supAutorizada} ha</div>
+					<div className="col-8">{dataPermiso.superficie} ha</div>
 				</div>
 
 				<div className="row p-1 pl-2">
@@ -91,11 +96,7 @@ export const CheckSanidad = () => {
 				</div>
 				<div className="row p-1 pl-2">
 					<div className="col-4">LOCALIDAD:</div>
-					<div className="col-8">{dataPermiso.localidad}</div>
-				</div>
-				<div className="row p-1 pl-2">
-					<div className="col-4">SECCION:</div>
-					<div className="col-8">{dataPermiso.seccion}</div>
+					<div className="col-8">{dataPermiso.ubicacion}</div>
 				</div>
 				<div className="row p-1 pl-2">
 					<div className="col-4">MODULO:</div>
@@ -238,13 +239,15 @@ export const CheckSanidad = () => {
 						<div className="col-6 ">SUPERFICIE MAPEADA:</div>
 						<div className="col-3">{dataPermiso.superficieMapeada} Ha</div>
 						<div className="col-3">
-							<button
-								className=" btn btn-outline-primary btn-sm "
-								type="button"
-								onClick={() => addSuperficieMapeada(dataPermiso.superficieMapeada)}
-							>
-								<i className="fas fa-plus"></i>
-							</button>
+							{registrarLabores && (
+								<button
+									className=" btn btn-outline-primary btn-sm "
+									type="button"
+									onClick={() => addSuperficieMapeada(dataPermiso.superficieMapeada)}
+								>
+									<i className="fas fa-plus"></i>
+								</button>
+							)}
 						</div>
 					</div>
 				) : (
@@ -253,9 +256,7 @@ export const CheckSanidad = () => {
 
 				<div className="row p-1 pl-2">
 					<div className="col-4">MONTO A PAGAR:</div>
-					<div className="col-8">
-						{formatter.format(dataPermiso.supAutorizada * cuotaSanidad)} MN
-					</div>
+					<div className="col-8">{formatter.format(dataPermiso.superficie * cuotaSanidad)} MN</div>
 				</div>
 
 				<div className="row p-1 pl-2 d-flex align-items-center">
@@ -265,15 +266,15 @@ export const CheckSanidad = () => {
 							<button
 								className=" btn btn-success btn-sm "
 								type="button"
-								onClick={(e) => setUnset({ pagado: false }, e)}
+								onClick={(e) => setUnsetPago({ pagado: false }, e)}
 							>
 								<i className="fas fa-check"></i>
 							</button>
-						) : dataPermiso.desarraigado ? (
+						) : dataPermiso.desarraigado && pagarLabores ? (
 							<button
 								className=" btn btn-outline-success btn-sm "
 								type="button"
-								onClick={(e) => setUnset({ pagado: true }, e)}
+								onClick={(e) => setUnsetPago({ pagado: true }, e)}
 							>
 								<i className="fas fa-check"></i>
 							</button>
@@ -287,7 +288,7 @@ export const CheckSanidad = () => {
 
 				<div className="row p-1 pl-2 pt-4 pb-4">
 					<div className="col-6 d-flex justify-content-center">
-						{dataPermiso.pagado ? (
+						{dataPermiso.pagado && imprimirLabores ? (
 							<button
 								type="button"
 								className="btn btn-outline-success"

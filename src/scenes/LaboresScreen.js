@@ -1,11 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import moment from "moment";
+// import moment from "moment";
 import Swal from "sweetalert2";
 import { CustomTable } from "../components/tables/CustomTable";
-import { permisosColumns } from "../components/tables/configTables";
+import { laboresColumns } from "../components/tables/configTables";
 import {
-	startLoadPermisos,
+	// startLoadPermisos,
 	setPermisoSelected,
 	startLoadPermisosSearch
 } from "../actions/algodoneroScreen";
@@ -21,14 +21,15 @@ export const LaboresScreen = () => {
 	const { palabra } = formValues;
 
 	const { permisos, permisoSelected } = useSelector((state) => state.algodoneroScreen);
+	const { uid, rol } = useSelector((state) => state.auth);
 
-	if (permisos.length === 0) {
-		dispatch(startLoadPermisos());
-	}
+	// if (permisos.length === 0) {
+	// 	dispatch(startLoadPermisos(uid));
+	// }
 
 	const buscarPermisos = () => {
 		if (palabra.length > 0) {
-			dispatch(startLoadPermisosSearch(palabra));
+			dispatch(startLoadPermisosSearch(rol === "tecnicoCESVBC" ? uid : 0, palabra));
 		} else {
 			Swal.fire(
 				"Nada para buscar",
@@ -44,16 +45,16 @@ export const LaboresScreen = () => {
 		}
 	};
 
-	let permisosFormateados = [];
+	// let permisosFormateados = [];
 
-	permisos.forEach((permiso) => {
-		permisosFormateados.push({
-			...permiso,
-			fechaEmicion: moment(permiso.fechaEmicion.toDate()).format("DD/MM/YYYY"),
-			fechaLimite: moment(permiso.fechaLimite.toDate()).format("DD/MM/YYYY"),
-			vigencia: moment(permiso.vigencia.toDate()).format("DD/MM/YYYY")
-		});
-	});
+	// permisos.forEach((permiso) => {
+	// 	permisosFormateados.push({
+	// 		...permiso
+	// 		// fechaEmicion: moment(permiso.fechaEmicion.toDate()).format("DD/MM/YYYY"),
+	// 		// fechaLimite: moment(permiso.fechaLimite.toDate()).format("DD/MM/YYYY"),
+	// 		// vigencia: moment(permiso.vigencia.toDate()).format("DD/MM/YYYY")
+	// 	});
+	// });
 
 	let dataPermiso;
 
@@ -70,7 +71,7 @@ export const LaboresScreen = () => {
 					<input
 						type="text"
 						className="form-control"
-						placeholder="Número de permiso, número de cuenta o apellido paterno"
+						placeholder="Apellido paterno"
 						name="palabra"
 						autoComplete="off"
 						value={palabra}
@@ -90,15 +91,17 @@ export const LaboresScreen = () => {
 
 			<div className="row pt-3 pb-4">
 				<div className="col-sm-8 pr-0 mt-3">
-					<CustomTable
-						title="Permisos"
-						columns={permisosColumns}
-						data={permisosFormateados}
-						setFunction={setPermisoSelected}
-					></CustomTable>
+					{permisos.length > 0 && (
+						<CustomTable
+							title="Permisos"
+							columns={laboresColumns}
+							data={permisos}
+							setFunction={setPermisoSelected}
+						/>
+					)}
 				</div>
 
-				{permisoSelected && dataPermiso !== undefined ? <CheckSanidad /> : <></>}
+				{permisoSelected && dataPermiso !== undefined ? <CheckSanidad palabra={palabra} /> : <></>}
 			</div>
 			{dataPermiso !== undefined ? (
 				<PrintSanidadModal data={dataPermiso}></PrintSanidadModal>

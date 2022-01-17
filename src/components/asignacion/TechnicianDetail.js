@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { modulos as modulosTags } from "../../helpers/consts";
 import { saveTechnicianModules } from "../../helpers/DB/saveTechnicianModules";
 import { types } from "../../types/types";
 
 export const TechnicianDetail = ({ state, dispatch }) => {
+	const { privilegios } = useSelector((state) => state.auth);
+	const { asignarTecnico } = privilegios;
+
 	const { technicianSelected: technician } = state;
 	const { email, displayName: name, modulos: modulosTechnician, id } = technician;
 
@@ -15,17 +19,19 @@ export const TechnicianDetail = ({ state, dispatch }) => {
 	}, [modulosTechnician]);
 
 	const addRemoveModule = (moduloOnClick) => {
-		const isInTechnician = modulosCard.includes(`${moduloOnClick}`);
-		let modulosUpdated = [];
+		if (asignarTecnico) {
+			const isInTechnician = modulosCard.includes(`${moduloOnClick}`);
+			let modulosUpdated = [];
 
-		if (isInTechnician) {
-			modulosUpdated = modulosCard.filter((modulo) => modulo !== `${moduloOnClick}`);
-		} else {
-			modulosUpdated = [...modulosCard];
-			modulosUpdated.push(`${moduloOnClick}`);
+			if (isInTechnician) {
+				modulosUpdated = modulosCard.filter((modulo) => modulo !== `${moduloOnClick}`);
+			} else {
+				modulosUpdated = [...modulosCard];
+				modulosUpdated.push(`${moduloOnClick}`);
+			}
+
+			setModulosCard(modulosUpdated);
 		}
-
-		setModulosCard(modulosUpdated);
 	};
 
 	const handleSaveChanges = async () => {
@@ -73,7 +79,7 @@ export const TechnicianDetail = ({ state, dispatch }) => {
 				})}
 			</div>
 
-			{somethingChanged(modulosCard, modulosTechnician) && (
+			{asignarTecnico && somethingChanged(modulosCard, modulosTechnician) && (
 				<button onClick={handleSaveChanges} className="btn btn-success mt-4">
 					Aplicar cambios
 				</button>
