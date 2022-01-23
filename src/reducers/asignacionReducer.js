@@ -9,6 +9,12 @@ import { types } from "../types/types";
 
 export const asignacionReducer = (state, action) => {
 	switch (action.type) {
+		case types.setLocaltiesAsignacion:
+			return { ...state, localties: action.payload };
+
+		case types.setSelectedLocaltiesAsignacion:
+			return { ...state, selectedLocalties: action.payload };
+
 		case types.setTechnicians:
 			return { ...state, technicians: action.payload };
 

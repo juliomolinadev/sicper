@@ -92,6 +92,12 @@ export const localtiesColumns = [
 	{ name: "ESTADO", selector: "estado", sortable: true }
 ];
 
+export const asignacionLocaltiesColumns = [
+	{ name: "CLAVE", selector: "clave", sortable: true, center: true },
+	{ name: "TIPO", selector: "tipo", sortable: true },
+	{ name: "NOMBRE", selector: "ubicacion", sortable: true }
+];
+
 export const permisosColumns = [
 	{ name: "id", selector: "id", omit: true },
 	{ name: "PERMISO", selector: "numeroPermiso", sortable: true, width: "110px" },

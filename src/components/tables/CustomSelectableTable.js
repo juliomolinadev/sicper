@@ -7,12 +7,19 @@ export const CustomSelectableTable = ({
 	columns,
 	data,
 	setSelectedRowsFunction,
+	simpleSetSelectedRowsFunction,
 	contextMessage
 }) => {
 	const dispatch = useDispatch();
 
 	const setSelectedRows = (rows) => {
-		dispatch(setSelectedRowsFunction(rows.selectedRows));
+		if (setSelectedRowsFunction !== undefined) {
+			dispatch(setSelectedRowsFunction(rows.selectedRows));
+		}
+
+		if (!simpleSetSelectedRowsFunction !== undefined) {
+			simpleSetSelectedRowsFunction(rows.selectedRows);
+		}
 	};
 
 	const paginationOptions = {

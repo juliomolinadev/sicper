@@ -1,30 +1,31 @@
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-	setSelectedLocalties,
-	startLoadLocaltiesFromUnassignedPermits
-} from "../../actions/entidades/localidades";
+import React, { useEffect } from "react";
+import { loadLocaltiesFromUnassignedPermits } from "../../helpers/loadLocaltiesFromUnassignedPermits";
+import { types } from "../../types/types";
 import { CustomSelectableTable } from "../tables/CustomSelectableTable";
-import { localtiesColumns } from "./configTables";
+import { asignacionLocaltiesColumns } from "./configTables";
 
-export const SelectableLocaltiesTable = () => {
-	const { localties } = useSelector((state) => state.entidades);
+export const SelectableLocaltiesTable = ({ state, dispatch }) => {
+	const { localties } = state;
 
-	const dispatch = useDispatch();
+	useEffect(() => {
+		loadLocaltiesFromUnassignedPermits().then((localtie) => {
+			dispatch({ type: types.setLocaltiesAsignacion, payload: localtie });
+		});
+	}, [dispatch]);
 
-	if (!localties) {
-		dispatch(startLoadLocaltiesFromUnassignedPermits());
-	}
+	const startSetSelectedLocalties = (localties) => {
+		dispatch({ type: types.setSelectedLocaltiesAsignacion, payload: localties });
+	};
 
 	const contextMessage = { singular: "localidad", plural: "localidades", message: "para asignar" };
 
-	if (localties) {
+	if (localties.length > 0) {
 		return (
 			<CustomSelectableTable
 				title={"Localidades disponibles"}
-				columns={localtiesColumns}
+				columns={asignacionLocaltiesColumns}
 				data={localties}
-				setSelectedRowsFunction={setSelectedLocalties}
+				simpleSetSelectedRowsFunction={startSetSelectedLocalties}
 				contextMessage={contextMessage}
 			/>
 		);

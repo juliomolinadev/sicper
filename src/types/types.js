@@ -152,6 +152,8 @@ export const types = {
 	openUserRoleModal: "[UI] Open User Role Modal",
 	closeUserRoleModal: "[UI] Close User Role Modal",
 
+	setLocaltiesAsignacion: "[Asignacion Screen] Set Localties",
+	setSelectedLocaltiesAsignacion: "[Asignacion Screen] Set Selected Localties",
 	setTechnicians: "[Asignacion Screen] Set Technicians",
 	updateTechnicians: "[Asignacion Screen] Update Technicians",
 	setTechnicianSelected: "[Asignacion Screen] Set Technician Selected",
