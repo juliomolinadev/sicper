@@ -1,12 +1,12 @@
 import { types } from "../../types/types";
-import { loadLocaltiesFromUnassignedPermits } from "../../helpers/loadLocaltiesFromUnassignedPermits";
+import { loadLocaltiesFromPermits } from "../../helpers/loadLocaltiesFromPermits";
 import { loadLocaltiesGroup } from "../../helpers/loadLocaltiesGroup";
 import { assignTechnician } from "../../helpers/assignTechnician";
 import { loadLocalties } from "../../helpers/DB/loadLocalties";
 
 export const startLoadLocaltiesFromUnassignedPermits = () => {
 	return async (dispatch) => {
-		const localties = await loadLocaltiesFromUnassignedPermits();
+		const localties = await loadLocaltiesFromPermits();
 		const localtiesData = await loadLocaltiesGroup(localties);
 		dispatch(setLocalties(localtiesData));
 	};

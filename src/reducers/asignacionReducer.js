@@ -30,7 +30,7 @@ export const asignacionReducer = (state, action) => {
 				updatedTechnicians.push(technician);
 				action.payload.forEach((updatedTech) => {
 					if (technician.id === updatedTech.id) {
-						updatedTechnicians[i].modulos = updatedTech.modulos;
+						updatedTechnicians[i].localidades = updatedTech.localidades;
 					}
 				});
 			});

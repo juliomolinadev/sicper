@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useReducer } from "react";
 import { useSelector } from "react-redux";
 import { PermisoAsignacion } from "../components/asignacion/PermisoAsignacion";
-import { TechnicianDetail } from "../components/asignacion/TechnicianDetail";
+import { SelectedLocaltiesDetail } from "../components/asignacion/SelectedLocaltiesDetail";
+// import { TechnicianDetail } from "../components/asignacion/TechnicianDetail";
 import { LaboresPermitsTable } from "../components/tables/LaboresPermitsTable";
 import { SelectableLocaltiesTable } from "../components/tables/SelectableLocaltiesTable";
-import { TechnicianTable } from "../components/tables/TechnicianTable";
+import { loadTechnician } from "../helpers/DB/loadTechnician";
+import { loadLocaltiesFromPermits } from "../helpers/loadLocaltiesFromPermits";
+// import { TechnicianTable } from "../components/tables/TechnicianTable";
 import { asignacionReducer } from "../reducers/asignacionReducer";
+import { types } from "../types/types";
 
 export const AsignacionScreen = () => {
 	const initialState = {
@@ -23,8 +27,20 @@ export const AsignacionScreen = () => {
 	const { permisoSelected } = useSelector((state) => state.algodoneroScreen);
 
 	const [state, dispatch] = useReducer(asignacionReducer, initialState);
-	const { technicianSelected: technician } = state;
+	const { selectedLocalties, localties } = state;
 	// console.log(state);
+
+	useEffect(() => {
+		loadLocaltiesFromPermits().then((localties) => {
+			dispatch({ type: types.setLocaltiesAsignacion, payload: localties });
+		});
+	}, [dispatch]);
+
+	useEffect(() => {
+		loadTechnician().then((techniciasns) => {
+			dispatch({ type: types.setTechnicians, payload: techniciasns });
+		});
+	}, [dispatch]);
 
 	return (
 		<>
@@ -34,11 +50,19 @@ export const AsignacionScreen = () => {
 
 			<div className="row">
 				<div className="col-sm-8">
-					<SelectableLocaltiesTable state={state} dispatch={dispatch} />
+					{localties.length > 0 && (
+						<SelectableLocaltiesTable localties={localties} dispatch={dispatch} />
+					)}
+				</div>
+
+				<div className="col-sm-4">
+					{selectedLocalties.length > 0 && (
+						<SelectedLocaltiesDetail state={state} dispatch={dispatch} />
+					)}
 				</div>
 			</div>
 
-			<div className="row">
+			{/* <div className="row">
 				<div className="col-sm-8">
 					<TechnicianTable state={state} dispatch={dispatch} />
 				</div>
@@ -46,7 +70,7 @@ export const AsignacionScreen = () => {
 				<div className="col-sm-4">
 					{technician && <TechnicianDetail state={state} dispatch={dispatch} />}
 				</div>
-			</div>
+			</div> */}
 
 			{asignarTecnico && (
 				<>

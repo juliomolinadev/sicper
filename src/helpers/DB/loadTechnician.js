@@ -8,7 +8,8 @@ export const loadTechnician = async () => {
 		technicians.push({
 			...doc.data(),
 			id: doc.id,
-			modulos: doc.data().modulos ?? []
+			modulos: doc.data().modulos ?? [],
+			localidades: doc.data().localidades ?? []
 		});
 	});
 

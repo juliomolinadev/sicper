@@ -1,9 +1,15 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadLocaltiesFromUnassignedPermits = async () => {
+export const loadLocaltiesFromPermits = async () => {
 	const permisosSnap = db.collectionGroup("permisos").where("ciclo", "==", "2020-2021");
 	const localtiesIds = [];
 	const localties = [];
+	const padronLocalties = [];
+	const padronLocaltiesSnap = await db.collectionGroup("colonias").get();
+
+	padronLocaltiesSnap.forEach((localtie) => {
+		padronLocalties.push({ ...localtie.data() });
+	});
 
 	await permisosSnap.get().then((permisos) => {
 		permisos.forEach((permiso) => {
@@ -12,11 +18,19 @@ export const loadLocaltiesFromUnassignedPermits = async () => {
 				localties.push({
 					clave: permiso.data().claveLocalidad,
 					ubicacion: permiso.data().ubicacion,
-					tipo: permiso.data().tipoLocalidad
+					tipo: permiso.data().tipoLocalidad,
+					tecnico: getTechnician(permiso.data().claveLocalidad, padronLocalties)
 				});
 			}
 		});
 	});
 
 	return localties;
+};
+
+const getTechnician = (id, localties) => {
+	const localtie = localties.find((localtie) => localtie.clave === id);
+
+	if (localtie.tecnico) return localtie.tecnico;
+	else return "Sin asignar";
 };
