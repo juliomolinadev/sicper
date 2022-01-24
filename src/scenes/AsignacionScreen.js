@@ -3,12 +3,10 @@ import { useReducer } from "react";
 import { useSelector } from "react-redux";
 import { PermisoAsignacion } from "../components/asignacion/PermisoAsignacion";
 import { SelectedLocaltiesDetail } from "../components/asignacion/SelectedLocaltiesDetail";
-// import { TechnicianDetail } from "../components/asignacion/TechnicianDetail";
 import { LaboresPermitsTable } from "../components/tables/LaboresPermitsTable";
 import { SelectableLocaltiesTable } from "../components/tables/SelectableLocaltiesTable";
 import { loadTechnician } from "../helpers/DB/loadTechnician";
 import { loadLocaltiesFromPermits } from "../helpers/loadLocaltiesFromPermits";
-// import { TechnicianTable } from "../components/tables/TechnicianTable";
 import { asignacionReducer } from "../reducers/asignacionReducer";
 import { types } from "../types/types";
 
@@ -61,16 +59,6 @@ export const AsignacionScreen = () => {
 					)}
 				</div>
 			</div>
-
-			{/* <div className="row">
-				<div className="col-sm-8">
-					<TechnicianTable state={state} dispatch={dispatch} />
-				</div>
-
-				<div className="col-sm-4">
-					{technician && <TechnicianDetail state={state} dispatch={dispatch} />}
-				</div>
-			</div> */}
 
 			{asignarTecnico && (
 				<>

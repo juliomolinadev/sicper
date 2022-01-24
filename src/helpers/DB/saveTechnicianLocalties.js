@@ -42,15 +42,13 @@ export const saveTechnicianLocalties = async (id, nombre, localties, otherTechni
 		});
 	});
 
-	const updatesInPadron = updates.map((technician) => {
-		const batch = [];
+	const updatesInPadron = [];
+	updates.forEach((technician) => {
 		technician.localidades.forEach((claveLocalidad) => {
 			const localtie = padronLocalties.find((localtie) => localtie.clave === claveLocalidad);
 
-			batch.push({ id: localtie.id, tecnico: technician.nombre });
+			updatesInPadron.push({ id: localtie.id, tecnico: technician.nombre });
 		});
-
-		return batch;
 	});
 
 	let batch = db.batch();
@@ -60,29 +58,26 @@ export const saveTechnicianLocalties = async (id, nombre, localties, otherTechni
 	try {
 		let asignados = 0;
 
-		updatesInPadron.forEach((padronBatch) => {
-			padronBatch.forEach((localtie) => {
-				console.log("Aniadiendo a batch: ", localtie.id, localtie.tecnico);
-				batch.update(db.collection("colonias").doc(localtie.id), {
-					tecnico: localtie.tecnico
-				});
-
-				if (i === batchSize) {
-					batch
-						.commit()
-						.then(() => {
-							console.log("Se termino de subir batch");
-						})
-						.catch((err) => {
-							console.error(err);
-						});
-
-					batch = db.batch();
-					i = 0;
-				}
-
-				i++;
+		updatesInPadron.forEach((localtie) => {
+			batch.update(db.collection("colonias").doc(localtie.id), {
+				tecnico: localtie.tecnico
 			});
+
+			if (i === batchSize) {
+				batch
+					.commit()
+					.then(() => {
+						console.log("Se termino de subir batch");
+					})
+					.catch((err) => {
+						console.error(err);
+					});
+
+				batch = db.batch();
+				i = 0;
+			}
+
+			i++;
 		});
 
 		updates.forEach((update) => {
@@ -151,7 +146,7 @@ export const saveTechnicianLocalties = async (id, nombre, localties, otherTechni
 				console.error(err);
 			});
 
-		return updates;
+		return { updates, updatesInPadron };
 	} catch (error) {
 		Swal.close();
 		Swal.fire("Error de conexión", "Error al intentar guardar los cambios.", "error");

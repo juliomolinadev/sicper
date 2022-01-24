@@ -8,7 +8,7 @@ export const loadLocaltiesFromPermits = async () => {
 	const padronLocaltiesSnap = await db.collectionGroup("colonias").get();
 
 	padronLocaltiesSnap.forEach((localtie) => {
-		padronLocalties.push({ ...localtie.data() });
+		padronLocalties.push({ id: localtie.id, ...localtie.data() });
 	});
 
 	await permisosSnap.get().then((permisos) => {
@@ -16,6 +16,7 @@ export const loadLocaltiesFromPermits = async () => {
 			if (permiso.data().claveLocalidad && !localtiesIds.includes(permiso.data().claveLocalidad)) {
 				localtiesIds.push(permiso.data().claveLocalidad);
 				localties.push({
+					id: getLocaltieId(permiso.data().claveLocalidad, padronLocalties),
 					clave: permiso.data().claveLocalidad,
 					ubicacion: permiso.data().ubicacion,
 					tipo: permiso.data().tipoLocalidad,
@@ -33,4 +34,10 @@ const getTechnician = (id, localties) => {
 
 	if (localtie.tecnico) return localtie.tecnico;
 	else return "Sin asignar";
+};
+
+const getLocaltieId = (clave, localties) => {
+	const localtie = localties.find((localtie) => localtie.clave === clave);
+
+	return localtie.id;
 };

@@ -40,6 +40,27 @@ export const asignacionReducer = (state, action) => {
 				technicians: updatedTechnicians
 			};
 
+		case types.updatePadronLocalties:
+			const newLocalties = [];
+			const updatesIds = [];
+
+			action.payload.forEach((localtie) => updatesIds.push(localtie.id));
+
+			state.localties.forEach((stateLocaltie) => {
+				const updatesIndex = updatesIds.indexOf(stateLocaltie.id);
+
+				if (updatesIndex >= 0) {
+					newLocalties.push({ ...stateLocaltie, tecnico: action.payload[updatesIndex].tecnico });
+				} else {
+					newLocalties.push({ ...stateLocaltie });
+				}
+			});
+
+			return {
+				...state,
+				localties: newLocalties
+			};
+
 		default:
 			return state;
 	}

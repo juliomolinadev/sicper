@@ -40,11 +40,17 @@ export const SelectedLocaltiesDetail = ({ state, dispatch }) => {
 				localtiesIds,
 				otherTechnicians
 			);
-			if (updates)
+			if (updates) {
 				dispatch({
 					type: types.updateTechnicians,
-					payload: updates
+					payload: updates.updates
 				});
+
+				dispatch({
+					type: types.updatePadronLocalties,
+					payload: updates.updatesInPadron
+				});
+			}
 		} else {
 			Swal.fire(
 				"Técnico no seleccionado!",
@@ -57,7 +63,12 @@ export const SelectedLocaltiesDetail = ({ state, dispatch }) => {
 	return (
 		<div className="border border-info rounded text-center p-3">
 			<h4>Localidades seleccionadas: {selectedLocalties.length}</h4>
-			{/* <div>Técnico: {technicianSelected ? technicianSelected.displayName : "Sin asignar"}</div> */}
+
+			<div>
+				{selectedLocalties.map((localtie) => (
+					<div key={localtie.id}> {localtie.ubicacion}</div>
+				))}
+			</div>
 
 			<select
 				name="campo"

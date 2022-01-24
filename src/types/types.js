@@ -156,6 +156,7 @@ export const types = {
 	setSelectedLocaltiesAsignacion: "[Asignacion Screen] Set Selected Localties",
 	setTechnicians: "[Asignacion Screen] Set Technicians",
 	updateTechnicians: "[Asignacion Screen] Update Technicians",
+	updatePadronLocalties: "[Asignacion Screen] Update Padron Localties",
 	setTechnicianSelected: "[Asignacion Screen] Set Technician Selected",
 	unsetTechnicianSelected: "[Asignacion Screen] Unset Technician Selected",
 	setBusqueda: "[Asignacion Screen] Set Busqueda"

@@ -12,7 +12,7 @@ export const SelectableLocaltiesTable = ({ localties, dispatch }) => {
 
 	return (
 		<CustomSelectableTable
-			title={"Localidades disponibles"}
+			title={"Localidades"}
 			columns={asignacionLocaltiesColumns}
 			data={localties}
 			simpleSetSelectedRowsFunction={startSetSelectedLocalties}
