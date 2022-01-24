@@ -10,6 +10,7 @@ export const loadSearchPermisosAlgodonero = async (id, palabra) => {
 		querySnapshot.forEach((doc) => {
 			permisos.push({
 				id: doc.id,
+				superficieMapeada: doc.data().superficie,
 				...doc.data()
 			});
 		});
@@ -21,6 +22,7 @@ export const loadSearchPermisosAlgodonero = async (id, palabra) => {
 		querySnapshot.forEach((doc) => {
 			permisos.push({
 				id: doc.id,
+				superficieMapeada: doc.data().superficie,
 				...doc.data()
 			});
 		});

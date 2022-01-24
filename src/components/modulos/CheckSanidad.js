@@ -40,7 +40,7 @@ export const CheckSanidad = ({ palabra }) => {
 	const addSuperficieMapeada = (superficieActual) => {
 		Swal.fire({
 			title: "Actualizar superficie mapeada",
-			input: "number",
+			input: "text",
 			inputPlaceholder: superficieActual,
 			inputAttributes: {
 				autocapitalize: "off"
@@ -51,7 +51,7 @@ export const CheckSanidad = ({ palabra }) => {
 		}).then((result) => {
 			if (result.isConfirmed) {
 				updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, "2020-2021", {
-					superficieMapeada: result.value
+					superficieMapeada: Number(result.value)
 				});
 				dispatch(startLoadPermisosSearch(rol === "tecnicoCESVBC" ? uid : 0, palabra));
 				Swal.fire("OK", `Se actualiso la superficie mapeada`, "success");
@@ -88,6 +88,22 @@ export const CheckSanidad = ({ palabra }) => {
 				<div className="row p-1 pl-2">
 					<div className="col-4">SUPERFICIE:</div>
 					<div className="col-8">{dataPermiso.superficie} ha</div>
+				</div>
+
+				<div className="row border rounded m-2 p-2 d-flex align-items-center">
+					<div className="col-6 ">SUPERFICIE MAPEADA:</div>
+					<div className="col-3">{dataPermiso.superficieMapeada} Ha</div>
+					<div className="col-3">
+						{registrarLabores && (
+							<button
+								className=" btn btn-outline-primary btn-sm "
+								type="button"
+								onClick={() => addSuperficieMapeada(dataPermiso.superficieMapeada)}
+							>
+								<i className="fas fa-edit"></i>
+							</button>
+						)}
+					</div>
 				</div>
 
 				<div className="row p-1 pl-2">
@@ -234,29 +250,38 @@ export const CheckSanidad = ({ palabra }) => {
 					</div>
 				</div>
 
-				{dataPermiso.desarraigado ? (
-					<div className="row border rounded m-2 p-2 d-flex align-items-center">
-						<div className="col-6 ">SUPERFICIE MAPEADA:</div>
-						<div className="col-3">{dataPermiso.superficieMapeada} Ha</div>
-						<div className="col-3">
-							{registrarLabores && (
-								<button
-									className=" btn btn-outline-primary btn-sm "
-									type="button"
-									onClick={() => addSuperficieMapeada(dataPermiso.superficieMapeada)}
-								>
-									<i className="fas fa-plus"></i>
-								</button>
-							)}
-						</div>
+				<div className="row p-1 pl-2 d-flex align-items-center">
+					<div className="col-4">BARBECHADO:</div>
+					<div className="col-8">
+						{dataPermiso.barbechado ? (
+							<button
+								className=" btn btn-success btn-sm "
+								type="button"
+								onClick={(e) => setUnset({ barbechado: false }, e)}
+							>
+								<i className="fas fa-check"></i>
+							</button>
+						) : dataPermiso.disqueado ? (
+							<button
+								className=" btn btn-outline-success btn-sm "
+								type="button"
+								onClick={(e) => setUnset({ barbechado: true }, e)}
+							>
+								<i className="fas fa-check"></i>
+							</button>
+						) : (
+							<button className=" btn btn-outline-secondary btn-sm " type="button">
+								<i className="fas fa-check"></i>
+							</button>
+						)}
 					</div>
-				) : (
-					<></>
-				)}
+				</div>
 
 				<div className="row p-1 pl-2">
 					<div className="col-4">MONTO A PAGAR:</div>
-					<div className="col-8">{formatter.format(dataPermiso.superficie * cuotaSanidad)} MN</div>
+					<div className="col-8">
+						{formatter.format(dataPermiso.superficieMapeada * cuotaSanidad)} MN
+					</div>
 				</div>
 
 				<div className="row p-1 pl-2 d-flex align-items-center">
@@ -270,7 +295,7 @@ export const CheckSanidad = ({ palabra }) => {
 							>
 								<i className="fas fa-check"></i>
 							</button>
-						) : dataPermiso.desarraigado && pagarLabores ? (
+						) : (dataPermiso.desarraigado || dataPermiso.barbechado) && pagarLabores ? (
 							<button
 								className=" btn btn-outline-success btn-sm "
 								type="button"
