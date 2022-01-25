@@ -13,7 +13,7 @@ export const CheckSanidad = ({ palabra }) => {
 
 	let dataPermiso;
 
-	const cuotaSanidad = 10;
+	const cuotaSanidad = 60;
 
 	permisos.forEach((permiso) => {
 		if (permiso.id === permisoSelected) {
@@ -59,6 +59,28 @@ export const CheckSanidad = ({ palabra }) => {
 		});
 	};
 
+	const addFolioFisico = (folio) => {
+		Swal.fire({
+			title: "Folio de constancia física:",
+			input: "text",
+			inputPlaceholder: folio,
+			inputAttributes: {
+				autocapitalize: "off"
+			},
+			showCancelButton: true,
+			confirmButtonText: "Guardar",
+			cancelButtonText: "Cancelar"
+		}).then((result) => {
+			if (result.isConfirmed) {
+				updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, "2020-2021", {
+					folioConstaniciaFisica: result.value
+				});
+				dispatch(startLoadPermisosSearch(rol === "tecnicoCESVBC" ? uid : 0, palabra));
+				Swal.fire("OK", `Se guardó el folio de la constancia.`, "success");
+			}
+		});
+	};
+
 	const formatter = new Intl.NumberFormat("es-MX", {
 		style: "currency",
 		currency: "MXN"
@@ -74,7 +96,7 @@ export const CheckSanidad = ({ palabra }) => {
 		<div className="col-sm-4 mt-3">
 			<div className="border border-info rounded detallePermiso">
 				<div className="d-flex bg-light border-info border-bottom rounded-top p-1 justify-content-center font-weight-bold text-secondary pt-3">
-					<h5>{dataPermiso.numeroPermiso}</h5>
+					<h5>{dataPermiso.folio}</h5>
 				</div>
 				<div className="row p-1 pl-2 pt-2">
 					<div className="col-4">CUENTA:</div>
@@ -99,6 +121,22 @@ export const CheckSanidad = ({ palabra }) => {
 								className=" btn btn-outline-primary btn-sm "
 								type="button"
 								onClick={() => addSuperficieMapeada(dataPermiso.superficieMapeada)}
+							>
+								<i className="fas fa-edit"></i>
+							</button>
+						)}
+					</div>
+				</div>
+
+				<div className="row border rounded m-2 p-2 d-flex align-items-center">
+					<div className="col-6 ">FOLIO DE CONSTANCIA FÍSICA:</div>
+					<div className="col-3">{dataPermiso.folioConstaniciaFisica}</div>
+					<div className="col-3">
+						{registrarLabores && (
+							<button
+								className=" btn btn-outline-primary btn-sm "
+								type="button"
+								onClick={() => addFolioFisico(dataPermiso.folioConstaniciaFisica ?? "")}
 							>
 								<i className="fas fa-edit"></i>
 							</button>

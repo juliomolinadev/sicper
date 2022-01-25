@@ -67,7 +67,7 @@ export const PrintSanidadModal = ({ data }) => {
 
 			<div className="row dflex justify-content-center">
 				<h5>
-					<b>ALGODONERO CICLO P-V {data.ciclo}</b>
+					<b>ALGODONERO CICLO P-V 2021-2021</b>
 				</h5>
 			</div>
 
@@ -77,11 +77,8 @@ export const PrintSanidadModal = ({ data }) => {
 				<div className="col-8">
 					<p>
 						POR LA PRESENTE HACEMOS CONSTAR QUE EL C. {data.nombre}, PRODUCTOR DEL LOTE NO.
-						{data.lote} DEL EJIDO/COLONIA {data.ubicacion}, CON SUPERFICIE SEMBRADA DE:
-						{data.superficie} HA; REALIZÓ LAS LABORES FITOSANITARIAS EN UNA SUPERFICIE DESVARADA DE:{" "}
-						{data.superficie} HA; SUPERFICIE DISQUEADA DE: {data.superficie} HA; SUPERFICIE
-						BARBECHADA DE: {data.superficie} HA; SUPERFICIE CON DESARRAIGO TOTAL DE:
-						{data.superficie} HA.
+						{data.lote} DEL EJIDO/COLONIA {data.ubicacion}, REALIZÓ LAS LABORES FITOSANITARIAS EN
+						UNA SUPERFICIE DE {data.superficie} HA.
 					</p>
 
 					<p>
@@ -121,11 +118,11 @@ export const PrintSanidadModal = ({ data }) => {
 					</div>
 				</div>
 
-				<div className="col-4 d-flex align-items-end justify-content-center">
+				{/* <div className="col-4 d-flex align-items-end justify-content-center">
 					<div className="text-center">
 						<b>SELLO DE CADER</b>
 					</div>
-				</div>
+				</div> */}
 			</div>
 
 			<div className="row p-5">
