@@ -1,10 +1,16 @@
 import React from "react";
+import { editarPermisos } from "../../helpers/DB/editarPermisos";
 import { ExpeditionCheckModule } from "../modulos/ExpeditionCheckModule";
 import { PermisosExcelModule } from "../modulos/PermisosExcelModule";
 import { ProducersReport } from "../ui/organisms/ProducersReport";
 
 export const TestArea = () => {
 	// console.log("modulo en test: ", modulo);
+
+	const editar = () => {
+		editarPermisos();
+	};
+
 	return (
 		<>
 			<div className="row justify-content-center pt-5">
@@ -25,6 +31,12 @@ export const TestArea = () => {
 
 			<div className="row border rounded p-3 m-1 mt-5">
 				<PermisosExcelModule />
+			</div>
+
+			<div className="mt-5">
+				<button onClick={editar} className="btn btn-primary">
+					Editar
+				</button>
 			</div>
 		</>
 	);

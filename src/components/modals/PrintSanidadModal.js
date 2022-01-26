@@ -51,8 +51,11 @@ export const PrintSanidadModal = ({ data }) => {
 					</h5>
 				</div>
 				<div className="col-2">
-					<div className="d-flex justify-content-center">
+					<div className="d-flex-column justify-content-center">
 						<img src={"./logos/cesvbc.webp"} alt="Logo sanidad vegetal" style={{ maxHeight: 80 }} />
+						<div className="mt-3">
+							<b>FOLIO: CESVBC-0000</b>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -102,19 +105,24 @@ export const PrintSanidadModal = ({ data }) => {
 			<div className="row pt-5"></div>
 			<div className="row pt-5"></div>
 			<div className="row pt-5"></div>
+			<div className="row pt-5"></div>
 
 			<div className="row pt-5 d-flex ">
-				<div className="col-4 d-flex flex-column ">
+				<div className="col-4 d-flex-column align-items-end justify-content-center">
+					<div className="text-center">
+						<img
+							src={"./logos/sello-cesvbc.png"}
+							alt="Sello sanidad vegetal"
+							style={{ maxHeight: 150 }}
+						/>
+					</div>
+				</div>
+
+				<div className="col-4 d-flex flex-column ml-3">
 					<p className="pb-5 text-center">NOMBRE Y FIRMA</p>
 					<hr />
 					<div className="text-center">
 						<b>TÉCNICO FITOSANITARIO DEL CESVBC</b>
-					</div>
-				</div>
-
-				<div className="col-4 d-flex align-items-end justify-content-center">
-					<div className="text-center">
-						<b>SELLO DE CESVBC</b>
 					</div>
 				</div>
 
