@@ -329,7 +329,7 @@ export const CheckSanidad = ({ palabra }) => {
 							<button
 								className=" btn btn-success btn-sm "
 								type="button"
-								onClick={(e) => setUnsetPago({ pagado: false }, e)}
+								onClick={(e) => setUnsetPago({ pagado: false, laboresPendientes: true }, e)}
 							>
 								<i className="fas fa-check"></i>
 							</button>
@@ -337,7 +337,7 @@ export const CheckSanidad = ({ palabra }) => {
 							<button
 								className=" btn btn-outline-success btn-sm "
 								type="button"
-								onClick={(e) => setUnsetPago({ pagado: true }, e)}
+								onClick={(e) => setUnsetPago({ pagado: true, laboresPendientes: false }, e)}
 							>
 								<i className="fas fa-check"></i>
 							</button>
@@ -346,6 +346,14 @@ export const CheckSanidad = ({ palabra }) => {
 								<i className="fas fa-check"></i>
 							</button>
 						)}
+					</div>
+				</div>
+
+				<div className="row pt-3 pl-2">
+					<div className={`col-12 ${!dataPermiso.laboresPendientes && "text-success"}`}>
+						{dataPermiso.laboresPendientes
+							? "CUENTA BLOQUEADA PARA EXPEDICIÓN"
+							: "CUENTA LIBERADA PARA EXPEDICIÓN"}
 					</div>
 				</div>
 
