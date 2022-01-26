@@ -245,13 +245,13 @@ export const NuevoPermisoScreen = () => {
 		return vigencia;
 	};
 
-	const defineEstadoPermiso = async (cultivo) => {
-		let estado = "";
+	const defineEstadoPermiso = async (/* cultivo */) => {
+		// let estado = "";
 
-		if (cultivo === "ALGODONERO") estado = "pendiente";
-		else estado = "activo";
+		// if (cultivo === "ALGODONERO") estado = "pendiente";
+		// else estado = "activo";
 
-		return estado;
+		return "activo";
 	};
 
 	const defineFechaLimite = (cultivo) => {
