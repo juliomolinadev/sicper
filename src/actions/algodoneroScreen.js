@@ -2,6 +2,7 @@ import { types } from "../types/types";
 import { loadPermisosAlgodonero } from "../helpers/loadPermisosAlgodonero";
 import { loadSuperficiesCultivos } from "../helpers/loadSuperficiesCultivos";
 import { loadSearchPermisosAlgodonero } from "../helpers/loadSearchPermisosAlgodonero";
+import { getConstanciaSanidadCount } from "../helpers/DB/getCostanciaSanidadCount";
 
 export const startLoadPermisos = (id) => {
 	return async (dispatch) => {
@@ -58,3 +59,25 @@ export const openSanidadModal = () => ({
 export const closeSanidadModal = () => ({
 	type: types.closeSanidadModal
 });
+
+export const defineFolioSanidad = (ciclo) => {
+	return async (dispatch) => {
+		const counter = await getConstanciaSanidadCount(ciclo);
+		const folio = defineFolio(counter);
+		dispatch(setFolioSanidad(folio));
+	};
+};
+
+export const setFolioSanidad = (folio) => ({
+	type: types.setFolioSanidad,
+	payload: folio
+});
+
+const fill = (number, len) => "0".repeat(len - number.toString().length) + number.toString();
+
+const defineFolio = (counter) => {
+	if (counter !== false) {
+		const folio = `CESVBC-${fill(counter + 1, 4)}`;
+		return folio;
+	} else return null;
+};

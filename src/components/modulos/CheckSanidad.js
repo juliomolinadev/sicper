@@ -1,7 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { openSanidadModal, startLoadPermisosSearch } from "../../actions/algodoneroScreen";
+import {
+	defineFolioSanidad,
+	openSanidadModal,
+	startLoadPermisosSearch
+} from "../../actions/algodoneroScreen";
 import { updatePermisoAlgodonero } from "../../helpers/updatePermisoAlgodonero";
 
 export const CheckSanidad = ({ palabra }) => {
@@ -88,6 +92,7 @@ export const CheckSanidad = ({ palabra }) => {
 
 	const handleOpenSanidadModal = () => {
 		dispatch(openSanidadModal());
+		dispatch(defineFolioSanidad("2020-2021"));
 	};
 
 	// TODO: Asignar folio de constancia fitosanitaria al expedir permiso de algodon

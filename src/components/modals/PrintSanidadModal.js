@@ -3,9 +3,12 @@ import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 
 import { closeSanidadModal } from "../../actions/algodoneroScreen";
+import { enablePrintButton } from "../../actions/transferenciasScreen";
+import { saveConstanciaSanidad } from "../../helpers/saveConsatanciaSanidad";
 
 export const PrintSanidadModal = ({ data }) => {
-	const { printSanidadModal } = useSelector((state) => state.algodoneroScreen);
+	const { printSanidadModal, folioSanidad } = useSelector((state) => state.algodoneroScreen);
+	const { transferPrintButton } = useSelector((state) => state.transferenciasScreen);
 
 	const dispatch = useDispatch();
 
@@ -22,6 +25,14 @@ export const PrintSanidadModal = ({ data }) => {
 			width: "1125px",
 			height: "1500px",
 			overflow: "auto"
+		}
+	};
+
+	const handleSaveConstancy = async () => {
+		const isSave = await saveConstanciaSanidad({ ...data, folio: folioSanidad }, "2020-2021");
+
+		if (isSave) {
+			dispatch(enablePrintButton());
 		}
 	};
 
@@ -54,7 +65,7 @@ export const PrintSanidadModal = ({ data }) => {
 					<div className="d-flex-column justify-content-center">
 						<img src={"./logos/cesvbc.webp"} alt="Logo sanidad vegetal" style={{ maxHeight: 80 }} />
 						<div className="mt-3">
-							<b>FOLIO: CESVBC-0000</b>
+							<b>FOLIO: {folioSanidad} </b>
 						</div>
 					</div>
 				</div>
@@ -138,7 +149,7 @@ export const PrintSanidadModal = ({ data }) => {
 				C.c.p. -ARCHIVO
 			</div>
 
-			<div className="row m-3 d-flex justify-content-center pt-5">
+			{/* <div className="row m-3 d-flex justify-content-center pt-5">
 				<button
 					type="button"
 					className="btn btn-outline-primary ml-5 d-print-none"
@@ -147,6 +158,33 @@ export const PrintSanidadModal = ({ data }) => {
 					<i className="fas fa-print"></i>
 					<span> Imprimir</span>
 				</button>
+
+				<button
+					type="button"
+					className="btn btn-outline-primary ml-5 d-print-none ml-3"
+					onClick={closeModal}
+				>
+					<i className="fas fa-sign-out-alt"></i>
+					<span> Cerrar</span>
+				</button>
+			</div> */}
+
+			<div className="row m-3 d-flex justify-content-center pt-5">
+				{transferPrintButton ? (
+					<button type="button" className="btn btn-outline-primary d-print-none" onClick={imprimir}>
+						<i className="fas fa-print"></i>
+						<span> Imprimir</span>
+					</button>
+				) : (
+					<button
+						type="button"
+						className="btn btn-outline-primary ml-5 d-print-none"
+						onClick={handleSaveConstancy}
+					>
+						<i className="fas fa-save"></i>
+						<span> Guardar </span>
+					</button>
+				)}
 
 				<button
 					type="button"
