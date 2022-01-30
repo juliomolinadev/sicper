@@ -2,13 +2,15 @@ import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 
-import { closeSanidadModal } from "../../actions/algodoneroScreen";
+import { closeSanidadModal, startLoadPermisosSearch } from "../../actions/algodoneroScreen";
 import { enablePrintButton } from "../../actions/transferenciasScreen";
 import { saveConstanciaSanidad } from "../../helpers/saveConsatanciaSanidad";
+import { updatePermisoAlgodonero } from "../../helpers/updatePermisoAlgodonero";
 
-export const PrintSanidadModal = ({ data }) => {
-	const { printSanidadModal, folioSanidad } = useSelector((state) => state.algodoneroScreen);
+export const PrintSanidadModal = ({ data, palabra }) => {
+	const { printSanidadModal } = useSelector((state) => state.algodoneroScreen);
 	const { transferPrintButton } = useSelector((state) => state.transferenciasScreen);
+	const { uid } = useSelector((state) => state.auth);
 
 	const dispatch = useDispatch();
 
@@ -29,10 +31,14 @@ export const PrintSanidadModal = ({ data }) => {
 	};
 
 	const handleSaveConstancy = async () => {
-		const isSave = await saveConstanciaSanidad({ ...data, folio: folioSanidad }, "2020-2021");
+		const isSave = await saveConstanciaSanidad({ ...data, folio: data.folioSanidad }, "2020-2021");
 
 		if (isSave) {
 			dispatch(enablePrintButton());
+			updatePermisoAlgodonero(data.folio, data.modulo, "2020-2021", {
+				folioSanidad: data.folioSanidad
+			});
+			dispatch(startLoadPermisosSearch(uid, palabra));
 		}
 	};
 
@@ -65,7 +71,7 @@ export const PrintSanidadModal = ({ data }) => {
 					<div className="d-flex-column justify-content-center">
 						<img src={"./logos/cesvbc.webp"} alt="Logo sanidad vegetal" style={{ maxHeight: 80 }} />
 						<div className="mt-3">
-							<b>FOLIO: {folioSanidad} </b>
+							<b>FOLIO: {data.folioSanidad} </b>
 						</div>
 					</div>
 				</div>
@@ -148,26 +154,6 @@ export const PrintSanidadModal = ({ data }) => {
 				C.c.p. -DISTRITO DE DESARROLLO RURAL 002-RIO COLORADO <br />
 				C.c.p. -ARCHIVO
 			</div>
-
-			{/* <div className="row m-3 d-flex justify-content-center pt-5">
-				<button
-					type="button"
-					className="btn btn-outline-primary ml-5 d-print-none"
-					onClick={imprimir}
-				>
-					<i className="fas fa-print"></i>
-					<span> Imprimir</span>
-				</button>
-
-				<button
-					type="button"
-					className="btn btn-outline-primary ml-5 d-print-none ml-3"
-					onClick={closeModal}
-				>
-					<i className="fas fa-sign-out-alt"></i>
-					<span> Cerrar</span>
-				</button>
-			</div> */}
 
 			<div className="row m-3 d-flex justify-content-center pt-5">
 				{transferPrintButton ? (

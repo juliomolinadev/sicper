@@ -160,5 +160,21 @@ export const types = {
 	setTechnicianSelected: "[Asignacion Screen] Set Technician Selected",
 	unsetTechnicianSelected: "[Asignacion Screen] Unset Technician Selected",
 	setBusqueda: "[Asignacion Screen] Set Busqueda",
-	setFolioSanidad: "[Labores Screen] Set Folio Sanidad"
+	setFolioSanidad: "[Labores Screen] Set Folio Sanidad",
+
+	setCheckState: "[Labores Checks] Set Check State",
+	checkDesfoliado: "[Labores Checks] Check Desfoliado",
+	uncheckDesfoliado: "[Labores Checks] Uncheck Desfoliado",
+	checkCosechado: "[Labores Checks] Check Cosechado",
+	uncheckCosechado: "[Labores Checks] Uncheck Cosechado",
+	checkDesvarado: "[Labores Checks] Check Desvarado",
+	uncheckDesvarado: "[Labores Checks] Uncheck Desvarado",
+	checkDisqueado: "[Labores Checks] Check Disqueado",
+	uncheckDisqueado: "[Labores Checks] Uncheck Disqueado",
+	checkDesarraigado: "[Labores Checks] Check Desarraigado",
+	uncheckDesarraigado: "[Labores Checks] Uncheck Desarraigado",
+	checkBarbechado: "[Labores Checks] Check Barbechado",
+	uncheckBarbechado: "[Labores Checks] Uncheck Barbechado",
+	checkPagado: "[Labores Checks] Check Pagado",
+	uncheckPagado: "[Labores Checks] Uncheck Pagado"
 };

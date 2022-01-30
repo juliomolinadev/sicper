@@ -3,8 +3,7 @@ import { types } from "../types/types";
 const initialState = {
 	permisos: [],
 	permisoSelected: null,
-	printSanidadModal: false,
-	folioSanidad: ""
+	printSanidadModal: false
 };
 
 export const algodoneroScreenReducer = (state = initialState, action) => {
@@ -48,7 +47,7 @@ export const algodoneroScreenReducer = (state = initialState, action) => {
 		case types.setFolioSanidad:
 			return {
 				...state,
-				folioSanidad: action.payload
+				permisoSelected: { ...state.permisoSelected, folioSanidad: action.payload }
 			};
 
 		default:

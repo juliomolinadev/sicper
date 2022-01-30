@@ -12,7 +12,6 @@ export const LaboresScreen = () => {
 	const dispatch = useDispatch();
 
 	const [formValues, handleInputChange] = useForm({ palabra: "" });
-
 	const { palabra } = formValues;
 
 	const { permisos, permisoSelected } = useSelector((state) => state.algodoneroScreen);
@@ -84,7 +83,7 @@ export const LaboresScreen = () => {
 				{permisoSelected && dataPermiso !== undefined ? <CheckSanidad palabra={palabra} /> : <></>}
 			</div>
 			{dataPermiso !== undefined ? (
-				<PrintSanidadModal data={dataPermiso}></PrintSanidadModal>
+				<PrintSanidadModal data={dataPermiso} palabra={palabra}></PrintSanidadModal>
 			) : (
 				<></>
 			)}
