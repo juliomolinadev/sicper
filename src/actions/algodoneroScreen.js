@@ -2,6 +2,8 @@ import { types } from "../types/types";
 import { loadPermisosAlgodonero } from "../helpers/loadPermisosAlgodonero";
 import { loadSuperficiesCultivos } from "../helpers/loadSuperficiesCultivos";
 import { loadSearchPermisosAlgodonero } from "../helpers/loadSearchPermisosAlgodonero";
+import { getConstanciaSanidadCount } from "../helpers/DB/getCostanciaSanidadCount";
+import { disablePrintButton, enablePrintButton } from "./transferenciasScreen";
 
 export const startLoadPermisos = (id) => {
 	return async (dispatch) => {
@@ -51,10 +53,46 @@ export const unsetPermisoSelected = () => ({
 	type: types.permisosScreenUnsetPermisoSelected
 });
 
-export const openSanidadModal = () => ({
-	type: types.openSanidadModal
+export const openSanidadModal = (permiso) => ({
+	type: types.openSanidadModal,
+	payload: permiso
 });
 
 export const closeSanidadModal = () => ({
 	type: types.closeSanidadModal
+});
+
+export const startCloseSanidadModal = () => {
+	return (dispatch) => {
+		dispatch(disablePrintButton());
+		dispatch(closeSanidadModal());
+	};
+};
+
+const fill = (number, len) => "0".repeat(len - number.toString().length) + number.toString();
+
+const defineFolio = (counter) => {
+	if (counter !== false) {
+		const folio = `CESVBC-${fill(counter + 1, 4)}`;
+		return folio;
+	} else return null;
+};
+
+export const startOpenSanidadModal = (ciclo, permiso) => {
+	return async (dispatch) => {
+		if (permiso.folioSanidad) {
+			dispatch(enablePrintButton());
+			dispatch(openSanidadModal(permiso));
+		} else {
+			const counter = await getConstanciaSanidadCount(ciclo);
+			const folioSanidad = defineFolio(counter);
+
+			dispatch(openSanidadModal({ ...permiso, folioSanidad }));
+		}
+	};
+};
+
+export const updatePermiso = (permiso) => ({
+	type: types.updatePermiso,
+	payload: permiso
 });

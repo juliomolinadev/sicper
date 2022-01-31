@@ -35,13 +35,29 @@ export const algodoneroScreenReducer = (state = initialState, action) => {
 		case types.openSanidadModal:
 			return {
 				...state,
-				printSanidadModal: true
+				printSanidadModal: action.payload
 			};
 
 		case types.closeSanidadModal:
 			return {
 				...state,
 				printSanidadModal: false
+			};
+
+		case types.setFolioSanidad:
+			return {
+				...state,
+				permisoSelected: { ...state.permisoSelected, folioSanidad: action.payload }
+			};
+
+		case types.updatePermiso:
+			const newPermits = state.permisos.map((permiso) => {
+				if (permiso.id === action.payload.id) return action.payload;
+				else return permiso;
+			});
+			return {
+				...state,
+				permisos: newPermits
 			};
 
 		default:

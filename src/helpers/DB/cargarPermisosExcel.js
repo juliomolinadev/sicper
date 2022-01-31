@@ -17,18 +17,20 @@ export const cargarPermisosExcel = (file, ciclo) => {
 		});
 
 		const itemsToUploadPromises = await data.map(async (permiso) => {
-			const modulo = defineModulo(permiso.modulo);
-			const folio = defineFolio(modulo, permiso.folio);
 			const cuenta = defineCuenta(`${permiso.cuenta}`, ".");
 			const padronId = defineCuenta(`${permiso.cuenta}`, "-");
+			const derechos = await db.collection("derechos").doc(padronId).get();
+			const labores = defineLabores(permiso.labores ?? "");
+			const tecnico = defineTecnico(permiso.tecnico ?? "");
 
-			const idLocalidadSnap = await db.collection("derechos").doc(padronId).get();
-
-			if (idLocalidadSnap.exists) {
-				const idLocalidad = idLocalidadSnap.data().ejido;
+			if (derechos.exists) {
+				const modulo = `${derechos.data().modulo}`;
+				const folio = defineFolio(modulo, permiso.folio);
+				const idLocalidad = derechos.data().ejido;
 				const localidad = localidades.find((localidad) => localidad.clave === idLocalidad);
 
 				return {
+					...labores,
 					folio,
 					modulo,
 					cuenta,
@@ -42,7 +44,7 @@ export const cargarPermisosExcel = (file, ciclo) => {
 					estadoPermiso: "Activo",
 					laboresPendientes: true,
 					ciclo: "2020-2021",
-					tecnico: ""
+					tecnico
 				};
 			} else {
 				console.log("Cuenta desconocida: ", padronId);
@@ -97,12 +99,14 @@ export const cargarPermisosExcel = (file, ciclo) => {
 	};
 };
 
-const defineModulo = (word) => {
-	const parts = word.split(" ");
-	if (parts[0] === "Modulo") return parts[1];
-	else if (parts[0] === "Unidad") return `UNI0${parts[1]}`;
-	else return "XXXXXX";
-};
+// const defineModulo = (word) => {
+// 	const parts = word.split(" ");
+
+// 	if (parts.length === 1) return parts[0];
+// 	else if (parts[0] === "Modulo") return parts[1];
+// 	else if (parts[0] === "Unidad") return `UNI0${parts[1]}`;
+// 	else return "XXXXXX";
+// };
 
 const defineCuenta = (word, separator) => {
 	const parts = word.split(".");
@@ -129,3 +133,51 @@ const defineNombe = (nombrePadron, nombreExcel) => {
 	if (dividedName[0] === "Desconocido") return nombreExcel.trim();
 	else return nombrePadron.trim();
 };
+
+const defineLabores = (trabajos) => {
+	if (trabajos.trim() === "BARBECHADO") {
+		return {
+			desfoliado: true,
+			cosechado: true,
+			desvarado: true,
+			disqueado: true,
+			desarraigado: true,
+			barbechado: true
+		};
+	} else return {};
+};
+
+const defineTecnico = (tecnico) => {
+	switch (tecnico.trim()) {
+		case "ADRIAN VILLA":
+			return "GOxDoCdADSSVhj1gQIXxzZ5YN4H3";
+
+		case "EDUARDO BAÑUELOS":
+			return "rUxW1A8ehVWGYzjK91c8LCwwklb2";
+
+		case "EDUARDO ZAVALA":
+			return "31naXMbqQibk1SzOLIhZ5JXFYAk1";
+
+		case "GUILEBALDO ZAVALA":
+			return "u2onRGMYn6RqLafQC3LNe2cP64q1";
+
+		case "SAUL VEA BERRELLEZA":
+			return "rA5pOGIhqZceAigtDlP0cVy2SwA3";
+
+		case "CORNELIO LARA":
+			return "bHflypkGK8SBj2VAOe6lIccxwbc2";
+
+		default:
+			return "";
+	}
+};
+
+/* 
+31naXMbqQibk1SzOLIhZ5JXFYAk1
+7x7LpErVMrcGQDvI5sBflOnzOx12
+GOxDoCdADSSVhj1gQIXxzZ5YN4H3
+bHflypkGK8SBj2VAOe6lIccxwbc2
+rA5pOGIhqZceAigtDlP0cVy2SwA3
+rUxW1A8ehVWGYzjK91c8LCwwklb2
+u2onRGMYn6RqLafQC3LNe2cP64q1
+*/
