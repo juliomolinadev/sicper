@@ -12,7 +12,7 @@ export const CheckSanidad = () => {
 	const dispatch = useDispatch();
 
 	const { permisos, permisoSelected } = useSelector((state) => state.algodoneroScreen);
-	const { uid, privilegios, rol } = useSelector((state) => state.auth);
+	const { uid, privilegios } = useSelector((state) => state.auth);
 	const { registrarLabores, pagarLabores, imprimirLabores } = privilegios;
 
 	const cuotaSanidad = 60;
@@ -30,7 +30,7 @@ export const CheckSanidad = () => {
 	);
 
 	const checkUncheck = async (editable, name, state) => {
-		if (editable) {
+		if (determinaAcceso(editable, name, registrarLabores, pagarLabores, uid, dataPermiso.tecnico)) {
 			const updates = getUpdates(name, state);
 			const isSave = await updatePermisoAlgodonero(
 				permisoSelected,
@@ -341,4 +341,17 @@ const getAction = (name, state) => {
 const getUpdates = (name, state) => {
 	if (name === "pagado") return { pagado: !state, laboresPendientes: state };
 	else return { [name]: !state };
+};
+
+const determinaAcceso = (editable, name, labores, pagar, uid, tecnico) => {
+	if (!editable) return false;
+
+	if (name === "pagado") {
+		if (pagar) return true;
+		else return false;
+	} else {
+		if (labores) return true;
+		else if (uid === tecnico) return true;
+		else return false;
+	}
 };
