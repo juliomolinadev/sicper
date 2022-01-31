@@ -3,16 +3,12 @@ import { useEffect } from "react";
 import { useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import {
-	startLoadPermisosSearch,
-	startOpenSanidadModal,
-	updatePermiso
-} from "../../actions/algodoneroScreen";
+import { startOpenSanidadModal, updatePermiso } from "../../actions/algodoneroScreen";
 import { updatePermisoAlgodonero } from "../../helpers/updatePermisoAlgodonero";
 import { laboresChecksReducer } from "../../reducers/laboresChecksReducer";
 import { types } from "../../types/types";
 
-export const CheckSanidad = ({ palabra }) => {
+export const CheckSanidad = () => {
 	const dispatch = useDispatch();
 
 	const { permisos, permisoSelected } = useSelector((state) => state.algodoneroScreen);
@@ -61,13 +57,20 @@ export const CheckSanidad = ({ palabra }) => {
 			showCancelButton: true,
 			confirmButtonText: "Guardar",
 			cancelButtonText: "Cancelar"
-		}).then((result) => {
+		}).then(async (result) => {
 			if (result.isConfirmed) {
-				updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, "2020-2021", {
-					superficieMapeada: Number(result.value)
-				});
-				dispatch(startLoadPermisosSearch(rol === "tecnicoCESVBC" ? uid : 0, palabra));
-				Swal.fire("OK", `Se actualiso la superficie mapeada`, "success");
+				const isSave = await updatePermisoAlgodonero(
+					permisoSelected,
+					dataPermiso.modulo,
+					"2020-2021",
+					{
+						superficieMapeada: Number(result.value)
+					}
+				);
+				if (isSave) {
+					dispatch(updatePermiso({ ...dataPermiso, superficieMapeada: Number(result.value) }));
+					Swal.fire("OK", `Se actualiso la superficie mapeada`, "success");
+				}
 			}
 		});
 	};
@@ -83,13 +86,20 @@ export const CheckSanidad = ({ palabra }) => {
 			showCancelButton: true,
 			confirmButtonText: "Guardar",
 			cancelButtonText: "Cancelar"
-		}).then((result) => {
+		}).then(async (result) => {
 			if (result.isConfirmed) {
-				updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, "2020-2021", {
-					folioConstaniciaFisica: result.value
-				});
-				dispatch(startLoadPermisosSearch(rol === "tecnicoCESVBC" ? uid : 0, palabra));
-				Swal.fire("OK", `Se guardó el folio de la constancia.`, "success");
+				const isSave = await updatePermisoAlgodonero(
+					permisoSelected,
+					dataPermiso.modulo,
+					"2020-2021",
+					{
+						folioConstaniciaFisica: result.value
+					}
+				);
+				if (isSave) {
+					dispatch(updatePermiso({ ...dataPermiso, folioConstaniciaFisica: result.value }));
+					Swal.fire("OK", `Se guardó el folio de la constancia.`, "success");
+				}
 			}
 		});
 	};
