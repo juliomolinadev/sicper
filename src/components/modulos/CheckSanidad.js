@@ -4,9 +4,9 @@ import { useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import {
-	defineFolioSanidad,
-	openSanidadModal,
-	startLoadPermisosSearch
+	startLoadPermisosSearch,
+	startOpenSanidadModal,
+	updatePermiso
 } from "../../actions/algodoneroScreen";
 import { updatePermisoAlgodonero } from "../../helpers/updatePermisoAlgodonero";
 import { laboresChecksReducer } from "../../reducers/laboresChecksReducer";
@@ -33,26 +33,20 @@ export const CheckSanidad = ({ palabra }) => {
 		setInitialState(dataPermiso)
 	);
 
-	const setUnset = (objeto) => {
-		if (registrarLabores) {
-			updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, "2020-2021", objeto);
-			dispatch(startLoadPermisosSearch(uid, palabra));
-		}
-	};
-
-	const checkUncheck = (editable, name, state) => {
+	const checkUncheck = async (editable, name, state) => {
 		if (editable) {
-			console.log(name);
+			const updates = getUpdates(name, state);
+			const isSave = await updatePermisoAlgodonero(
+				permisoSelected,
+				dataPermiso.modulo,
+				"2020-2021",
+				updates
+			);
 
-			checksDispatch(getAction(name, state));
-		}
-	};
-
-	const setUnsetPago = (objeto, e) => {
-		if (pagarLabores) {
-			e.preventDefault();
-			updatePermisoAlgodonero(permisoSelected, dataPermiso.modulo, "2020-2021", objeto);
-			dispatch(startLoadPermisosSearch(rol === "tecnicoCESVBC" ? uid : 0, palabra));
+			if (isSave) {
+				checksDispatch(getAction(name, state));
+				dispatch(updatePermiso({ ...dataPermiso, [name]: !state }));
+			}
 		}
 	};
 
@@ -106,8 +100,7 @@ export const CheckSanidad = ({ palabra }) => {
 	});
 
 	const handleOpenSanidadModal = () => {
-		dispatch(openSanidadModal());
-		dispatch(defineFolioSanidad("2020-2021"));
+		dispatch(startOpenSanidadModal("2020-2021", dataPermiso));
 	};
 
 	// TODO: Asignar folio de constancia fitosanitaria al expedir permiso de algodon
@@ -125,6 +118,19 @@ export const CheckSanidad = ({ palabra }) => {
 				<div className="row p-1 pl-2">
 					<div className="col-4">USUARIO:</div>
 					<div className="col-8">{dataPermiso.nombre}</div>
+				</div>
+
+				<div className="row p-1 pl-2">
+					<div className="col-4">LOTE:</div>
+					<div className="col-8">{dataPermiso.lote}</div>
+				</div>
+				<div className="row p-1 pl-2">
+					<div className="col-4">LOCALIDAD:</div>
+					<div className="col-8">{dataPermiso.ubicacion}</div>
+				</div>
+				<div className="row p-1 pl-2">
+					<div className="col-4">MODULO:</div>
+					<div className="col-8">{dataPermiso.modulo}</div>
 				</div>
 
 				<div className="row p-1 pl-2">
@@ -164,257 +170,6 @@ export const CheckSanidad = ({ palabra }) => {
 					</div>
 				</div>
 
-				<div className="row p-1 pl-2">
-					<div className="col-4">LOTE:</div>
-					<div className="col-8">{dataPermiso.lote}</div>
-				</div>
-				<div className="row p-1 pl-2">
-					<div className="col-4">LOCALIDAD:</div>
-					<div className="col-8">{dataPermiso.ubicacion}</div>
-				</div>
-				<div className="row p-1 pl-2">
-					<div className="col-4">MODULO:</div>
-					<div className="col-8">{dataPermiso.modulo}</div>
-				</div>
-
-				<div className="row p-1 pl-2 d-flex align-items-center">
-					<div className="col-4">DESFOLIADO:</div>
-					<div className="col-8">
-						<button
-							className={`btn btn-sm ${
-								dataPermiso.desfoliado ? "btn-success" : "btn-outline-success"
-							}`}
-							type="button"
-							onClick={() => setUnset({ desfoliado: !dataPermiso.desfoliado })}
-						>
-							<i className="fas fa-check"></i>
-						</button>
-					</div>
-
-					{/* <div className="col-8">
-						{dataPermiso.desfoliado ? (
-							<button
-								className=" btn btn-success btn-sm "
-								type="button"
-								onClick={(e) => setUnset({ desfoliado: false }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						) : (
-							<button
-								className=" btn btn-outline-success btn-sm "
-								type="button"
-								onClick={(e) => setUnset({ desfoliado: true }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						)}
-					</div> */}
-				</div>
-
-				<div className="row p-1 pl-2 d-flex align-items-center">
-					<div className="col-4">COSECHADO:</div>
-					<div className="col-8">
-						{dataPermiso.cosechado ? (
-							<button
-								className=" btn btn-success btn-sm "
-								type="button"
-								onClick={(e) => setUnset({ cosechado: false }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						) : dataPermiso.desfoliado ? (
-							<button
-								className=" btn btn-outline-success btn-sm "
-								type="button"
-								onClick={(e) => setUnset({ cosechado: true }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						) : (
-							<button className=" btn btn-outline-secondary btn-sm " type="button">
-								<i className="fas fa-check"></i>
-							</button>
-						)}
-					</div>
-				</div>
-
-				<div className="row p-1 pl-2 d-flex align-items-center">
-					<div className="col-4">DESVARADO:</div>
-					<div className="col-8">
-						{dataPermiso.desvarado ? (
-							<button
-								className=" btn btn-success btn-sm "
-								type="button"
-								onClick={(e) => setUnset({ desvarado: false }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						) : dataPermiso.cosechado ? (
-							<button
-								className=" btn btn-outline-success btn-sm "
-								type="button"
-								onClick={(e) => setUnset({ desvarado: true }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						) : (
-							<button className=" btn btn-outline-secondary btn-sm " type="button">
-								<i className="fas fa-check"></i>
-							</button>
-						)}
-					</div>
-				</div>
-
-				<div className="row p-1 pl-2 d-flex align-items-center">
-					<div className="col-4">DISQUEADO:</div>
-					<div className="col-8">
-						{dataPermiso.disqueado ? (
-							<button
-								className=" btn btn-success btn-sm "
-								type="button"
-								onClick={(e) => setUnset({ disqueado: false }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						) : dataPermiso.desvarado ? (
-							<button
-								className=" btn btn-outline-success btn-sm "
-								type="button"
-								onClick={(e) => setUnset({ disqueado: true }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						) : (
-							<button className=" btn btn-outline-secondary btn-sm " type="button">
-								<i className="fas fa-check"></i>
-							</button>
-						)}
-					</div>
-				</div>
-
-				<div className="row p-1 pl-2 d-flex align-items-center">
-					<div className="col-4">DESARRAIGADO:</div>
-					<div className="col-8">
-						{dataPermiso.desarraigado ? (
-							<button
-								className=" btn btn-success btn-sm "
-								type="button"
-								onClick={(e) => setUnset({ desarraigado: false }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						) : dataPermiso.disqueado ? (
-							<button
-								className=" btn btn-outline-success btn-sm "
-								type="button"
-								onClick={(e) => setUnset({ desarraigado: true }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						) : (
-							<button className=" btn btn-outline-secondary btn-sm " type="button">
-								<i className="fas fa-check"></i>
-							</button>
-						)}
-					</div>
-				</div>
-
-				<div className="row p-1 pl-2 d-flex align-items-center">
-					<div className="col-4">BARBECHADO:</div>
-					<div className="col-8">
-						{dataPermiso.barbechado ? (
-							<button
-								className=" btn btn-success btn-sm "
-								type="button"
-								onClick={(e) => setUnset({ barbechado: false }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						) : dataPermiso.disqueado ? (
-							<button
-								className=" btn btn-outline-success btn-sm "
-								type="button"
-								onClick={(e) => setUnset({ barbechado: true }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						) : (
-							<button className=" btn btn-outline-secondary btn-sm " type="button">
-								<i className="fas fa-check"></i>
-							</button>
-						)}
-					</div>
-				</div>
-
-				<div className="row p-1 pl-2">
-					<div className="col-4">MONTO A PAGAR:</div>
-					<div className="col-8">
-						{formatter.format(dataPermiso.superficieMapeada * cuotaSanidad)} MN
-					</div>
-				</div>
-
-				<div className="row p-1 pl-2 d-flex align-items-center">
-					<div className="col-4">PAGADO:</div>
-					<div className="col-8">
-						{dataPermiso.pagado ? (
-							<button
-								className=" btn btn-success btn-sm "
-								type="button"
-								onClick={(e) => setUnsetPago({ pagado: false, laboresPendientes: true }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						) : (dataPermiso.desarraigado || dataPermiso.barbechado) && pagarLabores ? (
-							<button
-								className=" btn btn-outline-success btn-sm "
-								type="button"
-								onClick={(e) => setUnsetPago({ pagado: true, laboresPendientes: false }, e)}
-							>
-								<i className="fas fa-check"></i>
-							</button>
-						) : (
-							<button className=" btn btn-outline-secondary btn-sm " type="button">
-								<i className="fas fa-check"></i>
-							</button>
-						)}
-					</div>
-				</div>
-
-				<div className="row pt-3 pl-2">
-					<div className={`col-12 ${!dataPermiso.laboresPendientes && "text-success"}`}>
-						{dataPermiso.laboresPendientes
-							? "CUENTA BLOQUEADA PARA EXPEDICIÓN"
-							: "CUENTA LIBERADA PARA EXPEDICIÓN"}
-					</div>
-				</div>
-
-				<div className="row p-1 pl-2 pt-4 pb-4">
-					<div className="col-12 d-flex justify-content-center">
-						{dataPermiso.pagado &&
-							imprimirLabores &&
-							(dataPermiso.folioSanidad ? (
-								<button
-									type="button"
-									className="btn btn-outline-success"
-									onClick={handleOpenSanidadModal}
-								>
-									<i className="fas fa-print"></i>
-									<span> Imprimir Constancia</span>
-								</button>
-							) : (
-								<button
-									type="button"
-									className="btn btn-outline-success"
-									onClick={handleOpenSanidadModal}
-								>
-									<i className="fas fa-print"></i>
-									<span> Generar Constancia</span>
-								</button>
-							))}
-					</div>
-				</div>
-
 				{checksState.map((check) => (
 					<div key={check.name} className="row p-1 pl-2 d-flex align-items-center">
 						<div className="col-4">{check.tag}:</div>
@@ -431,6 +186,40 @@ export const CheckSanidad = ({ palabra }) => {
 						</div>
 					</div>
 				))}
+
+				<div className="row p-1 pl-2">
+					<div className="col-4">MONTO A PAGAR:</div>
+					<div className="col-8">
+						{formatter.format(dataPermiso.superficieMapeada * cuotaSanidad)} MN
+					</div>
+				</div>
+
+				<div className="row pt-3 pl-2">
+					<div className={`col-12 ${!dataPermiso.laboresPendientes && "text-success"}`}>
+						{dataPermiso.laboresPendientes
+							? "CUENTA BLOQUEADA PARA EXPEDICIÓN"
+							: "CUENTA LIBERADA PARA EXPEDICIÓN"}
+					</div>
+				</div>
+
+				<div className="row p-1 pl-2 pt-4 pb-4">
+					<div className="col-12 d-flex justify-content-center">
+						{dataPermiso.pagado && imprimirLabores && (
+							<button
+								type="button"
+								className="btn btn-outline-success"
+								onClick={handleOpenSanidadModal}
+							>
+								<i className="fas fa-print"></i>
+								{dataPermiso.folioSanidad ? (
+									<span> Imprimir Constancia</span>
+								) : (
+									<span> Generar Constancia</span>
+								)}
+							</button>
+						)}
+					</div>
+				</div>
 			</div>
 		</div>
 	);
@@ -538,9 +327,8 @@ const getAction = (name, state) => {
 		}
 	}
 };
-/* 
-	const initialState = [
-		{ name: "desfoliado", tag: "DESFOLIADO", state: "false", editable: true },
-	];
 
-*/
+const getUpdates = (name, state) => {
+	if (name === "pagado") return { pagado: !state, laboresPendientes: state };
+	else return { [name]: !state };
+};

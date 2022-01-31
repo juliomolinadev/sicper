@@ -2,20 +2,19 @@ import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
 
-import { closeSanidadModal, startLoadPermisosSearch } from "../../actions/algodoneroScreen";
+import { startCloseSanidadModal, updatePermiso } from "../../actions/algodoneroScreen";
 import { enablePrintButton } from "../../actions/transferenciasScreen";
 import { saveConstanciaSanidad } from "../../helpers/saveConsatanciaSanidad";
 import { updatePermisoAlgodonero } from "../../helpers/updatePermisoAlgodonero";
 
-export const PrintSanidadModal = ({ data, palabra }) => {
+export const PrintSanidadModal = () => {
 	const { printSanidadModal } = useSelector((state) => state.algodoneroScreen);
 	const { transferPrintButton } = useSelector((state) => state.transferenciasScreen);
-	const { uid } = useSelector((state) => state.auth);
 
 	const dispatch = useDispatch();
 
 	const closeModal = () => {
-		dispatch(closeSanidadModal());
+		dispatch(startCloseSanidadModal());
 	};
 
 	const imprimir = () => {
@@ -31,14 +30,19 @@ export const PrintSanidadModal = ({ data, palabra }) => {
 	};
 
 	const handleSaveConstancy = async () => {
-		const isSave = await saveConstanciaSanidad({ ...data, folio: data.folioSanidad }, "2020-2021");
+		const isSave = await saveConstanciaSanidad(
+			{ ...printSanidadModal, folioSanidad: printSanidadModal.folioSanidad },
+			"2020-2021"
+		);
 
 		if (isSave) {
 			dispatch(enablePrintButton());
-			updatePermisoAlgodonero(data.folio, data.modulo, "2020-2021", {
-				folioSanidad: data.folioSanidad
+			updatePermisoAlgodonero(printSanidadModal.folio, printSanidadModal.modulo, "2020-2021", {
+				folioSanidad: printSanidadModal.folioSanidad
 			});
-			dispatch(startLoadPermisosSearch(uid, palabra));
+			dispatch(
+				updatePermiso({ ...printSanidadModal, folioSanidad: printSanidadModal.folioSanidad })
+			);
 		}
 	};
 
@@ -47,7 +51,7 @@ export const PrintSanidadModal = ({ data, palabra }) => {
 
 	return (
 		<Modal
-			isOpen={printSanidadModal}
+			isOpen={printSanidadModal ? true : false}
 			onRequestClose={closeModal}
 			style={customStyles}
 			closeTimeoutMS={200}
@@ -71,7 +75,7 @@ export const PrintSanidadModal = ({ data, palabra }) => {
 					<div className="d-flex-column justify-content-center">
 						<img src={"./logos/cesvbc.webp"} alt="Logo sanidad vegetal" style={{ maxHeight: 80 }} />
 						<div className="mt-3">
-							<b>FOLIO: {data.folioSanidad} </b>
+							<b>FOLIO: {printSanidadModal.folioSanidad} </b>
 						</div>
 					</div>
 				</div>
@@ -96,9 +100,10 @@ export const PrintSanidadModal = ({ data, palabra }) => {
 			<div className="row d-flex justify-content-center pt-5 text-justify">
 				<div className="col-8">
 					<p>
-						POR LA PRESENTE HACEMOS CONSTAR QUE EL C. {data.nombre}, PRODUCTOR DEL LOTE NO.
-						{data.lote} DEL EJIDO/COLONIA {data.ubicacion}, REALIZÓ LAS LABORES FITOSANITARIAS EN
-						UNA SUPERFICIE DE {data.superficie} HA.
+						POR LA PRESENTE HACEMOS CONSTAR QUE EL C. {printSanidadModal.nombre}, PRODUCTOR DEL LOTE
+						NO.
+						{printSanidadModal.lote} DEL EJIDO/COLONIA {printSanidadModal.ubicacion}, REALIZÓ LAS
+						LABORES FITOSANITARIAS EN UNA SUPERFICIE DE {printSanidadModal.superficie} HA.
 					</p>
 
 					<p>
@@ -111,7 +116,7 @@ export const PrintSanidadModal = ({ data, palabra }) => {
 
 					<p>SIRVA EL PRESENTE DOCUMENTO PARA LA LIBERACIÓN DE CARTA DE GARANTÍA EMITIDA.</p>
 
-					<p>PROPIETARIO: {data.nombre}</p>
+					<p>PROPIETARIO: {printSanidadModal.nombre}</p>
 
 					<div className=" d-flex justify-content-end pt-5">
 						<p>MEXICALI, B. C. , A {fecha.toLocaleString("es-MX", dateOptions).toUpperCase()}</p>

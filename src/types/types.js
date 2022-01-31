@@ -161,6 +161,7 @@ export const types = {
 	unsetTechnicianSelected: "[Asignacion Screen] Unset Technician Selected",
 	setBusqueda: "[Asignacion Screen] Set Busqueda",
 	setFolioSanidad: "[Labores Screen] Set Folio Sanidad",
+	updatePermiso: "[Labores Screen] Update Permiso",
 
 	setCheckState: "[Labores Checks] Set Check State",
 	checkDesfoliado: "[Labores Checks] Check Desfoliado",
