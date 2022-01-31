@@ -46,7 +46,11 @@ export const PrintConstancyModal = ({ openModal, constancia, constancySaved, set
 					<div className="row p-5 d-flex align-items-center">
 						<div className="col-8">
 							<div className="d-flex">
-								<img src={"./logos/medio-cna.png"} alt="Logo semarnat" style={{ maxWidth: 600 }} />
+								<img
+									src={"./logos/medio-cna-2022.png"}
+									alt="Logo semarnat"
+									style={{ maxWidth: 600 }}
+								/>
 							</div>
 						</div>
 
@@ -165,7 +169,7 @@ export const PrintConstancyModal = ({ openModal, constancia, constancySaved, set
 					</div>
 					<div className="row">
 						<div className="col-10 d-flex">
-							<div className="align-self-center pl-4 pr-4 pb-2">
+							<div className="align-self-center pl-4 pr-4 pb-2 mb-3">
 								<div>Av. Reforma y calle “L” s/n Col. Nueva, Mexicali, Baja California.</div>
 								<div>Teléfono: (686) 551 64 00. </div>
 								<div>http//:www.gob.mx/conagua</div>
@@ -173,8 +177,8 @@ export const PrintConstancyModal = ({ openModal, constancia, constancySaved, set
 						</div>
 
 						<div className="col-2">
-							<div className="d-flex justify-content-end">
-								<img src={"./logos/pie.png"} alt="Logo mexico" style={{ maxWidth: 970 }} />
+							<div className="d-flex justify-content-end mt-5">
+								<img src={"./logos/pie-2022.png"} alt="Logo mexico" style={{ maxWidth: 970 }} />
 							</div>
 						</div>
 					</div>
