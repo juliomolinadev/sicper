@@ -105,7 +105,7 @@ export const PrintTransferModal = ({ transferencia, reset }) => {
 				<div className="col-2 d-flex justify-content-center">
 					<img
 						className="align-self-center"
-						src={"./logos/medio.png"}
+						src={"./logos/medio-2022.png"}
 						alt="Logo secretaria del medio ambiente"
 						style={{ maxWidth: 200 }}
 					/>

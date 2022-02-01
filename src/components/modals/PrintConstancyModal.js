@@ -163,7 +163,7 @@ export const PrintConstancyModal = ({ openModal, constancia, constancySaved, set
 						<b>
 							<div className="col-12">
 								C.c.p.- Archivo <br />
-								VMMR/JDLA/pcf
+								VMMR/JDLA/KPM
 							</div>
 						</b>
 					</div>
