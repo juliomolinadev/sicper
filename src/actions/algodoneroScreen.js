@@ -4,6 +4,7 @@ import { loadSuperficiesCultivos } from "../helpers/loadSuperficiesCultivos";
 import { loadSearchPermisosAlgodonero } from "../helpers/loadSearchPermisosAlgodonero";
 import { getConstanciaSanidadCount } from "../helpers/DB/getCostanciaSanidadCount";
 import { disablePrintButton, enablePrintButton } from "./transferenciasScreen";
+import { loadPermitsForPay } from "../helpers/loadPermitsForPay";
 
 export const startLoadPermisos = (id) => {
 	return async (dispatch) => {
@@ -15,6 +16,13 @@ export const startLoadPermisos = (id) => {
 export const startLoadPermisosSearch = (id, palabra) => {
 	return async (dispatch) => {
 		const permisos = await loadSearchPermisosAlgodonero(id, palabra);
+		dispatch(setPermisos(permisos));
+	};
+};
+
+export const startLoadPermitsForPay = () => {
+	return async (dispatch) => {
+		const permisos = await loadPermitsForPay();
 		dispatch(setPermisos(permisos));
 	};
 };

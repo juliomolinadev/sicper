@@ -6,7 +6,8 @@ import { laboresColumns } from "../components/tables/configTables";
 import {
 	setPermisoSelected,
 	setTechniciansLabores,
-	startLoadPermisosSearch
+	startLoadPermisosSearch,
+	startLoadPermitsForPay
 } from "../actions/algodoneroScreen";
 import { useForm } from "../hooks/useForm";
 import { CheckSanidad } from "../components/modulos/CheckSanidad";
@@ -57,10 +58,14 @@ export const LaboresScreen = () => {
 		}
 	});
 
+	const loadPermitsForPay = () => {
+		dispatch(startLoadPermitsForPay());
+	};
+
 	return (
 		<>
 			<div className="row mt-5">
-				<div className="col-sm-4 d-inline-flex p-3 ">
+				<div className="col-sm-6 d-inline-flex">
 					<input
 						type="text"
 						className="form-control"
@@ -72,12 +77,14 @@ export const LaboresScreen = () => {
 						onKeyUp={handleKeyUp}
 					/>
 
-					<button
-						className=" btn btn-outline-primary d-sm-block ml-auto"
-						type="button"
-						onClick={buscarPermisos}
-					>
+					<button className="btn btn-outline-primary" onClick={buscarPermisos}>
 						<i className="fas fa-search"></i>
+					</button>
+				</div>
+
+				<div className="col-sm-4">
+					<button className="btn btn-outline-primary" onClick={loadPermitsForPay}>
+						Labores Completas
 					</button>
 				</div>
 			</div>
