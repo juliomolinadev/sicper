@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { CustomTable } from "../components/tables/CustomTable";
 import { laboresColumns } from "../components/tables/configTables";
-import { setPermisoSelected, startLoadPermisosSearch } from "../actions/algodoneroScreen";
+import {
+	setPermisoSelected,
+	setTechniciansLabores,
+	startLoadPermisosSearch
+} from "../actions/algodoneroScreen";
 import { useForm } from "../hooks/useForm";
 import { CheckSanidad } from "../components/modulos/CheckSanidad";
 import { PrintSanidadModal } from "../components/modals/PrintSanidadModal";
+import { loadTechnician } from "../helpers/DB/loadTechnician";
 
 export const LaboresScreen = () => {
 	const dispatch = useDispatch();
@@ -18,6 +23,12 @@ export const LaboresScreen = () => {
 		(state) => state.algodoneroScreen
 	);
 	// const { uid, rol } = useSelector((state) => state.auth);
+
+	useEffect(() => {
+		loadTechnician().then((techniciasns) => {
+			dispatch(setTechniciansLabores(techniciasns));
+		});
+	}, [dispatch]);
 
 	const buscarPermisos = () => {
 		if (palabra.length > 0) {

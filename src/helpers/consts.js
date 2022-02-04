@@ -183,6 +183,7 @@ export const privileges = {
 	registrarLabores: false,
 	pagarLabores: false,
 	imprimirLabores: false,
+	borrarPermisos: false,
 
 	//Configuracion
 	editarEntidades: false,

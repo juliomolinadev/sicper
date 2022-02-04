@@ -96,3 +96,13 @@ export const updatePermiso = (permiso) => ({
 	type: types.updatePermiso,
 	payload: permiso
 });
+
+export const deletePermiso = (id) => ({
+	type: types.deletePermiso,
+	payload: id
+});
+
+export const setTechniciansLabores = (technicians) => ({
+	type: types.setTechniciansLabores,
+	payload: technicians
+});

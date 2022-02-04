@@ -3,7 +3,8 @@ import { types } from "../types/types";
 const initialState = {
 	permisos: [],
 	permisoSelected: null,
-	printSanidadModal: false
+	printSanidadModal: false,
+	technicians: []
 };
 
 export const algodoneroScreenReducer = (state = initialState, action) => {
@@ -50,7 +51,7 @@ export const algodoneroScreenReducer = (state = initialState, action) => {
 				permisoSelected: { ...state.permisoSelected, folioSanidad: action.payload }
 			};
 
-		case types.updatePermiso:
+		case types.updatePermiso: {
 			const newPermits = state.permisos.map((permiso) => {
 				if (permiso.id === action.payload.id) return action.payload;
 				else return permiso;
@@ -58,6 +59,25 @@ export const algodoneroScreenReducer = (state = initialState, action) => {
 			return {
 				...state,
 				permisos: newPermits
+			};
+		}
+
+		case types.deletePermiso: {
+			const newPermits = [];
+			state.permisos.forEach((permiso) => {
+				if (permiso.id !== action.payload) newPermits.push({ ...permiso });
+			});
+			return {
+				...state,
+				permisoSelected: null,
+				permisos: newPermits
+			};
+		}
+
+		case types.setTechniciansLabores:
+			return {
+				...state,
+				technicians: action.payload
 			};
 
 		default:

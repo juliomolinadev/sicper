@@ -118,7 +118,7 @@ export const laboresColumns = [
 	{ name: "id", selector: "id", omit: true },
 	{ name: "CUENTA", selector: "cuenta", sortable: true, width: "80px" },
 	{ name: "USUARIO", selector: "nombre", sortable: true, width: "250px" },
-	{ name: "PERMISO", selector: "folio", sortable: true, width: "110px" },
+	{ name: "PERMISO", selector: "folio", sortable: true, width: "120px" },
 	{ name: "MODULO", selector: "modulo", sortable: true, width: "60px", center: true },
 	{ name: "HA", selector: "superficie", width: "60px", sortable: true, center: true },
 	{ name: "LOTE", selector: "lote", sortable: true, width: "60px", center: true },

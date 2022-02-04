@@ -3,7 +3,12 @@ import { useEffect } from "react";
 import { useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
-import { startOpenSanidadModal, updatePermiso } from "../../actions/algodoneroScreen";
+import {
+	deletePermiso,
+	startOpenSanidadModal,
+	updatePermiso
+} from "../../actions/algodoneroScreen";
+import { deletePermit } from "../../helpers/deletePermit";
 import { updatePermisoAlgodonero } from "../../helpers/updatePermisoAlgodonero";
 import { laboresChecksReducer } from "../../reducers/laboresChecksReducer";
 import { types } from "../../types/types";
@@ -11,13 +16,14 @@ import { types } from "../../types/types";
 export const CheckSanidad = () => {
 	const dispatch = useDispatch();
 
-	const { permisos, permisoSelected } = useSelector((state) => state.algodoneroScreen);
+	const { permisos, permisoSelected, technicians } = useSelector((state) => state.algodoneroScreen);
 	const { uid, privilegios } = useSelector((state) => state.auth);
-	const { registrarLabores, pagarLabores, imprimirLabores } = privilegios;
+	const { registrarLabores, pagarLabores, imprimirLabores, borrarPermisos } = privilegios;
 
 	const cuotaSanidad = 60;
 
 	const dataPermiso = permisos.find((permiso) => permiso.id === permisoSelected);
+	const tecnico = technicians.find((tecnico) => tecnico.id === dataPermiso.tecnico);
 
 	useEffect(() => {
 		const state = setInitialState(dataPermiso);
@@ -115,16 +121,54 @@ export const CheckSanidad = () => {
 
 	// TODO: Asignar folio de constancia fitosanitaria al expedir permiso de algodon
 
+	const handleDelete = () => {
+		Swal.fire({
+			title: "Atención!!",
+			text: `Borrar?`,
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Si",
+			cancelButtonText: "No"
+		}).then(async ({ isConfirmed }) => {
+			if (isConfirmed) {
+				console.log("Borrando permiso ", dataPermiso.id, dataPermiso.modulo);
+				const isDeleted = await deletePermit(dataPermiso.id, dataPermiso.modulo);
+				if (isDeleted) {
+					dispatch(deletePermiso(dataPermiso.id));
+				}
+			}
+		});
+	};
+
 	return (
 		<div className="col-sm-4 mt-3">
 			<div className="border border-info rounded detallePermiso">
 				<div className="d-flex bg-light border-info border-bottom rounded-top p-1 justify-content-center font-weight-bold text-secondary pt-3">
 					<h5>{dataPermiso.folio}</h5>
 				</div>
+
+				{borrarPermisos && (
+					<div className="row p-1 pl-2 pt-2">
+						<div className="col-4">
+							<button className="btn btn-danger" onClick={handleDelete}>
+								Borrar
+							</button>
+						</div>
+					</div>
+				)}
+
+				<div className="row p-1 pl-2 pt-2">
+					<div className="col-4">TÉCNICO:</div>
+					<div className="col-8">{tecnico ? tecnico.displayName : "SIN ASIGNAR"}</div>
+				</div>
+
 				<div className="row p-1 pl-2 pt-2">
 					<div className="col-4">CUENTA:</div>
 					<div className="col-8">{dataPermiso.cuenta}</div>
 				</div>
+
 				<div className="row p-1 pl-2">
 					<div className="col-4">USUARIO:</div>
 					<div className="col-8">{dataPermiso.nombre}</div>

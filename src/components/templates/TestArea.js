@@ -1,4 +1,5 @@
 import React from "react";
+import { printDuplicatePermits } from "../../helpers/printDuplicatePermits";
 // import { editarPermisos } from "../../helpers/DB/editarPermisos";
 import { ExpeditionCheckModule } from "../modulos/ExpeditionCheckModule";
 import { PermisosExcelModule } from "../modulos/PermisosExcelModule";
@@ -10,6 +11,10 @@ export const TestArea = () => {
 	// const editar = () => {
 	// 	editarPermisos();
 	// };
+
+	const cargarPermisos = () => {
+		printDuplicatePermits();
+	};
 
 	return (
 		<>
@@ -31,6 +36,12 @@ export const TestArea = () => {
 
 			<div className="row border rounded p-3 m-1 mt-5">
 				<PermisosExcelModule />
+			</div>
+
+			<div className="row border rounded p-3 m-1 mt-5">
+				<button className="btn btn-primary" onClick={cargarPermisos}>
+					Permisos Duplicados
+				</button>
 			</div>
 
 			{/* <div className="mt-5">
