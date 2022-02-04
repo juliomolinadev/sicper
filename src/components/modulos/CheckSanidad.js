@@ -110,6 +110,35 @@ export const CheckSanidad = () => {
 		});
 	};
 
+	const addComentario = (comentario) => {
+		Swal.fire({
+			title: "Folio de constancia física:",
+			input: "textarea",
+			inputValue: comentario,
+			inputAttributes: {
+				autocapitalize: "off"
+			},
+			showCancelButton: true,
+			confirmButtonText: "Guardar",
+			cancelButtonText: "Cancelar"
+		}).then(async (result) => {
+			if (result.isConfirmed) {
+				const isSave = await updatePermisoAlgodonero(
+					permisoSelected,
+					dataPermiso.modulo,
+					"2020-2021",
+					{
+						comentario: result.value
+					}
+				);
+				if (isSave) {
+					dispatch(updatePermiso({ ...dataPermiso, comentario: result.value }));
+					Swal.fire("OK", `Se guardó el comentario.`, "success");
+				}
+			}
+		});
+	};
+
 	const formatter = new Intl.NumberFormat("es-MX", {
 		style: "currency",
 		currency: "MXN"
@@ -223,6 +252,28 @@ export const CheckSanidad = () => {
 						)}
 					</div>
 				</div>
+
+				<div className="row border rounded m-2 p-2 d-flex align-items-center">
+					<div className="col-6 ">COMENTARIO:</div>
+					<div className="col-3"> {" - "} </div>
+					<div className="col-3">
+						{registrarLabores && (
+							<button
+								className=" btn btn-outline-primary btn-sm "
+								type="button"
+								onClick={() => addComentario(dataPermiso.comentario ?? "")}
+							>
+								<i className="fas fa-edit"></i>
+							</button>
+						)}
+					</div>
+				</div>
+
+				{dataPermiso.comentario && dataPermiso.comentario.length > 0 && (
+					<div className="row border rounded m-2 p-2">
+						<div className="col-12">{dataPermiso.comentario}</div>
+					</div>
+				)}
 
 				{checksState.map((check) => (
 					<div key={check.name} className="row p-1 pl-2 d-flex align-items-center">

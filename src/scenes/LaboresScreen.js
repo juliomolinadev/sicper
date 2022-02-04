@@ -65,7 +65,7 @@ export const LaboresScreen = () => {
 	return (
 		<>
 			<div className="row mt-5">
-				<div className="col-sm-6 d-inline-flex">
+				<div className="col-sm-6 d-inline-flex mt-2">
 					<input
 						type="text"
 						className="form-control"
@@ -82,7 +82,7 @@ export const LaboresScreen = () => {
 					</button>
 				</div>
 
-				<div className="col-sm-4">
+				<div className="col-sm-4 mt-2">
 					<button className="btn btn-outline-primary" onClick={loadPermitsForPay}>
 						Labores Completas
 					</button>
