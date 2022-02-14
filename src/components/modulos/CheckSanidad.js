@@ -47,7 +47,7 @@ export const CheckSanidad = () => {
 
 			if (isSave) {
 				checksDispatch(getAction(name, state));
-				dispatch(updatePermiso({ ...dataPermiso, [name]: !state }));
+				dispatch(updatePermiso({ ...dataPermiso, ...updates }));
 			}
 		}
 	};
