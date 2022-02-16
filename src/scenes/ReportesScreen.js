@@ -7,6 +7,7 @@ import { RadioButtonGroup } from "../components/ui/molecules/RadioButtonGroup";
 import { startSetAutorizados, startSetExpedicion } from "../actions/scenes/reportesScreen";
 import { ModuloInformesPadron } from "../components/modulos/ModuloInformesPadron";
 import { ModuloInformesTransferencias } from "../components/modulos/ModuloInformesTransferencias";
+import { ModuloInformesCesvbc } from "../components/modulos/ModuloInformesCesvbc";
 
 export const ReportesScreen = () => {
 	const { privilegios, variablesGlobales } = useSelector((state) => state.auth);
@@ -31,6 +32,10 @@ export const ReportesScreen = () => {
 		{
 			id: "transferencias",
 			label: "Transferencias"
+		},
+		{
+			id: "sanidad",
+			label: "CESVBC"
 		}
 	];
 
@@ -77,6 +82,12 @@ export const ReportesScreen = () => {
 			<div className="mt-5">
 				{reportTypeValues.reportType === "transferencias" &&
 					privilegios.consultarTransferencias && <ModuloInformesTransferencias />}
+			</div>
+
+			<div className="mt-5">
+				{reportTypeValues.reportType === "sanidad" && privilegios.consultarLabores && (
+					<ModuloInformesCesvbc />
+				)}
 			</div>
 			<div className="pb-5"></div>
 		</div>

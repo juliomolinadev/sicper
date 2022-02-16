@@ -206,6 +206,249 @@ export const permitsHeaders = [
 	}
 ];
 
+export const laboresHeaders = [
+	{
+		id: "folio",
+		header: "FOLIO",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: false,
+		search: false
+	},
+	{
+		id: "cuenta",
+		header: "CUENTA",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: true,
+		float: false,
+		display: true,
+		selectable: false,
+		search: true
+	},
+	{
+		id: "nombre",
+		header: "USUARIO",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: true
+	},
+	{
+		id: "tipoLocalidad",
+		header: "EJ/COL",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "claveLocalidad",
+		header: "CLAVE",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "ubicacion",
+		header: "LOCALIDAD",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: true
+	},
+	{
+		id: "lote",
+		header: "LOTE",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "modulo",
+		header: "MODULO",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: true
+	},
+	{
+		id: "cultivo",
+		header: "CULTIVO",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "superficie",
+		header: "HA",
+		styles: "text-center",
+		currency: false,
+		sum: true,
+		count: false,
+		float: 4,
+		display: true,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "superficieMapeada",
+		header: "HA-Map",
+		styles: "text-center",
+		currency: false,
+		sum: true,
+		count: false,
+		float: 4,
+		display: true,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "tecnico",
+		header: "TECNICO",
+		styles: "",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "desfoliado",
+		header: "DESFOLIADO",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "cosechado",
+		header: "COSECHADO",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "desvarado",
+		header: "DESVARADO",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "disqueado",
+		header: "DISQUEADO",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "desarraigado",
+		header: "DESARRAIGADO",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "barbechado",
+		header: "BARBECHADO",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: false,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "pagado",
+		header: "PAGADO",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: false
+	},
+	{
+		id: "laboresPendientes",
+		header: "BLOQUEADO",
+		styles: "text-center",
+		currency: false,
+		sum: false,
+		count: false,
+		float: false,
+		display: true,
+		selectable: true,
+		search: false
+	}
+];
+
 export const producersHeaders = [
 	{
 		id: "curp",
