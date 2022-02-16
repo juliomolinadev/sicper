@@ -51,7 +51,7 @@ export const loadPermisosLabores = async (pairs) => {
 				barbechado: snapHijo.data().barbechado ? "SI" : "NO",
 				pagado: snapHijo.data().pagado ? "SI" : "NO",
 				laboresPendientes: snapHijo.data().laboresPendientes ? "SI" : "NO",
-				tecnico: tecnico.nombre
+				tecnico: tecnico ? tecnico.nombre : ""
 			});
 		});
 	});
