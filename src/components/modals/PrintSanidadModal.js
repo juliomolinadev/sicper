@@ -8,7 +8,8 @@ import { saveConstanciaSanidad } from "../../helpers/saveConsatanciaSanidad";
 import { updatePermisoAlgodonero } from "../../helpers/updatePermisoAlgodonero";
 
 export const PrintSanidadModal = () => {
-	const { printSanidadModal } = useSelector((state) => state.algodoneroScreen);
+	const { printSanidadModal, technicians } = useSelector((state) => state.algodoneroScreen);
+	const tecnico = technicians.find((tecnico) => tecnico.id === printSanidadModal.tecnico);
 	const { transferPrintButton } = useSelector((state) => state.transferenciasScreen);
 
 	const dispatch = useDispatch();
@@ -116,7 +117,11 @@ export const PrintSanidadModal = () => {
 
 					<p>SIRVA EL PRESENTE DOCUMENTO PARA LA LIBERACIÓN DE CARTA DE GARANTÍA EMITIDA.</p>
 
-					<p>PROPIETARIO: {printSanidadModal.nombre}</p>
+					<p>
+						PROPIETARIO: {printSanidadModal.nombre} <br />
+						CUENTA: {printSanidadModal.cuenta} <br />
+						TÉCNICO: {tecnico ? tecnico.displayName : ""}
+					</p>
 
 					<div className=" d-flex justify-content-end pt-5">
 						<p>MEXICALI, B. C. , A {fecha.toLocaleString("es-MX", dateOptions).toUpperCase()}</p>
