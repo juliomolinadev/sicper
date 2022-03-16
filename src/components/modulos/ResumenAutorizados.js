@@ -28,6 +28,43 @@ export const ResumenAutorizados = () => {
 		dispatch(setSuperficieExtra());
 	};
 
+	const totales = {
+		gravedadNormalAutorizada: 0,
+		pozoNormalAutorizada: 0,
+		gravedadNormalAsignada: 0,
+		pozoNormalAsignada: 0,
+		gravedadNormal: 0,
+		pozoNormal: 0,
+		pozoParticularNormal: 0,
+		gravedadExtraAutorizada: 0,
+		pozoExtraAutorizada: 0,
+		gravedadExtraAsignada: 0,
+		pozoExtraAsignada: 0,
+		gravedadExtra: 0,
+		pozoExtra: 0
+	};
+
+	if (expedicion) {
+		expedicion.forEach((cultivo) => {
+			totales.gravedadNormalAutorizada =
+				totales.gravedadNormalAutorizada + cultivo.gravedadNormalAutorizada;
+			totales.pozoNormalAutorizada = totales.pozoNormalAutorizada + cultivo.pozoNormalAutorizada;
+			totales.gravedadNormalAsignada =
+				totales.gravedadNormalAsignada + cultivo.gravedadNormalAsignada;
+			totales.pozoNormalAsignada = totales.pozoNormalAsignada + cultivo.pozoNormalAsignada;
+			totales.gravedadNormal = totales.gravedadNormal + cultivo.gravedadNormal;
+			totales.pozoNormal = totales.pozoNormal + cultivo.pozoNormal;
+			totales.pozoParticularNormal = totales.pozoParticularNormal + cultivo.pozoParticularNormal;
+			totales.gravedadExtraAutorizada =
+				totales.gravedadExtraAutorizada + cultivo.gravedadExtraAutorizada;
+			totales.pozoExtraAutorizada = totales.pozoExtraAutorizada + cultivo.pozoExtraAutorizada;
+			totales.gravedadExtraAsignada = totales.gravedadExtraAsignada + cultivo.gravedadExtraAsignada;
+			totales.pozoExtraAsignada = totales.pozoExtraAsignada + cultivo.pozoExtraAsignada;
+			totales.gravedadExtra = totales.gravedadExtra + cultivo.gravedadExtra;
+			totales.pozoExtra = totales.pozoExtra + cultivo.pozoExtra;
+		});
+	}
+
 	const isModulo = (modulo) => {
 		switch (modulo) {
 			case "UNI01":
@@ -90,111 +127,196 @@ export const ResumenAutorizados = () => {
 								</th>
 							</tr>
 						</thead>
-						{expedicion && superficie === "normal" ? (
-							<tbody>
-								{expedicion.map((cultivo) => {
-									return (
-										<tr key={`${cultivo.id}-${cultivo.clave}`}>
-											<th scope="row" className="text-center">
-												{cultivo.clave}
-											</th>
-											<td>{cultivo.cultivo}</td>
-											<td>
-												<div>Gravedad</div>
-												<div>Pozo</div>
-											</td>
-											<td>
-												<div className="text-center">
-													{roundToN(cultivo.gravedadNormalAutorizada, 3)}
-												</div>
-												<div className="text-center">
-													{roundToN(cultivo.pozoNormalAutorizada, 3)}
-												</div>
-											</td>
-											<td>
-												<div className="text-center">
-													{roundToN(cultivo.gravedadNormalAsignada, 3)}
-												</div>
-												<div className="text-center">{roundToN(cultivo.pozoNormalAsignada, 3)}</div>
-											</td>
-											<td>
-												<div className="text-center">{roundToN(cultivo.gravedadNormal, 3)}</div>
-												{isModulo(modulo) ? (
-													<div className="text-center">{roundToN(cultivo.pozoNormal, 3)}</div>
-												) : (
-													<div className="text-center">
-														{roundToN(cultivo.pozoParticularNormal, 3)}
-													</div>
-												)}
-											</td>
-											<td>
-												<div className="text-center">
-													{roundToN(cultivo.gravedadNormalAsignada - cultivo.gravedadNormal, 3)}
-												</div>
-												{isModulo(modulo) ? (
-													<div className="text-center">
-														{roundToN(cultivo.pozoNormalAsignada - cultivo.pozoNormal, 3)}
-													</div>
-												) : (
-													<div className="text-center">
-														{roundToN(cultivo.pozoNormalAsignada - cultivo.pozoParticularNormal, 3)}
-													</div>
-												)}
-											</td>
-										</tr>
-									);
-								})}
-							</tbody>
-						) : (
-							<></>
-						)}
 
-						{expedicion && superficie === "extra" ? (
-							<tbody>
-								{expedicion.map((cultivo) => {
-									return (
-										<tr key={`${cultivo.id}-${cultivo.clave}`}>
-											<th scope="row" className="text-center">
-												{cultivo.clave}
-											</th>
-											<td>{cultivo.cultivo}</td>
-											<td>
-												<div>Gravedad</div>
-												<div>Pozo</div>
-											</td>
-											<td>
+						{expedicion &&
+							(superficie === "normal" ? (
+								<tbody>
+									{expedicion.map((cultivo) => {
+										return (
+											<tr key={`${cultivo.id}-${cultivo.clave}`}>
+												<th scope="row" className="text-center">
+													{cultivo.clave}
+												</th>
+												<td>{cultivo.cultivo}</td>
+												<td>
+													<div>Gravedad</div>
+													<div>Pozo</div>
+												</td>
+												<td>
+													<div className="text-center">
+														{roundToN(cultivo.gravedadNormalAutorizada, 3)}
+													</div>
+													<div className="text-center">
+														{roundToN(cultivo.pozoNormalAutorizada, 3)}
+													</div>
+												</td>
+												<td>
+													<div className="text-center">
+														{roundToN(cultivo.gravedadNormalAsignada, 3)}
+													</div>
+													<div className="text-center">
+														{roundToN(cultivo.pozoNormalAsignada, 3)}
+													</div>
+												</td>
+												<td>
+													<div className="text-center">{roundToN(cultivo.gravedadNormal, 3)}</div>
+													{isModulo(modulo) ? (
+														<div className="text-center">{roundToN(cultivo.pozoNormal, 3)}</div>
+													) : (
+														<div className="text-center">
+															{roundToN(cultivo.pozoParticularNormal, 3)}
+														</div>
+													)}
+												</td>
+												<td>
+													<div className="text-center">
+														{roundToN(cultivo.gravedadNormalAsignada - cultivo.gravedadNormal, 3)}
+													</div>
+													{isModulo(modulo) ? (
+														<div className="text-center">
+															{roundToN(cultivo.pozoNormalAsignada - cultivo.pozoNormal, 3)}
+														</div>
+													) : (
+														<div className="text-center">
+															{roundToN(
+																cultivo.pozoNormalAsignada - cultivo.pozoParticularNormal,
+																3
+															)}
+														</div>
+													)}
+												</td>
+											</tr>
+										);
+									})}
+
+									<tr key={`${totales.id}-${totales.clave}`}>
+										<th scope="row" className="text-center">
+											-
+										</th>
+										<td>TOTAL</td>
+										<td>
+											<div>Gravedad</div>
+											<div>Pozo</div>
+										</td>
+										<td>
+											<div className="text-center">
+												{roundToN(totales.gravedadNormalAutorizada, 3)}
+											</div>
+											<div className="text-center">{roundToN(totales.pozoNormalAutorizada, 3)}</div>
+										</td>
+										<td>
+											<div className="text-center">
+												{roundToN(totales.gravedadNormalAsignada, 3)}
+											</div>
+											<div className="text-center">{roundToN(totales.pozoNormalAsignada, 3)}</div>
+										</td>
+										<td>
+											<div className="text-center">{roundToN(totales.gravedadNormal, 3)}</div>
+											{isModulo(modulo) ? (
+												<div className="text-center">{roundToN(totales.pozoNormal, 3)}</div>
+											) : (
 												<div className="text-center">
-													{roundToN(cultivo.gravedadExtraAutorizada, 3)}
+													{roundToN(totales.pozoParticularNormal, 3)}
 												</div>
+											)}
+										</td>
+										<td>
+											<div className="text-center">
+												{roundToN(totales.gravedadNormalAsignada - totales.gravedadNormal, 3)}
+											</div>
+											{isModulo(modulo) ? (
 												<div className="text-center">
-													{roundToN(cultivo.pozoExtraAutorizada, 3)}
+													{roundToN(totales.pozoNormalAsignada - totales.pozoNormal, 3)}
 												</div>
-											</td>
-											<td>
+											) : (
 												<div className="text-center">
-													{roundToN(cultivo.gravedadExtraAsignada, 3)}
+													{roundToN(totales.pozoNormalAsignada - totales.pozoParticularNormal, 3)}
 												</div>
-												<div className="text-center">{roundToN(cultivo.pozoExtraAsignada, 3)}</div>
-											</td>
-											<td>
-												<div className="text-center">{roundToN(cultivo.gravedadExtra, 3)}</div>
-												<div className="text-center">{roundToN(cultivo.pozoExtra, 3)}</div>
-											</td>
-											<td>
-												<div className="text-center">
-													{roundToN(cultivo.gravedadExtraAsignada - cultivo.gravedadExtra, 3)}
-												</div>
-												<div className="text-center">
-													{roundToN(cultivo.pozoExtraAsignada - cultivo.pozoExtra, 3)}
-												</div>
-											</td>
-										</tr>
-									);
-								})}
-							</tbody>
-						) : (
-							<></>
-						)}
+											)}
+										</td>
+									</tr>
+								</tbody>
+							) : (
+								<tbody>
+									{expedicion.map((cultivo) => {
+										return (
+											<tr key={`${cultivo.id}-${cultivo.clave}`}>
+												<th scope="row" className="text-center">
+													{cultivo.clave}
+												</th>
+												<td>{cultivo.cultivo}</td>
+												<td>
+													<div>Gravedad</div>
+													<div>Pozo</div>
+												</td>
+												<td>
+													<div className="text-center">
+														{roundToN(cultivo.gravedadExtraAutorizada, 3)}
+													</div>
+													<div className="text-center">
+														{roundToN(cultivo.pozoExtraAutorizada, 3)}
+													</div>
+												</td>
+												<td>
+													<div className="text-center">
+														{roundToN(cultivo.gravedadExtraAsignada, 3)}
+													</div>
+													<div className="text-center">
+														{roundToN(cultivo.pozoExtraAsignada, 3)}
+													</div>
+												</td>
+												<td>
+													<div className="text-center">{roundToN(cultivo.gravedadExtra, 3)}</div>
+													<div className="text-center">{roundToN(cultivo.pozoExtra, 3)}</div>
+												</td>
+												<td>
+													<div className="text-center">
+														{roundToN(cultivo.gravedadExtraAsignada - cultivo.gravedadExtra, 3)}
+													</div>
+													<div className="text-center">
+														{roundToN(cultivo.pozoExtraAsignada - cultivo.pozoExtra, 3)}
+													</div>
+												</td>
+											</tr>
+										);
+									})}
+
+									<tr key={`${totales.id}-${totales.clave}`}>
+										<th scope="row" className="text-center">
+											-
+										</th>
+										<td>TOTAL</td>
+										<td>
+											<div>Gravedad</div>
+											<div>Pozo</div>
+										</td>
+										<td>
+											<div className="text-center">
+												{roundToN(totales.gravedadExtraAutorizada, 3)}
+											</div>
+											<div className="text-center">{roundToN(totales.pozoExtraAutorizada, 3)}</div>
+										</td>
+										<td>
+											<div className="text-center">
+												{roundToN(totales.gravedadExtraAsignada, 3)}
+											</div>
+											<div className="text-center">{roundToN(totales.pozoExtraAsignada, 3)}</div>
+										</td>
+										<td>
+											<div className="text-center">{roundToN(totales.gravedadExtra, 3)}</div>
+											<div className="text-center">{roundToN(totales.pozoExtra, 3)}</div>
+										</td>
+										<td>
+											<div className="text-center">
+												{roundToN(totales.gravedadExtraAsignada - totales.gravedadExtra, 3)}
+											</div>
+											<div className="text-center">
+												{roundToN(totales.pozoExtraAsignada - totales.pozoExtra, 3)}
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							))}
 					</table>
 				</div>
 			</div>
