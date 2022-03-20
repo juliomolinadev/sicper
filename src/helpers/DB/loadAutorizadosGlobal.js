@@ -28,7 +28,8 @@ export const loadAutorizadosGlobal = async (ciclo) => {
 			if (childItem.id !== "0-SIN CULTIVO") {
 				autorizados.push({
 					id: childItem.id,
-					...childItem.data()
+					...childItem.data(),
+					estado: childItem.data().modulo === "UNI03" ? "Sonora" : childItem.data().estado
 				});
 			}
 		});
