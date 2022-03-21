@@ -212,6 +212,55 @@ export const ExpedicionTable = ({ data, modulos }) => {
 							</tr>
 						);
 					})}
+
+					<tr>
+						<th scope="row" colSpan="13" className="pt-4">
+							-
+						</th>
+					</tr>
+					{Object.values(data["TOTAL"]).map((cultivo, i) => {
+						const nombreCultivo = Object.keys(data["TOTAL"])[i];
+
+						return (
+							<tr key={nombreCultivo}>
+								<th scope="row">{nombreCultivo}</th>
+								<td className="text-right">{roundToN(cultivo.supGravedadProgramada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supGravedadExpedida, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supGravedadRealizada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoProgramada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoExpedida, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoRealizada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoPartProgramada, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoPartExpedida, 3)}</td>
+								<td className="text-right">{roundToN(cultivo.supPozoPartRealizada, 3)}</td>
+
+								<td className="text-right">
+									{roundToN(
+										cultivo.supGravedadProgramada +
+											cultivo.supPozoProgramada +
+											cultivo.supPozoPartProgramada,
+										3
+									)}
+								</td>
+								<td className="text-right">
+									{roundToN(
+										cultivo.supGravedadExpedida +
+											cultivo.supPozoExpedida +
+											cultivo.supPozoPartExpedida,
+										3
+									)}
+								</td>
+								<td className="text-right">
+									{roundToN(
+										cultivo.supGravedadRealizada +
+											cultivo.supPozoRealizada +
+											cultivo.supPozoPartRealizada,
+										3
+									)}
+								</td>
+							</tr>
+						);
+					})}
 				</tbody>
 			</table>
 

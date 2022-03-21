@@ -22,8 +22,8 @@ const accumulate = (
 	supPozoExpedida,
 	supPozoRealizada,
 	supPozoPartProgramada,
-	supPozoPartExpedida
-	// supPozoPartRealizad
+	supPozoPartExpedida,
+	supPozoPartRealizada
 ) => {
 	ref.supGravedadProgramada = ref.supGravedadProgramada + supGravedadProgramada;
 	ref.supGravedadExpedida = ref.supGravedadExpedida + supGravedadExpedida;
@@ -33,7 +33,7 @@ const accumulate = (
 	ref.supPozoRealizada = ref.supPozoRealizada + supPozoRealizada;
 	ref.supPozoPartProgramada = ref.supPozoPartProgramada + supPozoPartProgramada;
 	ref.supPozoPartExpedida = ref.supPozoPartExpedida + supPozoPartExpedida;
-	// ref.supPozoPartRealizad = ref.supPozoPartRealizad + supPozoPartRealizad;
+	ref.supPozoPartRealizada = ref.supPozoPartRealizada + supPozoPartRealizada;
 };
 
 const checkModulo = (modulos, modulo) => {
@@ -88,8 +88,8 @@ export const filterReportData = (data, option, modulos) => {
 			supPozoExpedida,
 			supPozoRealizada,
 			supPozoPartProgramada,
-			supPozoPartExpedida
-			// supPozoPartRealizad
+			supPozoPartExpedida,
+			supPozoPartRealizada
 		}) => {
 			if (isRegisterInclude(option, modulos, modulo, estado)) {
 				if (reportData[subciclo][cultivo]) {
@@ -102,8 +102,8 @@ export const filterReportData = (data, option, modulos) => {
 						supPozoExpedida,
 						supPozoRealizada,
 						supPozoPartProgramada,
-						supPozoPartExpedida
-						// supPozoPartRealizad
+						supPozoPartExpedida,
+						supPozoPartRealizada
 					);
 
 					accumulate(
@@ -115,8 +115,8 @@ export const filterReportData = (data, option, modulos) => {
 						supPozoExpedida,
 						supPozoRealizada,
 						supPozoPartProgramada,
-						supPozoPartExpedida
-						// supPozoPartRealizad
+						supPozoPartExpedida,
+						supPozoPartRealizada
 					);
 				} else {
 					accumulate(
@@ -128,8 +128,8 @@ export const filterReportData = (data, option, modulos) => {
 						supPozoExpedida,
 						supPozoRealizada,
 						supPozoPartProgramada,
-						supPozoPartExpedida
-						// supPozoPartRealizad
+						supPozoPartExpedida,
+						supPozoPartRealizada
 					);
 
 					accumulate(
@@ -141,13 +141,48 @@ export const filterReportData = (data, option, modulos) => {
 						supPozoExpedida,
 						supPozoRealizada,
 						supPozoPartProgramada,
-						supPozoPartExpedida
-						// supPozoPartRealizad
+						supPozoPartExpedida,
+						supPozoPartRealizada
 					);
 				}
 			}
 		}
 	);
+
+	if (reportData.TOTAL) {
+		delete reportData.TOTAL;
+	}
+
+	const TOTAL = {
+		supGravedadProgramada: 0,
+		supGravedadExpedida: 0,
+		supGravedadRealizada: 0,
+		supPozoProgramada: 0,
+		supPozoExpedida: 0,
+		supPozoRealizada: 0,
+		supPozoPartProgramada: 0,
+		supPozoPartExpedida: 0,
+		supPozoPartRealizada: 0
+	};
+
+	Object.values(reportData).forEach((subciclo) => {
+		TOTAL.supGravedadProgramada =
+			TOTAL.supGravedadProgramada + subciclo.SUBTOTAL.supGravedadProgramada;
+		TOTAL.supGravedadExpedida = TOTAL.supGravedadExpedida + subciclo.SUBTOTAL.supGravedadExpedida;
+		TOTAL.supGravedadRealizada =
+			TOTAL.supGravedadRealizada + subciclo.SUBTOTAL.supGravedadRealizada;
+		TOTAL.supPozoProgramada = TOTAL.supPozoProgramada + subciclo.SUBTOTAL.supPozoProgramada;
+		TOTAL.supPozoExpedida = TOTAL.supPozoExpedida + subciclo.SUBTOTAL.supPozoExpedida;
+		TOTAL.supPozoRealizada = TOTAL.supPozoRealizada + subciclo.SUBTOTAL.supPozoRealizada;
+		TOTAL.supPozoPartProgramada =
+			TOTAL.supPozoPartProgramada + subciclo.SUBTOTAL.supPozoPartProgramada;
+		TOTAL.supPozoPartExpedida = TOTAL.supPozoPartExpedida + subciclo.SUBTOTAL.supPozoPartExpedida;
+		TOTAL.supPozoPartRealizada =
+			TOTAL.supPozoPartRealizada + subciclo.SUBTOTAL.supPozoPartRealizada;
+	});
+
+	reportData.TOTAL = {};
+	reportData.TOTAL.TOTAL = { ...TOTAL };
 
 	return reportData;
 };
