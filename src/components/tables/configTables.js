@@ -19,7 +19,7 @@ export const TextField = styled.input`
 export const usuariosColumns = [
 	{ name: "id", selector: "id", omit: true },
 	{ name: "CUENTA", selector: "cuenta", sortable: true, width: "80px" },
-	{ name: "SUBCTA", selector: "subcta", sortable: true, width: "40px", center: true },
+	{ name: "SUBCTA", selector: "subcta", sortable: true, width: "50px", center: true },
 	{ name: "PATERNO", selector: "apPaterno", width: "120px", sortable: true },
 	{ name: "MATERNO", selector: "apMaterno", width: "120px", sortable: true },
 	{ name: "NOMBRE", selector: "nombre", width: "150px", sortable: true },
@@ -51,7 +51,7 @@ export const transferColumns = [
 		center: true
 	},
 	{ name: "CUENTA", selector: "cuenta", sortable: true, width: "80px" },
-	{ name: "SUBCTA", selector: "subcta", sortable: true, width: "40px", center: true },
+	{ name: "SUBCTA", selector: "subcta", sortable: true, width: "50px", center: true },
 	{ name: "PATERNO", selector: "apPaterno", width: "120px", sortable: true },
 	{ name: "MATERNO", selector: "apMaterno", width: "120px", sortable: true },
 	{ name: "NOMBRE", selector: "nombre", width: "150px", sortable: true },
