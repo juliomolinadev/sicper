@@ -7,6 +7,7 @@ import { startSetEstadoExpedicionModulo } from "./auth";
 import { goToElement } from "../helpers/functions/assets";
 import { unsetTransferencia } from "./transferenciasScreen";
 import { loadLaboresPendientes } from "../helpers/loadLaboresPendientes";
+import { loadDictamen } from "../helpers/loadDictamen";
 
 export const openUsuariosModal = () => ({
 	type: types.altaPermisoOpenUsuariosModal
@@ -45,6 +46,12 @@ export const startSetUsuarioSelected = (usuario) => {
 			"2020-2021"
 		);
 
+		const dictamen = await loadDictamen(
+			`${usuario.cuenta}.${usuario.subcta}`,
+			// TODO: Poner ciclo de forma dinamica
+			"2021-2022"
+		);
+
 		// Verifica si los derechos corresponden a una transferencia
 		if (usuario.folio) {
 			const supPrevia = await loadSuperficiePrevia(
@@ -57,6 +64,7 @@ export const startSetUsuarioSelected = (usuario) => {
 			usuario.supRiego = usuario.superficieTransferida;
 			usuario.supPrevia = supPrevia;
 			usuario.laboresPendientes = laboresPendientes;
+			usuario.dictamen = dictamen;
 
 			dispatch(unsetTransferencia());
 			dispatch(setUsuarioSelected(usuario));
@@ -72,6 +80,7 @@ export const startSetUsuarioSelected = (usuario) => {
 
 			usuario.laboresPendientes = laboresPendientes;
 			usuario.supPrevia = supPrevia + transfers;
+			usuario.dictamen = dictamen;
 
 			dispatch(unsetTransferencia());
 			dispatch(setUsuarioSelected(usuario));

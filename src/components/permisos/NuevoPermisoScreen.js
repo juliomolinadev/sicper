@@ -108,6 +108,20 @@ export const NuevoPermisoScreen = () => {
 		}
 	};
 
+	const bloquearPorFechaLimite = () => {
+		if (altaPermisos.fechaLimite) {
+			const hoy = new Date();
+			// Firebase guarda en segundos (se requieren milisegundos)
+			const limite = new Date(altaPermisos.fechaLimite.seconds * 1000);
+
+			if (limite > hoy.getTime()) return false;
+			else {
+				if (altaPermisos.dictamen) return false;
+				else return true;
+			}
+		} else return false;
+	};
+
 	const isFormValid = () => {
 		if (!expedicionActiva || !expedicionActivaModulo) {
 			dispatch(setError("Expedición cerrada! Por el momento no es posible expedir permisos."));
@@ -144,6 +158,13 @@ export const NuevoPermisoScreen = () => {
 				"Superficie no disponible"
 		) {
 			dispatch(setError("La superficie asignada para el cultivo no es suficiente."));
+			return false;
+		} else if (bloquearPorFechaLimite()) {
+			dispatch(
+				setError(
+					"La fecha límite para la expedición de este cultivo ha expirado. Se requiere dictamen técnico de siembra."
+				)
+			);
 			return false;
 		}
 

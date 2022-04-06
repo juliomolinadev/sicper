@@ -1,5 +1,6 @@
 import React from "react";
 import { printDuplicatePermits } from "../../helpers/printDuplicatePermits";
+import { DictamenManual } from "../modulos/DictamenManual";
 // import { editarPermisos } from "../../helpers/DB/editarPermisos";
 import { ExpeditionCheckModule } from "../modulos/ExpeditionCheckModule";
 import { PermisosExcelModule } from "../modulos/PermisosExcelModule";
@@ -36,6 +37,10 @@ export const TestArea = () => {
 
 			<div className="row border rounded p-3 m-1 mt-5">
 				<PermisosExcelModule />
+			</div>
+
+			<div className="row border rounded d-flex flex-column p-3 m-1 mt-5">
+				<DictamenManual />
 			</div>
 
 			<div className="row border rounded p-3 m-1 mt-5">

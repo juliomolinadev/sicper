@@ -121,6 +121,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				claveCultivo: action.payload.clave,
 				subciclo: action.payload.subciclo,
 				cuotaCultivo: action.payload.costoHectarea,
+				fechaLimite: action.payload.fechaLimite,
 				superficiePreviaCultivo: action.payload.superficiePrevia
 			};
 
@@ -204,6 +205,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				nombreLocalidad: action.payload.nombreLocalidad,
 				tipoLocalidad: action.payload.tipoLocalidad,
 				claveLocalidad: action.payload.ejido,
+				dictamen: action.payload.dictamen,
 				laboresPendientes: action.payload.laboresPendientes
 			};
 
