@@ -10,7 +10,6 @@ export const loadDictamen = async (cuenta, ciclo) => {
 		.get();
 
 	if (dictamenesSnap.exists) {
-		console.log(dictamenesSnap.data());
 		if (dictamenesSnap.data().estado === "activo") dictamen = true;
 	}
 

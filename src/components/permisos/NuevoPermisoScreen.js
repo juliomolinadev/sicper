@@ -108,11 +108,26 @@ export const NuevoPermisoScreen = () => {
 		}
 	};
 
+	const getFechaLimite = () => {
+		switch (altaPermisos.estado) {
+			case "Baja California":
+				return altaPermisos.fechaLimiteBc;
+
+			case "Sonora":
+				return altaPermisos.fechaLimiteSonora;
+
+			default:
+				return false;
+		}
+	};
+
 	const bloquearPorFechaLimite = () => {
-		if (altaPermisos.fechaLimite) {
+		const fechaLimite = getFechaLimite();
+
+		if (fechaLimite) {
 			const hoy = new Date();
 			// Firebase guarda en segundos (se requieren milisegundos)
-			const limite = new Date(altaPermisos.fechaLimite.seconds * 1000);
+			const limite = new Date(fechaLimite.seconds * 1000);
 
 			if (limite > hoy.getTime()) return false;
 			else {
