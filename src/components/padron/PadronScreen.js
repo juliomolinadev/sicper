@@ -15,6 +15,7 @@ import { DownloadPadronButton } from "../ui/atoms/DownloadPadronButton";
 import { PrintConstancyModal } from "../modals/PrintConstancyModal";
 import { ConstancyModule } from "../ui/organisms/ConstancyModule";
 import { ProductoresModule } from "./ProductoresModule";
+import { DictamenModal } from "../modals/DictamenModal";
 
 export const PadronScreen = () => {
 	const { usuarios, usuario } = useSelector((state) => state.entidades);
@@ -44,6 +45,11 @@ export const PadronScreen = () => {
 		constancia: {}
 	});
 	const { openModal, constancia, constancySaved } = modalState;
+
+	const [dictamenFormState, setDictamenFormState] = useState({
+		isOpenDictamenForm: false
+	});
+	const { isOpenDictamenForm } = dictamenFormState;
 
 	return (
 		<div className="mt-5">
@@ -80,7 +86,12 @@ export const PadronScreen = () => {
 					</div>
 
 					<div className="col-sm-4">
-						{usuario && <UsuarioSelectedDetail setModalState={setModalState} />}
+						{usuario && (
+							<UsuarioSelectedDetail
+								setModalState={setModalState}
+								setDictamenFormState={setDictamenFormState}
+							/>
+						)}
 					</div>
 				</div>
 			)}
@@ -122,6 +133,13 @@ export const PadronScreen = () => {
 					constancia={constancia}
 					constancySaved={constancySaved}
 					setModalState={setModalState}
+				/>
+			)}
+
+			{isOpenDictamenForm && (
+				<DictamenModal
+					isOpenModal={isOpenDictamenForm}
+					setDictamenFormState={setDictamenFormState}
 				/>
 			)}
 			<br />
