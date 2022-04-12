@@ -109,15 +109,16 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const getFechaLimite = () => {
-		switch (altaPermisos.estado) {
-			case "Baja California":
-				return altaPermisos.fechaLimiteBc;
-
-			case "Sonora":
+		console.log(auth.modulo);
+		switch (auth.modulo) {
+			case "1":
+			case "2":
+			case "3":
+			case "UNI03":
 				return altaPermisos.fechaLimiteSonora;
 
 			default:
-				return false;
+				return altaPermisos.fechaLimiteBc;
 		}
 	};
 
