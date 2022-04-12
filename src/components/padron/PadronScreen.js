@@ -16,6 +16,7 @@ import { PrintConstancyModal } from "../modals/PrintConstancyModal";
 import { ConstancyModule } from "../ui/organisms/ConstancyModule";
 import { ProductoresModule } from "./ProductoresModule";
 import { DictamenModal } from "../modals/DictamenModal";
+import { PrintDictamenModal } from "../modals/PrintDictamenModal";
 
 export const PadronScreen = () => {
 	const { usuarios, usuario } = useSelector((state) => state.entidades);
@@ -142,6 +143,8 @@ export const PadronScreen = () => {
 					setDictamenFormState={setDictamenFormState}
 				/>
 			)}
+
+			{true && <PrintDictamenModal />}
 			<br />
 		</div>
 	);
