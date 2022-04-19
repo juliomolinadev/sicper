@@ -2,9 +2,9 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { getConstancyCounter } from "../../helpers/DB/getConstancyCount";
 
-export const UsuarioSelectedDetail = ({ setModalState }) => {
+export const UsuarioSelectedDetail = ({ setModalState, setDictamenFormState }) => {
 	const { privilegios } = useSelector((state) => state.auth);
-	const { generarConstancias } = privilegios;
+	const { generarConstancias, generarDictamenes } = privilegios;
 	const altaPermisos = useSelector((state) => state.altaPermisos);
 	const { usuarios, idUsuarioSelected } = useSelector((state) => state.altaPermisos);
 
@@ -17,6 +17,10 @@ export const UsuarioSelectedDetail = ({ setModalState }) => {
 		};
 
 		setModalState({ openModal: true, constancia });
+	};
+
+	const openDictamenModal = () => {
+		setDictamenFormState({ isOpenDictamenForm: true });
 	};
 
 	return (
@@ -40,6 +44,14 @@ export const UsuarioSelectedDetail = ({ setModalState }) => {
 				<div className="d-flex justify-content-center">
 					<button className="btn btn-outline-primary m-4" onClick={startSaveConstancy}>
 						Generar constancia
+					</button>
+				</div>
+			)}
+
+			{generarDictamenes && !altaPermisos.dictamen && (
+				<div className="d-flex justify-content-center">
+					<button className="btn btn-outline-primary m-4" onClick={openDictamenModal}>
+						Generar Dictamen
 					</button>
 				</div>
 			)}

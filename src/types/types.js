@@ -46,6 +46,8 @@ export const types = {
 	unsetUpdatingPadron: "[Padron] Unset Updating Padron",
 	setUpdatingReacomodos: "[Padron] Set Updating Reacomodos",
 	unsetUpdatingReacomodos: "[Padron] Unset Updating Reacomodos",
+	setDictamenData: "[Padron] Set Dictamen Data",
+	setDictamenDataSaved: "[Padron] Set Dictamen Data Saved",
 
 	altaPermisoOpenProductoresModal: "[Alta Permisos] Open productores modal",
 	altaPermisoCloseProductoresModal: "[Alta Permisos] Close productores modal",

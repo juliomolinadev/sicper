@@ -6,7 +6,8 @@ const initialState = {
 	},
 	padronScreen: {
 		updatingPadron: false,
-		updatingReacomodos: false
+		updatingReacomodos: false,
+		dictamen: null
 	}
 };
 
@@ -75,6 +76,15 @@ export const scenesReducer = (state = initialState, action) => {
 				...state,
 				padronScreen: {
 					updatingReacomodos: false
+				}
+			};
+
+		case types.setDictamenData:
+			return {
+				...state,
+				padronScreen: {
+					...state.padronScreen,
+					dictamen: action.payload
 				}
 			};
 

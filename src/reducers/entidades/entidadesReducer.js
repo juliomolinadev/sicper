@@ -156,6 +156,12 @@ export const entidadesReducer = (state = {}, action) => {
 				entities: action.payload
 			};
 
+		case types.setDictamenDataSaved:
+			return {
+				...state,
+				usuario: { ...state.usuario, dictamen: action.payload }
+			};
+
 		default:
 			return state;
 	}

@@ -15,10 +15,14 @@ import { DownloadPadronButton } from "../ui/atoms/DownloadPadronButton";
 import { PrintConstancyModal } from "../modals/PrintConstancyModal";
 import { ConstancyModule } from "../ui/organisms/ConstancyModule";
 import { ProductoresModule } from "./ProductoresModule";
+import { DictamenModal } from "../modals/DictamenModal";
+import { PrintDictamenModal } from "../modals/PrintDictamenModal";
 
 export const PadronScreen = () => {
 	const { usuarios, usuario } = useSelector((state) => state.entidades);
 	const { privilegios } = useSelector((state) => state.auth);
+	const { padronScreen } = useSelector((state) => state.scenes);
+	const { dictamen } = padronScreen;
 
 	const dispatch = useDispatch();
 
@@ -44,6 +48,13 @@ export const PadronScreen = () => {
 		constancia: {}
 	});
 	const { openModal, constancia, constancySaved } = modalState;
+
+	const [dictamenFormState, setDictamenFormState] = useState({
+		isOpenDictamenForm: false
+	});
+	const { isOpenDictamenForm } = dictamenFormState;
+
+	const [isOpenDictamenPrint, setIsOpenDictamenPrint] = useState(true);
 
 	return (
 		<div className="mt-5">
@@ -80,7 +91,12 @@ export const PadronScreen = () => {
 					</div>
 
 					<div className="col-sm-4">
-						{usuario && <UsuarioSelectedDetail setModalState={setModalState} />}
+						{usuario && (
+							<UsuarioSelectedDetail
+								setModalState={setModalState}
+								setDictamenFormState={setDictamenFormState}
+							/>
+						)}
 					</div>
 				</div>
 			)}
@@ -122,6 +138,22 @@ export const PadronScreen = () => {
 					constancia={constancia}
 					constancySaved={constancySaved}
 					setModalState={setModalState}
+				/>
+			)}
+
+			{isOpenDictamenForm && (
+				<DictamenModal
+					isOpenModal={isOpenDictamenForm}
+					setDictamenFormState={setDictamenFormState}
+					setIsOpenDictamenPrint={setIsOpenDictamenPrint}
+				/>
+			)}
+
+			{dictamen && (
+				<PrintDictamenModal
+					isOpenDictamenPrint={isOpenDictamenPrint}
+					setDictamenFormState={setDictamenFormState}
+					setIsOpenDictamenPrint={setIsOpenDictamenPrint}
 				/>
 			)}
 			<br />

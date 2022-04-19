@@ -158,6 +158,7 @@ export const privileges = {
 	actualizarPadron: false,
 	consultarPadron: false,
 	generarConstancias: false,
+	generarDictamenes: false,
 	editarProductores: false,
 
 	//Permisos
