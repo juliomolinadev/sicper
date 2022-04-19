@@ -4,7 +4,7 @@ import { getConstancyCounter } from "../../helpers/DB/getConstancyCount";
 
 export const UsuarioSelectedDetail = ({ setModalState, setDictamenFormState }) => {
 	const { privilegios } = useSelector((state) => state.auth);
-	const { generarConstancias } = privilegios;
+	const { generarConstancias, generarDictamenes } = privilegios;
 	const altaPermisos = useSelector((state) => state.altaPermisos);
 	const { usuarios, idUsuarioSelected } = useSelector((state) => state.altaPermisos);
 
@@ -48,7 +48,7 @@ export const UsuarioSelectedDetail = ({ setModalState, setDictamenFormState }) =
 				</div>
 			)}
 
-			{generarConstancias && (
+			{generarDictamenes && !altaPermisos.dictamen && (
 				<div className="d-flex justify-content-center">
 					<button className="btn btn-outline-primary m-4" onClick={openDictamenModal}>
 						Generar Dictamen

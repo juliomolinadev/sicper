@@ -1,21 +1,22 @@
 import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
+import { setDictamenDataSaved } from "../../actions/usuarios";
+import { saveDictamen } from "../../helpers/saveDictamen";
 
-import { startCloseSanidadModal, updatePermiso } from "../../actions/algodoneroScreen";
-import { enablePrintButton } from "../../actions/transferenciasScreen";
-import { saveConstanciaSanidad } from "../../helpers/saveConsatanciaSanidad";
-import { updatePermisoAlgodonero } from "../../helpers/updatePermisoAlgodonero";
-
-export const PrintDictamenModal = () => {
-	const { printSanidadModal, technicians } = useSelector((state) => state.algodoneroScreen);
-	const tecnico = technicians.find((tecnico) => tecnico.id === printSanidadModal.tecnico);
-	const { transferPrintButton } = useSelector((state) => state.transferenciasScreen);
+export const PrintDictamenModal = ({
+	isOpenDictamenPrint,
+	setIsOpenDictamenPrint,
+	setDictamenFormState
+}) => {
+	const { padronScreen } = useSelector((state) => state.scenes);
+	const { dictamen } = padronScreen;
+	const { usuario } = useSelector((state) => state.entidades);
 
 	const dispatch = useDispatch();
 
 	const closeModal = () => {
-		dispatch(startCloseSanidadModal());
+		setIsOpenDictamenPrint(false);
 	};
 
 	const imprimir = () => {
@@ -30,20 +31,15 @@ export const PrintDictamenModal = () => {
 		}
 	};
 
-	const handleSaveConstancy = async () => {
-		const isSave = await saveConstanciaSanidad(
-			{ ...printSanidadModal, folioSanidad: printSanidadModal.folioSanidad },
-			"2020-2021"
-		);
+	const handleSaveDictamen = async () => {
+		const isSave = saveDictamen(`${usuario.cuenta}.${usuario.subcta}`, "2021-2022", {
+			...dictamen,
+			estado: "activo"
+		});
 
 		if (isSave) {
-			dispatch(enablePrintButton());
-			updatePermisoAlgodonero(printSanidadModal.folio, printSanidadModal.modulo, "2020-2021", {
-				folioSanidad: printSanidadModal.folioSanidad
-			});
-			dispatch(
-				updatePermiso({ ...printSanidadModal, folioSanidad: printSanidadModal.folioSanidad })
-			);
+			dispatch(setDictamenDataSaved({ ...dictamen, estado: "activo" }));
+			setDictamenFormState({ isOpenDictamenForm: false });
 		}
 	};
 
@@ -52,7 +48,7 @@ export const PrintDictamenModal = () => {
 
 	return (
 		<Modal
-			isOpen={true}
+			isOpen={isOpenDictamenPrint}
 			onRequestClose={closeModal}
 			style={customStyles}
 			closeTimeoutMS={200}
@@ -89,34 +85,42 @@ export const PrintDictamenModal = () => {
 
 			<div className="row pt-5"></div>
 			<div className="row pt-5"></div>
-			<div className="row pl-5 pr-5 m-2">NOMBRE DEL PRODUCTOR: PRODUCTOR</div>
-			<div className="row pl-5 pr-5 m-2">NOMBRE DEL PROPIETARIO: PROPIETARIO</div>
-			<div className="row pl-5 pr-5 mt-2 mb-2">
-				<div className="col-4 pl-4">UBICACION: COLONIA</div>
-				<div className="col-2">PARCELA: LOTE</div>
-				<div className="col-2">SUP: HA</div>
-				<div className="col-4">CADER: CADER</div>
+			<div className="row pl-5 pr-5 m-2">NOMBRE DEL PRODUCTOR: {dictamen.nombreProductor}</div>
+			<div className="row pl-5 pr-5 m-2">
+				NOMBRE DEL PROPIETARIO: {`${usuario.apPaterno} ${usuario.apMaterno} ${usuario.nombre}`}
 			</div>
 			<div className="row pl-5 pr-5 mt-2 mb-2">
-				<div className="col-5 pl-4">HABILITADORA: HABILITADORA</div>
-				<div className="col-2">MODULO: MODULO</div>
-				<div className="col-5">CADER: CADER</div>
+				<div className="col-4 pl-4">UBICACION: {usuario.nombreLocalidad}</div>
+				<div className="col-2">PARCELA: {usuario.predio}</div>
+				<div className="col-2">SUP: {usuario.supFisica}</div>
+				<div className="col-4">No. CUENTA: {`${usuario.cuenta}.${usuario.subcta}`}</div>
+			</div>
+			<div className="row pl-5 pr-5 mt-2 mb-2">
+				<div className="col-4 pl-4">HABILITADORA: {dictamen.habilitadora}</div>
+				<div className="col-2">MODULO: {usuario.entidad}</div>
+				<div className="col-6">CADER: {dictamen.cader}</div>
 			</div>
 
 			<div className="row pt-5"></div>
 			<div className="row pt-5"></div>
 
-			<div className="row pl-5 pr-5 m-2">LABORES CULTURALES: PRODUCTOR</div>
-			<div className="row pl-5 pr-5 m-2">FECHA DE RIEGO: PRODUCTOR</div>
-			<div className="row pl-5 pr-5 m-2">FECHA DE SIEMBRA EN SECO: PRODUCTOR</div>
-			<div className="row pl-5 pr-5 m-2">FECHA DE SIEMBRA EN HUMEDO: PRODUCTOR</div>
-			<div className="row pl-5 pr-5 m-2">DICTAMEN TECNICO: PRODUCTOR</div>
+			<div className="row pl-5 pr-5 m-2">LABORES CULTURALES: {dictamen.laboresCulturales}</div>
+			<div className="row pl-5 pr-5 m-2">
+				FECHA DE RIEGO: {dictamen.fechaRiego.toLocaleDateString()}
+			</div>
+			<div className="row pl-5 pr-5 m-2">
+				FECHA DE SIEMBRA EN SECO: {dictamen.fechaSiembraSeco.toLocaleDateString()}
+			</div>
+			<div className="row pl-5 pr-5 m-2">
+				FECHA DE SIEMBRA EN HUMEDO: {dictamen.fechaSiembraHumedo.toLocaleDateString()}
+			</div>
+			<div className="row pl-5 pr-5 m-2">DICTAMEN TECNICO: {dictamen.dictamenTecnico}</div>
 
 			<div className="row pt-5"></div>
 			<div className="row pl-5 pr-5 m-2">
 				OBSERVACIONES:
 				<div className="d-block w-100 rounded border" style={{ height: 100 }}>
-					Observaciones
+					{dictamen.observaciones}
 				</div>
 			</div>
 
@@ -142,7 +146,7 @@ export const PrintDictamenModal = () => {
 			</div>
 
 			<div className="row m-3 d-flex justify-content-center pt-5">
-				{transferPrintButton ? (
+				{usuario.dictamen ? (
 					<button type="button" className="btn btn-outline-primary d-print-none" onClick={imprimir}>
 						<i className="fas fa-print"></i>
 						<span> Imprimir</span>
@@ -151,7 +155,7 @@ export const PrintDictamenModal = () => {
 					<button
 						type="button"
 						className="btn btn-outline-primary ml-5 d-print-none"
-						onClick={handleSaveConstancy}
+						onClick={handleSaveDictamen}
 					>
 						<i className="fas fa-save"></i>
 						<span> Guardar </span>

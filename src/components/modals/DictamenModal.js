@@ -21,7 +21,7 @@ const customStyles = {
 
 Modal.setAppElement("#root");
 
-export const DictamenModal = ({ isOpenModal, setDictamenFormState }) => {
+export const DictamenModal = ({ isOpenModal, setDictamenFormState, setIsOpenDictamenPrint }) => {
 	const dispatch = useDispatch();
 
 	const { msgError } = useSelector((state) => state.ui);
@@ -69,6 +69,8 @@ export const DictamenModal = ({ isOpenModal, setDictamenFormState }) => {
 					fechaSiembraHumedo
 				})
 			);
+
+			setIsOpenDictamenPrint(true);
 		}
 	};
 

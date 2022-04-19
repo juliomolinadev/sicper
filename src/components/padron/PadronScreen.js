@@ -21,6 +21,8 @@ import { PrintDictamenModal } from "../modals/PrintDictamenModal";
 export const PadronScreen = () => {
 	const { usuarios, usuario } = useSelector((state) => state.entidades);
 	const { privilegios } = useSelector((state) => state.auth);
+	const { padronScreen } = useSelector((state) => state.scenes);
+	const { dictamen } = padronScreen;
 
 	const dispatch = useDispatch();
 
@@ -51,6 +53,8 @@ export const PadronScreen = () => {
 		isOpenDictamenForm: false
 	});
 	const { isOpenDictamenForm } = dictamenFormState;
+
+	const [isOpenDictamenPrint, setIsOpenDictamenPrint] = useState(true);
 
 	return (
 		<div className="mt-5">
@@ -141,10 +145,17 @@ export const PadronScreen = () => {
 				<DictamenModal
 					isOpenModal={isOpenDictamenForm}
 					setDictamenFormState={setDictamenFormState}
+					setIsOpenDictamenPrint={setIsOpenDictamenPrint}
 				/>
 			)}
 
-			{true && <PrintDictamenModal />}
+			{dictamen && (
+				<PrintDictamenModal
+					isOpenDictamenPrint={isOpenDictamenPrint}
+					setDictamenFormState={setDictamenFormState}
+					setIsOpenDictamenPrint={setIsOpenDictamenPrint}
+				/>
+			)}
 			<br />
 		</div>
 	);

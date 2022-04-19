@@ -141,3 +141,8 @@ export const setDictamenData = (dictamen) => ({
 	type: types.setDictamenData,
 	payload: dictamen
 });
+
+export const setDictamenDataSaved = (dictamen) => ({
+	type: types.setDictamenDataSaved,
+	payload: dictamen
+});
