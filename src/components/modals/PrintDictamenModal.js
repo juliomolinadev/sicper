@@ -135,14 +135,6 @@ export const PrintDictamenModal = ({
 						<b>NOMBRE Y FIRMA</b>
 					</div>
 				</div>
-
-				<div className="col-4 d-flex flex-column ml-3">
-					<p className="pb-5 text-center">SADER</p>
-					<hr />
-					<div className="text-center">
-						<b>NOMBRE Y FIRMA</b>
-					</div>
-				</div>
 			</div>
 
 			<div className="row m-3 d-flex justify-content-center pt-5">
