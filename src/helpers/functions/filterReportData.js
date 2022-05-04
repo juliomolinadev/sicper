@@ -120,7 +120,7 @@ export const filterReportData = (data, option, modulos) => {
 					);
 				} else {
 					accumulate(
-						reportData[subciclo].VARIOS,
+						getRef(reportData, subciclo),
 						supGravedadProgramada,
 						supGravedadExpedida,
 						supGravedadRealizada,
@@ -185,4 +185,18 @@ export const filterReportData = (data, option, modulos) => {
 	reportData.TOTAL.TOTAL = { ...TOTAL };
 
 	return reportData;
+};
+
+const getRef = (ref, subciclo) => {
+	switch (subciclo) {
+		case "OTOÑO-INVIERNO":
+			return ref[subciclo].VARIOS_OI;
+		case "PERENNES":
+			return ref[subciclo].VARIOS_PERENNES;
+		case "PRIMAVERA-VERANO":
+			return ref[subciclo].VARIOS_PV;
+
+		default:
+			return "";
+	}
 };

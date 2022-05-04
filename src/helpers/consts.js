@@ -51,7 +51,7 @@ export const cultivosPrincipales = {
 		"1-CARTAMO": {},
 		"4-RYE-GRASS": {},
 		"12-CEBOLLIN O-I": {},
-		VARIOS: {},
+		VARIOS_OI: {},
 		SUBTOTAL: {}
 	},
 	PERENNES: {
@@ -64,7 +64,7 @@ export const cultivosPrincipales = {
 		FRUTALES: {},
 		"117-ZACATE BERMUDA": {},
 		"60-PALMA DATILERA": {},
-		VARIOS: {},
+		VARIOS_PERENNES: {},
 		SUBTOTAL: {}
 	},
 	"PRIMAVERA-VERANO": {
@@ -77,7 +77,7 @@ export const cultivosPrincipales = {
 		"88-MAIZ BLANCO TARDIO": {},
 		"12.1-CEBOLLIN P-V": {},
 		"12.2-CEBOLLIN TARDIO": {},
-		VARIOS: {},
+		VARIOS_PV: {},
 		SUBTOTAL: {}
 	}
 };
