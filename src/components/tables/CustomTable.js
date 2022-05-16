@@ -1,6 +1,6 @@
 import React from "react";
 import Datatable from "react-data-table-component";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export const CustomTable = ({
 	title,
@@ -11,10 +11,11 @@ export const CustomTable = ({
 	simpleSetFunction
 }) => {
 	const dispatch = useDispatch();
+	const { tipo } = useSelector((state) => state.altaPermisos);
 
 	const getRowSelected = (row) => {
 		if (setFunction !== undefined) {
-			dispatch(setFunction(row));
+			dispatch(setFunction(row, tipo));
 		}
 
 		if (closeFunction !== undefined) {

@@ -33,7 +33,7 @@ export const unsetUsuarios = () => ({
 	type: types.unsetUsuarios
 });
 
-export const startSetUsuarioSelected = (usuario) => {
+export const startSetUsuarioSelected = (usuario, tipo) => {
 	unsetUsuarioSelected();
 
 	return async (dispatch) => {
@@ -58,6 +58,7 @@ export const startSetUsuarioSelected = (usuario) => {
 				`${usuario.cuenta}.${usuario.subcta}`,
 				usuario.moduloDestino,
 				ciclo,
+				tipo,
 				usuario.folio
 			);
 
@@ -73,7 +74,8 @@ export const startSetUsuarioSelected = (usuario) => {
 			const supPrevia = await loadSuperficiePrevia(
 				`${usuario.cuenta}.${usuario.subcta}`,
 				usuario.entidad,
-				ciclo
+				ciclo,
+				tipo
 			);
 
 			const transfers = await loadUserTransfer(`${usuario.cuenta}-${usuario.subcta}`, ciclo);

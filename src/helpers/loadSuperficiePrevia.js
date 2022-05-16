@@ -1,8 +1,15 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadSuperficiePrevia = async (cuenta, modulo, ciclo, folio = false) => {
+export const loadSuperficiePrevia = async (
+	cuenta,
+	modulo,
+	ciclo,
+	tipo = "normal",
+	folio = false
+) => {
 	const permisos = [];
 	let supPrevia = 0;
+
 	const permisosPad = db
 		.collection(`permisos`)
 		.doc(ciclo)
@@ -33,7 +40,7 @@ export const loadSuperficiePrevia = async (cuenta, modulo, ciclo, folio = false)
 	}
 
 	permisos.forEach((permiso) => {
-		supPrevia += permiso.supAutorizada;
+		permiso.tipo === tipo && (supPrevia += permiso.supAutorizada);
 	});
 
 	return supPrevia;

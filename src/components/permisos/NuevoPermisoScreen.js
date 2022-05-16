@@ -16,7 +16,9 @@ import {
 	setFormValues,
 	setOnSubmitData,
 	openPrintPermisoModal,
-	setCuotaCultivo
+	setCuotaCultivo,
+	setTipoExtra,
+	setTipoNormal
 } from "../../actions/altaPermisos";
 import { loadContador } from "../../helpers/loadContador";
 import { removeError, setError } from "../../actions/ui";
@@ -27,6 +29,7 @@ import { useFormToUpper } from "../../hooks/UseFormToUpper";
 import { CultivoAnteriorModal } from "../modals/CultivoAnteriorModal";
 import { CultivoAnteriorInput } from "./inputsNuevosPermisos/CultivoAnteriorInput";
 import { roundToN } from "../../helpers/functions/roundToN";
+import { unsetUsuarioSelected } from "../../actions/usuarios";
 
 export const NuevoPermisoScreen = () => {
 	const {
@@ -64,6 +67,8 @@ export const NuevoPermisoScreen = () => {
 		...altaPermisos,
 		...auth
 	};
+
+	const tipo = altaPermisos.tipo;
 
 	const dispatch = useDispatch();
 
@@ -218,21 +223,38 @@ export const NuevoPermisoScreen = () => {
 
 		switch (altaPermisos.sistema) {
 			case "Gravedad":
-				if (roundToN(gravedadNormalAsignada - gravedadNormalPrevia, 4) >= supAutorizada)
+				if (
+					tipo === "normal" &&
+					roundToN(gravedadNormalAsignada - gravedadNormalPrevia, 4) >= supAutorizada
+				)
 					return "normal";
-				if (roundToN(gravedadExtraAsignada - gravedadExtraPrevia, 4) >= supAutorizada)
+				if (
+					tipo === "extra" &&
+					roundToN(gravedadExtraAsignada - gravedadExtraPrevia, 4) >= supAutorizada
+				)
 					return "extra";
 				return "Superficie no disponible";
 
 			case "Pozo Federal":
-				if (roundToN(pozoNormalAsignada - pozoNormalPrevia, 4) >= supAutorizada) return "normal";
-				if (roundToN(pozoExtraAsignada - pozoExtraPrevia, 4) >= supAutorizada) return "extra";
+				if (
+					tipo === "normal" &&
+					roundToN(pozoNormalAsignada - pozoNormalPrevia, 4) >= supAutorizada
+				)
+					return "normal";
+				if (tipo === "extra" && roundToN(pozoExtraAsignada - pozoExtraPrevia, 4) >= supAutorizada)
+					return "extra";
 				return "Superficie no disponible";
 
 			case "Pozo Particular":
-				if (roundToN(pozoNormalAsignada - pozoParticularNormalPrevia, 4) >= supAutorizada)
+				if (
+					tipo === "normal" &&
+					roundToN(pozoNormalAsignada - pozoParticularNormalPrevia, 4) >= supAutorizada
+				)
 					return "normal";
-				if (roundToN(pozoExtraAsignada - pozoParticularExtraPrevia, 4) >= supAutorizada)
+				if (
+					tipo === "extra" &&
+					roundToN(pozoExtraAsignada - pozoParticularExtraPrevia, 4) >= supAutorizada
+				)
 					return "extra";
 				return "Superficie no disponible";
 
@@ -320,10 +342,38 @@ export const NuevoPermisoScreen = () => {
 		}
 	}, [idUsuarioSelected, usuarios, setTransferComent]);
 
+	const setNormal = () => {
+		dispatch(unsetUsuarioSelected());
+		dispatch(setTipoNormal());
+	};
+
+	const setExtra = () => {
+		dispatch(unsetUsuarioSelected());
+		dispatch(setTipoExtra());
+	};
+
 	return (
 		<>
 			<div className="row m-3 d-flex justify-content-center">
 				<h1>Alta de permiso unico de siembra</h1>
+			</div>
+
+			<div className="row m-3 d-flex justify-content-center align-items-center">
+				<span className="mr-2">Tipo: </span>
+				<div className="btn-group">
+					<button
+						className={`btn ${tipo === "normal" ? "btn-primary" : "btn-outline-primary"}`}
+						onClick={setNormal}
+					>
+						Normal
+					</button>
+					<button
+						className={`btn ${tipo === "extra" ? "btn-primary" : "btn-outline-primary"}`}
+						onClick={setExtra}
+					>
+						Extra
+					</button>
+				</div>
 			</div>
 
 			{/* TODO: indicar cuando un campo es incorrecto directamente en los inputs */}

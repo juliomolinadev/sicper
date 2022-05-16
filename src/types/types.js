@@ -17,6 +17,8 @@ export const types = {
 
 	altaPermisoOpenPrintPermisoModal: "[Alta Permisos] Open permiso modal",
 	altaPermisoClosePrintPermisoModal: "[Alta Permisos] Close permiso modal",
+	setTipoNormal: "[Alta Permisos] Set Tipo Normal",
+	setTipoExtra: "[Alta Permisos] Set Tipo Extra",
 
 	altaPermisoOpenCultivosModal: "[Alta Permisos] Open cultivos modal",
 	altaPermisoCloseCultivosModal: "[Alta Permisos] Close cultivos modal",

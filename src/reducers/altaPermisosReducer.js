@@ -39,7 +39,7 @@ const initialState = {
 	idCultivoAnteriorSelected: null,
 	cultivoAnterior: null,
 	claveCultivoAnterior: null,
-	tipo: null,
+	tipo: "normal",
 	ciclo: null,
 	numeroPermiso: null,
 	fechaEmicion: null,
@@ -315,7 +315,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.altaPermisosUnsetSubmitData:
 			return {
 				...state,
-				tipo: null,
+				// tipo: null,
 				ciclo: null,
 				numeroPermiso: null,
 				fechaEmicion: null,
@@ -357,6 +357,18 @@ export const altaPermisosReducer = (state = initialState, action) => {
 			return {
 				...state,
 				enablePrintButton: false
+			};
+
+		case types.setTipoNormal:
+			return {
+				...state,
+				tipo: "normal"
+			};
+
+		case types.setTipoExtra:
+			return {
+				...state,
+				tipo: "extra"
 			};
 
 		default:

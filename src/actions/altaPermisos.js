@@ -50,3 +50,11 @@ export const setCuotaCultivo = (cuota) => ({
 	type: types.setCuotaCultivo,
 	payload: cuota
 });
+
+export const setTipoNormal = () => ({
+	type: types.setTipoNormal
+});
+
+export const setTipoExtra = () => ({
+	type: types.setTipoExtra
+});
