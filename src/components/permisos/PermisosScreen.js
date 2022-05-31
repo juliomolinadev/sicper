@@ -280,31 +280,31 @@ export const PermisosScreen = () => {
 									</button>
 								</div>
 
-								{cultivosConGuia.includes(dataPermiso.claveCultivo) && (
-									<div className="col-4 d-flex justify-content-center">
-										{dataPermiso.estadoPermiso === "activo" &&
-										privilegios.solicitarGuias &&
-										guia ? (
-											<button
-												type="button"
-												className="btn btn-sm btn-outline-info"
-												onClick={handleOpenPrintGuiaModal}
-											>
-												<i className="fas fa-file"></i>
-												<span> Imprimir Guía</span>
-											</button>
-										) : (
-											<button
-												type="button"
-												className="btn btn-sm btn-outline-info"
-												onClick={startOpenGuiaForm}
-											>
-												<i className="fas fa-file"></i>
-												<span> Generar Guía</span>
-											</button>
-										)}
-									</div>
-								)}
+								{cultivosConGuia.includes(dataPermiso.claveCultivo) &&
+									dataPermiso.estadoPermiso === "activo" &&
+									privilegios.solicitarGuias && (
+										<div className="col-4 d-flex justify-content-center">
+											{guia ? (
+												<button
+													type="button"
+													className="btn btn-sm btn-outline-info"
+													onClick={handleOpenPrintGuiaModal}
+												>
+													<i className="fas fa-file"></i>
+													<span> Imprimir Guía</span>
+												</button>
+											) : (
+												<button
+													type="button"
+													className="btn btn-sm btn-outline-info"
+													onClick={startOpenGuiaForm}
+												>
+													<i className="fas fa-file"></i>
+													<span> Generar Guía</span>
+												</button>
+											)}
+										</div>
+									)}
 
 								<div className="col-4 d-flex justify-content-center">
 									{dataPermiso.estadoPermiso === "activo" && privilegios.solicitarCancelarPermisos && (

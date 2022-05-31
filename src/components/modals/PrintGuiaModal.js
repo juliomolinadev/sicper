@@ -48,7 +48,7 @@ export const PrintGuiaModal = () => {
 			className="printModalSanidad"
 			overlayClassName="modal-fondo"
 		>
-			<div className="row p-5">
+			<div className="row pr-5 pl-5 pt-5">
 				<div className="col-2">
 					<h4 className="font-weight-bold text-danger text-center">
 						<b>CENTRO RECEPTOR </b>
@@ -71,7 +71,7 @@ export const PrintGuiaModal = () => {
 
 				<div className="col-3">
 					<div className="d-flex-column justify-content-center">
-						<h4 className="font-weight-bold text-danger">FOLIO: {guia.folio}</h4>
+						<h5 className="font-weight-bold text-danger">FOLIO: {guia.folio}</h5>
 
 						<img
 							src={"./logos/cesvbc.webp"}
@@ -94,39 +94,44 @@ export const PrintGuiaModal = () => {
 				<div className="col-12 font-weight-bold">DATOS DEL PRODUCTOR:</div>
 			</div>
 
-			<div className="row">
-				<div className="col-4 d-flex">
-					<div className="font-weight-bold mr-2">NOMBRE:</div>
-					{guia.nombre}
+			<div className="border rounded p-2 mb-2">
+				<div className="row">
+					<div className="col-4 d-flex">
+						<div className="font-weight-bold mr-2">NOMBRE:</div>
+						{guia.nombre}
+					</div>
+					<div className="col-2 d-flex">
+						<div className="font-weight-bold mr-2">CUENTA CNA:</div>
+						{guia.cuenta}
+					</div>
+					<div className="col-4 d-flex">
+						<div className="font-weight-bold mr-2">UBICACIÓN:</div>
+						{guia.tipoLocalidad} {guia.localidad}
+					</div>
+					<div className="col-2 d-flex">
+						<div className="font-weight-bold mr-2">NO. PREDIO:</div>
+						{guia.lote}
+					</div>
 				</div>
-				<div className="col-2 d-flex">
-					<div className="font-weight-bold mr-2">NO. PREDIO:</div>
-					{guia.lote}
-				</div>
-				<div className="col-2 d-flex">
-					<div className="font-weight-bold mr-2">HAS:</div>
-					{guia.superficie}
-				</div>
-				<div className="col-4 d-flex">
-					<div className="font-weight-bold mr-2">UBICACIÓN:</div>
-					{guia.tipoLocalidad} {guia.localidad}
-				</div>
-			</div>
-
-			<div className="row">
-				<div className="col-4 d-flex">
-					<div className="font-weight-bold mr-2">FECHA:</div>
-					{guia.fecha.toLocaleString("es-MX", dateOptions).toUpperCase()}
-				</div>
-				<div className="col-4 d-flex">
-					<div className="font-weight-bold mr-2">CUENTA CNA:</div>
-					{guia.cuenta}
+				<div className="row">
+					<div className="col-4 d-flex">
+						<div className="font-weight-bold mr-2">PRODUCTOR:</div>
+						{guia.productor}
+					</div>
+					<div className="col-2 d-flex">
+						<div className="font-weight-bold mr-2">HAS:</div>
+						{guia.superficie}
+					</div>
+					<div className="col-4 d-flex">
+						<div className="font-weight-bold mr-2">FECHA:</div>
+						{guia.fecha.toLocaleString("es-MX", dateOptions).toUpperCase()}
+					</div>
 				</div>
 			</div>
 
 			<div className="row">
 				<div className="col-12 d-flex">
-					<div className="font-weight-bold mr-2">DESTINO COSECHA / RAZÓN SOCIAL DE LA EMI:</div>
+					<div className="font-weight-bold mr-2">DESTINO COSECHA / RAZÓN SOCIAL DE LA EMPRESA:</div>
 					{guia.empresaDestino}
 				</div>
 			</div>
@@ -252,7 +257,7 @@ export const PrintGuiaModal = () => {
 			<div className="row pt-5"></div>
 			<div className="row pt-5"></div>
 
-			<div className="row border-top p-5">
+			<div className="row border-top pr-5 pl-5 pt-5">
 				<div className="col-2">
 					<h4 className="font-weight-bold text-danger text-center">
 						<b>CENTRO RECEPTOR </b>
@@ -275,7 +280,7 @@ export const PrintGuiaModal = () => {
 
 				<div className="col-3">
 					<div className="d-flex-column justify-content-center">
-						<h4 className="font-weight-bold text-danger">FOLIO: {guia.folio}</h4>
+						<h5 className="font-weight-bold text-danger">FOLIO: {guia.folio}</h5>
 
 						<img
 							src={"./logos/cesvbc.webp"}
@@ -298,39 +303,44 @@ export const PrintGuiaModal = () => {
 				<div className="col-12 font-weight-bold">DATOS DEL PRODUCTOR:</div>
 			</div>
 
-			<div className="row">
-				<div className="col-4 d-flex">
-					<div className="font-weight-bold mr-2">NOMBRE:</div>
-					{guia.nombre}
+			<div className="border rounded p-2 mb-2">
+				<div className="row">
+					<div className="col-4 d-flex">
+						<div className="font-weight-bold mr-2">NOMBRE:</div>
+						{guia.nombre}
+					</div>
+					<div className="col-2 d-flex">
+						<div className="font-weight-bold mr-2">CUENTA CNA:</div>
+						{guia.cuenta}
+					</div>
+					<div className="col-4 d-flex">
+						<div className="font-weight-bold mr-2">UBICACIÓN:</div>
+						{guia.tipoLocalidad} {guia.localidad}
+					</div>
+					<div className="col-2 d-flex">
+						<div className="font-weight-bold mr-2">NO. PREDIO:</div>
+						{guia.lote}
+					</div>
 				</div>
-				<div className="col-2 d-flex">
-					<div className="font-weight-bold mr-2">NO. PREDIO:</div>
-					{guia.lote}
-				</div>
-				<div className="col-2 d-flex">
-					<div className="font-weight-bold mr-2">HAS:</div>
-					{guia.superficie}
-				</div>
-				<div className="col-4 d-flex">
-					<div className="font-weight-bold mr-2">UBICACIÓN:</div>
-					{guia.tipoLocalidad} {guia.localidad}
-				</div>
-			</div>
-
-			<div className="row">
-				<div className="col-4 d-flex">
-					<div className="font-weight-bold mr-2">FECHA:</div>
-					{guia.fecha.toLocaleString("es-MX", dateOptions).toUpperCase()}
-				</div>
-				<div className="col-4 d-flex">
-					<div className="font-weight-bold mr-2">CUENTA CNA:</div>
-					{guia.cuenta}.{guia.subcta}
+				<div className="row">
+					<div className="col-4 d-flex">
+						<div className="font-weight-bold mr-2">PRODUCTOR:</div>
+						{guia.productor}
+					</div>
+					<div className="col-2 d-flex">
+						<div className="font-weight-bold mr-2">HAS:</div>
+						{guia.superficie}
+					</div>
+					<div className="col-4 d-flex">
+						<div className="font-weight-bold mr-2">FECHA:</div>
+						{guia.fecha.toLocaleString("es-MX", dateOptions).toUpperCase()}
+					</div>
 				</div>
 			</div>
 
 			<div className="row">
 				<div className="col-12 d-flex">
-					<div className="font-weight-bold mr-2">DESTINO COSECHA / RAZÓN SOCIAL DE LA EMI:</div>
+					<div className="font-weight-bold mr-2">DESTINO COSECHA / RAZÓN SOCIAL DE LA EMPRESA:</div>
 					{guia.empresaDestino}
 				</div>
 			</div>

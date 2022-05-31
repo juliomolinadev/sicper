@@ -53,6 +53,7 @@ export const GuiaFormModal = () => {
 					...formValues,
 					guardado: false,
 					permiso: permiso.id,
+					productor: permiso.nombreProductor,
 					modulo: permiso.modulo,
 					nombre: permiso.usuario,
 					lote: permiso.lote,
@@ -61,16 +62,16 @@ export const GuiaFormModal = () => {
 					localidad: permiso.localidad,
 					fecha: new Date(),
 					cuenta: permiso.cuenta,
-					TrasladoNoTolvas: "",
-					TrasladoNoToneladas: "",
-					TrasladoNoModulos: "",
-					TrasladoToneladas: "",
-					TrasladoTonTotales: "",
-					RecibidoNoTolvas: "",
-					RecibidoNoToneladas: "",
-					RecibidoNoModulos: "",
-					RecibidoToneladas: "",
-					RecibidoTonTotales: ""
+					trasladoNoTolvas: "",
+					trasladoNoToneladas: "",
+					trasladoNoModulos: "",
+					trasladoToneladas: "",
+					trasladoTonTotales: "",
+					recibidoNoTolvas: "",
+					recibidoNoToneladas: "",
+					recibidoNoModulos: "",
+					recibidoToneladas: "",
+					recibidoTonTotales: ""
 				})
 			);
 			dispatch(openGuiaPrint());

@@ -11,7 +11,7 @@ export const loadGuia = async (permiso) => {
 		.get();
 
 	guiasSnap.forEach((guia) => {
-		guias.push({ ...guia.data() });
+		guias.push({ ...guia.data(), fecha: new Date(guia.data().fecha.seconds * 1000) });
 	});
 
 	if (guias.length === 0) return false;
