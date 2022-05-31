@@ -165,6 +165,7 @@ export const privileges = {
 	expedirPermisos: false,
 	consultarPermisos: false,
 	solicitarCancelarPermisos: false,
+	solicitarGuias: false,
 	cancelarPermisos: false,
 	consultarExpedicion: false,
 

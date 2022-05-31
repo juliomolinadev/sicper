@@ -1,33 +1,21 @@
-# Imprimir permisos de riego
+# Implementar Guias
 
-## Disponer de todos los datos necesarios en el store
+## Abrir formulario
 
-    supPrevia:
-      <!-- Crear tabla de permisos y un ejemplo para pruevas -->
-      <!-- Calcular la superficie disponible de la cuenta seleccionada -->
+- Crear boton para abrir formulario que cambia el estado del modal del formulario en el store
+- Definir campos del formulario
+- Crear formulario
 
-    tipo: Definir si el permiso es normal o extra, Crear tabla de superficie autorizada, Verificar si el cultivo tiene superficie disponible
+## Obtener consecutibo de la guia
 
-    presidente y dotacion: Obtener los datos de la entidad (dotacion y presidente)
+## Capturar datos
 
-    ciclo: Calcular el ciclo al que corresponde el permiso
+## Validar formulario
 
-    numeroPermiso: Establecer el numero de permiso con autoincrement
+## Poner datos en store
 
-    fechaEmicion: Calcular al guardar
+## Abrir imprecion de la guia con datos del store
 
-    fechaLimite: Fecha de emicion mas 30 dias
+## Guardar guia
 
-    vigencia: Segun subciclo
-
-    folioSanidad: Establecer al guardar con autoincrement
-
-    supDisponible: Derecho menos supPrevia
-
-    cuotas: superficie del permiso por cuota del cultivo
-
-    supAutorizada: Verificar si la cuenta tiene superficie disponible
-
-    Manejar formulario: variedad, fuenteCredito, latitud, longitud, cultivoAnterior, observaciones
-
-## Crear plantilla html de impresion
+## Imprimir guia

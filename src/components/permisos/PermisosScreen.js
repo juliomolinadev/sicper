@@ -7,9 +7,11 @@ import { CustomTable } from "../tables/CustomTable";
 import { permisosColumns } from "../tables/configTables";
 import {
 	startLoadPermisos,
-	setPermisoSelected,
 	startLoadPermisosSearch,
-	startLoadSuperficies
+	startLoadSuperficies,
+	openGuiaForm,
+	startSetPermisoSelected,
+	openGuiaPrint
 } from "../../actions/permisosScreen";
 import { openPrintPermisoModal } from "../../actions/altaPermisos";
 import { PrintPermisoModal } from "../modals/PrintPermisoModal";
@@ -20,6 +22,8 @@ import { NuevoPermisoButton } from "../buttons/NuevoPermisoButton";
 import { PermitsCancellationModule } from "../ui/organisms/PermitsCancellationModule";
 import { roundToN } from "../../helpers/functions/roundToN";
 import { unsetUsuarioSelected } from "../../actions/usuarios";
+import { PrintGuiaModal } from "../modals/PrintGuiaModal";
+import { GuiaFormModal } from "../modals/GuiaFormModal";
 
 export const PermisosScreen = () => {
 	const dispatch = useDispatch();
@@ -28,7 +32,9 @@ export const PermisosScreen = () => {
 
 	const { palabra } = formValues;
 
-	const { permisos, permisoSelected } = useSelector((state) => state.permisosScreen);
+	const { permisos, permisoSelected, guia, isGuiaPrintModalOpen } = useSelector(
+		(state) => state.permisosScreen
+	);
 	const { modulo, privilegios, expedicionActivaModulo, uid } = useSelector((state) => state.auth);
 
 	const { variablesGlobales } = useSelector((state) => state.auth);
@@ -90,6 +96,14 @@ export const PermisosScreen = () => {
 
 	const handleOpenPrintPermisoModal = () => {
 		dispatch(openPrintPermisoModal());
+	};
+
+	const handleOpenPrintGuiaModal = () => {
+		dispatch(openGuiaPrint());
+	};
+
+	const startOpenGuiaForm = () => {
+		dispatch(openGuiaForm());
 	};
 
 	const cancelarPermiso = () => {
@@ -169,7 +183,7 @@ export const PermisosScreen = () => {
 						title="Permisos"
 						columns={permisosColumns}
 						data={permisosFormateados}
-						setFunction={setPermisoSelected}
+						setFunction={startSetPermisoSelected}
 					></CustomTable>
 				</div>
 
@@ -251,22 +265,46 @@ export const PermisosScreen = () => {
 								<div className="col-4">ESTADO:</div>
 								<div className="col-8">{dataPermiso.estadoPermiso}</div>
 							</div>
+
 							<div className="row p-1 pl-2 pt-4 pb-4">
-								<div className="col-6 d-flex justify-content-center">
+								<div className="col-4 d-flex justify-content-center">
 									<button
 										type="button"
-										className="btn btn-outline-info"
+										className="btn btn-sm btn-outline-info"
 										onClick={handleOpenPrintPermisoModal}
 									>
 										<i className="fas fa-print"></i>
 										<span> Imprimir</span>
 									</button>
 								</div>
-								<div className="col-6 d-flex justify-content-center">
+
+								<div className="col-4 d-flex justify-content-center">
+									{dataPermiso.estadoPermiso === "activo" && privilegios.solicitarGuias && guia ? (
+										<button
+											type="button"
+											className="btn btn-sm btn-outline-info"
+											onClick={handleOpenPrintGuiaModal}
+										>
+											<i className="fas fa-file"></i>
+											<span> Imprimir Guía</span>
+										</button>
+									) : (
+										<button
+											type="button"
+											className="btn btn-sm btn-outline-info"
+											onClick={startOpenGuiaForm}
+										>
+											<i className="fas fa-file"></i>
+											<span> Generar Guía</span>
+										</button>
+									)}
+								</div>
+
+								<div className="col-4 d-flex justify-content-center">
 									{dataPermiso.estadoPermiso === "activo" && privilegios.solicitarCancelarPermisos && (
 										<button
 											type="button"
-											className="btn btn-outline-danger"
+											className="btn btn-sm btn-outline-danger"
 											onClick={cancelarPermiso}
 										>
 											<i className="fas fa-times"></i>
@@ -289,6 +327,10 @@ export const PermisosScreen = () => {
 			{privilegios.cancelarPermisos && <PermitsCancellationModule />}
 
 			<PrintPermisoModal data={dataPermisoImprecion} isNew={false} />
+
+			{isGuiaPrintModalOpen && guia && <PrintGuiaModal />}
+
+			<GuiaFormModal />
 		</>
 	);
 };

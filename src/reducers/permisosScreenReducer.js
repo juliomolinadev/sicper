@@ -3,7 +3,10 @@ import { types } from "../types/types";
 const initialState = {
 	permisos: [],
 	permisoSelected: null,
-	superficies: null
+	superficies: null,
+	guia: null,
+	isGuiaFormModalOpen: false,
+	isGuiaPrintModalOpen: false
 };
 
 export const permisosScreenReducer = (state = initialState, action) => {
@@ -66,6 +69,63 @@ export const permisosScreenReducer = (state = initialState, action) => {
 			return {
 				...state,
 				superficies: null
+			};
+
+		case types.openGuiaForm:
+			return {
+				...state,
+				isGuiaFormModalOpen: true
+			};
+
+		case types.closeGuiaForm:
+			return {
+				...state,
+				isGuiaFormModalOpen: false
+			};
+
+		case types.openGuiaPrint:
+			return {
+				...state,
+				isGuiaPrintModalOpen: true
+			};
+
+		case types.closeGuiaPrint:
+			return {
+				...state,
+				isGuiaPrintModalOpen: false
+			};
+
+		case types.setGuiaSaved:
+			return {
+				...state,
+				guia: {
+					...state.guia,
+					guardado: true
+				}
+			};
+
+		case types.setFolioGuia:
+			return {
+				...state,
+				guia: {
+					...state.guia,
+					folio: action.payload
+				}
+			};
+
+		case types.setDataGuia:
+			return {
+				...state,
+				guia: {
+					...state.guia,
+					...action.payload
+				}
+			};
+
+		case types.clearGuia:
+			return {
+				...state,
+				guia: null
 			};
 
 		default:
