@@ -12,6 +12,7 @@ export const PrintDictamenModal = ({
 	const { padronScreen } = useSelector((state) => state.scenes);
 	const { dictamen } = padronScreen;
 	const { usuario } = useSelector((state) => state.entidades);
+	const { privilegios } = useSelector((state) => state.auth);
 
 	const dispatch = useDispatch();
 
@@ -128,6 +129,18 @@ export const PrintDictamenModal = ({
 			<div className="row pt-5"></div>
 
 			<div className="row pt-5 d-flex justify-content-center">
+				{privilegios.generarDictamenesDdr && (
+					<div className="col-4 d-flex flex-column ml-3">
+						<p className="pb-4 text-center">
+							JEFE DE DISTRITO DE DESARROLLO RURAL 002 RÍO COLORADO
+						</p>
+						<hr />
+						<div className="text-center">
+							<b>NOMBRE Y FIRMA</b>
+						</div>
+					</div>
+				)}
+
 				<div className="col-4 d-flex flex-column ml-3">
 					<p className="pb-5 text-center">CESVBC</p>
 					<hr />
