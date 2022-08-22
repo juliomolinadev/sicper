@@ -56,6 +56,12 @@ export const uiReducer = (state = initialState, action) => {
 				updatingPermisos: false
 			};
 
+		case types.setEntidadesConAcceso:
+			return {
+				...state,
+				entidadesConAcceso: action.payload
+			};
+
 		default:
 			return state;
 	}

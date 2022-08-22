@@ -16,6 +16,7 @@ import {
 } from "../actions/auth";
 import { PrivateRoute } from "./PrivateRoute";
 import { PublicRoute } from "./PublicRoute";
+import { startLoadEntities } from "../actions/entidades/entities";
 
 export const AppRouter = () => {
 	const dispatch = useDispatch();
@@ -66,6 +67,7 @@ export const AppRouter = () => {
 			}
 			setChecking(false);
 		});
+		dispatch(startLoadEntities());
 	}, [dispatch, setChecking, setIsLoggedIn]);
 
 	if (checking) {

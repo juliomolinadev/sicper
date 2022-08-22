@@ -5,7 +5,7 @@ import { useFormArray } from "../../hooks/useFormArray";
 
 export const EntityEditingModule = () => {
 	const { entities } = useSelector((state) => state.entidades);
-	const { privilegios } = useSelector((state) => state.auth);
+	const { privilegios, email } = useSelector((state) => state.auth);
 
 	const [formValues, handleInputChange] = useFormArray(entities);
 	const handleActualizarEntidades = () => {
@@ -120,42 +120,72 @@ export const EntityEditingModule = () => {
 											)}
 									</div>
 
-									{privilegios.cerrarExpedicionModulos &&
-										entitie.clave !== "SADER" &&
-										entitie.clave !== "CNA" &&
-										entitie.clave !== "SRL" &&
-										entitie.clave !== "CESVBC" && (
-											<div className="col-sm-2 mt-3">
-												Expedición:
-												<div className="btn-group" role="group">
-													<button
-														type="button"
-														name={`${i}-expedicionActivaModulo`}
-														className={
-															entities[i].expedicionActivaModulo
-																? "btn btn-primary"
-																: "btn btn-outline-primary"
-														}
-														onClick={handleInputChange}
-													>
-														Activa
-													</button>
+									{privilegios.cerrarExpedicionModulos && (
+										<div className="col-sm-2 mt-3">
+											{entitie.clave !== "SADER" &&
+												entitie.clave !== "CNA" &&
+												entitie.clave !== "SRL" &&
+												entitie.clave !== "CESVBC" && (
+													<div>
+														Expedición:
+														<div className="btn-group" role="group">
+															<button
+																type="button"
+																name={`${i}-expedicionActivaModulo`}
+																className={
+																	entities[i].expedicionActivaModulo
+																		? "btn btn-primary"
+																		: "btn btn-outline-primary"
+																}
+																onClick={handleInputChange}
+															>
+																Activa
+															</button>
+															<button
+																type="button"
+																name={`${i}-expedicionActivaModulo`}
+																className={
+																	entities[i].expedicionActivaModulo
+																		? "btn btn-outline-primary"
+																		: "btn btn-primary"
+																}
+																onClick={handleInputChange}
+															>
+																Cerrada
+															</button>
+														</div>
+													</div>
+												)}
 
-													<button
-														type="button"
-														name={`${i}-expedicionActivaModulo`}
-														className={
-															entities[i].expedicionActivaModulo
-																? "btn btn-outline-primary"
-																: "btn btn-primary"
-														}
-														onClick={handleInputChange}
-													>
-														Cerrada
-													</button>
+											{(email === "julio@dev.com" || email === "enriquem19@gmail.com") && (
+												<div className="mt-3">
+													Acceso:
+													<div className="btn-group" role="group">
+														<button
+															type="button"
+															name={`${i}-acceso`}
+															className={
+																entities[i].acceso ? "btn btn-primary" : "btn btn-outline-primary"
+															}
+															onClick={handleInputChange}
+														>
+															Permitido
+														</button>
+														<button
+															type="button"
+															name={`${i}-acceso`}
+															className={
+																entities[i].acceso ? "btn btn-outline-primary" : "btn btn-primary"
+															}
+															onClick={handleInputChange}
+														>
+															Denegado
+														</button>
+													</div>
 												</div>
-											</div>
-										)}
+											)}
+										</div>
+									)}
 								</div>
 							</div>
 						);

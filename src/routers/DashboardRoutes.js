@@ -14,27 +14,38 @@ import { ReportesScreen } from "../scenes/ReportesScreen";
 import { ConfiguracionScreen } from "../scenes/ConfiguracionScreen";
 import { TestArea } from "../components/templates/TestArea";
 import Header from "../components/ui/Header";
+import { ServicioSuspendido } from "../scenes/ServicioSuspendido";
+import { useSelector } from "react-redux";
 
 export const DashboardRoutes = () => {
+	const { entities } = useSelector((state) => state.entidades);
+	const { modulo } = useSelector((state) => state.auth);
+	const currentEntitie = entities.find((entitie) => entitie.id === modulo);
+
 	return (
 		<div className="container-fluid pr-4">
 			<NavbarComponent />
 			<Header />
-			<Switch>
-				<Route exact path="/sicper" component={SicperScreen} />
-				<Route exact path="/padron" component={PadronScreen} />
-				<Route exact path="/permisos" component={PermisosScreen} />
-				<Route exact path="/nuevo-permiso" component={NuevoPermisoScreen} />
-				<Route exact path="/transferencias" component={TransferenciasScreen} />
-				<Route exact path="/asignacion" component={AsignacionScreen} />
-				<Route exact path="/labores" component={LaboresScreen} />
-				<Route exact path="/autorizados" component={AutorizadosScreen} />
-				<Route exact path="/reportes" component={ReportesScreen} />
-				<Route exact path="/configuracion" component={ConfiguracionScreen} />
-				<Route exact path="/test" component={TestArea} />
 
-				<Redirect to="/sicper" />
-			</Switch>
+			{currentEntitie.acceso ? (
+				<Switch>
+					<Route exact path="/sicper" component={SicperScreen} />
+					<Route exact path="/padron" component={PadronScreen} />
+					<Route exact path="/permisos" component={PermisosScreen} />
+					<Route exact path="/nuevo-permiso" component={NuevoPermisoScreen} />
+					<Route exact path="/transferencias" component={TransferenciasScreen} />
+					<Route exact path="/asignacion" component={AsignacionScreen} />
+					<Route exact path="/labores" component={LaboresScreen} />
+					<Route exact path="/autorizados" component={AutorizadosScreen} />
+					<Route exact path="/reportes" component={ReportesScreen} />
+					<Route exact path="/configuracion" component={ConfiguracionScreen} />
+					<Route exact path="/test" component={TestArea} />
+
+					<Redirect to="/sicper" />
+				</Switch>
+			) : (
+				<ServicioSuspendido />
+			)}
 		</div>
 	);
 };
