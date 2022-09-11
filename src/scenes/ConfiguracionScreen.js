@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { UserRoleModal } from "../components/modals/UserRoleModal";
 import { UsersRoleManagement } from "../components/modulos/UsersRoleManagement";
 import { useDispatch, useSelector } from "react-redux";
@@ -6,12 +6,18 @@ import { EntityEditingModule } from "../components/modulos/EntityEditingModule";
 import { startLoadEntities } from "../actions/entidades/entities";
 import { useForm } from "../hooks/useForm";
 import { RadioButtonGroup } from "../components/ui/molecules/RadioButtonGroup";
+import { CatalogoDeCultivos } from "../components/modulos/CatalogoDeCultivos";
+import { startSetCatalogoDeCultivos } from "../actions/cultivos";
 
 export const ConfiguracionScreen = () => {
 	const { privilegios } = useSelector((state) => state.auth);
 	const { entities } = useSelector((state) => state.entidades);
 
 	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(startSetCatalogoDeCultivos());
+	}, [dispatch]);
 
 	if (!entities) {
 		dispatch(startLoadEntities());
@@ -27,6 +33,10 @@ export const ConfiguracionScreen = () => {
 		{
 			id: "entidades",
 			label: "entidades"
+		},
+		{
+			id: "cultivos",
+			label: "cultivos"
 		}
 	];
 
@@ -62,6 +72,12 @@ export const ConfiguracionScreen = () => {
 			<div className="row mt-4">
 				<div className="col-sm-12">
 					{modules.module === "entidades" && privilegios.editarEntidades && <EntityEditingModule />}
+				</div>
+			</div>
+
+			<div className="row mt-4">
+				<div className="col-sm-12">
+					{modules.module === "cultivos" && privilegios.editarCultivos && <CatalogoDeCultivos />}
 				</div>
 			</div>
 

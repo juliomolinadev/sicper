@@ -192,6 +192,7 @@ export const privileges = {
 	editarEntidades: false,
 	asignarRoles: false,
 	editarRoles: false,
+	editarCultivos: false,
 	cerrarExpedicionModulos: false,
 	variablesGlobales: false
 };

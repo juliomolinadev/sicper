@@ -180,7 +180,7 @@ export const AutorizadosModal = () => {
 		} else if (gravedadExtraAsignada - gravedadExtra < 0) {
 			dispatch(setFormError(superficieExcedida));
 			return false;
-		} else if (gravedadNormalAsignada - gravedadNormal < 0) {
+		} else if (roundToN(gravedadNormalAsignada, 4) - roundToN(gravedadNormal, 4) < 0) {
 			dispatch(setFormError(superficieExcedida));
 			return false;
 		} else if (pozoNormalAsignada - pozoNormal < 0) {
@@ -269,7 +269,10 @@ export const AutorizadosModal = () => {
 									/>
 								</td>
 								<td>{roundToN(gravedadNormal, 4)}</td>
-								<td>{roundToN(gravedadNormalAsignada - gravedadNormal, 4)}</td>
+								<td>
+									{roundToN(Number(gravedadNormalAsignada), 4) -
+										roundToN(Number(gravedadNormal), 4)}
+								</td>
 								<td>
 									<input
 										type="number"
@@ -295,7 +298,9 @@ export const AutorizadosModal = () => {
 									/>
 								</td>
 								<td>{roundToN(gravedadExtra, 4)}</td>
-								<td>{roundToN(gravedadExtraAsignada - gravedadExtra, 4)}</td>
+								<td>
+									{roundToN(Number(gravedadExtraAsignada), 4) - roundToN(Number(gravedadExtra), 4)}
+								</td>
 							</tr>
 
 							<tr>
@@ -325,7 +330,7 @@ export const AutorizadosModal = () => {
 									/>
 								</td>
 								<td>{roundToN(pozoNormal, 4)}</td>
-								<td>{roundToN(pozoNormalAsignada - pozoNormal, 4)}</td>
+								<td>{roundToN(Number(pozoNormalAsignada), 4) - roundToN(Number(pozoNormal), 4)}</td>
 
 								<td>
 									<input
@@ -352,7 +357,7 @@ export const AutorizadosModal = () => {
 									/>
 								</td>
 								<td>{roundToN(pozoExtra, 4)}</td>
-								<td>{roundToN(pozoExtraAsignada - pozoExtra, 4)}</td>
+								<td>{roundToN(Number(pozoExtraAsignada), 4) - roundToN(Number(pozoExtra), 4)}</td>
 							</tr>
 						</tbody>
 					</table>

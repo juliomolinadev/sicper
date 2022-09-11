@@ -2,6 +2,7 @@ import { useState } from "react";
 
 export const useFormToUpper = (initialState = {}) => {
 	const [values, setValues] = useState(initialState);
+
 	const reset = () => {
 		setValues(initialState);
 	};

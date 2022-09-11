@@ -3,6 +3,7 @@ import { loadCultivos } from "../helpers/loadCultivos";
 import { db } from "../firebase/firebase-config";
 import { loadCiclo } from "../helpers/DB/loadCiclo";
 import { goToElement } from "../helpers/functions/assets";
+import { saveCultivo } from "../helpers/saveCultivo";
 
 export const openCultivosModal = () => ({
 	type: types.altaPermisoOpenCultivosModal
@@ -19,6 +20,13 @@ export const openCultivoAnteriorModal = () => ({
 export const closeCultivoAnteriorModal = () => ({
 	type: types.altaPermisoCloseCultivoAnteriorModal
 });
+
+export const startSetCatalogoDeCultivos = () => {
+	return async (dispatch) => {
+		const cultivos = await loadCultivos("", "x");
+		dispatch(setCultivos(cultivos));
+	};
+};
 
 export const startLoadCultivos = (cultivo, modulo) => {
 	return async (dispatch) => {
@@ -109,3 +117,22 @@ export const setCultivoAnteriorSelected = (cultivo) => {
 export const unsetCultivoAnteriorSelected = () => ({
 	type: types.unsetCultivoAnterior
 });
+
+export const startSaveCultivo = (cultivo) => {
+	return async (dispatch, getState) => {
+		const state = getState();
+
+		const newCultivo = { ...cultivo };
+		delete newCultivo.id;
+
+		const isSave = saveCultivo(cultivo.id, newCultivo);
+
+		if (isSave) {
+			const cultivosActualizados = state.altaPermisos.cultivos.map((cultivoInStore) => {
+				if (cultivoInStore.id === cultivo.id) return cultivo;
+				else return cultivoInStore;
+			});
+			dispatch(setCultivos(cultivosActualizados));
+		}
+	};
+};
