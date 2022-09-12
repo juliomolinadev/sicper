@@ -43,13 +43,13 @@ export const startSetUsuarioSelected = (usuario, tipo) => {
 			`${usuario.cuenta}.${usuario.subcta}`,
 			usuario.entidad,
 			// TODO: Poner ciclo de forma dinamica
-			"2020-2021"
+			"2021-2022"
 		);
 
 		const dictamen = await loadDictamen(
 			`${usuario.cuenta}.${usuario.subcta}`,
 			// TODO: Poner ciclo de forma dinamica
-			"2021-2022"
+			"2022-2023"
 		);
 
 		// Verifica si los derechos corresponden a una transferencia

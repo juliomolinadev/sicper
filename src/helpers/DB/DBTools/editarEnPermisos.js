@@ -1,7 +1,7 @@
 import { db } from "../../../firebase/firebase-config";
 
 export const editarEnPermisos = async (modulo) => {
-	const ciclo = "2021-2022";
+	const ciclo = "2022-2023";
 	const permisosRef = db
 		.collection(`permisos`)
 		.doc(ciclo)

@@ -23,7 +23,7 @@ export const ExpeditionCheckModule = () => {
 
 				<button
 					// Solo imprime la tabla si hay diferencias
-					onClick={() => verificarExpedicion(modulo, "2021-2022", update)}
+					onClick={() => verificarExpedicion(modulo, "2022-2023", update)}
 					className="btn btn-primary ml-5"
 				>
 					{update ? "Actualizar" : "Revisar"}

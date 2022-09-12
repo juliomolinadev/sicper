@@ -33,7 +33,7 @@ export const PrintDictamenModal = ({
 	};
 
 	const handleSaveDictamen = async () => {
-		const isSave = saveDictamen(`${usuario.cuenta}.${usuario.subcta}`, "2021-2022", {
+		const isSave = saveDictamen(`${usuario.cuenta}.${usuario.subcta}`, "2022-2023", {
 			...dictamen,
 			estado: "activo"
 		});

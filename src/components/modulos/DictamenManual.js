@@ -8,7 +8,7 @@ export const DictamenManual = () => {
 
 	const handleSaveDictamen = () => {
 		if (estado.length > 0) {
-			saveDictamen(cuenta, "2021-2022", formValues);
+			saveDictamen(cuenta, "2022-2023", formValues);
 		}
 	};
 
