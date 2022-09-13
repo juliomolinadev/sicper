@@ -60,15 +60,17 @@ export const cultivosPrincipales = {
 		"51-ALFALFA NUEVA": {},
 		"145.1-COMP. DE VOL. ALF. NVA.": {},
 		"52-ESPARRAGO": {},
+		"142-COMP.VOL.ESPARRAGO": {},
 		"53-VID": {},
-		FRUTALES: {},
 		"117-ZACATE BERMUDA": {},
 		"60-PALMA DATILERA": {},
+		"140-COMP. VOLUMEN": {},
 		VARIOS_PERENNES: {},
 		SUBTOTAL: {}
 	},
 	"PRIMAVERA-VERANO": {
 		"80-ALGODONERO": {},
+		"141-COMP. VOL. ALGODON": {},
 		"81-SORGO GRANO TEMP.(SUDAN)": {},
 		"82-SORGO GRANO TARDIO": {},
 		"83-SORGO FORRAJERO TEMP.(SUDAN)": {},
