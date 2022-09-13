@@ -122,8 +122,10 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				claveCultivo: action.payload.clave,
 				subciclo: action.payload.subciclo,
 				cuotaCultivo: action.payload.costoHectarea,
-				fechaLimiteBc: action.payload.fechaLimiteBc,
-				fechaLimiteSonora: action.payload.fechaLimiteSonora,
+				inicioBc: action.payload.inicioBc,
+				finBc: action.payload.finBc,
+				inicioSonora: action.payload.inicioSonora,
+				finSonora: action.payload.finSonora,
 				superficiePreviaCultivo: action.payload.superficiePrevia
 			};
 

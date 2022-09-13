@@ -9,7 +9,17 @@ export const CultivoCard = ({ cultivo }) => {
 	const { msgError } = useSelector((state) => state.ui);
 
 	const [values, handleInputChange, reset] = useFormToUpper(cultivo);
-	const { clave, costoGuia, costoHectarea, nombre, subciclo, inicio = "", fin = "" } = values;
+	const {
+		clave,
+		costoGuia,
+		costoHectarea,
+		nombre,
+		subciclo,
+		inicioBc = "",
+		finBc = "",
+		inicioSonora = "",
+		finSonora = ""
+	} = values;
 
 	const dispatch = useDispatch();
 
@@ -57,21 +67,31 @@ export const CultivoCard = ({ cultivo }) => {
 			return false;
 		}
 
-		if (inicio.length === 0) {
+		if (inicioBc.length === 0) {
 			dispatch(setError("Indique la fecha de inicio de expedición del cultivo."));
 			return false;
 		}
 
-		if (fin.length === 0) {
+		if (finBc.length === 0) {
 			dispatch(setError("Indique la fecha de cierre de expedición del cultivo."));
 			return false;
 		}
 
-		const f1 = new Date(inicio);
-		const f2 = new Date(fin);
+		const f1Bc = new Date(inicioBc);
+		const f2Bc = new Date(finBc);
 
-		if (f1 > f2) {
-			dispatch(setError("La fecha de inicio no puede ser mayor a la fecha final."));
+		if (f1Bc > f2Bc) {
+			dispatch(
+				setError("La fecha de inicio para Baja California no puede ser mayor a la fecha final.")
+			);
+			return false;
+		}
+
+		const f1Sonora = new Date(inicioSonora);
+		const f2Sonora = new Date(finSonora);
+
+		if (f1Sonora > f2Sonora) {
+			dispatch(setError("La fecha de inicio para Sonora no puede ser mayor a la fecha final."));
 			return false;
 		}
 
@@ -99,7 +119,6 @@ export const CultivoCard = ({ cultivo }) => {
 						autoComplete="off"
 						value={costoGuia}
 						onChange={handleInputChange}
-						// onKeyUp={handleKeyUp}
 					/>
 				</div>
 
@@ -113,7 +132,6 @@ export const CultivoCard = ({ cultivo }) => {
 						autoComplete="off"
 						value={costoHectarea}
 						onChange={handleInputChange}
-						// onKeyUp={handleKeyUp}
 					/>
 				</div>
 
@@ -136,26 +154,46 @@ export const CultivoCard = ({ cultivo }) => {
 				</div>
 
 				<div className="row mt-2">
-					<label className="col-5">Inicio:</label>
+					<label className="col-5">Inicio BC:</label>
 					<input
 						type="date"
 						className="col-6 form-control ml-1"
-						name="inicio"
-						value={inicio}
+						name="inicioBc"
+						value={inicioBc}
 						onChange={handleInputChange}
-						// onKeyUp={handleKeyUp}
 					/>
 				</div>
 
 				<div className="row mt-2">
-					<label className="col-5">Fin:</label>
+					<label className="col-5">Fin BC:</label>
 					<input
 						type="date"
 						className="col-6 form-control ml-1"
-						name="fin"
-						value={fin}
+						name="finBc"
+						value={finBc}
 						onChange={handleInputChange}
-						// onKeyUp={handleKeyUp}
+					/>
+				</div>
+
+				<div className="row mt-2">
+					<label className="col-5">Inicio Sonora:</label>
+					<input
+						type="date"
+						className="col-6 form-control ml-1"
+						name="inicioSonora"
+						value={inicioSonora}
+						onChange={handleInputChange}
+					/>
+				</div>
+
+				<div className="row mt-2">
+					<label className="col-5">Fin Sonora:</label>
+					<input
+						type="date"
+						className="col-6 form-control ml-1"
+						name="finSonora"
+						value={finSonora}
+						onChange={handleInputChange}
 					/>
 				</div>
 			</div>

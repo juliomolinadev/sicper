@@ -113,34 +113,57 @@ export const NuevoPermisoScreen = () => {
 		}
 	};
 
-	const getFechaLimite = () => {
-		console.log(auth.modulo);
+	const getRangoExpedicion = () => {
 		switch (auth.modulo) {
 			case "1":
 			case "2":
 			case "3":
 			case "UNI03":
-				return altaPermisos.fechaLimiteSonora;
+				return {
+					inicio: altaPermisos.inicioSonora,
+					fin: altaPermisos.finSonora
+				};
 
 			default:
-				return altaPermisos.fechaLimiteBc;
+				return {
+					inicio: altaPermisos.inicioBc,
+					fin: altaPermisos.finBc
+				};
 		}
 	};
 
-	const bloquearPorFechaLimite = () => {
-		const fechaLimite = getFechaLimite();
+	const getFechaParaCicloActual = (fecha, ciclo) => {
+		const cicloSplit = ciclo.split("-");
+		const fechaSplit = fecha.split("-");
 
-		if (fechaLimite) {
+		const year =
+			fechaSplit[1] === "09" ||
+			fechaSplit[1] === "10" ||
+			fechaSplit[1] === "11" ||
+			fechaSplit[1] === "12"
+				? cicloSplit[0]
+				: cicloSplit[1];
+
+		const today = new Date(`${year}-${fechaSplit[1]}-${fechaSplit[2]}T00:00:00`);
+		console.log(today);
+		return today;
+	};
+
+	const bloquearPorPeriodoDeExpedicion = () => {
+		if (altaPermisos.dictamen) return false;
+
+		const rango = getRangoExpedicion();
+		console.log(rango);
+
+		if (rango.inicio && rango.fin) {
 			const hoy = new Date();
-			// Firebase guarda en segundos (se requieren milisegundos)
-			const limite = new Date(fechaLimite.seconds * 1000);
+			const inicio = getFechaParaCicloActual(rango.inicio, ciclo);
+			const fin = getFechaParaCicloActual(rango.fin, ciclo);
 
-			if (limite > hoy.getTime()) return false;
-			else {
-				if (altaPermisos.dictamen) return false;
-				else return true;
-			}
-		} else return false;
+			if (hoy < inicio) return true;
+			if (hoy > fin) return true;
+			else return false;
+		} else return true;
 	};
 
 	const isFormValid = () => {
@@ -176,19 +199,15 @@ export const NuevoPermisoScreen = () => {
 		} else if (!altaPermisos.cultivoAnterior) {
 			dispatch(setError("Especifique el cultivo anterior."));
 			return false;
+		} else if (bloquearPorPeriodoDeExpedicion()) {
+			dispatch(setError("Cultivo fuera de fecha. Se requiere dictamen técnico de siembra."));
+			return false;
 		} else if (
 			autorizadosPorCultivo === undefined ||
 			defineTipoPermiso(superficiePreviaCultivo, autorizadosPorCultivo) ===
 				"Superficie no disponible"
 		) {
 			dispatch(setError("La superficie asignada para el cultivo no es suficiente."));
-			return false;
-		} else if (bloquearPorFechaLimite()) {
-			dispatch(
-				setError(
-					"La fecha límite para la expedición de este cultivo ha expirado. Se requiere dictamen técnico de siembra."
-				)
-			);
 			return false;
 		}
 
