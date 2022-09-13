@@ -21,10 +21,10 @@ export const CatalogoDeCultivos = () => {
 			<h2>Catalogo de cultivos</h2>
 
 			<div className=" row mt-4">
-				<label className="col-2">Nombre del cultivo:</label>
+				<label className="col-sm-2">Nombre del cultivo:</label>
 				<input
 					type="text"
-					className="col-4 form-control ml-1"
+					className="col-sm-4 form-control ml-1"
 					placeholder="Nombre del cultivo"
 					name="cultivoName"
 					autoComplete="off"

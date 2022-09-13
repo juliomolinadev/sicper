@@ -90,10 +90,7 @@ export const CultivoCard = ({ cultivo }) => {
 				{msgError && <div className="auth__alert-error">{msgError}</div>}
 
 				<div className=" row mt-2">
-					<label className="col-5">
-						<span className="text-warning">* </span>
-						Costo guía:
-					</label>
+					<label className="col-5">Costo guía:</label>
 					<input
 						type="number"
 						className="col-6 form-control ml-1"
@@ -107,10 +104,7 @@ export const CultivoCard = ({ cultivo }) => {
 				</div>
 
 				<div className=" row mt-2">
-					<label className="col-5">
-						<span className="text-warning">* </span>
-						Costo Hectarea:
-					</label>
+					<label className="col-5">Costo Hectarea:</label>
 					<input
 						type="number"
 						className="col-6 form-control ml-1"
@@ -124,10 +118,7 @@ export const CultivoCard = ({ cultivo }) => {
 				</div>
 
 				<div className=" row mt-2">
-					<label className="col-5">
-						<span className="text-warning">* </span>
-						Subciclo:
-					</label>
+					<label className="col-5">Subciclo:</label>
 					<select
 						type="text"
 						name="subciclo"
@@ -145,10 +136,7 @@ export const CultivoCard = ({ cultivo }) => {
 				</div>
 
 				<div className="row mt-2">
-					<label className="col-5">
-						<span className="text-warning">* </span>
-						Inicio:
-					</label>
+					<label className="col-5">Inicio:</label>
 					<input
 						type="date"
 						className="col-6 form-control ml-1"
@@ -160,10 +148,7 @@ export const CultivoCard = ({ cultivo }) => {
 				</div>
 
 				<div className="row mt-2">
-					<label className="col-5">
-						<span className="text-warning">* </span>
-						Fin:
-					</label>
+					<label className="col-5">Fin:</label>
 					<input
 						type="date"
 						className="col-6 form-control ml-1"

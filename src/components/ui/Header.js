@@ -46,16 +46,16 @@ export const Header = () => {
 				</div>
 				<div className="col-sm-10">
 					<div className="card border">
-						<div className="card-header d-inline-flex">
-							<div className="div">{`${entidad} - Operador: ${email}`} </div>
-							<div className="div ml-5">
+						<div className="card-header d-inline-flex row">
+							<div className="col-sm-3">{`${entidad} - Operador: ${email}`} </div>
+
+							<div className="col-sm-2 ml-5">
 								<b>Ciclo actual: {variablesGlobales.cicloActual}</b>
 							</div>
-							<div className="w-100 pr-5 row ml-5">
-								<div className="col-3 text-center">Consultas:</div>
-								<div className="col-6 p-0">
-									<CicleSelector />
-								</div>
+
+							<div className="col-sm-6 d-flex align-items-center">
+								<div className="mr-2">Consultas:</div>
+								<CicleSelector />
 							</div>
 						</div>
 
