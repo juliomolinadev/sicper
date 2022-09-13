@@ -153,6 +153,9 @@ export const NuevoPermisoScreen = () => {
 		} else if (!altaPermisos.nombreProductor) {
 			dispatch(setError("El campo productor es obligatorio."));
 			return false;
+		} else if (altaPermisos.productorIncumplido) {
+			dispatch(setError("Productor inhabilitado. Favor de comunicarse con SADER."));
+			return false;
 		} else if (!altaPermisos.nombreCultivo) {
 			dispatch(setError("El campo cultivo es obligatorio."));
 			return false;

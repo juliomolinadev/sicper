@@ -30,6 +30,7 @@ const initialState = {
 	idProductorSelected: null,
 	nombreProductor: null,
 	rfcProductor: null,
+	productorIncumplido: null,
 	idCultivoSelected: null,
 	nombreCultivo: null,
 	claveCultivo: null,
@@ -260,7 +261,8 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				idProductorSelected: action.payload.id,
 				nombreProductor: `${action.payload.apPaterno} ${action.payload.apMaterno} ${action.payload.nombre}`,
 				rfcProductor: action.payload.rfc,
-				curpProductor: action.payload.curp
+				curpProductor: action.payload.curp,
+				productorIncumplido: action.payload.incumplido ? action.payload.incumplido : false
 			};
 
 		case types.unsetProductor:
@@ -268,7 +270,8 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				...state,
 				idProductorSelected: null,
 				nombreProductor: null,
-				rfcProductor: null
+				rfcProductor: null,
+				productorIncumplido: null
 			};
 
 		//Nuevo Productor **************************************

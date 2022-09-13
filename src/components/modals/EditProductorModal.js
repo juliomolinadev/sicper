@@ -47,7 +47,8 @@ export const EditProductorModal = ({
 		cp,
 		telefono,
 		genero,
-		indice = ""
+		indice = "",
+		incumplido = false
 	} = formValues;
 
 	// console.log(formValues);
@@ -75,7 +76,8 @@ export const EditProductorModal = ({
 			telefono: telefono.replace(/ /g, ""),
 			genero,
 			uid,
-			fechaRegistro
+			fechaRegistro,
+			incumplido
 		};
 
 		if (isFormValid()) {
@@ -357,6 +359,24 @@ export const EditProductorModal = ({
 								/>
 							</div>
 						)}
+					</div>
+				</div>
+
+				<div className="row p-2">
+					<div className="col-sm-12 d-flex align-items-baseline pt-2">
+						<span>*</span>
+						<div className="px-4">
+							<input
+								type="checkbox"
+								id="incumplido"
+								name="incumplido"
+								// value=""
+								onChange={handleInputChange}
+								checked={incumplido === true}
+							/>
+							<span> </span>
+							<label htmlFor="femenino"> Productor Incumplido</label>
+						</div>
 					</div>
 				</div>
 
