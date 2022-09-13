@@ -18,7 +18,7 @@ import { unsetUsuarios, unsetUsuarioSelected } from "../actions/usuarios";
 export const TransferenciasScreen = () => {
 	const { usuario } = useSelector((state) => state.entidades);
 	const { variablesGlobales, modulo } = useSelector((state) => state.auth);
-	const { cicloActual: ciclo } = variablesGlobales;
+	const { cicloConsulta: ciclo } = variablesGlobales;
 	const { nuevaTransferencia } = useSelector((state) => state.transferenciasScreen);
 	const { transferencia } = useSelector((state) => state.transferenciasScreen);
 

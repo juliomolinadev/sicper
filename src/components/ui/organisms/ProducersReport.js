@@ -9,7 +9,7 @@ import { useMultiInput } from "../../../hooks/useMultiInput";
 
 export const ProducersReport = () => {
 	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
-	const { cicloActual } = variablesGlobales;
+	const { cicloConsulta } = variablesGlobales;
 
 	const [formValues, handleInputChange, addPair, removePair] = useMultiInput([
 		{ palabra: "", campo: "" }
@@ -41,7 +41,7 @@ export const ProducersReport = () => {
 
 	const getProducers = async () => {
 		if (formValues[0].campo.length) {
-			const producersToSet = await simpleLoadProducers(formValues, cicloActual, modulo);
+			const producersToSet = await simpleLoadProducers(formValues, cicloConsulta, modulo);
 			resetFilters();
 			setData(producersToSet);
 		}

@@ -19,7 +19,7 @@ export const FormPermisosInformes = () => {
 	const [fechaFinal, onChangeFechaFinal] = useState(new Date());
 
 	const auth = useSelector((state) => state.auth);
-	const ciclo = auth.variablesGlobales.cicloActual;
+	const ciclo = auth.variablesGlobales.cicloConsulta;
 
 	const buscarPermisos = () => {
 		if (campo) {

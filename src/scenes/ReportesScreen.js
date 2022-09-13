@@ -11,7 +11,7 @@ import { ModuloInformesCesvbc } from "../components/modulos/ModuloInformesCesvbc
 
 export const ReportesScreen = () => {
 	const { privilegios, variablesGlobales } = useSelector((state) => state.auth);
-	const { cicloActual: ciclo } = variablesGlobales;
+	const { cicloConsulta: ciclo } = variablesGlobales;
 	const [reportTypeValues, handleReportTipeInputChange] = useForm();
 
 	const dispatch = useDispatch();

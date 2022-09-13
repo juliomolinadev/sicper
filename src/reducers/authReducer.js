@@ -45,6 +45,11 @@ export const authReducer = (state = {}, action) => {
 		case types.logout:
 			return {};
 
+		case types.setCicloConsulta:
+			const newState = { ...state };
+			newState.variablesGlobales.cicloConsulta = action.payload;
+			return newState;
+
 		default:
 			return state;
 	}

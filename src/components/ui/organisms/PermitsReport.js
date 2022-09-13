@@ -9,7 +9,7 @@ export const PermitsReport = () => {
 	const title = "REPORTE DE PERMISOS ACTIVOS POR SECCION";
 
 	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
-	const { cicloActual } = variablesGlobales;
+	const { cicloConsulta } = variablesGlobales;
 
 	const [formValues, handleInputChange] = useForm({ palabra: "" });
 	const { palabra } = formValues;
@@ -40,7 +40,7 @@ export const PermitsReport = () => {
 	const fechaFinal = new Date();
 
 	const getPermisos = async () => {
-		const permisosToSet = await loadPermisosPorSeccion(palabra, modulo, cicloActual);
+		const permisosToSet = await loadPermisosPorSeccion(palabra, modulo, cicloConsulta);
 		setPermisos(setFilter(permisosToSet));
 	};
 

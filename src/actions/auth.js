@@ -201,6 +201,11 @@ export const setPrivilegios = (privilegios) => ({
 	payload: privilegios
 });
 
+export const setCicloConsulta = (ciclo) => ({
+	type: types.setCicloConsulta,
+	payload: ciclo
+});
+
 export const loadEstadoExpedicionModulo = async (claveEntidad) => {
 	const entidad = await db.collection(`entidades`).doc(`${claveEntidad}`).get();
 

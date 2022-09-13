@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { startLoadEntities } from "../../actions/entidades/entities";
+import { CicleSelector } from "./molecules/CicleSelector";
 import { EntitySelector } from "./molecules/EntitySelector";
 
 export const Header = () => {
@@ -48,7 +49,13 @@ export const Header = () => {
 						<div className="card-header d-inline-flex">
 							<div className="div">{`${entidad} - Operador: ${email}`} </div>
 							<div className="div ml-5">
-								<b>Ciclo: {variablesGlobales.cicloActual}</b>
+								<b>Ciclo actual: {variablesGlobales.cicloActual}</b>
+							</div>
+							<div className="w-100 pr-5 row ml-5">
+								<div className="col-3 text-center">Consultas:</div>
+								<div className="col-6 p-0">
+									<CicleSelector />
+								</div>
 							</div>
 						</div>
 

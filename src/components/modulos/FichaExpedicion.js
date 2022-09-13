@@ -12,7 +12,7 @@ export const FichaExpedicion = () => {
 	const dispatch = useDispatch();
 
 	const auth = useSelector((state) => state.auth);
-	const ciclo = auth.variablesGlobales.cicloActual;
+	const ciclo = auth.variablesGlobales.cicloConsulta;
 
 	useEffect(() => {
 		dispatch(startLoadAutorizados(ciclo, modulo));

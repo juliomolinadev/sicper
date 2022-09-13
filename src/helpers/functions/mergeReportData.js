@@ -1,4 +1,4 @@
-const mergedData = {};
+let mergedData = {};
 
 const plantillaRegistro = {
 	cultivo: "",
@@ -71,6 +71,7 @@ const createNewAutorizadosItem = ({
 };
 
 export const mergeReportData = (autorizados, expedicion) => {
+	mergedData = {};
 	autorizados.forEach((item) => {
 		createNewAutorizadosItem(item);
 	});

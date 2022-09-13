@@ -8,7 +8,7 @@ import { TransferTable } from "../molecules/TransferTable";
 export const TableTransferReport = () => {
 	const componentRef = createRef();
 
-	const { cicloActual: ciclo } = useSelector((state) => state.auth.variablesGlobales);
+	const { cicloConsulta: ciclo } = useSelector((state) => state.auth.variablesGlobales);
 	const [table, setTable] = useState([]);
 
 	useEffect(() => {

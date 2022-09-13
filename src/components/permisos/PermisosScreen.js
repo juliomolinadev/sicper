@@ -38,7 +38,7 @@ export const PermisosScreen = () => {
 	const { modulo, privilegios, expedicionActivaModulo, uid } = useSelector((state) => state.auth);
 
 	const { variablesGlobales } = useSelector((state) => state.auth);
-	const { cicloActual: ciclo, expedicionActiva } = variablesGlobales;
+	const { cicloConsulta: ciclo, expedicionActiva } = variablesGlobales;
 
 	const cultivosConGuia = [3];
 

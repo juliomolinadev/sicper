@@ -12,7 +12,7 @@ import { useMultiInput } from "../../../hooks/useMultiInput";
 
 export const TransferReport = ({ tipo }) => {
 	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
-	const { cicloActual: ciclo } = variablesGlobales;
+	const { cicloConsulta: ciclo } = variablesGlobales;
 
 	const [formValues, handleInputChange, addPair, removePair] = useMultiInput([
 		{ palabra: "", campo: "" }

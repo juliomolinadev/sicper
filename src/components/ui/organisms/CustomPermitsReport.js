@@ -11,7 +11,7 @@ import { useMultiInput } from "../../../hooks/useMultiInput";
 
 export const CustomPermitsReport = () => {
 	const { modulo, variablesGlobales } = useSelector((state) => state.auth);
-	const { cicloActual } = variablesGlobales;
+	const { cicloConsulta } = variablesGlobales;
 
 	const [formValues, handleInputChange, addPair, removePair] = useMultiInput([
 		{ palabra: "", campo: "" }
@@ -50,7 +50,7 @@ export const CustomPermitsReport = () => {
 			const permisosToSet = await simpleLoadPermits(
 				formValues,
 				modulo,
-				cicloActual,
+				cicloConsulta,
 				fechaInicial,
 				fechaFinal
 			);

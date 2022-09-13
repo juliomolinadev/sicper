@@ -6,6 +6,7 @@ export const types = {
 	logout: "[Login] Logout",
 	setPrivilegios: "[Login] Privilegios",
 	setVariablesGlobales: "[Login] Set Variables Globales",
+	setCicloConsulta: "[Login] Set Ciclo Consulta",
 	setEstadoExpedicionModulo: "[Login] Set Estado Expedicion Modulo",
 
 	uiSetError: "[UI] Set Error",
