@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { startSetCultivoSelected } from "../../actions/cultivos";
 import { CultivoCard } from "../cards/CultivoCard";
@@ -9,17 +10,35 @@ export const CatalogoDeCultivos = () => {
 	const { cultivos, idCultivoSelected } = useSelector((state) => state.altaPermisos);
 	const cultivoSelected = cultivos.find((cultivo) => cultivo.id === idCultivoSelected);
 
-	// console.log("cultivoSelected en Catalogo: ", cultivoSelected);
+	const [cultivoName, setCultivoName] = useState("");
+
+	const filteredCultivos = cultivos.filter((cultivo) =>
+		cultivo.nombre.includes(cultivoName.toUpperCase())
+	);
+
 	return (
 		<div>
 			<h2>Catalogo de cultivos</h2>
+
+			<div className=" row mt-4">
+				<label className="col-2">Nombre del cultivo:</label>
+				<input
+					type="text"
+					className="col-4 form-control ml-1"
+					placeholder="Nombre del cultivo"
+					name="cultivoName"
+					autoComplete="off"
+					value={cultivoName}
+					onChange={(e) => setCultivoName(e.target.value)}
+				/>
+			</div>
 
 			<div className="row">
 				<div className="col-sm-8">
 					<CustomTable
 						title={cultivos.length === 0 ? "No se encontraron cultivos" : "Cultivos"}
 						columns={cultivosColumns}
-						data={cultivos}
+						data={filteredCultivos}
 						setFunction={startSetCultivoSelected}
 					/>
 				</div>

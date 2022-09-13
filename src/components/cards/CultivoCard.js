@@ -7,7 +7,6 @@ import { useFormToUpper } from "../../hooks/UseFormToUpper";
 
 export const CultivoCard = ({ cultivo }) => {
 	const { msgError } = useSelector((state) => state.ui);
-	// const { cultivos } = useSelector((state) => state.altaPermisos);
 
 	const [values, handleInputChange, reset] = useFormToUpper(cultivo);
 	const { clave, costoGuia, costoHectarea, nombre, subciclo, inicio = "", fin = "" } = values;
@@ -15,8 +14,10 @@ export const CultivoCard = ({ cultivo }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		reset();
-	}, [cultivo]);
+		if (cultivo.clave !== clave) {
+			reset();
+		}
+	}, [cultivo, clave, reset]);
 
 	const handleSaveCultivo = () => {
 		if (isFormValid()) {
