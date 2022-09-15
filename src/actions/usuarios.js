@@ -8,6 +8,8 @@ import { goToElement } from "../helpers/functions/assets";
 import { unsetTransferencia } from "./transferenciasScreen";
 import { loadLaboresPendientes } from "../helpers/loadLaboresPendientes";
 import { loadDictamen } from "../helpers/loadDictamen";
+import { loadCultivoAnterior } from "../helpers/loadCultivoAnterior";
+import { setCultivoAnteriorSelected } from "./cultivos";
 
 export const openUsuariosModal = () => ({
 	type: types.altaPermisoOpenUsuariosModal
@@ -38,6 +40,16 @@ export const startSetUsuarioSelected = (usuario, tipo) => {
 
 	return async (dispatch) => {
 		const ciclo = await loadCiclo();
+
+		const cultivoAnterior = await loadCultivoAnterior(
+			`${usuario.cuenta}.${usuario.subcta}`,
+			usuario.entidad,
+			// TODO: Poner ciclo de forma dinamica
+			"2021-2022"
+		);
+
+		console.log(cultivoAnterior);
+		dispatch(setCultivoAnteriorSelected(cultivoAnterior));
 
 		const laboresPendientes = await loadLaboresPendientes(
 			`${usuario.cuenta}.${usuario.subcta}`,
