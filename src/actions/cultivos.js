@@ -136,3 +136,8 @@ export const startSaveCultivo = (cultivo) => {
 		}
 	};
 };
+
+export const setTipoSemilla = (variedad) => ({
+	type: types.setTipoSemilla,
+	payload: variedad
+});

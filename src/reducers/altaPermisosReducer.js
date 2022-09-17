@@ -161,6 +161,12 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				claveCultivoAnterior: null
 			};
 
+		case types.setTipoSemilla:
+			return {
+				...state,
+				tipoSemilla: action.payload
+			};
+
 		//Usuarios **************************************
 
 		case types.altaPermisoOpenUsuariosModal:

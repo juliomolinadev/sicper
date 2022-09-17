@@ -51,7 +51,6 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 		dispatch(setEnEspera());
 
 		const isSave = await savePermitTransaction(data);
-		console.log("isSave en lugar: ", isSave);
 
 		if (isSave) {
 			dispatch(unsetEnEspera());

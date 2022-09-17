@@ -29,6 +29,7 @@ import { useFormToUpper } from "../../hooks/UseFormToUpper";
 import { CultivoAnteriorModal } from "../modals/CultivoAnteriorModal";
 import { roundToN } from "../../helpers/functions/roundToN";
 import { unsetUsuarioSelected } from "../../actions/usuarios";
+import { VariedadInput } from "./inputsNuevosPermisos/VariedadInput";
 
 export const NuevoPermisoScreen = () => {
 	const {
@@ -417,29 +418,9 @@ export const NuevoPermisoScreen = () => {
 
 				<div className="row">
 					<CultivoInput />
-
-					<div className="col-sm-6">
-						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">
-								<span className="text-warning">* </span>
-								Variedad:
-							</label>
-							<div className="flex-grow-1 ">
-								<input
-									id="variedadInput"
-									tabIndex="6"
-									type="text"
-									className="form-control"
-									placeholder="variedad"
-									name="variedad"
-									value={variedad}
-									autoComplete="off"
-									onChange={handleInputChange}
-								/>
-							</div>
-						</div>
-					</div>
+					<VariedadInput variedad={variedad} handleInputChange={handleInputChange} />
 				</div>
+
 				<div className="row">
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">

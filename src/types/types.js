@@ -31,6 +31,7 @@ export const types = {
 	clearCultivos: "[Alta Permisos] Clear cultivos",
 	setCultivo: "[Alta Permisos] Set cultivo",
 	unsetCultivo: "[Alta Permisos] unset cultivo",
+	setTipoSemilla: "[Alta Permisos] set Tipo Semilla",
 	setCultivoAnterior: "[Alta Permisos] Set cultivo anterior",
 	unsetCultivoAnterior: "[Alta Permisos] unset cultivo anterior",
 
