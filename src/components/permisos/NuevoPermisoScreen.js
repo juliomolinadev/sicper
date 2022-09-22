@@ -133,20 +133,40 @@ export const NuevoPermisoScreen = () => {
 		}
 	};
 
-	const getFechaParaCicloActual = (fecha, ciclo) => {
+	const getFechaParaCicloActual = (rango, ciclo) => {
 		const cicloSplit = ciclo.split("-");
-		const fechaSplit = fecha.split("-");
+		const inicioSplit = rango.inicio.split("-");
+		const finSplit = rango.fin.split("-");
 
-		const year =
-			fechaSplit[1] === "09" ||
-			fechaSplit[1] === "10" ||
-			fechaSplit[1] === "11" ||
-			fechaSplit[1] === "12"
-				? cicloSplit[0]
-				: cicloSplit[1];
+		const yearDifference = Number(finSplit[0]) - Number(inicioSplit[0]);
 
-		const today = new Date(`${year}-${fechaSplit[1]}-${fechaSplit[2]}T00:00:00`);
-		return today;
+		switch (yearDifference) {
+			case 1:
+				return {
+					inicio: new Date(`${cicloSplit[0]}-${inicioSplit[1]}-${inicioSplit[2]}T00:00:00`),
+					fin: new Date(`${cicloSplit[1]}-${finSplit[1]}-${finSplit[2]}T00:00:00`)
+				};
+
+			case 0:
+				if (
+					finSplit[1] === "9" ||
+					finSplit[1] === "10" ||
+					finSplit[1] === "11" ||
+					finSplit[1] === "12"
+				) {
+					return {
+						inicio: new Date(`${cicloSplit[0]}-${inicioSplit[1]}-${inicioSplit[2]}T00:00:00`),
+						fin: new Date(`${cicloSplit[0]}-${finSplit[1]}-${finSplit[2]}T00:00:00`)
+					};
+				} else
+					return {
+						inicio: new Date(`${cicloSplit[1]}-${inicioSplit[1]}-${inicioSplit[2]}T00:00:00`),
+						fin: new Date(`${cicloSplit[1]}-${finSplit[1]}-${finSplit[2]}T00:00:00`)
+					};
+
+			default:
+				return false;
+		}
 	};
 
 	const bloquearPorPeriodoDeExpedicion = () => {
@@ -155,13 +175,14 @@ export const NuevoPermisoScreen = () => {
 		const rango = getRangoExpedicion();
 
 		if (rango.inicio && rango.fin) {
+			const rangoActual = getFechaParaCicloActual(rango, ciclo);
 			const hoy = new Date();
-			const inicio = getFechaParaCicloActual(rango.inicio, ciclo);
-			const fin = getFechaParaCicloActual(rango.fin, ciclo);
 
-			if (hoy < inicio) return true;
-			if (hoy > fin) return true;
-			else return false;
+			if (rangoActual) {
+				if (hoy < rangoActual.inicio) return true;
+				if (hoy > rangoActual.fin) return true;
+				else return false;
+			} else return true;
 		} else return true;
 	};
 
