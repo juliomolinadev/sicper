@@ -125,7 +125,7 @@ export const PrintTransferModal = ({ transferencia, reset }) => {
 			</div>
 
 			<div className="row m-3 d-flex flex-column justify-content-center mt-2">
-				<p clssName="paragraph">
+				<p className="paragraph">
 					&nbsp;&nbsp;&nbsp;&nbsp; EN BASE A LO DISPUESTO EN EL ARTÍCULO 49 DE LA LEY DE AGUAS
 					NACIONALES EN EL CUAL ESPECIFICA QUE LOS DERECHOS DE EXPLOTACIÓN, USO O APROVECHAMIENTO DE
 					AGUA PARA USO AGRÍCOLA, GANADERO O FORESTAL SE PODRÁN TRANSMITIR EN LOS TÉRMINOS Y
@@ -135,7 +135,7 @@ export const PrintTransferModal = ({ transferencia, reset }) => {
 					TRANSMISIONES EN UNIDADES Y DISTRITOS DE RIEGO PODRÁN SER TEMPORAL O DEFINITIVA.
 				</p>
 
-				<p clssName="paragraph">
+				<p className="paragraph">
 					&nbsp;&nbsp;&nbsp;&nbsp; ES TEMPORAL CUANDO LOS DERECHOS SE TRANSFIEREN POR DETERMINADOS
 					CICLOS AGRÍCOLAS CONSERVANDO LA TITULARIDAD DE LA CONCESIÓN SIEMPRE Y CUANDO NO SE CAUSEN
 					PERJUICIOS A TERCEROS, POR LO ANTERIORMENTE SEÑALADO LA COMISIÓN NACIONAL DEL AGUA HA
@@ -167,7 +167,7 @@ export const PrintTransferModal = ({ transferencia, reset }) => {
 			</div>
 
 			<div className="row m-3 d-flex flex-column justify-content-center mt-5">
-				<p clssName="paragraph">
+				<p className="paragraph">
 					&nbsp;&nbsp;&nbsp;&nbsp; ESTA TRANSFERENCIA TENDRÁ VALIDEZ ÚNICAMENTE EN EL PRESENTE CICLO
 					AGRÍCOLA {ciclo}, DEBIENDO ENTREGARSE EL SERVICIO DE RIEGO PRECISAMENTE AL SOLICITANTE.
 				</p>

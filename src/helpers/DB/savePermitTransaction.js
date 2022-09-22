@@ -56,7 +56,7 @@ export const savePermitTransaction = async (allData) => {
 		estadoPermiso: allData.estadoPermiso,
 		reacomodo: allData.reacomodo ? allData.reacomodo : "",
 		direccion: allData.direccion,
-		tipoSemilla: allData.tipoSemilla
+		tipoSemilla: allData.tipoSemilla ? allData.tipoSemilla : ""
 	};
 
 	if (data.nombreCultivo === "ALGODONERO") {

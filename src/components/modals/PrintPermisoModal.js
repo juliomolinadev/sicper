@@ -200,7 +200,7 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 			{/* Parrafo legal ********************************************************************** */}
 
 			<div className="row m-3 d-flex flex-column justify-content-center">
-				<p clssName="paragraph">
+				<p className="paragraph">
 					Con base en el Acuerdo Nacional de Colaboración entre la Secretaría de Agricultura,
 					Ganadería, Desarrollo Rural, Pesca y Alimentación y el Acuerdo de Concertación entre la
 					SAGARPA, CONAGUA, Distrito de Riego Río Colorado y la Sociedad de Responsabilidad Limitada

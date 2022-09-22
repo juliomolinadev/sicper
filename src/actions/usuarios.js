@@ -48,7 +48,6 @@ export const startSetUsuarioSelected = (usuario, tipo) => {
 			"2021-2022"
 		);
 
-		console.log(cultivoAnterior);
 		dispatch(setCultivoAnteriorSelected(cultivoAnterior));
 
 		const laboresPendientes = await loadLaboresPendientes(

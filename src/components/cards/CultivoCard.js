@@ -31,7 +31,6 @@ export const CultivoCard = ({ cultivo }) => {
 
 	const handleSaveCultivo = () => {
 		if (isFormValid()) {
-			console.log("Guardando...", { ...values });
 			dispatch(startSaveCultivo(values));
 		}
 	};

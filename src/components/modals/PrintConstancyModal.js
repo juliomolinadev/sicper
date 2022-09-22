@@ -99,7 +99,7 @@ export const PrintConstancyModal = ({ openModal, constancia, constancySaved, set
 					</div>
 
 					<div className="row m-3 d-flex flex-column justify-content-center mt-2">
-						<p clssName="paragraph">
+						<p className="paragraph">
 							&nbsp;&nbsp;&nbsp;&nbsp; CON FUNDAMENTO EN LOS ARTÍCULOS 52, 67 INCISO A), 70 DE LA
 							LEY DE AGUAS NACIONALES; 92 Y 102 DEL REGLAMENTO DEL DISTRITO DE RIEGO DEL RÍO
 							COLORADO Y DEMÁS RELATIVOS DE LA NORMATIVIDAD VIGENTE, ARTÍCULOS 11 LETRA B FRACCIÓN
@@ -122,7 +122,7 @@ export const PrintConstancyModal = ({ openModal, constancia, constancySaved, set
 							<b>{municipio.toUpperCase()}</b>, <b>{estado.toUpperCase()}</b>.
 						</p>
 
-						<p clssName="paragraph">
+						<p className="paragraph">
 							&nbsp;&nbsp;&nbsp;&nbsp; LA PRESENTE SE EXTIENDE CON CARÁCTER INFORMATIVO A PETICIÓN
 							DEL INTERESADO PARA LOS FINES QUE ESTIME CONVENIENTES Y SE LE RECUERDA QUE DE ACUERDO
 							A LA NORMATIVA EN MATERIA DE AGUAS ES DEBER DEL USUARIO, CONCESIONARIO O ASIGNATARIO,
@@ -130,7 +130,7 @@ export const PrintConstancyModal = ({ openModal, constancia, constancySaved, set
 							DE LA INFORMACIÓN, TRANSMISIÓN, CESIÓN DE DERECHOS DE AGUA EN EL PADRÓN.
 						</p>
 
-						<p clssName="paragraph">
+						<p className="paragraph">
 							&nbsp;&nbsp;&nbsp;&nbsp; LA CONSTANCIA SE EMITE, SIN PREJUZGAR SOBRE LA EXISTENCIA DE
 							ALGUNA OTRA SOLICITUD, PROCEDIMIENTO ADMINISTRATIVO, SUCESORIO O JUDICIAL QUE NO SE
 							HAYA HECHO DE CONOCIMIENTO AL MOMENTO DE FORMULAR SU PETICIÓN.

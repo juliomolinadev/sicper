@@ -146,7 +146,6 @@ export const NuevoPermisoScreen = () => {
 				: cicloSplit[1];
 
 		const today = new Date(`${year}-${fechaSplit[1]}-${fechaSplit[2]}T00:00:00`);
-		console.log(today);
 		return today;
 	};
 
@@ -154,7 +153,6 @@ export const NuevoPermisoScreen = () => {
 		if (altaPermisos.dictamen) return false;
 
 		const rango = getRangoExpedicion();
-		console.log(rango);
 
 		if (rango.inicio && rango.fin) {
 			const hoy = new Date();
