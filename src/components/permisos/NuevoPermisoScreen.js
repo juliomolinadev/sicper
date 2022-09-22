@@ -202,6 +202,12 @@ export const NuevoPermisoScreen = () => {
 		} else if (!altaPermisos.nombreCultivo) {
 			dispatch(setError("El campo cultivo es obligatorio."));
 			return false;
+		} else if (
+			(altaPermisos.claveCultivo === 3 || altaPermisos.claveCultivo === 80) &&
+			altaPermisos.tipoSemilla === undefined
+		) {
+			dispatch(setError("Indique el tipo de semilla."));
+			return false;
 		} else if (supAutorizada <= 0) {
 			dispatch(setError("Ingrese la superficie que será autorizada en este permiso."));
 			return false;
