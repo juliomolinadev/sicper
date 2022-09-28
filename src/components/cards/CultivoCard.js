@@ -203,7 +203,6 @@ export const CultivoCard = ({ cultivo }) => {
 					<label className="col-9">Requiere dictamen técnico:</label>
 					<input
 						type="checkbox"
-						// className="col-6 form-control ml-1"
 						name="requiereDictamen"
 						value={requiereDictamen}
 						onChange={handleInputChange}
@@ -215,7 +214,6 @@ export const CultivoCard = ({ cultivo }) => {
 					<label className="col-9">Requiere complemento de volumen:</label>
 					<input
 						type="checkbox"
-						// className="col-6 form-control ml-1"
 						name="requiereComplementoVolumen"
 						value={requiereComplementoVolumen}
 						onChange={handleInputChange}
@@ -227,7 +225,6 @@ export const CultivoCard = ({ cultivo }) => {
 					<label className="col-9">Requiere control de CPUS:</label>
 					<input
 						type="checkbox"
-						// className="col-6  ml-1"
 						name="requiereControlCPUS"
 						value={requiereControlCPUS}
 						onChange={handleInputChange}

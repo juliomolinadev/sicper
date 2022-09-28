@@ -4,6 +4,7 @@ import { db } from "../firebase/firebase-config";
 import { loadCiclo } from "../helpers/DB/loadCiclo";
 import { goToElement } from "../helpers/functions/assets";
 import { saveCultivo } from "../helpers/saveCultivo";
+import { removeError } from "./ui";
 
 export const openCultivosModal = () => ({
 	type: types.altaPermisoOpenCultivosModal
@@ -85,6 +86,8 @@ export const loadSuperficiePrevia = async (ciclo, modulo, cultivo) => {
 
 export const startSetCultivoSelected = (cultivo) => {
 	return async (dispatch) => {
+		dispatch(removeError());
+
 		const ciclo = await loadCiclo();
 		const superficiePrevia = await loadSuperficiePrevia(
 			ciclo,
@@ -133,6 +136,7 @@ export const startSaveCultivo = (cultivo) => {
 				else return cultivoInStore;
 			});
 			dispatch(setCultivos(cultivosActualizados));
+			dispatch(removeError());
 		}
 	};
 };
