@@ -18,7 +18,10 @@ export const CultivoCard = ({ cultivo }) => {
 		inicioBc = "",
 		finBc = "",
 		inicioSonora = "",
-		finSonora = ""
+		finSonora = "",
+		requiereDictamen = false,
+		requiereComplementoVolumen = false,
+		requiereControlCPUS = false
 	} = values;
 
 	const dispatch = useDispatch();
@@ -193,6 +196,42 @@ export const CultivoCard = ({ cultivo }) => {
 						name="finSonora"
 						value={finSonora}
 						onChange={handleInputChange}
+					/>
+				</div>
+
+				<div className="row mt-4">
+					<label className="col-9">Requiere dictamen técnico:</label>
+					<input
+						type="checkbox"
+						// className="col-6 form-control ml-1"
+						name="requiereDictamen"
+						value={requiereDictamen}
+						onChange={handleInputChange}
+						checked={requiereDictamen === true}
+					/>
+				</div>
+
+				<div className="row mt-2">
+					<label className="col-9">Requiere complemento de volumen:</label>
+					<input
+						type="checkbox"
+						// className="col-6 form-control ml-1"
+						name="requiereComplementoVolumen"
+						value={requiereComplementoVolumen}
+						onChange={handleInputChange}
+						checked={requiereComplementoVolumen === true}
+					/>
+				</div>
+
+				<div className="row mt-2">
+					<label className="col-9">Requiere control de CPUS:</label>
+					<input
+						type="checkbox"
+						// className="col-6  ml-1"
+						name="requiereControlCPUS"
+						value={requiereControlCPUS}
+						onChange={handleInputChange}
+						checked={requiereControlCPUS === true}
 					/>
 				</div>
 			</div>
