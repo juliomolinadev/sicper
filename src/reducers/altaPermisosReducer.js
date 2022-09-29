@@ -126,7 +126,10 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				finBc: action.payload.finBc,
 				inicioSonora: action.payload.inicioSonora,
 				finSonora: action.payload.finSonora,
-				superficiePreviaCultivo: action.payload.superficiePrevia
+				superficiePreviaCultivo: action.payload.superficiePrevia,
+				requiereDictamen: action.payload.requiereDictamen ?? false,
+				requiereComplementoVolumen: action.payload.requiereComplementoVolumen ?? false,
+				requiereControlCPUS: action.payload.requiereControlCPUS ?? false
 			};
 
 		case types.setCuotaCultivo:

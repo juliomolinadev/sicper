@@ -13,6 +13,10 @@ export const PrintDictamenModal = ({
 	const { dictamen } = padronScreen;
 	const { usuario } = useSelector((state) => state.entidades);
 	const { privilegios } = useSelector((state) => state.auth);
+	const { cicloActual } = useSelector((state) => state.auth.variablesGlobales);
+	const { cultivos } = useSelector((state) => state.altaPermisos);
+
+	const cultivo = cultivos.find((cultivo) => cultivo.clave === Number(dictamen.cultivoDictamen));
 
 	const dispatch = useDispatch();
 
@@ -67,8 +71,8 @@ export const PrintDictamenModal = ({
 						SECRETARIA DE AGRICULTURA Y DESARROLLO RURAL <br />
 						REPRESENTACION ESTATAL EN BAJA CALIFORNIA <br />
 						COMITÉ ESTATAL DE SANIDAD VEGETAL DE BAJA CALIFORNIA <br />
-						DICTAMEN TECNICO DE SIEMBRA CULTIVO ALGODONERO <br />
-						CICLO PRIMAVERA VERANO 2022-22
+						DICTAMEN TECNICO DE SIEMBRA CULTIVO {cultivo.nombre} <br />
+						CICLO {cicloActual}
 					</h5>
 				</div>
 				<div className="col-2">

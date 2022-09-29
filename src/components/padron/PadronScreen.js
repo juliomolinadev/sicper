@@ -17,6 +17,7 @@ import { ConstancyModule } from "../ui/organisms/ConstancyModule";
 import { ProductoresModule } from "./ProductoresModule";
 import { DictamenModal } from "../modals/DictamenModal";
 import { PrintDictamenModal } from "../modals/PrintDictamenModal";
+import { startSetCatalogoDeCultivos } from "../../actions/cultivos";
 
 export const PadronScreen = () => {
 	const { usuarios, usuario } = useSelector((state) => state.entidades);
@@ -29,6 +30,7 @@ export const PadronScreen = () => {
 	useEffect(() => {
 		dispatch(unsetUsuarioSelected());
 		dispatch(unsetUsuarios());
+		dispatch(startSetCatalogoDeCultivos());
 	}, [dispatch]);
 
 	let data = [];
@@ -156,6 +158,7 @@ export const PadronScreen = () => {
 					setIsOpenDictamenPrint={setIsOpenDictamenPrint}
 				/>
 			)}
+
 			<br />
 		</div>
 	);

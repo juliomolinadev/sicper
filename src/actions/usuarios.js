@@ -2,7 +2,6 @@ import { types } from "../types/types";
 import { loadUsuarios } from "../helpers/loadUsuarios";
 import { loadSuperficiePrevia } from "../helpers/loadSuperficiePrevia";
 import { loadUserTransfer } from "../helpers/DB/loadUserTransfer";
-import { loadCiclo } from "../helpers/DB/loadCiclo";
 import { startSetEstadoExpedicionModulo } from "./auth";
 import { goToElement } from "../helpers/functions/assets";
 import { unsetTransferencia } from "./transferenciasScreen";
@@ -38,14 +37,15 @@ export const unsetUsuarios = () => ({
 export const startSetUsuarioSelected = (usuario, tipo) => {
 	unsetUsuarioSelected();
 
-	return async (dispatch) => {
-		const ciclo = await loadCiclo();
+	return async (dispatch, getState) => {
+		const state = getState();
+		const ciclo = state.auth.variablesGlobales.cicloActual;
+		const cicloAnterior = getCicloAnterior(ciclo);
 
 		const cultivoAnterior = await loadCultivoAnterior(
 			`${usuario.cuenta}.${usuario.subcta}`,
 			usuario.entidad,
-			// TODO: Poner ciclo de forma dinamica
-			"2021-2022"
+			cicloAnterior
 		);
 
 		dispatch(setCultivoAnteriorSelected(cultivoAnterior));
@@ -53,15 +53,10 @@ export const startSetUsuarioSelected = (usuario, tipo) => {
 		const laboresPendientes = await loadLaboresPendientes(
 			`${usuario.cuenta}.${usuario.subcta}`,
 			usuario.entidad,
-			// TODO: Poner ciclo de forma dinamica
-			"2021-2022"
+			cicloAnterior
 		);
 
-		const dictamen = await loadDictamen(
-			`${usuario.cuenta}.${usuario.subcta}`,
-			// TODO: Poner ciclo de forma dinamica
-			"2022-2023"
-		);
+		const dictamen = await loadDictamen(`${usuario.cuenta}.${usuario.subcta}`, ciclo);
 
 		// Verifica si los derechos corresponden a una transferencia
 		if (usuario.folio) {
@@ -159,3 +154,8 @@ export const setDictamenDataSaved = (dictamen) => ({
 	type: types.setDictamenDataSaved,
 	payload: dictamen
 });
+
+const getCicloAnterior = (ciclo) => {
+	const cicloSeparado = ciclo.split("-");
+	return `${Number(cicloSeparado[0]) - 1}-${Number(cicloSeparado[1]) - 1}`;
+};

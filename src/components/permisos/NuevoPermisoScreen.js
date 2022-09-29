@@ -170,8 +170,6 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const bloquearPorPeriodoDeExpedicion = () => {
-		if (altaPermisos.dictamen) return false;
-
 		const rango = getRangoExpedicion();
 
 		if (rango.inicio && rango.fin) {
@@ -184,6 +182,17 @@ export const NuevoPermisoScreen = () => {
 				else return false;
 			} else return true;
 		} else return true;
+	};
+
+	const bloquearPorDictamenTecnico = () => {
+		if (altaPermisos.requiereDictamen) {
+			if (
+				altaPermisos.dictamen.estado === "activo" &&
+				Number(altaPermisos.dictamen.cultivoDictamen) === altaPermisos.claveCultivo
+			)
+				return false;
+			else return true;
+		} else return false;
 	};
 
 	const isFormValid = () => {
@@ -227,6 +236,11 @@ export const NuevoPermisoScreen = () => {
 			return false;
 		} else if (bloquearPorPeriodoDeExpedicion()) {
 			dispatch(setError("Cultivo fuera de fecha. Se requiere dictamen técnico de siembra."));
+			return false;
+		} else if (bloquearPorDictamenTecnico()) {
+			dispatch(
+				setError("El cultivo requiere dictamen técnico de siembra. Favor de comunicarse con SADER.")
+			);
 			return false;
 		} else if (
 			autorizadosPorCultivo === undefined ||

@@ -25,6 +25,15 @@ export const DictamenModal = ({ isOpenModal, setDictamenFormState, setIsOpenDict
 	const dispatch = useDispatch();
 
 	const { msgError } = useSelector((state) => state.ui);
+	const { cultivos } = useSelector((state) => state.altaPermisos);
+
+	const cultivosIds = [];
+	const filteredCultivos = cultivos.filter((cultivo) => {
+		if (!cultivosIds.includes(cultivo.id)) {
+			cultivosIds.push(cultivo.id);
+			return true;
+		} else return false;
+	});
 
 	const closeModal = () => {
 		setDictamenFormState({ isOpenDictamenForm: false });
@@ -36,8 +45,10 @@ export const DictamenModal = ({ isOpenModal, setDictamenFormState, setIsOpenDict
 		habilitadora = "",
 		laboresCulturales = "",
 		dictamenTecnico = "",
-		observaciones = ""
+		observaciones = "",
+		cultivoDictamen = ""
 	} = formValues;
+
 	const [cader, setCader] = useState("");
 	const [fechaRiego, setFechaRiego] = useState(null);
 	const [fechaSiembraSeco, setFechaSiembraSeco] = useState(null);
@@ -75,7 +86,10 @@ export const DictamenModal = ({ isOpenModal, setDictamenFormState, setIsOpenDict
 	};
 
 	const isFormValid = () => {
-		if (nombreProductor.trim().length === 0) {
+		if (cultivos.find((cultivo) => cultivo.clave === Number(cultivoDictamen)) === undefined) {
+			dispatch(setError("Se requiere clave de cultivo válida"));
+			return false;
+		} else if (nombreProductor.trim().length === 0) {
 			dispatch(setError("Se requiere nombre del productor"));
 			return false;
 		} else if (habilitadora.trim().length === 0) {
@@ -122,6 +136,40 @@ export const DictamenModal = ({ isOpenModal, setDictamenFormState, setIsOpenDict
 
 			<form className="container pb-4" autoComplete="waa" onSubmit={handleRegister}>
 				{msgError && <div className="auth__alert-error ">{msgError}</div>}
+
+				<div className="row p-2">
+					<div className="col-sm-12">
+						<label htmlFor="cultivos" className="d-flex">
+							<div>* Cultivo:</div>
+							<input
+								className="form-control ml-4 w-75"
+								name="cultivoDictamen"
+								value={cultivoDictamen}
+								onChange={handleInputChange}
+								list="cultivos"
+							/>
+						</label>
+					</div>
+
+					<datalist id="cultivos">
+						{filteredCultivos.map((cultivo) => (
+							<option key={cultivo.id} value={cultivo.clave}>
+								{cultivo.nombre}
+							</option>
+						))}
+					</datalist>
+
+					{/* <div className="col-sm-6">
+						<input
+							type="text"
+							className="form-control"
+							name="nombreProductor"
+							value={nombreProductor}
+							autoComplete="off"
+							onChange={handleInputChange}
+						/>
+					</div> */}
+				</div>
 
 				<div className="row p-2">
 					<div className="col-sm-6">
