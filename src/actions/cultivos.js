@@ -5,6 +5,7 @@ import { loadCiclo } from "../helpers/DB/loadCiclo";
 import { goToElement } from "../helpers/functions/assets";
 import { saveCultivo } from "../helpers/saveCultivo";
 import { removeError } from "./ui";
+import { crearPadronDeCultivo } from "../helpers/DB/crearPadronDeCultivo";
 
 export const openCultivosModal = () => ({
 	type: types.altaPermisoOpenCultivosModal
@@ -124,6 +125,11 @@ export const unsetCultivoAnteriorSelected = () => ({
 export const startSaveCultivo = (cultivo) => {
 	return async (dispatch, getState) => {
 		const state = getState();
+		const ciclo = state.auth.variablesGlobales.cicloActual;
+
+		if (cultivo.requiereControlCPUS) {
+			await crearPadronDeCultivo(ciclo, cultivo.clave, cultivo.nombre);
+		}
 
 		const newCultivo = { ...cultivo };
 		delete newCultivo.id;

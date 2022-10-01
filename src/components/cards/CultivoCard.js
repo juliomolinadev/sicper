@@ -1,6 +1,8 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Swal from "sweetalert2";
+
 import { startSaveCultivo } from "../../actions/cultivos";
 import { setError } from "../../actions/ui";
 import { useFormToUpper } from "../../hooks/UseFormToUpper";
@@ -34,7 +36,22 @@ export const CultivoCard = ({ cultivo }) => {
 
 	const handleSaveCultivo = () => {
 		if (isFormValid()) {
-			dispatch(startSaveCultivo(values));
+			if (values.requiereControlCPUS) {
+				Swal.fire({
+					title: "Atención!!",
+					text: `Ha solicitado control de CPUS. Cuando un cultivo requiere control de CPUS se genera un padrón de productores para el cultivo. Los productores que soliciten la expedición de permiso de siembra para dicho cultivo no podrán expedir más superficie de la que tengan disponible en el padrón generado. El padrón se crea con base en la expedición del ciclo anterior. ¿Realmente desea generar el padrón?`,
+					icon: "warning",
+					showCancelButton: true,
+					confirmButtonColor: "#3085d6",
+					cancelButtonColor: "#d33",
+					confirmButtonText: "Si",
+					cancelButtonText: "No"
+				}).then(async ({ isConfirmed }) => {
+					if (isConfirmed) {
+						dispatch(startSaveCultivo(values));
+					}
+				});
+			} else dispatch(startSaveCultivo(values));
 		}
 	};
 
