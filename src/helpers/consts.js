@@ -163,6 +163,7 @@ export const privileges = {
 	generarDictamenes: false,
 	generarDictamenesDdr: false,
 	editarProductores: false,
+	editarPadronesCultivos: false,
 
 	//Permisos
 	expedirPermisos: false,

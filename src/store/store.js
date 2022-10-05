@@ -11,6 +11,7 @@ import { algodoneroScreenReducer } from "../reducers/algodoneroScreenReducer";
 import { entidadesReducer } from "../reducers/entidades/entidadesReducer";
 import { scenesReducer } from "../reducers/scenes/scenesReducer";
 import { transferenciasScreenReducer } from "../reducers/transferenciasScreenReducer";
+import { padronScreenReducer } from "../reducers/padronScreenReducer";
 
 const composeEnhancers =
 	(typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -21,6 +22,7 @@ const reducers = combineReducers({
 	scenes: scenesReducer,
 	entidades: entidadesReducer,
 	sicperScreen: sicperReducer,
+	padronScreen: padronScreenReducer,
 	permisosScreen: permisosScreenReducer,
 	algodoneroScreen: algodoneroScreenReducer,
 	transferenciasScreen: transferenciasScreenReducer,

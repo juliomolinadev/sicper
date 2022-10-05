@@ -75,6 +75,17 @@ export const cultivosColumns = [
 	{ name: "SUBCICLO", selector: "subciclo", sortable: true, center: true }
 ];
 
+export const concesionesColumns = [
+	{ name: "id", selector: "id", omit: true },
+	{ name: "CURP", selector: "curp", sortable: true, width: "200px" },
+	{ name: "NOMBRE", selector: "nombre", sortable: true, width: "350px" },
+	{ name: "CULTIVO", selector: "cultivo", sortable: true },
+	{ name: "MODULO", selector: "modulo", sortable: true, center: true, width: "60px" },
+	{ name: "CICLO", selector: "ciclo", sortable: true, width: "100px" },
+	{ name: "CONCESIÓN(HA)", selector: "supConcesion", sortable: true, center: true, width: "100px" },
+	{ name: "EXPEDIDA(HA)", selector: "supExpedida", sortable: true, center: true, width: "100px" }
+];
+
 export const systemUsersColumns = [
 	{ name: "id", selector: "id", omit: true },
 	{ name: "CLAVE ENTIDAD", selector: "claveEntidad", sortable: true, center: true },

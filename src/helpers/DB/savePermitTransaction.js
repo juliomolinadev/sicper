@@ -56,7 +56,10 @@ export const savePermitTransaction = async (allData) => {
 		estadoPermiso: allData.estadoPermiso,
 		reacomodo: allData.reacomodo ? allData.reacomodo : "",
 		direccion: allData.direccion,
-		tipoSemilla: allData.tipoSemilla ? allData.tipoSemilla : ""
+		tipoSemilla: allData.tipoSemilla ? allData.tipoSemilla : "",
+		requiereDictamen: allData.requiereDictamen ?? false,
+		requiereComplementoVolumen: allData.requiereComplementoVolumen ?? false,
+		requiereControlCPUS: allData.requiereControlCPUS ?? false
 	};
 
 	if (data.nombreCultivo === "ALGODONERO") {
@@ -93,10 +96,19 @@ export const savePermitTransaction = async (allData) => {
 		.collection("modulos")
 		.doc(`Modulo-${data.modulo}`);
 
+	const concesionRef = db
+		.collection("padronesCultivos")
+		.doc(data.ciclo)
+		.collection("padrones")
+		.doc(data.nombreCultivo)
+		.collection("padron")
+		.doc(`${data.idProductorSelected}-${data.nombreCultivo}-${data.modulo}`);
+
 	try {
 		const isSave = await db.runTransaction(async (transaction) => {
 			const permiso = await transaction.get(permisoRef);
 			const permisosPorCultivo = await transaction.get(permisosPorCultivoRef);
+			const concesion = await transaction.get(concesionRef);
 
 			if (permiso.exists) {
 				Swal.fire(
@@ -107,6 +119,12 @@ export const savePermitTransaction = async (allData) => {
 
 				throw new Error("El permiso ya existe!");
 			} else {
+				if (concesion.exists) {
+					transaction.update(concesionRef, {
+						supExpedida: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+					});
+				}
+
 				transaction.set(permisoRef, data);
 				transaction.update(contadorPermisosRef, {
 					numeroPermisosModulo: firebase.firestore.FieldValue.increment(1),

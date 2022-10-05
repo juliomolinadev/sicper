@@ -30,7 +30,9 @@ export const crearPadronDeCultivo = async (ciclo, claveCultivo, nombreCultivo) =
 
 		if (modulosIndex === -1) {
 			modulos.push({
+				cultivo: nombreCultivo,
 				modulo: permiso.data().modulo,
+				ciclo,
 				supConcesion: permiso.data().supAutorizada,
 				supExpedida: 0
 			});
@@ -46,9 +48,12 @@ export const crearPadronDeCultivo = async (ciclo, claveCultivo, nombreCultivo) =
 
 		if (padronIndex === -1) {
 			padron.push({
+				idProductor: permiso.data().idProductorSelected,
 				curp: permiso.data().curpProductor,
 				nombre: permiso.data().nombreProductor,
+				cultivo: nombreCultivo,
 				modulo: permiso.data().modulo,
+				ciclo,
 				supConcesion: permiso.data().supAutorizada,
 				supExpedida: 0
 			});
@@ -67,9 +72,11 @@ export const crearPadronDeCultivo = async (ciclo, claveCultivo, nombreCultivo) =
 			batch.set(
 				db
 					.collection("padronesCultivos")
+					.doc(ciclo)
+					.collection("padrones")
 					.doc(nombreCultivo)
 					.collection("modulos")
-					.doc(modulo.modulo),
+					.doc(`${modulo.cultivo}-${modulo.modulo}`),
 				modulo
 			);
 		});
@@ -85,14 +92,16 @@ export const crearPadronDeCultivo = async (ciclo, claveCultivo, nombreCultivo) =
 
 		batch = db.batch();
 
-		padron.forEach((productor) => {
+		padron.forEach((concesion) => {
 			batch.set(
 				db
 					.collection("padronesCultivos")
+					.doc(ciclo)
+					.collection("padrones")
 					.doc(nombreCultivo)
 					.collection("padron")
-					.doc(`${productor.curp}-${productor.modulo}`),
-				productor
+					.doc(`${concesion.idProductor}-${concesion.cultivo}-${concesion.modulo}`), //pensar sobre cultivo
+				concesion
 			);
 
 			if (i === batchSize) {

@@ -195,6 +195,19 @@ export const NuevoPermisoScreen = () => {
 		} else return false;
 	};
 
+	const bloquearPorControlCPUS = () => {
+		if (altaPermisos.requiereControlCPUS) {
+			const concesion = altaPermisos.concesionesProductor.find(
+				(concesion) => concesion.cultivo === altaPermisos.nombreCultivo
+			);
+
+			if (concesion === undefined) return true;
+
+			if (Number(supAutorizada) <= concesion.supConcesion - concesion.supExpedida) return false;
+			else return true;
+		} else return false;
+	};
+
 	const isFormValid = () => {
 		if (!expedicionActiva || !expedicionActivaModulo) {
 			dispatch(setError("Expedición cerrada! Por el momento no es posible expedir permisos."));
@@ -241,6 +254,26 @@ export const NuevoPermisoScreen = () => {
 			dispatch(
 				setError("El cultivo requiere dictamen técnico de siembra. Favor de comunicarse con SADER.")
 			);
+			return false;
+		} else if (
+			altaPermisos.nombreCultivo === "ALFALFA" &&
+			altaPermisos.cultivoAnterior !== "ALFALFA"
+		) {
+			dispatch(
+				setError(
+					`El predio seleccionado no tenía alfalfa el ciclo pasado. Para establecer alfalfa en este predio, seleccione "ALFALFA NUEVA" en el campo cultivo.`
+				)
+			);
+			return false;
+		} else if (bloquearPorControlCPUS()) {
+			dispatch(
+				setError(
+					`El productor no se encuentra registrado en el padrón de productores de "${altaPermisos.nombreCultivo}" o la superficie es mayor a la que tiene disponible en el padrón.`
+				)
+			);
+			return false;
+		} else if (altaPermisos.nombreCultivo === "ALFALFA NUEVA") {
+			dispatch(setError("Requiere complemento de volumen."));
 			return false;
 		} else if (
 			autorizadosPorCultivo === undefined ||

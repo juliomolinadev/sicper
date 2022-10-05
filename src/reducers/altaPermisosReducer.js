@@ -273,7 +273,8 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				nombreProductor: `${action.payload.apPaterno} ${action.payload.apMaterno} ${action.payload.nombre}`,
 				rfcProductor: action.payload.rfc,
 				curpProductor: action.payload.curp,
-				productorIncumplido: action.payload.incumplido ? action.payload.incumplido : false
+				productorIncumplido: action.payload.incumplido ? action.payload.incumplido : false,
+				concesionesProductor: action.payload.concesiones ? action.payload.concesiones : false
 			};
 
 		case types.unsetProductor:
