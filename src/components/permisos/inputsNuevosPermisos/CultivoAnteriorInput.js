@@ -1,107 +1,49 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Swal from "sweetalert2";
 
-import {
-	closeCultivoAnteriorModal,
-	openCultivoAnteriorModal,
-	startLoadCultivosAnteriores,
-	unsetCultivoAnteriorSelected
-} from "../../../actions/cultivos";
-import { useFormToUpper } from "../../../hooks/UseFormToUpper";
+import { setCultivoAnteriorSelected } from "../../../actions/cultivos";
 
 export const CultivoAnteriorInput = () => {
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		dispatch(unsetCultivoAnteriorSelected());
-		dispatch(closeCultivoAnteriorModal());
-	}, [dispatch]);
+	const { cultivosAnteriores } = useSelector((state) => state.altaPermisos);
 
-	const handleOpenCultivoAnteriorModal = () => {
-		handleLoadCultivos();
-		if (nombreCultivoAnterior.length > 0) {
-			dispatch(openCultivoAnteriorModal());
-		} else {
-			Swal.fire("Nada para buscar", "Ingrese nombre del cultivo", "warning");
-		}
-	};
+	const [nombreCultivoAnterior, setNombreCultivoAnterior] = useState("");
 
-	const handleLoadCultivos = () => {
-		dispatch(startLoadCultivosAnteriores(nombreCultivoAnterior.toUpperCase()));
-	};
-
-	const { idCultivoAnteriorSelected, cultivoAnterior } = useSelector((state) => state.altaPermisos);
-
-	let cultivoLabel = "";
-
-	if (idCultivoAnteriorSelected) {
-		cultivoLabel = cultivoAnterior;
-	}
-
-	const clearCultivoInput = () => {
-		dispatch(unsetCultivoAnteriorSelected());
-		formValues.cultivoAnterior = "";
-	};
-
-	const [formValues, handleInputChange] = useFormToUpper({
-		nombreCultivoAnterior: ""
-	});
-
-	const { nombreCultivoAnterior } = formValues;
-
-	const handleKeyUp = (event) => {
-		if (event.key === "Enter") {
-			handleOpenCultivoAnteriorModal();
-		}
+	const handleSetCultivoAnterior = (e) => {
+		setNombreCultivoAnterior(e.target.value);
+		dispatch(
+			setCultivoAnteriorSelected(
+				cultivosAnteriores.find((cultivo) => cultivo.nombre === e.target.value)
+			)
+		);
 	};
 
 	return (
 		<div className="col-sm-6">
-			<div className="form-group d-flex align-items-baseline row p-3">
-				<label className="col-sm-3">
-					<span className="text-warning">* </span>
-					Cultivo Anterior:{" "}
-				</label>
-				<label className="">{cultivoLabel} </label>
-				{idCultivoAnteriorSelected ? <div className="fas fa-check text-success p-3"></div> : <></>}
-				{idCultivoAnteriorSelected ? (
-					<></>
-				) : (
-					<div className="flex-grow-1">
-						<input
-							tabIndex="4"
-							type="text"
-							className="form-control"
-							placeholder="Clave o nombre del cultivo"
-							name="nombreCultivoAnterior"
-							autoComplete="off"
-							value={nombreCultivoAnterior}
-							onChange={handleInputChange}
-							onKeyUp={handleKeyUp}
-						/>
-					</div>
-				)}
-				{idCultivoAnteriorSelected ? (
-					<button
-						tabIndex="-1"
-						className=" btn btn-outline-primary d-sm-block ml-auto"
-						type="button"
-						onClick={clearCultivoInput}
-					>
-						<i className="fas fa-trash"></i>
-					</button>
-				) : (
-					<button
-						tabIndex="-1"
-						className=" btn btn-outline-primary d-sm-block ml-auto"
-						type="button"
-						onClick={handleOpenCultivoAnteriorModal}
-					>
-						<i className="fas fa-search"></i>
-					</button>
-				)}
-			</div>
+			<label htmlFor="cultivos" className="d-flex">
+				<div>
+					<span className="text-warning">* </span> Cultivo Anterior:
+				</div>
+				<select
+					className="form-control ml-4 w-75"
+					name="nombreCultivoAnterior"
+					value={nombreCultivoAnterior}
+					onChange={handleSetCultivoAnterior}
+					// onKeyUp={handleKeyUp}
+					list="cultivos"
+				>
+					<option hidden defaultValue="">
+						Cultivo Anterior
+					</option>
+
+					{cultivosAnteriores.map((cultivo) => (
+						<option key={cultivo.id} value={cultivo.nombre}>
+							{cultivo.nombre}
+						</option>
+					))}
+				</select>
+			</label>
 		</div>
 	);
 };

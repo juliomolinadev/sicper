@@ -30,6 +30,7 @@ import { CultivoAnteriorModal } from "../modals/CultivoAnteriorModal";
 import { roundToN } from "../../helpers/functions/roundToN";
 import { unsetUsuarioSelected } from "../../actions/usuarios";
 import { VariedadInput } from "./inputsNuevosPermisos/VariedadInput";
+import { CultivoAnteriorInput } from "./inputsNuevosPermisos/CultivoAnteriorInput";
 
 export const NuevoPermisoScreen = () => {
 	const {
@@ -47,7 +48,6 @@ export const NuevoPermisoScreen = () => {
 	const { cicloActual: ciclo, expedicionActiva } = variablesGlobales;
 	const { msgError } = useSelector((state) => state.ui);
 	const { autorizadosPorCultivo } = useSelector((state) => state.autorizadosScreen);
-	const { cultivoAnterior } = useSelector((state) => state.altaPermisos);
 
 	const [formValues, handleInputChange, , , setValues] = useFormToUpper({
 		variedad: "",
@@ -538,14 +538,14 @@ export const NuevoPermisoScreen = () => {
 				</div>
 
 				<div className="row">
-					{/* <CultivoAnteriorInput /> */}
+					<CultivoAnteriorInput />
 
-					<div className="col-sm-6">
+					{/* <div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
 							<label className="col-sm-3">Cultivo Anterior: </label>
 							<div>{cultivoAnterior}</div>
 						</div>
-					</div>
+					</div> */}
 
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
