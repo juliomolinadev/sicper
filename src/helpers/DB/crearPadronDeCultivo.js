@@ -62,86 +62,95 @@ export const crearPadronDeCultivo = async (ciclo, claveCultivo, nombreCultivo) =
 		}
 	});
 
-	// Guardar padron
-	try {
-		let batch = db.batch();
-		let i = 1;
-		const batchSize = 500;
+	if (padron.length > 0) {
+		try {
+			let batch = db.batch();
+			let i = 1;
+			const batchSize = 500;
 
-		modulos.forEach((modulo) => {
-			batch.set(
-				db
-					.collection("padronesCultivos")
-					.doc(ciclo)
-					.collection("padrones")
-					.doc(nombreCultivo)
-					.collection("modulos")
-					.doc(`${modulo.cultivo}-${modulo.modulo}`),
-				modulo
-			);
-		});
-
-		batch
-			.commit()
-			.then(() => {
-				console.log("Se termino de subir batch de modulos");
-			})
-			.catch((err) => {
-				console.error(err);
-			});
-
-		batch = db.batch();
-
-		padron.forEach((concesion) => {
-			batch.set(
-				db
-					.collection("padronesCultivos")
-					.doc(ciclo)
-					.collection("padrones")
-					.doc(nombreCultivo)
-					.collection("padron")
-					.doc(`${concesion.idProductor}-${concesion.cultivo}-${concesion.modulo}`), //pensar sobre cultivo
-				concesion
-			);
-
-			if (i === batchSize) {
-				batch
-					.commit()
-					.then(() => {
-						console.log("Se termino de subir batch");
-					})
-					.catch((err) => {
-						console.error(err);
-					});
-
-				batch = db.batch();
-				i = 0;
-			}
-
-			i++;
-		});
-
-		batch
-			.commit()
-			.then(() => {
-				console.log("Se termino de crear padron");
-				Swal.close();
-				Swal.fire(
-					"Padrón creado",
-					`Se generó padrón de productores de "${nombreCultivo}".`,
-					"success"
+			modulos.forEach((modulo) => {
+				batch.set(
+					db
+						.collection("padronesCultivos")
+						.doc(ciclo)
+						.collection("padrones")
+						.doc(nombreCultivo)
+						.collection("modulos")
+						.doc(`${modulo.cultivo}-${modulo.modulo}`),
+					modulo
 				);
-			})
-			.catch((err) => {
-				console.error(err);
 			});
 
-		return true;
-	} catch (error) {
-		Swal.close();
-		Swal.fire("Error de conexión", "Error al intentar guardar los cambios.", "error");
-		console.error(error);
+			batch
+				.commit()
+				.then(() => {
+					console.log("Se termino de subir batch de modulos");
+				})
+				.catch((err) => {
+					console.error(err);
+				});
 
+			batch = db.batch();
+
+			padron.forEach((concesion) => {
+				batch.set(
+					db
+						.collection("padronesCultivos")
+						.doc(ciclo)
+						.collection("padrones")
+						.doc(nombreCultivo)
+						.collection("padron")
+						.doc(`${concesion.idProductor}-${concesion.cultivo}-${concesion.modulo}`), //pensar sobre cultivo
+					concesion
+				);
+
+				if (i === batchSize) {
+					batch
+						.commit()
+						.then(() => {
+							console.log("Se termino de subir batch");
+						})
+						.catch((err) => {
+							console.error(err);
+						});
+
+					batch = db.batch();
+					i = 0;
+				}
+
+				i++;
+			});
+
+			batch
+				.commit()
+				.then(() => {
+					console.log("Se termino de crear padron");
+					Swal.close();
+					Swal.fire(
+						"Padrón creado",
+						`Se generó padrón de productores de "${nombreCultivo}".`,
+						"success"
+					);
+				})
+				.catch((err) => {
+					console.error(err);
+				});
+
+			return true;
+		} catch (error) {
+			Swal.close();
+			Swal.fire("Error de conexión", "Error al intentar guardar los cambios.", "error");
+			console.error(error);
+
+			return false;
+		}
+	} else {
+		Swal.close();
+		Swal.fire(
+			"No fue posible generar el padrón",
+			"No se encontraron permisos de este cultivo expedidos el ciclo pasado.",
+			"error"
+		);
 		return false;
 	}
 };

@@ -51,7 +51,7 @@ export const TestArea = () => {
 
 			{/* <div className="mt-5">
 				<button onClick={editar} className="btn btn-primary">
-					Editar
+					Editar Permisos
 				</button>
 			</div> */}
 		</>

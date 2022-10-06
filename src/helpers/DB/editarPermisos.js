@@ -1,19 +1,29 @@
 import { db } from "../../firebase/firebase-config";
+import moment from "moment";
 
 export const editarPermisos = async () => {
 	console.log("Entro en edicion");
 	const permisosSnap = await db
 		.collectionGroup("permisos")
-		.where("ciclo", "==", "2020-2021")
-		.where("pagado", "==", true)
+		.where("ciclo", "==", "2022-2023")
+		// .where("pagado", "==", true)
 		.get();
 
 	const permisos = [];
 	permisosSnap.forEach((permiso) => {
+		if (permiso.data().nombreCultivo === "TRIGO") {
+		}
+
+		const fechaTrigo = moment("12/31/2022");
+		const fechaTodo = moment("03/31/2023");
+
 		permisos.push({
 			id: permiso.id,
 			modulo: permiso.data().modulo,
-			laboresPendientes: permiso.data().laboresPendientes
+			fechaLimite:
+				permiso.data().nombreCultivo === "TRIGO"
+					? moment(fechaTrigo).toDate()
+					: moment(fechaTodo).toDate()
 		});
 	});
 
@@ -24,17 +34,17 @@ export const editarPermisos = async () => {
 	const batchSize = 500;
 
 	permisos.forEach((permiso) => {
-		// console.log({ i, ...permiso });
+		// console.log(permiso);
 
 		const ref = db
 			.collection("permisos")
-			.doc("2020-2021")
+			.doc("2022-2023")
 			.collection("modulos")
 			.doc(`Modulo-${permiso.modulo}`)
 			.collection("permisos")
 			.doc(permiso.id);
 
-		batch.update(ref, { laboresPendientes: false });
+		batch.update(ref, { fechaLimite: permiso.fechaLimite });
 
 		if (i === batchSize) {
 			batch

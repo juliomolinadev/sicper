@@ -6,9 +6,13 @@ import Swal from "sweetalert2";
 import { startSaveCultivo } from "../../actions/cultivos";
 import { setError } from "../../actions/ui";
 import { useFormToUpper } from "../../hooks/UseFormToUpper";
+import { crearPadronDeCultivo } from "../../helpers/DB/crearPadronDeCultivo";
+import { setCultivosConPadron } from "../../actions/padronScreenActions";
 
 export const CultivoCard = ({ cultivo }) => {
 	const { msgError } = useSelector((state) => state.ui);
+	const { cicloActual } = useSelector((state) => state.auth.variablesGlobales);
+	const { cultivos: cultivosConPadron } = useSelector((state) => state.padronScreen.padrones);
 
 	const [values, handleInputChange, reset] = useFormToUpper(cultivo);
 	const {
@@ -34,24 +38,30 @@ export const CultivoCard = ({ cultivo }) => {
 		}
 	}, [cultivo, clave, reset]);
 
+	const handleCrearPadron = () => {
+		Swal.fire({
+			title: "Atención!!",
+			text: `Ha solicitado control de CPUS. Cuando un cultivo requiere control de CPUS se genera un padrón de productores para el cultivo. Los productores que soliciten la expedición de permiso de siembra para dicho cultivo no podrán expedir más superficie de la que tengan disponible en el padrón generado. El padrón se crea con base en la expedición del ciclo anterior. ¿Realmente desea generar el padrón?`,
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Si",
+			cancelButtonText: "No"
+		}).then(async ({ isConfirmed }) => {
+			if (isConfirmed) {
+				const isSave = await crearPadronDeCultivo(cicloActual, cultivo.clave, cultivo.nombre);
+				if (isSave) {
+					cultivosConPadron.push(cultivo.nombre);
+					dispatch(setCultivosConPadron(cultivosConPadron));
+				}
+			}
+		});
+	};
+
 	const handleSaveCultivo = () => {
 		if (isFormValid()) {
-			if (values.requiereControlCPUS) {
-				Swal.fire({
-					title: "Atención!!",
-					text: `Ha solicitado control de CPUS. Cuando un cultivo requiere control de CPUS se genera un padrón de productores para el cultivo. Los productores que soliciten la expedición de permiso de siembra para dicho cultivo no podrán expedir más superficie de la que tengan disponible en el padrón generado. El padrón se crea con base en la expedición del ciclo anterior. ¿Realmente desea generar el padrón?`,
-					icon: "warning",
-					showCancelButton: true,
-					confirmButtonColor: "#3085d6",
-					cancelButtonColor: "#d33",
-					confirmButtonText: "Si",
-					cancelButtonText: "No"
-				}).then(async ({ isConfirmed }) => {
-					if (isConfirmed) {
-						dispatch(startSaveCultivo(values));
-					}
-				});
-			} else dispatch(startSaveCultivo(values));
+			dispatch(startSaveCultivo(values));
 		}
 	};
 
@@ -251,6 +261,17 @@ export const CultivoCard = ({ cultivo }) => {
 			</div>
 
 			<div className="d-flex flex-column border-bottom border-info p-4">
+				{!cultivosConPadron.find((cultivoConPadron) => cultivoConPadron === cultivo.nombre) && (
+					<button
+						type="button"
+						className="btn btn-outline-primary mt-4"
+						onClick={handleCrearPadron}
+					>
+						<i className="fas fa-file"></i>
+						<span> Crear Padrón</span>
+					</button>
+				)}
+
 				<button type="button" className="btn btn-outline-primary mt-4" onClick={handleSaveCultivo}>
 					<i className="fas fa-save"></i>
 					<span> Guardar</span>

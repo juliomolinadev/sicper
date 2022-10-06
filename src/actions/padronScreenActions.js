@@ -41,3 +41,8 @@ export const startSaveConcesion = (concesion) => {
 		}
 	};
 };
+
+export const setCultivosConPadron = (cultivos) => ({
+	type: types.setCultivosConPadron,
+	payload: cultivos
+});

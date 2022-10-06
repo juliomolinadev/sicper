@@ -8,6 +8,7 @@ import { useForm } from "../hooks/useForm";
 import { RadioButtonGroup } from "../components/ui/molecules/RadioButtonGroup";
 import { CatalogoDeCultivos } from "../components/modulos/CatalogoDeCultivos";
 import { startSetCatalogoDeCultivos } from "../actions/cultivos";
+import { startSetPadronesCultivos } from "../actions/padronScreenActions";
 
 export const ConfiguracionScreen = () => {
 	const { privilegios } = useSelector((state) => state.auth);
@@ -17,6 +18,7 @@ export const ConfiguracionScreen = () => {
 
 	useEffect(() => {
 		dispatch(startSetCatalogoDeCultivos());
+		dispatch(startSetPadronesCultivos());
 	}, [dispatch]);
 
 	if (!entities) {
