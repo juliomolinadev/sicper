@@ -409,8 +409,8 @@ export const NuevoPermisoScreen = () => {
 	};
 
 	const defineFechaLimite = (cultivo) => {
-		if (cultivo === "TRIGO") return moment("12/31/2021");
-		else return moment("03/31/2022");
+		if (cultivo === "TRIGO") return moment("12/31/2022");
+		else return moment("03/31/2023");
 	};
 
 	const setTransferComent = useCallback(
