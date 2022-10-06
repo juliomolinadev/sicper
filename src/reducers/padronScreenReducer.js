@@ -16,6 +16,15 @@ export const padronScreenReducer = (state = initialState, action) => {
 				concesionSelected: action.payload
 			};
 
+		case types.setCultivosConPadron:
+			return {
+				...state,
+				padrones: {
+					...state.padrones,
+					cultivos: action.payload
+				}
+			};
+
 		default:
 			return state;
 	}

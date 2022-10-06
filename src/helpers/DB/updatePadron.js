@@ -137,12 +137,10 @@ const getLocaltie = (localidades, id) => {
 };
 
 const definePredio = (grupo, predio) => {
-	if (predio >= 0) {
-		if (grupo > 0) {
-			return `${grupo}${predio}`;
-		}
-		return predio;
-	} else return "";
+	if (grupo === 0) return `${predio}`;
+
+	if (grupo > 0 && predio < 10) return `${grupo}0${predio}`;
+	else return `${grupo}${predio}`;
 };
 
 const defineModulo = (modulo) => {

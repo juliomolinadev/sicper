@@ -16,6 +16,7 @@ export const types = {
 	setEntidadesConAcceso: "[UI] set Entidades ConAcceso",
 
 	setEntities: "[Configuracion] Set Entities",
+	setCultivosConPadron: "[Configuracion] Set Cultivos Con Padron",
 
 	altaPermisoOpenPrintPermisoModal: "[Alta Permisos] Open permiso modal",
 	altaPermisoClosePrintPermisoModal: "[Alta Permisos] Close permiso modal",
