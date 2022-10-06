@@ -197,6 +197,8 @@ export const NuevoPermisoScreen = () => {
 
 	const bloquearPorControlCPUS = () => {
 		if (altaPermisos.requiereControlCPUS) {
+			if (!altaPermisos.concesionesProductor) return true; //Si el productor no aparece en el padron
+
 			const concesion = altaPermisos.concesionesProductor.find(
 				(concesion) => concesion.cultivo === altaPermisos.nombreCultivo
 			);

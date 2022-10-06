@@ -5,6 +5,7 @@ export const ProductorSelected = () => {
 	const { productores, idProductorSelected } = useSelector((state) => state.altaPermisos);
 
 	const productor = productores.find((productor) => productor.id === idProductorSelected);
+	console.log(productor);
 
 	return (
 		<div className="border rounded mb-4 p-2">
@@ -22,10 +23,11 @@ export const ProductorSelected = () => {
 						className="row"
 						key={`${concesion.idProductor}-${concesion.modulo}-${concesion.cultivo}`}
 					>
-						<div className="col-sm-3">Cultivo: {concesion.cultivo}</div>
-						<div className="col-sm-3">Padrón: {concesion.supConcesion} (Ha)</div>
-						<div className="col-sm-3">Expedida: {concesion.supExpedida} (Ha)</div>
-						<div className="col-sm-3">
+						<div className="col-sm-2">Modulo: {concesion.modulo}</div>
+						<div className="col-sm-4">Cultivo: {concesion.cultivo}</div>
+						<div className="col-sm-2">Padrón: {concesion.supConcesion} (Ha)</div>
+						<div className="col-sm-2">Expedida: {concesion.supExpedida} (Ha)</div>
+						<div className="col-sm-2">
 							Disponible: {concesion.supConcesion - concesion.supExpedida} (Ha)
 						</div>
 					</div>
