@@ -15,9 +15,14 @@ export const loadPermisos = async (
 	estado = "todos",
 	tipo = "todos",
 	sistema = "todos",
-	fechaInicial = new Date(2022, 8, 1), //TODO: poner fechas segun ciclo
-	fechaFinal = new Date(2023, 8, 30)
+	fechaInicial, //TODO: poner fechas segun ciclo
+	fechaFinal
 ) => {
+	const cicloSplit = ciclo.split("-");
+
+	const fechaInicialBusqueda = fechaInicial ?? new Date(cicloSplit[0], 8, 1);
+	const fechaFinalBusqueda = fechaFinal ?? new Date(cicloSplit[1], 8, 30);
+
 	const permisos = [];
 	const permisosCampo = [];
 
@@ -63,7 +68,7 @@ export const loadPermisos = async (
 		permisosResueltos[i].forEach((snapHijo) => {
 			const fecha = snapHijo.data().fechaEmicion.toDate();
 
-			if (fecha >= fechaInicial && fecha <= addDays(fechaFinal, 1)) {
+			if (fecha >= fechaInicialBusqueda && fecha <= addDays(fechaFinalBusqueda, 1)) {
 				permisos.push({
 					id: snapHijo.id,
 					...snapHijo.data()
