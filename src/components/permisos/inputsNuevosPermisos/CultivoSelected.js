@@ -3,9 +3,19 @@ import { useSelector } from "react-redux";
 import { roundToN } from "../../../helpers/functions/roundToN";
 
 export const CultivoSelected = () => {
-	const { nombreCultivo, claveCultivo, subciclo, superficiePreviaCultivo, sistema } = useSelector(
-		(state) => state.altaPermisos
-	);
+	const {
+		nombreCultivo,
+		claveCultivo,
+		subciclo,
+		superficiePreviaCultivo,
+		sistema,
+		cultivos,
+		supDerecho,
+		supPrevia
+	} = useSelector((state) => state.altaPermisos);
+
+	const cultivoSelected = cultivos.find((cultivo) => cultivo.clave === claveCultivo);
+	console.log(cultivoSelected);
 
 	const { autorizadosPorCultivo } = useSelector((state) => state.autorizadosScreen);
 
@@ -18,6 +28,32 @@ export const CultivoSelected = () => {
 					<div className="mr-4">Subciclo: {subciclo}</div>
 				</div>
 			</div>
+
+			{cultivoSelected.requiereComplementoVolumen && (
+				<div className="row mt-4">
+					<div className="col-sm-12">
+						<div className="text-warning"> "REQUIERE COMPLEMENTO DE VOLUMEN"</div>
+						<div className="">
+							Complemento de volumen requerido por hectárea de cultivo (Ha):{" "}
+							{cultivoSelected.complementoPorHa}
+						</div>
+						{supDerecho && (
+							<>
+								<div className="">
+									Superficie máxima de cultivo con la dotación disponible de la cuenta (Ha) :{" "}
+									{roundToN((supDerecho - supPrevia) / (cultivoSelected.complementoPorHa + 1), 1)}
+								</div>
+
+								<div className="">
+									Complemento de volumen necesario para establecer la superficie disponible de la
+									cuenta (Ha):{" "}
+									{roundToN((supDerecho - supPrevia) * cultivoSelected.complementoPorHa, 1)}
+								</div>
+							</>
+						)}
+					</div>
+				</div>
+			)}
 
 			<div className="row mt-4">
 				<div className="col-sm-12">

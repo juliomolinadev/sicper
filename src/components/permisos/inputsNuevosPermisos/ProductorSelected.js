@@ -5,7 +5,6 @@ export const ProductorSelected = () => {
 	const { productores, idProductorSelected } = useSelector((state) => state.altaPermisos);
 
 	const productor = productores.find((productor) => productor.id === idProductorSelected);
-	console.log(productor);
 
 	return (
 		<div className="border rounded mb-4 p-2">
