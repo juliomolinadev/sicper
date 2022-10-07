@@ -13,6 +13,9 @@ export const CultivoCard = ({ cultivo }) => {
 	const { msgError } = useSelector((state) => state.ui);
 	const { cicloActual } = useSelector((state) => state.auth.variablesGlobales);
 	const { cultivos: cultivosConPadron } = useSelector((state) => state.padronScreen.padrones);
+	const { cultivos } = useSelector((state) => state.altaPermisos);
+
+	const cultivosComplemento = cultivos.filter((cultivo) => cultivo.nombre.includes("COMP."));
 
 	const [values, handleInputChange, reset] = useFormToUpper(cultivo);
 	const {
@@ -27,6 +30,8 @@ export const CultivoCard = ({ cultivo }) => {
 		finSonora = "",
 		requiereDictamen = false,
 		requiereComplementoVolumen = false,
+		complementoPorHa = 0,
+		cultivoComplementario = 0,
 		requiereControlCPUS = false
 	} = values;
 
@@ -91,6 +96,11 @@ export const CultivoCard = ({ cultivo }) => {
 			return false;
 		}
 
+		if (complementoPorHa < 0) {
+			dispatch(setError("El complemento de volumen por hectárea no puede ser negativo."));
+			return false;
+		}
+
 		if (subciclo.length === 0) {
 			dispatch(setError("Seleccione el subciclo."));
 			return false;
@@ -124,6 +134,18 @@ export const CultivoCard = ({ cultivo }) => {
 			return false;
 		}
 
+		if (requiereComplementoVolumen && complementoPorHa === 0) {
+			dispatch(
+				setError("Indique las hectáreas de complemento de volumen por hectárea de cultivo.")
+			);
+			return false;
+		}
+
+		if (requiereComplementoVolumen && cultivoComplementario === 0) {
+			dispatch(setError("Indique el cultivo complementario."));
+			return false;
+		}
+
 		return true;
 	};
 
@@ -136,8 +158,6 @@ export const CultivoCard = ({ cultivo }) => {
 			</div>
 
 			<div className="d-flex flex-column border-bottom border-info p-2 pt-4 pb-4">
-				{msgError && <div className="auth__alert-error">{msgError}</div>}
-
 				<div className=" row mt-2">
 					<label className="col-5">Costo guía:</label>
 					<input
@@ -248,6 +268,45 @@ export const CultivoCard = ({ cultivo }) => {
 					/>
 				</div>
 
+				{requiereComplementoVolumen && (
+					<>
+						<div className=" row mt-2">
+							<label className="col-7">Hectáreas de complemento por hectárea de cultivo:</label>
+							<input
+								type="number"
+								className="col-4 form-control ml-1"
+								placeholder="Complemento Por Ha"
+								name="complementoPorHa"
+								autoComplete="off"
+								value={complementoPorHa}
+								onChange={handleInputChange}
+							/>
+						</div>
+
+						<div className=" row mt-2">
+							<label className="col-5">Cultivo Complementario:</label>
+							<select
+								className="col-6 form-control ml-1"
+								placeholder="Clave de Cultivo"
+								name="cultivoComplementario"
+								autoComplete="off"
+								value={cultivoComplementario}
+								onChange={handleInputChange}
+							>
+								<option hidden defaultValue="">
+									Cultivo Complementario
+								</option>
+
+								{cultivosComplemento.map((cultivo) => (
+									<option key={cultivo.id} value={cultivo.clave}>
+										{cultivo.nombre}
+									</option>
+								))}
+							</select>
+						</div>
+					</>
+				)}
+
 				<div className="row mt-2">
 					<label className="col-9">Requiere control de CPUS:</label>
 					<input
@@ -258,6 +317,8 @@ export const CultivoCard = ({ cultivo }) => {
 						checked={requiereControlCPUS === true}
 					/>
 				</div>
+
+				{msgError && <div className="auth__alert-error mt-3">{msgError}</div>}
 			</div>
 
 			<div className="d-flex flex-column border-bottom border-info p-4">

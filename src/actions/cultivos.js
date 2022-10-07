@@ -125,7 +125,7 @@ export const startSaveCultivo = (cultivo) => {
 	return async (dispatch, getState) => {
 		const state = getState();
 
-		const newCultivo = { ...cultivo };
+		const newCultivo = { ...cultivo, cultivoComplementario: Number(cultivo.cultivoComplementario) };
 		delete newCultivo.id;
 
 		const isSave = saveCultivo(cultivo.id, newCultivo);
