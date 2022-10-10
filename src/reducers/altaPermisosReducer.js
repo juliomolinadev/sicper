@@ -170,6 +170,19 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				tipoSemilla: action.payload
 			};
 
+		case types.setComplemento:
+			return {
+				...state,
+				supComplemento: action.payload.supComplemento,
+				restoSupComplemento: action.payload.restoSupComplemento
+			};
+
+		case types.setOpcionDeExpedicion:
+			return {
+				...state,
+				opcionDeExpedicion: action.payload
+			};
+
 		//Usuarios **************************************
 
 		case types.altaPermisoOpenUsuariosModal:

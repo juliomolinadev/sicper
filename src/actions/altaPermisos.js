@@ -58,3 +58,13 @@ export const setTipoNormal = () => ({
 export const setTipoExtra = () => ({
 	type: types.setTipoExtra
 });
+
+export const setComplemento = (complemento) => ({
+	type: types.setComplemento,
+	payload: complemento
+});
+
+export const setOpcionDeExpedicion = (opcionDeExpedicion) => ({
+	type: types.setOpcionDeExpedicion,
+	payload: opcionDeExpedicion
+});

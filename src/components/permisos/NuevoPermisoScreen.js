@@ -31,6 +31,7 @@ import { roundToN } from "../../helpers/functions/roundToN";
 import { unsetUsuarioSelected } from "../../actions/usuarios";
 import { VariedadInput } from "./inputsNuevosPermisos/VariedadInput";
 import { CultivoAnteriorInput } from "./inputsNuevosPermisos/CultivoAnteriorInput";
+import { SuperficieInput } from "./inputsNuevosPermisos/SuperficieInput";
 
 export const NuevoPermisoScreen = () => {
 	const {
@@ -78,8 +79,28 @@ export const NuevoPermisoScreen = () => {
 	}, [dispatch]);
 
 	useEffect(() => {
-		dispatch(startLoadAutorizadoPorCultivo(ciclo, auth.modulo, altaPermisos.claveCultivo));
-	}, [ciclo, dispatch, auth.modulo, altaPermisos.claveCultivo]);
+		const claves = [];
+		claves.push(altaPermisos.claveCultivo);
+
+		if (
+			altaPermisos.requiereComplementoVolumen &&
+			altaPermisos.opcionDeExpedicion === "complementoPropio"
+		) {
+			const cultivo = altaPermisos.cultivos.find(
+				(cultivo) => cultivo.clave === altaPermisos.claveCultivo
+			);
+			claves.push(cultivo.cultivoComplementario);
+		}
+		dispatch(startLoadAutorizadoPorCultivo(ciclo, auth.modulo, claves));
+	}, [
+		ciclo,
+		dispatch,
+		auth.modulo,
+		altaPermisos.claveCultivo,
+		altaPermisos.cultivos,
+		altaPermisos.opcionDeExpedicion,
+		altaPermisos.requiereComplementoVolumen
+	]);
 
 	useEffect(() => {
 		const cultivoSelected = altaPermisos.cultivos.find(
@@ -240,6 +261,17 @@ export const NuevoPermisoScreen = () => {
 				setError("La superficie excede la superficie disponible de la cuenta seleccionada.")
 			);
 			return false;
+		} else if (
+			altaPermisos.requiereComplementoVolumen &&
+			altaPermisos.opcionDeExpedicion === "complementoPropio" &&
+			altaPermisos.restoSupComplemento < 0
+		) {
+			dispatch(
+				setError(
+					"La suma de la superficie autorizada y el complemento de volumen no puede ser mayor a la superficie disponible."
+				)
+			);
+			return false;
 		} else if (altaPermisos.laboresPendientes) {
 			dispatch(setError("La cuenta seleccionada tiene labores fitosanitarias pendientes."));
 			return false;
@@ -274,13 +306,12 @@ export const NuevoPermisoScreen = () => {
 				)
 			);
 			return false;
-		} else if (altaPermisos.nombreCultivo === "ALFALFA NUEVA") {
-			dispatch(setError("Requiere complemento de volumen."));
-			return false;
 		} else if (
 			autorizadosPorCultivo === undefined ||
-			defineTipoPermiso(superficiePreviaCultivo, autorizadosPorCultivo) ===
-				"Superficie no disponible"
+			defineTipoPermiso(
+				superficiePreviaCultivo,
+				autorizadosPorCultivo.find((cultivo) => cultivo.clave === altaPermisos.claveCultivo)
+			) === "Superficie no disponible"
 		) {
 			dispatch(setError("La superficie asignada para el cultivo no es suficiente."));
 			return false;
@@ -292,7 +323,10 @@ export const NuevoPermisoScreen = () => {
 
 	const getOnSubmitData = async () => {
 		const data = {
-			tipo: defineTipoPermiso(superficiePreviaCultivo, autorizadosPorCultivo),
+			tipo: defineTipoPermiso(
+				superficiePreviaCultivo,
+				autorizadosPorCultivo.find((cultivo) => cultivo.clave === altaPermisos.claveCultivo)
+			),
 			ciclo,
 			numeroPermiso: await defineNumeroPermiso(),
 			fechaEmicion: moment(),
@@ -496,27 +530,12 @@ export const NuevoPermisoScreen = () => {
 				</div>
 
 				<div className="row">
-					<div className="col-sm-6">
-						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">
-								<span className="text-warning">* </span>
-								Superficie:
-							</label>
-							<div className="flex-grow-1 ">
-								<input
-									id="superficieInput"
-									tabIndex="3"
-									type="number"
-									className="form-control"
-									placeholder="superficie"
-									name="supAutorizada"
-									value={supAutorizada}
-									autoComplete="off"
-									onChange={handleInputChange}
-								/>
-							</div>
-						</div>
-					</div>
+					<SuperficieInput
+						formValues={formValues}
+						handleInputChange={handleInputChange}
+						setValues={setValues}
+					/>
+
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
 							<label className="col-sm-3">

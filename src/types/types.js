@@ -46,6 +46,8 @@ export const types = {
 	unsetUsuarios: "[Alta Permisos] Unset usuarios",
 	setUsuario: "[Alta Permisos] Set usuario",
 	unsetUsuario: "[Alta Permisos] Unset usuario",
+	setOpcionDeExpedicion: "[Alta Permisos] Set Opcion De Expedicion",
+	setComplemento: "[Alta Permisos] Set Complemento",
 	setUpdatingPadron: "[Padron] Set Updating Padron",
 	setUpdatingPermisos: "[TestArea] Set Updating Permisos",
 	unsetUpdatingPermisos: "[TestArea] Unset Updating Permisos",

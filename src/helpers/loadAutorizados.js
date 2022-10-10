@@ -65,23 +65,32 @@ export const loadAutorizados = async (ciclo, modulo) => {
 	return autorizados;
 };
 
-export const loadAutorizadoPorCultivo = async (ciclo, modulo, clave) => {
-	const autorizadosSnap = await db
-		.collection(`autorizados`)
-		.doc(ciclo)
-		.collection("modulos")
-		.doc(`Modulo-${modulo}`)
-		.collection(`autorizados`)
-		.where("clave", "==", clave)
-		.get();
+export const loadAutorizadoPorCultivo = async (ciclo, modulo, claves) => {
+	const autorizadosPromises = [];
+
+	claves.forEach((clave) => {
+		autorizadosPromises.push(
+			db
+				.collection(`autorizados`)
+				.doc(ciclo)
+				.collection("modulos")
+				.doc(`Modulo-${modulo}`)
+				.collection(`autorizados`)
+				.where("clave", "==", clave)
+				.get()
+		);
+	});
+	const autorizadosResolved = await Promise.all(autorizadosPromises);
 
 	const autorizados = [];
 
-	autorizadosSnap.forEach((snapHijo) => {
-		autorizados.push({
-			...snapHijo.data()
+	autorizadosResolved.forEach((snapHijo) => {
+		snapHijo.forEach((autorizado) => {
+			autorizados.push({
+				...autorizado.data()
+			});
 		});
 	});
 
-	return autorizados[0];
+	return autorizados;
 };

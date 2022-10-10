@@ -30,9 +30,9 @@ export const startLoadAutorizados = (ciclo, modulo) => {
 	};
 };
 
-export const startLoadAutorizadoPorCultivo = (ciclo, modulo, clave) => {
+export const startLoadAutorizadoPorCultivo = (ciclo, modulo, claves) => {
 	return async (dispatch) => {
-		const autorizados = await loadAutorizadoPorCultivo(ciclo, modulo, clave);
+		const autorizados = await loadAutorizadoPorCultivo(ciclo, modulo, claves);
 		dispatch(setAutorizadosPorCultivo(autorizados));
 	};
 };
