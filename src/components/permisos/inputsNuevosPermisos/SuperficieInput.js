@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setComplemento } from "../../../actions/altaPermisos";
 import { setPermisoComplemento } from "../../../actions/productores";
@@ -19,6 +19,12 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 	} = useSelector((state) => state.altaPermisos);
 
 	const cultivoSelected = cultivos.find((cultivo) => cultivo.clave === claveCultivo);
+	const complementosDisponibles =
+		complementosProductor && cultivoSelected
+			? complementosProductor.filter(
+					(complemento) => complemento.claveCultivo === cultivoSelected.cultivoComplementario
+			  )
+			: false;
 
 	const dispatch = useDispatch();
 
@@ -40,12 +46,8 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 		}
 	}, [dispatch, supAutorizada, cultivoSelected, supDerecho, supPrevia]);
 
-	const [permisoComplementoForm, setPermisoComplementoForm] = useState(false);
-
 	const handleSetPermisoComplemento = (e) => {
-		setPermisoComplementoForm(e.target.value);
-
-		const complemento = complementosProductor.find((permiso) => permiso.id === e.target.value);
+		const complemento = complementosDisponibles.find((permiso) => permiso.id === e.target.value);
 		dispatch(setPermisoComplemento(complemento));
 
 		setValues({
@@ -91,7 +93,7 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 						<div className="flex-grow-1 col-sm-5">
 							<input
 								id="superficieInput"
-								tabIndex="3"
+								tabIndex="4"
 								type="number"
 								className="form-control"
 								placeholder="superficie"
@@ -114,7 +116,7 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 						</div>
 					</div>
 
-					{complementosProductor && (
+					{complementosDisponibles && (
 						<div className="mb-5">
 							<label htmlFor="permisosComplemento" className="d-flex">
 								<div>
@@ -123,7 +125,7 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 								<select
 									className="form-control ml-4 w-75"
 									name="permisoComplemento"
-									value={permisoComplementoForm}
+									value={permisoComplemento ? permisoComplemento.id : ""}
 									onChange={handleSetPermisoComplemento}
 									list="permisosComplemento"
 								>
@@ -131,7 +133,7 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 										Permiso Complemento
 									</option>
 
-									{complementosProductor.map((permiso) => (
+									{complementosDisponibles.map((permiso) => (
 										<option key={permiso.id} value={permiso.id}>
 											{permiso.id}
 										</option>
@@ -166,7 +168,7 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 					<div className="flex-grow-1">
 						<input
 							id="superficieInput"
-							tabIndex="3"
+							tabIndex="4"
 							type="number"
 							className="form-control"
 							placeholder="superficie"

@@ -71,7 +71,7 @@ export const ProductorInput = () => {
 					<div className="flex-grow-1">
 						<input
 							id="productorInput"
-							tabIndex="5"
+							tabIndex="2"
 							type="text"
 							className="form-control"
 							placeholder="Apellido paterno"

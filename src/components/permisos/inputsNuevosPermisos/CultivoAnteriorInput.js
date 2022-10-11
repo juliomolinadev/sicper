@@ -24,6 +24,7 @@ export const CultivoAnteriorInput = () => {
 				</div>
 				<select
 					className="form-control ml-4 w-75"
+					tabIndex="5"
 					name="nombreCultivoAnterior"
 					value={cultivoAnterior}
 					onChange={handleSetCultivoAnterior}
