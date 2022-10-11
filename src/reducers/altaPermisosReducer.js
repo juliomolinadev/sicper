@@ -38,7 +38,7 @@ const initialState = {
 	cuotaCultivo: null,
 	supPrevia: 0,
 	idCultivoAnteriorSelected: null,
-	cultivoAnterior: null,
+	cultivoAnterior: "",
 	claveCultivoAnterior: null,
 	tipo: "normal",
 	ciclo: null,
@@ -145,7 +145,11 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				nombreCultivo: null,
 				claveCultivo: null,
 				subciclo: null,
-				cuotaCultivo: null
+				cuotaCultivo: null,
+				requiereDictamen: false,
+				requiereComplementoVolumen: false,
+				requiereControlCPUS: false,
+				opcionDeExpedicion: ""
 			};
 
 		case types.setCultivoAnterior:
@@ -160,7 +164,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 			return {
 				...state,
 				idCultivoAnteriorSelected: null,
-				cultivoAnterior: null,
+				cultivoAnterior: "",
 				claveCultivoAnterior: null
 			};
 
@@ -175,12 +179,6 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				...state,
 				supComplemento: action.payload.supComplemento,
 				restoSupComplemento: action.payload.restoSupComplemento
-			};
-
-		case types.setOpcionDeExpedicion:
-			return {
-				...state,
-				opcionDeExpedicion: action.payload
 			};
 
 		//Usuarios **************************************
@@ -288,6 +286,24 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				curpProductor: action.payload.curp,
 				productorIncumplido: action.payload.incumplido ? action.payload.incumplido : false,
 				concesionesProductor: action.payload.concesiones ? action.payload.concesiones : false
+			};
+
+		case types.setComplementos:
+			return {
+				...state,
+				complementosProductor: action.payload
+			};
+
+		case types.setPermisoComplemento:
+			return {
+				...state,
+				permisoComplemento: action.payload
+			};
+
+		case types.unsetPermisoComplemento:
+			return {
+				...state,
+				permisoComplemento: null
 			};
 
 		case types.unsetProductor:

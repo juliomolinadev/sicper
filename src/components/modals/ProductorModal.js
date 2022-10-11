@@ -1,7 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import { useDispatch, useSelector } from "react-redux";
-import { closeProductoresModal, setProductorSelected } from "../../actions/productores";
+import { closeProductoresModal, startSetProductorSelected } from "../../actions/productores";
 import { openNuevoProductorModal } from "../../actions/nuevoProductor";
 import { CustomTable } from "../tables/CustomTable";
 import { productoresColumns } from "../tables/configTables";
@@ -49,7 +49,7 @@ export const ProductorModal = () => {
 				title={data.length === 0 ? "No se encontraron productores" : "Productores"}
 				columns={productoresColumns}
 				data={data}
-				setFunction={setProductorSelected}
+				setFunction={startSetProductorSelected}
 				closeFunction={closeProductoresModal}
 			></CustomTable>
 

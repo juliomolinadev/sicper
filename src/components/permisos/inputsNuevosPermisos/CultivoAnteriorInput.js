@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setCultivoAnteriorSelected } from "../../../actions/cultivos";
@@ -6,12 +6,9 @@ import { setCultivoAnteriorSelected } from "../../../actions/cultivos";
 export const CultivoAnteriorInput = () => {
 	const dispatch = useDispatch();
 
-	const { cultivosAnteriores } = useSelector((state) => state.altaPermisos);
-
-	const [nombreCultivoAnterior, setNombreCultivoAnterior] = useState("");
+	const { cultivosAnteriores, cultivoAnterior } = useSelector((state) => state.altaPermisos);
 
 	const handleSetCultivoAnterior = (e) => {
-		setNombreCultivoAnterior(e.target.value);
 		dispatch(
 			setCultivoAnteriorSelected(
 				cultivosAnteriores.find((cultivo) => cultivo.nombre === e.target.value)
@@ -28,9 +25,8 @@ export const CultivoAnteriorInput = () => {
 				<select
 					className="form-control ml-4 w-75"
 					name="nombreCultivoAnterior"
-					value={nombreCultivoAnterior}
+					value={cultivoAnterior}
 					onChange={handleSetCultivoAnterior}
-					// onKeyUp={handleKeyUp}
 					list="cultivos"
 				>
 					<option hidden defaultValue="">

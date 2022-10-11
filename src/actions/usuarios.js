@@ -92,7 +92,7 @@ export const startSetUsuarioSelected = (usuario, tipo) => {
 
 			dispatch(unsetTransferencia());
 			dispatch(setUsuarioSelected(usuario));
-			goToElement("cultivoInput");
+			goToElement("productorInput");
 		}
 	};
 };

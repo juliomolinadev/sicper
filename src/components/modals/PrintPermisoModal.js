@@ -14,7 +14,7 @@ import {
 	startDisablePrintButton
 } from "../../actions/altaPermisos";
 import { unsetCultivoAnteriorSelected, unsetCultivoSelected } from "../../actions/cultivos";
-import { unsetProductorSelected } from "../../actions/productores";
+import { unsetPermisoComplemento, unsetProductorSelected } from "../../actions/productores";
 import { unsetUsuarioSelected } from "../../actions/usuarios";
 import { roundToN } from "../../helpers/functions/roundToN";
 import { savePermitTransaction } from "../../helpers/DB/savePermitTransaction";
@@ -27,7 +27,7 @@ const customStyles = {
 	}
 };
 
-export const PrintPermisoModal = ({ data, isNew }) => {
+export const PrintPermisoModal = ({ data, isNew, formValues, setValues }) => {
 	const { openPrintPermisoModal, enableSaveButton, enablePrintButton, enEspera } = useSelector(
 		(state) => state.altaPermisos
 	);
@@ -44,6 +44,8 @@ export const PrintPermisoModal = ({ data, isNew }) => {
 		dispatch(startEnableSaveButton());
 		dispatch(startDisablePrintButton());
 		dispatch(unsetEnEspera());
+		dispatch(unsetPermisoComplemento());
+		setValues({ ...formValues, observaciones: "" });
 	};
 
 	const handleSavePermiso = async () => {

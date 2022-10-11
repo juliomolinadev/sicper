@@ -59,7 +59,8 @@ export const savePermitTransaction = async (allData) => {
 		tipoSemilla: allData.tipoSemilla ? allData.tipoSemilla : "",
 		requiereDictamen: allData.requiereDictamen ?? false,
 		requiereComplementoVolumen: allData.requiereComplementoVolumen ?? false,
-		requiereControlCPUS: allData.requiereControlCPUS ?? false
+		requiereControlCPUS: allData.requiereControlCPUS ?? false,
+		permisoVinculado: allData.permisoComplemento ? allData.permisoComplemento.id : false
 	};
 
 	if (data.nombreCultivo === "ALGODONERO") {
@@ -126,6 +127,21 @@ export const savePermitTransaction = async (allData) => {
 				}
 
 				transaction.set(permisoRef, data);
+				if (data.permisoVinculado) {
+					const permisoComplementoRef = db
+						.collection(`permisos`)
+						.doc(data.ciclo)
+						.collection("modulos")
+						.doc(`Modulo-${data.modulo}`)
+						.collection(`permisos`)
+						.doc(data.permisoVinculado);
+
+					transaction.update(permisoComplementoRef, {
+						permisoVinculado: data.numeroPermiso,
+						observaciones: `Complemento aplicado en el permiso "${data.numeroPermiso}" de la cuenta "${data.cuenta}".`
+					});
+				}
+
 				transaction.update(contadorPermisosRef, {
 					numeroPermisosModulo: firebase.firestore.FieldValue.increment(1),
 					superficieModulo: firebase.firestore.FieldValue.increment(allData.supAutorizada)

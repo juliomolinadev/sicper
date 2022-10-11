@@ -261,14 +261,18 @@ export const NuevoPermisoScreen = () => {
 				setError("La superficie excede la superficie disponible de la cuenta seleccionada.")
 			);
 			return false;
+		} else if (altaPermisos.requiereComplementoVolumen && !altaPermisos.permisoComplemento) {
+			dispatch(
+				setError(`El cultivo "${altaPermisos.nombreCultivo}" requiere complemento de volumen.`)
+			);
+			return false;
 		} else if (
 			altaPermisos.requiereComplementoVolumen &&
-			altaPermisos.opcionDeExpedicion === "complementoPropio" &&
-			altaPermisos.restoSupComplemento < 0
+			altaPermisos.permisoComplemento.supAutorizada < altaPermisos.supComplemento
 		) {
 			dispatch(
 				setError(
-					"La suma de la superficie autorizada y el complemento de volumen no puede ser mayor a la superficie disponible."
+					"El complemento de volumen no es suficiente para la superficie solicitada. Reduzca la superficie o expida el complemento de volumen suficiente."
 				)
 			);
 			return false;
@@ -278,7 +282,7 @@ export const NuevoPermisoScreen = () => {
 		} else if (!fuenteCredito) {
 			dispatch(setError("Especifique la fuente de crédito."));
 			return false;
-		} else if (!altaPermisos.cultivoAnterior) {
+		} else if (altaPermisos.cultivoAnterior === "") {
 			dispatch(setError("Especifique el cultivo anterior."));
 			return false;
 		} else if (bloquearPorPeriodoDeExpedicion()) {
@@ -561,13 +565,6 @@ export const NuevoPermisoScreen = () => {
 				<div className="row">
 					<CultivoAnteriorInput />
 
-					{/* <div className="col-sm-6">
-						<div className="form-group d-flex align-items-baseline row p-3">
-							<label className="col-sm-3">Cultivo Anterior: </label>
-							<div>{cultivoAnterior}</div>
-						</div>
-					</div> */}
-
 					<div className="col-sm-6">
 						<div className="form-group d-flex align-items-baseline row p-3">
 							<label className="col-sm-3">Transferencia interna:</label>
@@ -647,7 +644,12 @@ export const NuevoPermisoScreen = () => {
 			<UsuarioModal />
 			<ProductorModal />
 			<NuevoProductorModal />
-			<PrintPermisoModal data={permisoData} isNew={true} />
+			<PrintPermisoModal
+				data={permisoData}
+				isNew={true}
+				formValues={formValues}
+				setValues={setValues}
+			/>
 		</>
 	);
 };

@@ -2,6 +2,7 @@ import { types } from "../types/types";
 import { loadProductores } from "../helpers/loadProductores";
 import { goToElement } from "../helpers/functions/assets";
 import { loadConcesiones } from "../helpers/DB/loadConcesiones";
+import { loadComplementos } from "../helpers/loadComplementos";
 
 export const openProductoresModal = () => ({
 	type: types.altaPermisoOpenProductoresModal
@@ -39,13 +40,41 @@ export const setProductores = (productores) => ({
 	payload: productores
 });
 
-export const setProductorSelected = (idProductor) => {
+export const startSetProductorSelected = (productor) => {
+	return async (dispatch, getState) => {
+		const state = getState();
+		const complementos = await loadComplementos(
+			productor.id,
+			state.auth.variablesGlobales.cicloActual,
+			state.auth.modulo
+		);
+
+		dispatch(setProductorSelected(productor));
+		dispatch(setComplementos(complementos));
+	};
+};
+
+export const setProductorSelected = (productor) => {
 	goToElement("variedadInput");
 	return {
 		type: types.setProductor,
-		payload: idProductor
+		payload: productor
 	};
 };
+
+export const setComplementos = (permisos) => ({
+	type: types.setComplementos,
+	payload: permisos
+});
+
+export const setPermisoComplemento = (permiso) => ({
+	type: types.setPermisoComplemento,
+	payload: permiso
+});
+
+export const unsetPermisoComplemento = () => ({
+	type: types.unsetPermisoComplemento
+});
 
 export const unsetProductorSelected = () => ({
 	type: types.unsetProductor

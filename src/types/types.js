@@ -46,7 +46,6 @@ export const types = {
 	unsetUsuarios: "[Alta Permisos] Unset usuarios",
 	setUsuario: "[Alta Permisos] Set usuario",
 	unsetUsuario: "[Alta Permisos] Unset usuario",
-	setOpcionDeExpedicion: "[Alta Permisos] Set Opcion De Expedicion",
 	setComplemento: "[Alta Permisos] Set Complemento",
 	setUpdatingPadron: "[Padron] Set Updating Padron",
 	setUpdatingPermisos: "[TestArea] Set Updating Permisos",
@@ -64,6 +63,9 @@ export const types = {
 	loadProductores: "[Alta Permisos] Load prosuctores",
 	clearProductores: "[Alta Permisos] Clear prosuctores",
 	setProductor: "[Alta Permisos] Set productor",
+	setComplementos: "[Alta Permisos] Set Complementos",
+	setPermisoComplemento: "[Alta Permisos] Set Permiso Complemento",
+	unsetPermisoComplemento: "[Alta Permisos] Unset Permiso Complemento",
 	unsetProductor: "[Alta Permisos] Unset productor",
 
 	altaPermisoOpenNuevoProductorModal: "[Alta Permisos] Open nuevo prouctor modal",

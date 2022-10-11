@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setComplemento, setOpcionDeExpedicion } from "../../../actions/altaPermisos";
+import { setComplemento } from "../../../actions/altaPermisos";
+import { setPermisoComplemento } from "../../../actions/productores";
 import { roundToN } from "../../../helpers/functions/roundToN";
 
 export const SuperficieInput = ({ formValues, handleInputChange, setValues }) => {
@@ -13,7 +14,8 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 		cultivos,
 		supComplemento,
 		restoSupComplemento,
-		opcionDeExpedicion
+		complementosProductor,
+		permisoComplemento
 	} = useSelector((state) => state.altaPermisos);
 
 	const cultivoSelected = cultivos.find((cultivo) => cultivo.clave === claveCultivo);
@@ -38,94 +40,119 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 		}
 	}, [dispatch, supAutorizada, cultivoSelected, supDerecho, supPrevia]);
 
-	const handleSetOpcionDeExpedicion = ({ target }) => {
-		dispatch(setOpcionDeExpedicion(target.name));
+	const [permisoComplementoForm, setPermisoComplementoForm] = useState(false);
 
-		if (target.name === "complementoPropio") {
-			const complemento = getComplemento(
-				supDerecho,
-				supPrevia,
-				supAutorizada,
-				cultivoSelected.complementoPorHa
-			);
+	const handleSetPermisoComplemento = (e) => {
+		setPermisoComplementoForm(e.target.value);
 
-			setValues({ ...formValues, supAutorizada: complemento.supMaxima });
+		const complemento = complementosProductor.find((permiso) => permiso.id === e.target.value);
+		dispatch(setPermisoComplemento(complemento));
 
-			dispatch(
-				setComplemento({
-					supComplemento: complemento.supComplemento,
-					restoSupComplemento: complemento.restoSupComplemento
-				})
-			);
-		}
+		setValues({
+			...formValues,
+			observaciones: `${complemento.supAutorizada}Ha de complemento de volumen de la cuenta "${complemento.cuenta}" con el permiso "${complemento.id}"`
+		});
+	};
+
+	const setComplementoPropio = () => {
+		const complemento = getComplemento(
+			supDerecho,
+			supPrevia,
+			supAutorizada,
+			cultivoSelected.complementoPorHa
+		);
+
+		setValues({ ...formValues, supAutorizada: complemento.supMaxima });
+
+		dispatch(
+			setComplemento({
+				supComplemento: complemento.supComplemento,
+				restoSupComplemento: complemento.restoSupComplemento
+			})
+		);
 	};
 
 	return (
 		<div className="col-sm-6">
-			{claveCultivo === 51 ? (
+			{cultivoSelected && cultivoSelected.requiereComplementoVolumen ? (
 				<>
-					<div className="form-group d-flex align-items-baseline row p-3">
+					<div className="form-group d-flex align-items-baseline row">
 						<label className="col-sm-3">
 							<span className="text-warning">* </span>
-							Tipo de expedición:{" "}
+							Superficie:
 						</label>
+
 						<div className="col-sm-4">
-							<input
-								type="radio"
-								id="complementoPropio"
-								name="complementoPropio"
-								onChange={handleSetOpcionDeExpedicion}
-								checked={opcionDeExpedicion === "complementoPropio"}
-								value={opcionDeExpedicion}
-							/>{" "}
-							<label htmlFor="complementoPropio"> Complemento Propio </label>
+							<div className="btn btn-outline-primary btn-sm" onClick={setComplementoPropio}>
+								Complemento Propio
+							</div>
 						</div>
-						<div className="col-sm-4">
+
+						<div className="flex-grow-1 col-sm-5">
 							<input
-								type="radio"
-								id="complementoExterno"
-								name="complementoExterno"
-								onChange={handleSetOpcionDeExpedicion}
-								checked={opcionDeExpedicion === "complementoExterno"}
-								value={opcionDeExpedicion}
-							/>{" "}
-							<label htmlFor="complementoExterno"> Complemento Externo </label>
+								id="superficieInput"
+								tabIndex="3"
+								type="number"
+								className="form-control"
+								placeholder="superficie"
+								name="supAutorizada"
+								value={supAutorizada}
+								autoComplete="off"
+								onChange={handleInputChange}
+							/>
 						</div>
 					</div>
 
-					{opcionDeExpedicion === "complementoPropio" ? (
-						<div className="form-group d-flex align-items-baseline row p-3">
-							<div className="form-group d-flex align-items-baseline row p-3">
-								<label className="col-sm-3">
-									<span className="text-warning">* </span>
-									Superficie:
-								</label>
-
-								<div className="flex-grow-1 col-sm-4">
-									<input
-										id="superficieInput"
-										tabIndex="3"
-										type="number"
-										className="form-control"
-										placeholder="superficie"
-										name="supAutorizada"
-										value={supAutorizada}
-										autoComplete="off"
-										onChange={handleInputChange}
-									/>
-								</div>
-
-								<div className="col-sm-5 p-0">
-									<div>Complemento: {supComplemento}</div>
-									<div className={restoSupComplemento < 0 ? "text-danger" : ""}>
-										Restante: {restoSupComplemento}
-									</div>
-								</div>
+					<div className="form-group d-flex align-items-baseline row">
+						<div className="col-sm-7">
+							<div>Complemento Requerido: {supComplemento} (Ha)</div>
+						</div>
+						<div className="col-sm-5 m-0 p-0">
+							<div className={restoSupComplemento < 0 ? "text-danger" : ""}>
+								Superficie Restante: {restoSupComplemento} (Ha)
 							</div>
 						</div>
-					) : (
-						<div className="form-group d-flex align-items-baseline row p-3">
-							Complemento Externo
+					</div>
+
+					{complementosProductor && (
+						<div className="mb-5">
+							<label htmlFor="permisosComplemento" className="d-flex">
+								<div>
+									<span className="text-warning">* </span> Permiso Complemento:
+								</div>
+								<select
+									className="form-control ml-4 w-75"
+									name="permisoComplemento"
+									value={permisoComplementoForm}
+									onChange={handleSetPermisoComplemento}
+									list="permisosComplemento"
+								>
+									<option hidden defaultValue="">
+										Permiso Complemento
+									</option>
+
+									{complementosProductor.map((permiso) => (
+										<option key={permiso.id} value={permiso.id}>
+											{permiso.id}
+										</option>
+									))}
+								</select>
+							</label>
+
+							{permisoComplemento && (
+								<div className="d-flex">
+									<div>Superficie del permiso complemento: </div>
+									<div
+										className={`ml-2 ${
+											permisoComplemento.supAutorizada >= supComplemento
+												? "text-success"
+												: "text-danger"
+										}`}
+									>
+										{permisoComplemento.supAutorizada} (Ha)
+									</div>
+								</div>
+							)}
 						</div>
 					)}
 				</>
