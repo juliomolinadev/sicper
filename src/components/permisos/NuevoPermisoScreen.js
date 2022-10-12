@@ -221,7 +221,9 @@ export const NuevoPermisoScreen = () => {
 			if (!altaPermisos.concesionesProductor) return true; //Si el productor no aparece en el padron
 
 			const concesion = altaPermisos.concesionesProductor.find(
-				(concesion) => concesion.cultivo === altaPermisos.nombreCultivo //Seleccionar tambien por modulo
+				(concesion) =>
+					concesion.cultivo === altaPermisos.nombreCultivo &&
+					concesion.modulo === `${altaPermisos.modulo}`
 			);
 
 			if (concesion === undefined) return true;
