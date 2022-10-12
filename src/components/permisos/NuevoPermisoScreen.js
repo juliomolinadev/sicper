@@ -221,7 +221,7 @@ export const NuevoPermisoScreen = () => {
 			if (!altaPermisos.concesionesProductor) return true; //Si el productor no aparece en el padron
 
 			const concesion = altaPermisos.concesionesProductor.find(
-				(concesion) => concesion.cultivo === altaPermisos.nombreCultivo
+				(concesion) => concesion.cultivo === altaPermisos.nombreCultivo //Seleccionar tambien por modulo
 			);
 
 			if (concesion === undefined) return true;
@@ -334,7 +334,10 @@ export const NuevoPermisoScreen = () => {
 			ciclo,
 			numeroPermiso: await defineNumeroPermiso(),
 			fechaEmicion: moment(),
-			fechaLimite: defineFechaLimite(nombreCultivo),
+			fechaLimite: defineFechaLimite(
+				altaPermisos.estado,
+				altaPermisos.cultivos.find((cultivo) => cultivo.id === altaPermisos.idCultivoSelected)
+			),
 			vigencia: defineVigencia(subciclo),
 			estadoPermiso: await defineEstadoPermiso(nombreCultivo)
 		};
@@ -448,9 +451,23 @@ export const NuevoPermisoScreen = () => {
 		return "activo";
 	};
 
-	const defineFechaLimite = (cultivo) => {
-		if (cultivo === "TRIGO") return moment("12/31/2022");
-		else return moment("03/31/2023");
+	const defineFechaLimite = (estado, cultivo) => {
+		// if (cultivo === "TRIGO") return moment("12/31/2022");
+		// else return moment("03/31/2023");
+
+		if (estado === "Baja California") {
+			if (cultivo.finBc) {
+				const fechaSplit = cultivo.finBc.split("-");
+				return moment(`${fechaSplit[1]}/${fechaSplit[2]}/${fechaSplit[0]}`);
+			} else return "";
+		}
+
+		if (estado === "Sonora") {
+			if (cultivo.finSonora) {
+				const fechaSplit = cultivo.finBc.split("-");
+				return moment(`${fechaSplit[1]}/${fechaSplit[2]}/${fechaSplit[0]}`);
+			} else return "";
+		}
 	};
 
 	const setTransferComent = useCallback(
