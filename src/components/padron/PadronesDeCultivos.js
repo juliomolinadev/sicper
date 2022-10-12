@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setConcesionSelected, startSetPadronesCultivos } from "../../actions/padronScreenActions";
+import { removeError } from "../../actions/ui";
 import { concesionesColumns } from "../tables/configTables";
 import { CustomTable } from "../tables/CustomTable";
 import { ConcesionCard } from "./ConcesionCard";
@@ -12,6 +13,7 @@ export const PadronesDeCultivos = () => {
 
 	useEffect(() => {
 		dispatch(startSetPadronesCultivos());
+		dispatch(removeError());
 	}, [dispatch]);
 
 	const [cultivo, setCultivo] = useState();
