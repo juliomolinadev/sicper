@@ -1,6 +1,6 @@
 import { db } from "../../firebase/firebase-config";
 
-export const cancelPermit = (permiso, modulo, ciclo, fecha, uid) => {
+export const cancelPermit = async (permiso, modulo, ciclo, fecha, uid) => {
 	db.collection(`permisos`)
 		.doc(ciclo)
 		.collection(`modulos`)
@@ -13,4 +13,21 @@ export const cancelPermit = (permiso, modulo, ciclo, fecha, uid) => {
 			fechaCancelacion: fecha,
 			apruebaCancelacion: uid
 		});
+
+	// try {
+	// 	const permisoRef = db
+	// 		.collection(`permisos`)
+	// 		.doc(ciclo)
+	// 		.collection(`modulos`)
+	// 		.doc(`Modulo-${modulo}`)
+	// 		.collection(`permisos`);
+
+	// 	const isSave = await db.runTransaction(async (transaction) => {
+
+	// 	});
+	// } catch (error) {
+	// 	Swal.fire("Error de conexión", "Por favor intente más tarde.", "error");
+	// 	console.error(error);
+	// 	return false;
+	// }
 };

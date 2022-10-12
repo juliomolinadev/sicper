@@ -307,16 +307,18 @@ export const PermisosScreen = () => {
 									)}
 
 								<div className="col-4 d-flex justify-content-center">
-									{dataPermiso.estadoPermiso === "activo" && privilegios.solicitarCancelarPermisos && (
-										<button
-											type="button"
-											className="btn btn-sm btn-outline-danger"
-											onClick={cancelarPermiso}
-										>
-											<i className="fas fa-times"></i>
-											<span> Cancelar</span>
-										</button>
-									)}
+									{dataPermiso.estadoPermiso === "activo" &&
+										!dataPermiso.nombreCultivo.includes("COMP.") &&
+										privilegios.solicitarCancelarPermisos && (
+											<button
+												type="button"
+												className="btn btn-sm btn-outline-danger"
+												onClick={cancelarPermiso}
+											>
+												<i className="fas fa-times"></i>
+												<span> Cancelar</span>
+											</button>
+										)}
 								</div>
 							</div>
 						</div>
