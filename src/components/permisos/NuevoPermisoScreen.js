@@ -222,8 +222,7 @@ export const NuevoPermisoScreen = () => {
 
 			const concesion = altaPermisos.concesionesProductor.find(
 				(concesion) =>
-					concesion.cultivo === altaPermisos.nombreCultivo &&
-					concesion.modulo === `${altaPermisos.modulo}`
+					concesion.cultivo === altaPermisos.nombreCultivo && concesion.modulo === `${auth.modulo}`
 			);
 
 			if (concesion === undefined) return true;
