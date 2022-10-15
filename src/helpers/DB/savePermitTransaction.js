@@ -105,6 +105,14 @@ export const savePermitTransaction = async (allData) => {
 		.collection("padron")
 		.doc(`${data.idProductorSelected}-${data.nombreCultivo}-${data.modulo}`);
 
+	const concesionModuloRef = db
+		.collection("padronesCultivos")
+		.doc(data.ciclo)
+		.collection("padrones")
+		.doc(data.nombreCultivo)
+		.collection("modulos")
+		.doc(`${data.nombreCultivo}-${data.modulo}`);
+
 	try {
 		const isSave = await db.runTransaction(async (transaction) => {
 			const permiso = await transaction.get(permisoRef);
@@ -122,6 +130,10 @@ export const savePermitTransaction = async (allData) => {
 			} else {
 				if (concesion.exists) {
 					transaction.update(concesionRef, {
+						supExpedida: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+					});
+
+					transaction.update(concesionModuloRef, {
 						supExpedida: firebase.firestore.FieldValue.increment(allData.supAutorizada)
 					});
 				}

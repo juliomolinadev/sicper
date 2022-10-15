@@ -308,7 +308,7 @@ export const PermisosScreen = () => {
 
 								<div className="col-4 d-flex justify-content-center">
 									{dataPermiso.estadoPermiso === "activo" &&
-										!dataPermiso.nombreCultivo.includes("COMP.") &&
+										dataPermiso.permisoVinculado === null &&
 										privilegios.solicitarCancelarPermisos && (
 											<button
 												type="button"

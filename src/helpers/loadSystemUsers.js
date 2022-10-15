@@ -43,5 +43,16 @@ export const loadSystemUsers = async (entidad) => {
 		});
 	}
 
+	if (entidad === "SADER") {
+		const usuariosSnap = await db.collection(`usuarios`).where("claveEntidad", "==", "SADER").get();
+
+		usuariosSnap.forEach((snapHijo) => {
+			usuarios.push({
+				id: snapHijo.id,
+				...snapHijo.data()
+			});
+		});
+	}
+
 	return usuarios;
 };
