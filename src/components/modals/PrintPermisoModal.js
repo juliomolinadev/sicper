@@ -14,7 +14,7 @@ import {
 	startDisablePrintButton
 } from "../../actions/altaPermisos";
 import { unsetCultivoAnteriorSelected, unsetCultivoSelected } from "../../actions/cultivos";
-import { unsetPermisoComplemento, unsetProductorSelected } from "../../actions/productores";
+import { unsetPermisosComplemento, unsetProductorSelected } from "../../actions/productores";
 import { unsetUsuarioSelected } from "../../actions/usuarios";
 import { roundToN } from "../../helpers/functions/roundToN";
 import { savePermitTransaction } from "../../helpers/DB/savePermitTransaction";
@@ -44,7 +44,7 @@ export const PrintPermisoModal = ({ data, isNew, formValues, setValues = () => {
 		dispatch(startEnableSaveButton());
 		dispatch(startDisablePrintButton());
 		dispatch(unsetEnEspera());
-		dispatch(unsetPermisoComplemento());
+		dispatch(unsetPermisosComplemento());
 		setValues({ ...formValues, observaciones: "" });
 	};
 

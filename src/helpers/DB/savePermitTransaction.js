@@ -60,7 +60,7 @@ export const savePermitTransaction = async (allData) => {
 		requiereDictamen: allData.requiereDictamen ?? false,
 		requiereComplementoVolumen: allData.requiereComplementoVolumen ?? false,
 		requiereControlCPUS: allData.requiereControlCPUS ?? false,
-		permisoVinculado: allData.permisoComplemento ? allData.permisoComplemento.id : false
+		permisosComplemento: allData.permisosComplemento.map((permiso) => permiso.id)
 	};
 
 	if (data.nombreCultivo === "ALGODONERO") {
@@ -139,18 +139,25 @@ export const savePermitTransaction = async (allData) => {
 				}
 
 				transaction.set(permisoRef, data);
-				if (data.permisoVinculado) {
-					const permisoComplementoRef = db
-						.collection(`permisos`)
-						.doc(data.ciclo)
-						.collection("modulos")
-						.doc(`Modulo-${data.modulo}`)
-						.collection(`permisos`)
-						.doc(data.permisoVinculado);
 
-					transaction.update(permisoComplementoRef, {
-						permisoVinculado: data.numeroPermiso,
-						observaciones: `Complemento aplicado en el permiso "${data.numeroPermiso}" de la cuenta "${data.cuenta}".`
+				if (data.permisosComplemento.length > 0) {
+					data.permisosComplemento.forEach((permiso) => {
+						const permisoComplementoRef = db
+							.collection(`permisos`)
+							.doc(data.ciclo)
+							.collection("modulos")
+							.doc(`Modulo-${data.modulo}`)
+							.collection(`permisos`)
+							.doc(permiso);
+
+						// Puse array de permisos vinculados a pesar de que solo es un permiso ya que el proceso de cancelacion de permisos requiere un array de permisos.
+						const arrayPermisos = [];
+						arrayPermisos.push(data.numeroPermiso);
+
+						transaction.update(permisoComplementoRef, {
+							permisosVinculados: arrayPermisos,
+							observaciones: `Complemento aplicado en el permiso "${data.numeroPermiso}" de la cuenta "${data.cuenta}".`
+						});
 					});
 				}
 

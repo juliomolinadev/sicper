@@ -64,8 +64,8 @@ export const types = {
 	clearProductores: "[Alta Permisos] Clear prosuctores",
 	setProductor: "[Alta Permisos] Set productor",
 	setComplementos: "[Alta Permisos] Set Complementos",
-	setPermisoComplemento: "[Alta Permisos] Set Permiso Complemento",
-	unsetPermisoComplemento: "[Alta Permisos] Unset Permiso Complemento",
+	setPermisosComplemento: "[Alta Permisos] Set Permisos Complemento",
+	unsetPermisosComplemento: "[Alta Permisos] Unset Permisos Complemento",
 	unsetProductor: "[Alta Permisos] Unset productor",
 
 	altaPermisoOpenNuevoProductorModal: "[Alta Permisos] Open nuevo prouctor modal",

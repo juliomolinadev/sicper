@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setComplemento } from "../../../actions/altaPermisos";
-import { setPermisoComplemento } from "../../../actions/productores";
+import { setPermisosComplemento } from "../../../actions/productores";
 import { roundToN } from "../../../helpers/functions/roundToN";
 
 export const SuperficieInput = ({ formValues, handleInputChange, setValues }) => {
@@ -12,10 +12,10 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 		supDerecho,
 		supPrevia,
 		cultivos,
-		supComplemento,
-		restoSupComplemento,
+		supComplementoRequerida,
+		restoSupComplementoRequerida,
 		complementosProductor,
-		permisoComplemento
+		permisosComplemento
 	} = useSelector((state) => state.altaPermisos);
 
 	const cultivoSelected = cultivos.find((cultivo) => cultivo.clave === claveCultivo);
@@ -25,6 +25,10 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 					(complemento) => complemento.claveCultivo === cultivoSelected.cultivoComplementario
 			  )
 			: false;
+	const supComplemento = permisosComplemento.reduce(
+		(total, permiso) => total + permiso.supAutorizada,
+		0
+	);
 
 	const dispatch = useDispatch();
 
@@ -39,21 +43,51 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 
 			dispatch(
 				setComplemento({
-					supComplemento: complemento.supComplemento,
-					restoSupComplemento: complemento.restoSupComplemento
+					supComplementoRequerida: complemento.supComplementoRequerida,
+					restoSupComplementoRequerida: complemento.restoSupComplementoRequerida
 				})
 			);
 		}
 	}, [dispatch, supAutorizada, cultivoSelected, supDerecho, supPrevia]);
 
-	const handleSetPermisoComplemento = (e) => {
+	const handleSetPermisosComplemento = (e) => {
 		const complemento = complementosDisponibles.find((permiso) => permiso.id === e.target.value);
-		dispatch(setPermisoComplemento(complemento));
+		const isSelected = permisosComplemento.find((permiso) => permiso.id === e.target.value);
 
-		setValues({
-			...formValues,
-			observaciones: `${complemento.supAutorizada}Ha de complemento de volumen de la cuenta "${complemento.cuenta}" con el permiso "${complemento.id}"`
-		});
+		if (isSelected) {
+			const nuevosComplementos = permisosComplemento.filter(
+				(permiso) => permiso.id !== e.target.value
+			);
+
+			dispatch(setPermisosComplemento(nuevosComplementos));
+
+			let textoComplementos = "";
+
+			nuevosComplementos.forEach((complemento) => {
+				textoComplementos = `${textoComplementos} ${complemento.supAutorizada} Ha de complemento de volumen de la cuenta "${complemento.cuenta}" con el permiso "${complemento.id}". `;
+			});
+
+			setValues({
+				...formValues,
+				observaciones: textoComplementos
+			});
+		} else {
+			const nuevosComplementos = [...permisosComplemento];
+			nuevosComplementos.push(complemento);
+
+			dispatch(setPermisosComplemento(nuevosComplementos));
+
+			let textoComplementos = "";
+
+			nuevosComplementos.forEach((complemento) => {
+				textoComplementos = `${textoComplementos} ${complemento.supAutorizada} Ha de complemento de volumen de la cuenta "${complemento.cuenta}" con el permiso "${complemento.id}". `;
+			});
+
+			setValues({
+				...formValues,
+				observaciones: textoComplementos
+			});
+		}
 	};
 
 	const setComplementoPropio = () => {
@@ -68,8 +102,8 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 
 		dispatch(
 			setComplemento({
-				supComplemento: complemento.supComplemento,
-				restoSupComplemento: complemento.restoSupComplemento
+				supComplementoRequerida: complemento.supComplementoRequerida,
+				restoSupComplementoRequerida: complemento.restoSupComplementoRequerida
 			})
 		);
 	};
@@ -107,51 +141,53 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 
 					<div className="form-group d-flex align-items-baseline row">
 						<div className="col-sm-7">
-							<div>Complemento Requerido: {supComplemento} (Ha)</div>
+							<div>Complemento Requerido: {supComplementoRequerida} (Ha)</div>
 						</div>
 						<div className="col-sm-5 m-0 p-0">
-							<div className={restoSupComplemento < 0 ? "text-danger" : ""}>
-								Superficie Restante: {restoSupComplemento} (Ha)
+							<div className={restoSupComplementoRequerida < 0 ? "text-danger" : ""}>
+								Superficie Restante: {restoSupComplementoRequerida} (Ha)
 							</div>
 						</div>
 					</div>
 
 					{complementosDisponibles && (
 						<div className="mb-5">
-							<label htmlFor="permisosComplemento" className="d-flex">
-								<div>
-									<span className="text-warning">* </span> Permiso Complemento:
+							<div className="mb-3">
+								<span className="text-warning">* </span> Permisos Complemento:
+							</div>
+
+							{complementosDisponibles.map((permiso) => (
+								<div key={permiso.id} className="form-group form-check">
+									<input
+										type="checkbox"
+										className="form-check-input"
+										id={permiso.id}
+										name="permisoComplemento"
+										value={permiso.id}
+										onChange={handleSetPermisosComplemento}
+										checked={
+											permisosComplemento.find(
+												(permisoComplemento) => permisoComplemento.id === permiso.id
+											)
+												? true
+												: false
+										}
+									/>
+									<label className="form-check-label" htmlFor={permiso.id}>
+										{permiso.id} {permiso.supAutorizada} Ha
+									</label>
 								</div>
-								<select
-									className="form-control ml-4 w-75"
-									name="permisoComplemento"
-									value={permisoComplemento ? permisoComplemento.id : ""}
-									onChange={handleSetPermisoComplemento}
-									list="permisosComplemento"
-								>
-									<option hidden defaultValue="">
-										Permiso Complemento
-									</option>
+							))}
 
-									{complementosDisponibles.map((permiso) => (
-										<option key={permiso.id} value={permiso.id}>
-											{permiso.id}
-										</option>
-									))}
-								</select>
-							</label>
-
-							{permisoComplemento && (
+							{permisosComplemento && (
 								<div className="d-flex">
-									<div>Superficie del permiso complemento: </div>
+									<div>Superficie de los permisos complemento: </div>
 									<div
 										className={`ml-2 ${
-											permisoComplemento.supAutorizada >= supComplemento
-												? "text-success"
-												: "text-danger"
+											supComplemento >= supComplementoRequerida ? "text-success" : "text-danger"
 										}`}
 									>
-										{permisoComplemento.supAutorizada} (Ha)
+										{supComplemento} (Ha)
 									</div>
 								</div>
 							)}
@@ -186,8 +222,11 @@ export const SuperficieInput = ({ formValues, handleInputChange, setValues }) =>
 
 const getComplemento = (supDerecho, supPrevia, supAutorizada, complementoPorHa) => {
 	const supMaxima = roundToN((supDerecho - supPrevia) / (complementoPorHa + 1), 3);
-	const supComplemento = roundToN(supAutorizada * complementoPorHa, 3);
-	const restoSupComplemento = roundToN(supDerecho - supPrevia - supAutorizada - supComplemento, 3);
+	const supComplementoRequerida = roundToN(supAutorizada * complementoPorHa, 3);
+	const restoSupComplementoRequerida = roundToN(
+		supDerecho - supPrevia - supAutorizada - supComplementoRequerida,
+		3
+	);
 
-	return { supMaxima, supComplemento, restoSupComplemento };
+	return { supMaxima, supComplementoRequerida, restoSupComplementoRequerida };
 };

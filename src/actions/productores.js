@@ -67,13 +67,13 @@ export const setComplementos = (permisos) => ({
 	payload: permisos
 });
 
-export const setPermisoComplemento = (permiso) => ({
-	type: types.setPermisoComplemento,
-	payload: permiso
+export const setPermisosComplemento = (permisos) => ({
+	type: types.setPermisosComplemento,
+	payload: permisos
 });
 
-export const unsetPermisoComplemento = () => ({
-	type: types.unsetPermisoComplemento
+export const unsetPermisosComplemento = () => ({
+	type: types.unsetPermisosComplemento
 });
 
 export const unsetProductorSelected = () => ({

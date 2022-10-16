@@ -16,7 +16,7 @@ export const loadComplementos = async (idProductor, ciclo, modulo) => {
 		.get();
 
 	permisosBatch.forEach((permiso) => {
-		if (!permiso.data().permisoVinculado) {
+		if (!permiso.data().permisoVinculado && permiso.data().estadoPermiso === "activo") {
 			permisos.push({
 				id: permiso.id,
 				...permiso.data()
