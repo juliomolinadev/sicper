@@ -309,7 +309,7 @@ export const PermisosScreen = () => {
 								<div className="col-4 d-flex justify-content-center">
 									{isAvailableCancelButton(
 										dataPermiso.estadoPermiso,
-										dataPermiso.permisoVinculado,
+										dataPermiso.permisosVinculados,
 										dataPermiso.requiereControlCPUS
 									) &&
 										privilegios.solicitarCancelarPermisos && (
@@ -346,9 +346,12 @@ export const PermisosScreen = () => {
 	);
 };
 
-const isAvailableCancelButton = (estadoPermiso, permisoVinculado, requiereControlCPUS) => {
+const isAvailableCancelButton = (estadoPermiso, permisosVinculados, requiereControlCPUS) => {
+	console.log({ estadoPermiso, permisosComplemento: permisosVinculados, requiereControlCPUS });
+
 	if (estadoPermiso !== "activo") return false;
-	if (permisoVinculado && requiereControlCPUS) return true;
-	if (!permisoVinculado) return true;
+	if (permisosVinculados && permisosVinculados.length > 0 && requiereControlCPUS) return true;
+	if (permisosVinculados && permisosVinculados.length === 0) return true;
+	if (!permisosVinculados) return true;
 	else return false;
 };

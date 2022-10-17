@@ -60,7 +60,7 @@ export const savePermitTransaction = async (allData) => {
 		requiereDictamen: allData.requiereDictamen ?? false,
 		requiereComplementoVolumen: allData.requiereComplementoVolumen ?? false,
 		requiereControlCPUS: allData.requiereControlCPUS ?? false,
-		permisosComplemento: allData.permisosComplemento.map((permiso) => permiso.id)
+		permisosVinculados: allData.permisosComplemento.map((permiso) => permiso.id)
 	};
 
 	if (data.nombreCultivo === "ALGODONERO") {
@@ -140,8 +140,8 @@ export const savePermitTransaction = async (allData) => {
 
 				transaction.set(permisoRef, data);
 
-				if (data.permisosComplemento.length > 0) {
-					data.permisosComplemento.forEach((permiso) => {
+				if (data.permisosVinculados.length > 0) {
+					data.permisosVinculados.forEach((permiso) => {
 						const permisoComplementoRef = db
 							.collection(`permisos`)
 							.doc(data.ciclo)
