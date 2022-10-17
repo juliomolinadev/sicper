@@ -32,6 +32,10 @@ export const startSaveConcesion = (concesion) => {
 				else return concesionState;
 			});
 
+			if (!newConcesiones.find((concesionInNew) => concesionInNew.id === concesion.id)) {
+				newConcesiones.push(concesion);
+			}
+
 			dispatch(
 				setPadronesCultivos({
 					...state.padronScreen.padrones,

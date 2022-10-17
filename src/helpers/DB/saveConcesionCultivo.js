@@ -3,6 +3,9 @@ import firebase from "firebase/app";
 import Swal from "sweetalert2";
 
 export const saveConcesionCultivo = async (concesion) => {
+	const newConcesion = { ...concesion };
+	delete newConcesion.id;
+
 	const concesionRef = db
 		.collection("padronesCultivos")
 		.doc(concesion.ciclo)
@@ -31,6 +34,12 @@ export const saveConcesionCultivo = async (concesion) => {
 				});
 
 				transaction.update(concesionRef, { supConcesion: concesion.supConcesion });
+			} else {
+				transaction.update(concesionModuloRef, {
+					supConcesion: firebase.firestore.FieldValue.increment(concesion.supConcesion)
+				});
+
+				transaction.set(concesionRef, newConcesion);
 			}
 
 			return true;
