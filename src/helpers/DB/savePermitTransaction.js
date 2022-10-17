@@ -1,7 +1,7 @@
 import { db } from "../../firebase/firebase-config";
+import firebase from "firebase/app";
 import Swal from "sweetalert2";
 import moment from "moment";
-import firebase from "firebase/app";
 
 export const savePermitTransaction = async (allData) => {
 	const data = {
