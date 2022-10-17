@@ -52,7 +52,8 @@ const initialState = {
 	fuenteCredito: "",
 	latitud: "",
 	longitud: "",
-	observaciones: ""
+	observaciones: "",
+	permisosComplemento: []
 };
 
 export const altaPermisosReducer = (state = initialState, action) => {
@@ -177,8 +178,8 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.setComplemento:
 			return {
 				...state,
-				supComplemento: action.payload.supComplemento,
-				restoSupComplemento: action.payload.restoSupComplemento
+				supComplementoRequerida: action.payload.supComplementoRequerida,
+				restoSupComplementoRequerida: action.payload.restoSupComplementoRequerida
 			};
 
 		//Usuarios **************************************
@@ -294,16 +295,16 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				complementosProductor: action.payload
 			};
 
-		case types.setPermisoComplemento:
+		case types.setPermisosComplemento:
 			return {
 				...state,
-				permisoComplemento: action.payload
+				permisosComplemento: action.payload
 			};
 
-		case types.unsetPermisoComplemento:
+		case types.unsetPermisosComplemento:
 			return {
 				...state,
-				permisoComplemento: null
+				permisosComplemento: []
 			};
 
 		case types.unsetProductor:

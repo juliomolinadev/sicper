@@ -41,7 +41,8 @@ export const NuevoPermisoScreen = () => {
 		subciclo,
 		nombreCultivo,
 		superficiePreviaCultivo,
-		usuarios
+		usuarios,
+		permisosComplemento
 	} = useSelector((state) => state.altaPermisos);
 	const altaPermisos = useSelector((state) => state.altaPermisos);
 	const auth = useSelector((state) => state.auth);
@@ -49,6 +50,11 @@ export const NuevoPermisoScreen = () => {
 	const { cicloActual: ciclo, expedicionActiva } = variablesGlobales;
 	const { msgError } = useSelector((state) => state.ui);
 	const { autorizadosPorCultivo } = useSelector((state) => state.autorizadosScreen);
+
+	const supComplemento = permisosComplemento.reduce(
+		(total, permiso) => total + permiso.supAutorizada,
+		0
+	);
 
 	const [formValues, handleInputChange, , , setValues] = useFormToUpper({
 		variedad: "",
@@ -262,14 +268,17 @@ export const NuevoPermisoScreen = () => {
 				setError("La superficie excede la superficie disponible de la cuenta seleccionada.")
 			);
 			return false;
-		} else if (altaPermisos.requiereComplementoVolumen && !altaPermisos.permisoComplemento) {
+		} else if (
+			altaPermisos.requiereComplementoVolumen &&
+			altaPermisos.permisosComplemento.length === 0
+		) {
 			dispatch(
 				setError(`El cultivo "${altaPermisos.nombreCultivo}" requiere complemento de volumen.`)
 			);
 			return false;
 		} else if (
 			altaPermisos.requiereComplementoVolumen &&
-			altaPermisos.permisoComplemento.supAutorizada < altaPermisos.supComplemento
+			supComplemento < altaPermisos.supComplementoRequerida
 		) {
 			dispatch(
 				setError(

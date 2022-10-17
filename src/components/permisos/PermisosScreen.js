@@ -307,8 +307,11 @@ export const PermisosScreen = () => {
 									)}
 
 								<div className="col-4 d-flex justify-content-center">
-									{dataPermiso.estadoPermiso === "activo" &&
-										!dataPermiso.nombreCultivo.includes("COMP.") &&
+									{isAvailableCancelButton(
+										dataPermiso.estadoPermiso,
+										dataPermiso.permisosVinculados,
+										dataPermiso.requiereControlCPUS
+									) &&
 										privilegios.solicitarCancelarPermisos && (
 											<button
 												type="button"
@@ -341,4 +344,12 @@ export const PermisosScreen = () => {
 			<GuiaFormModal />
 		</>
 	);
+};
+
+const isAvailableCancelButton = (estadoPermiso, permisosVinculados, requiereControlCPUS) => {
+	if (estadoPermiso !== "activo") return false;
+	if (permisosVinculados && permisosVinculados.length > 0 && requiereControlCPUS) return true;
+	if (permisosVinculados && permisosVinculados.length === 0) return true;
+	if (!permisosVinculados) return true;
+	else return false;
 };
