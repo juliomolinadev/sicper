@@ -347,8 +347,6 @@ export const PermisosScreen = () => {
 };
 
 const isAvailableCancelButton = (estadoPermiso, permisosVinculados, requiereControlCPUS) => {
-	console.log({ estadoPermiso, permisosComplemento: permisosVinculados, requiereControlCPUS });
-
 	if (estadoPermiso !== "activo") return false;
 	if (permisosVinculados && permisosVinculados.length > 0 && requiereControlCPUS) return true;
 	if (permisosVinculados && permisosVinculados.length === 0) return true;

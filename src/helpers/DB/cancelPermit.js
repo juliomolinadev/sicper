@@ -67,9 +67,12 @@ export const cancelPermit = async (permit, uid) => {
 			.doc(`${permit.nombreCultivo}-${modulo}`);
 
 		const isCancel = await db.runTransaction(async (transaction) => {
-			if (permit.permisoVinculado) {
-				transaction.update(permisoRef.doc(permit.permisoVinculado), {
-					permisoVinculado: null
+			if (permit.permisosVinculados && permit.permisosVinculados.length > 0) {
+				permit.permisosVinculados.forEach((permiso) => {
+					transaction.update(permisoRef.doc(permiso), {
+						permisosVinculados: [],
+						observaciones: ""
+					});
 				});
 
 				transaction.update(permisoRef.doc(numeroPermiso), {
@@ -77,7 +80,8 @@ export const cancelPermit = async (permit, uid) => {
 					cuotaCultivo: 0,
 					fechaCancelacion: fecha,
 					apruebaCancelacion: uid,
-					permisoVinculado: null
+					permisosVinculados: [],
+					observaciones: ""
 				});
 
 				transaction.update(concesionRef, {
