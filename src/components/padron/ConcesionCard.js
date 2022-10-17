@@ -1,11 +1,10 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-import { useSelector } from "react-redux";
-// import { startSaveConcesion } from "../../actions/padronScreenActions";
+import { useDispatch, useSelector } from "react-redux";
 
-// import { setError } from "../../actions/ui";
+import { startSaveConcesion } from "../../actions/padronScreenActions";
+import { setError } from "../../actions/ui";
 
 export const ConcesionCard = ({ concesion }) => {
 	const { id, curp, nombre, cultivo, modulo, ciclo, supConcesion, supExpedida } = concesion;
@@ -16,31 +15,31 @@ export const ConcesionCard = ({ concesion }) => {
 		setSupConcesionInput(supConcesion);
 	}, [supConcesion]);
 
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
-	// const handleSaveConcesion = () => {
-	// 	if (isFormValid())
-	// 		dispatch(
-	// 			startSaveConcesion({
-	// 				...concesion,
-	// 				supConcesion: supConcesionInput
-	// 			})
-	// 		);
-	// };
+	const handleSaveConcesion = () => {
+		if (isFormValid())
+			dispatch(
+				startSaveConcesion({
+					...concesion,
+					supConcesion: supConcesionInput
+				})
+			);
+	};
 
-	// const isFormValid = () => {
-	// 	if (supConcesion < 0) {
-	// 		dispatch(setError("La concesión de superficie no puede ser negativa."));
-	// 		return false;
-	// 	}
+	const isFormValid = () => {
+		if (supConcesion < 0) {
+			dispatch(setError("La concesión de superficie no puede ser negativa."));
+			return false;
+		}
 
-	// 	if (supConcesion - supExpedida < 0) {
-	// 		dispatch(setError("La concesión de superficie no puede ser menor a la superficie expedida."));
-	// 		return false;
-	// 	}
+		if (supConcesion - supExpedida < 0) {
+			dispatch(setError("La concesión de superficie no puede ser menor a la superficie expedida."));
+			return false;
+		}
 
-	// 	return true;
-	// };
+		return true;
+	};
 
 	return (
 		<div className="border border-info rounded">
@@ -103,14 +102,14 @@ export const ConcesionCard = ({ concesion }) => {
 			</div>
 
 			<div className="d-flex flex-column border-bottom border-info p-4">
-				{/* <button
+				<button
 					type="button"
 					className="btn btn-outline-primary mt-4"
 					onClick={handleSaveConcesion}
 				>
 					<i className="fas fa-save"></i>
 					<span> Guardar</span>
-				</button> */}
+				</button>
 			</div>
 		</div>
 	);
