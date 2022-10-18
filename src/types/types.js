@@ -29,6 +29,7 @@ export const types = {
 	altaPermisoCloseCultivoAnteriorModal: "[Alta Permisos] Close cultivo anterior modal",
 	loadCultivos: "[Alta Permisos] Load cultivos",
 	setCultivosAnteriores: "[Alta Permisos] Set Cultivos Anteriores",
+	setProductoresAnteriores: "[Alta Permisos] Set Productores Anteriores",
 	clearCultivos: "[Alta Permisos] Clear cultivos",
 	setCultivo: "[Alta Permisos] Set cultivo",
 	unsetCultivo: "[Alta Permisos] unset cultivo",

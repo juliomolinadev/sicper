@@ -313,6 +313,18 @@ export const NuevoPermisoScreen = () => {
 				)
 			);
 			return false;
+		} else if (
+			altaPermisos.nombreCultivo === "ALFALFA" &&
+			!altaPermisos.productoresAnteriores.find(
+				(productor) => productor.id === altaPermisos.idProductorSelected
+			)
+		) {
+			dispatch(
+				setError(
+					`El productor no es el mismo productor del ciclo pasado en la cuenta seleccionada. Para establecer alfalfa en este predio, seleccione "ALFALFA NUEVA" en el campo cultivo.`
+				)
+			);
+			return false;
 		} else if (bloquearPorControlCPUS()) {
 			dispatch(
 				setError(

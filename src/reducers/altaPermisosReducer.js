@@ -316,6 +316,12 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				productorIncumplido: null
 			};
 
+		case types.setProductoresAnteriores:
+			return {
+				...state,
+				productoresAnteriores: action.payload
+			};
+
 		//Nuevo Productor **************************************
 
 		case types.altaPermisoOpenNuevoProductorModal:
