@@ -57,6 +57,11 @@ export const setCultivosAnteriores = (cultivos) => ({
 	payload: cultivos
 });
 
+export const setProductoresAnteriores = (productores) => ({
+	type: types.setProductoresAnteriores,
+	payload: productores
+});
+
 export const loadSuperficiePrevia = async (ciclo, modulo, cultivo) => {
 	const supCultivo = await db
 		.collection(`permisos`)

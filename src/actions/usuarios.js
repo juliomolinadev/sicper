@@ -7,8 +7,8 @@ import { goToElement } from "../helpers/functions/assets";
 import { unsetTransferencia } from "./transferenciasScreen";
 import { loadLaboresPendientes } from "../helpers/loadLaboresPendientes";
 import { loadDictamen } from "../helpers/loadDictamen";
-import { loadCultivosAnteriores } from "../helpers/loadCultivosAnteriores";
-import { setCultivosAnteriores } from "./cultivos";
+import { loadCultivosYProductoresAnteriores } from "../helpers/loadCultivosYProductoresAnteriores";
+import { setCultivosAnteriores, setProductoresAnteriores } from "./cultivos";
 
 export const openUsuariosModal = () => ({
 	type: types.altaPermisoOpenUsuariosModal
@@ -42,13 +42,14 @@ export const startSetUsuarioSelected = (usuario, tipo) => {
 		const ciclo = state.auth.variablesGlobales.cicloActual;
 		const cicloAnterior = getCicloAnterior(ciclo);
 
-		const cultivosAnteriores = await loadCultivosAnteriores(
+		const cultivosYProductoresAnteriores = await loadCultivosYProductoresAnteriores(
 			`${usuario.cuenta}.${usuario.subcta}`,
 			usuario.entidad,
 			cicloAnterior
 		);
 
-		dispatch(setCultivosAnteriores(cultivosAnteriores));
+		dispatch(setCultivosAnteriores(cultivosYProductoresAnteriores[0]));
+		dispatch(setProductoresAnteriores(cultivosYProductoresAnteriores[1]));
 
 		const laboresPendientes = await loadLaboresPendientes(
 			`${usuario.cuenta}.${usuario.subcta}`,
