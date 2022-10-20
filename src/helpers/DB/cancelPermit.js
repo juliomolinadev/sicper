@@ -83,20 +83,22 @@ export const cancelPermit = async (permit, uid) => {
 					permisosVinculados: [],
 					observaciones: ""
 				});
-
-				transaction.update(concesionRef, {
-					supExpedida: firebase.firestore.FieldValue.increment(supAutorizada * -1)
-				});
-
-				transaction.update(concesionModuloRef, {
-					supExpedida: firebase.firestore.FieldValue.increment(supAutorizada * -1)
-				});
 			} else {
 				transaction.update(permisoRef.doc(numeroPermiso), {
 					estadoPermiso: "Cancelado",
 					cuotaCultivo: 0,
 					fechaCancelacion: fecha,
 					apruebaCancelacion: uid
+				});
+			}
+
+			if (permit.requiereControlCPUS) {
+				transaction.update(concesionRef, {
+					supExpedida: firebase.firestore.FieldValue.increment(supAutorizada * -1)
+				});
+
+				transaction.update(concesionModuloRef, {
+					supExpedida: firebase.firestore.FieldValue.increment(supAutorizada * -1)
 				});
 			}
 
