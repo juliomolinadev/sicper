@@ -303,29 +303,34 @@ export const NuevoPermisoScreen = () => {
 				setError("El cultivo requiere dictamen técnico de siembra. Favor de comunicarse con SADER.")
 			);
 			return false;
-		} else if (
-			altaPermisos.nombreCultivo === "ALFALFA" &&
-			altaPermisos.cultivoAnterior !== "ALFALFA"
-		) {
-			dispatch(
-				setError(
-					`El predio seleccionado no tenía alfalfa el ciclo pasado. Para establecer alfalfa en este predio, seleccione "ALFALFA NUEVA" en el campo cultivo.`
-				)
-			);
-			return false;
-		} else if (
-			altaPermisos.nombreCultivo === "ALFALFA" &&
-			!altaPermisos.productoresAnteriores.find(
-				(productor) => productor.id === altaPermisos.idProductorSelected
-			)
-		) {
-			dispatch(
-				setError(
-					`El productor no es el mismo productor del ciclo pasado en la cuenta seleccionada. Para establecer alfalfa en este predio, seleccione "ALFALFA NUEVA" en el campo cultivo.`
-				)
-			);
-			return false;
-		} else if (bloquearPorControlCPUS()) {
+		}
+
+		// else if (
+		// 	altaPermisos.nombreCultivo === "ALFALFA" &&
+		// 	altaPermisos.cultivoAnterior !== "ALFALFA"
+		// ) {
+		// 	dispatch(
+		// 		setError(
+		// 			`El predio seleccionado no tenía alfalfa el ciclo pasado. Para establecer alfalfa en este predio, seleccione "ALFALFA NUEVA" en el campo cultivo.`
+		// 		)
+		// 	);
+		// 	return false;
+		// }
+
+		// else if (
+		// 	altaPermisos.nombreCultivo === "ALFALFA" &&
+		// 	!altaPermisos.productoresAnteriores.find(
+		// 		(productor) => productor.id === altaPermisos.idProductorSelected
+		// 	)
+		// ) {
+		// 	dispatch(
+		// 		setError(
+		// 			`El productor no es el mismo productor del ciclo pasado en la cuenta seleccionada. Para establecer alfalfa en este predio, seleccione "ALFALFA NUEVA" en el campo cultivo.`
+		// 		)
+		// 	);
+		// 	return false;
+		// }
+		else if (bloquearPorControlCPUS()) {
 			dispatch(
 				setError(
 					`El productor no se encuentra registrado en el padrón de productores de "${altaPermisos.nombreCultivo}" o la superficie es mayor a la que tiene disponible en el padrón.`
