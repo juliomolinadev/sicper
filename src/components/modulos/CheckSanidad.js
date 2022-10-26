@@ -16,14 +16,14 @@ import { types } from "../../types/types";
 export const CheckSanidad = () => {
 	const dispatch = useDispatch();
 
-	const { permisos, permisoSelected } = useSelector((state) => state.algodoneroScreen);
+	const { permisos, permisoSelected, technicians } = useSelector((state) => state.algodoneroScreen);
 	const { uid, privilegios, variablesGlobales } = useSelector((state) => state.auth);
 	const { registrarLabores, pagarLabores, imprimirLabores } = privilegios;
 
 	const cuotaSanidad = 60;
 
 	const dataPermiso = permisos.find((permiso) => permiso.id === permisoSelected);
-	// const tecnico = technicians.find((tecnico) => tecnico.id === dataPermiso.tecnico);
+	const tecnico = technicians.find((tecnico) => tecnico.id === dataPermiso.tecnico);
 
 	useEffect(() => {
 		const state = setInitialState(dataPermiso);
@@ -201,7 +201,7 @@ export const CheckSanidad = () => {
 
 				<div className="row p-1 pl-2 pt-2">
 					<div className="col-4">TÉCNICO:</div>
-					<div className="col-8">{dataPermiso.tecnico ? dataPermiso.tecnico : "SIN ASIGNAR"}</div>
+					<div className="col-8">{tecnico ? tecnico.displayName : "SIN ASIGNAR"}</div>
 				</div>
 
 				<div className="row p-1 pl-2 pt-2">
