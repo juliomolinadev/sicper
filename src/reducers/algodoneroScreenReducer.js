@@ -80,6 +80,17 @@ export const algodoneroScreenReducer = (state = initialState, action) => {
 				technicians: action.payload
 			};
 
+		case types.setNewTecnico:
+			const nuevosPermisos = state.permisos.map((permiso) => {
+				if (permiso.id === action.payload.idPermiso)
+					return { ...permiso, tecnico: action.payload.uid };
+				else return permiso;
+			});
+			return {
+				...state,
+				permisos: nuevosPermisos
+			};
+
 		default:
 			return state;
 	}

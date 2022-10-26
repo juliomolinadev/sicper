@@ -14,11 +14,17 @@ export const LaboresPermitsTable = ({ dispatch: dispatchLocal }) => {
 	const { palabra } = formValues;
 
 	const { permisos } = useSelector((state) => state.algodoneroScreen);
-	const { uid, rol } = useSelector((state) => state.auth);
+	const { uid, rol, variablesGlobales } = useSelector((state) => state.auth);
 
 	const buscarPermisos = () => {
 		if (palabra.length > 0) {
-			dispatch(startLoadPermisosSearch(rol === "tecnicoCESVBC" ? uid : 0, palabra));
+			dispatch(
+				startLoadPermisosSearch(
+					rol === "tecnicoCESVBC" ? uid : 0,
+					palabra,
+					variablesGlobales.cicloActual
+				)
+			);
 			dispatchLocal({ type: types.setBusqueda, payload: palabra });
 		} else {
 			Swal.fire(

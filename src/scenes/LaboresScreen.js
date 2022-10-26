@@ -23,7 +23,7 @@ export const LaboresScreen = () => {
 	const { permisos, permisoSelected, printSanidadModal } = useSelector(
 		(state) => state.algodoneroScreen
 	);
-	// const { uid, rol } = useSelector((state) => state.auth);
+	const { cicloConsulta } = useSelector((state) => state.auth.variablesGlobales);
 
 	useEffect(() => {
 		loadTechnician().then((techniciasns) => {
@@ -34,7 +34,7 @@ export const LaboresScreen = () => {
 	const buscarPermisos = () => {
 		if (palabra.length > 0) {
 			// dispatch(startLoadPermisosSearch(rol === "tecnicoCESVBC" ? uid : 0, palabra));
-			dispatch(startLoadPermisosSearch(0, palabra));
+			dispatch(startLoadPermisosSearch(0, palabra, cicloConsulta)); //Con 0 busca sin importar el id del técnico
 		} else {
 			Swal.fire(
 				"Nada para buscar",
@@ -59,7 +59,7 @@ export const LaboresScreen = () => {
 	});
 
 	const loadPermitsForPay = () => {
-		dispatch(startLoadPermitsForPay());
+		dispatch(startLoadPermitsForPay(cicloConsulta));
 	};
 
 	return (

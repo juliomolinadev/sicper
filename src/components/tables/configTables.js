@@ -128,13 +128,13 @@ export const permisosColumns = [
 export const laboresColumns = [
 	{ name: "id", selector: "id", omit: true },
 	{ name: "CUENTA", selector: "cuenta", sortable: true, width: "80px" },
-	{ name: "USUARIO", selector: "nombre", sortable: true, width: "250px" },
-	{ name: "PERMISO", selector: "folio", sortable: true, width: "120px" },
+	{ name: "USUARIO", selector: "usuario", sortable: true, width: "250px" },
+	{ name: "PERMISO", selector: "numeroPermiso", sortable: true, width: "120px" },
 	{ name: "MODULO", selector: "modulo", sortable: true, width: "60px", center: true },
-	{ name: "HA", selector: "superficie", width: "60px", sortable: true, center: true },
+	{ name: "HA", selector: "supAutorizada", width: "60px", sortable: true, center: true },
 	{ name: "LOTE", selector: "lote", sortable: true, width: "60px", center: true },
-	{ name: "LOCALIDAD", selector: "ubicacion", sortable: true, width: "130px" },
-	{ name: "CULTIVO", selector: "cultivo", width: "130px", sortable: true }
+	{ name: "LOCALIDAD", selector: "nombreLocalidad", sortable: true, width: "130px" },
+	{ name: "CULTIVO", selector: "nombreCultivo", width: "130px", sortable: true }
 ];
 
 export const printPermisosColumns = [

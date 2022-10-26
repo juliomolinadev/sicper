@@ -1,73 +1,195 @@
 import { db } from "../../firebase/firebase-config";
-import moment from "moment";
 
+// Muestra los permisos expedidos que evadieron labores fitosanitarias ###########################################
 export const editarPermisos = async () => {
-	console.log("Entro en edicion");
 	const permisosSnap = await db
 		.collectionGroup("permisos")
-		.where("ciclo", "==", "2022-2023")
-		// .where("pagado", "==", true)
+		.where("claveCultivo", "==", 80)
+		.where("ciclo", "==", "2021-2022")
 		.get();
 
-	const permisos = [];
+	const nuevosPermisosPromises = [];
+
 	permisosSnap.forEach((permiso) => {
-		if (permiso.data().nombreCultivo === "TRIGO") {
-		}
-
-		const fechaTrigo = moment("12/31/2022");
-		const fechaTodo = moment("03/31/2023");
-
-		permisos.push({
-			id: permiso.id,
-			modulo: permiso.data().modulo,
-			fechaLimite:
-				permiso.data().nombreCultivo === "TRIGO"
-					? moment(fechaTrigo).toDate()
-					: moment(fechaTodo).toDate()
-		});
-	});
-
-	// console.log(permisos);
-
-	let batch = db.batch();
-	let i = 1;
-	const batchSize = 500;
-
-	permisos.forEach((permiso) => {
-		// console.log(permiso);
-
-		const ref = db
+		const nuevoPermisoRef = db
 			.collection("permisos")
 			.doc("2022-2023")
 			.collection("modulos")
-			.doc(`Modulo-${permiso.modulo}`)
+			.doc(`Modulo-${permiso.data().modulo}`)
 			.collection("permisos")
-			.doc(permiso.id);
+			.where("cuenta", "==", permiso.data().cuenta);
 
-		batch.update(ref, { fechaLimite: permiso.fechaLimite });
-
-		if (i === batchSize) {
-			batch
-				.commit()
-				.then(() => {
-					console.log("Se termino de subir batch");
-				})
-				.catch((err) => {
-					console.error(err);
-				});
-			batch = db.batch();
-			i = 0;
-		}
-
-		i++;
+		nuevosPermisosPromises.push(nuevoPermisoRef.get());
 	});
 
-	batch
-		.commit()
-		.then(() => {
-			console.log("Se terminaron de editar los permisos");
-		})
-		.catch((err) => {
-			console.error(err);
+	const permisosResolbed = await Promise.all(nuevosPermisosPromises);
+	const permisosFujitivos = [];
+
+	permisosResolbed.forEach((batch) => {
+		batch.forEach((permiso) => {
+			permisosFujitivos.push({
+				id: permiso.id,
+				modulo: permiso.data().modulo,
+				cuenta: permiso.data().cuenta,
+				expedida: permiso.data().supAutorizada,
+				derecho: permiso.data().supDerecho
+			});
 		});
+	});
+
+	console.table(permisosFujitivos);
 };
+
+// // Asigna tecnico a permisos del 2021-2022 ##################################################################
+// export const editarPermisos = async () => {
+// 	const permisosSnap = await db
+// 		.collectionGroup("permisos")
+// 		.where("claveCultivo", "==", 80)
+// 		.where("ciclo", "==", "2021-2022")
+// 		.get();
+
+// 	const tecnicosSnap = await db.collection("usuarios").where("rol", "==", "tecnicoCESVBC").get();
+
+// 	const tecnicos = [];
+// 	tecnicosSnap.forEach((tecnico) => {
+// 		tecnicos.push({
+// 			id: tecnico.id,
+// 			localidades: tecnico.data().localidades
+// 		});
+// 	});
+
+// 	let batch = db.batch();
+// 	let i = 1;
+// 	const batchSize = 500;
+
+// 	permisosSnap.forEach((permiso) => {
+// 		const tecnico = tecnicos.find((tecnico) =>
+// 			tecnico.localidades.includes(permiso.data().claveLocalidad)
+// 		);
+// 		// console.log(permiso.id);
+// 		// console.log(permiso.data().claveLocalidad);
+// 		// else console.log("sintecnico");
+// 		// if (tecnico) {
+// 		// 	console.log(tecnico.id);
+// 		// 	console.log(permiso.data().claveLocalidad);
+// 		// 	console.log(permiso.id);
+// 		// }
+
+// 		const ref = db
+// 			.collection("permisos")
+// 			.doc("2021-2022")
+// 			.collection("modulos")
+// 			.doc(`Modulo-${permiso.data().modulo}`)
+// 			.collection("permisos")
+// 			.doc(permiso.id);
+
+// 		batch.update(ref, {
+// 			laboresPendientes: true,
+// 			tecnico: tecnico ? tecnico.id : false
+// 		});
+
+// 		if (i === batchSize) {
+// 			batch
+// 				.commit()
+// 				.then(() => {
+// 					console.log("Se termino de subir batch");
+// 				})
+// 				.catch((err) => {
+// 					console.error(err);
+// 				});
+// 			batch = db.batch();
+// 			i = 0;
+// 		}
+
+// 		i++;
+// 	});
+
+// 	batch
+// 		.commit()
+// 		.then(() => {
+// 			console.log("Se terminaron de editar los permisos");
+// 		})
+// 		.catch((err) => {
+// 			console.error(err);
+// 			console.log("Ya termino");
+// 		});
+// };
+
+// // Homologa permisos de algodon del 2020-2021 con 2021-2022 ###########################################################
+// export const editarPermisos = async () => {
+// 	const permisosSnap = await db
+// 		.collectionGroup("permisos")
+// 		.where("cultivo", "==", "ALGODONERO")
+// 		.where("ciclo", "==", "2020-2021")
+// 		.get();
+
+// 	let batch = db.batch();
+// 	let i = 1;
+// 	const batchSize = 500;
+
+// 	// const permisos = [];
+// 	permisosSnap.forEach((permiso) => {
+// 		// console.log(permiso.data().claveLocalidad);
+// 		// else console.log("sintecnico");
+// 		// if (tecnico) {
+// 		// 	console.log(tecnico.id);
+// 		// 	console.log(permiso.data().claveLocalidad);
+// 		// 	console.log(permiso.id);
+// 		// }
+
+// 		// permisos.push({
+// 		// 	nombreCultivo: "ALGODONERO",
+// 		// 	claveCultivo: 80,
+// 		// 	numeroPermiso: permiso.data().folio,
+// 		// 	estadoPermiso: "activo",
+// 		// 	usuario: permiso.data().nombre,
+// 		// 	supAutorizada: permiso.data().superficie,
+// 		// 	nombreLocalidad: permiso.data().ubicacion
+// 		// });
+
+// 		const ref = db
+// 			.collection("permisos")
+// 			.doc("2020-2021")
+// 			.collection("modulos")
+// 			.doc(`Modulo-${permiso.data().modulo}`)
+// 			.collection("permisos")
+// 			.doc(permiso.id);
+
+// 		batch.update(ref, {
+// 			nombreCultivo: "ALGODONERO",
+// 			claveCultivo: 80,
+// 			numeroPermiso: permiso.data().folio,
+// 			estadoPermiso: "activo",
+// 			usuario: permiso.data().nombre,
+// 			supAutorizada: permiso.data().superficie,
+// 			nombreLocalidad: permiso.data().ubicacion
+// 		});
+
+// 		if (i === batchSize) {
+// 			batch
+// 				.commit()
+// 				.then(() => {
+// 					console.log("Se termino de subir batch");
+// 				})
+// 				.catch((err) => {
+// 					console.error(err);
+// 				});
+// 			batch = db.batch();
+// 			i = 0;
+// 		}
+
+// 		i++;
+// 	});
+
+// 	batch
+// 		.commit()
+// 		.then(() => {
+// 			console.log("Se terminaron de editar los permisos");
+// 		})
+// 		.catch((err) => {
+// 			console.error(err);
+// 			console.log("Ya termino");
+// 		});
+
+// 	// console.log(permisos);
+// };

@@ -1,7 +1,13 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadLocaltiesFromPermits = async () => {
-	const permisosSnap = db.collectionGroup("permisos").where("ciclo", "==", "2020-2021");
+export const loadLocaltiesFromPermits = async (cicloActual) => {
+	const cicloSplit = cicloActual.split("-");
+	const cicloAnterior = `${Number(cicloSplit[0]) - 1}-${Number(cicloSplit[1]) - 1}`;
+
+	const permisosSnap = db
+		.collectionGroup("permisos")
+		.where("ciclo", "==", cicloAnterior)
+		.where("claveCultivo", "==", 80);
 	const localtiesIds = [];
 	const localties = [];
 	const padronLocalties = [];
@@ -18,7 +24,7 @@ export const loadLocaltiesFromPermits = async () => {
 				localties.push({
 					id: getLocaltieId(permiso.data().claveLocalidad, padronLocalties),
 					clave: permiso.data().claveLocalidad,
-					ubicacion: permiso.data().ubicacion,
+					ubicacion: permiso.data().localidad,
 					tipo: permiso.data().tipoLocalidad,
 					tecnico: getTechnician(permiso.data().claveLocalidad, padronLocalties)
 				});

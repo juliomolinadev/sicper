@@ -187,6 +187,7 @@ export const types = {
 	updatePermiso: "[Labores Screen] Update Permiso",
 	deletePermiso: "[Labores Screen] Delete Permiso",
 	setTechniciansLabores: "[Labores Screen] Set Technicians Labores",
+	setNewTecnico: "[Labores Screen] Set New Tecnico",
 
 	setCheckState: "[Labores Checks] Set Check State",
 	checkDesfoliado: "[Labores Checks] Check Desfoliado",

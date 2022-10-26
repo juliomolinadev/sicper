@@ -1,18 +1,21 @@
 import { db } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
 
-export const loadPermitsForPay = async () => {
+export const loadPermitsForPay = async (cicloConsulta) => {
+	const cicloSplit = cicloConsulta.split("-");
+	const cicloAnterior = `${Number(cicloSplit[0]) - 1}-${Number(cicloSplit[1]) - 1}`;
+
 	const permisos = [];
 
 	const desarraigadoSnap = await db
 		.collectionGroup("permisos")
-		.where("ciclo", "==", "2020-2021")
+		.where("ciclo", "==", cicloAnterior)
 		.where("desarraigado", "==", true)
 		.get();
 
 	const barbechadoSnap = await db
 		.collectionGroup("permisos")
-		.where("ciclo", "==", "2020-2021")
+		.where("ciclo", "==", cicloAnterior)
 		.where("barbechado", "==", true)
 		.get();
 

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import { saveTechnicianLocalties } from "../../helpers/DB/saveTechnicianLocalties";
 // import { saveTechnicianLocalties } from "../../helpers/DB/saveTechnicianLocalties";
 import { types } from "../../types/types";
 
 export const SelectedLocaltiesDetail = ({ state, dispatch }) => {
+	const { cicloActual } = useSelector((state) => state.auth.variablesGlobales);
 	const { selectedLocalties, technicians, technicianSelected } = state;
 
 	const [technicianId, setTechnicianId] = useState("");
@@ -38,7 +40,8 @@ export const SelectedLocaltiesDetail = ({ state, dispatch }) => {
 				technicianId,
 				technicianSelected.displayName,
 				localtiesIds,
-				otherTechnicians
+				otherTechnicians,
+				cicloActual
 			);
 			if (updates) {
 				dispatch({

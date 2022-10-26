@@ -1,10 +1,13 @@
 import { db } from "../firebase/firebase-config";
 import Swal from "sweetalert2";
 
-export const loadSearchPermisosAlgodonero = async (id, palabra) => {
+export const loadSearchPermisosAlgodonero = async (id, palabra, cicloConsulta) => {
+	const cicloSplit = cicloConsulta.split("-");
+	const cicloAnterior = `${Number(cicloSplit[0]) - 1}-${Number(cicloSplit[1]) - 1}`;
+
 	const permisos = [];
 
-	const permisosNombre = getNombreRef(id, palabra);
+	const permisosNombre = getNombreRef(id, palabra, cicloAnterior);
 
 	await permisosNombre.get().then((querySnapshot) => {
 		querySnapshot.forEach((doc) => {
@@ -16,7 +19,7 @@ export const loadSearchPermisosAlgodonero = async (id, palabra) => {
 		});
 	});
 
-	const permisosCuenta = getCuentaRef(id, palabra);
+	const permisosCuenta = getCuentaRef(id, palabra, cicloAnterior);
 
 	await permisosCuenta.get().then((querySnapshot) => {
 		querySnapshot.forEach((doc) => {
@@ -39,30 +42,33 @@ export const loadSearchPermisosAlgodonero = async (id, palabra) => {
 	return permisos;
 };
 
-const getNombreRef = (id, palabra) => {
+const getNombreRef = (id, palabra, ciclo) => {
 	if (id === 0) {
 		return db
 			.collectionGroup("permisos")
-			.where("ciclo", "==", "2020-2021")
-			.orderBy("nombre")
+			.where("ciclo", "==", ciclo)
+			.where("claveCultivo", "==", 80)
+			.orderBy("usuario")
 			.startAt(palabra.toUpperCase())
 			.endAt(palabra.toUpperCase() + "\uf8ff");
 	} else {
 		return db
 			.collectionGroup("permisos")
 			.where("tecnico", "==", id)
-			.where("ciclo", "==", "2020-2021")
-			.orderBy("nombre")
+			.where("ciclo", "==", ciclo)
+			.where("claveCultivo", "==", 80)
+			.orderBy("usuario")
 			.startAt(palabra.toUpperCase())
 			.endAt(palabra.toUpperCase() + "\uf8ff");
 	}
 };
 
-const getCuentaRef = (id, palabra) => {
+const getCuentaRef = (id, palabra, ciclo) => {
 	if (id === 0) {
 		return db
 			.collectionGroup("permisos")
-			.where("ciclo", "==", "2020-2021")
+			.where("ciclo", "==", ciclo)
+			.where("claveCultivo", "==", 80)
 			.orderBy("cuenta")
 			.startAt(palabra)
 			.endAt(palabra + "\uf8ff");
@@ -70,7 +76,8 @@ const getCuentaRef = (id, palabra) => {
 		return db
 			.collectionGroup("permisos")
 			.where("tecnico", "==", id)
-			.where("ciclo", "==", "2020-2021")
+			.where("ciclo", "==", ciclo)
+			.where("claveCultivo", "==", 80)
 			.orderBy("cuenta")
 			.startAt(palabra)
 			.endAt(palabra + "\uf8ff");

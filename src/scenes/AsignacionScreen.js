@@ -20,7 +20,7 @@ export const AsignacionScreen = () => {
 		permitSelected: null
 	};
 
-	const { privilegios } = useSelector((state) => state.auth);
+	const { privilegios, variablesGlobales } = useSelector((state) => state.auth);
 	const { asignarTecnico } = privilegios;
 	const { permisoSelected } = useSelector((state) => state.algodoneroScreen);
 
@@ -29,10 +29,10 @@ export const AsignacionScreen = () => {
 	// console.log(state);
 
 	useEffect(() => {
-		loadLocaltiesFromPermits().then((localties) => {
+		loadLocaltiesFromPermits(variablesGlobales.cicloActual).then((localties) => {
 			dispatch({ type: types.setLocaltiesAsignacion, payload: localties });
 		});
-	}, [dispatch]);
+	}, [dispatch, variablesGlobales.cicloActual]);
 
 	useEffect(() => {
 		loadTechnician().then((techniciasns) => {

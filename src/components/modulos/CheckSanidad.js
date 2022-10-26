@@ -4,11 +4,11 @@ import { useReducer } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import {
-	deletePermiso,
+	setNewTecnico,
 	startOpenSanidadModal,
 	updatePermiso
 } from "../../actions/algodoneroScreen";
-import { deletePermit } from "../../helpers/deletePermit";
+import { asignarTecnico } from "../../helpers/asignarTecnico";
 import { updatePermisoAlgodonero } from "../../helpers/updatePermisoAlgodonero";
 import { laboresChecksReducer } from "../../reducers/laboresChecksReducer";
 import { types } from "../../types/types";
@@ -16,14 +16,14 @@ import { types } from "../../types/types";
 export const CheckSanidad = () => {
 	const dispatch = useDispatch();
 
-	const { permisos, permisoSelected, technicians } = useSelector((state) => state.algodoneroScreen);
-	const { uid, privilegios } = useSelector((state) => state.auth);
-	const { registrarLabores, pagarLabores, imprimirLabores, borrarPermisos } = privilegios;
+	const { permisos, permisoSelected } = useSelector((state) => state.algodoneroScreen);
+	const { uid, privilegios, variablesGlobales } = useSelector((state) => state.auth);
+	const { registrarLabores, pagarLabores, imprimirLabores } = privilegios;
 
 	const cuotaSanidad = 60;
 
 	const dataPermiso = permisos.find((permiso) => permiso.id === permisoSelected);
-	const tecnico = technicians.find((tecnico) => tecnico.id === dataPermiso.tecnico);
+	// const tecnico = technicians.find((tecnico) => tecnico.id === dataPermiso.tecnico);
 
 	useEffect(() => {
 		const state = setInitialState(dataPermiso);
@@ -38,10 +38,14 @@ export const CheckSanidad = () => {
 	const checkUncheck = async (editable, name, state) => {
 		if (determinaAcceso(editable, name, registrarLabores, pagarLabores, uid, dataPermiso.tecnico)) {
 			const updates = getUpdates(name, state);
+
+			const cicloSplit = variablesGlobales.cicloConsulta.split("-");
+			const cicloAnterior = `${Number(cicloSplit[0]) - 1}-${Number(cicloSplit[1]) - 1}`;
+
 			const isSave = await updatePermisoAlgodonero(
 				permisoSelected,
 				dataPermiso.modulo,
-				"2020-2021",
+				cicloAnterior,
 				updates
 			);
 
@@ -150,22 +154,29 @@ export const CheckSanidad = () => {
 
 	// TODO: Asignar folio de constancia fitosanitaria al expedir permiso de algodon
 
-	const handleDelete = () => {
+	const onSetCurrentTechnician = () => {
 		Swal.fire({
-			title: "Atención!!",
-			text: `Borrar?`,
+			title: "Gestionar Labores",
+			text: `Al confirmar, usted será asignado como técnico para registrar las labores fitosanitarias para el permiso seleccionado.`,
 			icon: "warning",
 			showCancelButton: true,
 			confirmButtonColor: "#3085d6",
 			cancelButtonColor: "#d33",
-			confirmButtonText: "Si",
-			cancelButtonText: "No"
+			confirmButtonText: "Confirmar",
+			cancelButtonText: "Cancelar"
 		}).then(async ({ isConfirmed }) => {
 			if (isConfirmed) {
-				console.log("Borrando permiso ", dataPermiso.id, dataPermiso.modulo);
-				const isDeleted = await deletePermit(dataPermiso.id, dataPermiso.modulo);
+				const cicloSplit = variablesGlobales.cicloConsulta.split("-");
+				const cicloAnterior = `${Number(cicloSplit[0]) - 1}-${Number(cicloSplit[1]) - 1}`;
+
+				const isDeleted = await asignarTecnico(
+					dataPermiso.id,
+					dataPermiso.modulo,
+					cicloAnterior,
+					uid
+				);
 				if (isDeleted) {
-					dispatch(deletePermiso(dataPermiso.id));
+					dispatch(setNewTecnico(dataPermiso.id, uid));
 				}
 			}
 		});
@@ -175,14 +186,14 @@ export const CheckSanidad = () => {
 		<div className="col-sm-4 mt-3">
 			<div className="border border-info rounded detallePermiso">
 				<div className="d-flex bg-light border-info border-bottom rounded-top p-1 justify-content-center font-weight-bold text-secondary pt-3">
-					<h5>{dataPermiso.folio}</h5>
+					<h5>{dataPermiso.numeroPermiso}</h5>
 				</div>
 
-				{borrarPermisos && (
+				{registrarLabores && uid !== dataPermiso.tecnico && (
 					<div className="row p-1 pl-2 pt-2">
-						<div className="col-4">
-							<button className="btn btn-danger" onClick={handleDelete}>
-								Borrar
+						<div className="col-12 d-flex justify-content-center m-3">
+							<button className="btn btn-outline-primary" onClick={onSetCurrentTechnician}>
+								Gestionar Labores
 							</button>
 						</div>
 					</div>
@@ -190,7 +201,7 @@ export const CheckSanidad = () => {
 
 				<div className="row p-1 pl-2 pt-2">
 					<div className="col-4">TÉCNICO:</div>
-					<div className="col-8">{tecnico ? tecnico.displayName : "SIN ASIGNAR"}</div>
+					<div className="col-8">{dataPermiso.tecnico ? dataPermiso.tecnico : "SIN ASIGNAR"}</div>
 				</div>
 
 				<div className="row p-1 pl-2 pt-2">
@@ -200,7 +211,7 @@ export const CheckSanidad = () => {
 
 				<div className="row p-1 pl-2">
 					<div className="col-4">USUARIO:</div>
-					<div className="col-8">{dataPermiso.nombre}</div>
+					<div className="col-8">{dataPermiso.usuario}</div>
 				</div>
 
 				<div className="row p-1 pl-2">
@@ -209,7 +220,7 @@ export const CheckSanidad = () => {
 				</div>
 				<div className="row p-1 pl-2">
 					<div className="col-4">LOCALIDAD:</div>
-					<div className="col-8">{dataPermiso.ubicacion}</div>
+					<div className="col-8">{dataPermiso.nombreLocalidad}</div>
 				</div>
 				<div className="row p-1 pl-2">
 					<div className="col-4">MODULO:</div>
@@ -218,7 +229,7 @@ export const CheckSanidad = () => {
 
 				<div className="row p-1 pl-2">
 					<div className="col-4">SUPERFICIE:</div>
-					<div className="col-8">{dataPermiso.superficie} ha</div>
+					<div className="col-8">{dataPermiso.supAutorizada} ha</div>
 				</div>
 
 				<div className="row border rounded m-2 p-2 d-flex align-items-center">
@@ -445,8 +456,7 @@ const determinaAcceso = (editable, name, labores, pagar, uid, tecnico) => {
 		if (pagar) return true;
 		else return false;
 	} else {
-		if (labores) return true;
-		else if (uid === tecnico) return true;
+		if (labores && uid === tecnico) return true;
 		else return false;
 	}
 };

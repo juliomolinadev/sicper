@@ -64,7 +64,7 @@ export const savePermitTransaction = async (allData) => {
 	};
 
 	if (data.nombreCultivo === "ALGODONERO") {
-		data.tecnico = "sinAsignar";
+		data.tecnico = false;
 		data.desfoliado = false;
 		data.cosechado = false;
 		data.desvarado = false;
@@ -73,6 +73,7 @@ export const savePermitTransaction = async (allData) => {
 		data.superficieMapeada = 0;
 		data.pagado = false;
 		data.constanciaFitosanitaria = false;
+		data.laboresPendientes = true;
 	}
 
 	const permisosPorCultivoRef = db
