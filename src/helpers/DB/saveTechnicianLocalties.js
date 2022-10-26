@@ -1,12 +1,20 @@
 import { db } from "../../firebase/firebase-config";
 import Swal from "sweetalert2";
 
-export const saveTechnicianLocalties = async (id, nombre, localties, otherTechnicians) => {
+export const saveTechnicianLocalties = async (
+	id,
+	nombre,
+	localties,
+	otherTechnicians,
+	cicloActual
+) => {
 	// TODO: Asignar ciclo de forma dinamica
 
 	//Traer todos los permisos que coinsidan con las localidades que no tengan al tecnico
 	//Asignar a los permisos de la consulta anterior el nuevo tecnico
 	//En la tabla de usuarios actualizar las localidades que se asignaron al tecnico
+	const cicloSplit = cicloActual.split("-");
+	const cicloAnterior = `${Number(cicloSplit[0]) - 1}-${Number(cicloSplit[1]) - 1}`;
 
 	Swal.fire({
 		title: "Actualizando...",
@@ -22,7 +30,7 @@ export const saveTechnicianLocalties = async (id, nombre, localties, otherTechni
 	const newPermisosRefs = await db
 		.collectionGroup("permisos")
 		.where("tecnico", "!=", id)
-		.where("ciclo", "==", "2020-2021")
+		.where("ciclo", "==", cicloAnterior)
 		.where("claveLocalidad", "in", localties.length > 0 ? localties : ["x"])
 		.get();
 
@@ -103,7 +111,7 @@ export const saveTechnicianLocalties = async (id, nombre, localties, otherTechni
 			batch.update(
 				db
 					.collection("permisos")
-					.doc("2020-2021")
+					.doc(cicloAnterior)
 					.collection("modulos")
 					.doc(`Modulo-${permit.data().modulo}`)
 					.collection("permisos")

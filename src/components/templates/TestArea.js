@@ -1,7 +1,7 @@
 import React from "react";
 import { printDuplicatePermits } from "../../helpers/printDuplicatePermits";
 import { DictamenManual } from "../modulos/DictamenManual";
-// import { editarPermisos } from "../../helpers/DB/editarPermisos";
+import { editarPermisos } from "../../helpers/DB/editarPermisos";
 import { ExpeditionCheckModule } from "../modulos/ExpeditionCheckModule";
 import { PermisosExcelModule } from "../modulos/PermisosExcelModule";
 import { ProducersReport } from "../ui/organisms/ProducersReport";
@@ -9,9 +9,9 @@ import { ProducersReport } from "../ui/organisms/ProducersReport";
 export const TestArea = () => {
 	// console.log("modulo en test: ", modulo);
 
-	// const editar = () => {
-	// 	editarPermisos();
-	// };
+	const editar = () => {
+		editarPermisos();
+	};
 
 	const cargarPermisos = () => {
 		printDuplicatePermits();
@@ -49,11 +49,11 @@ export const TestArea = () => {
 				</button>
 			</div>
 
-			{/* <div className="mt-5">
+			<div className="mt-5">
 				<button onClick={editar} className="btn btn-primary">
 					Editar Permisos
 				</button>
-			</div> */}
+			</div>
 		</>
 	);
 };

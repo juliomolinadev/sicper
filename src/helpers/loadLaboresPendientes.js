@@ -1,27 +1,40 @@
 import { db } from "../firebase/firebase-config";
 
-export const loadLaboresPendientes = async (cuenta, modulo, ciclo) => {
-	const permisos = [];
+export const loadLaboresPendientes = async (cuenta, modulo, cicloAnterior) => {
 	let laboresPendientes = false;
-	const permisosSnap = await db
-		.collection(`permisos`)
-		.doc(ciclo)
-		.collection("modulos")
-		.doc(`Modulo-${modulo}`)
-		.collection(`permisos`)
-		.where("cuenta", "==", cuenta)
-		.where("estadoPermiso", "!=", "Cancelado")
-		.get();
 
-	permisosSnap.forEach((snapHijo) => {
-		permisos.push({
-			id: snapHijo.id,
-			...snapHijo.data()
-		});
+	const cicloSplit = cicloAnterior.split("-");
+	const ciclos = [];
+	let anioInicio = 2020;
+	let anioFin = 2021;
+	do {
+		ciclos.push(`${anioInicio}-${anioFin}`);
+		anioInicio++;
+		anioFin++;
+	} while (anioInicio <= Number(cicloSplit[0]));
+
+	const permisosPromises = [];
+
+	ciclos.forEach((ciclo) => {
+		permisosPromises.push(
+			db
+				.collection(`permisos`)
+				.doc(ciclo)
+				.collection("modulos")
+				.doc(`Modulo-${modulo}`)
+				.collection(`permisos`)
+				.where("cuenta", "==", cuenta)
+				.where("estadoPermiso", "!=", "Cancelado")
+				.get()
+		);
 	});
 
-	permisos.forEach((permiso) => {
-		if (permiso.laboresPendientes === true) laboresPendientes = true;
+	const permisosResolbed = await Promise.all(permisosPromises);
+
+	permisosResolbed.forEach((batch) => {
+		batch.forEach((permiso) => {
+			if (permiso.data().laboresPendientes === true) laboresPendientes = true;
+		});
 	});
 
 	return laboresPendientes;

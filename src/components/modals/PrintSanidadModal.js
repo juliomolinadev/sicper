@@ -33,14 +33,19 @@ export const PrintSanidadModal = () => {
 	const handleSaveConstancy = async () => {
 		const isSave = await saveConstanciaSanidad(
 			{ ...printSanidadModal, folioSanidad: printSanidadModal.folioSanidad },
-			"2020-2021"
+			printSanidadModal.ciclo
 		);
 
 		if (isSave) {
 			dispatch(enablePrintButton());
-			updatePermisoAlgodonero(printSanidadModal.folio, printSanidadModal.modulo, "2020-2021", {
-				folioSanidad: printSanidadModal.folioSanidad
-			});
+			updatePermisoAlgodonero(
+				printSanidadModal.numeroPermiso,
+				printSanidadModal.modulo,
+				printSanidadModal.ciclo,
+				{
+					folioSanidad: printSanidadModal.folioSanidad
+				}
+			);
 			dispatch(
 				updatePermiso({ ...printSanidadModal, folioSanidad: printSanidadModal.folioSanidad })
 			);
@@ -92,7 +97,7 @@ export const PrintSanidadModal = () => {
 
 			<div className="row dflex justify-content-center">
 				<h5>
-					<b>ALGODONERO CICLO P-V 2021-2021</b>
+					<b>ALGODONERO CICLO P-V {printSanidadModal.ciclo}</b>
 				</h5>
 			</div>
 
@@ -101,10 +106,10 @@ export const PrintSanidadModal = () => {
 			<div className="row d-flex justify-content-center pt-5 text-justify">
 				<div className="col-8">
 					<p>
-						POR LA PRESENTE HACEMOS CONSTAR QUE EL C. {printSanidadModal.nombre}, PRODUCTOR DEL LOTE
-						NO.
-						{printSanidadModal.lote} DEL EJIDO/COLONIA {printSanidadModal.ubicacion}, REALIZÓ LAS
-						LABORES FITOSANITARIAS EN UNA SUPERFICIE DE {printSanidadModal.superficie} HA.
+						POR LA PRESENTE HACEMOS CONSTAR QUE EL C. {printSanidadModal.usuario}, PRODUCTOR DEL
+						LOTE NO.
+						{printSanidadModal.lote} DEL EJIDO/COLONIA {printSanidadModal.nombreLocalidad}, REALIZÓ
+						LAS LABORES FITOSANITARIAS EN UNA SUPERFICIE DE {printSanidadModal.supAutorizada} HA.
 					</p>
 
 					<p>
@@ -118,7 +123,7 @@ export const PrintSanidadModal = () => {
 					<p>SIRVA EL PRESENTE DOCUMENTO PARA LA LIBERACIÓN DE CARTA DE GARANTÍA EMITIDA.</p>
 
 					<p>
-						PROPIETARIO: {printSanidadModal.nombre} <br />
+						PROPIETARIO: {printSanidadModal.usuario} <br />
 						CUENTA: {printSanidadModal.cuenta} <br />
 						TÉCNICO: {tecnico ? tecnico.displayName : ""}
 					</p>
@@ -146,7 +151,21 @@ export const PrintSanidadModal = () => {
 				</div>
 
 				<div className="col-4 d-flex flex-column ml-3">
-					<p className="pb-5 text-center">NOMBRE Y FIRMA</p>
+					<p className="text-center">NOMBRE Y FIRMA</p>
+					<div className="d-flex justify-content-center">
+						<img
+							// src={`./firmas/31naXMbqQibk1SzOLIhZ5JXFYAk1.png`}
+							// src={`./firmas/bHflypkGK8SBj2VAOe6lIccxwbc2.png`}
+							// src={`./firmas/GOxDoCdADSSVhj1gQIXxzZ5YN4H3.png`}
+							// src={`./firmas/rA5pOGIhqZceAigtDlP0cVy2SwA3.png`}
+							// src={`./firmas/rUxW1A8ehVWGYzjK91c8LCwwklb2.png`}
+							// src={`./firmas/u2onRGMYn6RqLafQC3LNe2cP64q1.png`}
+							src={`./firmas/${tecnico ? tecnico.id : ""}.png`}
+							alt="Firma del técnico"
+							style={{ maxHeight: 90 }}
+						/>
+					</div>
+					<div className="text-center">{tecnico ? tecnico.displayName : ""}</div>
 					<hr />
 					<div className="text-center">
 						<b>TÉCNICO FITOSANITARIO DEL CESVBC</b>

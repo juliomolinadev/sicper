@@ -13,16 +13,16 @@ export const startLoadPermisos = (id) => {
 	};
 };
 
-export const startLoadPermisosSearch = (id, palabra) => {
+export const startLoadPermisosSearch = (id, palabra, cicloConsulta) => {
 	return async (dispatch) => {
-		const permisos = await loadSearchPermisosAlgodonero(id, palabra);
+		const permisos = await loadSearchPermisosAlgodonero(id, palabra, cicloConsulta);
 		dispatch(setPermisos(permisos));
 	};
 };
 
-export const startLoadPermitsForPay = () => {
+export const startLoadPermitsForPay = (cicloConsulta) => {
 	return async (dispatch) => {
-		const permisos = await loadPermitsForPay();
+		const permisos = await loadPermitsForPay(cicloConsulta);
 		dispatch(setPermisos(permisos));
 	};
 };
@@ -113,4 +113,9 @@ export const deletePermiso = (id) => ({
 export const setTechniciansLabores = (technicians) => ({
 	type: types.setTechniciansLabores,
 	payload: technicians
+});
+
+export const setNewTecnico = (idPermiso, uid) => ({
+	type: types.setNewTecnico,
+	payload: { idPermiso, uid }
 });
