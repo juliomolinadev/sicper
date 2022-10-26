@@ -149,7 +149,7 @@ export const CheckSanidad = () => {
 	});
 
 	const handleOpenSanidadModal = () => {
-		dispatch(startOpenSanidadModal("2020-2021", dataPermiso));
+		dispatch(startOpenSanidadModal(dataPermiso.ciclo, dataPermiso));
 	};
 
 	// TODO: Asignar folio de constancia fitosanitaria al expedir permiso de algodon

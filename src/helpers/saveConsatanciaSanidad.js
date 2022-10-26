@@ -3,11 +3,13 @@ import Swal from "sweetalert2";
 import firebase from "firebase/app";
 
 export const saveConstanciaSanidad = async (constacia, ciclo) => {
+	console.log({ constacia, ciclo });
+
 	const constanciaRef = db
 		.collection(`constanciasSanidad`)
 		.doc(ciclo)
 		.collection(`constancias`)
-		.doc(constacia.folio);
+		.doc(constacia.numeroPermiso);
 
 	const contConstanciaRef = db.collection(`constanciasSanidad`).doc(ciclo);
 

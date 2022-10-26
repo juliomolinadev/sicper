@@ -39,7 +39,7 @@ export const PrintSanidadModal = () => {
 		if (isSave) {
 			dispatch(enablePrintButton());
 			updatePermisoAlgodonero(
-				printSanidadModal.folio,
+				printSanidadModal.numeroPermiso,
 				printSanidadModal.modulo,
 				printSanidadModal.ciclo,
 				{
