@@ -2,16 +2,20 @@ import { db } from "../../firebase/firebase-config";
 
 // Muestra los permisos expedidos que evadieron labores fitosanitarias ###########################################
 export const editarPermisos = async () => {
-	const permisosSnap = await db
+	const permisosAnterioresSnap = await db
 		.collectionGroup("permisos")
 		.where("claveCultivo", "==", 80)
 		.where("ciclo", "==", "2021-2022")
+		.where("estadoPermiso", "!=", "Cancelado")
 		.get();
 
-	const nuevosPermisosPromises = [];
+	const permisosAnteriores = [];
+	const permisosNuevosPromises = [];
 
-	permisosSnap.forEach((permiso) => {
-		const nuevoPermisoRef = db
+	permisosAnterioresSnap.forEach((permiso) => {
+		permisosAnteriores.push({ ...permiso.data() });
+
+		const permisosNuevosRef = db
 			.collection("permisos")
 			.doc("2022-2023")
 			.collection("modulos")
@@ -19,20 +23,32 @@ export const editarPermisos = async () => {
 			.collection("permisos")
 			.where("cuenta", "==", permiso.data().cuenta);
 
-		nuevosPermisosPromises.push(nuevoPermisoRef.get());
+		permisosNuevosPromises.push(permisosNuevosRef.get());
 	});
 
-	const permisosResolbed = await Promise.all(nuevosPermisosPromises);
+	const permisosNuevosResolbed = await Promise.all(permisosNuevosPromises);
 	const permisosFujitivos = [];
 
-	permisosResolbed.forEach((batch) => {
-		batch.forEach((permiso) => {
+	permisosNuevosResolbed.forEach((batch) => {
+		batch.forEach((permisoNuevo) => {
+			const arrayDePermisosAnteriores = permisosAnteriores.filter(
+				(permisoAnterior) => permisoAnterior.cuenta === permisoNuevo.data().cuenta
+			);
+
+			let stringDePermisosAnteriores = "";
+
+			arrayDePermisosAnteriores.forEach((permiso) => {
+				stringDePermisosAnteriores = `${stringDePermisosAnteriores}${permiso.numeroPermiso}*(${permiso.supAutorizada}ha) `;
+			});
+
 			permisosFujitivos.push({
-				id: permiso.id,
-				modulo: permiso.data().modulo,
-				cuenta: permiso.data().cuenta,
-				expedida: permiso.data().supAutorizada,
-				derecho: permiso.data().supDerecho
+				id: permisoNuevo.id,
+				cultivo: permisoNuevo.data().nombreCultivo,
+				modulo: permisoNuevo.data().modulo,
+				cuenta: permisoNuevo.data().cuenta,
+				expedida: permisoNuevo.data().supAutorizada,
+				derecho: permisoNuevo.data().supDerecho,
+				permisosAnteriores: stringDePermisosAnteriores
 			});
 		});
 	});

@@ -573,7 +573,7 @@ export const NuevoPermisoScreen = () => {
 				</div>
 
 				<div className="row">
-					<CultivoInput />
+					<CultivoInput altaFormValues={formValues} setAltaFormValues={setValues} />
 					<VariedadInput variedad={variedad} handleInputChange={handleInputChange} />
 				</div>
 

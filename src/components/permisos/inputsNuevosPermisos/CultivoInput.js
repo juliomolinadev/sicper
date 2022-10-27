@@ -10,7 +10,7 @@ import {
 } from "../../../actions/cultivos";
 import { useFormToUpper } from "../../../hooks/UseFormToUpper";
 
-export const CultivoInput = () => {
+export const CultivoInput = ({ altaFormValues, setAltaFormValues }) => {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -42,6 +42,7 @@ export const CultivoInput = () => {
 
 	const clearCultivoInput = () => {
 		dispatch(unsetCultivoSelected());
+		setAltaFormValues({ ...altaFormValues, observaciones: "" });
 		formValues.cultivo = "";
 	};
 

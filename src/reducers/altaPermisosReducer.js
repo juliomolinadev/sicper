@@ -304,7 +304,8 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.unsetPermisosComplemento:
 			return {
 				...state,
-				permisosComplemento: []
+				permisosComplemento: [],
+				observaciones: ""
 			};
 
 		case types.unsetProductor:

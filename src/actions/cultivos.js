@@ -5,6 +5,7 @@ import { loadCiclo } from "../helpers/DB/loadCiclo";
 import { goToElement } from "../helpers/functions/assets";
 import { saveCultivo } from "../helpers/saveCultivo";
 import { removeError } from "./ui";
+import { unsetPermisosComplemento } from "./productores";
 
 export const openCultivosModal = () => ({
 	type: types.altaPermisoOpenCultivosModal
@@ -92,6 +93,7 @@ export const loadSuperficiePrevia = async (ciclo, modulo, cultivo) => {
 export const startSetCultivoSelected = (cultivo) => {
 	return async (dispatch) => {
 		dispatch(removeError());
+		dispatch(unsetPermisosComplemento());
 
 		const ciclo = await loadCiclo();
 		const superficiePrevia = await loadSuperficiePrevia(
