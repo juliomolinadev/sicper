@@ -16,16 +16,19 @@ export const crearPadronDeCultivo = async (ciclo, claveCultivo, nombreCultivo) =
 	const cicloAnterior = `${Number(cicloSplit[0]) - 1}-${Number(cicloSplit[1]) - 1}`;
 
 	// Traer todos los permisos expedidos del cultivo del ciclo anterior
-	const permisosSnap = await db
+	const permisosAnterioresSnap = await db
 		.collectionGroup("permisos")
 		.where("claveCultivo", "==", claveCultivo)
 		.where("ciclo", "==", cicloAnterior)
+		.where("estadoPermiso", "!=", "Cancelado")
 		.get();
 
 	const padron = [];
 	const modulos = [];
+	const fugitivos = [];
 
-	permisosSnap.forEach((permiso) => {
+	// Generar padron en base a los permisos expedidos en el ciclo anterior
+	permisosAnterioresSnap.forEach((permiso) => {
 		const modulosIndex = modulos.findIndex((modulo) => modulo.modulo === permiso.data().modulo);
 
 		if (modulosIndex === -1) {
@@ -42,7 +45,7 @@ export const crearPadronDeCultivo = async (ciclo, claveCultivo, nombreCultivo) =
 
 		const padronIndex = padron.findIndex(
 			(productor) =>
-				productor.curp === permiso.data().curpProductor &&
+				productor.idProductor === permiso.data().idProductorSelected &&
 				productor.modulo === permiso.data().modulo
 		);
 
@@ -61,6 +64,64 @@ export const crearPadronDeCultivo = async (ciclo, claveCultivo, nombreCultivo) =
 			padron[padronIndex].supConcesion += permiso.data().supAutorizada;
 		}
 	});
+
+	// Actualizar padron con los permisos expedidos en el ciclo actual
+	const permisosActualesSnap = await db
+		.collectionGroup("permisos")
+		.where("claveCultivo", "==", claveCultivo)
+		.where("ciclo", "==", ciclo)
+		.where("estadoPermiso", "!=", "Cancelado")
+		.get();
+
+	permisosActualesSnap.forEach((permiso) => {
+		const modulosIndex = modulos.findIndex((modulo) => modulo.modulo === permiso.data().modulo);
+
+		if (modulosIndex === -1) {
+			modulos.push({
+				cultivo: nombreCultivo,
+				modulo: permiso.data().modulo,
+				ciclo,
+				supConcesion: 0,
+				supExpedida: permiso.data().supAutorizada
+			});
+		} else {
+			modulos[modulosIndex].supExpedida += permiso.data().supAutorizada;
+		}
+
+		const padronIndex = padron.findIndex(
+			(productor) =>
+				productor.idProductor === permiso.data().idProductorSelected &&
+				productor.modulo === permiso.data().modulo
+		); // Si no se encuentra el productor quiere decir que expidio sin estar en el padron
+
+		if (padronIndex === -1) {
+			padron.push({
+				idProductor: permiso.data().idProductorSelected,
+				curp: permiso.data().curpProductor,
+				nombre: permiso.data().nombreProductor,
+				cultivo: nombreCultivo,
+				modulo: permiso.data().modulo,
+				ciclo,
+				supConcesion: 0,
+				supExpedida: permiso.data().supAutorizada
+			});
+
+			fugitivos.push({
+				idProductorSelected: permiso.data().idProductorSelected,
+				curpProductor: permiso.data().curpProductor,
+				nombreProductor: permiso.data().nombreProductor,
+				modulo: permiso.data().modulo,
+				supAutorizada: permiso.data().supAutorizada,
+				cuenta: permiso.data().cuenta,
+				usuario: permiso.data().usuario,
+				numeroPermiso: permiso.data().numeroPermiso
+			});
+		} else {
+			padron[padronIndex].supExpedida += permiso.data().supAutorizada;
+		}
+	});
+
+	console.table(fugitivos);
 
 	if (padron.length > 0) {
 		try {
