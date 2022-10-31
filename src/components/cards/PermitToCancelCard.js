@@ -4,6 +4,7 @@ import Swal from "sweetalert2";
 import { startLoadPreCancelPermits, unsetPermitToCancel } from "../../actions/permisosScreen";
 import { cancelPermit } from "../../helpers/DB/cancelPermit";
 import { getPermitStatus } from "../../helpers/DB/getPermitStatus";
+import { denegarCancelacionDePermiso } from "../../helpers/denegarCancelacionDePermiso";
 
 export const PermitToCancelCard = () => {
 	const { preCancelPermits, permitToCancelSelected } = useSelector((state) => state.permisosScreen);
@@ -43,6 +44,31 @@ export const PermitToCancelCard = () => {
 		});
 	};
 
+	const denegarCancelacion = () => {
+		Swal.fire({
+			title: "Denegar solicitud de cancelación.",
+			text: `El estado del permiso ${permit.numeroPermiso} quedará como "activo".`,
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Confirmar",
+			cancelButtonText: "Cancelar"
+		}).then(async ({ isConfirmed }) => {
+			if (isConfirmed) {
+				const isDenied = denegarCancelacionDePermiso(
+					permit.numeroPermiso,
+					permit.modulo,
+					permit.ciclo
+				);
+				if (isDenied) {
+					dispatch(startLoadPreCancelPermits(auth.variablesGlobales.cicloActual));
+					dispatch(unsetPermitToCancel());
+				}
+			}
+		});
+	};
+
 	const elements = {
 		MODULO: permit.modulo,
 		CUENTA: permit.cuenta,
@@ -77,6 +103,10 @@ export const PermitToCancelCard = () => {
 				<button type="button" className="btn btn-outline-danger" onClick={cancelarPermiso}>
 					<i className="fas fa-times"></i>
 					<span> Cancelar</span>
+				</button>
+
+				<button type="button" className="btn btn-outline-primary ml-4" onClick={denegarCancelacion}>
+					<span> Denegar</span>
 				</button>
 			</div>
 		</div>

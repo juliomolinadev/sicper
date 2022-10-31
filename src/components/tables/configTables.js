@@ -112,7 +112,7 @@ export const asignacionLocaltiesColumns = [
 
 export const permisosColumns = [
 	{ name: "id", selector: "id", omit: true },
-	{ name: "PERMISO", selector: "numeroPermiso", sortable: true, width: "110px" },
+	{ name: "PERMISO", selector: "numeroPermiso", sortable: true, width: "120px" },
 	{ name: "CUENTA", selector: "cuenta", sortable: true, width: "80px" },
 	{ name: "USUARIO", selector: "usuario", sortable: true, width: "250px" },
 	{ name: "PRODUCTOR", selector: "nombreProductor", width: "250px", sortable: true },
