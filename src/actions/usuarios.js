@@ -51,7 +51,7 @@ export const startSetUsuarioSelected = (usuario, tipo) => {
 		dispatch(setCultivosAnteriores(cultivosYProductoresAnteriores[0]));
 		dispatch(setProductoresAnteriores(cultivosYProductoresAnteriores[1]));
 
-		const laboresPendientes = await loadLaboresPendientes(
+		const labores = await loadLaboresPendientes(
 			`${usuario.cuenta}.${usuario.subcta}`,
 			usuario.entidad,
 			cicloAnterior
@@ -71,7 +71,8 @@ export const startSetUsuarioSelected = (usuario, tipo) => {
 
 			usuario.supRiego = usuario.superficieTransferida;
 			usuario.supPrevia = supPrevia;
-			usuario.laboresPendientes = laboresPendientes;
+			usuario.laboresPendientes = labores.laboresPendientes;
+			usuario.superficieParcialLiberada = labores.superficieParcialLiberada;
 			usuario.dictamen = dictamen;
 
 			dispatch(unsetTransferencia());
@@ -87,7 +88,8 @@ export const startSetUsuarioSelected = (usuario, tipo) => {
 
 			const transfers = await loadUserTransfer(`${usuario.cuenta}-${usuario.subcta}`, ciclo);
 
-			usuario.laboresPendientes = laboresPendientes;
+			usuario.laboresPendientes = labores.laboresPendientes;
+			usuario.superficieParcialLiberada = labores.superficieParcialLiberada;
 			usuario.supPrevia = supPrevia + transfers;
 			usuario.dictamen = dictamen;
 

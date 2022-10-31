@@ -286,8 +286,21 @@ export const NuevoPermisoScreen = () => {
 				)
 			);
 			return false;
-		} else if (altaPermisos.laboresPendientes) {
+		} else if (
+			altaPermisos.laboresPendientes &&
+			(!altaPermisos.superficieParcialLiberada || altaPermisos.superficieParcialLiberada === 0)
+		) {
 			dispatch(setError("La cuenta seleccionada tiene labores fitosanitarias pendientes."));
+			return false;
+		} else if (
+			altaPermisos.laboresPendientes &&
+			supAutorizada > altaPermisos.superficieParcialLiberada
+		) {
+			dispatch(
+				setError(
+					`La cuenta seleccionada tiene labores fitosanitarias pendientes. Solo tiene ${altaPermisos.superficieParcialLiberada} ha disponibles para expedición.`
+				)
+			);
 			return false;
 		} else if (!fuenteCredito) {
 			dispatch(setError("Especifique la fuente de crédito."));

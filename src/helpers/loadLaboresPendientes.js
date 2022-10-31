@@ -2,6 +2,7 @@ import { db } from "../firebase/firebase-config";
 
 export const loadLaboresPendientes = async (cuenta, modulo, cicloAnterior) => {
 	let laboresPendientes = false;
+	let superficieParcialLiberada = 0;
 
 	const cicloSplit = cicloAnterior.split("-");
 	const ciclos = [];
@@ -34,8 +35,10 @@ export const loadLaboresPendientes = async (cuenta, modulo, cicloAnterior) => {
 	permisosResolbed.forEach((batch) => {
 		batch.forEach((permiso) => {
 			if (permiso.data().laboresPendientes === true) laboresPendientes = true;
+			if (permiso.data().superficieParcialLiberada)
+				superficieParcialLiberada += permiso.data().superficieParcialLiberada;
 		});
 	});
 
-	return laboresPendientes;
+	return { laboresPendientes, superficieParcialLiberada };
 };

@@ -35,12 +35,12 @@ export const CheckSanidad = () => {
 		setInitialState(dataPermiso)
 	);
 
+	const cicloSplit = variablesGlobales.cicloConsulta.split("-");
+	const cicloAnterior = `${Number(cicloSplit[0]) - 1}-${Number(cicloSplit[1]) - 1}`;
+
 	const checkUncheck = async (editable, name, state) => {
 		if (determinaAcceso(editable, name, registrarLabores, pagarLabores, uid, dataPermiso.tecnico)) {
 			const updates = getUpdates(name, state);
-
-			const cicloSplit = variablesGlobales.cicloConsulta.split("-");
-			const cicloAnterior = `${Number(cicloSplit[0]) - 1}-${Number(cicloSplit[1]) - 1}`;
 
 			const isSave = await updatePermisoAlgodonero(
 				permisoSelected,
@@ -57,90 +57,129 @@ export const CheckSanidad = () => {
 	};
 
 	const addSuperficieMapeada = (superficieActual) => {
-		Swal.fire({
-			title: "Actualizar superficie mapeada",
-			input: "text",
-			inputPlaceholder: superficieActual,
-			inputAttributes: {
-				autocapitalize: "off"
-			},
-			showCancelButton: true,
-			confirmButtonText: "Guardar",
-			cancelButtonText: "Cancelar"
-		}).then(async (result) => {
-			if (result.isConfirmed) {
-				const isSave = await updatePermisoAlgodonero(
-					permisoSelected,
-					dataPermiso.modulo,
-					"2020-2021",
-					{
-						superficieMapeada: Number(result.value)
+		if (uid === dataPermiso.tecnico) {
+			Swal.fire({
+				title: "Actualizar superficie mapeada",
+				input: "text",
+				inputPlaceholder: superficieActual,
+				inputAttributes: {
+					autocapitalize: "off"
+				},
+				showCancelButton: true,
+				confirmButtonText: "Guardar",
+				cancelButtonText: "Cancelar"
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					const isSave = await updatePermisoAlgodonero(
+						permisoSelected,
+						dataPermiso.modulo,
+						cicloAnterior,
+						{
+							superficieMapeada: Number(result.value)
+						}
+					);
+					if (isSave) {
+						dispatch(updatePermiso({ ...dataPermiso, superficieMapeada: Number(result.value) }));
+						Swal.fire("OK", `Se actualiso la superficie mapeada`, "success");
 					}
-				);
-				if (isSave) {
-					dispatch(updatePermiso({ ...dataPermiso, superficieMapeada: Number(result.value) }));
-					Swal.fire("OK", `Se actualiso la superficie mapeada`, "success");
 				}
-			}
-		});
+			});
+		}
+	};
+
+	const addSuperficieParcialLiberada = (superficieParcialLiberada) => {
+		if (uid === dataPermiso.tecnico) {
+			Swal.fire({
+				title: "Liberar superficie parcial.",
+				input: "text",
+				inputPlaceholder: superficieParcialLiberada,
+				inputAttributes: {
+					autocapitalize: "off"
+				},
+				showCancelButton: true,
+				confirmButtonText: "Guardar",
+				cancelButtonText: "Cancelar"
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					const isSave = await updatePermisoAlgodonero(
+						permisoSelected,
+						dataPermiso.modulo,
+						cicloAnterior,
+						{
+							superficieParcialLiberada: Number(result.value)
+						}
+					);
+					if (isSave) {
+						dispatch(
+							updatePermiso({ ...dataPermiso, superficieParcialLiberada: Number(result.value) })
+						);
+						Swal.fire("OK", `Se liberaron ${result.value} ha para expedición.`, "success");
+					}
+				}
+			});
+		}
 	};
 
 	const addFolioFisico = (folio) => {
-		Swal.fire({
-			title: "Folio de constancia física:",
-			input: "text",
-			inputPlaceholder: folio,
-			inputAttributes: {
-				autocapitalize: "off"
-			},
-			showCancelButton: true,
-			confirmButtonText: "Guardar",
-			cancelButtonText: "Cancelar"
-		}).then(async (result) => {
-			if (result.isConfirmed) {
-				const isSave = await updatePermisoAlgodonero(
-					permisoSelected,
-					dataPermiso.modulo,
-					"2020-2021",
-					{
-						folioConstaniciaFisica: result.value
+		if (uid === dataPermiso.tecnico) {
+			Swal.fire({
+				title: "Folio de constancia física:",
+				input: "text",
+				inputPlaceholder: folio,
+				inputAttributes: {
+					autocapitalize: "off"
+				},
+				showCancelButton: true,
+				confirmButtonText: "Guardar",
+				cancelButtonText: "Cancelar"
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					const isSave = await updatePermisoAlgodonero(
+						permisoSelected,
+						dataPermiso.modulo,
+						cicloAnterior,
+						{
+							folioConstaniciaFisica: result.value
+						}
+					);
+					if (isSave) {
+						dispatch(updatePermiso({ ...dataPermiso, folioConstaniciaFisica: result.value }));
+						Swal.fire("OK", `Se guardó el folio de la constancia.`, "success");
 					}
-				);
-				if (isSave) {
-					dispatch(updatePermiso({ ...dataPermiso, folioConstaniciaFisica: result.value }));
-					Swal.fire("OK", `Se guardó el folio de la constancia.`, "success");
 				}
-			}
-		});
+			});
+		}
 	};
 
 	const addComentario = (comentario) => {
-		Swal.fire({
-			title: "Folio de constancia física:",
-			input: "textarea",
-			inputValue: comentario,
-			inputAttributes: {
-				autocapitalize: "off"
-			},
-			showCancelButton: true,
-			confirmButtonText: "Guardar",
-			cancelButtonText: "Cancelar"
-		}).then(async (result) => {
-			if (result.isConfirmed) {
-				const isSave = await updatePermisoAlgodonero(
-					permisoSelected,
-					dataPermiso.modulo,
-					"2020-2021",
-					{
-						comentario: result.value
+		if (uid === dataPermiso.tecnico) {
+			Swal.fire({
+				title: "Folio de constancia física:",
+				input: "textarea",
+				inputValue: comentario,
+				inputAttributes: {
+					autocapitalize: "off"
+				},
+				showCancelButton: true,
+				confirmButtonText: "Guardar",
+				cancelButtonText: "Cancelar"
+			}).then(async (result) => {
+				if (result.isConfirmed) {
+					const isSave = await updatePermisoAlgodonero(
+						permisoSelected,
+						dataPermiso.modulo,
+						cicloAnterior,
+						{
+							comentario: result.value
+						}
+					);
+					if (isSave) {
+						dispatch(updatePermiso({ ...dataPermiso, comentario: result.value }));
+						Swal.fire("OK", `Se guardó el comentario.`, "success");
 					}
-				);
-				if (isSave) {
-					dispatch(updatePermiso({ ...dataPermiso, comentario: result.value }));
-					Swal.fire("OK", `Se guardó el comentario.`, "success");
 				}
-			}
-		});
+			});
+		}
 	};
 
 	const formatter = new Intl.NumberFormat("es-MX", {
@@ -207,6 +246,11 @@ export const CheckSanidad = () => {
 				<div className="row p-1 pl-2 pt-2">
 					<div className="col-4">CUENTA:</div>
 					<div className="col-8">{dataPermiso.cuenta}</div>
+				</div>
+
+				<div className="row p-1 pl-2 pt-2">
+					<div className="col-4">CICLO:</div>
+					<div className="col-8">{dataPermiso.ciclo}</div>
 				</div>
 
 				<div className="row p-1 pl-2">
@@ -310,6 +354,24 @@ export const CheckSanidad = () => {
 					</div>
 				</div>
 
+				<div className="row border rounded m-2 p-2 d-flex align-items-center">
+					<div className="col-6 ">LIBERAR SUPERFICIE PARCIAL:</div>
+					<div className="col-3">{dataPermiso.superficieParcialLiberada} Ha</div>
+					<div className="col-3">
+						{registrarLabores && (
+							<button
+								className=" btn btn-outline-primary btn-sm "
+								type="button"
+								onClick={() =>
+									addSuperficieParcialLiberada(dataPermiso.superficieParcialLiberada ?? 0)
+								}
+							>
+								<i className="fas fa-edit"></i>
+							</button>
+						)}
+					</div>
+				</div>
+
 				<div className="row pt-3 pl-2">
 					<div className={`col-12 ${!dataPermiso.laboresPendientes && "text-success"}`}>
 						{dataPermiso.laboresPendientes
@@ -317,6 +379,18 @@ export const CheckSanidad = () => {
 							: "CUENTA LIBERADA PARA EXPEDICIÓN"}
 					</div>
 				</div>
+
+				{dataPermiso.superficieParcialLiberada &&
+				dataPermiso.superficieParcialLiberada > 0 &&
+				dataPermiso.laboresPendientes ? (
+					<div className="row pt-3 pl-2">
+						<div className="col-12 text-success">
+							{dataPermiso.superficieParcialLiberada} HA LIBRES PARA EXPEDICIÓN
+						</div>
+					</div>
+				) : (
+					""
+				)}
 
 				<div className="row p-1 pl-2 pt-4 pb-4">
 					<div className="col-12 d-flex justify-content-center">

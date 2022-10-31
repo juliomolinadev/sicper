@@ -56,6 +56,99 @@ export const editarPermisos = async () => {
 	console.table(permisosFujitivos);
 };
 
+// // Registra permisos ###########################################################################################
+// export const editarPermisos = async () => {
+// 	const permisos = [
+// 		{
+// 			numeroPermiso: "MOD9B-2000",
+// 			cuenta: "10497.0",
+// 			usuario: "ESTRADA GARCIA ERENDIDA Y+",
+// 			modulo: "9B",
+// 			claveLocalidad: 71,
+// 			tipoLocalidad: "Colonia",
+// 			nombreLocalidad: "MADERO",
+// 			lote: "31",
+// 			supAutorizada: 20
+// 		},
+// 		{
+// 			numeroPermiso: "MOD11-2000",
+// 			cuenta: "12455.0",
+// 			usuario: "LOPEZ ANGULO ROSA",
+// 			modulo: "11",
+// 			claveLocalidad: 104,
+// 			tipoLocalidad: "Colonia",
+// 			nombreLocalidad: "SONORA",
+// 			lote: "21",
+// 			supAutorizada: 11.19
+// 		},
+// 		{
+// 			numeroPermiso: "MOD11-2001",
+// 			cuenta: "12767.0",
+// 			usuario: "PALMERIN MEDRANO RAMON Y+",
+// 			modulo: "11",
+// 			claveLocalidad: 110,
+// 			tipoLocalidad: "Colonia",
+// 			nombreLocalidad: "V. CARRANZA",
+// 			lote: "47",
+// 			supAutorizada: 20
+// 		},
+// 		{
+// 			numeroPermiso: "MOD17-2000",
+// 			cuenta: "14635.0",
+// 			usuario: "DE LA CERDA PIZANO LUIS",
+// 			modulo: "17",
+// 			claveLocalidad: 166,
+// 			tipoLocalidad: "Ejido",
+// 			nombreLocalidad: "HIDALGO",
+// 			lote: "8",
+// 			supAutorizada: 16.92
+// 		},
+// 		{
+// 			numeroPermiso: "MOD21-2000",
+// 			cuenta: "8436.0",
+// 			usuario: "JIMENEZ BARRERA GABRIEL",
+// 			modulo: "21",
+// 			claveLocalidad: 211,
+// 			tipoLocalidad: "Ejido",
+// 			nombreLocalidad: "SOMBRERETE I",
+// 			lote: "93",
+// 			supAutorizada: 6.59
+// 		}
+// 	];
+
+// 	try {
+// 		permisos.forEach((permiso) => {
+// 			console.log("Escribiendo: ", permiso.numeroPermiso);
+
+// 			db.collection("permisos")
+// 				.doc("2020-2021")
+// 				.collection("modulos")
+// 				.doc(`Modulo-${permiso.modulo}`)
+// 				.collection("permisos")
+// 				.doc(permiso.numeroPermiso)
+// 				.set({
+// 					...permiso,
+// 					ciclo: "2020-2021",
+// 					nombreCultivo: "ALGODONERO",
+// 					estadoPermiso: "activo",
+// 					claveCultivo: 80,
+// 					barbechado: false,
+// 					cosechado: false,
+// 					desarraigado: false,
+// 					desfoliado: false,
+// 					desvarado: false,
+// 					disqueado: false,
+// 					laboresPendientes: true,
+// 					pagado: false,
+// 					superficieMapeada: 0,
+// 					tecnico: false
+// 				});
+// 		});
+// 	} catch (error) {
+// 		console.log(error);
+// 	}
+// };
+
 // // Asigna tecnico a permisos del 2021-2022 ##################################################################
 // export const editarPermisos = async () => {
 // 	const permisosSnap = await db
