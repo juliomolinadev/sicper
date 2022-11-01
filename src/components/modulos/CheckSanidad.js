@@ -101,19 +101,29 @@ export const CheckSanidad = () => {
 				cancelButtonText: "Cancelar"
 			}).then(async (result) => {
 				if (result.isConfirmed) {
-					const isSave = await updatePermisoAlgodonero(
-						permisoSelected,
-						dataPermiso.modulo,
-						cicloAnterior,
-						{
-							superficieParcialLiberada: Number(result.value)
-						}
-					);
-					if (isSave) {
-						dispatch(
-							updatePermiso({ ...dataPermiso, superficieParcialLiberada: Number(result.value) })
+					if (result.value > dataPermiso.supDerecho - dataPermiso.supAutorizada) {
+						Swal.fire(
+							"Error.",
+							`Solo es posible liberar ${
+								dataPermiso.supDerecho - dataPermiso.supAutorizada
+							} ha o menos en esta cuenta.`,
+							"error"
 						);
-						Swal.fire("OK", `Se liberaron ${result.value} ha para expedición.`, "success");
+					} else {
+						const isSave = await updatePermisoAlgodonero(
+							permisoSelected,
+							dataPermiso.modulo,
+							cicloAnterior,
+							{
+								superficieParcialLiberada: Number(result.value)
+							}
+						);
+						if (isSave) {
+							dispatch(
+								updatePermiso({ ...dataPermiso, superficieParcialLiberada: Number(result.value) })
+							);
+							Swal.fire("OK", `Se liberaron ${result.value} ha para expedición.`, "success");
+						}
 					}
 				}
 			});
@@ -272,8 +282,13 @@ export const CheckSanidad = () => {
 				</div>
 
 				<div className="row p-1 pl-2">
-					<div className="col-4">SUPERFICIE:</div>
+					<div className="col-4">SUP. PERMISO :</div>
 					<div className="col-8">{dataPermiso.supAutorizada} ha</div>
+				</div>
+
+				<div className="row p-1 pl-2">
+					<div className="col-4">SUP. CUENTA:</div>
+					<div className="col-8">{dataPermiso.supDerecho} ha</div>
 				</div>
 
 				<div className="row border rounded m-2 p-2 d-flex align-items-center">

@@ -130,7 +130,7 @@ export const laboresColumns = [
 	{ name: "CUENTA", selector: "cuenta", sortable: true, width: "80px" },
 	{ name: "USUARIO", selector: "usuario", sortable: true, width: "250px" },
 	{ name: "PERMISO", selector: "numeroPermiso", sortable: true, width: "120px" },
-	{ name: "MODULO", selector: "modulo", sortable: true, width: "60px", center: true },
+	{ name: "MODULO", selector: "modulo", sortable: true, width: "80px", center: true },
 	{ name: "HA", selector: "supAutorizada", width: "60px", sortable: true, center: true },
 	{ name: "LOTE", selector: "lote", sortable: true, width: "60px", center: true },
 	{ name: "LOCALIDAD", selector: "nombreLocalidad", sortable: true, width: "130px" },
