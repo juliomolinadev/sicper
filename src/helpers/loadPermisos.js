@@ -23,6 +23,17 @@ export const loadPermisos = async (
 	const fechaInicialBusqueda = fechaInicial ?? new Date(cicloSplit[0], 8, 1);
 	const fechaFinalBusqueda = fechaFinal ?? new Date(cicloSplit[1], 8, 30);
 
+	const usuarios = [];
+	const usuariosBatch = await db.collection("usuarios").get();
+
+	usuariosBatch.forEach((usuario) => {
+		usuarios.push({
+			id: usuario.id,
+			displayName: usuario.data().displayName,
+			email: usuario.data().email
+		});
+	});
+
 	const permisos = [];
 	const permisosCampo = [];
 
@@ -69,10 +80,21 @@ export const loadPermisos = async (
 			const fecha = snapHijo.data().fechaEmicion.toDate();
 
 			if (fecha >= fechaInicialBusqueda && fecha <= addDays(fechaFinalBusqueda, 1)) {
-				permisos.push({
+				const usuario = usuarios.find(
+					(usuario) => usuario.id === snapHijo.data().solicitanteCancelacion
+				);
+
+				const permiso = {
 					id: snapHijo.id,
 					...snapHijo.data()
-				});
+				};
+
+				if (usuario) {
+					permiso.nombreSolicitanteCancelacion = usuario.displayName;
+					permiso.emailSolicitanteCancelacion = usuario.email;
+				}
+
+				permisos.push(permiso);
 			}
 		});
 	}

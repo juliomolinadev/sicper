@@ -1,60 +1,108 @@
 import { db } from "../../firebase/firebase-config";
 
-// Muestra los permisos expedidos que evadieron labores fitosanitarias ###########################################
+// Muestra permisoa cancelados por modulo ######################################################################
 export const editarPermisos = async () => {
-	const permisosAnterioresSnap = await db
-		.collectionGroup("permisos")
-		.where("claveCultivo", "==", 80)
-		.where("ciclo", "==", "2021-2022")
-		.where("estadoPermiso", "!=", "Cancelado")
-		.get();
+	const permisos = [];
+	const usuarios = [];
 
-	const permisosAnteriores = [];
-	const permisosNuevosPromises = [];
+	const usuariosBatch = await db.collection("usuarios").get();
 
-	permisosAnterioresSnap.forEach((permiso) => {
-		permisosAnteriores.push({ ...permiso.data() });
-
-		const permisosNuevosRef = db
-			.collection("permisos")
-			.doc("2022-2023")
-			.collection("modulos")
-			.doc(`Modulo-${permiso.data().modulo}`)
-			.collection("permisos")
-			.where("cuenta", "==", permiso.data().cuenta);
-
-		permisosNuevosPromises.push(permisosNuevosRef.get());
-	});
-
-	const permisosNuevosResolbed = await Promise.all(permisosNuevosPromises);
-	const permisosFujitivos = [];
-
-	permisosNuevosResolbed.forEach((batch) => {
-		batch.forEach((permisoNuevo) => {
-			const arrayDePermisosAnteriores = permisosAnteriores.filter(
-				(permisoAnterior) => permisoAnterior.cuenta === permisoNuevo.data().cuenta
-			);
-
-			let stringDePermisosAnteriores = "";
-
-			arrayDePermisosAnteriores.forEach((permiso) => {
-				stringDePermisosAnteriores = `${stringDePermisosAnteriores}${permiso.numeroPermiso}*(${permiso.supAutorizada}ha) `;
-			});
-
-			permisosFujitivos.push({
-				id: permisoNuevo.id,
-				cultivo: permisoNuevo.data().nombreCultivo,
-				modulo: permisoNuevo.data().modulo,
-				cuenta: permisoNuevo.data().cuenta,
-				expedida: permisoNuevo.data().supAutorizada,
-				derecho: permisoNuevo.data().supDerecho,
-				permisosAnteriores: stringDePermisosAnteriores
-			});
+	usuariosBatch.forEach((usuario) => {
+		usuarios.push({
+			id: usuario.id,
+			displayName: usuario.data().displayName,
+			email: usuario.data().email
 		});
 	});
 
-	console.table(permisosFujitivos);
+	const permisosBatch = await db
+		.collection("permisos")
+		.doc("2021-2022")
+		.collection("modulos")
+		.doc(`Modulo-14`)
+		.collection("permisos")
+		.where("estadoPermiso", "!=", "activo")
+		.get();
+
+	permisosBatch.forEach((permiso) => {
+		const usuario = usuarios.find(
+			(usuario) => usuario.id === permiso.data().solicitanteCancelacion
+		);
+		permisos.push({
+			numeroPermiso: permiso.data().numeroPermiso,
+			ciclo: permiso.data().ciclo,
+			estadoPermiso: permiso.data().estadoPermiso,
+			cuenta: permiso.data().cuenta,
+			usuario: permiso.data().usuario,
+			nombreCultivo: permiso.data().nombreCultivo,
+			supAutorizada: permiso.data().supAutorizada,
+			usuarioSolicitante: usuario.displayName,
+			emailSolicitante: usuario.email,
+			fechaSolicitudCancelacion: permiso
+				.data()
+				.fechaSolicitudCancelacion.toDate()
+				.toLocaleDateString()
+		});
+	});
+
+	console.table(permisos);
 };
+
+// // Muestra los permisos expedidos que evadieron labores fitosanitarias ###########################################
+// export const editarPermisos = async () => {
+// 	const permisosAnterioresSnap = await db
+// 		.collectionGroup("permisos")
+// 		.where("claveCultivo", "==", 80)
+// 		.where("ciclo", "==", "2021-2022")
+// 		.where("estadoPermiso", "!=", "Cancelado")
+// 		.get();
+
+// 	const permisosAnteriores = [];
+// 	const permisosNuevosPromises = [];
+
+// 	permisosAnterioresSnap.forEach((permiso) => {
+// 		permisosAnteriores.push({ ...permiso.data() });
+
+// 		const permisosNuevosRef = db
+// 			.collection("permisos")
+// 			.doc("2022-2023")
+// 			.collection("modulos")
+// 			.doc(`Modulo-${permiso.data().modulo}`)
+// 			.collection("permisos")
+// 			.where("cuenta", "==", permiso.data().cuenta);
+
+// 		permisosNuevosPromises.push(permisosNuevosRef.get());
+// 	});
+
+// 	const permisosNuevosResolbed = await Promise.all(permisosNuevosPromises);
+// 	const permisosFujitivos = [];
+
+// 	permisosNuevosResolbed.forEach((batch) => {
+// 		batch.forEach((permisoNuevo) => {
+// 			const arrayDePermisosAnteriores = permisosAnteriores.filter(
+// 				(permisoAnterior) => permisoAnterior.cuenta === permisoNuevo.data().cuenta
+// 			);
+
+// 			let stringDePermisosAnteriores = "";
+
+// 			arrayDePermisosAnteriores.forEach((permiso) => {
+// 				stringDePermisosAnteriores = `${stringDePermisosAnteriores}${permiso.numeroPermiso}*(${permiso.supAutorizada}ha) `;
+// 			});
+
+// 			permisosFujitivos.push({
+// 				id: permisoNuevo.id,
+// 				cultivo: permisoNuevo.data().nombreCultivo,
+// 				modulo: permisoNuevo.data().modulo,
+// 				cuenta: permisoNuevo.data().cuenta,
+// 				expedida: permisoNuevo.data().supAutorizada,
+// 				derecho: permisoNuevo.data().supDerecho,
+// 				permisosAnteriores: stringDePermisosAnteriores
+// 			});
+// 		});
+// 	});
+
+// 	console.table(permisosFujitivos);
+// };
 
 // // Registra permisos ###########################################################################################
 // export const editarPermisos = async () => {

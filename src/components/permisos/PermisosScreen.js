@@ -263,10 +263,36 @@ export const PermisosScreen = () => {
 									{moment(dataPermiso.vigencia.toDate()).format("DD/MM/YYYY")}
 								</div>
 							</div>
+
 							<div className="row p-1 pl-2">
 								<div className="col-4">ESTADO:</div>
 								<div className="col-8">{dataPermiso.estadoPermiso}</div>
 							</div>
+
+							{dataPermiso.estadoPermiso !== "activo" && (
+								<div className="bg-light rounded m-4 p-2">
+									<div className="row p-1 pl-2">
+										<div className="col-12">DATOS DE LA SOLICITUD DE CANCELACIÓN</div>
+									</div>
+
+									<div className="row p-1 pl-2">
+										<div className="col-4">FECHA:</div>
+										<div className="col-8">
+											{dataPermiso.fechaSolicitudCancelacion.toDate().toLocaleDateString()}
+										</div>
+									</div>
+
+									<div className="row p-1 pl-2">
+										<div className="col-4">USUARIO:</div>
+										<div className="col-8">{dataPermiso.nombreSolicitanteCancelacion}</div>
+									</div>
+
+									<div className="row p-1 pl-2">
+										<div className="col-4">EMAIL:</div>
+										<div className="col-8">{dataPermiso.emailSolicitanteCancelacion}</div>
+									</div>
+								</div>
+							)}
 
 							<div className="row p-1 pl-2 pt-4 pb-4">
 								<div className="col-4 d-flex justify-content-center">
@@ -350,6 +376,6 @@ const isAvailableCancelButton = (estadoPermiso, permisosVinculados, requiereCont
 	if (estadoPermiso !== "activo") return false;
 	if (permisosVinculados && permisosVinculados.length > 0 && requiereControlCPUS) return true;
 	if (permisosVinculados && permisosVinculados.length === 0) return true;
-	if (!permisosVinculados) return true;
+	if (!permisosVinculados || permisosVinculados.length === 0) return true;
 	else return false;
 };
