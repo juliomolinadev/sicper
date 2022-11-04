@@ -283,6 +283,11 @@ export const PermisosScreen = () => {
 									</div>
 
 									<div className="row p-1 pl-2">
+										<div className="col-4">MOTIVO:</div>
+										<div className="col-8">{dataPermiso.motivoCancelacion}</div>
+									</div>
+
+									<div className="row p-1 pl-2">
 										<div className="col-4">USUARIO:</div>
 										<div className="col-8">{dataPermiso.nombreSolicitanteCancelacion}</div>
 									</div>
