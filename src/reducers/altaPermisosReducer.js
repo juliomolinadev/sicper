@@ -12,7 +12,9 @@ const initialState = {
 	isOpenPrintPermisoModal: false,
 	usuarios: [],
 	cultivos: [],
-	cultivosAnteriores: [],
+	cultivosAnteriores: [
+		{ clave: 0, id: "zaNmqPpV7fVmcSDZ4bu7", nombre: "SIN CULTIVO", superficie: 0 }
+	],
 	productores: [],
 	idUsuarioSelected: null,
 	cuenta: null,
@@ -250,7 +252,10 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				seccion: null,
 				canal: null,
 				toma: null,
-				sistema: null
+				sistema: null,
+				cultivosAnteriores: [
+					{ clave: 0, id: "zaNmqPpV7fVmcSDZ4bu7", nombre: "SIN CULTIVO", superficie: 0 }
+				]
 			};
 
 		//Productores **************************************

@@ -41,14 +41,14 @@ export const loadCultivosYProductoresAnteriores = async (cuenta, modulo, ciclo) 
 			});
 	});
 
-	if (cultivos.length === 0) {
-		cultivos.push({
-			superficie: 0,
-			nombre: "SIN CULTIVO",
-			id: "",
-			clave: ""
-		});
-	}
+	// if (cultivos.length === 0) {
+	// 	cultivos.push({
+	// 		superficie: 0,
+	// 		nombre: "SIN CULTIVO",
+	// 		id: "zaNmqPpV7fVmcSDZ4bu7",
+	// 		clave: 0
+	// 	});
+	// }
 
 	if (productores.length === 0) {
 		productores.push({
@@ -57,6 +57,8 @@ export const loadCultivosYProductoresAnteriores = async (cuenta, modulo, ciclo) 
 			nombre: "SIN PRODUTOR"
 		});
 	}
+
+	console.log(cultivos);
 
 	return [cultivos, productores];
 };

@@ -48,7 +48,12 @@ export const startSetUsuarioSelected = (usuario, tipo) => {
 			cicloAnterior
 		);
 
-		dispatch(setCultivosAnteriores(cultivosYProductoresAnteriores[0]));
+		dispatch(
+			setCultivosAnteriores([
+				...state.altaPermisos.cultivosAnteriores,
+				...cultivosYProductoresAnteriores[0]
+			])
+		);
 		dispatch(setProductoresAnteriores(cultivosYProductoresAnteriores[1]));
 
 		const labores = await loadLaboresPendientes(

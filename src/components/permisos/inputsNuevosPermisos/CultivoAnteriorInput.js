@@ -34,7 +34,7 @@ export const CultivoAnteriorInput = () => {
 						Cultivo Anterior
 					</option>
 
-					<option value={"SIN CULTIVO"}>SIN CULTIVO</option>
+					{/* <option value={"SIN CULTIVO"}>SIN CULTIVO</option> */}
 
 					{cultivosAnteriores.map((cultivo) => (
 						<option key={cultivo.id} value={cultivo.nombre}>
