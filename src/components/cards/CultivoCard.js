@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
-import { startSaveCultivo } from "../../actions/cultivos";
+import { startDeleteCultivo, startSaveCultivo } from "../../actions/cultivos";
 import { setError } from "../../actions/ui";
 import { useFormToUpper } from "../../hooks/UseFormToUpper";
 import { crearPadronDeCultivo } from "../../helpers/DB/crearPadronDeCultivo";
@@ -17,9 +17,10 @@ export const CultivoCard = ({ cultivo }) => {
 
 	const cultivosComplemento = cultivos.filter((cultivo) => cultivo.nombre.includes("COMP."));
 
-	const [values, handleInputChange, reset] = useFormToUpper(cultivo);
+	const [values, handleInputChange, reset] = useFormToUpper({ ...cultivo });
 	const {
 		clave,
+		nuevaClave = 0,
 		costoGuia,
 		costoHectarea,
 		nombre,
@@ -70,21 +71,38 @@ export const CultivoCard = ({ cultivo }) => {
 		}
 	};
 
-	const isFormValid = () => {
-		if (nombre.length === 0) {
-			dispatch(setError("Indique el nombre del cultivo."));
-			return false;
-		}
+	const onDeleteCultivo = () => {
+		Swal.fire({
+			title: "Atención!!",
+			text: `¿Realmente desea borrar el cultivo?`,
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Si",
+			cancelButtonText: "No"
+		}).then(async ({ isConfirmed }) => {
+			if (isConfirmed) {
+				dispatch(startDeleteCultivo(cultivo.id));
+			}
+		});
+	};
 
+	const isFormValid = () => {
 		if (clave.length === 0) {
 			dispatch(setError("Indique la clave del cultivo."));
 			return false;
 		}
 
-		// if (cultivos.find((cultivo) => cultivo.clave === clave)) {
-		// 	dispatch(setError("La clave del cultivo ya está en uso, indique una clave diferente."));
-		// 	return false;
-		// }
+		if (cultivo.id === "nuevoCultivo" && cultivos.find((cultivo) => cultivo.clave === nuevaClave)) {
+			dispatch(setError("La clave del cultivo ya está en uso, indique una clave diferente."));
+			return false;
+		}
+
+		if (nombre.length === 0) {
+			dispatch(setError("Indique el nobre del cultivo."));
+			return false;
+		}
 
 		if (costoGuia < 0) {
 			dispatch(setError("El costo de la guía no puede ser negativo."));
@@ -152,14 +170,48 @@ export const CultivoCard = ({ cultivo }) => {
 	return (
 		<div className="border border-info rounded">
 			<div className="border-bottom border-info p-2">
-				<div className="d-flex justify-content-center">
-					<h4>{`${clave} - ${nombre}`}</h4>
+				<div className="d-flex justify-content-center mt-2">
+					{cultivo?.id === "nuevoCultivo" ? (
+						<h4>NUEVO CULTIVO</h4>
+					) : (
+						<h4>{`${clave} - ${nombre}`}</h4>
+					)}
 				</div>
 			</div>
 
 			<div className="d-flex flex-column border-bottom border-info p-2 pt-4 pb-4">
+				{cultivo.id === "nuevoCultivo" && (
+					<>
+						<div className=" row mt-2">
+							<label className="col-5">Clave Cultivo:</label>
+							<input
+								type="number"
+								className="col-6 form-control ml-1"
+								placeholder="Clave Cultivo"
+								name="nuevaClave"
+								autoComplete="off"
+								value={nuevaClave}
+								onChange={handleInputChange}
+							/>
+						</div>
+
+						<div className=" row mt-2">
+							<label className="col-5">Nombre Cultivo:</label>
+							<input
+								type="text"
+								className="col-6 form-control ml-1"
+								placeholder="Nombre Cultivo"
+								name="nombre"
+								autoComplete="off"
+								value={nombre}
+								onChange={handleInputChange}
+							/>
+						</div>
+					</>
+				)}
+
 				<div className=" row mt-2">
-					<label className="col-5">Costo guía:</label>
+					<label className="col-5">Costo Guía:</label>
 					<input
 						type="number"
 						className="col-6 form-control ml-1"
@@ -322,6 +374,11 @@ export const CultivoCard = ({ cultivo }) => {
 			</div>
 
 			<div className="d-flex flex-column border-bottom border-info p-4">
+				<button type="button" className="btn btn-outline-danger mt-4" onClick={onDeleteCultivo}>
+					<i className="fas fa-times"></i>
+					<span> Eliminar</span>
+				</button>
+
 				{!cultivosConPadron.find((cultivoConPadron) => cultivoConPadron === cultivo.nombre) && (
 					<button
 						type="button"

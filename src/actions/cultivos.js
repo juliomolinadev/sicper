@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 import { types } from "../types/types";
 import { loadCultivos } from "../helpers/loadCultivos";
 import { db } from "../firebase/firebase-config";
@@ -6,6 +8,8 @@ import { goToElement } from "../helpers/functions/assets";
 import { saveCultivo } from "../helpers/saveCultivo";
 import { removeError } from "./ui";
 import { unsetPermisosComplemento } from "./productores";
+import { hayPermisosExpedidosDelCultivo } from "../helpers/DB/hayPermisosExpedidosDelCultivo";
+import { deleteCultivo } from "../helpers/deleteCultivo";
 
 export const openCultivosModal = () => ({
 	type: types.altaPermisoOpenCultivosModal
@@ -135,6 +139,11 @@ export const startSaveCultivo = (cultivo) => {
 		const newCultivo = { ...cultivo, cultivoComplementario: Number(cultivo.cultivoComplementario) };
 		delete newCultivo.id;
 
+		if (cultivo.nuevaClave !== undefined) newCultivo.clave = cultivo.nuevaClave;
+		delete newCultivo.nuevaClave;
+
+		if (cultivo.id === "nuevoCultivo") cultivo.id = `${cultivo.nuevaClave}-${cultivo.nombre}`;
+
 		const isSave = saveCultivo(cultivo.id, newCultivo);
 
 		if (isSave) {
@@ -142,13 +151,64 @@ export const startSaveCultivo = (cultivo) => {
 				if (cultivoInStore.id === cultivo.id) return cultivo;
 				else return cultivoInStore;
 			});
+
+			const isInStore = cultivosActualizados.find(
+				(cultivoActualizado) => cultivoActualizado.id === newCultivo.id
+			);
+
+			console.log(isInStore);
+			console.log(cultivo);
+
+			if (!isInStore) {
+				console.log("Puso nuevo cultivo");
+				cultivosActualizados.push(newCultivo);
+			}
+
 			dispatch(setCultivos(cultivosActualizados));
+			dispatch(setCultivoSelected(newCultivo));
 			dispatch(removeError());
 		}
 	};
 };
 
+export const startDeleteCultivo = (cultivoId) => {
+	return async (dispatch) => {
+		const tienePermisos = await hayPermisosExpedidosDelCultivo(cultivoId);
+		if (tienePermisos) {
+			Swal.fire(
+				"Error.",
+				"Hay permisos expedidos de este cultivo. No es posible borrar el cultivo.",
+				"error"
+			);
+		} else {
+			const isDeleted = await deleteCultivo(cultivoId);
+			if (isDeleted) dispatch(removeCultivo(cultivoId));
+		}
+	};
+};
+
+export const removeCultivo = (idCultivo) => ({
+	type: types.removeCultivo,
+	payload: idCultivo
+});
+
 export const setTipoSemilla = (variedad) => ({
 	type: types.setTipoSemilla,
 	payload: variedad
+});
+
+export const addNuevoCultivo = () => ({
+	type: types.addNuevoCultivo,
+	payload: {
+		id: "nuevoCultivo",
+		clave: 0,
+		nombre: "",
+		subciclo: "",
+		costoHectarea: 0,
+		costoGuia: 0,
+		inicioBc: "",
+		finBc: "",
+		inicioSonora: "",
+		finSonora: ""
+	}
 });
