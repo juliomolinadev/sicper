@@ -105,6 +105,13 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				cultivos: action.payload
 			};
 
+		case types.addNuevoCultivo:
+			return {
+				...state,
+				cultivos: [...state.cultivos, { ...action.payload }],
+				idCultivoSelected: action.payload.id
+			};
+
 		case types.setCultivosAnteriores:
 			return {
 				...state,
@@ -115,6 +122,26 @@ export const altaPermisosReducer = (state = initialState, action) => {
 			return {
 				...state,
 				cultivos: []
+			};
+
+		case types.removeCultivo:
+			const cultivosFiltered = state.cultivos.filter((cultivo) => cultivo.id !== action.payload);
+			return {
+				...state,
+				idCultivoSelected: null,
+				nombreCultivo: null,
+				claveCultivo: null,
+				subciclo: null,
+				cuotaCultivo: null,
+				inicioBc: "",
+				finBc: "",
+				inicioSonora: "",
+				finSonora: "",
+				superficiePreviaCultivo: null,
+				requiereDictamen: null,
+				requiereComplementoVolumen: null,
+				requiereControlCPUS: null,
+				cultivos: [...cultivosFiltered]
 			};
 
 		case types.setCultivo:

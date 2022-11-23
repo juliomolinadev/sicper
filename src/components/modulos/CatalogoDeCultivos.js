@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { useSelector } from "react-redux";
-import { startSetCultivoSelected } from "../../actions/cultivos";
+import { useDispatch, useSelector } from "react-redux";
+import { addNuevoCultivo, startSetCultivoSelected } from "../../actions/cultivos";
 import { CultivoCard } from "../cards/CultivoCard";
 import { cultivosColumns } from "../tables/configTables";
 import { CustomTable } from "../tables/CustomTable";
@@ -15,6 +15,12 @@ export const CatalogoDeCultivos = () => {
 	const filteredCultivos = cultivos.filter((cultivo) =>
 		cultivo.nombre.includes(cultivoName.toUpperCase())
 	);
+
+	const dispatch = useDispatch();
+
+	const onAddCultivo = () => {
+		dispatch(addNuevoCultivo());
+	};
 
 	return (
 		<div>
@@ -31,6 +37,11 @@ export const CatalogoDeCultivos = () => {
 					value={cultivoName}
 					onChange={(e) => setCultivoName(e.target.value)}
 				/>
+
+				<button className="btn btn-outline-primary ml-2 col-sm-2" onClick={onAddCultivo}>
+					<i className="fas fa-plus mr-2"></i>
+					<span>Nuevo Cultivo</span>
+				</button>
 			</div>
 
 			<div className="row">

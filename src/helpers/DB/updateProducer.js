@@ -9,22 +9,6 @@ export const updateProducer = async (
 	nombreAnterior,
 	rfcAnterior
 ) => {
-	/*
-    case 1: Cambia de tipo de persona (fisica/moral), cambia la curp o cambia id
-        - Obtener modulos y permisos del productor
-        - Borrar el documento
-        - Crear un nuevo documento con id difernente y los datos tal cual en el formulario.
-        - Actualizar datos del productor en permisos
-        
-    case 2: Cambia el nombre o el rfc
-        - Obtener modulos y permisos del productor
-        - Actualizar datos del productor en permisos
-        - Actualizar documento con los datos tal cual en el formulario.
-        
-    case 3: Cambia cualquier otro campo 
-        - Actualizar documento con los datos tal cual en el formulario.
-    */
-
 	const { id, curp, rfc } = productor;
 	const tipoPersona = productor.genoro === "MORAL" ? "MORAL" : "FISICA";
 	const nombreCompleto = `${productor.apPaterno} ${productor.apMaterno} ${productor.nombre}`;
@@ -38,9 +22,36 @@ export const updateProducer = async (
 
 			if (producer.exists) {
 				if (tipoPersona !== tipoPersonaAnterior || curp !== curpAnterior || id !== idAnterior) {
-					const permisosRef = await getPermitsRefs(idAnterior);
+					//  case 1: Cambia de tipo de persona (fisica/moral), cambia la curp o cambia id
+					// 		- Obtener modulos y permisos del productor
+					// 		- Obtener concesiones de los padrones de cultivos
+					// 		- Crear nuevos registros en los padrones de cultivos
+					// 		- Borrar concesiones en los padrones de cultivos
+					// 		- Actualizar datos del productor en permisos
+					// 		- Borrar documento del productor
+					// 		- Crear un nuevo documento con id difernente y los datos tal cual en el formulario.
 
-					permisosRef.forEach((permiso) => {
+					const permitsRefs = await getPermitsRefs(idAnterior);
+					const { concesionesRefs, concesiones } = await getConcesionesRefs(idAnterior);
+
+					concesiones.forEach((concesion) => {
+						///padronesCultivos/2022-2023/padrones/ALFALFA/padron/ FICJ700625HBCRXR03-ALFALFA-8
+						const ref = db
+							.collection("padronesCultivos")
+							.doc(concesion.ciclo)
+							.collection("padrones")
+							.doc(concesion.cultivo)
+							.collection("padron")
+							.doc(`${id}-${concesion.cultivo}-${concesion.modulo}`);
+
+						transaction.set(ref, { ...concesion, curp, idProductor: id });
+					});
+
+					concesionesRefs.forEach((concesion) => {
+						transaction.delete(concesion);
+					});
+
+					permitsRefs.forEach((permiso) => {
 						transaction.update(permiso, {
 							curpProductor: curp,
 							idProductorSelected: id,
@@ -56,9 +67,17 @@ export const updateProducer = async (
 
 					return true;
 				} else if (nombreCompleto !== nombreAnterior || rfc !== rfcAnterior) {
-					const permisosRef = await getPermitsRefs(idAnterior);
+					// case 2: Cambia el nombre o el rfc
+					// 		- Obtener modulos y permisos del productor
+					// 		- Obtener concesiones de los padrones de cultivos
+					// 		- Actualizar datos del productor en permisos
+					// 		- Actualizar los padrones de cultivos.
+					// 		- Actualizar documento con los datos tal cual en el formulario.
 
-					permisosRef.forEach((permiso) => {
+					const permitsRefs = await getPermitsRefs(idAnterior);
+					const { concesionesRefs } = await getConcesionesRefs(idAnterior);
+
+					permitsRefs.forEach((permiso) => {
 						transaction.update(permiso, {
 							curpProductor: curp,
 							idProductorSelected: id,
@@ -67,11 +86,20 @@ export const updateProducer = async (
 						});
 					});
 
+					concesionesRefs.forEach((concesion) => {
+						transaction.update(concesion, {
+							nombre: nombreCompleto
+						});
+					});
+
 					delete productor.id;
 					transaction.update(producerRef, productor);
 
 					return true;
 				} else {
+					// case 3: Cambia cualquier otro campo
+					// 		- Actualizar documento con los datos tal cual en el formulario.
+
 					delete productor.id;
 					transaction.update(producerRef, productor);
 					return true;
@@ -112,4 +140,20 @@ const getPermitsRefs = async (idProductor) => {
 	});
 
 	return permisosRefs;
+};
+
+const getConcesionesRefs = async (idProductor) => {
+	const concesionesRefs = [];
+	const concesiones = [];
+
+	const concesionesBatch = db.collectionGroup("padron").where("idProductor", "==", idProductor);
+
+	await concesionesBatch.get().then((querySnapshot) => {
+		querySnapshot.forEach((doc) => {
+			concesionesRefs.push(doc.ref);
+			concesiones.push({ ...doc.data() });
+		});
+	});
+
+	return { concesionesRefs, concesiones };
 };
