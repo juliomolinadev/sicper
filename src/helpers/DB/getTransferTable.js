@@ -19,7 +19,7 @@ export const getTransferTable = async (ciclo) => {
 	const transferSnap = await db.collectionGroup("transferencias").where("ciclo", "==", ciclo).get();
 
 	transferSnap.forEach((snap) => {
-		if (snap.data().moduloDestino !== "dev")
+		if (snap.data().moduloDestino !== "dev" && snap.data().estadoTransferencia === "ACTIVA")
 			transferencias.push({
 				origen: `${snap.data().modulo}`,
 				destino: snap.data().moduloDestino,

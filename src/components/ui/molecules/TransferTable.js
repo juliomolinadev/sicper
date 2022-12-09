@@ -1,4 +1,5 @@
 import React, { forwardRef } from "react";
+import { roundToN } from "../../../helpers/functions/roundToN";
 import { ReportHeader } from "./ReportHeader";
 
 export const TransferTable = forwardRef((props, ref) => {
@@ -26,7 +27,11 @@ export const TransferTable = forwardRef((props, ref) => {
 									className={`text-center border border-dark ${i === j && "bg-secondary"}`}
 									style={{ fontSize: 12 }}
 								>
-									{i === j && i !== 0 && j !== 0 && i !== 24 && j !== 24 ? "X" : cell}
+									{i === j && i !== 0 && j !== 0 && i !== 24 && j !== 24
+										? "X"
+										: typeof cell === "number"
+										? roundToN(cell, 4)
+										: cell}
 								</th>
 							))}
 						</tr>

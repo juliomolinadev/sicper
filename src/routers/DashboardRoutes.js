@@ -49,3 +49,45 @@ export const DashboardRoutes = () => {
 		</div>
 	);
 };
+
+//  50	Aplicación
+//  25	Servicio
+//  15	Pantalla
+//  10	Sección
+//  20	Configurar Informe
+//  20	Doc Imprimible
+//  15	Informe
+//  15	Importar Excel
+//  15	Descargar Excel
+//  15	Tabla Personalizada
+//  12	Registrar Usuarios
+//  12	Autenticar Usuarios
+//  12	Transacciones
+//  12	Escritura en Lotes
+//  10	Composición
+//  10	Proceso de Datos
+//  10	Detalle
+//  8	Formulario
+//  7	Imprimir Documento
+//  7	Alerta Formulario
+//  7	Leer BD
+//  6	Gráfico
+//  6	Alerta Condicional
+//  6	Actualizar BD
+//  6	Custom Hook
+//  5	Botones Dinámicos
+//  5	Actualizar Store
+//  5	useReducer
+//  4	Componente
+//  4	Elemento
+//  3	Input Compuesto
+//  3	Tabla (3ros)
+//  3	Modal
+//  2	Local Storage
+//  2	Navegación
+//  2	useState
+//  2	Inpun Simple
+//  1	Boton
+//  1	Alerta Simple
+//  1	Leer Store
+//
