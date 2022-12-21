@@ -6,6 +6,7 @@ import { useForm } from "../../hooks/useForm";
 
 export const UserPrivilegesForm = () => {
 	const { userRoleSelected, privilegesToEdit } = useSelector((state) => state.entidades);
+	const { uid } = useSelector((state) => state.auth);
 
 	Object.getOwnPropertyNames(privilegesToEdit).map((privilegeName) => {
 		privileges[privilegeName] = privilegesToEdit[privilegeName];
@@ -17,7 +18,7 @@ export const UserPrivilegesForm = () => {
 	const startSaveRolePrivileges = (e) => {
 		e.preventDefault();
 
-		saveRolePrivileges(userRoleSelected, formValues);
+		saveRolePrivileges(userRoleSelected, formValues, uid);
 	};
 
 	return (
