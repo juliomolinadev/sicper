@@ -22,7 +22,7 @@ export const AutorizadosScreen = () => {
 		(state) => state.autorizadosScreen
 	);
 
-	const { variablesGlobales, privilegios } = useSelector((state) => state.auth);
+	const { uid, variablesGlobales, privilegios } = useSelector((state) => state.auth);
 	const ciclo = variablesGlobales.cicloActual;
 
 	let totalGravedadNormalAutorizada = 0;
@@ -65,7 +65,7 @@ export const AutorizadosScreen = () => {
 	};
 
 	const handleSaveAutorizados = () => {
-		sabeAutorizados(ciclo, modulo, autorizados);
+		sabeAutorizados(ciclo, modulo, autorizados, uid);
 		dispatch(startLoadAutorizados(ciclo, modulo));
 		dispatch(startLoadExpedicion(modulo, ciclo));
 	};

@@ -6,7 +6,7 @@ const decideEstado = (modulo) => {
 	else return "Baja California";
 };
 
-export const sabeAutorizados = (ciclo, modulo, autorizados) => {
+export const sabeAutorizados = (ciclo, modulo, autorizados, uid) => {
 	const batch = db.batch();
 
 	autorizados.forEach((autorizado) => {
@@ -39,7 +39,8 @@ export const sabeAutorizados = (ciclo, modulo, autorizados) => {
 			pozoNormalAutorizada: autorizado.pozoNormalAutorizada,
 			pozoNormalAsignada: autorizado.pozoNormalAsignada,
 			pozoExtraAutorizada: autorizado.pozoExtraAutorizada,
-			pozoExtraAsignada: autorizado.pozoExtraAsignada
+			pozoExtraAsignada: autorizado.pozoExtraAsignada,
+			uid
 		});
 	});
 
