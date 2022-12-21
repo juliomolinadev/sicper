@@ -3,6 +3,8 @@ import firebase from "firebase/app";
 import Swal from "sweetalert2";
 
 export const saveConcesionCultivo = async (concesion) => {
+	console.log(concesion);
+
 	const newConcesion = { ...concesion };
 	delete newConcesion.id;
 
@@ -25,6 +27,7 @@ export const saveConcesionCultivo = async (concesion) => {
 	try {
 		const isSave = await db.runTransaction(async (transaction) => {
 			const concesionInDb = await transaction.get(concesionRef);
+			const concesionModuloInDb = await transaction.get(concesionModuloRef);
 
 			if (concesionInDb.exists) {
 				transaction.update(concesionModuloRef, {
@@ -35,9 +38,19 @@ export const saveConcesionCultivo = async (concesion) => {
 
 				transaction.update(concesionRef, { supConcesion: concesion.supConcesion });
 			} else {
-				transaction.update(concesionModuloRef, {
-					supConcesion: firebase.firestore.FieldValue.increment(concesion.supConcesion)
-				});
+				if (concesionModuloInDb.exists) {
+					transaction.update(concesionModuloRef, {
+						supConcesion: firebase.firestore.FieldValue.increment(concesion.supConcesion)
+					});
+				} else {
+					transaction.set(concesionModuloRef, {
+						cultivo: concesion.cultivo,
+						modulo: concesion.modulo,
+						ciclo: concesion.ciclo,
+						supConcesion: concesion.supConcesion,
+						supExpedida: 0
+					});
+				}
 
 				transaction.set(concesionRef, newConcesion);
 			}
