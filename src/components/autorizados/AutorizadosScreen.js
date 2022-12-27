@@ -18,9 +18,8 @@ import { ResumenAutorizadosPozo } from "./ResumenAutorizadosPozo";
 export const AutorizadosScreen = () => {
 	const dispatch = useDispatch();
 
-	const { modulo, autorizados, autorizadoSelected, superficieReferencia } = useSelector(
-		(state) => state.autorizadosScreen
-	);
+	const { modulo, autorizados, autorizadoSelected, superficieReferencia, loadingAutorizados } =
+		useSelector((state) => state.autorizadosScreen);
 
 	const { uid, variablesGlobales, privilegios } = useSelector((state) => state.auth);
 	const ciclo = variablesGlobales.cicloActual;
@@ -102,67 +101,70 @@ export const AutorizadosScreen = () => {
 				</div>
 			</div>
 
-			<div className="row ">
-				<div className="col-sm-8 pr-0 mt-3">
-					{modulo === "Pozo Particular" ? (
-						<CustomTable
-							title="Autorizados"
-							columns={autorizadosPozoColumns}
-							data={autorizados}
-							setFunction={setAutorizadoSelected}
-						></CustomTable>
+			{!loadingAutorizados && (
+				<div className="row ">
+					<div className="col-sm-8 pr-0 mt-3">
+						{modulo === "Pozo Particular" ? (
+							<CustomTable
+								title="Autorizados"
+								columns={autorizadosPozoColumns}
+								data={autorizados}
+								setFunction={setAutorizadoSelected}
+							></CustomTable>
+						) : (
+							<CustomTable
+								title="Autorizados"
+								columns={autorizadosColumns}
+								data={autorizados}
+								setFunction={setAutorizadoSelected}
+							></CustomTable>
+						)}
+					</div>
+
+					{modulo ? (
+						<div className="col-sm-4 pl-3 mt-3">
+							<div className="d-flex flex-column border rounded border-info">
+								{autorizados.length > 0 ? (
+									modulo === "Pozo Particular" ? (
+										<ResumenAutorizadosPozo
+											autorizados={autorizados}
+											modulo={modulo}
+										></ResumenAutorizadosPozo>
+									) : (
+										<ResumenAutorizados
+											autorizados={autorizados}
+											modulo={modulo}
+										></ResumenAutorizados>
+									)
+								) : (
+									<></>
+								)}
+
+								{privilegios.editarAutorizados && superficieReferencia !== superficieTotal && (
+									<div className="row p-1 pl-2  d-flex flex-column">
+										<div className="d-flex justify-content-center pt-5 text-warning">
+											! Hay modificaciones sin guardar !
+										</div>
+										<div className="d-flex justify-content-center pt-4 pb-4">
+											<button
+												type="submit"
+												className="btn btn-outline-primary"
+												onClick={handleSaveAutorizados}
+											>
+												<i className="far fa-save"></i>
+												<span> Guardar Cambios</span>
+											</button>
+										</div>
+									</div>
+								)}
+							</div>
+						</div>
 					) : (
-						<CustomTable
-							title="Autorizados"
-							columns={autorizadosColumns}
-							data={autorizados}
-							setFunction={setAutorizadoSelected}
-						></CustomTable>
+						<></>
 					)}
 				</div>
+			)}
 
-				{modulo ? (
-					<div className="col-sm-4 pl-3 mt-3">
-						<div className="d-flex flex-column border rounded border-info">
-							{autorizados.length > 0 ? (
-								modulo === "Pozo Particular" ? (
-									<ResumenAutorizadosPozo
-										autorizados={autorizados}
-										modulo={modulo}
-									></ResumenAutorizadosPozo>
-								) : (
-									<ResumenAutorizados
-										autorizados={autorizados}
-										modulo={modulo}
-									></ResumenAutorizados>
-								)
-							) : (
-								<></>
-							)}
-
-							{privilegios.editarAutorizados && superficieReferencia !== superficieTotal && (
-								<div className="row p-1 pl-2  d-flex flex-column">
-									<div className="d-flex justify-content-center pt-5 text-warning">
-										! Hay modificaciones sin guardar !
-									</div>
-									<div className="d-flex justify-content-center pt-4 pb-4">
-										<button
-											type="submit"
-											className="btn btn-outline-primary"
-											onClick={handleSaveAutorizados}
-										>
-											<i className="far fa-save"></i>
-											<span> Guardar Cambios</span>
-										</button>
-									</div>
-								</div>
-							)}
-						</div>
-					</div>
-				) : (
-					<></>
-				)}
-			</div>
 			{autorizadoSelected ? (
 				modulo === "UNI01" || modulo === "UNI02" || modulo === "UNI03" ? (
 					<AutorizadosPozoModal />

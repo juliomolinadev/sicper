@@ -120,6 +120,8 @@ export const types = {
 	setFormError: "[Autorizados Screen] Set Form Error",
 	removeFormError: "[Autorizados Screen] Unset Form Error",
 	setAutorizadosPorCultivo: "[Autorizados Screen] Set autorizados por cultivo",
+	setLoadingAutorizados: "[Autorizados Screen] Set Loading Autorizados",
+	unsetLoadingAutorizados: "[Autorizados Screen] Unset Loading Autorizados",
 
 	sicperScreenSetAutorizados: "[Sicper Screen] Set autorizados",
 	sicperScreenUnsetAutorizados: "[Sicper Screen] Unset autorizados",

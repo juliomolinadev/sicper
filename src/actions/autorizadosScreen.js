@@ -10,8 +10,17 @@ export const unsetModulo = () => ({
 	type: types.autorizadosScreenUnsetModulo
 });
 
+export const setLoadingAutorizados = () => ({
+	type: types.setLoadingAutorizados
+});
+
+export const unsetLoadingAutorizados = () => ({
+	type: types.unsetLoadingAutorizados
+});
+
 export const startLoadAutorizados = (ciclo, modulo) => {
 	return async (dispatch) => {
+		dispatch(setLoadingAutorizados());
 		const autorizados = await loadAutorizados(ciclo, modulo);
 
 		let superficieReferencia = 0;
@@ -27,6 +36,7 @@ export const startLoadAutorizados = (ciclo, modulo) => {
 		});
 		dispatch(setAutorizados(autorizados));
 		dispatch(setSuperficieReferencia(superficieReferencia));
+		dispatch(unsetLoadingAutorizados());
 	};
 };
 

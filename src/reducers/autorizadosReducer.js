@@ -6,11 +6,24 @@ const initialState = {
 	autorizados: [],
 	autorizadoSelected: null,
 	superficieReferencia: null,
-	formError: null
+	formError: null,
+	loadingAutorizados: false
 };
 
 export const autorizadosReducer = (state = initialState, action) => {
 	switch (action.type) {
+		case types.setLoadingAutorizados:
+			return {
+				...state,
+				loadingAutorizados: true
+			};
+
+		case types.unsetLoadingAutorizados:
+			return {
+				...state,
+				loadingAutorizados: false
+			};
+
 		case types.autorizadosScreenSetModulo:
 			return {
 				...state,
