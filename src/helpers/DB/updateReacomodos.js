@@ -5,14 +5,36 @@ import { readExcel } from "../functions/readExcel";
 
 export const updateReacomodos = (file) => {
 	return async (dispatch) => {
+		Swal.fire({
+			title: "Verificando archivo...",
+			text: "Por favor espere...",
+			allowOutsideClick: false,
+			showConfirmButton: false,
+			didOpen: () => {
+				Swal.showLoading();
+			}
+		});
+
 		await dispatch(setUpdatingReacomodos());
-		const data = await readExcel(file);
+
+		const nuevoPadron = await readExcel(file);
+		const idsPadronAnterior = [];
+
 		let batch = db.batch();
 		let i = 1;
-		const batchSize = 500;
+		const batchSize = 350;
 
-		if (checkReacomodos(data)) {
-			data.forEach((element) => {
+		if (checkReacomodos(nuevoPadron)) {
+			Swal.update({
+				title: "Cargando padrón...",
+				allowOutsideClick: false,
+				showConfirmButton: false
+			});
+
+			const padronAnterior = await db.collection("reacomodos").get();
+			padronAnterior.forEach((reacomodo) => idsPadronAnterior.push(reacomodo.id));
+
+			await nuevoPadron.forEach((element) => {
 				const itemToUpload = {
 					cuenta: element.CTA !== undefined ? element.CTA : "?",
 					subCuenta: element.SC !== undefined ? element.SC : "?",
@@ -28,10 +50,14 @@ export const updateReacomodos = (file) => {
 					predioProcedencia: element.PREPRO !== undefined ? element.PREPRO : "?"
 				};
 
+				const index = idsPadronAnterior.indexOf(`${itemToUpload.cuenta}-${itemToUpload.subCuenta}`);
+				if (index !== -1) idsPadronAnterior.splice(index, 1);
+
 				const ref = db
 					.collection("reacomodos")
 					.doc(`${itemToUpload.cuenta}-${itemToUpload.subCuenta}`);
 				batch.set(ref, itemToUpload);
+
 				if (i === batchSize) {
 					batch
 						.commit()
@@ -48,13 +74,22 @@ export const updateReacomodos = (file) => {
 				i++;
 			});
 
+			idsPadronAnterior.forEach((id) => {
+				const ref = db.collection("reacomodos").doc(id);
+				batch.delete(ref);
+			});
+
 			batch
 				.commit()
 				.then(() => {
 					console.log("Se terminaron de actualizar los reacomodos");
+					Swal.close();
 					Swal.fire(
 						"Reacomodos actualizados",
-						"Se actualizaron con éxito los reacomodos.",
+						`Se actualizaron con éxito los reacomodos.
+						${nuevoPadron.length} registros procesados.
+						${idsPadronAnterior.length} registros eliminados.
+						`,
 						"success"
 					);
 					dispatch(unsetUpdatingReacomodos());
@@ -62,8 +97,11 @@ export const updateReacomodos = (file) => {
 				.catch((err) => {
 					console.error(err);
 				});
+
+			console.log(idsPadronAnterior);
 		} else {
 			dispatch(unsetUpdatingReacomodos());
+			Swal.close();
 			Swal.fire(
 				"Formato incorrecto",
 				"Verifique que el documento que intenta cargar corresponda a una tabla de reacomodos válida.",

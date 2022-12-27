@@ -8,36 +8,55 @@ import { testUsers } from "../consts";
 
 export const updatePadron = (file) => {
 	return async (dispatch) => {
+		Swal.fire({
+			title: "Verificando archivo...",
+			text: "Por favor espere...",
+			allowOutsideClick: false,
+			didOpen: () => {
+				Swal.showLoading();
+			}
+		});
+
 		await dispatch(setUpdatingPadron());
 		const localties = await loadLocalties("");
 		const reacomodos = await loadReacomodos();
 
-		const data = await readExcel(file);
+		const nuevoPadron = await readExcel(file);
+		const idsPadronAnterior = [];
+
 		testUsers.forEach((user) => {
-			data.push(user);
+			nuevoPadron.push(user);
 		});
 
 		let batch = db.batch();
 		let i = 1;
-		const batchSize = 500;
+		const batchSize = 200;
 
-		if (checkPadron(data)) {
-			await data.forEach((usuario, i) => {
+		if (checkPadron(nuevoPadron)) {
+			Swal.update({
+				title: "Cargando padrón...",
+				allowOutsideClick: false,
+				showConfirmButton: false
+			});
+			const padronAnterior = await db.collection("derechos").get();
+			padronAnterior.forEach((derecho) => idsPadronAnterior.push(derecho.id));
+
+			await nuevoPadron.forEach((usuario, i) => {
 				const reacomodo = reacomodos.find(
 					(reacomodo) => reacomodo.id === `${usuario.CUENTA}-${usuario.SUBCTA}`
 				);
 				if (reacomodo) {
-					data[i].reacomodo = reacomodo.reacomodo;
+					nuevoPadron[i].reacomodo = reacomodo.reacomodo;
 				}
 			});
 
-			await data.forEach((usuario, i) => {
+			await nuevoPadron.forEach((usuario, i) => {
 				const localidad = getLocaltie(localties, usuario.EJIDO);
-				data[i].nombreLocalidad = localidad.nombre !== undefined ? localidad.nombre : "";
-				data[i].tipoLocalidad = localidad.tipo !== undefined ? localidad.tipo : "";
+				nuevoPadron[i].nombreLocalidad = localidad.nombre !== undefined ? localidad.nombre : "";
+				nuevoPadron[i].tipoLocalidad = localidad.tipo !== undefined ? localidad.tipo : "";
 			});
 
-			await data.forEach((element) => {
+			await nuevoPadron.forEach((element) => {
 				const itemToUpload = {
 					apMaterno: element.APMATERNO !== undefined ? element.APMATERNO : "",
 					apPaterno: element.APPATERNO !== undefined ? element.APPATERNO : "",
@@ -73,8 +92,12 @@ export const updatePadron = (file) => {
 					reacomodo: element.reacomodo !== undefined ? element.reacomodo : ""
 				};
 
+				const index = idsPadronAnterior.indexOf(`${itemToUpload.cuenta}-${itemToUpload.subcta}`);
+				if (index !== -1) idsPadronAnterior.splice(index, 1);
+
 				const ref = db.collection("derechos").doc(`${itemToUpload.cuenta}-${itemToUpload.subcta}`);
 				batch.set(ref, itemToUpload);
+
 				if (i === batchSize) {
 					batch
 						.commit()
@@ -91,13 +114,22 @@ export const updatePadron = (file) => {
 				i++;
 			});
 
+			idsPadronAnterior.forEach((id) => {
+				const ref = db.collection("derechos").doc(id);
+				batch.delete(ref);
+			});
+
 			batch
 				.commit()
 				.then(() => {
 					console.log("Se termino de actualizar el padron");
+					Swal.close();
 					Swal.fire(
 						"Padron actualizado",
-						"Se actualizo con éxito el padrón de usuarios.",
+						`Se actualizo con éxito el padrón de usuarios.
+						${nuevoPadron.length} registros procesados.
+						${idsPadronAnterior.length} registros eliminados.
+						`,
 						"success"
 					);
 					dispatch(unsetUpdatingPadron());
@@ -107,6 +139,7 @@ export const updatePadron = (file) => {
 				});
 		} else {
 			dispatch(unsetUpdatingPadron());
+			Swal.close();
 			Swal.fire(
 				"Formato incorrecto",
 				"Verifique que el documento que intenta cargar corresponda a un padrón de usuarios válido.",
