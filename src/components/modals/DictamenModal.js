@@ -64,7 +64,8 @@ export const DictamenModal = ({ isOpenModal, setDictamenFormState, setIsOpenDict
 		"GPR VICTORIA",
 		"COLONIAS NUEVAS",
 		"DELTA",
-		"VALLE CHICO"
+		"VALLE CHICO",
+		"DDR SAN LUIS"
 	];
 
 	const handleRegister = (e) => {
