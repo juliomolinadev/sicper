@@ -11,7 +11,7 @@ import {
 	setEnEspera,
 	unsetEnEspera,
 	startEnableSaveButton,
-	startDisablePrintButton
+	startDisablePrintButton,
 } from "../../actions/altaPermisos";
 import { unsetCultivoAnteriorSelected, unsetCultivoSelected } from "../../actions/cultivos";
 import { unsetPermisosComplemento, unsetProductorSelected } from "../../actions/productores";
@@ -23,11 +23,12 @@ const customStyles = {
 	content: {
 		width: "1125px",
 		height: "1500px",
-		overflow: "auto"
-	}
+		overflow: "auto",
+	},
 };
 
 export const PrintPermisoModal = ({ data, isNew, formValues, setValues = () => {} }) => {
+	console.log(data.mensajeFijo);
 	const { openPrintPermisoModal, enableSaveButton, enablePrintButton, enEspera } = useSelector(
 		(state) => state.altaPermisos
 	);
@@ -347,11 +348,17 @@ export const PrintPermisoModal = ({ data, isNew, formValues, setValues = () => {
 					</div>
 
 					{/* Transferencia  ************************************************************* */}
-					<div className="border border-dark rounded mt-3">
-						<div className="d-flex justify-content-center ">TRANSFERENCIA</div>
+					<div className="border border-dark rounded mt-3 p-2">
+						{/* <div className="d-flex justify-content-center ">TRANSFERENCIA</div>
 						<div className="border-top border-dark d-flex text-dotacion p-1">
 							<p>{data.transferencia}</p>
-						</div>
+						</div> */}
+
+						{data.transferencia &&
+							data.transferencia.length > 0 &&
+							`TRANSFERENCIA INTERNA: ${data.transferencia}`}
+
+						{data.mensajeFijo && `  ${data.mensajeFijo}`}
 					</div>
 				</div>
 			</div>

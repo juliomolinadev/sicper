@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 
@@ -18,7 +18,7 @@ import {
 	openPrintPermisoModal,
 	setCuotaCultivo,
 	setTipoExtra,
-	setTipoNormal
+	setTipoNormal,
 } from "../../actions/altaPermisos";
 import { loadContador } from "../../helpers/loadContador";
 import { removeError, setError } from "../../actions/ui";
@@ -42,7 +42,7 @@ export const NuevoPermisoScreen = () => {
 		nombreCultivo,
 		superficiePreviaCultivo,
 		usuarios,
-		permisosComplemento
+		permisosComplemento,
 	} = useSelector((state) => state.altaPermisos);
 	const altaPermisos = useSelector((state) => state.altaPermisos);
 	const auth = useSelector((state) => state.auth);
@@ -56,6 +56,8 @@ export const NuevoPermisoScreen = () => {
 		0
 	);
 
+	const usuarioSelected = usuarios.find((usuario) => usuario.id === idUsuarioSelected);
+
 	const [formValues, handleInputChange, , , setValues] = useFormToUpper({
 		variedad: "",
 		supAutorizada: "",
@@ -64,16 +66,26 @@ export const NuevoPermisoScreen = () => {
 		longitud: "",
 		observaciones: "",
 		transferencia: "",
-		cuotaSanidad: true
+		cuotaSanidad: true,
+		localidadDestino: "",
+		loteDestino: "",
 	});
 
-	const { variedad, supAutorizada, fuenteCredito, observaciones, transferencia, cuotaSanidad } =
-		formValues;
+	const {
+		variedad,
+		supAutorizada,
+		fuenteCredito,
+		observaciones,
+		transferencia,
+		cuotaSanidad,
+		localidadDestino,
+		loteDestino,
+	} = formValues;
 
 	const permisoData = {
 		...formValues,
 		...altaPermisos,
-		...auth
+		...auth,
 	};
 
 	const tipo = altaPermisos.tipo;
@@ -105,7 +117,7 @@ export const NuevoPermisoScreen = () => {
 		altaPermisos.claveCultivo,
 		altaPermisos.cultivos,
 		altaPermisos.opcionDeExpedicion,
-		altaPermisos.requiereComplementoVolumen
+		altaPermisos.requiereComplementoVolumen,
 	]);
 
 	useEffect(() => {
@@ -125,7 +137,7 @@ export const NuevoPermisoScreen = () => {
 		altaPermisos.cuotaCultivo,
 		cuotaSanidad,
 		altaPermisos.cultivos,
-		altaPermisos.idCultivoSelected
+		altaPermisos.idCultivoSelected,
 	]);
 
 	const handleOpenPrintPermisoModal = () => {
@@ -149,13 +161,13 @@ export const NuevoPermisoScreen = () => {
 			case "UNI03":
 				return {
 					inicio: altaPermisos.inicioSonora,
-					fin: altaPermisos.finSonora
+					fin: altaPermisos.finSonora,
 				};
 
 			default:
 				return {
 					inicio: altaPermisos.inicioBc,
-					fin: altaPermisos.finBc
+					fin: altaPermisos.finBc,
 				};
 		}
 	};
@@ -171,7 +183,7 @@ export const NuevoPermisoScreen = () => {
 			case 1:
 				return {
 					inicio: new Date(`${cicloSplit[0]}-${inicioSplit[1]}-${inicioSplit[2]}T00:00:00`),
-					fin: new Date(`${cicloSplit[1]}-${finSplit[1]}-${finSplit[2]}T00:00:00`)
+					fin: new Date(`${cicloSplit[1]}-${finSplit[1]}-${finSplit[2]}T00:00:00`),
 				};
 
 			case 0:
@@ -183,12 +195,12 @@ export const NuevoPermisoScreen = () => {
 				) {
 					return {
 						inicio: new Date(`${cicloSplit[0]}-${inicioSplit[1]}-${inicioSplit[2]}T00:00:00`),
-						fin: new Date(`${cicloSplit[0]}-${finSplit[1]}-${finSplit[2]}T00:00:00`)
+						fin: new Date(`${cicloSplit[0]}-${finSplit[1]}-${finSplit[2]}T00:00:00`),
 					};
 				} else
 					return {
 						inicio: new Date(`${cicloSplit[1]}-${inicioSplit[1]}-${inicioSplit[2]}T00:00:00`),
-						fin: new Date(`${cicloSplit[1]}-${finSplit[1]}-${finSplit[2]}T00:00:00`)
+						fin: new Date(`${cicloSplit[1]}-${finSplit[1]}-${finSplit[2]}T00:00:00`),
 					};
 
 			default:
@@ -244,6 +256,20 @@ export const NuevoPermisoScreen = () => {
 			return false;
 		} else if (!altaPermisos.usuario) {
 			dispatch(setError("El campo usuario es obligatorio."));
+			return false;
+		} else if (usuarioSelected && usuarioSelected.folio && localidadDestino.length === 0) {
+			dispatch(
+				setError(
+					"Los derechos de riego seleccionados provienen de una transferencia. Indique la localidad donde se aplicará la transferencia."
+				)
+			);
+			return false;
+		} else if (usuarioSelected && usuarioSelected.folio && loteDestino.length === 0) {
+			dispatch(
+				setError(
+					"Los derechos de riego seleccionados provienen de una transferencia. Indique el lote donde se aplicará la transferencia."
+				)
+			);
 			return false;
 		} else if (!altaPermisos.nombreProductor) {
 			dispatch(setError("El campo productor es obligatorio."));
@@ -379,10 +405,20 @@ export const NuevoPermisoScreen = () => {
 				altaPermisos.cultivos.find((cultivo) => cultivo.id === altaPermisos.idCultivoSelected)
 			),
 			vigencia: defineVigencia(subciclo),
-			estadoPermiso: await defineEstadoPermiso(nombreCultivo)
+			estadoPermiso: await defineEstadoPermiso(nombreCultivo),
+			mensajeFijo: defineMesajeFijo(),
 		};
 
 		return data;
+	};
+
+	const defineMesajeFijo = () => {
+		//Mensaje para transferencias
+		if (usuarioSelected && usuarioSelected.folio) {
+			return `TRANSFERENCIA FOLIO ${usuarioSelected.folio} EN EL LOTE ${loteDestino},  ${localidadDestino}`;
+		}
+
+		return false;
 	};
 
 	// TODO: Probar defineTipoPermiso (es necesario conciderar el acumulado de lo expedido para cada cultivo)
@@ -396,7 +432,7 @@ export const NuevoPermisoScreen = () => {
 			pozoNormal: pozoNormalPrevia,
 			pozoExtra: pozoExtraPrevia,
 			pozoParticularNormal: pozoParticularNormalPrevia,
-			pozoParticularExtra: pozoParticularExtraPrevia
+			pozoParticularExtra: pozoParticularExtraPrevia,
 		} = superficiePreviaCultivo;
 
 		switch (altaPermisos.sistema) {
@@ -510,29 +546,29 @@ export const NuevoPermisoScreen = () => {
 		}
 	};
 
-	const setTransferComent = useCallback(
-		(folio, lote, tipolocalidad, localidad) => {
-			setValues((values) => ({
-				...values,
-				observaciones: `TRANSFERENCIA FOLIO ${folio} EN EL LOTE ${lote}, ${tipolocalidad.toUpperCase()} ${localidad}`
-			}));
-		},
-		[setValues]
-	);
+	// const setTransferComent = useCallback(
+	// 	(folio, lote, tipolocalidad, localidad) => {
+	// 		setValues((values) => ({
+	// 			...values,
+	// 			observaciones: `TRANSFERENCIA FOLIO ${folio} EN EL LOTE ${lote}, ${tipolocalidad.toUpperCase()} ${localidad}`,
+	// 		}));
+	// 	},
+	// 	[setValues]
+	// );
 
-	useEffect(() => {
-		if (idUsuarioSelected) {
-			const usuario = usuarios.find((usuario) => usuario.id === idUsuarioSelected);
-			if (usuario.folio) {
-				setTransferComent(
-					usuario.folio,
-					usuario.loteDestino,
-					usuario.tipolocalidadDestino,
-					usuario.localidadDestino
-				);
-			}
-		}
-	}, [idUsuarioSelected, usuarios, setTransferComent]);
+	// useEffect(() => {
+	// 	if (idUsuarioSelected) {
+	// 		const usuario = usuarios.find((usuario) => usuario.id === idUsuarioSelected);
+	// 		if (usuario.folio) {
+	// 			setTransferComent(
+	// 				usuario.folio,
+	// 				usuario.loteDestino,
+	// 				usuario.tipolocalidadDestino,
+	// 				usuario.localidadDestino
+	// 			);
+	// 		}
+	// 	}
+	// }, [idUsuarioSelected, usuarios, setTransferComent]);
 
 	const setNormal = () => {
 		dispatch(unsetUsuarioSelected());
@@ -583,6 +619,53 @@ export const NuevoPermisoScreen = () => {
 				<div className="row">
 					<UsuarioInput />
 					<ProductorInput />
+				</div>
+
+				<div className="row">
+					{usuarioSelected && usuarioSelected.folio && (
+						<>
+							<div className="col-sm-6">
+								<div className="form-group d-flex align-items-baseline row p-3">
+									<label className="col-sm-3">
+										<span className="text-warning">* </span>
+										Localidad:
+									</label>
+									<div className="flex-grow-1 ">
+										<input
+											tabIndex="7"
+											type="text"
+											className="form-control"
+											placeholder="Localidad donde se aplica la trasferencia"
+											name="localidadDestino"
+											value={localidadDestino}
+											autoComplete="off"
+											onChange={handleInputChange}
+										/>
+									</div>
+								</div>
+							</div>
+							<div className="col-sm-6">
+								<div className="form-group d-flex align-items-baseline row p-3">
+									<label className="col-sm-3">
+										<span className="text-warning">* </span>
+										Lote:
+									</label>
+									<div className="flex-grow-1 ">
+										<input
+											tabIndex="7"
+											type="text"
+											className="form-control"
+											placeholder="Lote donde se aplica la trasferencia"
+											name="loteDestino"
+											value={loteDestino}
+											autoComplete="off"
+											onChange={handleInputChange}
+										/>
+									</div>
+								</div>
+							</div>
+						</>
+					)}
 				</div>
 
 				<div className="row">

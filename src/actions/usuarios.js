@@ -11,11 +11,11 @@ import { loadCultivosYProductoresAnteriores } from "../helpers/loadCultivosYProd
 import { setCultivosAnteriores, setProductoresAnteriores } from "./cultivos";
 
 export const openUsuariosModal = () => ({
-	type: types.altaPermisoOpenUsuariosModal
+	type: types.altaPermisoOpenUsuariosModal,
 });
 
 export const closeUsuariosModal = () => ({
-	type: types.altaPermisoCloseUsuariosModal
+	type: types.altaPermisoCloseUsuariosModal,
 });
 
 export const startLoadUsuarios = (usuario, modulo, ciclo, global) => {
@@ -28,10 +28,10 @@ export const startLoadUsuarios = (usuario, modulo, ciclo, global) => {
 
 export const setUsuarios = (usuarios) => ({
 	type: types.setUsuarios,
-	payload: usuarios
+	payload: usuarios,
 });
 export const unsetUsuarios = () => ({
-	type: types.unsetUsuarios
+	type: types.unsetUsuarios,
 });
 
 export const startSetUsuarioSelected = (usuario, tipo) => {
@@ -51,7 +51,7 @@ export const startSetUsuarioSelected = (usuario, tipo) => {
 		dispatch(
 			setCultivosAnteriores([
 				...state.altaPermisos.cultivosAnteriores,
-				...cultivosYProductoresAnteriores[0]
+				...cultivosYProductoresAnteriores[0],
 			])
 		);
 		dispatch(setProductoresAnteriores(cultivosYProductoresAnteriores[1]));
@@ -129,38 +129,38 @@ export const setUsuarioSelected = (usuario) => {
 	}
 	return {
 		type: types.setUsuario,
-		payload: usuario
+		payload: usuario,
 	};
 };
 
 export const unsetUsuarioSelected = () => ({
-	type: types.unsetUsuario
+	type: types.unsetUsuario,
 });
 
 export const setUpdatingPadron = () => ({
-	type: types.setUpdatingPadron
+	type: types.setUpdatingPadron,
 });
 
 export const unsetUpdatingPadron = () => ({
-	type: types.unsetUpdatingPadron
+	type: types.unsetUpdatingPadron,
 });
 
 export const setUpdatingReacomodos = () => ({
-	type: types.setUpdatingReacomodos
+	type: types.setUpdatingReacomodos,
 });
 
 export const unsetUpdatingReacomodos = () => ({
-	type: types.unsetUpdatingReacomodos
+	type: types.unsetUpdatingReacomodos,
 });
 
 export const setDictamenData = (dictamen) => ({
 	type: types.setDictamenData,
-	payload: dictamen
+	payload: dictamen,
 });
 
 export const setDictamenDataSaved = (dictamen) => ({
 	type: types.setDictamenDataSaved,
-	payload: dictamen
+	payload: dictamen,
 });
 
 const getCicloAnterior = (ciclo) => {

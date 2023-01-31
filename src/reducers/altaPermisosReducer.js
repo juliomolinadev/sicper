@@ -13,7 +13,7 @@ const initialState = {
 	usuarios: [],
 	cultivos: [],
 	cultivosAnteriores: [
-		{ clave: 0, id: "zaNmqPpV7fVmcSDZ4bu7", nombre: "SIN CULTIVO", superficie: 0 }
+		{ clave: 0, id: "zaNmqPpV7fVmcSDZ4bu7", nombre: "SIN CULTIVO", superficie: 0 },
 	],
 	productores: [],
 	idUsuarioSelected: null,
@@ -55,7 +55,7 @@ const initialState = {
 	latitud: "",
 	longitud: "",
 	observaciones: "",
-	permisosComplemento: []
+	permisosComplemento: [],
 };
 
 export const altaPermisosReducer = (state = initialState, action) => {
@@ -65,63 +65,63 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.altaPermisoOpenPrintPermisoModal:
 			return {
 				...state,
-				openPrintPermisoModal: true
+				openPrintPermisoModal: true,
 			};
 
 		case types.altaPermisoClosePrintPermisoModal:
 			return {
 				...state,
-				openPrintPermisoModal: false
+				openPrintPermisoModal: false,
 			};
 
 		//Cultivos **************************************
 		case types.altaPermisoOpenCultivosModal:
 			return {
 				...state,
-				openCultivosModal: true
+				openCultivosModal: true,
 			};
 
 		case types.altaPermisoCloseCultivosModal:
 			return {
 				...state,
-				openCultivosModal: false
+				openCultivosModal: false,
 			};
 
 		case types.altaPermisoOpenCultivoAnteriorModal:
 			return {
 				...state,
-				openCultivoAnteriorModal: true
+				openCultivoAnteriorModal: true,
 			};
 
 		case types.altaPermisoCloseCultivoAnteriorModal:
 			return {
 				...state,
-				openCultivoAnteriorModal: false
+				openCultivoAnteriorModal: false,
 			};
 
 		case types.loadCultivos:
 			return {
 				...state,
-				cultivos: action.payload
+				cultivos: action.payload,
 			};
 
 		case types.addNuevoCultivo:
 			return {
 				...state,
 				cultivos: [...state.cultivos, { ...action.payload }],
-				idCultivoSelected: action.payload.id
+				idCultivoSelected: action.payload.id,
 			};
 
 		case types.setCultivosAnteriores:
 			return {
 				...state,
-				cultivosAnteriores: action.payload
+				cultivosAnteriores: action.payload,
 			};
 
 		case types.clearCultivos:
 			return {
 				...state,
-				cultivos: []
+				cultivos: [],
 			};
 
 		case types.removeCultivo:
@@ -141,7 +141,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				requiereDictamen: null,
 				requiereComplementoVolumen: null,
 				requiereControlCPUS: null,
-				cultivos: [...cultivosFiltered]
+				cultivos: [...cultivosFiltered],
 			};
 
 		case types.setCultivo:
@@ -159,13 +159,13 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				superficiePreviaCultivo: action.payload.superficiePrevia,
 				requiereDictamen: action.payload.requiereDictamen ?? false,
 				requiereComplementoVolumen: action.payload.requiereComplementoVolumen ?? false,
-				requiereControlCPUS: action.payload.requiereControlCPUS ?? false
+				requiereControlCPUS: action.payload.requiereControlCPUS ?? false,
 			};
 
 		case types.setCuotaCultivo:
 			return {
 				...state,
-				cuotaCultivo: action.payload
+				cuotaCultivo: action.payload,
 			};
 
 		case types.unsetCultivo:
@@ -179,7 +179,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				requiereDictamen: false,
 				requiereComplementoVolumen: false,
 				requiereControlCPUS: false,
-				opcionDeExpedicion: ""
+				opcionDeExpedicion: "",
 			};
 
 		case types.setCultivoAnterior:
@@ -187,7 +187,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				...state,
 				idCultivoAnteriorSelected: action.payload.id,
 				cultivoAnterior: action.payload.nombre,
-				claveCultivoAnterior: action.payload.clave
+				claveCultivoAnterior: action.payload.clave,
 			};
 
 		case types.unsetCultivoAnterior:
@@ -195,20 +195,20 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				...state,
 				idCultivoAnteriorSelected: null,
 				cultivoAnterior: "",
-				claveCultivoAnterior: null
+				claveCultivoAnterior: null,
 			};
 
 		case types.setTipoSemilla:
 			return {
 				...state,
-				tipoSemilla: action.payload
+				tipoSemilla: action.payload,
 			};
 
 		case types.setComplemento:
 			return {
 				...state,
 				supComplementoRequerida: action.payload.supComplementoRequerida,
-				restoSupComplementoRequerida: action.payload.restoSupComplementoRequerida
+				restoSupComplementoRequerida: action.payload.restoSupComplementoRequerida,
 			};
 
 		//Usuarios **************************************
@@ -216,25 +216,25 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.altaPermisoOpenUsuariosModal:
 			return {
 				...state,
-				openUsuariosModal: true
+				openUsuariosModal: true,
 			};
 
 		case types.altaPermisoCloseUsuariosModal:
 			return {
 				...state,
-				openUsuariosModal: false
+				openUsuariosModal: false,
 			};
 
 		case types.setUsuarios:
 			return {
 				...state,
-				usuarios: action.payload
+				usuarios: action.payload,
 			};
 
 		case types.clearUsuarios:
 			return {
 				...state,
-				usuarios: []
+				usuarios: [],
 			};
 
 		case types.setUsuario:
@@ -261,7 +261,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				claveLocalidad: action.payload.ejido,
 				dictamen: action.payload.dictamen,
 				laboresPendientes: action.payload.laboresPendientes,
-				superficieParcialLiberada: action.payload.superficieParcialLiberada
+				superficieParcialLiberada: action.payload.superficieParcialLiberada,
 			};
 
 		case types.unsetUsuario:
@@ -281,8 +281,8 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				toma: null,
 				sistema: null,
 				cultivosAnteriores: [
-					{ clave: 0, id: "zaNmqPpV7fVmcSDZ4bu7", nombre: "SIN CULTIVO", superficie: 0 }
-				]
+					{ clave: 0, id: "zaNmqPpV7fVmcSDZ4bu7", nombre: "SIN CULTIVO", superficie: 0 },
+				],
 			};
 
 		//Productores **************************************
@@ -290,25 +290,25 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.altaPermisoOpenProductoresModal:
 			return {
 				...state,
-				openProductoresModal: true
+				openProductoresModal: true,
 			};
 
 		case types.altaPermisoCloseProductoresModal:
 			return {
 				...state,
-				openProductoresModal: false
+				openProductoresModal: false,
 			};
 
 		case types.loadProductores:
 			return {
 				...state,
-				productores: action.payload
+				productores: action.payload,
 			};
 
 		case types.clearProductores:
 			return {
 				...state,
-				productores: []
+				productores: [],
 			};
 
 		case types.setProductor:
@@ -319,26 +319,26 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				rfcProductor: action.payload.rfc,
 				curpProductor: action.payload.curp,
 				productorIncumplido: action.payload.incumplido ? action.payload.incumplido : false,
-				concesionesProductor: action.payload.concesiones ? action.payload.concesiones : false
+				concesionesProductor: action.payload.concesiones ? action.payload.concesiones : false,
 			};
 
 		case types.setComplementos:
 			return {
 				...state,
-				complementosProductor: action.payload
+				complementosProductor: action.payload,
 			};
 
 		case types.setPermisosComplemento:
 			return {
 				...state,
-				permisosComplemento: action.payload
+				permisosComplemento: action.payload,
 			};
 
 		case types.unsetPermisosComplemento:
 			return {
 				...state,
 				permisosComplemento: [],
-				observaciones: ""
+				observaciones: "",
 			};
 
 		case types.unsetProductor:
@@ -347,13 +347,13 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				idProductorSelected: null,
 				nombreProductor: null,
 				rfcProductor: null,
-				productorIncumplido: null
+				productorIncumplido: null,
 			};
 
 		case types.setProductoresAnteriores:
 			return {
 				...state,
-				productoresAnteriores: action.payload
+				productoresAnteriores: action.payload,
 			};
 
 		//Nuevo Productor **************************************
@@ -361,13 +361,13 @@ export const altaPermisosReducer = (state = initialState, action) => {
 		case types.altaPermisoOpenNuevoProductorModal:
 			return {
 				...state,
-				isOpenNuevoProductorModal: true
+				isOpenNuevoProductorModal: true,
 			};
 
 		case types.altaPermisoCloseNuevoProductorModal:
 			return {
 				...state,
-				isOpenNuevoProductorModal: false
+				isOpenNuevoProductorModal: false,
 			};
 
 		//Set Form *****************************************************
@@ -380,7 +380,7 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				fuenteCredito: action.payload.fuenteCredito,
 				latitud: action.payload.latitud,
 				longitud: action.payload.longitud,
-				observaciones: action.payload.observaciones
+				observaciones: action.payload.observaciones,
 			};
 
 		// Al guardar
@@ -394,7 +394,8 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				fechaEmicion: action.payload.fechaEmicion,
 				fechaLimite: action.payload.fechaLimite,
 				vigencia: action.payload.vigencia,
-				estadoPermiso: action.payload.estadoPermiso
+				estadoPermiso: action.payload.estadoPermiso,
+				mensajeFijo: action.payload.mensajeFijo,
 			};
 
 		case types.altaPermisosUnsetSubmitData:
@@ -405,55 +406,55 @@ export const altaPermisosReducer = (state = initialState, action) => {
 				numeroPermiso: null,
 				fechaEmicion: null,
 				fechaLimite: null,
-				vigencia: null
+				vigencia: null,
 			};
 
 		case types.altaPermisosSetEnEspera:
 			return {
 				...state,
-				enEspera: true
+				enEspera: true,
 			};
 
 		case types.altaPermisosUnsetEnEspera:
 			return {
 				...state,
-				enEspera: false
+				enEspera: false,
 			};
 
 		case types.altaPermisosEnableSaveButton:
 			return {
 				...state,
-				enableSaveButton: true
+				enableSaveButton: true,
 			};
 
 		case types.altaPermisosDisableSaveButton:
 			return {
 				...state,
-				enableSaveButton: false
+				enableSaveButton: false,
 			};
 
 		case types.altaPermisosEnablePrintButton:
 			return {
 				...state,
-				enablePrintButton: true
+				enablePrintButton: true,
 			};
 
 		case types.altaPermisosDisablePrintButton:
 			return {
 				...state,
-				enablePrintButton: false
+				enablePrintButton: false,
 			};
 
 		case types.setTipoNormal:
 			return {
 				...state,
-				tipo: "normal"
+				tipo: "normal",
 			};
 
 		case types.setTipoExtra:
 			return {
 				...state,
-				tipo: "extra"
+				tipo: "extra",
 			};
 
 		default:

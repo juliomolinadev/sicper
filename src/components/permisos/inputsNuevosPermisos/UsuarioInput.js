@@ -5,7 +5,7 @@ import {
 	closeUsuariosModal,
 	openUsuariosModal,
 	startLoadUsuarios,
-	unsetUsuarioSelected
+	unsetUsuarioSelected,
 } from "../../../actions/usuarios";
 import { useFormToUpper } from "../../../hooks/UseFormToUpper";
 
@@ -47,7 +47,7 @@ export const UsuarioInput = ({ global = false }) => {
 	};
 
 	const [formValues, handleInputChange] = useFormToUpper({
-		usuario: ""
+		usuario: "",
 	});
 
 	const { usuario } = formValues;

@@ -60,7 +60,8 @@ export const savePermitTransaction = async (allData) => {
 		requiereDictamen: allData.requiereDictamen ?? false,
 		requiereComplementoVolumen: allData.requiereComplementoVolumen ?? false,
 		requiereControlCPUS: allData.requiereControlCPUS ?? false,
-		permisosVinculados: allData.permisosComplemento.map((permiso) => permiso.id)
+		permisosVinculados: allData.permisosComplemento.map((permiso) => permiso.id),
+		mensajeFijo: allData.mensajeFijo ?? false,
 	};
 
 	if (data.nombreCultivo === "ALGODONERO") {
@@ -131,11 +132,11 @@ export const savePermitTransaction = async (allData) => {
 			} else {
 				if (concesion.exists) {
 					transaction.update(concesionRef, {
-						supExpedida: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+						supExpedida: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 					});
 
 					transaction.update(concesionModuloRef, {
-						supExpedida: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+						supExpedida: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 					});
 				}
 
@@ -157,14 +158,14 @@ export const savePermitTransaction = async (allData) => {
 
 						transaction.update(permisoComplementoRef, {
 							permisosVinculados: arrayPermisos,
-							observaciones: `Complemento aplicado en el permiso "${data.numeroPermiso}" de la cuenta "${data.cuenta}".`
+							observaciones: `Complemento aplicado en el permiso "${data.numeroPermiso}" de la cuenta "${data.cuenta}".`,
 						});
 					});
 				}
 
 				transaction.update(contadorPermisosRef, {
 					numeroPermisosModulo: firebase.firestore.FieldValue.increment(1),
-					superficieModulo: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+					superficieModulo: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 				});
 
 				if (permisosPorCultivo.exists) {
@@ -174,7 +175,7 @@ export const savePermitTransaction = async (allData) => {
 								transaction.update(permisosPorCultivoRef, {
 									numeroPermisos: firebase.firestore.FieldValue.increment(1),
 									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-									gravedadNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+									gravedadNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 								});
 							}
 
@@ -182,7 +183,7 @@ export const savePermitTransaction = async (allData) => {
 								transaction.update(permisosPorCultivoRef, {
 									numeroPermisos: firebase.firestore.FieldValue.increment(1),
 									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-									gravedadExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+									gravedadExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 								});
 							}
 							break;
@@ -192,7 +193,7 @@ export const savePermitTransaction = async (allData) => {
 								transaction.update(permisosPorCultivoRef, {
 									numeroPermisos: firebase.firestore.FieldValue.increment(1),
 									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-									pozoNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+									pozoNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 								});
 							}
 
@@ -200,7 +201,7 @@ export const savePermitTransaction = async (allData) => {
 								transaction.update(permisosPorCultivoRef, {
 									numeroPermisos: firebase.firestore.FieldValue.increment(1),
 									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-									pozoExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+									pozoExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 								});
 							}
 							break;
@@ -212,7 +213,7 @@ export const savePermitTransaction = async (allData) => {
 									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 									pozoParticularNormal: firebase.firestore.FieldValue.increment(
 										allData.supAutorizada
-									)
+									),
 								});
 							}
 
@@ -222,7 +223,7 @@ export const savePermitTransaction = async (allData) => {
 									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 									pozoParticularExtra: firebase.firestore.FieldValue.increment(
 										allData.supAutorizada
-									)
+									),
 								});
 							}
 							break;
@@ -243,7 +244,7 @@ export const savePermitTransaction = async (allData) => {
 									cultivo: allData.nombreCultivo,
 									numeroPermisos: firebase.firestore.FieldValue.increment(1),
 									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-									gravedadNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+									gravedadNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 								});
 							}
 
@@ -256,7 +257,7 @@ export const savePermitTransaction = async (allData) => {
 									cultivo: allData.nombreCultivo,
 									numeroPermisos: firebase.firestore.FieldValue.increment(1),
 									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-									gravedadExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+									gravedadExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 								});
 							}
 							break;
@@ -271,7 +272,7 @@ export const savePermitTransaction = async (allData) => {
 									cultivo: allData.nombreCultivo,
 									numeroPermisos: firebase.firestore.FieldValue.increment(1),
 									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-									pozoNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+									pozoNormal: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 								});
 							}
 
@@ -284,7 +285,7 @@ export const savePermitTransaction = async (allData) => {
 									cultivo: allData.nombreCultivo,
 									numeroPermisos: firebase.firestore.FieldValue.increment(1),
 									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
-									pozoExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada)
+									pozoExtra: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 								});
 							}
 							break;
@@ -301,7 +302,7 @@ export const savePermitTransaction = async (allData) => {
 									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 									pozoParticularNormal: firebase.firestore.FieldValue.increment(
 										allData.supAutorizada
-									)
+									),
 								});
 							}
 
@@ -316,7 +317,7 @@ export const savePermitTransaction = async (allData) => {
 									superficie: firebase.firestore.FieldValue.increment(allData.supAutorizada),
 									pozoParticularExtra: firebase.firestore.FieldValue.increment(
 										allData.supAutorizada
-									)
+									),
 								});
 							}
 							break;

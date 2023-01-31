@@ -19,6 +19,7 @@ export const editarPermisos = async () => {
 		]
 	};
 
+
 	///padronesCultivos/2022-2023/padrones/ALFALFA/padron/ FICJ700625HBCRXR03-ALFALFA-8
 	const concesionesBatch = await db
 		.collection("padronesCultivos")
