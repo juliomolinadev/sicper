@@ -11,10 +11,10 @@ export const modulosPorUnidad = {
 		17: false,
 		18: false,
 		19: false,
-		20: false
+		20: false,
 	},
 	terceraUnidad: { 1: false, 2: false, 3: false, 21: false, 22: false, 23: false },
-	pozosParticulares: { UNI01: false, UNI02: false, UNI03: false }
+	pozosParticulares: { UNI01: false, UNI02: false, UNI03: false },
 };
 
 export const modulosPorEstado = {
@@ -38,9 +38,9 @@ export const modulosPorEstado = {
 		"20",
 		"21",
 		"22",
-		"FL"
+		"FL",
 	],
-	sonora: ["1", "2", "3"]
+	sonora: ["1", "2", "3"],
 };
 
 export const cultivosPrincipales = {
@@ -52,13 +52,15 @@ export const cultivosPrincipales = {
 		"4-RYE-GRASS": {},
 		"12-CEBOLLIN O-I": {},
 		VARIOS_OI: {},
-		SUBTOTAL: {}
+		SUBTOTAL: {},
 	},
 	PERENNES: {
 		"50-ALFALFA": {},
 		"145-COMP. VOL. ALFALFA": {},
 		"51-ALFALFA NUEVA": {},
 		"145.1-COMP. DE VOL. ALF. NVA.": {},
+		"51.2-ALFALFA (R)": {},
+		"145.2-COMP. VOL. ALFALFA (R)": {},
 		"52-ESPARRAGO": {},
 		"142-COMP.VOL.ESPARRAGO": {},
 		"53-VID": {},
@@ -66,7 +68,7 @@ export const cultivosPrincipales = {
 		"60-PALMA DATILERA": {},
 		"140-COMP. VOLUMEN": {},
 		VARIOS_PERENNES: {},
-		SUBTOTAL: {}
+		SUBTOTAL: {},
 	},
 	"PRIMAVERA-VERANO": {
 		"80-ALGODONERO": {},
@@ -80,8 +82,8 @@ export const cultivosPrincipales = {
 		"12.1-CEBOLLIN P-V": {},
 		"12.2-CEBOLLIN TARDIO": {},
 		VARIOS_PV: {},
-		SUBTOTAL: {}
-	}
+		SUBTOTAL: {},
+	},
 };
 
 export const modulos = [
@@ -111,7 +113,7 @@ export const modulos = [
 	"UNI01",
 	"UNI02",
 	"UNI03",
-	"dev"
+	"dev",
 ];
 
 export const transferModulos = [
@@ -137,7 +139,7 @@ export const transferModulos = [
 	"20",
 	"21",
 	"22",
-	"23"
+	"23",
 ];
 
 export const privileges = {
@@ -197,7 +199,7 @@ export const privileges = {
 	editarRoles: false,
 	editarCultivos: false,
 	cerrarExpedicionModulos: false,
-	variablesGlobales: false
+	variablesGlobales: false,
 };
 
 export const entidades = [
@@ -209,7 +211,7 @@ export const entidades = [
 		direccion: "",
 		nombre: "Desarrollo",
 		img: "dev.png",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "CNA",
@@ -218,7 +220,7 @@ export const entidades = [
 		nombre: "Comisión Nacional del Agua",
 		titular: "???",
 		direccion: "",
-		img: "cna.png"
+		img: "cna.png",
 	},
 	{
 		clave: "SADER",
@@ -227,7 +229,7 @@ export const entidades = [
 		nombre: "Secretaría de Agricultura y Desarrollo Rural",
 		titular: "???",
 		direccion: "",
-		img: "sader.png"
+		img: "sader.png",
 	},
 	{
 		clave: "CESVBC",
@@ -236,7 +238,7 @@ export const entidades = [
 		nombre: "Comité Estatal de Sanidad Vegetal de Baja California",
 		titular: "???",
 		direccion: "",
-		img: "cesvbc.webp"
+		img: "cesvbc.webp",
 	},
 	{
 		clave: "SRL",
@@ -245,7 +247,7 @@ export const entidades = [
 		nombre: "Distrito de Riego 014, Río Colorado S. de R.L.",
 		titular: "???",
 		direccion: "",
-		img: "srl.png"
+		img: "srl.png",
 	},
 	{
 		clave: "1",
@@ -255,7 +257,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m1.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "2",
@@ -265,7 +267,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m2.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "3",
@@ -275,7 +277,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m3.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "4",
@@ -285,7 +287,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m4.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "5",
@@ -295,7 +297,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m5.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "6",
@@ -305,7 +307,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m6.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "7",
@@ -315,7 +317,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m7.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "8",
@@ -325,7 +327,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m8.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "9A",
@@ -335,7 +337,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m9a.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "9B",
@@ -345,7 +347,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m9b.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "10",
@@ -355,7 +357,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m10.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "11",
@@ -365,7 +367,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m11.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "12",
@@ -375,7 +377,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m12.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "14",
@@ -385,7 +387,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m14.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "15",
@@ -395,7 +397,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m15.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "16",
@@ -405,7 +407,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m16.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "17",
@@ -415,7 +417,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m17.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "18",
@@ -425,7 +427,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m18.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "19",
@@ -435,7 +437,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "Carretera a San Felipe Km 1.5 S/N, Col. Xochimilco C.P. 21380. Mexicali B.C.",
 		img: "m19.png",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "20",
@@ -445,7 +447,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m20.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "21",
@@ -455,7 +457,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m21.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "22",
@@ -465,7 +467,7 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "m22.jpg",
-		expedicionActivaModulo: true
+		expedicionActivaModulo: true,
 	},
 	{
 		clave: "23",
@@ -475,8 +477,8 @@ export const entidades = [
 		titular: "???",
 		direccion: "",
 		img: "srl.png",
-		expedicionActivaModulo: true
-	}
+		expedicionActivaModulo: true,
+	},
 ];
 
 export const testUsers = [
@@ -508,7 +510,7 @@ export const testUsers = [
 		SUPRIEGO: 100,
 		FECHA: "",
 		REFERENCIA: 3606,
-		MODULO: "dev"
+		MODULO: "dev",
 	},
 
 	{
@@ -539,7 +541,7 @@ export const testUsers = [
 		SUPRIEGO: 100,
 		FECHA: "",
 		REFERENCIA: 3606,
-		MODULO: "dev"
+		MODULO: "dev",
 	},
 
 	{
@@ -570,6 +572,6 @@ export const testUsers = [
 		SUPRIEGO: 100,
 		FECHA: "",
 		REFERENCIA: 3606,
-		MODULO: "dev"
-	}
+		MODULO: "dev",
+	},
 ];
