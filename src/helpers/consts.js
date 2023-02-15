@@ -79,6 +79,7 @@ export const cultivosPrincipales = {
 		"84-SORGO FORRAJERO TARDIO": {},
 		"87-MAIZ BLANCO TEMPRANO": {},
 		"88-MAIZ BLANCO TARDIO": {},
+		"89-MAIZ AMARILLO": {},
 		"12.1-CEBOLLIN P-V": {},
 		"12.2-CEBOLLIN TARDIO": {},
 		VARIOS_PV: {},
