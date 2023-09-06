@@ -18,7 +18,7 @@ export const loadCultivosYProductoresAnteriores = async (cuenta, modulo, ciclo) 
 	permisosSnap.forEach((snapHijo) => {
 		permisos.push({
 			id: snapHijo.id,
-			...snapHijo.data()
+			...snapHijo.data(),
 		});
 	});
 
@@ -29,7 +29,7 @@ export const loadCultivosYProductoresAnteriores = async (cuenta, modulo, ciclo) 
 				superficie: permiso.supAutorizada,
 				nombre: permiso.nombreCultivo,
 				id: permiso.idCultivoSelected,
-				clave: permiso.claveCultivo
+				clave: permiso.claveCultivo,
 			});
 
 		const productor = productores.find((productor) => productor.id === permiso.idProductorSelected);
@@ -37,7 +37,7 @@ export const loadCultivosYProductoresAnteriores = async (cuenta, modulo, ciclo) 
 			productores.push({
 				id: permiso.idProductorSelected,
 				curp: permiso.curpProductor,
-				nombre: permiso.nombreProductor
+				nombre: permiso.nombreProductor,
 			});
 	});
 
@@ -54,11 +54,9 @@ export const loadCultivosYProductoresAnteriores = async (cuenta, modulo, ciclo) 
 		productores.push({
 			id: "",
 			curp: "",
-			nombre: "SIN PRODUTOR"
+			nombre: "SIN PRODUTOR",
 		});
 	}
-
-	console.log(cultivos);
 
 	return [cultivos, productores];
 };

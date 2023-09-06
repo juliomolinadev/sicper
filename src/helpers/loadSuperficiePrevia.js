@@ -25,7 +25,7 @@ export const loadSuperficiePrevia = async (
 		permisosSnap.forEach((snapHijo) => {
 			permisos.push({
 				id: snapHijo.id,
-				...snapHijo.data()
+				...snapHijo.data(),
 			});
 		});
 	} else {
@@ -34,7 +34,7 @@ export const loadSuperficiePrevia = async (
 		permisosSnap.forEach((snapHijo) => {
 			permisos.push({
 				id: snapHijo.id,
-				...snapHijo.data()
+				...snapHijo.data(),
 			});
 		});
 	}

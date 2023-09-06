@@ -30,11 +30,11 @@ export const saveConstanciaSanidad = async (constacia, ciclo) => {
 				transaction.set(constanciaRef, constacia);
 				if (countConstancia.exists) {
 					transaction.update(contConstanciaRef, {
-						numeroConstancia: firebase.firestore.FieldValue.increment(1)
+						numeroConstancia: firebase.firestore.FieldValue.increment(1),
 					});
 				} else {
 					transaction.set(contConstanciaRef, {
-						numeroConstancia: 1
+						numeroConstancia: 1,
 					});
 				}
 			}

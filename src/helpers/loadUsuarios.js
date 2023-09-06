@@ -47,7 +47,7 @@ export const loadUsuarios = async (usuario, modulo, ciclo, global = false) => {
 					usuarios.push({
 						id: snapHijo.id,
 						entidad: modulo,
-						...snapHijo.data()
+						...snapHijo.data(),
 					});
 					break;
 
@@ -56,7 +56,7 @@ export const loadUsuarios = async (usuario, modulo, ciclo, global = false) => {
 						usuarios.push({
 							...snapHijo.data(),
 							entidad: modulo,
-							id: snapHijo.id
+							id: snapHijo.id,
 						});
 					}
 					break;

@@ -179,6 +179,8 @@ export const NuevoPermisoScreen = () => {
 
 		const yearDifference = Number(finSplit[0]) - Number(inicioSplit[0]);
 
+		// const isPremature = new Date() < new Date(`${cicloSplit[0]}-10-01T00:00:00`);
+
 		switch (yearDifference) {
 			case 1:
 				return {
@@ -188,7 +190,7 @@ export const NuevoPermisoScreen = () => {
 
 			case 0:
 				if (
-					finSplit[1] === "9" ||
+					finSplit[1] === "09" ||
 					finSplit[1] === "10" ||
 					finSplit[1] === "11" ||
 					finSplit[1] === "12"
@@ -214,6 +216,8 @@ export const NuevoPermisoScreen = () => {
 		if (rango.inicio && rango.fin) {
 			const rangoActual = getFechaParaCicloActual(rango, ciclo);
 			const hoy = new Date();
+
+			console.log({ rango, rangoActual });
 
 			if (rangoActual) {
 				if (hoy < rangoActual.inicio) return true;

@@ -28,7 +28,6 @@ const customStyles = {
 };
 
 export const PrintPermisoModal = ({ data, isNew, formValues, setValues = () => {} }) => {
-	console.log(data.mensajeFijo);
 	const { openPrintPermisoModal, enableSaveButton, enablePrintButton, enEspera } = useSelector(
 		(state) => state.altaPermisos
 	);
