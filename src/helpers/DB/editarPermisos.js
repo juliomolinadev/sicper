@@ -1,101 +1,436 @@
 import { db } from "../../firebase/firebase-config";
 import { exportJSONToExcel } from "../functions/exportJSONToExcel";
 
-//Descarga expedicion permisos por de pozos ######################################################################
-export const editarPermisos = async () => {
-	const permisos = [];
+// Imprime productores que expidieron mas de su concesion #############################################################
+// export const editarPermisos = async () => {
+// 	const concesiones = await db
+// 		.collection("padronesCultivos")
+// 		.doc("2023-2024")
+// 		.collection("padrones")
+// 		.doc("ALFALFA")
+// 		.collection("padron")
+// 		.get();
 
-	const headers = {
-		header: [
-			"CICLO",
-			"CLAVE_CULTIVO",
-			"CLAVECULTIVO_ANTERIOR",
-			"CLAVE_LOCALIDAD",
-			"CUENTA",
-			"CULTIVO_ANTERIOR",
-			"CURP_PRODUCTOR",
-			"ESTADO",
-			"ESTADO_PERMISO",
-			"FECHA_EMICION",
-			"FECHA_LIMITE",
-			"FUENTE_CREDITO",
-			"LOCALIDAD",
-			"LOTE",
-			"MODULO",
-			"MUNICIPIO",
-			"NOMBRE_CULTIVO",
-			"NOMBRE_LOCALIDAD",
-			"NOMBRE_PRODUCTOR",
-			"NUMERO_PERMISO",
-			"OBSERVACIONES",
-			"REACOMODO",
-			"RFC_PRODUCTOR",
-			"SECCION",
-			"SISTEMA",
-			"SUBCICLO",
-			"SUP_AUTORIZADA",
-			"SUP_DERECHO",
-			"TIPO_PERMISO",
-			"TIPO_LOCALIDAD",
-			"TIPO_SEMILLA",
-			"TRANSFERENCIA",
-			"USUARIO",
-			"VARIEDAD",
-			"P-CONTROL",
-		],
-	};
+// 	concesiones.forEach((concesion) => {
+// 		if (concesion.data().supConcesion < concesion.data().supExpedida) {
+// 			console.log(concesion.data());
+// 		}
+// 	});
+// };
 
-	const permisosBatch = await db
-		.collectionGroup("permisos")
-		.where("sistema", "in", ["Pozo Particular", "Pozo Federal"])
-		.where("ciclo", "==", "2022-2023")
-		.where("estadoPermiso", "!=", "Cancelado")
-		.get();
+// Imprime exedicion de alfalfa por productor ##################################################################
+// export const editarPermisos = async () => {
+// 	const permisosSnap = await db
+// 		.collectionGroup("permisos")
+// 		.where("idProductorSelected", "==", "HEGG700720HBCRTB07-PM")
+// 		.where("ciclo", "==", "2022-2023")
+// 		.get();
 
-	permisosBatch.forEach((permiso) => {
-		permisos.push({
-			CICLO: permiso.data().ciclo,
-			CLAVE_CULTIVO: permiso.data().claveCultivo,
-			CLAVECULTIVO_ANTERIOR: permiso.data().claveCultivoAnterior,
-			CLAVE_LOCALIDAD: permiso.data().claveLocalidad,
-			CUENTA: permiso.data().cuenta,
-			CULTIVO_ANTERIOR: permiso.data().cultivoAnterior,
-			CURP_PRODUCTOR: permiso.data().curpProductor,
-			ESTADO: permiso.data().estado,
-			ESTADO_PERMISO: permiso.data().estadoPermiso,
-			FECHA_EMICION: permiso.data().fechaEmicion.toDate().toLocaleDateString(),
-			FECHA_LIMITE: permiso.data().fechaLimite.toDate().toLocaleDateString(),
-			FUENTE_CREDITO: permiso.data().fuenteCredito,
-			LOCALIDAD: permiso.data().localidad,
-			LOTE: permiso.data().lote,
-			MODULO: permiso.data().modulo,
-			MUNICIPIO: permiso.data().municipio,
-			NOMBRE_CULTIVO: permiso.data().nombreCultivo,
-			NOMBRE_LOCALIDAD: permiso.data().nombreLocalidad,
-			NOMBRE_PRODUCTOR: permiso.data().nombreProductor,
-			NUMERO_PERMISO: permiso.data().numeroPermiso,
-			OBSERVACIONES: permiso.data().observaciones,
-			REACOMODO: permiso.data().reacomodo,
-			RFC_PRODUCTOR: permiso.data().rfcProductor,
-			SECCION: permiso.data().seccion,
-			SISTEMA: permiso.data().sistema,
-			SUBCICLO: permiso.data().subciclo,
-			SUP_AUTORIZADA: permiso.data().supAutorizada,
-			SUP_DERECHO: permiso.data().supDerecho,
-			TIPO_PERMISO: permiso.data().tipo,
-			TIPO_LOCALIDAD: permiso.data().tipoLocalidad,
-			TIPO_SEMILLA: permiso.data().tipoSemilla,
-			TRANSFERENCIA: permiso.data().transferencia,
-			USUARIO: permiso.data().usuario,
-			VARIEDAD: permiso.data().variedad,
-			"P-CONTROL": permiso.data().toma,
-		});
-	});
+// 	const expedicion = {
+// 		alfalfa: {},
+// 		alfalfaNva: {},
+// 		alfalfaR: {},
+// 	};
 
-	exportJSONToExcel(permisos, headers, "PermisosTrigoDic23", "JulioMolina", "PermisosTrigoDic23");
+// 	permisosSnap.forEach((permiso) => {
+// 		if (permiso.data().estadoPermiso !== "Cancelado") {
+// 			if (permiso.data().claveCultivo === 50) {
+// 				if (expedicion.alfalfa[permiso.data().modulo]) {
+// 					expedicion.alfalfa[permiso.data().modulo] =
+// 						expedicion.alfalfa[permiso.data().modulo] + permiso.data().supAutorizada;
+// 				} else {
+// 					console.log(permiso.data().modulo);
+// 					expedicion.alfalfa[permiso.data().modulo] = permiso.data().supAutorizada;
+// 				}
+// 			}
 
-	// console.table(permisos);
-};
+// 			if (permiso.data().claveCultivo === 51) {
+// 				if (expedicion.alfalfaNva[permiso.data().modulo]) {
+// 					expedicion.alfalfaNva[permiso.data().modulo] =
+// 						expedicion.alfalfaNva[permiso.data().modulo] + permiso.data().supAutorizada;
+// 				} else {
+// 					expedicion.alfalfaNva[permiso.data().modulo] = permiso.data().supAutorizada;
+// 				}
+// 			}
+
+// 			if (permiso.data().claveCultivo === 51.2) {
+// 				if (expedicion.alfalfaR[permiso.data().modulo]) {
+// 					expedicion.alfalfaR[permiso.data().modulo] =
+// 						expedicion.alfalfaR[permiso.data().modulo] + permiso.data().supAutorizada;
+// 				} else {
+// 					expedicion.alfalfaR[permiso.data().modulo] = permiso.data().supAutorizada;
+// 				}
+// 			}
+// 		}
+// 	});
+
+// 	console.log(expedicion);
+// };
+
+// Asigna localidad a permisos del 2023-2024 ##################################################################
+// export const editarPermisos = async () => {
+// 	const permisosSnap = await db
+// 		.collectionGroup("permisos")
+// 		.where("localidad", "==", "")
+// 		.where("ciclo", "==", "2023-2024")
+// 		.get();
+
+// 	const localidadesSnap = await db.collection("colonias").get();
+
+// 	const localidades = {};
+// 	localidadesSnap.forEach((localidad) => {
+// 		localidades[localidad.data().clave] = {
+// 			nombre: localidad.data().nombre,
+// 			tipo: localidad.data().tipo,
+// 		};
+// 	});
+
+// 	// const tecnicosSnap = await db.collection("usuarios").where("rol", "==", "tecnicoCESVBC").get();
+
+// 	// const tecnicos = [];
+// 	// tecnicosSnap.forEach((tecnico) => {
+// 	// 	tecnicos.push({
+// 	// 		id: tecnico.id,
+// 	// 		localidades: tecnico.data().localidades
+// 	// 	});
+// 	// });
+
+// 	let batch = db.batch();
+// 	let i = 1;
+// 	const batchSize = 500;
+
+// 	permisosSnap.forEach((permiso) => {
+// 		// const tecnico = tecnicos.find((tecnico) =>
+// 		// 	tecnico.localidades.includes(permiso.data().claveLocalidad)
+// 		// );
+
+// 		const localidad = localidades[permiso.data().claveLocalidad];
+
+// 		// const permisoPrint = permiso.data();
+
+// 		// console.log({ permisoPrint, localidad });
+// 		// console.log(permiso.id);
+// 		// console.log(permiso.data().claveLocalidad);
+// 		// else console.log("sintecnico");
+// 		// if (tecnico) {
+// 		// 	console.log(tecnico.id);
+// 		// 	console.log(permiso.data().claveLocalidad);
+// 		// 	console.log(permiso.id);
+// 		// }
+
+// 		const ref = db
+// 			.collection("permisos")
+// 			.doc("2023-2024")
+// 			.collection("modulos")
+// 			.doc(`Modulo-${permiso.data().modulo}`)
+// 			.collection("permisos")
+// 			.doc(permiso.id);
+
+// 		if (localidad) {
+// 			batch.update(ref, {
+// 				localidad: localidad.nombre,
+// 				nombreLocalidad: localidad.nombre,
+// 				tipoLocalidad: localidad.tipo,
+// 			});
+// 		}
+
+// 		if (i === batchSize) {
+// 			batch
+// 				.commit()
+// 				.then(() => {
+// 					console.log("Se termino de subir batch");
+// 				})
+// 				.catch((err) => {
+// 					console.error(err);
+// 				});
+// 			batch = db.batch();
+// 			i = 0;
+// 		}
+
+// 		i++;
+// 	});
+
+// 	batch
+// 		.commit()
+// 		.then(() => {
+// 			console.log("Se terminaron de editar los permisos");
+// 		})
+// 		.catch((err) => {
+// 			console.error(err);
+// 			console.log("Ya termino");
+// 		});
+// };
+
+//Descarga expedicion de algodon ######################################################################
+// export const editarPermisos = async () => {
+// 	const permisos = [];
+
+// 	const headers = {
+// 		header: [
+// 			"CICLO",
+// 			"CLAVE_CULTIVO",
+// 			"CLAVECULTIVO_ANTERIOR",
+// 			"CLAVE_LOCALIDAD",
+// 			"CUENTA",
+// 			"CULTIVO_ANTERIOR",
+// 			"CURP_PRODUCTOR",
+// 			"ESTADO",
+// 			"ESTADO_PERMISO",
+// 			"FECHA_EMICION",
+// 			"FECHA_LIMITE",
+// 			"FUENTE_CREDITO",
+// 			"LOCALIDAD",
+// 			"LOTE",
+// 			"MODULO",
+// 			"MUNICIPIO",
+// 			"NOMBRE_CULTIVO",
+// 			"NOMBRE_LOCALIDAD",
+// 			"NOMBRE_PRODUCTOR",
+// 			"NUMERO_PERMISO",
+// 			"OBSERVACIONES",
+// 			"REACOMODO",
+// 			"RFC_PRODUCTOR",
+// 			"SECCION",
+// 			"SISTEMA",
+// 			"SUBCICLO",
+// 			"SUP_AUTORIZADA",
+// 			"SUP_DERECHO",
+// 			"TIPO_PERMISO",
+// 			"TIPO_LOCALIDAD",
+// 			"TIPO_SEMILLA",
+// 			"TRANSFERENCIA",
+// 			"USUARIO",
+// 			"VARIEDAD"
+// 		]
+// 	};
+
+// 	const permisosBatch = await db
+// 		.collectionGroup("permisos")
+// 		.where("claveCultivo", "==", 80)
+// 		.where("ciclo", "==", "2022-2023")
+// 		.where("estadoPermiso", "!=", "Cancelado")
+// 		.get();
+
+// 	permisosBatch.forEach((permiso) => {
+// 		permisos.push({
+// 			CICLO: permiso.data().ciclo,
+// 			CLAVE_CULTIVO: permiso.data().claveCultivo,
+// 			CLAVECULTIVO_ANTERIOR: permiso.data().claveCultivoAnterior,
+// 			CLAVE_LOCALIDAD: permiso.data().claveLocalidad,
+// 			CUENTA: permiso.data().cuenta,
+// 			CULTIVO_ANTERIOR: permiso.data().cultivoAnterior,
+// 			CURP_PRODUCTOR: permiso.data().curpProductor,
+// 			ESTADO: permiso.data().estado,
+// 			ESTADO_PERMISO: permiso.data().estadoPermiso,
+// 			FECHA_EMICION: permiso.data().fechaEmicion.toDate().toLocaleDateString(),
+// 			FECHA_LIMITE: permiso.data().fechaLimite.toDate().toLocaleDateString(),
+// 			FUENTE_CREDITO: permiso.data().fuenteCredito,
+// 			LOCALIDAD: permiso.data().localidad,
+// 			LOTE: permiso.data().lote,
+// 			MODULO: permiso.data().modulo,
+// 			MUNICIPIO: permiso.data().municipio,
+// 			NOMBRE_CULTIVO: permiso.data().nombreCultivo,
+// 			NOMBRE_LOCALIDAD: permiso.data().nombreLocalidad,
+// 			NOMBRE_PRODUCTOR: permiso.data().nombreProductor,
+// 			NUMERO_PERMISO: permiso.data().numeroPermiso,
+// 			OBSERVACIONES: permiso.data().observaciones,
+// 			REACOMODO: permiso.data().reacomodo,
+// 			RFC_PRODUCTOR: permiso.data().rfcProductor,
+// 			SECCION: permiso.data().seccion,
+// 			SISTEMA: permiso.data().sistema,
+// 			SUBCICLO: permiso.data().subciclo,
+// 			SUP_AUTORIZADA: permiso.data().supAutorizada,
+// 			SUP_DERECHO: permiso.data().supDerecho,
+// 			TIPO_PERMISO: permiso.data().tipo,
+// 			TIPO_LOCALIDAD: permiso.data().tipoLocalidad,
+// 			TIPO_SEMILLA: permiso.data().tipoSemilla,
+// 			TRANSFERENCIA: permiso.data().transferencia,
+// 			USUARIO: permiso.data().usuario,
+// 			VARIEDAD: permiso.data().variedad
+// 		});
+// 	});
+
+// 	exportJSONToExcel(permisos, headers, "PermisosTrigoDic23", "JulioMolina", "PermisosTrigoDic23");
+
+// 	// console.table(permisos);
+// };
+
+//Descarga el padron de cultivos ####################################################################################
+// export const editarPermisos = async () => {
+// 	const cultivos = [];
+
+// 	const headers = {
+// 		header: [
+// 			"CLAVE",
+// 			"NOMBRE",
+// 			"SUBCICLO",
+// 			"COSTOHECTAREA",
+// 			"COSTOGUIA",
+// 			"INICIOBC",
+// 			"FINBC",
+// 			"INICIOSONORA",
+// 			"FINSONORA",
+// 			"CULTIVOCOMPLEMENTARIO",
+// 		],
+// 	};
+
+// 	const cultivosBatch = await db.collectionGroup("cultivos").get();
+
+// 	cultivosBatch.forEach((cultivo) => {
+// 		cultivos.push({
+// 			CLAVE: cultivo.data().clave,
+// 			NOMBRE: cultivo.data().nombre,
+// 			SUBCICLO: cultivo.data().subciclo,
+// 			COSTOHECTAREA: cultivo.data().costoHectarea,
+// 			COSTOGUIA: cultivo.data().costoGuia,
+// 			INICIOBC: cultivo.data().inicioBc,
+// 			FINBC: cultivo.data().finBc,
+// 			INICIOSONORA: cultivo.data().inicioSonora,
+// 			FINSONORA: cultivo.data().finSonora,
+// 			CULTIVOCOMPLEMENTARIO: cultivo.data().cultivoComplementario,
+// 		});
+// 	});
+
+// 	exportJSONToExcel(cultivos, headers, "PadronDeCultivos", "JulioMolina", "PadronDeCultivos");
+
+// 	// console.table(permisos);
+// };
+
+// // Modifica costo por hectarea de todos los cultivos ##################################################################
+// export const editarPermisos = async () => {
+// 	const cultivosSnap = await db.collectionGroup("cultivos").get();
+
+// 	let batch = db.batch();
+// 	let i = 1;
+// 	const batchSize = 500;
+
+// 	cultivosSnap.forEach((cultivo) => {
+// 		const ref = db.collection("cultivos").doc(cultivo.id);
+
+// 		batch.update(ref, { costoHectarea: 15 });
+
+// 		if (i === batchSize) {
+// 			batch
+// 				.commit()
+// 				.then(() => {
+// 					console.log("Se termino de subir batch");
+// 				})
+// 				.catch((err) => {
+// 					console.error(err);
+// 				});
+// 			batch = db.batch();
+// 			i = 0;
+// 		}
+
+// 		i++;
+// 	});
+
+// 	batch
+// 		.commit()
+// 		.then(() => {
+// 			console.log("Se terminaron de editar los cultivos");
+// 		})
+// 		.catch((err) => {
+// 			console.error(err);
+// 			console.log("Ya termino");
+// 		});
+// };
+
+// //Descarga expedicion permisos de pozos #########################################################################
+// export const editarPermisos = async () => {
+// 	const permisos = [];
+
+// 	const headers = {
+// 		header: [
+// 			"CICLO",
+// 			"CLAVE_CULTIVO",
+// 			"CLAVECULTIVO_ANTERIOR",
+// 			"CLAVE_LOCALIDAD",
+// 			"CUENTA",
+// 			"CULTIVO_ANTERIOR",
+// 			"CURP_PRODUCTOR",
+// 			"ESTADO",
+// 			"ESTADO_PERMISO",
+// 			"FECHA_EMICION",
+// 			"FECHA_LIMITE",
+// 			"FUENTE_CREDITO",
+// 			"LOCALIDAD",
+// 			"LOTE",
+// 			"MODULO",
+// 			"MUNICIPIO",
+// 			"NOMBRE_CULTIVO",
+// 			"NOMBRE_LOCALIDAD",
+// 			"NOMBRE_PRODUCTOR",
+// 			"NUMERO_PERMISO",
+// 			"OBSERVACIONES",
+// 			"REACOMODO",
+// 			"RFC_PRODUCTOR",
+// 			"SECCION",
+// 			"SISTEMA",
+// 			"SUBCICLO",
+// 			"SUP_AUTORIZADA",
+// 			"SUP_DERECHO",
+// 			"TIPO_PERMISO",
+// 			"TIPO_LOCALIDAD",
+// 			"TIPO_SEMILLA",
+// 			"TRANSFERENCIA",
+// 			"USUARIO",
+// 			"VARIEDAD",
+// 			"P-CONTROL",
+// 		],
+// 	};
+
+// 	const permisosBatch = await db
+// 		.collectionGroup("permisos")
+// 		.where("sistema", "in", ["Pozo Particular", "Pozo Federal"])
+// 		.where("ciclo", "==", "2022-2023")
+// 		.where("estadoPermiso", "!=", "Cancelado")
+// 		.get();
+
+// 	permisosBatch.forEach((permiso) => {
+// 		permisos.push({
+// 			CICLO: permiso.data().ciclo,
+// 			CLAVE_CULTIVO: permiso.data().claveCultivo,
+// 			CLAVECULTIVO_ANTERIOR: permiso.data().claveCultivoAnterior,
+// 			CLAVE_LOCALIDAD: permiso.data().claveLocalidad,
+// 			CUENTA: permiso.data().cuenta,
+// 			CULTIVO_ANTERIOR: permiso.data().cultivoAnterior,
+// 			CURP_PRODUCTOR: permiso.data().curpProductor,
+// 			ESTADO: permiso.data().estado,
+// 			ESTADO_PERMISO: permiso.data().estadoPermiso,
+// 			FECHA_EMICION: permiso.data().fechaEmicion.toDate().toLocaleDateString(),
+// 			FECHA_LIMITE: permiso.data().fechaLimite.toDate().toLocaleDateString(),
+// 			FUENTE_CREDITO: permiso.data().fuenteCredito,
+// 			LOCALIDAD: permiso.data().localidad,
+// 			LOTE: permiso.data().lote,
+// 			MODULO: permiso.data().modulo,
+// 			MUNICIPIO: permiso.data().municipio,
+// 			NOMBRE_CULTIVO: permiso.data().nombreCultivo,
+// 			NOMBRE_LOCALIDAD: permiso.data().nombreLocalidad,
+// 			NOMBRE_PRODUCTOR: permiso.data().nombreProductor,
+// 			NUMERO_PERMISO: permiso.data().numeroPermiso,
+// 			OBSERVACIONES: permiso.data().observaciones,
+// 			REACOMODO: permiso.data().reacomodo,
+// 			RFC_PRODUCTOR: permiso.data().rfcProductor,
+// 			SECCION: permiso.data().seccion,
+// 			SISTEMA: permiso.data().sistema,
+// 			SUBCICLO: permiso.data().subciclo,
+// 			SUP_AUTORIZADA: permiso.data().supAutorizada,
+// 			SUP_DERECHO: permiso.data().supDerecho,
+// 			TIPO_PERMISO: permiso.data().tipo,
+// 			TIPO_LOCALIDAD: permiso.data().tipoLocalidad,
+// 			TIPO_SEMILLA: permiso.data().tipoSemilla,
+// 			TRANSFERENCIA: permiso.data().transferencia,
+// 			USUARIO: permiso.data().usuario,
+// 			VARIEDAD: permiso.data().variedad,
+// 			"P-CONTROL": permiso.data().toma,
+// 		});
+// 	});
+
+// 	exportJSONToExcel(permisos, headers, "PermisosTrigoDic23", "JulioMolina", "PermisosTrigoDic23");
+
+// 	// console.table(permisos);
+// };
 
 // // Descarga expedicion de trigo ######################################################################
 // export const editarPermisos = async () => {
@@ -149,99 +484,99 @@ export const editarPermisos = async () => {
 // 	// console.table(concesiones);
 // };
 
-// Descarga expedicion de trigo ######################################################################
-// export const editarPermisos = async () => {
-// 	const permisos = [];
+//Descarga expedicion de trigo ######################################################################
+export const editarPermisos = async () => {
+	const permisos = [];
 
-// 	const headers = {
-// 		header: [
-// 			"CICLO",
-// 			"CLAVE_CULTIVO",
-// 			"CLAVECULTIVO_ANTERIOR",
-// 			"CLAVE_LOCALIDAD",
-// 			"CUENTA",
-// 			"CULTIVO_ANTERIOR",
-// 			"CURP_PRODUCTOR",
-// 			"ESTADO",
-// 			"ESTADO_PERMISO",
-// 			"FECHA_EMICION",
-// 			"FECHA_LIMITE",
-// 			"FUENTE_CREDITO",
-// 			"LOCALIDAD",
-// 			"LOTE",
-// 			"MODULO",
-// 			"MUNICIPIO",
-// 			"NOMBRE_CULTIVO",
-// 			"NOMBRE_LOCALIDAD",
-// 			"NOMBRE_PRODUCTOR",
-// 			"NUMERO_PERMISO",
-// 			"OBSERVACIONES",
-// 			"REACOMODO",
-// 			"RFC_PRODUCTOR",
-// 			"SECCION",
-// 			"SISTEMA",
-// 			"SUBCICLO",
-// 			"SUP_AUTORIZADA",
-// 			"SUP_DERECHO",
-// 			"TIPO_PERMISO",
-// 			"TIPO_LOCALIDAD",
-// 			"TIPO_SEMILLA",
-// 			"TRANSFERENCIA",
-// 			"USUARIO",
-// 			"VARIEDAD"
-// 		]
-// 	};
+	const headers = {
+		header: [
+			"CICLO",
+			"CLAVE_CULTIVO",
+			"CLAVECULTIVO_ANTERIOR",
+			"CLAVE_LOCALIDAD",
+			"CUENTA",
+			"CULTIVO_ANTERIOR",
+			"CURP_PRODUCTOR",
+			"ESTADO",
+			"ESTADO_PERMISO",
+			"FECHA_EMICION",
+			"FECHA_LIMITE",
+			"FUENTE_CREDITO",
+			"LOCALIDAD",
+			"LOTE",
+			"MODULO",
+			"MUNICIPIO",
+			"NOMBRE_CULTIVO",
+			"NOMBRE_LOCALIDAD",
+			"NOMBRE_PRODUCTOR",
+			"NUMERO_PERMISO",
+			"OBSERVACIONES",
+			"REACOMODO",
+			"RFC_PRODUCTOR",
+			"SECCION",
+			"SISTEMA",
+			"SUBCICLO",
+			"SUP_AUTORIZADA",
+			"SUP_DERECHO",
+			"TIPO_PERMISO",
+			"TIPO_LOCALIDAD",
+			"TIPO_SEMILLA",
+			"TRANSFERENCIA",
+			"USUARIO",
+			"VARIEDAD",
+		],
+	};
 
-// 	const permisosBatch = await db
-// 		.collectionGroup("permisos")
-// 		.where("claveCultivo", "==", 3)
-// 		.where("ciclo", "==", "2022-2023")
-// 		.where("estadoPermiso", "!=", "Cancelado")
-// 		.get();
+	const permisosBatch = await db
+		.collectionGroup("permisos")
+		.where("claveCultivo", "==", 3)
+		.where("ciclo", "==", "2023-2024")
+		.where("estadoPermiso", "!=", "Cancelado")
+		.get();
 
-// 	permisosBatch.forEach((permiso) => {
-// 		permisos.push({
-// 			CICLO: permiso.data().ciclo,
-// 			CLAVE_CULTIVO: permiso.data().claveCultivo,
-// 			CLAVECULTIVO_ANTERIOR: permiso.data().claveCultivoAnterior,
-// 			CLAVE_LOCALIDAD: permiso.data().claveLocalidad,
-// 			CUENTA: permiso.data().cuenta,
-// 			CULTIVO_ANTERIOR: permiso.data().cultivoAnterior,
-// 			CURP_PRODUCTOR: permiso.data().curpProductor,
-// 			ESTADO: permiso.data().estado,
-// 			ESTADO_PERMISO: permiso.data().estadoPermiso,
-// 			FECHA_EMICION: permiso.data().fechaEmicion.toDate().toLocaleDateString(),
-// 			FECHA_LIMITE: permiso.data().fechaLimite.toDate().toLocaleDateString(),
-// 			FUENTE_CREDITO: permiso.data().fuenteCredito,
-// 			LOCALIDAD: permiso.data().localidad,
-// 			LOTE: permiso.data().lote,
-// 			MODULO: permiso.data().modulo,
-// 			MUNICIPIO: permiso.data().municipio,
-// 			NOMBRE_CULTIVO: permiso.data().nombreCultivo,
-// 			NOMBRE_LOCALIDAD: permiso.data().nombreLocalidad,
-// 			NOMBRE_PRODUCTOR: permiso.data().nombreProductor,
-// 			NUMERO_PERMISO: permiso.data().numeroPermiso,
-// 			OBSERVACIONES: permiso.data().observaciones,
-// 			REACOMODO: permiso.data().reacomodo,
-// 			RFC_PRODUCTOR: permiso.data().rfcProductor,
-// 			SECCION: permiso.data().seccion,
-// 			SISTEMA: permiso.data().sistema,
-// 			SUBCICLO: permiso.data().subciclo,
-// 			SUP_AUTORIZADA: permiso.data().supAutorizada,
-// 			SUP_DERECHO: permiso.data().supDerecho,
-// 			TIPO_PERMISO: permiso.data().tipo,
-// 			TIPO_LOCALIDAD: permiso.data().tipoLocalidad,
-// 			TIPO_SEMILLA: permiso.data().tipoSemilla,
-// 			TRANSFERENCIA: permiso.data().transferencia,
-// 			USUARIO: permiso.data().usuario,
-// 			VARIEDAD: permiso.data().variedad
-// 		});
-// 	});
+	permisosBatch.forEach((permiso) => {
+		permisos.push({
+			CICLO: permiso.data().ciclo,
+			CLAVE_CULTIVO: permiso.data().claveCultivo,
+			CLAVECULTIVO_ANTERIOR: permiso.data().claveCultivoAnterior,
+			CLAVE_LOCALIDAD: permiso.data().claveLocalidad,
+			CUENTA: permiso.data().cuenta,
+			CULTIVO_ANTERIOR: permiso.data().cultivoAnterior,
+			CURP_PRODUCTOR: permiso.data().curpProductor,
+			ESTADO: permiso.data().estado,
+			ESTADO_PERMISO: permiso.data().estadoPermiso,
+			FECHA_EMICION: permiso.data().fechaEmicion.toDate().toLocaleDateString(),
+			FECHA_LIMITE: permiso.data().fechaLimite.toDate().toLocaleDateString(),
+			FUENTE_CREDITO: permiso.data().fuenteCredito,
+			LOCALIDAD: permiso.data().localidad,
+			LOTE: permiso.data().lote,
+			MODULO: permiso.data().modulo,
+			MUNICIPIO: permiso.data().municipio,
+			NOMBRE_CULTIVO: permiso.data().nombreCultivo,
+			NOMBRE_LOCALIDAD: permiso.data().nombreLocalidad,
+			NOMBRE_PRODUCTOR: permiso.data().nombreProductor,
+			NUMERO_PERMISO: permiso.data().numeroPermiso,
+			OBSERVACIONES: permiso.data().observaciones,
+			REACOMODO: permiso.data().reacomodo,
+			RFC_PRODUCTOR: permiso.data().rfcProductor,
+			SECCION: permiso.data().seccion,
+			SISTEMA: permiso.data().sistema,
+			SUBCICLO: permiso.data().subciclo,
+			SUP_AUTORIZADA: permiso.data().supAutorizada,
+			SUP_DERECHO: permiso.data().supDerecho,
+			TIPO_PERMISO: permiso.data().tipo,
+			TIPO_LOCALIDAD: permiso.data().tipoLocalidad,
+			TIPO_SEMILLA: permiso.data().tipoSemilla,
+			TRANSFERENCIA: permiso.data().transferencia,
+			USUARIO: permiso.data().usuario,
+			VARIEDAD: permiso.data().variedad,
+		});
+	});
 
-// 	exportJSONToExcel(permisos, headers, "PermisosTrigoDic23", "JulioMolina", "PermisosTrigoDic23");
+	exportJSONToExcel(permisos, headers, "PermisosTrigoDic23", "JulioMolina", "PermisosTrigoDic23");
 
-// 	// console.table(permisos);
-// };
+	// console.table(permisos);
+};
 
 // Muestra permisoa cancelados por modulo ######################################################################
 // export const editarPermisos = async () => {

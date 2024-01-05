@@ -4,7 +4,7 @@ import { usuariosColumns } from "../tables/configTables";
 import {
 	startSetUsuarioSelected,
 	unsetUsuarios,
-	unsetUsuarioSelected
+	unsetUsuarioSelected,
 } from "../../actions/usuarios";
 import { UsuarioInput } from "../permisos/inputsNuevosPermisos/UsuarioInput";
 import { useDispatch, useSelector } from "react-redux";
@@ -41,12 +41,12 @@ export const PadronDeUsuariosSection = () => {
 	const [modalState, setModalState] = useState({
 		openModal: false,
 		constancySaved: false,
-		constancia: {}
+		constancia: {},
 	});
 	const { openModal, constancia, constancySaved } = modalState;
 
 	const [dictamenFormState, setDictamenFormState] = useState({
-		isOpenDictamenForm: false
+		isOpenDictamenForm: false,
 	});
 	const { isOpenDictamenForm } = dictamenFormState;
 

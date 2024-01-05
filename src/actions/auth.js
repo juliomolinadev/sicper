@@ -23,7 +23,7 @@ export const startLoginEmailPassword = (email, password) => {
 					dotacionPozo,
 					titular,
 					direccion,
-					expedicionActivaModulo
+					expedicionActivaModulo,
 				} = entityData;
 
 				dispatch(login(user.uid, user.displayName, user.email));
@@ -69,7 +69,7 @@ export const startRegisterWithEmailPasswordName = (email, password, name, modulo
 					modulo: modulo,
 					rol: "sinAsignar",
 					email: email,
-					displayName: name
+					displayName: name,
 				});
 			})
 			.catch((e) => {
@@ -95,8 +95,8 @@ export const login = (uid, displayName, email) => ({
 	payload: {
 		uid,
 		displayName,
-		email
-	}
+		email,
+	},
 });
 
 export const setEntity = (
@@ -122,8 +122,8 @@ export const setEntity = (
 		direccion,
 		expedicionActivaModulo,
 		rol,
-		modulo
-	}
+		modulo,
+	},
 });
 
 export const startSetVariablesGlobales = () => {
@@ -135,7 +135,7 @@ export const startSetVariablesGlobales = () => {
 
 export const setVariablesGlobales = (data) => ({
 	type: types.setVariablesGlobales,
-	payload: data
+	payload: data,
 });
 
 export const startLogout = () => {
@@ -146,7 +146,7 @@ export const startLogout = () => {
 };
 
 export const logout = () => ({
-	type: types.logout
+	type: types.logout,
 });
 
 export const loadEntity = async (uid) => {
@@ -194,16 +194,18 @@ export const loadPrivilegios = async (rol) => {
 export const loadVariablesGlobales = async () => {
 	const roles = await db.collection(`app`).doc("variablesGlobales").get();
 	return roles.data();
+
+	// return { cicloActual: "2022-2023", cicloConsulta: "2022-2023", expedicionActiva: true };
 };
 
 export const setPrivilegios = (privilegios) => ({
 	type: types.setPrivilegios,
-	payload: privilegios
+	payload: privilegios,
 });
 
 export const setCicloConsulta = (ciclo) => ({
 	type: types.setCicloConsulta,
-	payload: ciclo
+	payload: ciclo,
 });
 
 export const loadEstadoExpedicionModulo = async (claveEntidad) => {
@@ -221,5 +223,5 @@ export const startSetEstadoExpedicionModulo = (claveEntidad) => {
 
 export const setEstadoExpedicionModulo = (estadoExpedicion) => ({
 	type: types.setEstadoExpedicionModulo,
-	payload: estadoExpedicion
+	payload: estadoExpedicion,
 });

@@ -7,7 +7,7 @@ import { saveDictamen } from "../../helpers/saveDictamen";
 export const PrintDictamenModal = ({
 	isOpenDictamenPrint,
 	setIsOpenDictamenPrint,
-	setDictamenFormState
+	setDictamenFormState,
 }) => {
 	const { padronScreen } = useSelector((state) => state.scenes);
 	const { dictamen } = padronScreen;
@@ -32,14 +32,14 @@ export const PrintDictamenModal = ({
 		content: {
 			width: "1125px",
 			height: "1500px",
-			overflow: "auto"
-		}
+			overflow: "auto",
+		},
 	};
 
 	const handleSaveDictamen = async () => {
-		const isSave = saveDictamen(`${usuario.cuenta}.${usuario.subcta}`, "2022-2023", {
+		const isSave = saveDictamen(`${usuario.cuenta}.${usuario.subcta}`, cicloActual, {
 			...dictamen,
-			estado: "activo"
+			estado: "activo",
 		});
 
 		if (isSave) {
